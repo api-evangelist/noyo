@@ -1,0 +1,370 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Group Coverage Export API
+  version: 1.0.0
+servers: []
+tags:
+- name: Group Coverage Export
+paths:
+  /api/v1/group_coverage_exports:
+    get:
+      description: Get all relevant group coverage exports
+      operationId: getGroupCoverageExportList
+      parameters:
+      - description: The max size of each page of results
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+      - description: The integer offset at which to start the page. Possible values are 0 to total_records - 1
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                meta:
+                  offset: 0
+                  page_num: 1
+                  page_size: 20
+                  total_records: 1
+                response:
+                - as_of: '2023-01-31'
+                  carrier_ids:
+                  - 8fac0992-933a-4743-8dab-0d606ef2569e
+                  completed: null
+                  created: 1675199964
+                  expires: null
+                  file_format: csv
+                  file_key: csv-uploads/2613a221-d3c8-4c8a-86d5-e7e885fd1da9/2023-02-01-test-group-coverage-export.xlsx
+                  group_id: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+                  id: 0620e171-5dcc-4f2b-9143-6c96a5ee9925
+                  modified: 1675199964
+                  percentage_complete: 0
+                  request_user_id: 00112806-bd97-442d-8884-83e71c3de057
+                  status: processing
+                  version: f5133f0a-30ae-443a-80f0-9975abec3213
+              schema:
+                $ref: '#/components/schemas/PaginatedGroupCoverageExportResult'
+          description: Successful Response - Returns Group Coverage Exports
+      summary: Get a list of all Group Coverage Exports
+      tags:
+      - Group Coverage Export
+  /api/v1/group_coverage_exports/{group_coverage_export_id}:
+    x-summary: Get a single group coverage export
+    get:
+      description: Get a Group Coverage Export by ID
+      operationId: getGroupCoverageExport
+      parameters:
+      - description: The unique identifier of the group coverage export
+        in: path
+        name: group_coverage_export_id
+        required: true
+        schema:
+          example: 0620e171-5dcc-4f2b-9143-6c96a5ee9925
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                as_of: '2023-01-31'
+                carrier_ids:
+                - 8fac0992-933a-4743-8dab-0d606ef2569e
+                completed: null
+                created: 1675199964
+                expires: null
+                file_format: csv
+                group_id: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+                id: 0620e171-5dcc-4f2b-9143-6c96a5ee9925
+                modified: 1675199964
+                percentage_complete: 0
+                request_user_id: 00112806-bd97-442d-8884-83e71c3de057
+                status: processing
+                version: f5133f0a-30ae-443a-80f0-9975abec3213
+              schema:
+                $ref: '#/components/schemas/GroupCoverageExportResult'
+          description: Successful Response - Returns the Group Coverage Export contents
+      summary: Get a Group Coverage Export
+      tags:
+      - Group Coverage Export
+  /api/v1/group_coverage_exports/{group_coverage_export_id}/file:
+    get:
+      description: Returns file contents for a group coverage export
+      operationId: getGroupCoverageExportFile
+      parameters:
+      - description: The unique identifier of the group coverage export
+        in: path
+        name: group_coverage_export_id
+        required: true
+        schema:
+          example: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            text/csv:
+              example: Member Type,Relationship,Custom Individual ID,Employee Noyo ID,Noyo Member ID,First Name,Middle Name,Last Name,Date of Birth,SSN,Sex,Home Address Street 1,Home Address Street 2,Home Address City,Home Address State,Home Address ZIP Code,Home Address County,Hire Date,Full Time Start,Hours Worked,Job Title,Email,Home Phone Number,Employment Status,Line of Coverage,Carrier ID,Carrier Name,Noyo Plan ID,Plan Type,Carrier Plan Name,Effective Start Date,Effective End Date,Enrollment Status,COBRA Enrolled,Department Number,Division Number,Class Number,System ID,Cert Number,Claimant Number,Coverage Code
+          description: Successful Response - Returns file contents
+      summary: Get file associated with group coverage export
+      tags:
+      - Group Coverage Export
+  /api/v1/groups/{group_id}/coverage_exports:
+    x-summary: Public endpoint for creating a group coverage export
+    get:
+      description: Returns a list of group coverage exports based on the Group ID provided.
+      operationId: getGroupCoverageExportsForGroup
+      parameters:
+      - description: The unique identifier of the group you would like to get group exports for
+        in: path
+        name: group_id
+        required: true
+        schema:
+          example: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                meta:
+                  offset: 0
+                  page_num: 1
+                  page_size: 20
+                  total_records: 1
+                response:
+                - as_of: '2023-01-31'
+                  carrier_ids:
+                  - 8fac0992-933a-4743-8dab-0d606ef2569e
+                  completed: null
+                  created: 1675199964
+                  expires: null
+                  file_format: csv
+                  file_key: csv-uploads/2613a221-d3c8-4c8a-86d5-e7e885fd1da9/2023-02-01-test-group-coverage-export.xlsx
+                  group_id: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+                  id: 0620e171-5dcc-4f2b-9143-6c96a5ee9925
+                  modified: 1675199964
+                  percentage_complete: 0
+                  request_user_id: 00112806-bd97-442d-8884-83e71c3de057
+                  status: processing
+                  version: f5133f0a-30ae-443a-80f0-9975abec3213
+              schema:
+                $ref: '#/components/schemas/PaginatedGroupCoverageExportResult'
+          description: Successful Response - Returns Group Coverage Exports
+      summary: Get Group Coverage Exports for a Group
+      tags:
+      - Group Coverage Export
+    post:
+      description: Request a new Group Coverage Export for a group.
+      operationId: createGroupCoverageExport
+      parameters:
+      - description: The unique identifier of the group to create a Group Coverage Export for.
+        in: path
+        name: group_id
+        required: true
+        schema:
+          example: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              success:
+                value:
+                  as_of: '2023-01-31'
+                  carrier_ids:
+                  - 8fac0992-933a-4743-8dab-0d606ef2569e
+            schema:
+              $ref: '#/components/schemas/GroupCoverageExportCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              example:
+                as_of: '2023-01-31'
+                carrier_ids:
+                - 8fac0992-933a-4743-8dab-0d606ef2569e
+                created: 1675113819
+                file_format: csv
+                group_id: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+                id: 0620e171-5dcc-4f2b-9143-6c96a5ee9925
+                modified: 1675113819
+                percentage_complete: 0
+                request_user_id: 00112806-bd97-442d-8884-83e71c3de057
+                status: processing
+                version: e3fa3878-e5ec-449f-975a-1c2dadf4ae87
+              schema:
+                $ref: '#/components/schemas/GroupCoverageExportResult'
+          description: Successful Response - Returns the contents of the newly requested Group Coverage Export
+      summary: Create a Group Coverage Export
+      tags:
+      - Group Coverage Export
+components:
+  schemas:
+    GroupCoverageExportCreateRequest:
+      properties:
+        as_of:
+          description: ISO-8601 Date to query group coverage data
+          format: date
+          type: string
+        carrier_ids:
+          description: List of carrier IDs to only include in requested group coverage export
+          items:
+            format: uuid
+            type: string
+          type: array
+      type: object
+      x-field_order: []
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+    PaginatedGroupCoverageExportResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of group coverage exports
+          items:
+            $ref: '#/components/schemas/GroupCoverageExportResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    GroupCoverageExportResult:
+      properties:
+        as_of:
+          description: ISO-8601 Date to query group coverage data
+          format: date
+          readOnly: true
+          type: string
+        carrier_ids:
+          description: List of carrier IDs to only include in requested group coverage export
+          items:
+            format: uuid
+            type: string
+          readOnly: true
+          type: array
+        completed:
+          description: Timestamp indicating when the group coverage export was completed
+          example: '1673452723'
+          readOnly: true
+          type: integer
+        created:
+          description: The date the record was created
+          type: integer
+        expires:
+          description: Timestamp indicating when the group coverage export expired
+          example: '1673826563'
+          readOnly: true
+          type: integer
+        file_format:
+          description: File format of the group coverage export
+          example: csv
+          readOnly: true
+          type: string
+        group_id:
+          description: Unique identifier of the associated group in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        percentage_complete:
+          description: Percentage of the group coverage export that has been completed
+          example: 0.5
+          format: float
+          readOnly: true
+          type: number
+        request_user_id:
+          description: Unique identifier of the user who requested the group coverage export
+          format: uuid
+          readOnly: true
+          type: string
+        status:
+          description: Status of the group_coverage_export
+          example: processing
+          readOnly: true
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - as_of
+      - carrier_ids
+      - completed
+      - created
+      - expires
+      - file_format
+      - group_id
+      - id
+      - modified
+      - percentage_complete
+      - request_user_id
+      - status
+      - version
+      type: object
+      x-field_order:
+      - id
+      - version
+      - group_id
+      - request_user_id
+      - as_of
+      - carrier_ids
+      - created
+      - modified
+      - completed
+      - expires
+      - status
+      - file_format
+      - percentage_complete

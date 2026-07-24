@@ -1,0 +1,3129 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Member Snapshot API
+  version: 1.0.0
+servers: []
+tags:
+- name: Member Snapshot
+paths:
+  /api/v1/employees/{employee_id}/member_snapshot:
+    x-summary: Get a single employees member snapshot
+    get:
+      description: Get a Member Snapshot by Employee ID. This will be calculated based on the current state of Noyo data for the employee.
+      operationId: getMemberSnapshotForEmployee
+      parameters:
+      - description: The unique identifier of the employee
+        in: path
+        name: employee_id
+        required: true
+        schema:
+          example: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+          format: uuid
+          type: string
+      - description: Filter by associated status
+        in: query
+        name: status
+        schema:
+          items:
+            type: string
+          type: array
+      - description: Filter by ID (comma separated)
+        in: query
+        name: id
+        required: false
+        schema:
+          items:
+            format: uuid
+            type: string
+          type: array
+      - description: Filter by fulfillment summary carrier ID (comma separated)
+        in: query
+        name: fulfillment_summary_carrier_id
+        required: false
+        schema:
+          items:
+            format: uuid
+            type: string
+          type: array
+      - description: Filter by fulfillment summary status (comma separated)
+        in: query
+        name: fulfillment_summary_status
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                coverages:
+                - carrier_id: 4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1
+                  enrolled_members:
+                  - effective_end_date: '9999-12-31'
+                    effective_start_date: '2022-01-01'
+                    individual_id: 6e7a80fc-473e-460a-8368-454e9e8dc9cb
+                    individual_type: employee
+                    latest_change_effective_date: '2022-02-13'
+                  - effective_end_date: '9999-12-31'
+                    effective_start_date: '2022-01-01'
+                    individual_id: ab740704-7c37-4010-92b3-d22c6926be3e
+                    individual_type: dependent
+                  line_of_coverage: medical
+                  plan_id: 4bf04f73-0aad-48ac-b28a-e5f4def7c5e9
+                  signature_date: '2021-12-23'
+                - carrier_id: 4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1
+                  enrolled_members:
+                  - effective_end_date: '9999-12-31'
+                    effective_start_date: '2022-01-01'
+                    individual_type: employee
+                  - effective_end_date: '2021-12-31'
+                    effective_start_date: '2022-01-01'
+                    individual_id: ab740704-7c37-4010-92b3-d22c6926be3e
+                    individual_type: dependent
+                  line_of_coverage: dental
+                  plan_name: DHMO Smile Plus
+                  signature_date: '2021-12-23'
+                - carrier_id: 4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1
+                  enrolled_members:
+                  - effective_end_date: '9999-12-31'
+                    effective_start_date: '2022-01-01'
+                    individual_type: employee
+                    volume: 50000
+                  line_of_coverage: life
+                  plan_name: 50k Employee Basic Life
+                  signature_date: '2021-12-23'
+                dependents:
+                - custom_individual_id: 3f093cc0-4fef-4d5d-9267-ba5cdfc09827
+                  id: ab740704-7c37-4010-92b3-d22c6926be3e
+                  person:
+                    contact:
+                      email_address: jamie@testemail.com
+                      email_address_type: home
+                      home_phone: '+12065551234'
+                    date_of_birth: '1990-01-02'
+                    first_name: Jamie
+                    home_address:
+                      city: San Francisco
+                      county: San Francisco
+                      state: CA
+                      street_one: 1234 Home Ave
+                      zip_code: '94107'
+                    last_name: Johnson
+                    mailing_address:
+                      city: San Francisco
+                      state: CA
+                      street_one: P.O. Box 1234
+                      zip_code: '94107'
+                    marital_status: married
+                    sex: F
+                    ssn: '987654321'
+                  relationship: spouse
+                employee:
+                  classifications:
+                    BranchName: HQ
+                    Department: Sales
+                  custom_individual_id: bb6bfcd8-6657-4b77-8151-949ea8b5e44e
+                  employment:
+                    employment_dates:
+                      full_time_start: '2015-01-01'
+                      hire_date: '2014-12-10'
+                    employment_status: full-time
+                    hours_worked: 50
+                    occupation: Senior Analyst
+                    salary:
+                      amount: 55000
+                      effective_date: '2022-01-31'
+                      type: salary
+                      unit: annual
+                  group_id: d0ec3837-3499-4a2f-8c58-966ef7e46d95
+                  id: 6e7a80fc-473e-460a-8368-454e9e8dc9cb
+                  person:
+                    contact:
+                      email_address: david@testemail.com
+                      email_address_type: home
+                      home_phone: '+12065551234'
+                      preferred_method: email
+                      work_phone: '+12065559876'
+                    date_of_birth: '1985-06-22'
+                    first_name: David
+                    home_address:
+                      city: San Francisco
+                      county: San Francisco
+                      state: CA
+                      street_one: 1234 Home Ave
+                      zip_code: '94107'
+                    last_name: Johnson
+                    mailing_address:
+                      city: San Francisco
+                      state: CA
+                      street_one: P.O. Box 1234
+                      zip_code: '94107'
+                    marital_status: married
+                    middle_name: A
+                    sex: M
+                    ssn: '123456789'
+                    suffix: Jr
+              schema:
+                $ref: '#/components/schemas/InboundMemberSnapshot'
+          description: Successful Response - Returns the Member Snapshot contents for an employee
+        '404':
+          content:
+            application/json:
+              example:
+                message: Employee not found with UUID 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+                status: 404
+          description: Failure Response - Not found error
+      summary: Get a Member Snapshot by Employee
+      tags:
+      - Member Snapshot
+  /api/v1/employees/{employee_id}/member_snapshots:
+    get:
+      description: Returns a list with metadata for all member snapshots for a given employee.
+      operationId: getMemberSnapshotsForEmployeeList
+      parameters:
+      - description: The unique identifier of the employee for which you would like to view member snapshots
+        in: path
+        name: employee_id
+        required: true
+        schema:
+          example: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+          format: uuid
+          type: string
+      - description: The max size of each page of results
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+      - description: The integer offset at which to start the page. Possible values are 0 to total_records - 1
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                meta:
+                  offset: 0
+                  page_num: 1
+                  page_size: 20
+                  total_records: 2
+                response:
+                - created: 1599184829
+                  employee_id: 7f39b5e0-460d-49e2-83b7-a1b6f2726b12
+                  fulfillment_summary:
+                  - carrier_id: 4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1
+                    errors: []
+                    status: processing
+                  id: bc4aea3e-f728-4b05-85dc-e1ea14456e83
+                  modified: 1599184829
+                  status: processing
+                  version: 431b7d10-3da6-4c5e-bb2f-58a6ebb1224f
+                - created: 1557512389
+                  employee_id: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+                  fulfillment_summary:
+                  - carrier_id: 4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1
+                    errors: []
+                    status: sent
+                  id: 30b74a44-d5b1-4123-a7a4-6d3aec251ba4
+                  modified: 1564440756
+                  status: completed
+                  version: 6260146a-3486-4c3d-b2a6-fcd3f8c84043
+              schema:
+                $ref: '#/components/schemas/OutboundPaginatedMemberSnapshot'
+          description: Successful Response - Returns metadata for any matching Member Snapshots
+        '404':
+          content:
+            application/json:
+              example:
+                message: Employee not found with UUID 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+                status: 404
+          description: Failure Response - Not found error
+      summary: Get all Member Snapshots by Employee
+      tags:
+      - Member Snapshot
+  /api/v1/employees/{employee_id}/status:
+    x-summary: Get Current Employee Status compared to Snapshots
+    get:
+      description: Returns the status of the employee and family, summarized by carrier and including any pending or completed enrollment changes requested by the platform.
+      operationId: getEmployeeStatus
+      parameters:
+      - description: The unique identifier of the employee
+        in: path
+        name: employee_id
+        required: true
+        schema:
+          example: 30b74a44-d5b1-4123-a7a4-6d3aec251ba4
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                pending_changes:
+                  value:
+                    carrier_statuses:
+                    - carrier_id: 1012fbfe-3fbf-422b-807c-b449a3119a61
+                      pending_changes:
+                      - id: 6e0d7cf3-e8a8-42a1-b2dc-269fa988b99e
+                        status: processing
+                        type: member_snapshot
+                      status: pending_changes
+                stable:
+                  value:
+                    carrier_statuses:
+                    - carrier_id: 1012fbfe-3fbf-422b-807c-b449a3119a61
+                      latest_platform_change:
+                        id: 6e0d7cf3-e8a8-42a1-b2dc-269fa988b99e
+                        status: completed
+                        type: member_snapshot
+                      pending_changes: []
+                      status: stable
+                unable_to_fulfill:
+                  value:
+                    carrier_statuses:
+                    - carrier_id: 1012fbfe-3fbf-422b-807c-b449a3119a61
+                      latest_platform_change:
+                        error:
+                          message: Salary effective date needed for volume change
+                        id: c39ccd04-b4ef-4a5f-b267-c32c83fa50fa
+                        status: failed
+                        type: member_snapshot
+                      pending_changes: []
+                      status: unable_to_fulfill
+              schema:
+                $ref: '#/components/schemas/EmployeeStatusResult'
+          description: Returns details about the current status of the Employee
+        '404':
+          content:
+            application/json:
+              example:
+                message: Employee not found with UUID 30b74a44-d5b1-4123-a7a4-6d3aec251ba4
+                status: 404
+          description: Failure Response - Not found error
+      summary: Get Employee Status
+      tags:
+      - Member Snapshot
+  /api/v1/groups/{group_id}/member_snapshots:
+    x-summary: Get all member snapshots by group
+    get:
+      description: Returns a list with metadata for all member snapshots for a given group.
+      operationId: getMemberSnapshotsForGroupList
+      parameters:
+      - description: The unique identifier of the group for which you would like to view member snapshots
+        in: path
+        name: group_id
+        required: true
+        schema:
+          example: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+          format: uuid
+          type: string
+      - description: The max size of each page of results
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+      - description: The integer offset at which to start the page. Possible values are 0 to total_records - 1
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: The employee ID associated with the member snapshot
+        in: query
+        name: employee_id
+        required: false
+        schema:
+          example: a88f4b6f-7c26-4dd0-8b62-6c76f06412ad
+          format: uuid
+          type: string
+      - description: Filter by associated status
+        in: query
+        name: status
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+      - description: Filter by ID (comma separated)
+        in: query
+        name: id
+        required: false
+        schema:
+          items:
+            format: uuid
+            type: string
+          type: array
+      - description: Filter by fulfillment summary carrier ID (comma separated)
+        in: query
+        name: fulfillment_summary_carrier_id
+        required: false
+        schema:
+          items:
+            format: uuid
+            type: string
+          type: array
+      - description: Filter by fulfillment summary status (comma separated)
+        in: query
+        name: fulfillment_summary_status
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                meta:
+                  offset: 0
+                  page_num: 1
+                  page_size: 20
+                  total_records: 2
+                response:
+                - created: 1599184829
+                  employee_id: 7f39b5e0-460d-49e2-83b7-a1b6f2726b12
+                  fulfillment_summary:
+                  - carrier_id: 4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1
+                    errors: []
+                    status: processing
+                  id: bc4aea3e-f728-4b05-85dc-e1ea14456e83
+                  modified: 1599184829
+                  status: processing
+                  version: 431b7d10-3da6-4c5e-bb2f-58a6ebb1224f
+                - created: 1557512389
+                  employee_id: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+                  fulfillment_summary:
+                  - carrier_id: 4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1
+                    errors: []
+                    status: sent
+                  id: 30b74a44-d5b1-4123-a7a4-6d3aec251ba4
+                  modified: 1564440756
+                  status: completed
+                  version: 6260146a-3486-4c3d-b2a6-fcd3f8c84043
+              schema:
+                $ref: '#/components/schemas/OutboundPaginatedMemberSnapshot'
+          description: Successful Response - Returns metadata for any matching Member Snapshots
+        '404':
+          content:
+            application/json:
+              example:
+                message: Group not found with UUID 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+                status: 404
+          description: Failure Response - Not found error
+      summary: Get all Member Snapshots by Group
+      tags:
+      - Member Snapshot
+    post:
+      description: Create a new Member Snapshot for an employee associated with a group.
+      operationId: createMemberSnapshot
+      parameters:
+      - description: The unique identifier of the group for the employee referenced in the snapshot
+        in: path
+        name: group_id
+        required: true
+        schema:
+          example: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              success:
+                value:
+                  coverages:
+                  - carrier_id: 4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1
+                    enrolled_members:
+                    - effective_end_date: '9999-12-31'
+                      effective_start_date: '2022-01-01'
+                      event_id: '1'
+                      individual_id: 6e7a80fc-473e-460a-8368-454e9e8dc9cb
+                      individual_type: employee
+                      latest_change_effective_date: '2022-02-13'
+                    - effective_end_date: '9999-12-31'
+                      effective_start_date: '2022-01-01'
+                      event_id: '1'
+                      individual_id: ab740704-7c37-4010-92b3-d22c6926be3e
+                      individual_type: dependent
+                    line_of_coverage: medical
+                    plan_id: 4bf04f73-0aad-48ac-b28a-e5f4def7c5e9
+                    signature_date: '2021-12-23'
+                  - carrier_id: 4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1
+                    enrolled_members:
+                    - effective_end_date: '9999-12-31'
+                      effective_start_date: '2022-01-01'
+                      event_id: '1'
+                      individual_id: 6e7a80fc-473e-460a-8368-454e9e8dc9cb
+                      individual_type: employee
+                    - effective_end_date: '2021-12-31'
+                      effective_start_date: '2022-01-01'
+                      event_id: '1'
+                      individual_id: ab740704-7c37-4010-92b3-d22c6926be3e
+                      individual_type: dependent
+                    line_of_coverage: dental
+                    plan_name: DHMO Smile Plus
+                    signature_date: '2021-12-23'
+                  - carrier_id: 4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1
+                    enrolled_members:
+                    - effective_end_date: '9999-12-31'
+                      effective_start_date: '2022-01-01'
+                      event_id: '1'
+                      individual_id: 6e7a80fc-473e-460a-8368-454e9e8dc9cb
+                      individual_type: employee
+                      volume: 50000
+                    line_of_coverage: life
+                    plan_name: 50k Employee Basic Life
+                    signature_date: '2021-12-23'
+                  dependents:
+                  - custom_individual_id: '378713198'
+                    event_id: '1'
+                    id: ab740704-7c37-4010-92b3-d22c6926be3e
+                    person:
+                      contact:
+                        email_address: jamie@testemail.com
+                        email_address_type: home
+                        home_phone: '+12065551234'
+                      date_of_birth: '1990-01-02'
+                      first_name: Jamie
+                      home_address:
+                        city: San Francisco
+                        county: San Francisco
+                        state: CA
+                        street_one: 1234 Home Ave
+                        zip_code: '94107'
+                      last_name: Johnson
+                      mailing_address:
+                        city: San Francisco
+                        state: CA
+                        street_one: P.O. Box 1234
+                        zip_code: '94107'
+                      marital_status: married
+                      sex: F
+                      ssn: '987654321'
+                    relationship: spouse
+                  employee:
+                    classifications:
+                      BranchName: HQ
+                      Department: Sales
+                    custom_individual_id: '718713143'
+                    employment:
+                      employment_dates:
+                        full_time_start: '2015-01-01'
+                        hire_date: '2014-12-10'
+                      employment_status: full-time
+                      hours_worked: 50
+                      occupation: Senior Analyst
+                      salary:
+                        amount: 55000
+                        effective_date: '2022-01-31'
+                        type: salary
+                        unit: annual
+                    event_id: '1'
+                    id: 6e7a80fc-473e-460a-8368-454e9e8dc9cb
+                    person:
+                      contact:
+                        email_address: david@testemail.com
+                        email_address_type: home
+                        home_phone: '+12065551234'
+                        preferred_method: email
+                        work_phone: '+12065559876'
+                      date_of_birth: '1985-06-22'
+                      first_name: David
+                      home_address:
+                        city: San Francisco
+                        county: San Francisco
+                        state: CA
+                        street_one: 1234 Home Ave
+                        zip_code: '94107'
+                      last_name: Johnson
+                      mailing_address:
+                        city: San Francisco
+                        state: CA
+                        street_one: P.O. Box 1234
+                        zip_code: '94107'
+                      marital_status: married
+                      middle_name: A
+                      sex: M
+                      ssn: '123456789'
+                      suffix: Jr
+                  enable_member_auto_link: false
+                  events:
+                  - date: '2022-01-01'
+                    id: '1'
+                    reason: open_enrollment
+                    type: coverage
+                  snapshot_mode: current_open
+            schema:
+              $ref: '#/components/schemas/InboundMemberSnapshot'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              example:
+                created: 1656030390
+                created_members:
+                - custom_individual_id: '718713143'
+                  id: 6e7a80fc-473e-460a-8368-454e9e8dc9cb
+                  type: employee
+                - custom_individual_id: '378713198'
+                  id: ab740704-7c37-4010-92b3-d22c6926be3e
+                  type: dependent
+                employee_id: 6e7a80fc-473e-460a-8368-454e9e8dc9cb
+                fulfillment_summary:
+                - carrier_id: 4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1
+                  errors: []
+                  status: processing
+                id: 7bea80ac-499d-560b-5512-60be9e2349cb
+                member_snapshot:
+                  coverages:
+                  - carrier_id: 4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1
+                    enrolled_members:
+                    - effective_end_date: '9999-12-31'
+                      effective_start_date: '2022-01-01'
+                      event_id: '1'
+                      individual_id: 6e7a80fc-473e-460a-8368-454e9e8dc9cb
+                      individual_type: employee
+                      latest_change_effective_date: '2022-02-13'
+                    - effective_end_date: '9999-12-31'
+                      effective_start_date: '2022-01-01'
+                      event_id: '1'
+                      individual_id: ab740704-7c37-4010-92b3-d22c6926be3e
+                      individual_type: dependent
+                    line_of_coverage: medical
+                    plan_id: 4bf04f73-0aad-48ac-b28a-e5f4def7c5e9
+                    signature_date: '2021-12-23'
+                  - carrier_id: 4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1
+                    enrolled_members:
+                    - effective_end_date: '9999-12-31'
+                      effective_start_date: '2022-01-01'
+                      event_id: '1'
+                      individual_type: employee
+                    - effective_end_date: '2021-12-31'
+                      effective_start_date: '2022-01-01'
+                      event_id: '1'
+                      individual_id: ab740704-7c37-4010-92b3-d22c6926be3e
+                      individual_type: dependent
+                    line_of_coverage: dental
+                    plan_name: DHMO Smile Plus
+                    signature_date: '2021-12-23'
+                  - carrier_id: 4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1
+                    enrolled_members:
+                    - effective_end_date: '9999-12-31'
+                      effective_start_date: '2022-01-01'
+                      event_id: '1'
+                      individual_type: employee
+                      volume: 50000
+                    line_of_coverage: life
+                    plan_name: 50k Employee Basic Life
+                    signature_date: '2021-12-23'
+                  dependents:
+                  - custom_individual_id: '378713198'
+                    event_id: '1'
+                    id: ab740704-7c37-4010-92b3-d22c6926be3e
+                    person:
+                      contact:
+                        email_address: jamie@testemail.com
+                        email_address_type: home
+                        home_phone: '+12065551234'
+                      date_of_birth: '1990-01-02'
+                      first_name: Jamie
+                      home_address:
+                        city: San Francisco
+                        county: San Francisco
+                        state: CA
+                        street_one: 1234 Home Ave
+                        zip_code: '94107'
+                      last_name: Johnson
+                      mailing_address:
+                        city: San Francisco
+                        state: CA
+                        street_one: P.O. Box 1234
+                        zip_code: '94107'
+                      marital_status: married
+                      sex: F
+                      ssn: '987654321'
+                    relationship: spouse
+                  employee:
+                    classifications:
+                      BranchName: HQ
+                      Department: Sales
+                    custom_individual_id: '718713143'
+                    employment:
+                      employment_dates:
+                        full_time_start: '2015-01-01'
+                        hire_date: '2014-12-10'
+                      employment_status: full-time
+                      hours_worked: 50
+                      occupation: Senior Analyst
+                      salary:
+                        amount: 55000
+                        effective_date: '2022-01-31'
+                        type: salary
+                        unit: annual
+                    event_id: '1'
+                    group_id: d0ec3837-3499-4a2f-8c58-966ef7e46d95
+                    id: 6e7a80fc-473e-460a-8368-454e9e8dc9cb
+                    person:
+                      contact:
+                        email_address: david@testemail.com
+                        email_address_type: home
+                        home_phone: '+12065551234'
+                        preferred_method: email
+                        work_phone: '+12065559876'
+                      date_of_birth: '1985-06-22'
+                      first_name: David
+                      home_address:
+                        city: San Francisco
+                        county: San Francisco
+                        state: CA
+                        street_one: 1234 Home Ave
+                        zip_code: '94107'
+                      last_name: Johnson
+                      mailing_address:
+                        city: San Francisco
+                        state: CA
+                        street_one: P.O. Box 1234
+                        zip_code: '94107'
+                      marital_status: married
+                      middle_name: A
+                      sex: M
+                      ssn: '123456789'
+                      suffix: Jr
+                  enable_member_auto_link: false
+                  events:
+                  - date: '2022-01-01'
+                    id: '1'
+                    reason: open_enrollment
+                    type: coverage
+                  snapshot_mode: current_open
+                modified: 1656030390
+                status: processing
+                version: 271c60d6-f009-4b3d-8bba-aac49b2dd9a4
+                warnings: []
+              schema:
+                $ref: '#/components/schemas/OutboundMemberSnapshot'
+          description: Successful Response - Returns the contents of the newly created Member Snapshot
+        '400':
+          content:
+            application/json:
+              example:
+                message: 'Error creating dependent. Existing dependent has matching name and date of birth: ab740704-7c37-4010-92b3-d22c6926be3e'
+                status: 400
+          description: Failure Response - Client error
+        '404':
+          content:
+            application/json:
+              example:
+                message: Dependent with ID ab740704-7c37-4010-92b3-d22c6926be3e does not have an associated employee.
+                status: 404
+          description: Failure Response - Not found error
+        '422':
+          content:
+            application/json:
+              example:
+                message: 'This snapshot is missing the following active coverages: dental for dependent ab740704-7c37-4010-92b3-d22c6926be3e. If you intend to terminate a coverage, please send a snapshot that includes a termination date before omitting it from future snapshots.'
+                status: 422
+          description: Failure Response - Schema validation error
+      summary: Create a Member Snapshot
+      tags:
+      - Member Snapshot
+  /api/v1/groups/{group_id}/member_snapshots/test:
+    x-summary: Public endpoint for testing creation of a member snapshot
+    post:
+      description: Test creating a Member Snapshot for an employee associated with a group
+      operationId: testCreateMemberSnapshot
+      parameters:
+      - description: The unique identifier of the group for the employee referenced in the snapshot
+        in: path
+        name: group_id
+        required: true
+        schema:
+          example: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              success:
+                value:
+                  member_snapshot:
+                    coverages:
+                    - carrier_id: 4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1
+                      enrolled_members:
+                      - effective_end_date: '9999-12-31'
+                        effective_start_date: '2022-01-01'
+                        event_id: '1'
+                        individual_id: 6e7a80fc-473e-460a-8368-454e9e8dc9cb
+                        individual_type: employee
+                        latest_change_effective_date: '2022-02-13'
+                      - effective_end_date: '9999-12-31'
+                        effective_start_date: '2022-01-01'
+                        event_id: '1'
+                        individual_id: ab740704-7c37-4010-92b3-d22c6926be3e
+                        individual_type: dependent
+                      line_of_coverage: medical
+                      plan_id: 4bf04f73-0aad-48ac-b28a-e5f4def7c5e9
+                      signature_date: '2021-12-23'
+                    - carrier_id: 4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1
+                      enrolled_members:
+                      - effective_end_date: '9999-12-31'
+                        effective_start_date: '2022-01-01'
+                        event_id: '1'
+                        individual_id: 6e7a80fc-473e-460a-8368-454e9e8dc9cb
+                        individual_type: employee
+                      - effective_end_date: '2021-12-31'
+                        effective_start_date: '2022-01-01'
+                        event_id: '1'
+                        individual_id: ab740704-7c37-4010-92b3-d22c6926be3e
+                        individual_type: dependent
+                      line_of_coverage: dental
+                      plan_name: DHMO Smile Plus
+                      signature_date: '2021-12-23'
+                    - carrier_id: 4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1
+                      enrolled_members:
+                      - effective_end_date: '9999-12-31'
+                        effective_start_date: '2022-01-01'
+                        event_id: '1'
+                        individual_id: 6e7a80fc-473e-460a-8368-454e9e8dc9cb
+                        individual_type: employee
+                        volume: 50000
+                      line_of_coverage: life
+                      plan_name: 50k Employee Basic Life
+                      signature_date: '2021-12-23'
+                    dependents:
+                    - custom_individual_id: '378713198'
+                      event_id: '1'
+                      id: ab740704-7c37-4010-92b3-d22c6926be3e
+                      person:
+                        contact:
+                          email_address: jamie@testemail.com
+                          email_address_type: home
+                          home_phone: '+12065551234'
+                        date_of_birth: '1990-01-02'
+                        first_name: Jamie
+                        home_address:
+                          city: San Francisco
+                          county: San Francisco
+                          state: CA
+                          street_one: 1234 Home Ave
+                          zip_code: '94107'
+                        last_name: Johnson
+                        mailing_address:
+                          city: San Francisco
+                          state: CA
+                          street_one: P.O. Box 1234
+                          zip_code: '94107'
+                        marital_status: married
+                        sex: F
+                        ssn: '987654321'
+                      relationship: spouse
+                    employee:
+                      classifications:
+                        BranchName: HQ
+                        Department: Sales
+                      custom_individual_id: '718713143'
+                      employment:
+                        employment_dates:
+                          full_time_start: '2015-01-01'
+                          hire_date: '2014-12-10'
+                        employment_status: full-time
+                        hours_worked: 50
+                        occupation: Senior Analyst
+                        salary:
+                          amount: 55000
+                          effective_date: '2022-01-31'
+                          type: salary
+                          unit: annual
+                      event_id: '1'
+                      id: 6e7a80fc-473e-460a-8368-454e9e8dc9cb
+                      person:
+                        contact:
+                          email_address: david@testemail.com
+                          email_address_type: home
+                          home_phone: '+12065551234'
+                          preferred_method: email
+                          work_phone: '+12065559876'
+                        date_of_birth: '1985-06-22'
+                        first_name: David
+                        home_address:
+                          city: San Francisco
+                          county: San Francisco
+                          state: CA
+                          street_one: 1234 Home Ave
+                          zip_code: '94107'
+                        last_name: Johnson
+                        mailing_address:
+                          city: San Francisco
+                          state: CA
+                          street_one: P.O. Box 1234
+                          zip_code: '94107'
+                        marital_status: married
+                        middle_name: A
+                        sex: M
+                        ssn: '123456789'
+                        suffix: Jr
+                    enable_member_auto_link: false
+                    events:
+                    - date: '2022-01-01'
+                      id: '1'
+                      reason: open_enrollment
+                      type: coverage
+                    snapshot_mode: current_open
+            schema:
+              $ref: '#/components/schemas/InboundTestMemberSnapshot'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                member_snapshot:
+                  created: 1656030390
+                  created_members:
+                  - custom_individual_id: '718713143'
+                    id: 6e7a80fc-473e-460a-8368-454e9e8dc9cb
+                    type: employee
+                  - custom_individual_id: '378713198'
+                    id: ab740704-7c37-4010-92b3-d22c6926be3e
+                    type: dependent
+                  employee_id: 6e7a80fc-473e-460a-8368-454e9e8dc9cb
+                  fulfillment_summary:
+                  - carrier_id: 4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1
+                    errors: []
+                    status: processing
+                  id: 7bea80ac-499d-560b-5512-60be9e2349cb
+                  member_snapshot:
+                    coverages:
+                    - carrier_id: 4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1
+                      enrolled_members:
+                      - effective_end_date: '9999-12-31'
+                        effective_start_date: '2022-01-01'
+                        event_id: '1'
+                        individual_id: 6e7a80fc-473e-460a-8368-454e9e8dc9cb
+                        individual_type: employee
+                        latest_change_effective_date: '2022-02-13'
+                      - effective_end_date: '9999-12-31'
+                        effective_start_date: '2022-01-01'
+                        event_id: '1'
+                        individual_id: ab740704-7c37-4010-92b3-d22c6926be3e
+                        individual_type: dependent
+                      line_of_coverage: medical
+                      plan_id: 4bf04f73-0aad-48ac-b28a-e5f4def7c5e9
+                      signature_date: '2021-12-23'
+                    - carrier_id: 4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1
+                      enrolled_members:
+                      - effective_end_date: '9999-12-31'
+                        effective_start_date: '2022-01-01'
+                        event_id: '1'
+                        individual_type: employee
+                      - effective_end_date: '2021-12-31'
+                        effective_start_date: '2022-01-01'
+                        event_id: '1'
+                        individual_id: ab740704-7c37-4010-92b3-d22c6926be3e
+                        individual_type: dependent
+                      line_of_coverage: dental
+                      plan_name: DHMO Smile Plus
+                      signature_date: '2021-12-23'
+                    - carrier_id: 4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1
+                      enrolled_members:
+                      - effective_end_date: '9999-12-31'
+                        effective_start_date: '2022-01-01'
+                        event_id: '1'
+                        individual_type: employee
+                        volume: 50000
+                      line_of_coverage: life
+                      plan_name: 50k Employee Basic Life
+                      signature_date: '2021-12-23'
+                    dependents:
+                    - custom_individual_id: '378713198'
+                      event_id: '1'
+                      id: ab740704-7c37-4010-92b3-d22c6926be3e
+                      person:
+                        contact:
+                          email_address: jamie@testemail.com
+                          email_address_type: home
+                          home_phone: '+12065551234'
+                        date_of_birth: '1990-01-02'
+                        first_name: Jamie
+                        home_address:
+                          city: San Francisco
+                          county: San Francisco
+                          state: CA
+                          street_one: 1234 Home Ave
+                          zip_code: '94107'
+                        last_name: Johnson
+                        mailing_address:
+                          city: San Francisco
+                          state: CA
+                          street_one: P.O. Box 1234
+                          zip_code: '94107'
+                        marital_status: married
+                        sex: F
+                        ssn: '987654321'
+                      relationship: spouse
+                    employee:
+                      classifications:
+                        BranchName: HQ
+                        Department: Sales
+                      custom_individual_id: '718713143'
+                      employment:
+                        employment_dates:
+                          full_time_start: '2015-01-01'
+                          hire_date: '2014-12-10'
+                        employment_status: full-time
+                        hours_worked: 50
+                        occupation: Senior Analyst
+                        salary:
+                          amount: 55000
+                          effective_date: '2022-01-31'
+                          type: salary
+                          unit: annual
+                      event_id: '1'
+                      group_id: d0ec3837-3499-4a2f-8c58-966ef7e46d95
+                      id: 6e7a80fc-473e-460a-8368-454e9e8dc9cb
+                      person:
+                        contact:
+                          email_address: david@testemail.com
+                          email_address_type: home
+                          home_phone: '+12065551234'
+                          preferred_method: email
+                          work_phone: '+12065559876'
+                        date_of_birth: '1985-06-22'
+                        first_name: David
+                        home_address:
+                          city: San Francisco
+                          county: San Francisco
+                          state: CA
+                          street_one: 1234 Home Ave
+                          zip_code: '94107'
+                        last_name: Johnson
+                        mailing_address:
+                          city: San Francisco
+                          state: CA
+                          street_one: P.O. Box 1234
+                          zip_code: '94107'
+                        marital_status: married
+                        middle_name: A
+                        sex: M
+                        ssn: '123456789'
+                        suffix: Jr
+                    enable_member_auto_link: false
+                    events:
+                    - date: '2022-01-01'
+                      id: '1'
+                      reason: open_enrollment
+                      type: coverage
+                    snapshot_mode: current_open
+                  modified: 1656030390
+                  status: processing
+                  version: 271c60d6-f009-4b3d-8bba-aac49b2dd9a4
+                  warnings: []
+                trace_ids: []
+              schema:
+                $ref: '#/components/schemas/OutboundTestMemberSnapshot'
+          description: Successful Response - Returns the contents of the test Member Snapshot
+        '400':
+          content:
+            application/json:
+              example:
+                message: 'Error creating dependent. Existing dependent has matching name and date of birth: ab740704-7c37-4010-92b3-d22c6926be3e'
+                status: 400
+          description: Failure Response - Client error
+        '404':
+          content:
+            application/json:
+              example:
+                message: Dependent with ID ab740704-7c37-4010-92b3-d22c6926be3e does not have an associated employee.
+                status: 404
+          description: Failure Response - Not found error
+        '422':
+          content:
+            application/json:
+              example:
+                message: 'This snapshot is missing the following active coverages: dental for dependent ab740704-7c37-4010-92b3-d22c6926be3e. If you intend to terminate a coverage, please send a snapshot that includes a termination date before omitting it from future snapshots.'
+                status: 422
+          description: Failure Response - Schema validation error
+      summary: Test creating a member snapshot
+      tags:
+      - Member Snapshot
+  /api/v1/member_snapshots:
+    x-summary: Get all member snapshots
+    get:
+      description: Returns a list with metadata for all member snapshots.
+      operationId: getMemberSnapshotsList
+      parameters:
+      - description: The max size of each page of results
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+      - description: The integer offset at which to start the page. Possible values are 0 to total_records - 1
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Filter by associated status
+        in: query
+        name: status
+        schema:
+          items:
+            type: string
+          type: array
+      - description: Filter by ID (comma separated)
+        in: query
+        name: id
+        required: false
+        schema:
+          items:
+            format: uuid
+            type: string
+          type: array
+      - description: Filter by fulfillment summary carrier ID (comma separated)
+        in: query
+        name: fulfillment_summary_carrier_id
+        required: false
+        schema:
+          items:
+            format: uuid
+            type: string
+          type: array
+      - description: Filter by fulfillment summary status (comma separated)
+        in: query
+        name: fulfillment_summary_status
+        required: false
+        schema:
+          items:
+            format: uuid
+            type: string
+          type: array
+      - description: The employee ID associated with the member snapshot
+        in: query
+        name: employee_id
+        required: false
+        schema:
+          example: a88f4b6f-7c26-4dd0-8b62-6c76f06412ad
+          format: uuid
+          type: string
+      - description: The group ID associated with the member snapshot
+        in: query
+        name: group_id
+        required: false
+        schema:
+          example: a88f4b6f-7c26-4dd0-8b62-6c76f06412ad
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                meta:
+                  offset: 0
+                  page_num: 1
+                  page_size: 20
+                  total_records: 2
+                response:
+                - created: 1599184829
+                  employee_id: 7f39b5e0-460d-49e2-83b7-a1b6f2726b12
+                  fulfillment_summary:
+                  - carrier_id: 4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1
+                    errors: []
+                    status: processing
+                  id: bc4aea3e-f728-4b05-85dc-e1ea14456e83
+                  modified: 1599184829
+                  status: processing
+                  version: 431b7d10-3da6-4c5e-bb2f-58a6ebb1224f
+                - created: 1557512389
+                  employee_id: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+                  fulfillment_summary:
+                  - carrier_id: 4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1
+                    errors: []
+                    status: sent
+                  id: 30b74a44-d5b1-4123-a7a4-6d3aec251ba4
+                  modified: 1564440756
+                  status: completed
+                  version: 6260146a-3486-4c3d-b2a6-fcd3f8c84043
+              schema:
+                $ref: '#/components/schemas/OutboundPaginatedMemberSnapshot'
+          description: Successful Response - Returns metadata for any matching Member Snapshots
+      summary: Get all Member Snapshots
+      tags:
+      - Member Snapshot
+  /api/v1/member_snapshots/{snapshot_id}:
+    x-summary: Get a single member snapshot
+    get:
+      description: Get a Member Snapshot by ID
+      operationId: getMemberSnapshot
+      parameters:
+      - description: The unique identifier of the member snapshot
+        in: path
+        name: snapshot_id
+        required: true
+        schema:
+          example: 30b74a44-d5b1-4123-a7a4-6d3aec251ba4
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                created: 1656030390
+                created_members:
+                - custom_individual_id: bb6bfcd8-6657-4b77-8151-949ea8b5e44e
+                  id: 6e7a80fc-473e-460a-8368-454e9e8dc9cb
+                  type: employee
+                - custom_individual_id: 3f093cc0-4fef-4d5d-9267-ba5cdfc09827
+                  id: ab740704-7c37-4010-92b3-d22c6926be3e
+                  type: dependent
+                employee_id: 6e7a80fc-473e-460a-8368-454e9e8dc9cb
+                fulfillment_summary:
+                - carrier_id: 4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1
+                  errors: []
+                  status: processing
+                id: 7bea80ac-499d-560b-5512-60be9e2349cb
+                member_snapshot:
+                  coverages:
+                  - carrier_id: 4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1
+                    enrolled_members:
+                    - effective_end_date: '9999-12-31'
+                      effective_start_date: '2022-01-01'
+                      event_id: '1'
+                      individual_id: 6e7a80fc-473e-460a-8368-454e9e8dc9cb
+                      individual_type: employee
+                      latest_change_effective_date: '2022-02-13'
+                    - effective_end_date: '9999-12-31'
+                      effective_start_date: '2022-01-01'
+                      event_id: '1'
+                      individual_id: ab740704-7c37-4010-92b3-d22c6926be3e
+                      individual_type: dependent
+                    line_of_coverage: medical
+                    plan_id: 4bf04f73-0aad-48ac-b28a-e5f4def7c5e9
+                    signature_date: '2021-12-23'
+                  - carrier_id: 4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1
+                    enrolled_members:
+                    - effective_end_date: '9999-12-31'
+                      effective_start_date: '2022-01-01'
+                      event_id: '1'
+                      individual_type: employee
+                    - effective_end_date: '2021-12-31'
+                      effective_start_date: '2022-01-01'
+                      event_id: '1'
+                      individual_id: ab740704-7c37-4010-92b3-d22c6926be3e
+                      individual_type: dependent
+                    line_of_coverage: dental
+                    plan_name: DHMO Smile Plus
+                    signature_date: '2021-12-23'
+                  - carrier_id: 4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1
+                    enrolled_members:
+                    - effective_end_date: '9999-12-31'
+                      effective_start_date: '2022-01-01'
+                      event_id: '1'
+                      individual_type: employee
+                      volume: 50000
+                    line_of_coverage: life
+                    plan_name: 50k Employee Basic Life
+                    signature_date: '2021-12-23'
+                  dependents:
+                  - custom_individual_id: 3f093cc0-4fef-4d5d-9267-ba5cdfc09827
+                    event_id: '1'
+                    id: ab740704-7c37-4010-92b3-d22c6926be3e
+                    person:
+                      contact:
+                        email_address: jamie@testemail.com
+                        email_address_type: home
+                        home_phone: '+12065551234'
+                      date_of_birth: '1990-01-02'
+                      first_name: Jamie
+                      home_address:
+                        city: San Francisco
+                        county: San Francisco
+                        state: CA
+                        street_one: 1234 Home Ave
+                        zip_code: '94107'
+                      last_name: Johnson
+                      mailing_address:
+                        city: San Francisco
+                        state: CA
+                        street_one: P.O. Box 1234
+                        zip_code: '94107'
+                      marital_status: married
+                      sex: F
+                      ssn: '987654321'
+                    relationship: spouse
+                  employee:
+                    classifications:
+                      BranchName: HQ
+                      Department: Sales
+                    custom_individual_id: bb6bfcd8-6657-4b77-8151-949ea8b5e44e
+                    employment:
+                      employment_dates:
+                        full_time_start: '2015-01-01'
+                        hire_date: '2014-12-10'
+                      employment_status: full-time
+                      hours_worked: 50
+                      occupation: Senior Analyst
+                      salary:
+                        amount: 55000
+                        effective_date: '2022-01-31'
+                        type: salary
+                        unit: annual
+                    event_id: '1'
+                    group_id: d0ec3837-3499-4a2f-8c58-966ef7e46d95
+                    id: 6e7a80fc-473e-460a-8368-454e9e8dc9cb
+                    person:
+                      contact:
+                        email_address: david@testemail.com
+                        email_address_type: home
+                        home_phone: '+12065551234'
+                        preferred_method: email
+                        work_phone: '+12065559876'
+                      date_of_birth: '1985-06-22'
+                      first_name: David
+                      home_address:
+                        city: San Francisco
+                        county: San Francisco
+                        state: CA
+                        street_one: 1234 Home Ave
+                        zip_code: '94107'
+                      last_name: Johnson
+                      mailing_address:
+                        city: San Francisco
+                        state: CA
+                        street_one: P.O. Box 1234
+                        zip_code: '94107'
+                      marital_status: married
+                      middle_name: A
+                      sex: M
+                      ssn: '123456789'
+                      suffix: Jr
+                  events:
+                  - date: '2022-01-01'
+                    id: '1'
+                    reason: open_enrollment
+                    type: enrollment
+                  snapshot_mode: current_open
+                modified: 1656030390
+                replaced_by: 9aea70ac-469d-560b-2512-90be9e2348ys
+                status: processing
+                version: 271c60d6-f009-4b3d-8bba-aac49b2dd9a4
+                warnings: []
+              schema:
+                $ref: '#/components/schemas/OutboundMemberSnapshot'
+          description: Successful Response - Returns the Member Snapshot contents
+        '404':
+          content:
+            application/json:
+              example:
+                message: MemberSnapshot not found with UUID 30b74a44-d5b1-4123-a7a4-6d3aec251ba4
+                status: 404
+          description: Failure Response - Not found error
+      summary: Get a Member Snapshot
+      tags:
+      - Member Snapshot
+  /ui/v1/member_snapshots:
+    x-summary: List Member Snapshots
+    get:
+      description: Returns a list of all member snapshots.
+      operationId: uiGetMemberSnapshotList
+      parameters:
+      - description: The max size of each page of results
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+      - description: The integer offset at which to start the page. Possible values are 0 to total_records - 1
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - in: query
+        name: id
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: status
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: organization_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+      - in: query
+        name: employee_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+      - in: query
+        name: group_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+      - in: query
+        name: member_request_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+      - in: query
+        name: group_name_search
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: created_before
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: search
+        required: false
+        schema:
+          type: string
+      - description: The attribute on which to sort the member snapshots
+        in: query
+        name: sort_by
+        required: false
+        schema:
+          type: string
+      - description: Either asc or desc, to denote the data's direction
+        in: query
+        name: sort_direction
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                meta:
+                  offset: 0
+                  page_num: 1
+                  page_size: 20
+                  total_records: 2
+                response:
+                - employee:
+                    employment:
+                      employment_dates:
+                        full_time_start: '2017-12-05'
+                        hire_date: '2018-01-01'
+                      employment_status: full-time
+                      hours_worked: 40
+                      occupation: Engineer
+                      salary:
+                        amount: 550
+                        type: salary
+                        unit: annual
+                    id: 0ff1e7ef-16f8-42ec-b6d9-330e75d5a1e2
+                    person:
+                      first_name: John
+                      id: f5d9ba72-c5f7-4a19-96ca-9daef73f59d8
+                      last_name: Doe
+                      middle_name: Frank
+                  group:
+                    created: 1663100706
+                    dba_name: Test Company LLC
+                    federal_ein: '123123123'
+                    id: 8653c609-c08d-4951-afc5-8788d5d5fed5
+                    modified: 1663100706
+                    name: One
+                    organization_id: a4c3e548-23bf-47cf-91ad-d30e190ec36b
+                    sic_code: '7371'
+                    version: e3c272f6-452f-4b07-b5f7-e46ec5e69d7b
+                  member_snapshot:
+                    created: 1641171601
+                    employee_id: 0ff1e7ef-16f8-42ec-b6d9-330e75d5a1e2
+                    id: bda1b068-3e6a-4cc3-9769-0fb8a38649ce
+                    modified: 1641171601
+                    status: processing
+                    version: feae8f7e-1404-446a-bcec-d0ec8aee11b4
+                - employee:
+                    employment:
+                      employment_dates:
+                        full_time_start: '2017-12-05'
+                        hire_date: '2018-01-01'
+                      employment_status: full-time
+                      hours_worked: 40
+                      occupation: Engineer
+                      salary:
+                        amount: 550
+                        type: salary
+                        unit: annual
+                    id: 512649c3-e66a-475a-9bff-78b632d24702
+                    person:
+                      first_name: John
+                      id: d41ef8a4-087c-4d94-906b-599c6568d218
+                      last_name: Doe
+                      middle_name: Frank
+                  group:
+                    created: 1663100706
+                    dba_name: Test Company LLC
+                    federal_ein: '123123123'
+                    id: 8653c609-c08d-4951-afc5-8788d5d5fed5
+                    modified: 1663100706
+                    name: One
+                    organization_id: a4c3e548-23bf-47cf-91ad-d30e190ec36b
+                    sic_code: '7371'
+                    version: e3c272f6-452f-4b07-b5f7-e46ec5e69d7b
+                  member_snapshot:
+                    created: 1641085201
+                    employee_id: 512649c3-e66a-475a-9bff-78b632d24702
+                    id: fd70e9a6-c662-4fc6-b724-ab023ee59a12
+                    modified: 1641085201
+                    status: completed
+                    version: 7a26674d-5974-4173-8346-85eef354f6fd
+              schema:
+                $ref: '#/components/schemas/PaginatedUIMemberSnapshotPublicResult'
+          description: Successful Response - Returns all matching Member Snapshots
+      summary: Get a list of all Member Snapshots
+      tags:
+      - Member Snapshot
+  /ui/v1/member_snapshots/member_transaction/{transaction_id}:
+    get:
+      description: Gets member snapshot currently associated with a transaction
+      operationId: getUIMemberSnapshotByMemberTransaction
+      parameters:
+      - description: The unique identifier of the member transaction we are using to get associated member snapshot
+        in: path
+        name: transaction_id
+        required: true
+        schema:
+          example: 0059143c-e8df-4f2d-adfd-8013ee683030
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                created: 1656030390
+                created_members:
+                - custom_individual_id: bb6bfcd8-6657-4b77-8151-949ea8b5e44e
+                  id: 6e7a80fc-473e-460a-8368-454e9e8dc9cb
+                  type: employee
+                - custom_individual_id: 3f093cc0-4fef-4d5d-9267-ba5cdfc09827
+                  id: ab740704-7c37-4010-92b3-d22c6926be3e
+                  type: dependent
+                employee_id: 6e7a80fc-473e-460a-8368-454e9e8dc9cb
+                fulfillment_summary:
+                - carrier_id: 4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1
+                  errors: []
+                  status: processing
+                id: 7bea80ac-499d-560b-5512-60be9e2349cb
+                member_snapshot:
+                  coverages:
+                  - carrier_id: 4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1
+                    enrolled_members:
+                    - effective_end_date: '9999-12-31'
+                      effective_start_date: '2022-01-01'
+                      event_id: '1'
+                      individual_id: 6e7a80fc-473e-460a-8368-454e9e8dc9cb
+                      individual_type: employee
+                    - effective_end_date: '9999-12-31'
+                      effective_start_date: '2022-01-01'
+                      event_id: '1'
+                      individual_id: ab740704-7c37-4010-92b3-d22c6926be3e
+                      individual_type: dependent
+                    line_of_coverage: medical
+                    plan_id: 4bf04f73-0aad-48ac-b28a-e5f4def7c5e9
+                    signature_date: '2021-12-23'
+                  dependents:
+                  - custom_individual_id: 3f093cc0-4fef-4d5d-9267-ba5cdfc09827
+                    event_id: '1'
+                    id: ab740704-7c37-4010-92b3-d22c6926be3e
+                    person:
+                      date_of_birth: '1990-01-02'
+                      first_name: Jamie
+                      last_name: Johnson
+                      sex: F
+                    relationship: spouse
+                  employee:
+                    custom_individual_id: bb6bfcd8-6657-4b77-8151-949ea8b5e44e
+                    event_id: '1'
+                    group_id: d0ec3837-3499-4a2f-8c58-966ef7e46d95
+                    id: 6e7a80fc-473e-460a-8368-454e9e8dc9cb
+                    person:
+                      contact:
+                        email_address: david@testemail.com
+                      date_of_birth: '1985-06-22'
+                      first_name: David
+                      home_address:
+                        city: San Francisco
+                        state: CA
+                        street_one: 1234 Home Ave
+                        zip_code: '94107'
+                      last_name: Johnson
+                      sex: M
+                  events:
+                  - date: '2022-01-01'
+                    id: '1'
+                    reason: open_enrollment
+                    type: enrollment
+                modified: 1656030390
+                status: processing
+                version: 271c60d6-f009-4b3d-8bba-aac49b2dd9a4
+                warnings: []
+              schema:
+                $ref: '#/components/schemas/OutboundMemberSnapshot'
+          description: Successful Response - Returns the Member Snapshot contents
+        '404':
+          content:
+            application/json:
+              example:
+                message: MemberTransaction not found with UUID 30b74a44-d5b1-4123-a7a4-6d3aec251ba4
+                status: 404
+          description: Failure Response - Not found error
+      summary: Gets member snapshot currently associated with a transaction
+      tags:
+      - Member Snapshot
+components:
+  schemas:
+    MemberSnapshotDB:
+      properties:
+        coverages:
+          description: List of coverage and enrollment decisions for each member
+          items:
+            $ref: '#/components/schemas/InboundMemberSnapshotCoverage'
+          type: array
+        dependents:
+          description: List of demographic information for each dependent
+          items:
+            $ref: '#/components/schemas/InboundMemberSnapshotDependent'
+          type: array
+        employee:
+          allOf:
+          - $ref: '#/components/schemas/InboundMemberSnapshotEmployee'
+          description: Demographic information for the employee
+        enable_member_auto_link:
+          default: false
+          description: Boolean flag for autolinking workflow
+          type: boolean
+        events:
+          description: List of events associated with member and coverage updates
+          items:
+            $ref: '#/components/schemas/InboundMemberSnapshotEvent'
+          type: array
+        omitted_coverage_handling:
+          allOf:
+          - $ref: '#/components/schemas/InboundMemberSnapshotOmittedCoverage'
+          description: Configuration for handling omitted coverages
+        snapshot_mode:
+          description: Mode describing how the contents of the snapshot will be processed
+          enum:
+          - current_open
+          example: current_open
+          type: string
+      required:
+      - employee
+      - snapshot_mode
+      type: object
+    LatestPlatformChange:
+      properties:
+        error:
+          allOf:
+          - $ref: '#/components/schemas/LatestChangeError'
+          description: The error message explaining any issues from the platform change
+        id:
+          description: Unique identifier of the platform change record
+          format: uuid
+          type: string
+        status:
+          description: The status of the platform change
+          type: string
+        type:
+          description: The type of the platform change record
+          enum:
+          - member_request
+          - member_snapshot
+          type: string
+      required:
+      - id
+      - status
+      - type
+      type: object
+    EmployeeCarrierStatus:
+      properties:
+        carrier_id:
+          description: Unique identifier of the carrier in Noyo
+          format: uuid
+          type: string
+        latest_platform_change:
+          allOf:
+          - $ref: '#/components/schemas/LatestPlatformChange'
+          description: Details on the latest change sent to Noyo to be applied at the carrier
+        pending_changes:
+          description: A list of any open changes being processed with the carrier
+          items:
+            $ref: '#/components/schemas/PlatformChange'
+          type: array
+        status:
+          description: The member status related to the latest requested platform changes
+          enum:
+          - pending_changes
+          - stable
+          - unable_to_fulfill
+          type: string
+      required:
+      - pending_changes
+      - status
+      type: object
+    InboundMemberSnapshotPersonContact:
+      properties:
+        email_address:
+          description: Email address of the person
+          example: catherine.briggs@example.com
+          format: email
+          nullable: true
+          type: string
+        email_address_type:
+          description: Type of email address
+          enum:
+          - home
+          - work
+          example: home
+          type: string
+        home_phone:
+          description: Home phone number in E.164 format
+          example: '+15555551212'
+          type: string
+        preferred_language:
+          description: Preferred written or spoken language of the person
+          example: English
+          type: string
+        preferred_method:
+          description: Preferred method of contact for the person
+          enum:
+          - mail
+          - email
+          - home-phone
+          - work-phone
+          - other
+          example: email
+          type: string
+        speaks_english:
+          description: True if the person can speak or communicate in English
+          example: true
+          type: boolean
+        work_phone:
+          description: Work phone number in E.164 format
+          example: '+15555551212'
+          type: string
+      type: object
+      x-field_order: []
+    OutboundTestMemberSnapshot:
+      properties:
+        member_snapshot:
+          allOf:
+          - $ref: '#/components/schemas/OutboundMemberSnapshot'
+          description: The member snapshot that would have been created
+        trace_ids:
+          description: List of trace IDs for tracking the test request
+          items:
+            format: uuid
+            type: string
+          type: array
+      required:
+      - member_snapshot
+      - trace_ids
+      type: object
+      x-field_order: []
+    InboundMemberSnapshotEvent:
+      properties:
+        date:
+          description: The date the event occurred
+          format: date
+          type: string
+        id:
+          description: Unique ID for the event, used internally in this payload
+          minLength: 1
+          type: string
+        reason:
+          description: The cause or real world scenario described in the event
+          enum:
+          - adoption
+          - benefit_class_change
+          - change_to_part_time
+          - change_to_full_time
+          - cobra_enrollment
+          - cobra_termination
+          - cobra_update_other
+          - court_order
+          - death
+          - demographic_change
+          - dependent_open_enrollment
+          - disability_status_change
+          - divorce
+          - eligibility_change
+          - foster_care
+          - immigration_status_change
+          - leave_status_change
+          - legal_guardian
+          - lost_coverage
+          - marriage
+          - medicare
+          - moved
+          - newborn
+          - new_hire
+          - offline_change
+          - open_enrollment
+          - rate_changed
+          - rehire
+          - reinstatement
+          - retirement
+          - termination
+          type: string
+        type:
+          description: The type or category of member change made due to this event
+          enum:
+          - coverage
+          - demographic
+          type: string
+      required:
+      - date
+      - id
+      - reason
+      - type
+      type: object
+      x-field_order: []
+    UIMemberSnapshotPublicParentResult:
+      properties:
+        created:
+          description: The date the record was created
+          type: integer
+        employee:
+          allOf:
+          - $ref: '#/components/schemas/UIEmployeeResult'
+          description: Employee details associated with the member snapshot
+        group:
+          allOf:
+          - $ref: '#/components/schemas/GroupResult'
+          description: Group details associated with the member snapshot
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        member_snapshot:
+          allOf:
+          - $ref: '#/components/schemas/OutboundSimplifiedMemberSnapshot'
+          description: Member snapshot details
+        modified:
+          description: The date the record was last updated
+          type: integer
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - created
+      - employee
+      - group
+      - id
+      - member_snapshot
+      - modified
+      - version
+      type: object
+    InboundMemberSnapshotEmployment:
+      properties:
+        employment_dates:
+          allOf:
+          - $ref: '#/components/schemas/InboundMemberSnapshotEmploymentDates'
+          description: Employee employment dates
+        employment_status:
+          description: Employee employment status
+          enum:
+          - full-time
+          - part-time
+          - contract
+          - disabled
+          - terminated
+          - retired
+          type: string
+        hours_worked:
+          description: An integer of hours worked per week by the employee
+          example: 40
+          format: int32
+          type: integer
+        occupation:
+          description: Employee occupation or job title
+          example: Engineer
+          type: string
+        salary:
+          allOf:
+          - $ref: '#/components/schemas/InboundMemberSnapshotSalary'
+          description: Employee salary information
+      required:
+      - employment_dates
+      - employment_status
+      - hours_worked
+      type: object
+      x-field_order: []
+    InboundMemberSnapshotCoverage:
+      properties:
+        carrier_config:
+          description: Details about enrolled member classifications at the carrier
+          type: object
+        carrier_id:
+          description: Noyo Carrier ID associated with this coverage
+          format: uuid
+          type: string
+        cobra_details:
+          allOf:
+          - $ref: '#/components/schemas/InboundMemberSnapshotCOBRADetails'
+          description: Details about COBRA eligibility dates and enrollment status
+        custom_plan_id:
+          description: Platform-specific plan ID. Even when `custom_plan_id` is provided, `plan_id` or `plan_name` must also be provided.
+          minLength: 1
+          type: string
+        enrolled_members:
+          description: Employee and dependent members enrolling in this coverage
+          items:
+            $ref: '#/components/schemas/InboundMemberSnapshotEnrolledMember'
+          type: array
+        line_of_coverage:
+          description: Line of coverage for the coverage
+          enum:
+          - medical
+          - dental
+          - vision
+          - life
+          - add
+          - std
+          - ltd
+          - accident
+          - critical_illness
+          - cancer
+          - health_fund
+          - hospital_indemnity
+          - pharmacy
+          - wellness
+          example: dental
+          type: string
+        plan_id:
+          description: The unique ID of the noyo plan associated with this coverage. This field is required when `plan_name` is not provided.
+          format: uuid
+          type: string
+        plan_name:
+          description: The name of this plan in your records or the name that maps to a group plan in Noyo. This field is required when `plan_id` is not provided.
+          minLength: 1
+          type: string
+        signature_date:
+          description: The date the decision for this coverage enrollment was made
+          example: '2020-01-01'
+          format: date
+          type: string
+      required:
+      - carrier_id
+      - enrolled_members
+      - line_of_coverage
+      type: object
+      x-field_order: []
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+    InboundMemberSnapshotPersonTobacco:
+      properties:
+        duration:
+          description: Duration of tobacco use
+          example: 5 years
+          type: string
+        frequency:
+          description: Frequency of tobacco use
+          example: Daily
+          type: string
+        types:
+          description: List of types of tobacco use
+          example: cigarettes
+          items:
+            enum:
+            - pipe
+            - cigarettes
+            - chewing-tobacco
+            type: string
+          minItems: 1
+          type: array
+        user:
+          description: True if the person uses tobacco of any kind
+          example: true
+          type: boolean
+      type: object
+      x-field_order: []
+    InboundMemberSnapshotOmittedCoverageCustom:
+      properties:
+        effective_end_date:
+          description: A custom effective end date that will be used for the termination of the omitted coverage(s).
+          example: '2024-03-15'
+          format: date
+          type: string
+      type: object
+      x-field_order: []
+    UIEmployeeResult:
+      properties:
+        employment:
+          allOf:
+          - $ref: '#/components/schemas/Employment'
+          description: Employment information for the employee
+        id:
+          description: Unique identifier of the employee in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        person:
+          allOf:
+          - $ref: '#/components/schemas/UIPersonResult'
+          description: Personal information for the employee
+      required:
+      - employment
+      - id
+      - person
+      type: object
+    InboundMemberSnapshotSalary:
+      properties:
+        amount:
+          description: Amount of salary earned by the employee in US dollars and cents, as a decimal value
+          example: 52000
+          minimum: 0
+          type: number
+        effective_date:
+          description: The ISO-8601 date-string the current employee salary is effective
+          example: '2022-02-01'
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
+          type: string
+        type:
+          description: Type of salary earned by the employee
+          enum:
+          - hourly
+          - salary
+          example: salary
+          type: string
+        unit:
+          description: Unit of salary earned by the employee
+          enum:
+          - annual
+          - month
+          - semi-monthly
+          - week
+          - hour
+          example: annual
+          type: string
+      type: object
+      x-field_order: []
+    InboundMemberSnapshotPCPDetails:
+      properties:
+        providers:
+          description: List of primary care providers
+          items:
+            $ref: '#/components/schemas/InboundMemberSnapshotPrimaryCareProvider'
+          type: array
+      required:
+      - providers
+      type: object
+      x-field_order: []
+    PlatformChange:
+      properties:
+        id:
+          description: Unique identifier of the platform change record
+          format: uuid
+          type: string
+        status:
+          description: The status of the platform change
+          type: string
+        type:
+          description: The type of the platform change record
+          enum:
+          - member_request
+          - member_snapshot
+          type: string
+      required:
+      - id
+      - status
+      - type
+      type: object
+    InboundMemberSnapshotPersonDetails:
+      properties:
+        american_indian:
+          allOf:
+          - $ref: '#/components/schemas/InboundMemberSnapshotPersonAmericanIndian'
+          description: American Indian status details (if applicable)
+        disability:
+          allOf:
+          - $ref: '#/components/schemas/InboundMemberSnapshotPersonDisability'
+          description: Disability details (if applicable)
+        is_military:
+          description: True if the person is in the military
+          type: boolean
+        is_student:
+          description: True if the person is a student
+          type: boolean
+        tobacco:
+          allOf:
+          - $ref: '#/components/schemas/InboundMemberSnapshotPersonTobacco'
+          description: Tobacco usage details (if applicable)
+      type: object
+      x-field_order: []
+    OutboundMemberSnapshotCreatedMember:
+      properties:
+        custom_individual_id:
+          description: Custom ID of the Member from the platform's system.
+          type: string
+        id:
+          description: Unique ID of the Member in Noyo's system.
+          format: uuid
+          type: string
+        type:
+          description: Type of the Member. Either 'employee' or 'dependent.
+          type: string
+      required:
+      - id
+      - type
+      type: object
+      x-field_order: []
+    CarrierFulfillmentStatus:
+      properties:
+        carrier_id:
+          description: Unique identifier of the Carrier in Noyo
+          format: uuid
+          type: string
+        errors:
+          description: Errors generated while processing the member snapshot at the carrier
+          items:
+            type: string
+          type: array
+        status:
+          description: Status of the member snapshot fulfillment at carrier
+          enum:
+          - invalid
+          - no_changes
+          - processing
+          - replaced
+          - scheduled
+          - sent
+          - valid
+          - not_connected
+          type: string
+      required:
+      - carrier_id
+      - status
+      type: object
+      x-field_order: []
+    InboundMemberSnapshot:
+      properties:
+        coverages:
+          description: List of coverage and enrollment decisions for each member
+          items:
+            $ref: '#/components/schemas/InboundMemberSnapshotCoverage'
+          type: array
+        dependents:
+          description: List of demographic information for each dependent
+          items:
+            $ref: '#/components/schemas/InboundMemberSnapshotDependent'
+          type: array
+        employee:
+          allOf:
+          - $ref: '#/components/schemas/InboundMemberSnapshotEmployee'
+          description: Demographic information for the employee
+        enable_member_auto_link:
+          default: false
+          description: Boolean flag for autolinking workflow
+          type: boolean
+        events:
+          description: List of events associated with member and coverage updates
+          items:
+            $ref: '#/components/schemas/InboundMemberSnapshotEvent'
+          type: array
+        omitted_coverage_handling:
+          allOf:
+          - $ref: '#/components/schemas/InboundMemberSnapshotOmittedCoverage'
+          description: Configuration for handling omitted coverages
+        snapshot_mode:
+          description: Mode describing how the contents of the snapshot will be processed
+          enum:
+          - current_open
+          example: current_open
+          type: string
+      required:
+      - employee
+      - snapshot_mode
+      type: object
+      x-field_order: []
+    GroupResult:
+      properties:
+        created:
+          description: The date the record was created
+          type: integer
+        dba_name:
+          description: DBA name for the company, if applicable
+          example: Floors R Us
+          type: string
+        federal_ein:
+          description: Federal Employer Identification Number for the company
+          example: '112222222'
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        name:
+          description: Name of the group
+          example: ACME Flooring
+          type: string
+        organization_id:
+          description: Unique identifier of the platform or broker organization in Noyo
+          format: uuid
+          type: string
+        sic_code:
+          description: SIC Code of the group
+          example: '5713'
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - created
+      - id
+      - modified
+      - name
+      - version
+      type: object
+      x-field_order:
+      - id
+      - version
+      - created
+      - modified
+      - organization_id
+      - name
+      - sic_code
+      - dba_name
+      - federal_ein
+    InboundTestMemberSnapshot:
+      properties:
+        carrier_overrides:
+          description: List of carrier overrides to control connection status for testing
+          items:
+            $ref: '#/components/schemas/CarrierOverride'
+          type: array
+        member_snapshot:
+          allOf:
+          - $ref: '#/components/schemas/InboundMemberSnapshot'
+          description: The member snapshot data to process
+        rule_set_overrides:
+          allOf:
+          - $ref: '#/components/schemas/RuleSetOverrides'
+          description: Run test overriding rule sets by ID
+      required:
+      - member_snapshot
+      type: object
+      x-field_order: []
+    InboundMemberSnapshotOmittedCoverage:
+      properties:
+        custom:
+          allOf:
+          - $ref: '#/components/schemas/InboundMemberSnapshotOmittedCoverageCustom'
+          description: List of Individual Enrollment actions
+        policy:
+          default: reject
+          description: How Noyo will process the member snapshot's omitted coverage(s).
+          enum:
+          - continue
+          - reject
+          - terminate
+          example: terminate
+          type: string
+        termination_rule:
+          description: The rule that Noyo should use to determine the explicit date of termination for the omitted coverage(s).
+          enum:
+          - custom
+          - end_of_current_month
+          - end_of_prior_month
+          example: end_of_current_month
+          type: string
+      type: object
+      x-field_order: []
+    Salary:
+      properties:
+        amount:
+          description: Amount of salary earned by the employee in US dollars and cents, as a decimal value
+          example: 52000
+          minimum: 0
+          type: number
+        type:
+          description: Type of salary earned by the employee
+          enum:
+          - hourly
+          - salary
+          example: salary
+          type: string
+        unit:
+          description: Unit of salary earned by the employee
+          enum:
+          - annual
+          - month
+          - semi-monthly
+          - week
+          - hour
+          example: annual
+          type: string
+      type: object
+      x-field_order:
+      - amount
+      - unit
+      - type
+    InboundMemberSnapshotPersonDisability:
+      properties:
+        communication:
+          description: True if the disability impacts the ability to communicate or read
+          type: boolean
+        disabled:
+          description: True if the member has a disability
+          type: boolean
+        reason:
+          description: Description of the disability
+          type: string
+      type: object
+      x-field_order: []
+    InboundMemberSnapshotPrimaryCareProvider:
+      properties:
+        entity_identifier_code:
+          description: Code of the entity identifier
+          enum:
+          - pcp
+          - dental_pcp
+          - obgyn
+          type: string
+        entity_type:
+          description: Type of entity
+          enum:
+          - person
+          - non_person_entity
+          type: string
+        first_name:
+          description: First name of the primary care provider
+          type: string
+        identification_code:
+          description: Code of the identification
+          type: string
+        identification_code_type:
+          description: Type of the identification code
+          enum:
+          - service_provider_number
+          - national_provider_identifier
+          type: string
+        last_name:
+          description: Last name of the primary care provider
+          type: string
+        middle_name:
+          description: Middle name of the primary care provider
+          type: string
+        organization_name:
+          description: Organization name of the primary care provider.
+          type: string
+        patient_relationship_code:
+          description: Code which represents the relationship of the patient to the primary care provider
+          enum:
+          - established
+          - not_established
+          - unknown
+          type: string
+      required:
+      - identification_code
+      - identification_code_type
+      type: object
+      x-field_order: []
+    UIPersonResult:
+      properties:
+        first_name:
+          description: First name of the person
+          example: Catherine
+          type: string
+        id:
+          description: Unique identifier of the person in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        last_name:
+          description: Last name of the person
+          example: Briggs
+          type: string
+        middle_name:
+          description: Middle name of the person
+          example: S
+          type: string
+      required:
+      - id
+      type: object
+    OutboundMemberSnapshot:
+      properties:
+        created:
+          description: The date the record was created
+          type: integer
+        created_members:
+          description: List of created members
+          items:
+            $ref: '#/components/schemas/OutboundMemberSnapshotCreatedMember'
+          type: array
+        employee_id:
+          description: Unique ID of the employee in Noyo
+          format: uuid
+          type: string
+        fulfillment_summary:
+          description: List of member snapshot fulfillment statuses per carrier
+          items:
+            $ref: '#/components/schemas/CarrierFulfillmentStatus'
+          type: array
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        inbound_snapshot:
+          description: Exact member snapshot as received by Noyo and prior to any processing (e.g. adding omitted coverages, applying rulesets, etc.)
+          type: string
+        member_snapshot:
+          allOf:
+          - $ref: '#/components/schemas/MemberSnapshotDB'
+          description: Member snapshot post Noyo processing (e.g. adding omitted coverages, applying rulesets, etc.)
+        modified:
+          description: The date the record was last updated
+          type: integer
+        replaced_by:
+          description: UUID of the member snapshot that replaced the returned snapshot
+          format: uuid
+          type: string
+        status:
+          description: Status of the member snapshot
+          enum:
+          - processing
+          - completed
+          - replaced
+          - canceled
+          - submitted
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+        warnings:
+          description: Warnings generated during processing of the member snapshot
+          items:
+            type: string
+          type: array
+      required:
+      - created
+      - created_members
+      - employee_id
+      - id
+      - member_snapshot
+      - modified
+      - status
+      - version
+      - warnings
+      type: object
+      x-field_order: []
+    CarrierOverride:
+      properties:
+        carrier_id:
+          description: Carrier ID to override connection status for
+          example: 123e4567-e89b-12d3-a456-426614174000
+          format: uuid
+          type: string
+        connected:
+          description: Whether the carrier should be treated as connected for testing
+          example: true
+          type: boolean
+      required:
+      - carrier_id
+      type: object
+    Employment:
+      properties:
+        employment_dates:
+          allOf:
+          - $ref: '#/components/schemas/EmploymentDates'
+          description: Employee employment dates
+        employment_status:
+          description: Employee employment status
+          enum:
+          - full-time
+          - part-time
+          - contract
+          - disabled
+          - terminated
+          - retired
+          type: string
+        hours_worked:
+          description: An integer of hours worked per week by the employee
+          example: 40
+          format: int32
+          type: integer
+        occupation:
+          description: Employee occupation or job title
+          example: Engineer
+          type: string
+        salary:
+          allOf:
+          - $ref: '#/components/schemas/Salary'
+          description: Employee salary information
+      required:
+      - employment_dates
+      - employment_status
+      - hours_worked
+      type: object
+      x-field_order:
+      - employment_status
+      - occupation
+      - hours_worked
+      - salary
+      - employment_dates
+    InboundMemberSnapshotEnrolledMember:
+      properties:
+        custom_individual_id:
+          description: Platform ID of the employee or dependent from the snapshot
+          nullable: true
+          type: string
+        effective_end_date:
+          description: Effective end date of coverage for the member. If the member is still enrolled in coverage, this should be set to 9999-12-31.
+          example: '9999-12-31'
+          format: date
+          type: string
+        effective_start_date:
+          description: Original effective start date of coverage for the member
+          example: '2021-01-01'
+          format: date
+          type: string
+        event_id:
+          description: The unique ID of an event from the snapshot events list
+          example: '1'
+          minLength: 1
+          type: string
+        individual_id:
+          description: Unique ID of the employee or dependent from the snapshot
+          format: uuid
+          nullable: true
+          type: string
+        individual_type:
+          description: Type of member enrolling in coverage
+          enum:
+          - dependent
+          - employee
+          example: employee
+          type: string
+        latest_change_effective_date:
+          description: Effective date of the latest change related to this member coverage
+          example: '2022-01-01'
+          format: date
+          type: string
+        pcp_details:
+          allOf:
+          - $ref: '#/components/schemas/InboundMemberSnapshotPCPDetails'
+          description: Details about primary care providers
+        volume:
+          description: The volume of coverage for the member (in dollars)
+          example: 100
+          format: int32
+          type: integer
+      required:
+      - effective_end_date
+      - effective_start_date
+      - individual_type
+      type: object
+      x-field_order: []
+    EmploymentDates:
+      properties:
+        full_time_start:
+          description: ISO-8601 date string for start date as a full time employee with the group (if applicable)
+          example: '2017-01-17'
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
+          type: string
+        hire_date:
+          description: ISO-8601 date string for the hire date of the employee
+          example: '2017-01-17'
+          format: date
+          type: string
+        rehire:
+          description: ISO-8601 date string for the rehire date of the employee (if applicable)
+          example: '2018-02-01'
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
+          type: string
+        retirement:
+          description: ISO-8601 date string for the retirement date of the employee (if applicable)
+          example: '2019-01-01'
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
+          type: string
+        terminated:
+          description: ISO-8601 date string for the termination date of the employee (if applicable)
+          example: '2018-01-01'
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
+          type: string
+      required:
+      - hire_date
+      type: object
+      x-field_order: []
+    EmployeeStatusResult:
+      properties:
+        carrier_statuses:
+          description: List of employee statuses with any relevant carriers
+          items:
+            $ref: '#/components/schemas/EmployeeCarrierStatus'
+          type: array
+      required:
+      - carrier_statuses
+      type: object
+      x-field_order: []
+    PaginatedUIMemberSnapshotPublicResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of member snapshot results
+          items:
+            $ref: '#/components/schemas/UIMemberSnapshotPublicParentResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    OutboundSimplifiedMemberSnapshot:
+      properties:
+        created:
+          description: The date the record was created
+          type: integer
+        employee_id:
+          description: Unique identifier of the employee in Noyo
+          format: uuid
+          type: string
+        fulfillment_summary:
+          description: List of member snapshot fulfillment statuses per carrier
+          items:
+            $ref: '#/components/schemas/CarrierFulfillmentStatus'
+          type: array
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        status:
+          description: Status of the member snapshot
+          enum:
+          - processing
+          - completed
+          - replaced
+          - canceled
+          - submitted
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - created
+      - employee_id
+      - id
+      - modified
+      - status
+      - version
+      type: object
+      x-field_order:
+      - id
+      - version
+      - created
+      - modified
+      - employee_id
+      - status
+      - fulfillment_summary
+    InboundMemberSnapshotEmploymentDates:
+      properties:
+        full_time_start:
+          description: ISO-8601 date string for start date as a full time employee with the group (if applicable)
+          example: '2017-01-17'
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
+          type: string
+        hire_date:
+          description: ISO-8601 date string for the hire date of the employee
+          example: '2017-01-17'
+          format: date
+          type: string
+        rehire:
+          description: ISO-8601 date string for the rehire date of the employee (if applicable)
+          example: '2018-02-01'
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
+          type: string
+        retirement:
+          description: ISO-8601 date string for the retirement date of the employee (if applicable)
+          example: '2019-01-01'
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
+          type: string
+        terminated:
+          description: ISO-8601 date string for the termination date of the employee (if applicable)
+          example: '2018-01-01'
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
+          type: string
+      required:
+      - hire_date
+      type: object
+      x-field_order: []
+    InboundMemberSnapshotPerson:
+      properties:
+        contact:
+          allOf:
+          - $ref: '#/components/schemas/InboundMemberSnapshotPersonContact'
+          description: Contact information for the person
+        date_of_birth:
+          description: ISO-8601 date string for the date of birth of the person
+          example: '1977-06-03'
+          format: date
+          type: string
+        details:
+          allOf:
+          - $ref: '#/components/schemas/InboundMemberSnapshotPersonDetails'
+          description: Additional personal details of the person
+        first_name:
+          description: First name of the person
+          example: Catherine
+          type: string
+        home_address:
+          allOf:
+          - $ref: '#/components/schemas/InboundMemberSnapshotAddress'
+          description: Home address of the person
+        last_name:
+          description: Last name of the person
+          example: Briggs
+          type: string
+        maiden_name:
+          description: Maiden name of the person (deprecated)
+          type: string
+        mailing_address:
+          allOf:
+          - $ref: '#/components/schemas/InboundMemberSnapshotAddress'
+          description: Mailing address of the person
+        marital_status:
+          description: Marital status of the person
+          enum:
+          - single
+          - married
+          - domestic-partner
+          - divorced
+          - widowed
+          - legally-separated
+          example: married
+          type: string
+        middle_name:
+          description: Middle name of the person
+          example: S
+          type: string
+        sex:
+          description: Sex of the person
+          enum:
+          - F
+          - M
+          - U
+          - X
+          example: F
+          type: string
+        ssn:
+          description: Social Security Number of the person
+          example: '123456789'
+          nullable: true
+          pattern: ^(?!000)[0-9]{3}(?!00)[0-9]{2}(?!0000)[0-9]{4}$
+          type: string
+        suffix:
+          description: Suffix of the person
+          type: string
+      required:
+      - date_of_birth
+      - first_name
+      - home_address
+      - last_name
+      - mailing_address
+      - sex
+      type: object
+      x-field_order: []
+    OutboundPaginatedMemberSnapshot:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of member snapshot results
+          items:
+            $ref: '#/components/schemas/OutboundSimplifiedMemberSnapshot'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    InboundMemberSnapshotEmployee:
+      properties:
+        classifications:
+          description: Fields that classify employees for group structure mapping
+          type: object
+        custom_individual_id:
+          description: Custom ID of the Employee from platform system. Required if member is new
+          minLength: 1
+          type: string
+        employment:
+          allOf:
+          - $ref: '#/components/schemas/InboundMemberSnapshotEmployment'
+          description: Employment information for the employee
+        event_id:
+          description: The unique ID of an event from the snapshot events list
+          example: '1'
+          minLength: 1
+          type: string
+        group_individual_id:
+          description: Group-level ID of the employee
+          minLength: 1
+          type: string
+        id:
+          description: Unique ID of the Employee in Noyo's system. Leave blank if member is new
+          format: uuid
+          type: string
+        person:
+          allOf:
+          - $ref: '#/components/schemas/InboundMemberSnapshotPerson'
+          description: Personal information for the employee
+      required:
+      - employment
+      - person
+      type: object
+      x-field_order: []
+    RuleSetOverrides:
+      properties:
+        noyo_post:
+          description: Noyo post rule set ID to override selection for
+          format: uuid
+          type: string
+        noyo_pre:
+          description: Noyo pre rule set ID to use instead of the default
+          format: uuid
+          type: string
+        platform_post:
+          description: Platform post rule set ID to override selection for
+          format: uuid
+          type: string
+        platform_pre:
+          description: Platform pre rule set ID to override selection for
+          format: uuid
+          type: string
+        primary:
+          description: Primary rule set ID to override selection for
+          format: uuid
+          type: string
+      type: object
+    InboundMemberSnapshotCOBRADetails:
+      properties:
+        cobra_enrolled:
+          description: Boolean representing whether or not a member is enrolled in COBRA
+          type: boolean
+        eligibility_end_date:
+          description: The date which represents when the individual is no longer eligible for COBRA
+          format: date
+          type: string
+        eligibility_start_date:
+          description: The date which represents when the individual is first eligible for COBRA
+          format: date
+          type: string
+        qualifying_event_date:
+          description: The date of the event which qualified the individual for COBRA
+          format: date
+          type: string
+        qualifying_event_reason:
+          description: The reason of the event which qualified the individual for COBRA
+          enum:
+          - termination_of_employment
+          - reduction_of_work_hours
+          - medicare
+          - death
+          - divorce
+          - separation
+          - ineligible_child
+          - bankruptcy_of_retirees_former_employer
+          - layoff
+          - leave_of_absence
+          type: string
+      required:
+      - cobra_enrolled
+      - eligibility_end_date
+      - eligibility_start_date
+      type: object
+      x-field_order: []
+    InboundMemberSnapshotAddress:
+      properties:
+        city:
+          description: City of the address
+          example: Bend
+          type: string
+        county:
+          description: County of the address
+          example: Deschutes
+          type: string
+        state:
+          description: State postal code of the address
+          enum:
+          - AL
+          - AK
+          - AZ
+          - AR
+          - CA
+          - CO
+          - CT
+          - DE
+          - DC
+          - FL
+          - GA
+          - HI
+          - ID
+          - IL
+          - IN
+          - IA
+          - KS
+          - KY
+          - LA
+          - ME
+          - MD
+          - MA
+          - MI
+          - MN
+          - MS
+          - MO
+          - MT
+          - NE
+          - NV
+          - NH
+          - NJ
+          - NM
+          - NY
+          - NC
+          - ND
+          - OH
+          - OK
+          - OR
+          - PA
+          - RI
+          - SC
+          - SD
+          - TN
+          - TX
+          - UT
+          - VT
+          - VA
+          - WA
+          - WV
+          - WI
+          - WY
+          - AS
+          - GU
+          - MH
+          - FM
+          - MP
+          - PW
+          - PR
+          - VI
+          - UM
+          example: OR
+          type: string
+        street_one:
+          description: Line one of the address
+          example: 339 Hickory Street
+          type: string
+        street_two:
+          description: Line two of the address
+          example: Apartment 5
+          type: string
+        zip_code:
+          description: Zip code of the address
+          example: '97701'
+          pattern: ^(\d{5})(?:-?)(\d{4})?$
+          type: string
+      required:
+      - city
+      - state
+      - street_one
+      - zip_code
+      type: object
+      x-field_order: []
+    InboundMemberSnapshotPersonAmericanIndian:
+      properties:
+        state:
+          description: Primary state of the federally-recognized American Indian or Alaska Native tribe, if applicable
+          enum:
+          - AL
+          - AK
+          - AZ
+          - AR
+          - CA
+          - CO
+          - CT
+          - DE
+          - DC
+          - FL
+          - GA
+          - HI
+          - ID
+          - IL
+          - IN
+          - IA
+          - KS
+          - KY
+          - LA
+          - ME
+          - MD
+          - MA
+          - MI
+          - MN
+          - MS
+          - MO
+          - MT
+          - NE
+          - NV
+          - NH
+          - NJ
+          - NM
+          - NY
+          - NC
+          - ND
+          - OH
+          - OK
+          - OR
+          - PA
+          - RI
+          - SC
+          - SD
+          - TN
+          - TX
+          - UT
+          - VT
+          - VA
+          - WA
+          - WV
+          - WI
+          - WY
+          - AS
+          - GU
+          - MH
+          - FM
+          - MP
+          - PW
+          - PR
+          - VI
+          - UM
+          type: string
+        tribe:
+          description: Name of the federally-recognized American Indian or Alaska Native tribe, if applicable
+          example: Ojibwe
+          type: string
+      type: object
+      x-field_order: []
+    InboundMemberSnapshotDependent:
+      properties:
+        custom_individual_id:
+          description: Custom ID of the Dependent from platform system. Required if member is new
+          minLength: 1
+          type: string
+        event_id:
+          description: The unique ID of an event from the snapshot events list
+          example: '1'
+          minLength: 1
+          type: string
+        group_individual_id:
+          description: Group-level ID of the dependent
+          minLength: 1
+          type: string
+        id:
+          description: Unique ID of the Dependent in Noyo's system. Leave blank if member is new
+          format: uuid
+          type: string
+        person:
+          allOf:
+          - $ref: '#/components/schemas/InboundMemberSnapshotPerson'
+          description: Personal information for the dependent
+        relationship:
+          description: Relationship of the dependent to the employee
+          enum:
+          - spouse
+          - child
+          - domestic-partner
+          - grandchild
+          - civil-union
+          - step-child
+          - foster-child
+          - adopted-child
+          - legal-guardianship
+          - ex-spouse
+          - other
+          type: string
+      required:
+      - person
+      - relationship
+      type: object
+      x-field_order: []
+    LatestChangeError:
+      properties:
+        message:
+          description: The error message for the latest change
+          type: string
+      required:
+      - message
+      type: object

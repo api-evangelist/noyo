@@ -1,0 +1,185 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Member Snapshot Test Population API
+  version: 1.0.0
+servers: []
+tags:
+- name: Member Snapshot Test Population
+paths:
+  /api/v1/member_snapshot_test_populations:
+    get:
+      description: Returns a list of Member Snapshot Test Populations.
+      operationId: getMemberSnapshotTestPopulationsList
+      parameters:
+      - description: The max size of each page of results
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+      - description: The integer offset at which to start the page. Possible values are 0 to total_records - 1
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Noyo specific group UUID to filter Member Snapshot Test Populations
+        in: query
+        name: group_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+      - description: Carrier UUID to filter Member Snapshot Test Populations
+        in: query
+        name: carrier_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedMemberSnapshotTestPopulationResult'
+          description: Successful Response - Returns a list of all matching Member Snapshot Test Populations
+      summary: Retrieves a list of Member Snapshot Test Populations.
+      tags:
+      - Member Snapshot Test Population
+    post:
+      description: Create a new Member Snapshot Test Population.
+      operationId: createMemberSnapshotTestPopulation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MemberSnapshotTestPopulationCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemberSnapshotTestPopulationResult'
+          description: Successful Response - Returns the contents of the newly created Member Snapshot Test Population
+      summary: Create a Member Snapshot Test Population
+      tags:
+      - Member Snapshot Test Population
+  /api/v1/member_snapshot_test_populations/{member_snapshot_test_population_id}:
+    get:
+      description: Returns a single member snapshot test population based on the ID provided.
+      operationId: getMemberSnapshotTestPopulation
+      parameters:
+      - description: The unique identifier of the member snapshot test population you would like to view
+        in: path
+        name: member_snapshot_test_population_id
+        required: true
+        schema:
+          example: 30b74a44-d5b1-4123-a7a4-6d3aec251ba4
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemberSnapshotTestPopulationResult'
+          description: Successful Response - Returns a single Member Snapshot Test Population
+      summary: Get a single Member Snapshot Test Population
+      tags:
+      - Member Snapshot Test Population
+components:
+  schemas:
+    MemberSnapshotTestPopulationCreateRequest:
+      properties:
+        carrier_id:
+          format: uuid
+          type: string
+        group_id:
+          format: uuid
+          type: string
+      required:
+      - carrier_id
+      - group_id
+      type: object
+      x-field_order: []
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+    MemberSnapshotTestPopulationResult:
+      properties:
+        carrier_id:
+          format: uuid
+          type: string
+        created:
+          description: The date the record was created
+          type: integer
+        group_id:
+          format: uuid
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - created
+      - id
+      - modified
+      - version
+      type: object
+      x-field_order: []
+    PaginatedMemberSnapshotTestPopulationResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of Member Snapshot Test Population results
+          items:
+            $ref: '#/components/schemas/MemberSnapshotTestPopulationResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response

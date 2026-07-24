@@ -1,0 +1,201 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Member Transaction Labels API
+  version: 1.0.0
+servers: []
+tags:
+- name: Member Transaction Labels
+paths:
+  /ui/v1/member_transactions/{transaction_id}/labels:
+    x-summary: Returns a list of labels associated to a member transaction
+    get:
+      description: Returns a list of all member transaction labels
+      operationId: getMemberTransactionLabelsUIList
+      parameters:
+      - description: The unique identifier of the member transaction we are fetching labels for
+        in: path
+        name: transaction_id
+        required: true
+        schema:
+          example: 3f804fe8-6b42-4fa2-be47-3f18dc66dc8d
+          format: uuid
+          type: string
+      - description: The max size of each page of results
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+      - description: The integer offset at which to start the page. Possible values are 0 to total_records - 1
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: UUID of the label to search
+        in: query
+        name: label_id
+        required: false
+        schema:
+          type: string
+      - description: String describing the contents of the label
+        in: query
+        name: display_name
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                meta:
+                  offset: 0
+                  page_num: 1
+                  page_size: 20
+                  total_records: 1
+                response:
+                - context: transaction_complete
+                  created: 1557512389
+                  id: a6e30204-87b2-4802-95a4-a156bd0f7435
+                  internal_note: A note!
+                  label:
+                    created: 3257512346
+                    display_name: My Label
+                    id: 7be0d550-9943-4ce1-a6ef-7f096f31f8ac
+                    modified: 3264440746
+                    summary: This is my label
+                    version: 67d00f72-61ee-496e-aa79-229bd4f318c7
+                  member_request_id: bba6ea27-4004-4a52-a3d9-f986ace0d3da
+                  modified: 1564440756
+                  name: other
+              schema:
+                $ref: '#/components/schemas/PaginatedMemberTransactionLabelsUIResult'
+          description: Successful Response - Returns all matching Member Transaction Labels
+      summary: Get a list of all Member Transaction Labels
+      tags:
+      - Member Transaction Labels
+components:
+  schemas:
+    LabelUIResult:
+      properties:
+        created:
+          description: The date the record was created
+          type: integer
+        display_name:
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        summary:
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - created
+      - display_name
+      - id
+      - modified
+      - summary
+      - version
+      type: object
+    PaginatedMemberTransactionLabelsUIResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of member transaction label results
+          items:
+            $ref: '#/components/schemas/MemberTransactionLabelUIResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+    MemberTransactionLabelUIResult:
+      properties:
+        context:
+          description: Describing why/when a label was applied
+          example: transaction_complete
+          type: string
+        created:
+          description: The date the record was created
+          type: integer
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        internal_note:
+          description: Free text note
+          type: string
+        label:
+          allOf:
+          - $ref: '#/components/schemas/LabelUIResult'
+          description: Label associated to the member transaction
+        member_transaction_id:
+          description: Unique identifier of the associated member transaction
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        name:
+          description: String describing the contents of the label
+          example: suspected_eoi
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - context
+      - created
+      - id
+      - member_transaction_id
+      - modified
+      - name
+      - version
+      type: object

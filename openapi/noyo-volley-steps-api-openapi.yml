@@ -1,0 +1,213 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Volley Steps API
+  version: 1.0.0
+servers: []
+tags:
+- name: Volley Steps
+paths:
+  /api/v1/volley_steps:
+    x-summary: Get all volley steps
+    get:
+      description: Returns a list of Volley Steps
+      operationId: getVolleyStepList
+      parameters:
+      - description: Search by group name or group ID associated with parent volley
+        in: query
+        name: search
+        required: false
+        schema:
+          type: string
+      - description: Filter by step status
+        in: query
+        name: status
+        required: false
+        schema:
+          type: string
+      - description: Filter by carrier ID on parent volley
+        in: query
+        name: carrier_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+      - description: Filter by organization ID
+        in: query
+        name: organization_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+      - description: Filter by volley type on parent volley
+        in: query
+        name: volley_type
+        required: false
+        schema:
+          type: string
+      - description: Filter by step key
+        in: query
+        name: step_key
+        required: false
+        schema:
+          type: string
+      - description: Filter by parent volley ID
+        in: query
+        name: volley_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+      - in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+      - in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - in: query
+        name: sort_by
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: sort_direction
+        required: false
+        schema:
+          type: string
+      - description: Filter by the actor that owns the step
+        in: query
+        name: actor_type
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolleyStepPaginatedResult'
+          description: Successful Response - Returns all matching Volley Steps
+      summary: Get a list of all Volley Steps
+      tags:
+      - Volley Steps
+components:
+  schemas:
+    VolleyStepResult:
+      properties:
+        actor_type:
+          description: Actor type for this step
+          type: string
+        carrier_id:
+          description: Carrier ID from parent volley
+          format: uuid
+          type: string
+        closed_at:
+          description: Timestamp when the step was closed
+          format: date-time
+          type: string
+        created:
+          description: The date the record was created
+          type: integer
+        from_transition_id:
+          description: Transition that created this step
+          format: uuid
+          type: string
+        group_id:
+          description: Group ID from parent volley
+          format: uuid
+          type: string
+        group_setup_request_id:
+          description: Group setup request ID from parent volley
+          format: uuid
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        status:
+          description: Current status of the step
+          type: string
+        step_key:
+          description: Step key
+          type: string
+        to_transition_id:
+          description: Transition that closed this step
+          format: uuid
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+        volley_id:
+          description: Parent volley ID
+          format: uuid
+          type: string
+      required:
+      - actor_type
+      - carrier_id
+      - created
+      - group_id
+      - id
+      - modified
+      - status
+      - step_key
+      - version
+      - volley_id
+      type: object
+      x-field_order: []
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+    VolleyStepPaginatedResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of volley steps
+          items:
+            $ref: '#/components/schemas/VolleyStepResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response

@@ -1,0 +1,132 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Volley Definitions API
+  version: 1.0.0
+servers: []
+tags:
+- name: Volley Definitions
+paths:
+  /api/v1/volley_definitions/{volley_type}:
+    x-summary: Get current version of a volley definition type
+    get:
+      description: Get a volley definition by type.
+      operationId: getVolleyDefinitionByType
+      parameters:
+      - description: The type of the volley definition to get
+        in: path
+        name: volley_type
+        required: true
+        schema:
+          example: mapping
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolleyDefinitionResult'
+          description: Successful Response - Returns the volley definition
+      summary: Get Volley Definition By Type
+      tags:
+      - Volley Definitions
+  /api/v1/volley_definitions/{volley_type}/{version}:
+    x-summary: Get a single volley definition version by type and version
+    get:
+      description: Get a volley definition by type and version.
+      operationId: getVolleyDefinitionByVersion
+      parameters:
+      - description: The type of the volley definition to get
+        in: path
+        name: volley_type
+        required: true
+        schema:
+          example: mapping
+          type: string
+      - description: The version of the volley definition to get
+        in: path
+        name: version
+        required: true
+        schema:
+          example: 1.0.0
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolleyDefinitionResult'
+          description: Successful Response - Returns the volley definition
+      summary: Get Volley Definition By Version
+      tags:
+      - Volley Definitions
+components:
+  schemas:
+    VolleyDefinitionResult:
+      properties:
+        steps:
+          description: Steps in the volley definition
+          items:
+            $ref: '#/components/schemas/VolleyStepDefinition'
+          type: array
+        transitions:
+          description: Transitions in the volley definition
+          items:
+            $ref: '#/components/schemas/VolleyTransitionRule'
+          type: array
+        version:
+          type: string
+        volley_type:
+          type: string
+      required:
+      - steps
+      - transitions
+      - version
+      - volley_type
+      type: object
+      x-field_order: []
+    VolleyStepDefinition:
+      properties:
+        actor_type:
+          type: string
+        step_key:
+          type: string
+        step_type:
+          type: string
+      required:
+      - actor_type
+      - step_key
+      - step_type
+      type: object
+      x-field_order: []
+    VolleyTransitionRule:
+      properties:
+        allowed_attachment_types:
+          items:
+            type: string
+          type: array
+        from_step_key:
+          nullable: true
+          type: string
+        from_transition_keys:
+          items:
+            type: string
+          type: array
+        requires_attachment:
+          type: boolean
+        to_step_keys:
+          items:
+            type: string
+          type: array
+        transition_key:
+          type: string
+        trigger_type:
+          type: string
+      required:
+      - from_transition_keys
+      - requires_attachment
+      - to_step_keys
+      - transition_key
+      - trigger_type
+      type: object
+      x-field_order: []

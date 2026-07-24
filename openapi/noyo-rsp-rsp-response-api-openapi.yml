@@ -1,0 +1,341 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field RSP (RSP Response) API
+  version: 1.0.0
+servers: []
+tags:
+- name: RSP (RSP Response)
+paths:
+  /api/v1/rsp:
+    post:
+      description: Create a new RSP (RSP Response) request following the LDExRSP specification version 2.0.2024.09.13
+      operationId: createRsp
+      requestBody:
+        content:
+          application/json:
+            examples:
+              error_response:
+                value:
+                  transmissionResponse:
+                    audit:
+                      auditID: audit-001
+                      auditRecord:
+                      - recordFieldName: employeeRecordQuantity
+                        recordQuantity: 1
+                    creationDateTime: '2024-01-15T10:30:00Z'
+                    sourceTransmissionGUID: source-550e8400-e29b-41d4-a716-446655440000
+                    transmissionGUID: 550e8400-e29b-41d4-a716-446655440000
+                    transmissionRemark:
+                    - entityCode: CoverageID
+                      entityReferenceValue: trans-001
+                      fieldName: status
+                      messageText: Invalid coverage configuration detected
+                      messageTypeCode: Invalid
+                      remarkStatusCode: Error
+                    transmissionStatusCode: Failure
+              minimal:
+                value:
+                  transmissionResponse:
+                    audit:
+                      auditID: audit-001
+                      auditRecord:
+                      - recordFieldName: employeeRecordQuantity
+                        recordQuantity: 1
+                    creationDateTime: '2024-01-15T10:30:00Z'
+                    sourceTransmissionGUID: source-550e8400-e29b-41d4-a716-446655440000
+                    transmissionGUID: 550e8400-e29b-41d4-a716-446655440000
+                    transmissionStatusCode: Success
+              success:
+                value:
+                  transmissionResponse:
+                    audit:
+                      auditID: audit-001
+                      auditRecord:
+                      - recordFieldName: carrierRecordQuantity
+                        recordQuantity: 5
+                      - recordFieldName: employerRecordQuantity
+                        recordQuantity: 1
+                      - recordFieldName: employeeRecordQuantity
+                        recordQuantity: 25
+                      - recordFieldName: dependentRecordQuantity
+                        recordQuantity: 15
+                      - recordFieldName: otherPartyRecordQuantity
+                        recordQuantity: 0
+                      - recordFieldName: beneficiaryGroupRecordQuantity
+                        recordQuantity: 0
+                      - recordFieldName: eventRecordQuantity
+                        recordQuantity: 3
+                      - recordFieldName: coverageRecordQuantity
+                        recordQuantity: 30
+                      - recordFieldName: coverageRiderRecordQuantity
+                        recordQuantity: 5
+                      - recordFieldName: employeeFormRecordQuantity
+                        recordQuantity: 10
+                    creationDateTime: '2024-01-15T10:30:00Z'
+                    sourceTransmissionGUID: source-550e8400-e29b-41d4-a716-446655440000
+                    transactionDetail:
+                    - referenceElement: EmployeePartyID
+                      referenceElementID: employee-456
+                      transactionRemark:
+                      - entityCode: EmployeePartyID
+                        entityReferenceValue: emp-123
+                        fieldName: ssn
+                        messageText: Employee SSN validation successful
+                        messageTypeCode: Missing
+                        remarkStatusCode: OK
+                    transmissionGUID: 550e8400-e29b-41d4-a716-446655440000
+                    transmissionRemark:
+                    - entityCode: BenefitPlanID
+                      entityReferenceValue: trans-001
+                      fieldName: status
+                      messageText: Transmission processed successfully
+                      messageTypeCode: Duplicate
+                      remarkStatusCode: OK
+                    transmissionStatusCode: Success
+            schema:
+              $ref: '#/components/schemas/CreateRspRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              example:
+                message: Record created successfully
+                status: success
+              schema:
+                properties:
+                  message:
+                    example: Record created successfully
+                    type: string
+                  status:
+                    example: success
+                    type: string
+                required:
+                - status
+                - message
+                type: object
+          description: Successful Response - RSP request created successfully
+        '400':
+          content:
+            application/json:
+              example:
+                message: Invalid transmission status code
+                status: error
+              schema:
+                properties:
+                  message:
+                    example: Invalid transmission status code
+                    type: string
+                  status:
+                    example: error
+                    type: string
+                required:
+                - status
+                - message
+                type: object
+          description: Bad Request - Invalid request data
+        '401':
+          content:
+            application/json:
+              example:
+                message: 'Unauthorized organization ID: invalid_org_id'
+              schema:
+                properties:
+                  message:
+                    example: 'Unauthorized organization ID: invalid_org_id'
+                    type: string
+                required:
+                - message
+                type: object
+          description: Unauthorized - Invalid organization ID
+        '422':
+          content:
+            application/json:
+              example:
+                message: 'TransmissionResponse.transmissionGUID: Transmission GUID is required; TransmissionResponse.transmissionStatusCode: Transmission status code is required'
+                status: error
+              schema:
+                properties:
+                  message:
+                    example: 'TransmissionResponse.transmissionGUID: Transmission GUID is required; TransmissionResponse.transmissionStatusCode: Transmission status code is required'
+                    type: string
+                  status:
+                    example: error
+                    type: string
+                required:
+                - status
+                - message
+                type: object
+          description: Unprocessable Entity - Validation error
+        '500':
+          content:
+            application/json:
+              example:
+                message: Internal server error occurred
+                status: error
+              schema:
+                properties:
+                  message:
+                    example: Internal server error occurred
+                    type: string
+                  status:
+                    example: error
+                    type: string
+                required:
+                - status
+                - message
+                type: object
+          description: Internal Server Error
+      summary: Create RSP (RSP Response)
+      tags:
+      - RSP (RSP Response)
+components:
+  schemas:
+    CreateRspRequest:
+      properties:
+        transmissionResponse:
+          allOf:
+          - $ref: '#/components/schemas/TransmissionResponse'
+          description: Complete transmission response with results and audit
+      required:
+      - transmissionResponse
+      type: object
+      x-field_order: []
+    Audit3:
+      properties:
+        auditID:
+          description: Unique audit identifier
+          type: string
+        auditRecord:
+          description: Contains information about the number of records processed
+          items:
+            $ref: '#/components/schemas/AuditRecord'
+          minItems: 1
+          type: array
+      required:
+      - auditID
+      - auditRecord
+      type: object
+    TransactionDetail:
+      properties:
+        referenceElement:
+          description: Reference element type (e.g., BenefitPlanID)
+          enum:
+          - BenefitClassID
+          - BenefitPlanID
+          - BillGroupID
+          - ClaimGroupID
+          - CoverageID
+          - EmployeePartyID
+          - EmployerPartyID
+          - GroupConfigurationID
+          - GroupProfileID
+          - OfferID
+          type: string
+        referenceElementID:
+          description: Unique identifier for the reference element
+          type: string
+        transactionRemark:
+          description: Remarks for this transaction
+          items:
+            $ref: '#/components/schemas/Remark'
+          minItems: 0
+          type: array
+      required:
+      - referenceElement
+      - referenceElementID
+      type: object
+    AuditRecord:
+      properties:
+        recordFieldName:
+          description: Record type name (e.g., employeeRecordQuantity)
+          type: string
+        recordQuantity:
+          description: Count of records processed
+          format: int32
+          type: integer
+      required:
+      - recordFieldName
+      - recordQuantity
+      type: object
+    Remark:
+      properties:
+        entityCode:
+          description: Entity code for the reference element
+          type: string
+        entityReferenceValue:
+          description: Unique identifier for the referenced entity
+          type: string
+        fieldName:
+          description: Field that triggered this remark
+          type: string
+        fieldReferenceValue:
+          description: Additional reference for the field
+          nullable: true
+          type: string
+        messageText:
+          description: Human-readable remark description
+          nullable: true
+          type: string
+        messageTypeCode:
+          description: Business error type (Duplicate, Invalid, Missing)
+          enum:
+          - Duplicate
+          - Invalid
+          - Missing
+          nullable: true
+          type: string
+        remarkStatusCode:
+          description: Remark status (Error, Warning, OK)
+          enum:
+          - Error
+          - OK
+          - Warning
+          type: string
+      required:
+      - entityCode
+      - entityReferenceValue
+      - fieldName
+      - remarkStatusCode
+      type: object
+    TransmissionResponse:
+      properties:
+        audit:
+          allOf:
+          - $ref: '#/components/schemas/Audit3'
+          description: Record count summary
+        creationDateTime:
+          description: ISO 8601 creation timestamp
+          type: string
+        sourceTransmissionGUID:
+          description: Original transmission request identifier
+          type: string
+        transactionDetail:
+          description: Transaction processing details
+          items:
+            $ref: '#/components/schemas/TransactionDetail'
+          minItems: 0
+          type: array
+        transmissionGUID:
+          description: Unique transmission identifier
+          type: string
+        transmissionRemark:
+          description: Overall transmission remarks
+          items:
+            $ref: '#/components/schemas/Remark'
+          minItems: 0
+          type: array
+        transmissionStatusCode:
+          description: Processing status (Success, Partial, Failure)
+          enum:
+          - Failure
+          - Partial
+          - Success
+          type: string
+      required:
+      - creationDateTime
+      - sourceTransmissionGUID
+      - transmissionGUID
+      - transmissionStatusCode
+      type: object

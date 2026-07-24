@@ -1,0 +1,110 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Carrier Sync API
+  version: 1.0.0
+servers: []
+tags:
+- name: Carrier Sync
+paths:
+  /api/v1/groups/{group_id}/audit_requests/latest:
+    get:
+      description: Noyo regularly audits each Group against the carrier(s) that the Group has coverage with in order to find updated data and potential mismatches. This endpoint returns metadata about the latest group audit request that was completed. If no group audits have been completed the `completed_at` timestamp will be the timestamp of when the group was created and the `carrier_ids` array will be empty.
+      operationId: getLatestGroupAuditRequest
+      parameters:
+      - description: The unique identifier of the associated group in Noyo
+        in: path
+        name: group_id
+        required: true
+        schema:
+          example: 2ce3b54a-2535-4803-b218-e6b44081d418
+          format: uuid
+          type: string
+      - description: The unique identifier of the carrier for which you would like to view audit requests
+        in: query
+        name: carrier_id
+        required: false
+        schema:
+          example: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                carrier_ids:
+                - 8fac0992-933a-4743-8dab-0d606ef2569e
+                completed_at: 1602609543
+                group_id: 2ce3b54a-2535-4803-b218-e6b44081d418
+              schema:
+                $ref: '#/components/schemas/LatestGroupAuditRequestResult'
+          description: Successful Response - Returns metadata about the latest Group Audit Request
+      summary: Get Latest Group Audit Request
+      tags:
+      - Carrier Sync
+  /api/v1/groups/{group_id}/audit_requests/list_latest:
+    get:
+      description: Noyo regularly audits each Group against the carrier(s) that the Group has coverage with in order to find updated data and potential mismatches. This endpoint returns metadata about the latest group audit requests that were completed for each carrier. If no group audits have been completed the `completed_at` timestamp will be the timestamp of when the group was created and the `carrier_ids` array will be empty.
+      operationId: getLatestGroupAuditRequestList
+      parameters:
+      - description: The unique identifier of the associated group in Noyo
+        in: path
+        name: group_id
+        required: true
+        schema:
+          example: 2ce3b54a-2535-4803-b218-e6b44081d418
+          format: uuid
+          type: string
+      - description: The relative date on which to view the state of the record
+        in: query
+        name: effective_date
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+              - carrier_ids:
+                - 8fac0992-933a-4743-8dab-0d606ef2569e
+                completed_at: 1602609543
+                group_id: 2ce3b54a-2535-4803-b218-e6b44081d418
+              schema:
+                items:
+                  $ref: '#/components/schemas/LatestGroupAuditRequestResult'
+                type: array
+          description: Successful Response - Returns metadata list about the latest Group Audit Requests for each carrier in the group's carrier config
+      summary: Get Latest Group Audit Request List
+      tags:
+      - Carrier Sync
+components:
+  schemas:
+    LatestGroupAuditRequestResult:
+      properties:
+        carrier_ids:
+          description: List of carrier IDs included in group audit
+          items:
+            description: Carrier ID used for group audit
+            format: uuid
+            type: string
+          minItems: 1
+          type: array
+        completed_at:
+          description: The date the group audit request was completed
+          type: integer
+        group_id:
+          description: Unique identifier of the associated group in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+      required:
+      - carrier_ids
+      - completed_at
+      - group_id
+      type: object
+      x-field_order:
+      - group_id
+      - carrier_ids
+      - completed_at

@@ -1,0 +1,485 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Platform Account Structure API
+  version: 1.0.0
+servers: []
+tags:
+- name: Platform Account Structure
+paths:
+  /api/v1/groups/{group_id}/platform_account_structures:
+    get:
+      description: Retrieve a Platform Account Structure by Group
+      operationId: getPlatformAccountStructureByGroup
+      parameters:
+      - description: The unique identifier of the group you want to get a platform account structure for
+        in: path
+        name: group_id
+        required: true
+        schema:
+          example: 2705bb9f-3c90-4400-a4e7-0bc9d48e677c
+          format: uuid
+          type: string
+      - description: The relative date on which to view the state of the record
+        in: query
+        name: effective_date
+        required: false
+        schema:
+          example: '2022-01-01'
+          format: date
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                account_structure:
+                  account_structure_fields:
+                  - existing_value_set:
+                    - North Branch
+                    - HQ
+                    - Springfield
+                    field_name: BranchName
+                    field_type: string
+                  plans:
+                    group_dental_plans:
+                    - Dental Plan Low
+                    - Dental Plan High
+                    group_medical_plans:
+                    - Medical Plan A
+                    - Medical Plan B
+                group_id: 2c4d5515-6bf8-4f8c-821a-9c56374198b2
+                id: 2705bb9f-3c90-4400-a4e7-0bc9d48e677c
+                version: 7a2b0437-4027-4251-9e71-85384c0eb1c9
+              schema:
+                $ref: '#/components/schemas/PlatformAccountStructureResult'
+          description: Successful Response - Returns a Platform Account Structure
+      summary: Get a Platform Account Structure by Group
+      tags:
+      - Platform Account Structure
+    post:
+      description: Create a new Platform Account Structure
+      operationId: createNewPlatformAccountStructure
+      parameters:
+      - description: Unique identifier of the associated group in the Noyo system
+        in: path
+        name: group_id
+        required: true
+        schema:
+          example: 3e366930-df4d-11eb-ba80-0242ac130004
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              success:
+                value:
+                  account_structure:
+                    account_structure_fields:
+                    - existing_value_set:
+                      - North Branch
+                      - HQ
+                      - Springfield
+                      field_name: BranchName
+                      field_type: string
+                    plans:
+                      group_dental_plans:
+                      - Dental Plan Low
+                      - Dental Plan High
+                      group_medical_plans:
+                      - Medical Plan A
+                      - Medical Plan B
+                  start_date: '2021-01-12'
+            schema:
+              $ref: '#/components/schemas/PlatformAccountStructureCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              example:
+                account_structure:
+                  account_structure_fields:
+                  - existing_value_set:
+                    - North Branch
+                    - HQ
+                    - Springfield
+                    field_name: BranchName
+                    field_type: string
+                  plans:
+                    group_dental_plans:
+                    - Dental Plan Low
+                    - Dental Plan High
+                    group_medical_plans:
+                    - Medical Plan A
+                    - Medical Plan B
+                created: 1626281253
+                group_id: 3e366930-df4d-11eb-ba80-0242ac130004
+                id: 3e366930-df4d-11eb-ba80-0242ac130004
+                modified: 1626281253
+                version: 5200a894-81c5-4c41-8519-86c32e9a9965
+              schema:
+                $ref: '#/components/schemas/PlatformAccountStructureResult'
+          description: Successful Response - Returns the new Platform Account Structure
+      summary: Create a new Platform Account Structure
+      tags:
+      - Platform Account Structure
+  /api/v1/platform_account_structures/{platform_account_structure_id}:
+    get:
+      description: Retrieve a Platform Account Structure
+      operationId: getPlatformAccountStructure
+      parameters:
+      - description: The unique identifier of the platform account structure to be retrieved.
+        in: path
+        name: platform_account_structure_id
+        required: true
+        schema:
+          example: 2705bb9f-3c90-4400-a4e7-0bc9d48e677c
+          format: uuid
+          type: string
+      - description: The relative date on which to view the state of the record
+        in: query
+        name: effective_date
+        required: false
+        schema:
+          example: '2022-01-01'
+          format: date
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                account_structure:
+                  account_structure_fields:
+                  - existing_value_set:
+                    - North Branch
+                    - HQ
+                    - Springfield
+                    field_name: BranchName
+                    field_type: string
+                  plans:
+                    group_dental_plans:
+                    - Dental Plan Low
+                    - Dental Plan High
+                    group_medical_plans:
+                    - Medical Plan A
+                    - Medical Plan B
+                group_id: 2c4d5515-6bf8-4f8c-821a-9c56374198b2
+                id: 2705bb9f-3c90-4400-a4e7-0bc9d48e677c
+                version: 7a2b0437-4027-4251-9e71-85384c0eb1c9
+              schema:
+                $ref: '#/components/schemas/PlatformAccountStructureResult'
+          description: Successful Response - Returns the matching Platform Account Structure
+      summary: Get a single Platform Account Structure
+      tags:
+      - Platform Account Structure
+  /api/v1/platform_account_structures/{platform_account_structure_id}/{version}:
+    put:
+      description: Edit a platform account structure based on the ID provided. The version parameter must match the latest platform account structure version.
+      operationId: editPlatformAccountStructure
+      parameters:
+      - description: Unique identifier of the platform account structure in the Noyo system
+        in: path
+        name: platform_account_structure_id
+        required: true
+        schema:
+          example: 3e366930-df4d-11eb-ba80-0242ac130004
+          format: uuid
+          type: string
+      - description: Current version of the model
+        in: path
+        name: version
+        required: true
+        schema:
+          example: 5200a894-81c5-4c41-8519-86c32e9a9965
+          format: uuid
+          type: string
+      - description: The relative date on which to view the state of the record
+        in: query
+        name: effective_date
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              success:
+                value:
+                  account_structure:
+                    account_structure_fields:
+                    - existing_value_set:
+                      - North Branch
+                      - HQ
+                      - Springfield
+                      field_name: BranchName
+                      field_type: date
+                    plans:
+                      group_dental_plans:
+                      - Dental Plan Low
+                      - Dental Plan High
+                      group_medical_plans:
+                      - Medical Plan A
+                      - Medical Plan B
+            schema:
+              $ref: '#/components/schemas/PlatformAccountStructureEditRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                account_structure:
+                  account_structure_fields:
+                  - existing_value_set:
+                    - North Branch
+                    - HQ
+                    - Springfield
+                    field_name: BranchName
+                    field_type: date
+                  plans:
+                    group_dental_plans:
+                    - Dental Plan Low
+                    - Dental Plan High
+                    group_medical_plans:
+                    - Medical Plan A
+                    - Medical Plan B
+                created: 1557512389
+                group_id: 3e366930-df4d-11eb-ba80-0242ac130004
+                id: 3e366930-df4d-11eb-ba80-0242ac130004
+                modified: 1543215342
+                version: 5200a894-81c5-4c41-8519-86c32e9a9965
+              schema:
+                $ref: '#/components/schemas/PlatformAccountStructureResult'
+          description: Successful Response - Returns the modified Platform Account Structure
+      summary: Edit an existing Platform Account Structure
+      tags:
+      - Platform Account Structure
+components:
+  schemas:
+    PlatformAccountStructureEditRequest:
+      properties:
+        account_structure:
+          allOf:
+          - $ref: '#/components/schemas/PlatformAccountStructureAccountStructure'
+          description: Group-specific platform account structure
+        effective_date:
+          description: Effective date for target record to update, defaults to today
+          example: '2019-04-04'
+          format: date
+          type: string
+        end_date:
+          description: Effective end date of the record
+          example: '2020-01-01'
+          format: date
+          type: string
+        start_date:
+          description: Effective start date of the record, defaults to today
+          example: '2019-01-01'
+          format: date
+          type: string
+      required:
+      - account_structure
+      type: object
+      x-field_order:
+      - account_structure
+      - effective_date
+      - start_date
+      - end_date
+    PlatformAccountStructureCreateRequest:
+      properties:
+        account_structure:
+          allOf:
+          - $ref: '#/components/schemas/PlatformAccountStructureAccountStructure'
+          description: Group-specific platform account structure
+        end_date:
+          description: Effective end date of the record
+          example: '2020-01-01'
+          format: date
+          type: string
+        start_date:
+          description: Effective start date of the record, defaults to today
+          example: '2019-01-01'
+          format: date
+          type: string
+      required:
+      - account_structure
+      type: object
+      x-field_order:
+      - account_structure
+      - start_date
+      - end_date
+    PlatformAccountStructureResult:
+      properties:
+        account_structure:
+          allOf:
+          - $ref: '#/components/schemas/PlatformAccountStructureAccountStructure'
+          description: Group-specific platform account structure
+          readOnly: true
+        created:
+          description: The date the record was created
+          type: integer
+        group_id:
+          description: Unique identifier of the group in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - account_structure
+      - created
+      - group_id
+      - id
+      - modified
+      - version
+      type: object
+      x-field_order:
+      - id
+      - version
+      - created
+      - modified
+      - group_id
+      - account_structure
+    PlatformAccountStructureAccountStructureField:
+      properties:
+        existing_value_set:
+          description: All distinct values that are represented in the group for this field
+          items:
+            type: string
+          type: array
+        field_name:
+          description: The name of the field
+          type: string
+        field_type:
+          description: The data type of this field
+          enum:
+          - string
+          - integer
+          - decimal
+          - date
+          - boolean
+          type: string
+      required:
+      - existing_value_set
+      - field_name
+      - field_type
+      type: object
+      x-field_order:
+      - field_name
+      - field_type
+      - existing_value_set
+    PlatformAccountStructureAccountStructurePlan:
+      properties:
+        group_accident_plans:
+          description: List of accident plan names for the group
+          items:
+            type: string
+          type: array
+        group_add_plans:
+          description: List of AD&D plan names for the group
+          items:
+            type: string
+          type: array
+        group_cancer_plans:
+          description: List of cancer plan names for the group
+          items:
+            type: string
+          type: array
+        group_critical_illness_plans:
+          description: List of critical illness plan names for the group
+          items:
+            type: string
+          type: array
+        group_dental_plans:
+          description: List of dental plan names for the group
+          items:
+            type: string
+          type: array
+        group_health_fund_plans:
+          description: List of health fund plan names for the group
+          items:
+            type: string
+          type: array
+        group_hospital_indemnity_plans:
+          description: List of hospital indemnity plan names for the group
+          items:
+            type: string
+          type: array
+        group_life_plans:
+          description: List of life plan names for the group
+          items:
+            type: string
+          type: array
+        group_ltd_plans:
+          description: List of long-term disability plan names for the group
+          items:
+            type: string
+          type: array
+        group_medical_plans:
+          description: List of medical plan names for the group
+          items:
+            type: string
+          type: array
+        group_pharmacy_plans:
+          description: List of pharmacy plan names for the group
+          items:
+            type: string
+          type: array
+        group_std_plans:
+          description: List of short-term disability plan names for the group
+          items:
+            type: string
+          type: array
+        group_vision_plans:
+          description: List of vision plan names for the group
+          items:
+            type: string
+          type: array
+        group_wellness_plans:
+          description: List of wellness plan names for the group
+          items:
+            type: string
+          type: array
+      type: object
+      x-field_order:
+      - group_medical_plans
+      - group_dental_plans
+      - group_vision_plans
+      - group_life_plans
+      - group_add_plans
+      - group_std_plans
+      - group_ltd_plans
+      - group_accident_plans
+      - group_critical_illness_plans
+      - group_cancer_plans
+      - group_health_fund_plans
+      - group_hospital_indemnity_plans
+      - group_pharmacy_plans
+      - group_wellness_plans
+    PlatformAccountStructureAccountStructure:
+      properties:
+        account_structure_fields:
+          items:
+            $ref: '#/components/schemas/PlatformAccountStructureAccountStructureField'
+          type: array
+        plans:
+          allOf:
+          - $ref: '#/components/schemas/PlatformAccountStructureAccountStructurePlan'
+          description: Plans available for plan mapping
+      type: object
+      x-field_order:
+      - field_name
+      - field_type
+      - existing_value_set

@@ -1,0 +1,110 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Eligibility Rules API
+  version: 1.0.0
+servers: []
+tags:
+- name: Eligibility Rules
+paths:
+  /api/v1/carriers/{carrier_id}/eligibility_rules:
+    x-summary: Get Eligibility Rules for a Carrier
+    get:
+      description: Returns eligibility rules and requirements for a specific carrier across all supported data exchange configurations.
+      operationId: getEligibilityRules
+      parameters:
+      - description: The unique identifier of the carrier to get eligibility rules for
+        in: path
+        name: carrier_id
+        required: true
+        schema:
+          example: 2d370e0e-fd73-45e0-8828-796d2cacaeef
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedEligibilityRulesResult'
+          description: Successful Response - Returns eligibility rules for the carrier
+        '401':
+          description: Unauthorized
+      summary: Get Eligibility Rules for a Carrier
+      tags:
+      - Eligibility Rules
+components:
+  schemas:
+    PaginatedEligibilityRulesResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of eligibility rule configurations
+          items:
+            $ref: '#/components/schemas/EligibilityRuleConfiguration'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    EligibilityRuleConfiguration:
+      properties:
+        data_exchange_configuration_name:
+          description: Data exchange configuration name
+          type: string
+        rules:
+          description: List of eligibility rule descriptions
+          items:
+            $ref: '#/components/schemas/EligibilityRuleDescription'
+          type: array
+      required:
+      - data_exchange_configuration_name
+      - rules
+      type: object
+      x-field_order: []
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+    EligibilityRuleDescription:
+      properties:
+        description:
+          description: Eligibility rule description
+          type: string
+      required:
+      - description
+      type: object
+      x-field_order: []

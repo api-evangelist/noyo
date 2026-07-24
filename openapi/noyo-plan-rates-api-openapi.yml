@@ -1,0 +1,147 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Plan Rates API
+  version: 1.0.0
+servers: []
+tags:
+- name: Plan Rates
+paths:
+  /api/v1/groups/{group_id}/plan_rates:
+    x-summary: Get Plan Rates by Group ID
+    get:
+      description: 'Retrieves all temporal plan rates for a specific group, organized by plan ID.
+
+        This endpoint queries plan rates by filtering by group_id.
+
+        '
+      operationId: getPlanRatesByGroupId
+      parameters:
+      - description: Unique identifier of the group to filter by
+        example: 123e4567-e89b-12d3-a456-426614174000
+        in: path
+        name: group_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPlanRateByPlanResult'
+          description: Successfully retrieved plan rates organized by plan ID
+      summary: Get Plan Rates by Group ID
+      tags:
+      - Plan Rates
+components:
+  schemas:
+    RateStructure:
+      properties:
+        calculation_type:
+          enum:
+          - member_based
+          - member_based_volume
+          - family_unit_based
+          type: string
+        options:
+          items:
+            type: string
+          type: array
+      required:
+      - calculation_type
+      - options
+      type: object
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+    PlanRateByPlanResult:
+      properties:
+        plan_id:
+          description: Unique identifier of the plan
+          format: uuid
+          type: string
+        plan_rate_id:
+          description: Unique identifier of the plan rate
+          format: uuid
+          type: string
+        temporal_rates:
+          description: List of temporal rates for this plan
+          items:
+            $ref: '#/components/schemas/TemporalPlanRateResult'
+          type: array
+      required:
+      - plan_id
+      - plan_rate_id
+      - temporal_rates
+      type: object
+    TemporalPlanRateResult:
+      properties:
+        end_date:
+          format: date
+          nullable: true
+          type: string
+        id:
+          format: uuid
+          type: string
+        plan_rate_id:
+          format: uuid
+          type: string
+        rate_structure:
+          $ref: '#/components/schemas/RateStructure'
+        start_date:
+          format: date
+          type: string
+      required:
+      - id
+      - plan_rate_id
+      - rate_structure
+      - start_date
+      type: object
+    PaginatedPlanRateByPlanResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of plan rate results
+          items:
+            $ref: '#/components/schemas/PlanRateByPlanResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response

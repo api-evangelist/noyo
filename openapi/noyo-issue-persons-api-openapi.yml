@@ -1,0 +1,114 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Issue Persons API
+  version: 1.0.0
+servers: []
+tags:
+- name: Issue Persons
+paths:
+  /ui/v1/issue_persons/{id}:
+    get:
+      description: Get a specific IssuePerson by its ID.
+      operationId: getIssuePersonUI
+      parameters:
+      - description: The unique identifier for the IssuePerson.
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                created: 1697380200
+                date_of_birth: '1990-05-15'
+                first_name: Jane
+                group_id: 436fb487-bb75-42d4-9651-7b1471a8940e
+                id: dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1
+                last_name: Doe
+                middle_name: null
+                modified: 1697380200
+                organization_id: d61fa455-adf4-4dc4-8c57-6d779ba9475e
+                ssn: null
+                suffix: null
+                version: ea38e798-cd61-4fa2-b485-d1c5b87a61af
+              schema:
+                $ref: '#/components/schemas/IssuePersonUIResult'
+          description: Successful Response - Returns the IssuePerson details.
+        '404':
+          description: IssuePerson not found.
+      summary: Get Issue Person
+      tags:
+      - Issue Persons
+components:
+  schemas:
+    IssuePersonUIResult:
+      properties:
+        created:
+          description: The date the record was created
+          type: integer
+        date_of_birth:
+          description: Date of birth
+          format: date
+          nullable: true
+          readOnly: true
+          type: string
+        first_name:
+          description: First name
+          nullable: true
+          readOnly: true
+          type: string
+        group_id:
+          description: The unique identifier of the group associated with this issue person
+          format: uuid
+          readOnly: true
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        last_name:
+          description: Last name
+          nullable: true
+          readOnly: true
+          type: string
+        middle_name:
+          description: Middle name
+          nullable: true
+          readOnly: true
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        organization_id:
+          description: The unique identifier of the organization associated with this issue person
+          format: uuid
+          readOnly: true
+          type: string
+        ssn:
+          description: Social Security Number
+          nullable: true
+          readOnly: true
+          type: string
+        suffix:
+          description: Name suffix
+          nullable: true
+          readOnly: true
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - created
+      - group_id
+      - id
+      - modified
+      - organization_id
+      - version
+      type: object
+      x-field_order: []

@@ -1,0 +1,376 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Feeds API
+  version: 1.0.0
+servers: []
+tags:
+- name: Feeds
+paths:
+  /api/v1/feeds:
+    x-summary: Get Feeds
+    get:
+      description: Returns a list of feeds
+      operationId: getFeedList
+      parameters:
+      - description: Unique identifier of the group
+        in: query
+        name: group_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+      - description: Unique identifier of the carrier
+        in: query
+        name: carrier_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+      - description: Filter by feeds that will run before the provided datetime
+        in: query
+        name: next_transmission_end
+        required: false
+        schema:
+          type: string
+      - description: Filter by feeds that are temporarily paused from delivering files
+        in: query
+        name: paused
+        required: false
+        schema:
+          type: boolean
+      - description: Filter by feed status
+        in: query
+        name: status
+        required: false
+        schema:
+          type: string
+      - description: Filter by feeds that are in a testing state with the carrier
+        in: query
+        name: testing
+        required: false
+        schema:
+          type: boolean
+      - description: Filter by feed name or feed ID
+        in: query
+        name: feed
+        required: false
+        schema:
+          type: string
+      - description: The max size of each page of results
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+      - description: The integer offset at which to start the page. Possible values are 0 to total_records - 1
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: The attribute on which to sort
+        in: query
+        name: sort_by
+        required: false
+        schema:
+          type: string
+      - description: Either asc or desc, to denote the data's direction
+        in: query
+        name: sort_direction
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                meta:
+                  offset: 0
+                  page_num: 1
+                  page_size: 20
+                  total_records: 3
+                response:
+                - carrier_id: 6ccec769-aaf5-4cb0-92f0-f16b9500c21d
+                  configuration:
+                    cadence:
+                      end_date: '2025-03-01'
+                      next_transmission: '2024-09-10T10:00:00+00:00'
+                      paused: true
+                      rrule: RRULE:FREQ=DAILY
+                      start_date: '2024-03-01'
+                      time_of_day: 06:00
+                      zone_info: US/Eastern
+                  created: 1690395918
+                  group_id: 594ca3ab-4f98-4ec6-8158-ed59f7f96fe2
+                  id: 00ffa55b-84e1-48d7-8587-57103c10903f
+                  last_transmission:
+                    id: bda1b068-3e6a-4cc3-9769-0fb8a38649ce
+                    sent_timestamp: 1641171601
+                  modified: 1690395918
+                  name: feed-me
+                  next_transmission: 1641171601
+                  paused: false
+                  status: active
+                  version: 49ed5785-d8e1-4c3d-a09d-2f3625b9f2b1
+                - carrier_id: 6ccec769-aaf5-4cb0-92f0-f16b9500c21d
+                  configuration:
+                    cadence:
+                      end_date: '2025-03-01'
+                      next_transmission: '2024-09-10T10:00:00+00:00'
+                      paused: true
+                      rrule: RRULE:FREQ=DAILY
+                      start_date: '2024-03-01'
+                      time_of_day: 06:00
+                      zone_info: US/Eastern
+                  created: 1690395919
+                  group_id: 594ca3ab-4f98-4ec6-8158-ed59f7f96fe2
+                  id: 3b6e4933-c45a-4320-9770-06d6da1f035a
+                  last_transmission:
+                    id: bda1b068-3e6a-4cc3-9769-0fb8a38649ce
+                    sent_timestamp: 1641171601
+                  modified: 1690395919
+                  name: feed-you
+                  next_transmission: 1641171601
+                  paused: false
+                  status: retired
+                  version: 3e93d0ec-4666-4cb5-9780-7f451a309754
+                - carrier_id: 6ccec769-aaf5-4cb0-92f0-f16b9500c21d
+                  configuration:
+                    cadence:
+                      end_date: '2025-03-01'
+                      next_transmission: '2024-09-10T10:00:00+00:00'
+                      paused: true
+                      rrule: RRULE:FREQ=DAILY
+                      start_date: '2024-03-01'
+                      time_of_day: 06:00
+                      zone_info: US/Eastern
+                  created: 1690395920
+                  group_id: 594ca3ab-4f98-4ec6-8158-ed59f7f96fe2
+                  id: 2d8ce8c4-623f-4aae-8bdc-5a730f523172
+                  last_transmission:
+                    id: bda1b068-3e6a-4cc3-9769-0fb8a38649ce
+                    sent_timestamp: 1641171601
+                  modified: 1690395920
+                  name: feed-who
+                  next_transmission: 1641171601
+                  paused: true
+                  status: template
+                  version: bf2039f2-b9e1-460e-8d67-c2083ef352a7
+              schema:
+                $ref: '#/components/schemas/PaginatedPublicFeedResult'
+          description: Successful Response - Returns all matching feeds
+      summary: Get a list of feeds
+      tags:
+      - Feeds
+  /api/v1/feeds/{feed_id}:
+    x-summary: Get Feed
+    get:
+      description: Returns a feed
+      operationId: getFeed
+      parameters:
+      - description: Unique identifier of the feed
+        in: path
+        name: feed_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                configuration:
+                  cadence:
+                    end_date: '2024-03-01'
+                    next_transmission: '2024-08-30T10:00:00+00:00'
+                    paused: true
+                    rrule: RRULE:FREQ=DAILY
+                    start_date: '2023-03-01'
+                    time_of_day: 06:00
+                    zone_info: US/Eastern
+                created: 1690395918
+                last_transmission:
+                  id: bda1b068-3e6a-4cc3-9769-0fb8a38649ce
+                  sent_timestamp: 1759238254
+                modified: 1690395918
+                name: feed-me
+                next_transmission: 1759339054
+                paused: false
+                status: active
+                version: 49ed5785-d8e1-4c3d-a09d-2f3625b9f2b1
+              schema:
+                $ref: '#/components/schemas/PublicFeedResult'
+          description: Successful Response - Returns a single feed
+      summary: Get a feed
+      tags:
+      - Feeds
+components:
+  schemas:
+    UIFeedsLastTransmissionResult:
+      properties:
+        id:
+          description: ID of transmission
+          format: uuid
+          type: string
+        sent_timestamp:
+          description: DateTime the transmission was sent to the carrier
+          type: integer
+      required:
+      - id
+      - sent_timestamp
+      type: object
+    Cadence:
+      properties:
+        end_date:
+          format: date
+          type: string
+        next_transmission:
+          format: date-time
+          nullable: true
+          type: string
+        paused:
+          type: boolean
+        rrule:
+          type: string
+        start_date:
+          format: date
+          type: string
+        time_of_day:
+          pattern: ^([01]?[0-9]|2[0-3]):[0-5][0-9]$
+          type: string
+        zone_info:
+          enum:
+          - Etc/UTC
+          - US/Eastern
+          - US/Central
+          - US/Mountain
+          - US/Pacific
+          type: string
+      required:
+      - end_date
+      - next_transmission
+      - paused
+      - rrule
+      - start_date
+      - time_of_day
+      - zone_info
+      type: object
+    PaginatedPublicFeedResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of feeds with public data
+          items:
+            $ref: '#/components/schemas/PublicFeedResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    PublicFeedResult:
+      properties:
+        carrier_id:
+          description: Unique identifier of the carrier in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        configuration:
+          allOf:
+          - $ref: '#/components/schemas/PublicFeedConfiguration'
+          description: Configuration of the feed
+          readOnly: true
+        created:
+          description: The date the record was created
+          type: integer
+        group_ids:
+          description: List of group IDs associated with this feed
+          items:
+            format: uuid
+            type: string
+          readOnly: true
+          type: array
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        last_transmission:
+          allOf:
+          - $ref: '#/components/schemas/UIFeedsLastTransmissionResult'
+          description: Last transmission of feed
+        modified:
+          description: The date the record was last updated
+          type: integer
+        name:
+          description: Status of the feed
+          readOnly: true
+          type: string
+        next_transmission:
+          description: Next transmission date of feed
+          format: date-time
+          nullable: true
+          type: string
+        paused:
+          description: Whether feed is paused or not
+          nullable: true
+          type: boolean
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - carrier_id
+      - configuration
+      - created
+      - group_ids
+      - id
+      - modified
+      - name
+      - paused
+      - version
+      type: object
+      x-field_order: []
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+    PublicFeedConfiguration:
+      properties:
+        cadence:
+          $ref: '#/components/schemas/Cadence'
+      type: object

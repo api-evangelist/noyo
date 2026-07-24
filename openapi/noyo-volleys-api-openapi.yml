@@ -1,0 +1,554 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Volleys API
+  version: 1.0.0
+servers: []
+tags:
+- name: Volleys
+paths:
+  /api/v1/volleys:
+    x-summary: Get all volleys
+    get:
+      description: Returns a list of Volleys
+      operationId: getVolleyList
+      parameters:
+      - description: Search for volleys by partial match on group name or group ID
+        in: query
+        name: search
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: volley_type
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: organization_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+      - in: query
+        name: group_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+      - in: query
+        name: carrier_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+      - in: query
+        name: group_setup_request_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+      - in: query
+        name: status
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: definition_version
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+      - in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - in: query
+        name: sort_by
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: sort_direction
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolleyPaginatedResult'
+          description: Successful Response - Returns all matching Volleys
+      summary: Get a list of all Volleys
+      tags:
+      - Volleys
+  /api/v1/volleys/{volley_id}:
+    x-summary: Get a single volley
+    get:
+      description: Get a specific Volley by its ID.
+      operationId: getVolley
+      parameters:
+      - description: The unique identifier for the Volley.
+        in: path
+        name: volley_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                carrier_id: 7027d416-3bed-43e8-b824-508d9c0d323e
+                closed_at: null
+                created: 1697380200
+                definition_version: 1.0.0
+                group_id: 436fb487-bb75-42d4-9651-7b1471a8940e
+                group_setup_request_id: a1b2c3d4-e5f6-7890-1234-567890123456
+                id: dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1
+                modified: 1697380200
+                organization_id: 8fac0992-933a-4743-8dab-0d606ef2569e
+                status: open
+                version: ea38e798-cd61-4fa2-b485-d1c5b87a61af
+                volley_type: mapping
+              schema:
+                $ref: '#/components/schemas/PublicVolleyResult'
+          description: Successful Response - Returns the Volley details.
+        '404':
+          description: Volley not found.
+      summary: Get Volley
+      tags:
+      - Volleys
+  /api/v1/volleys/{volley_id}/available_transitions:
+    get:
+      description: Returns a list of available transitions for a volley
+      operationId: getVolleyAvailableTransitions
+      parameters:
+      - description: Only show transitions from steps assigned to this actor type
+        in: query
+        name: actor_type
+        required: false
+        schema:
+          type: string
+      - description: The unique identifier for the Volley
+        in: path
+        name: volley_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicVolleyAvailableTransitionsResult'
+          description: Successful Response - Returns all available transitions for the volley
+        '404':
+          description: Volley not found
+      summary: Get available transitions for a volley
+      tags:
+      - Volleys
+  /api/v1/volleys/{volley_id}/transition:
+    x-summary: Transition a volley
+    post:
+      description: Execute a transition on a volley, moving it from one step to another based on the volley definition.
+      operationId: transitionVolley
+      parameters:
+      - description: The ID of the volley to transition
+        in: path
+        name: volley_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              attachments:
+              - attachment_type: note
+                content: Please provide the latest enrollment forms.
+              suppress_notifications: false
+              transition_key: request_additional_docs
+            schema:
+              $ref: '#/components/schemas/VolleyTransitionRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolleyStepTransitionResult'
+          description: Successful Response - Returns the transition record with any attachments.
+        '400':
+          description: Bad Request - Invalid transition for current volley state.
+        '404':
+          description: Volley not found.
+        '422':
+          description: Unprocessable Entity - Invalid request data.
+      summary: Transition Volley
+      tags:
+      - Volleys
+  /api/v1/volleys/{volley_id}/transitions:
+    x-summary: Get transitions for a volley
+    get:
+      description: Returns a paginated list of transitions for a volley, including any attachments.
+      operationId: getVolleyTransitions
+      parameters:
+      - description: The ID of the volley
+        in: path
+        name: volley_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+      - in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - in: query
+        name: sort_by
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: sort_direction
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolleyStepTransitionPaginatedResult'
+          description: Successful Response - Returns transitions for the volley.
+        '404':
+          description: Volley not found.
+      summary: Get Volley Transitions
+      tags:
+      - Volleys
+components:
+  schemas:
+    VolleyAttachmentRequest:
+      properties:
+        attachment_type:
+          description: Type of the attachment (note, document)
+          type: string
+        content:
+          description: Text content for the attachment
+          nullable: true
+          type: string
+        file_key:
+          description: Cloud storage key for document attachments
+          nullable: true
+          type: string
+        file_name:
+          description: Original file name for document attachments
+          nullable: true
+          type: string
+      required:
+      - attachment_type
+      type: object
+      x-field_order: []
+    VolleyPaginatedResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of volleys
+          items:
+            $ref: '#/components/schemas/PublicVolleyResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    PublicVolleyResult:
+      properties:
+        carrier_id:
+          description: Carrier ID
+          format: uuid
+          type: string
+        closed_at:
+          description: Timestamp when volley was closed
+          format: date-time
+          nullable: true
+          type: string
+        created:
+          description: The date the record was created
+          type: integer
+        definition_version:
+          description: Version of the volley definition
+          type: string
+        group_id:
+          description: Group ID
+          format: uuid
+          type: string
+        group_setup_request_id:
+          description: Group setup request ID
+          format: uuid
+          nullable: true
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        organization_id:
+          description: Organization ID
+          format: uuid
+          type: string
+        status:
+          description: Current status of the volley
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+        volley_type:
+          description: Type of the volley
+          type: string
+      required:
+      - carrier_id
+      - created
+      - definition_version
+      - group_id
+      - id
+      - modified
+      - organization_id
+      - status
+      - version
+      - volley_type
+      type: object
+      x-field_order: []
+    VolleyTransitionRequest:
+      properties:
+        attachments:
+          description: Attachments for the transition
+          items:
+            $ref: '#/components/schemas/VolleyAttachmentRequest'
+          type: array
+        transition_key:
+          description: Key of the transition to execute
+          type: string
+      required:
+      - transition_key
+      type: object
+      x-field_order: []
+    PublicVolleyAvailableTransitionsResult:
+      properties:
+        response:
+          description: List of available transitions
+          items:
+            $ref: '#/components/schemas/AvailableTransition'
+          type: array
+      required:
+      - response
+      type: object
+      x-field_order: []
+    VolleyStepTransitionResult:
+      properties:
+        attachments:
+          description: Attachments for this transition
+          items:
+            $ref: '#/components/schemas/VolleyAttachmentResult'
+          type: array
+        created:
+          description: The date the record was created
+          type: integer
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        to_transition_id:
+          description: Linked transition ID
+          format: uuid
+          nullable: true
+          type: string
+        transition_data:
+          allOf:
+          - $ref: '#/components/schemas/StepTransitionData'
+          description: Transition data
+        transition_key:
+          description: Transition key
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+        volley_id:
+          description: Volley ID
+          format: uuid
+          type: string
+      required:
+      - created
+      - id
+      - modified
+      - transition_data
+      - transition_key
+      - version
+      - volley_id
+      type: object
+      x-field_order: []
+    VolleyStepTransitionPaginatedResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of transitions
+          items:
+            $ref: '#/components/schemas/VolleyStepTransitionResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+    AvailableTransition:
+      properties:
+        allowed_attachment_types:
+          items:
+            type: string
+          nullable: true
+          type: array
+        from_step_actor_type:
+          description: Type of the owner of the step the transition is from
+          type: string
+        from_step_id:
+          description: ID of the step the transition is from
+          format: uuid
+          type: string
+        from_step_key:
+          description: Key of the step the transition is from
+          nullable: true
+          type: string
+        requires_attachment:
+          description: Whether the transition requires an attachment
+          type: boolean
+        transition_key:
+          description: Key of the transition
+          type: string
+      required:
+      - from_step_actor_type
+      - from_step_id
+      - requires_attachment
+      - transition_key
+      type: object
+      x-field_order: []
+    VolleyAttachmentResult:
+      properties:
+        attachment_type:
+          description: Type of the attachment
+          type: string
+        content:
+          description: Text content of the attachment
+          nullable: true
+          type: string
+        created:
+          description: The date the record was created
+          type: integer
+        file_key:
+          description: Cloud storage key
+          nullable: true
+          type: string
+        file_name:
+          description: Original file name
+          nullable: true
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - attachment_type
+      - created
+      - id
+      - modified
+      - version
+      type: object
+      x-field_order: []
+    StepTransitionData:
+      properties:
+        from_step_key:
+          nullable: true
+          type: string
+        from_transition_keys:
+          items:
+            type: string
+          type: array
+        to_step_keys:
+          items:
+            type: string
+          type: array
+        triggered_by_actor_type:
+          type: string
+      required:
+      - triggered_by_actor_type
+      type: object

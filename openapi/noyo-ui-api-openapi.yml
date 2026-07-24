@@ -1,0 +1,242 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Ui API
+  version: 1.0.0
+servers: []
+tags:
+- name: Ui
+paths:
+  /ui/v1/member_transactions/{transaction_id}:
+    x-summary: Single Member Transaction
+    get:
+      description: Returns the latest version of a single member transaction based on the ID provided.
+      operationId: uiGetMemberTransaction
+      parameters:
+      - description: The unique identifier of the member transaction you would like to view
+        in: path
+        name: transaction_id
+        required: true
+        schema:
+          example: a6e30204-87b2-4802-95a4-a156bd0f7435
+          format: uuid
+          type: string
+      - description: Optionally include a restructured form of the body for UI display purposes
+        in: query
+        name: ui_body
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                member_snapshot_id: 2e6a04b6-21f3-40d7-a9e2-735196cc451x
+                member_transaction:
+                  body:
+                    coverages:
+                    - carrier_config:
+                        bill_group: '1000001'
+                        member_group: '99999'
+                      carrier_id: d0003042-eaae-4491-b219-4825456a3d16
+                      lines_of_coverage:
+                        dental:
+                          enrolling_members:
+                          - id: 25434576-e85d-481b-a825-962fd575046f
+                            member_type: employee
+                            plan_id: 2e6a04b6-21f3-40d7-a9e2-735196cc451b
+                          waiving_members: []
+                        medical:
+                          enrolling_members:
+                          - id: 25434576-e85d-481b-a825-962fd575046f
+                            member_type: employee
+                            plan_id: 1873df52-c9e9-4e3a-995c-f47f32d0bd62
+                          waiving_members: []
+                        vision:
+                          enrolling_members:
+                          - id: 25434576-e85d-481b-a825-962fd575046f
+                            member_type: employee
+                            plan_id: 9cb64800-022e-40af-ab80-8d945e430592
+                          waiving_members: []
+                  carrier_id: 478e066e-9696-490e-b60f-47f40c96dc7c
+                  created: 1557512389
+                  employee_id: 25434576-e85d-481b-a825-962fd575046f
+                  id: a6e30204-87b2-4802-95a4-a156bd0f7435
+                  lines_of_coverage:
+                  - medical
+                  - dental
+                  - vision
+                  member_request_id: bba6ea27-4004-4a52-a3d9-f986ace0d3da
+                  modified: 1564440756
+                  status: processing
+              schema:
+                $ref: '#/components/schemas/UIGetMemberTransactionResult'
+          description: Successful Response - Returns a single Member Transaction
+      summary: Get a single Member Transaction
+      tags:
+      - Ui
+components:
+  schemas:
+    UIGetMemberTransactionResult:
+      properties:
+        member_snapshot_id:
+          description: Associated member snapshot id
+          format: uuid
+          type: string
+        member_transaction:
+          allOf:
+          - $ref: '#/components/schemas/MemberTransactionResult'
+          description: Member transaction details
+      required:
+      - member_transaction
+      type: object
+      x-field_order:
+      - member_transaction
+      - member_snapshot_id
+    StatusDetailResult:
+      properties:
+        event_created:
+          description: Timestamp indicating when the status detail was created
+          example: '1673452723'
+          type: integer
+        status_detail:
+          description: Type of Status detail
+          enum:
+          - noyo_accepted
+          - carrier_accepted
+          - carrier_processing
+          - carrier_completed
+          - noyo_verified
+          example: carrier_accepted
+          type: string
+      required:
+      - event_created
+      - status_detail
+      type: object
+      x-field_order:
+      - status_detail
+      - event_created
+    MemberTransactionResult:
+      properties:
+        body:
+          description: Body of the member transaction
+          type: object
+        carrier_id:
+          description: Unique identifier of the carrier in the Noyo system
+          format: uuid
+          type: string
+        created:
+          description: The date the record was created
+          type: integer
+        employee_id:
+          description: Unique identifier of the associated employee in the Noyo system
+          format: uuid
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        lines_of_coverage:
+          description: List of lines of coverage for the member transaction
+          items:
+            description: Line of coverage for the member transaction
+            enum:
+            - medical
+            - dental
+            - vision
+            - life
+            - add
+            - std
+            - ltd
+            - accident
+            - critical_illness
+            - cancer
+            - health_fund
+            - hospital_indemnity
+            - pharmacy
+            - wellness
+            type: string
+          type: array
+        member_request_id:
+          description: Unique identifier of the member request in the Noyo system
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        result:
+          description: Result of the member transaction
+          type: object
+        status:
+          description: Status of the member transaction
+          enum:
+          - processing
+          - completed
+          - failed
+          - canceled
+          type: string
+        status_details:
+          description: History of status details for the member transaction
+          items:
+            $ref: '#/components/schemas/StatusDetailResult'
+          type: array
+        transaction_type:
+          description: Transaction type of the member transaction
+          enum:
+          - carrier_demographic
+          - carrier_demographic_full
+          - carrier_new_hire
+          - carrier_termination
+          - noyo_termination
+          - carrier_open_enrollment_full
+          - carrier_open_enrollment_adding
+          - carrier_open_enrollment_modifying
+          - carrier_open_enrollment_removing
+          - carrier_qualifying_life_event_full
+          - carrier_qualifying_life_event_adding
+          - carrier_qualifying_life_event_modifying
+          - carrier_qualifying_life_event_removing
+          - carrier_enrollment_snapshot_new_hire
+          - carrier_cobra_enrollment
+          - carrier_cobra_termination
+          - carrier_cobra_open_enrollment
+          - carrier_cobra_qualifying_life_event
+          type: string
+        ui_body:
+          description: A restructured form of the transaction's body data for UI display purposes
+          type: string
+        verified:
+          description: The date the member transaction was verified
+          type: integer
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - body
+      - created
+      - employee_id
+      - id
+      - lines_of_coverage
+      - member_request_id
+      - modified
+      - result
+      - status
+      - transaction_type
+      - version
+      type: object
+      x-field_order:
+      - id
+      - version
+      - created
+      - modified
+      - member_request_id
+      - employee_id
+      - carrier_id
+      - lines_of_coverage
+      - transaction_type
+      - status
+      - verified
+      - body
+      - result

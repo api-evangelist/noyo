@@ -1,0 +1,275 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Volley Setting API
+  version: 1.0.0
+servers: []
+tags:
+- name: Volley Setting
+paths:
+  /api/v1/volley_settings:
+    get:
+      description: Returns a paginated list of Volley Settings.
+      operationId: getVolleySettingsList
+      parameters:
+      - description: The max size of each page of results
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+      - description: The integer offset at which to start the page. Possible values are 0 to total_records - 1
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Noyo specific organization UUID to filter Volley Settings
+        in: query
+        name: organization_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+      - description: Volley type value to filter by
+        in: query
+        name: volley_type
+        required: false
+        schema:
+          example: new_connection_mapping
+          type: string
+      - description: Sort direction (asc or desc)
+        in: query
+        name: sort_direction
+        required: false
+        schema:
+          example: asc
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedVolleySettingResult'
+          description: Successful Response - Returns a list of Volley Settings
+      summary: Retrieves a list of Volley Settings.
+      tags:
+      - Volley Setting
+    post:
+      description: Create a new Volley Setting.
+      operationId: createVolleySetting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VolleySettingCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolleySettingResult'
+          description: Successful Response - Returns the contents of the newly created Volley Setting
+        '400':
+          description: Invalid request
+        '409':
+          description: A volley setting for this volley_type already exists in scope
+      summary: Create a Volley Setting
+      tags:
+      - Volley Setting
+  /api/v1/volley_settings/{volley_setting_id}:
+    get:
+      description: Returns the latest version of a single volley setting based on the ID provided.
+      operationId: getVolleySetting
+      parameters:
+      - description: The unique identifier of the volley setting you would like to view.
+        in: path
+        name: volley_setting_id
+        required: true
+        schema:
+          example: 30b74a44-d5b1-4123-a7a4-6d3aec251ba4
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolleySettingResult'
+          description: Successful Response - Returns a single Volley Setting
+        '404':
+          description: Volley setting not found
+      summary: Get a single Volley Setting
+      tags:
+      - Volley Setting
+  /api/v1/volley_settings/{volley_setting_id}/{version}:
+    put:
+      description: Update a volley setting based on the ID provided. The version parameter must match the latest volley setting version.
+      operationId: updateVolleySetting
+      parameters:
+      - description: Unique identifier of the volley setting you want to edit.
+        in: path
+        name: volley_setting_id
+        required: true
+        schema:
+          example: c6db3cb5-e60d-4540-81b8-9487e148b7ad
+          format: uuid
+          type: string
+      - description: Unique version of the volley setting you want to edit.
+        in: path
+        name: version
+        required: true
+        schema:
+          example: edcf866c-cab1-4fe6-b8dc-ccd8c4c09128
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VolleySettingUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolleySettingResult'
+          description: Successful Response - Returns the modified Volley Setting
+        '400':
+          description: Invalid request
+        '409':
+          description: Version conflict
+      summary: Update a Volley Setting
+      tags:
+      - Volley Setting
+components:
+  schemas:
+    VolleySettingCreateRequest:
+      properties:
+        configuration:
+          allOf:
+          - $ref: '#/components/schemas/VolleySettingConfiguration'
+          nullable: true
+        volley_type:
+          enum:
+          - new_connection_mapping
+          type: string
+      required:
+      - volley_type
+      type: object
+      x-field_order: []
+    VolleySettingConfiguration:
+      properties:
+        configuration_settings:
+          $ref: '#/components/schemas/VolleySettingConfigurationSettings'
+        volley_type:
+          type: string
+      required:
+      - configuration_settings
+      - volley_type
+      type: object
+    VolleySettingUpdateRequest:
+      properties:
+        configuration:
+          allOf:
+          - $ref: '#/components/schemas/VolleySettingConfiguration'
+          nullable: true
+      type: object
+      x-field_order: []
+    VolleySettingConfigurationSettings:
+      properties:
+        platform_email_addresses:
+          items:
+            format: email
+            type: string
+          type: array
+      required:
+      - platform_email_addresses
+      type: object
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+    VolleySettingResult:
+      properties:
+        configuration:
+          allOf:
+          - $ref: '#/components/schemas/VolleySettingConfiguration'
+          nullable: true
+        created:
+          description: The date the record was created
+          type: integer
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        organization_id:
+          format: uuid
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+        volley_type:
+          enum:
+          - new_connection_mapping
+          type: string
+      required:
+      - created
+      - id
+      - modified
+      - organization_id
+      - version
+      - volley_type
+      type: object
+      x-field_order: []
+    PaginatedVolleySettingResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of Volley Setting results
+          items:
+            $ref: '#/components/schemas/VolleySettingResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response

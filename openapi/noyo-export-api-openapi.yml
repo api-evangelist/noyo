@@ -1,0 +1,158 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Export API
+  version: 1.0.0
+servers: []
+tags:
+- name: Export
+paths:
+  /api/v1/exports:
+    x-summary: Create Export to kickoff pipeline workflow based on export_type
+    post:
+      description: Create a new Export.
+      operationId: createExport
+      requestBody:
+        content:
+          application/json:
+            examples:
+              success:
+                value:
+                  export_ids:
+                  - 8fac0992-933a-4743-8dab-0d606ef2569e
+                  export_type: differences_export
+                  filters:
+                    type: a_type
+            schema:
+              $ref: '#/components/schemas/ExportRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              example:
+                created: 1626281253
+                export_ids: []
+                export_type: differences_export
+                id: 7dac0992-933a-4743-8dab-0d606ef2525r
+                modified: 1626281253
+                organization_id: 8fac0992-933a-4743-8dab-0d606ef2569e
+                status: processing
+                version: 2gce0972-236a-4743-8dab-0d606ef2596e
+              schema:
+                $ref: '#/components/schemas/ExportResult'
+          description: Successful Response - Returns the contents of the newly created Export
+      summary: Create a Export
+      tags:
+      - Export
+  /api/v1/exports/{export_id}:
+    get:
+      description: Get a single Export
+      operationId: getExport
+      parameters:
+      - description: UUID of the requested export
+        in: path
+        name: export_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                completed: 1730391791
+                created: 1626281253
+                export_ids: []
+                export_type: differences_export
+                file_key: /path/to/a/file
+                filters:
+                  type: a_filter_type
+                id: 7dac0992-933a-4743-8dab-0d606ef2525r
+                modified: 1730391791
+                organization_id: 8fac0992-933a-4743-8dab-0d606ef2569e
+                status: complete
+                version: 2gce0972-236a-4743-8dab-0d606ef2596e
+              schema:
+                $ref: '#/components/schemas/ExportResult'
+          description: Successful Response - Returns an Export
+      summary: Get a Export
+      tags:
+      - Export
+  /api/v1/exports/{export_id}/download:
+    get:
+      description: Returns file contents for an export
+      operationId: getExportFile
+      parameters:
+      - description: The unique identifier of the export
+        in: path
+        name: export_id
+        required: true
+        schema:
+          example: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+          format: uuid
+          type: string
+      responses:
+        '200':
+          description: Successful Response - Returns file contents
+      summary: Get file associated with Export
+      tags:
+      - Export
+components:
+  schemas:
+    ExportRequest:
+      properties:
+        export_ids:
+          description: List of uuids when exported selected items
+          items:
+            description: UUID of model exporting
+            format: uuid
+            type: string
+          type: array
+        export_type:
+          description: Type of export to be created
+          type: string
+      required:
+      - export_type
+      type: object
+      x-field_order: []
+    ExportResult:
+      properties:
+        completed:
+          format: date-time
+          type: string
+        created:
+          description: The date the record was created
+          type: integer
+        export_ids:
+          description: Key/Value pairs of query parameters being applied when export is requested
+          type: object
+        export_type:
+          type: string
+        file_key:
+          type: string
+        filters:
+          type: object
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        status:
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - created
+      - export_type
+      - id
+      - modified
+      - status
+      - version
+      type: object
+      x-field_order: []

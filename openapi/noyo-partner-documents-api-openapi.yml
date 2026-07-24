@@ -1,0 +1,672 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Partner Documents API
+  version: 1.0.0
+servers: []
+tags:
+- name: Partner Documents
+paths:
+  /api/v1/partner_documents:
+    x-summary: Partner Documents Resource
+    get:
+      description: 'Returns a paginated list of partner documents with filtering options.
+
+
+        This endpoint supports filtering by:
+
+        * group
+
+        * partner
+
+        * date range (effective_date)
+
+        * file name
+
+        * source
+
+        * content type
+
+
+        It also supports sorting by:
+
+        * file_name
+
+        * creation date
+
+        * effective_date
+
+        '
+      operationId: getPartnerDocumentList
+      parameters:
+      - description: Filter by associated group IDs
+        explode: false
+        in: query
+        name: group_ids
+        required: false
+        schema:
+          items:
+            format: uuid
+            type: string
+          type: array
+        style: form
+      - description: Filter by associated feed IDs
+        explode: false
+        in: query
+        name: feed_ids
+        required: false
+        schema:
+          items:
+            format: uuid
+            type: string
+          type: array
+        style: form
+      - description: Filter by associated partner ID
+        in: query
+        name: partner_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+      - description: Filter by associated partner type (e.g., 'carrier' or 'broker')
+        in: query
+        name: partner_type
+        required: false
+        schema:
+          type: string
+      - description: Filter by associated organization ID
+        in: query
+        name: organization_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+      - description: Search by file name (partial matches)
+        in: query
+        name: file_name
+        required: false
+        schema:
+          type: string
+      - description: Filter by document source (SFTP, EMAIL, UPLOAD, PORTAL)
+        in: query
+        name: source
+        required: false
+        schema:
+          enum:
+          - SFTP
+          - EMAIL
+          - UPLOAD
+          - PORTAL
+          type: string
+      - description: Filter by document content type
+        in: query
+        name: content_type
+        required: false
+        schema:
+          enum:
+          - EDI_ERROR_REPORT
+          type: string
+      - description: Start date for filtering by effective date (YYYY-MM-DD)
+        in: query
+        name: effective_date_start
+        required: false
+        schema:
+          format: date
+          type: string
+      - description: End date for filtering by effective date (YYYY-MM-DD)
+        in: query
+        name: effective_date_end
+        required: false
+        schema:
+          format: date
+          type: string
+      - description: Field to sort by
+        in: query
+        name: sort_by
+        required: false
+        schema:
+          default: created
+          enum:
+          - file_name
+          - created
+          - effective_date
+          type: string
+      - description: Sort order
+        in: query
+        name: sort_order
+        required: false
+        schema:
+          default: desc
+          enum:
+          - asc
+          - desc
+          type: string
+      - description: Page number
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          type: integer
+      - description: Number of items per page
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 20
+          type: integer
+      - description: Exclude total count from the response
+        in: query
+        name: exclude_total_count
+        required: false
+        schema:
+          default: false
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPartnerDocumentPublicResult'
+          description: Successfully retrieved partner documents
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    example: Invalid partner_id
+                    type: string
+          description: Bad request
+        '401':
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    example: Unauthorized
+                    type: string
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    example: Forbidden
+                    type: string
+          description: Forbidden
+      summary: List Partner Documents
+      tags:
+      - Partner Documents
+    post:
+      description: Create a new partner document
+      operationId: createPartnerDocument
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PartnerDocumentPublicCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartnerDocumentPublicResult'
+          description: Successfully created partner document
+        '404':
+          description: Group, carrier, or feed not found
+      summary: '---'
+      tags:
+      - Partner Documents
+  /api/v1/partner_documents/{id}/status:
+    x-summary: Partner Document Status Resource
+    get:
+      operationId: getPartnerDocumentStatuses
+      parameters:
+      - description: ID of the partner document
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: Number of results to return per page
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 20
+          type: integer
+      - description: Number of results to skip
+        in: query
+        name: offset
+        required: false
+        schema:
+          default: 0
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartnerDocumentPaginatedStatusResult'
+          description: List of workflow statuses for the partner document
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    example: Partner document not found
+                    type: string
+                  status:
+                    example: 404
+                    type: integer
+                type: object
+          description: Partner document not found
+      summary: Get statuses for a partner document
+      tags:
+      - Partner Documents
+  /api/v1/partner_documents/{id}/{version}:
+    delete:
+      operationId: deletePartnerDocument
+      parameters:
+      - description: ID of the partner document to delete
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: Current version of the partner document
+        in: path
+        name: version
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: Partner document successfully deleted
+      security:
+      - BearerAuth: []
+      summary: Delete a partner document
+      tags:
+      - Partner Documents
+    put:
+      description: Edit a partner document based on the ID provided
+      operationId: editPartnerDocument
+      parameters:
+      - description: Unique identifier of the partner document
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 00ffa55b-84e1-48d7-8587-57103c10903f
+          format: uuid
+          type: string
+      - description: Version of the partner document
+        in: path
+        name: version
+        required: true
+        schema:
+          example: 00ffa55b-84e1-48d7-8587-57103c10903f
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PartnerDocumentPublicEditRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartnerDocumentPublicResult'
+          description: Successful Response - Returns a single Partner Document
+        '400':
+          description: Invalid request body
+        '404':
+          description: Partner Document not found
+        '409':
+          description: Version conflict
+      summary: Edit an existing Partner Document
+      tags:
+      - Partner Documents
+  /api/v1/partner_documents/{partner_document_id}:
+    x-summary: Single Partner Document Resource
+    get:
+      description: 'Returns a single partner document by ID.
+
+        '
+      operationId: getPartnerDocument
+      parameters:
+      - description: Partner Document ID
+        in: path
+        name: partner_document_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartnerDocumentPublicResult'
+          description: Successfully retrieved partner document
+        '401':
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    example: Unauthorized
+                    type: string
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    example: Forbidden
+                    type: string
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    example: Partner document not found with ID 12345678-1234-1234-1234-123456789012
+                    type: string
+          description: Partner document not found
+      summary: Get Partner Document
+      tags:
+      - Partner Documents
+components:
+  schemas:
+    PaginatedPartnerDocumentPublicResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of partner document results
+          items:
+            $ref: '#/components/schemas/PartnerDocumentPublicResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    PartnerDocumentPaginatedStatusResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of workflow status results
+          items:
+            $ref: '#/components/schemas/WorkflowStatus'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    PartnerDocumentPublicCreateRequest:
+      properties:
+        content_type:
+          description: Content type of the document
+          example: EDI_ERROR_REPORT
+          type: string
+        display_name:
+          description: Display name of the document
+          example: Error_Report_Acme_Corp_2023_10_27.csv
+          type: string
+        effective_date:
+          description: Effective date of the document
+          example: '2023-10-27'
+          format: date
+          type: string
+        extracted_data:
+          description: Extracted data from the document
+          nullable: true
+          type: object
+        feed_ids:
+          default: []
+          description: List of feed IDs associated with the document
+          items:
+            format: uuid
+            type: string
+          type: array
+        file_key:
+          description: GCS key for the file
+          example: uploads/partner_a/error_reports/2023-10-27.csv
+          type: string
+        group_ids:
+          default: []
+          description: List of group IDs associated with the document
+          items:
+            format: uuid
+            type: string
+          type: array
+        organization_id:
+          description: ID of the organization associated with the document (can be derived from partner_id if partner_type is 'organization')
+          format: uuid
+          nullable: true
+          type: string
+        partner_document_source_id:
+          description: ID of the partner document source
+          format: uuid
+          type: string
+        partner_id:
+          description: ID of the partner (e.g., organization or carrier) associated with the document
+          format: uuid
+          type: string
+        partner_type:
+          description: Type of the partner (e.g., 'organization' or 'carrier') associated with the document
+          type: string
+        source:
+          description: Source of the document
+          example: SFTP
+          type: string
+      required:
+      - content_type
+      - file_key
+      - partner_id
+      - partner_type
+      - source
+      type: object
+      x-field_order: []
+    PartnerDocumentPublicResult:
+      properties:
+        content_type:
+          description: Content type of the document
+          example: EDI_ERROR_REPORT
+          type: string
+        created:
+          description: The date the record was created
+          type: integer
+        display_name:
+          description: Display name of the document
+          example: Error_Report_Acme_Corp_2023_10_27.csv
+          type: string
+        effective_date:
+          description: Effective date of the document
+          example: '2023-10-27'
+          format: date
+          type: string
+        extracted_data:
+          description: Extracted data from the document
+          nullable: true
+          type: object
+        feed_ids:
+          default: []
+          description: List of feed IDs associated with the document
+          items:
+            format: uuid
+            type: string
+          type: array
+        file_key:
+          description: GCS key for the file
+          example: uploads/partner_a/error_reports/2023-10-27.csv
+          type: string
+        group_ids:
+          default: []
+          description: List of group IDs associated with the document
+          items:
+            format: uuid
+            type: string
+          type: array
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        organization_id:
+          description: ID of the organization associated with the document (can be derived from partner_id if partner_type is 'organization')
+          format: uuid
+          nullable: true
+          type: string
+        partner_document_source_id:
+          description: ID of the partner document source
+          format: uuid
+          type: string
+        partner_id:
+          description: ID of the partner (e.g., organization or carrier) associated with the document
+          format: uuid
+          type: string
+        partner_type:
+          description: Type of the partner (e.g., 'organization' or 'carrier') associated with the document
+          type: string
+        source:
+          description: Source of the document
+          example: SFTP
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - content_type
+      - created
+      - file_key
+      - id
+      - modified
+      - partner_id
+      - partner_type
+      - source
+      - version
+      type: object
+      x-field_order:
+      - id
+      - version
+      - created
+      - modified
+      - display_name
+      - file_key
+      - source
+      - content_type
+      - effective_date
+      - partner_id
+      - partner_type
+      - organization_id
+      - group_ids
+      - feed_ids
+      - partner_document_source_id
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+    PartnerDocumentPublicEditRequest:
+      properties:
+        display_name:
+          description: Display name of the document
+          example: Error_Report_Acme_Corp_2023_10_27.csv
+          type: string
+        effective_date:
+          description: Effective date of the document
+          example: '2023-10-27'
+          format: date
+          type: string
+        extracted_data:
+          description: Extracted data from the document
+          type: object
+        is_external:
+          description: Whether the document is external
+          type: boolean
+      type: object
+      x-field_order: []
+    WorkflowStatus:
+      properties:
+        created:
+          description: The date the record was created
+          type: integer
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        status:
+          description: Current workflow status
+          type: string
+        template_name:
+          description: Name of the workflow template
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - created
+      - id
+      - modified
+      - status
+      - template_name
+      - version
+      type: object

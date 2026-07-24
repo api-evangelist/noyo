@@ -1,0 +1,410 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Reconciliation Issues API
+  version: 1.0.0
+servers: []
+tags:
+- name: Reconciliation Issues
+paths:
+  /api/v1/reconciliation_issues/{reconciliation_issue_id}/ack:
+    put:
+      description: Acknowledge receipt of a reconciliation issue
+      operationId: acknowledgeReconciliationIssue
+      parameters:
+      - description: Unique identifier of the reconciliation issue in the Noyo system
+        in: path
+        name: reconciliation_issue_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              success:
+                summary: An empty request, simply acknowledging reconciliation issue receipt
+                value: null
+            schema:
+              $ref: '#/components/schemas/ReconciliationIssueAckRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                body:
+                  carrier_value: '2020-01-01'
+                  distributor_value: '2020-02-01'
+                carrier_id: 8fac0992-933a-4743-8dab-0d606ef2569e
+                context: ''
+                created: 1557862286
+                group_id: 436fb487-bb75-42d4-9651-7b1471a8940e
+                id: dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1
+                modified: 1557862286
+                reconciliation_issue_type: individual_enrollment_effective_start_date_mismatch
+                status: acknowledged
+                subject_id: 7027d416-3bed-43e8-b824-508d9c0d323e
+                subject_type: IndividualEnrollment
+                version: ea38e798-cd61-4fa2-b485-d1c5b87a61af
+              schema:
+                $ref: '#/components/schemas/ReconciliationIssuePublicResult'
+          description: Successful Response - Returns the updated Reconciliation Issue
+      summary: Acknowledge Reconciliation Issue
+      tags:
+      - Reconciliation Issues
+  /api/v1/reconciliation_issues/{reconciliation_issue_id}/request_outcome:
+    x-summary: Request a particular reconciliation issue outcome
+    put:
+      description: Request a new outcome attempt for a reconciliation issue
+      operationId: requestReconciliationIssueOutcome
+      parameters:
+      - description: The unique identifier of the associated reconciliation issue
+        in: path
+        name: reconciliation_issue_id
+        required: true
+        schema:
+          example: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              success:
+                summary: A reconciliation issue resolution body
+                value:
+                  distributor_action: will_update
+                  outcome: distributor_change
+                  request_context: After checking with the team, this looks like an issue on our end, will update
+                  resolution_type: offline
+            schema:
+              $ref: '#/components/schemas/ReconciliationIssueResolutionRequestOutcome'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              example:
+                distributor_action: will_update
+                id: 30b74a44-d5b1-4123-a7a4-6d3aec251ba4
+                outcome: distributor_change
+                reconciliation_issue_id: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+                request_context: After checking with the team, this looks like an issue on our end, will update
+                resolution_type: offline
+                result: {}
+                version: 6260146a-3486-4c3d-b2a6-fcd3f8c84043
+              schema:
+                $ref: '#/components/schemas/ReconciliationIssueResolutionResult'
+          description: Successful Response - Returns the new Reconciliation Issue Resolution
+      summary: Request Reconciliation Issue Outcome
+      tags:
+      - Reconciliation Issues
+  /api/v1/reconciliation_issues/{reconciliation_issue_id}/resolutions:
+    x-summary: Get a list of reconciliation issue resolutions
+    get:
+      description: Returns a list of all resolutions for a given reconciliation issue.
+      operationId: getReconciliationIssueResolutionsList
+      parameters:
+      - description: The unique identifier of the reconciliation issue for which you would like to view resolutions
+        in: path
+        name: reconciliation_issue_id
+        required: true
+        schema:
+          example: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+          format: uuid
+          type: string
+      - description: The max size of each page of results
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+      - description: The integer offset at which to start the page. Possible values are 0 to total_records - 1
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                meta:
+                  offset: 0
+                  page_num: 1
+                  page_size: 20
+                  total_records: 1
+                response:
+                - automated_change_id: bd957820-4652-4ee7-8a3a-6413df21e28d
+                  automated_change_type: member_request
+                  distributor_action: no_update
+                  id: 30b74a44-d5b1-4123-a7a4-6d3aec251ba4
+                  outcome: carrier_change
+                  reconciliation_issue_id: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+                  resolution_type: member_request
+                  result:
+                    context: Something here explaining the resolution
+                    type: note
+                  version: 6260146a-3486-4c3d-b2a6-fcd3f8c84043
+              schema:
+                $ref: '#/components/schemas/PaginatedReconciliationIssueResolutionResult'
+          description: Successful Response - Returns all matching reconciliation issue resolutions
+      summary: Get a list of all reconciliation issue resolutions under a single reconciliation issue
+      tags:
+      - Reconciliation Issues
+components:
+  schemas:
+    ReconciliationIssuePublicResult:
+      properties:
+        body:
+          description: Details of what values are in contention with each other
+          readOnly: true
+          type: object
+        carrier_id:
+          description: Unique identifier of the associated carrier in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        context:
+          description: Context for the processing of the reconciliation issue
+          readOnly: true
+          type: string
+        created:
+          description: The date the record was created
+          type: integer
+        group_id:
+          description: Unique identifier of the group in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        reconciliation_issue_type:
+          description: Categorization of the reconciliation issue
+          readOnly: true
+          type: string
+        status:
+          description: Status of the reconciliation issue
+          enum:
+          - needs_review
+          - processing
+          - resolved
+          - dismissed
+          - failed
+          readOnly: true
+          type: string
+        subject_id:
+          description: Unique identifier of the model that is the subject of the reconciliation issue
+          format: uuid
+          readOnly: true
+          type: string
+        subject_type:
+          description: The type of the model that is the subject of the reconciliation issue
+          readOnly: true
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - body
+      - carrier_id
+      - created
+      - group_id
+      - id
+      - modified
+      - reconciliation_issue_type
+      - status
+      - subject_id
+      - subject_type
+      - version
+      type: object
+      x-field_order:
+      - id
+      - version
+      - group_id
+      - carrier_id
+      - status
+      - reconciliation_issue_type
+      - subject_id
+      - subject_type
+      - context
+      - body
+      - created
+      - modified
+    ReconciliationIssueResolutionResult:
+      properties:
+        automated_change_id:
+          description: Unique identifier of the associated automated change model
+          format: uuid
+          readOnly: true
+          type: string
+        automated_change_type:
+          description: The type or model of the associated automated change, 'MemberRequest' or 'MemberSnapshot'
+          enum:
+          - member_request
+          - member_snapshot
+          - no_change
+          readOnly: true
+          type: string
+        created:
+          description: The date the record was created
+          type: integer
+        distributor_action:
+          description: The distributor action taken to sync up with Noyo's system, as a result of this change
+          example: already_updated
+          readOnly: true
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        outcome:
+          description: The outcome of the resolution, in order words, what change took place
+          example: carrier_change
+          readOnly: true
+          type: string
+        reconciliation_issue_id:
+          description: Unique identifier of the associated reconciliation issue
+          format: uuid
+          readOnly: true
+          type: string
+        request_context:
+          description: Additional context provided by the distributor when requesting an outcome
+          example: Our records reflect that they should be enrolled at the carrier, can you update?
+          readOnly: true
+          type: string
+        resolution_type:
+          description: The technique used to resolve the reconciliation issue
+          example: member_request
+          readOnly: true
+          type: string
+        result:
+          description: Result of the discrepancy resolution
+          type: object
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - created
+      - distributor_action
+      - id
+      - modified
+      - reconciliation_issue_id
+      - request_context
+      - resolution_type
+      - version
+      type: object
+      x-field_order:
+      - id
+      - version
+      - reconciliation_issue_id
+      - automated_change_id
+      - automated_change_type
+      - resolution_type
+      - outcome
+      - distributor_action
+      - request_context
+      - result
+      - created
+      - modified
+    ReconciliationIssueResolutionRequestOutcome:
+      properties:
+        distributor_action:
+          description: The distributor action taken to sync up with Noyo's system, as a result of this change
+          enum:
+          - already_updated
+          - will_update
+          - no_update
+          example: already_updated
+          type: string
+        outcome:
+          description: The chosen response to take, after being notified of the reconciliation issue
+          enum:
+          - noyo_change
+          - carrier_change
+          - distributor_change
+          - no_change
+          example: carrier_value
+          type: string
+        request_context:
+          description: Additional context to provide when requesting an outcome
+          example: Our records reflect that they should be enrolled at the carrier, can you update?
+          type: string
+        resolution_type:
+          description: The technique used to resolve the reconciliation issue
+          enum:
+          - member_request
+          - offline
+          - no_action
+          example: offline
+          type: string
+      required:
+      - outcome
+      type: object
+      x-field_order: []
+    ReconciliationIssueAckRequest:
+      properties: {}
+      type: object
+      x-field_order: []
+    PaginatedReconciliationIssueResolutionResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of reconciliation issue resolutions
+          items:
+            $ref: '#/components/schemas/ReconciliationIssueResolutionResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object

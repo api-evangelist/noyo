@@ -1,0 +1,470 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Rule API
+  version: 1.0.0
+servers: []
+tags:
+- name: Rule
+paths:
+  /api/v1/group_mappings/{group_mapping_id}/rules:
+    x-summary: Rules for Group Mapping
+    get:
+      description: Returns a list of conditions based on the Group Mapping ID provided.
+      operationId: getRulesForGroupMapping
+      parameters:
+      - description: The unique identifier of the group mapping you would like to get rules for
+        in: path
+        name: group_mapping_id
+        required: true
+        schema:
+          example: 30b74a44-d5b1-4123-a7a4-6d3aec251ba4
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                meta:
+                  offset: 0
+                  page_num: 1
+                  page_size: 20
+                  total_records: 2
+                response:
+                - active: true
+                  group_mapping_id: 30b74a44-d5b1-4123-a7a4-6d3aec251ba4
+                  id: dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1
+                  joining_operator: AND
+                  mapping_type: account_structure
+                  name: Rule 1
+                  rank: '1'
+                  resulting_field_name: bill_groups.bill_group_number
+                  resulting_field_value: '1001'
+                  rule_type: normal
+                  version: ad2fd914-b9bf-4e27-9c25-d2794ab1f548
+                - active: true
+                  group_mapping_id: 30b74a44-d5b1-4123-a7a4-6d3aec251ba4
+                  id: e49b79fa-0419-4cc6-b8dc-bad037e18e4b
+                  joining_operator: null
+                  mapping_type: account_structure
+                  name: Rule 2
+                  rank: null
+                  resulting_field_name: member_groups.member_group_key
+                  resulting_field_value: '1001'
+                  rule_type: default
+                  version: 5200a894-81c5-4c41-8519-86c32e9a9965
+              schema:
+                $ref: '#/components/schemas/PaginatedRulesResult'
+          description: Successful Response - Returns Rules
+      summary: Get Rules for a Group Mapping
+      tags:
+      - Rule
+    post:
+      description: Create a new Rule for a Group Mapping
+      operationId: createNewRule
+      parameters:
+      - description: The unique identifier of the group mapping you are creating a new rule for
+        in: path
+        name: group_mapping_id
+        required: true
+        schema:
+          example: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              success:
+                value:
+                  active: true
+                  joining_operator: null
+                  mapping_type: account_structure
+                  name: Rule 1
+                  rank: null
+                  resulting_field_name: member_groups.member_group_key
+                  resulting_field_value: '1001'
+                  rule_type: default
+            schema:
+              $ref: '#/components/schemas/RuleCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              example:
+                active: true
+                created: 1557512389
+                group_mapping_id: f833ac4b-36aa-46f4-826c-0badcfe27922
+                id: dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1
+                mapping_type: account_structure
+                modified: 1564440756
+                name: Rule 1
+                resulting_field_name: member_groups.member_group_key
+                resulting_field_value: '1001'
+                rule_type: default
+                version: 5200a894-81c5-4c41-8519-86c32e9a9965
+              schema:
+                $ref: '#/components/schemas/RuleResult'
+          description: Successful Response - Returns the new Rule
+      summary: Create a new Rule
+      tags:
+      - Rule
+  /api/v1/rules/{rule_id}:
+    get:
+      description: Returns the latest version of a single rule based on the ID provided.
+      operationId: getRule
+      parameters:
+      - description: The unique identifier of the rule you would like to view
+        in: path
+        name: rule_id
+        required: true
+        schema:
+          example: 30b74a44-d5b1-4123-a7a4-6d3aec251ba4
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                active: true
+                group_mapping_id: f833ac4b-36aa-46f4-826c-0badcfe27922
+                id: 30b74a44-d5b1-4123-a7a4-6d3aec251ba4
+                joining_operator: null
+                mapping_type: account_structure
+                name: Rule 1
+                rank: null
+                resulting_field_name: member_groups.member_group_key
+                resulting_field_value: '1001'
+                rule_type: default
+                version: 5200a894-81c5-4c41-8519-86c32e9a9965
+              schema:
+                $ref: '#/components/schemas/RuleResult'
+          description: Successful Response - Returns a single Rule
+      summary: Get a single Rule
+      tags:
+      - Rule
+  /api/v1/rules/{rule_id}/{version}:
+    delete:
+      description: Delete a rule based on the ID provided. The version parameter must match the latest rule version. Also deletes all conditions for this rule.
+      operationId: deleteRule
+      parameters:
+      - description: Unique identifier of the rule you want to delete
+        in: path
+        name: rule_id
+        required: true
+        schema:
+          example: 306f6dc5-504b-4829-a5a6-8c5c1c1cfda2
+          format: uuid
+          type: string
+      - description: Unique version of the rule you want to delete
+        in: path
+        name: version
+        required: true
+        schema:
+          example: 750b57ed-afcc-4ef0-8fa1-0aa03a5da07c
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: Successful Response - Rule and its conditions was deleted successfully
+      summary: Delete a Rule
+      tags:
+      - Rule
+    put:
+      description: Edit a rule based on the ID provided. The version parameter must match the latest rule version.
+      operationId: editRule
+      parameters:
+      - description: Unique identifier of the rule you want to edit.
+        in: path
+        name: rule_id
+        required: true
+        schema:
+          example: 306f6dc5-504b-4829-a5a6-8c5c1c1cfda2
+          format: uuid
+          type: string
+      - description: Unique version of the rule you want to edit.
+        in: path
+        name: version
+        required: true
+        schema:
+          example: 750b57ed-afcc-4ef0-8fa1-0aa03a5da07c
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              success:
+                value:
+                  joining_operator: AND
+                  rank: '1'
+                  rule_type: normal
+            schema:
+              $ref: '#/components/schemas/RuleEditRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                active: true
+                created: 1557512389
+                group_mapping_id: f833ac4b-36aa-46f4-826c-0badcfe27922
+                id: dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1
+                joining_operator: AND
+                mapping_type: account_structure
+                modified: 1564440756
+                name: Rule 1
+                rank: '1'
+                resulting_field_name: member_groups.member_group_key
+                resulting_field_value: '1001'
+                rule_type: normal
+                version: 5200a894-81c5-4c41-8519-86c32e9a9965
+              schema:
+                $ref: '#/components/schemas/RuleResult'
+          description: Successful Response - Returns the modified Rule
+      summary: Edit a Rule
+      tags:
+      - Rule
+components:
+  schemas:
+    RuleEditRequest:
+      properties:
+        active:
+          description: Boolean that dictates if the rule is active or not
+          type: boolean
+        joining_operator:
+          description: Operator that will join the rule's conditions
+          enum:
+          - AND
+          - OR
+          nullable: true
+          type: string
+        name:
+          description: descriptive name of the rule
+          type: string
+        rank:
+          description: Rank of the rule versus other rules
+          nullable: true
+          type: number
+        resulting_field_name:
+          description: Name of the field this rule will result in
+          nullable: true
+          type: string
+        resulting_field_value:
+          description: Value of the resulting_field_name this rule will result in
+          nullable: true
+          type: string
+        rule_type:
+          description: Type of rule
+          enum:
+          - normal
+          - default
+          type: string
+      type: object
+      x-field_order:
+      - active
+      - name
+      - rule_type
+      - joining_operator
+      - resulting_field_name
+      - resulting_field_value
+      - rank
+    RuleResult:
+      properties:
+        active:
+          description: Boolean that dictates if the rule is active or not
+          readOnly: true
+          type: boolean
+        created:
+          description: The date the record was created
+          type: integer
+        group_mapping_id:
+          description: Unique identifier of the rule we are creating condition for
+          format: uuid
+          readOnly: true
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        joining_operator:
+          description: Operator that will join the rule's conditions
+          enum:
+          - AND
+          - OR
+          nullable: true
+          readOnly: true
+          type: string
+        mapping_type:
+          description: Describes the type of mapping this rule falls under
+          enum:
+          - account_structure
+          - plan
+          readOnly: true
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        name:
+          description: descriptive name of the rule
+          readOnly: true
+          type: string
+        rank:
+          description: Rank of the rule versus other rules
+          nullable: true
+          readOnly: true
+          type: number
+        resulting_field_name:
+          description: Name of the field this rule will result in
+          nullable: true
+          readOnly: true
+          type: string
+        resulting_field_value:
+          description: Value of the resulting_field_name this rule will result in
+          nullable: true
+          readOnly: true
+          type: string
+        rule_type:
+          description: Type of rule
+          enum:
+          - normal
+          - default
+          readOnly: true
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - active
+      - created
+      - group_mapping_id
+      - id
+      - joining_operator
+      - modified
+      - name
+      - rank
+      - resulting_field_name
+      - resulting_field_value
+      - rule_type
+      - version
+      type: object
+      x-field_order:
+      - id
+      - version
+      - created
+      - modified
+      - group_mapping_id
+      - active
+      - name
+      - mapping_type
+      - rule_type
+      - joining_operator
+      - resulting_field_name
+      - resulting_field_value
+      - rank
+    PaginatedRulesResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of rules
+          items:
+            $ref: '#/components/schemas/RuleResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    RuleCreateRequest:
+      properties:
+        active:
+          description: Boolean that dictates if the rule is active or not
+          type: boolean
+        joining_operator:
+          description: Operator that will join the rule's conditions
+          enum:
+          - AND
+          - OR
+          nullable: true
+          type: string
+        mapping_type:
+          description: Describes the type of mapping this rule falls under
+          enum:
+          - account_structure
+          - plan
+          type: string
+        name:
+          description: descriptive name of the rule
+          type: string
+        rank:
+          description: Rank of the rule versus other rules
+          nullable: true
+          type: number
+        resulting_field_name:
+          description: Name of the field this rule will result in
+          nullable: true
+          type: string
+        resulting_field_value:
+          description: Value of the resulting_field_name this rule will result in
+          nullable: true
+          type: string
+        rule_type:
+          description: Type of rule
+          enum:
+          - normal
+          - default
+          type: string
+      required:
+      - name
+      - rule_type
+      type: object
+      x-field_order:
+      - active
+      - name
+      - mapping_type
+      - rule_type
+      - joining_operator
+      - resulting_field_name
+      - resulting_field_value
+      - rank
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object

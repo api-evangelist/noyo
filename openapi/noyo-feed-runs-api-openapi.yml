@@ -1,0 +1,46 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Feed Runs API
+  version: 1.0.0
+servers: []
+tags:
+- name: Feed Runs
+paths:
+  /api/v1/feed/runs/{id}/file:
+    x-summary: Get Feed Run File
+    get:
+      description: Returns a signed URL to the feed run file based on the ID provided
+      operationId: getFeedRunFile
+      parameters:
+      - description: Unique identifier of the workflow
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 95ce77a6-30fd-4bd9-af10-8d3a1744ac2e
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                signed_url: https://storage.googleapis.com/noyo-feeds-production/454b979e-da31-4712-97e0-6f666bdb01c6/748f6710-d3be-4073-831c-315e1e34a2e0.txt?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=url-signer%40noyo-production.iam.gserviceaccount.com%2F20240923%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240923T153921Z&X-Goog-Expires=300&X-Goog-SignedHeaders=host&X-Goog-Signature=859cd756fb3bb64c5744d864c168daebb1f98fcf5e89c3d7ec5fda4e819d453664de578062afadbe58dda55df33cadcbb79a612efbad77cb27953934cb50313573ff2a951a0e377384d27bfa74f88e823c5e53c011f55bb818f4dc77c0e6817b86bac81de43a4921474cb4690fe14a60e10fd81078eaa4798f7a4f319f6d82738564d3cd6c25aad3cfd65dc963b289030dda7bf95abfa003fe6cf425403527144be6b01dd9ca8977c44be0d55e5f31bbbe07ec57faabed453dc51354ac6c0610bcabd9aa12d44252ae361c180cc814e5a928fa21ce08a63a27fa51d5c6315eee41e1da245a4cdda36f58c340f1a978b5cc56534e53936d92c62596eb7acdfec7
+              schema:
+                $ref: '#/components/schemas/PublicFeedRunFileResult'
+          description: Successful Response - Returns a signed URL to the feed run file
+      summary: Get a feed run file
+      tags:
+      - Feed Runs
+components:
+  schemas:
+    PublicFeedRunFileResult:
+      properties:
+        signed_url:
+          format: url
+          type: string
+      required:
+      - signed_url
+      type: object
+      x-field_order: []

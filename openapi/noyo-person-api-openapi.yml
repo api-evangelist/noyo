@@ -1,0 +1,86 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Person API
+  version: 1.0.0
+servers: []
+tags:
+- name: Person
+paths:
+  /api/v1/people:
+    post:
+      description: Search for people based on various criteria including name, date of birth, and SSN
+      operationId: searchPeople
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                date_of_birth:
+                  description: Date of birth to search for
+                  format: date
+                  type: string
+                first_name:
+                  description: First name to search for
+                  type: string
+                full_name:
+                  description: Full name to search for
+                  type: string
+                group_id:
+                  description: Group ID to filter results by
+                  format: uuid
+                  type: string
+                last_name:
+                  description: Last name to search for
+                  type: string
+                size:
+                  description: Maximum number of results to return
+                  minimum: 1
+                  type: integer
+                ssn:
+                  description: Social Security Number to search for
+                  type: string
+              required:
+              - full_name
+              type: object
+        description: People search criteria
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  properties:
+                    date_of_birth:
+                      format: date
+                      type: string
+                    dependent_id:
+                      format: uuid
+                      nullable: true
+                      type: string
+                    employee_id:
+                      format: uuid
+                      nullable: true
+                      type: string
+                    full_name:
+                      type: string
+                    group_id:
+                      format: uuid
+                      type: string
+                    id:
+                      format: uuid
+                      type: string
+                    match_score:
+                      format: float
+                      type: number
+                  type: object
+                type: array
+          description: Successful response
+        '401':
+          description: Unauthorized - Authentication required
+        '403':
+          description: Forbidden - Insufficient permissions
+      summary: Search people
+      tags:
+      - Person

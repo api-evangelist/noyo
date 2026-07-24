@@ -1,0 +1,195 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Member Snapshot Test Report API
+  version: 1.0.0
+servers: []
+tags:
+- name: Member Snapshot Test Report
+paths:
+  /api/v1/member_snapshot_test_reports:
+    get:
+      description: Returns a list of Member Snapshot Test Reports.
+      operationId: getMemberSnapshotTestReportsList
+      parameters:
+      - description: The max size of each page of results
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+      - description: The integer offset at which to start the page. Possible values are 0 to total_records - 1
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Noyo group UUID to filter Member Snapshot Test Report
+        in: query
+        name: group_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+      - description: Noyo carrier UUID to filter Member Snapshot Test Report
+        in: query
+        name: carrier_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemberSnapshotTestReportPaginatedResult'
+          description: Successful Response - Returns a list of all matching Member Snapshot Test Reports
+      summary: Retrieves a list of Member Snapshot Test Reports.
+      tags:
+      - Member Snapshot Test Report
+  /api/v1/member_snapshot_test_reports/{member_snapshot_test_report_id}:
+    get:
+      description: Returns the latest version of a single Member Snapshot Test Report based on the ID provided.
+      operationId: getMemberSnapshotTestReport
+      parameters:
+      - description: The unique identifier of the Member Snapshot Test Report you would like to view
+        in: path
+        name: member_snapshot_test_report_id
+        required: true
+        schema:
+          example: 491cfdee-a38f-4bb1-8cb4-4017c87dff2b
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemberSnapshotTestReportResult'
+          description: Successful Response - Returns a single Member Snapshot Test Report
+      summary: Get a single Member Snapshot Test Report
+      tags:
+      - Member Snapshot Test Report
+components:
+  schemas:
+    PublicMemberSnapshotReportData:
+      properties:
+        completed_at:
+          default: null
+          description: Time the report was completed
+          nullable: true
+          type: integer
+        rule_set_overrides:
+          $ref: '#/components/schemas/RuleSetOverrides'
+        started_at:
+          default: null
+          description: Time the report started being actually filled out
+          nullable: true
+          type: integer
+      type: object
+    MemberSnapshotTestReportPaginatedResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          items:
+            $ref: '#/components/schemas/MemberSnapshotTestReportResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    MemberSnapshotTestReportResult:
+      properties:
+        carrier_id:
+          format: uuid
+          type: string
+        created:
+          description: The date the record was created
+          type: integer
+        group_id:
+          format: uuid
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        report_data:
+          $ref: '#/components/schemas/PublicMemberSnapshotReportData'
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - carrier_id
+      - created
+      - group_id
+      - id
+      - modified
+      - report_data
+      - version
+      type: object
+      x-field_order: []
+    RuleSetOverrides:
+      properties:
+        noyo_post:
+          description: Noyo post rule set ID to override selection for
+          format: uuid
+          type: string
+        noyo_pre:
+          description: Noyo pre rule set ID to use instead of the default
+          format: uuid
+          type: string
+        platform_post:
+          description: Platform post rule set ID to override selection for
+          format: uuid
+          type: string
+        platform_pre:
+          description: Platform pre rule set ID to override selection for
+          format: uuid
+          type: string
+        primary:
+          description: Primary rule set ID to override selection for
+          format: uuid
+          type: string
+      type: object
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object

@@ -1,0 +1,236 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Partner Document Sources API
+  version: 1.0.0
+servers: []
+tags:
+- name: Partner Document Sources
+paths:
+  /api/v1/partner_document_sources:
+    get:
+      description: Returns a paginated list of partner document sources
+      operationId: getPartnerDocumentSources
+      parameters:
+      - description: Filter by partner ID
+        in: query
+        name: partner_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+      - description: Filter by partner type
+        in: query
+        name: partner_type
+        required: false
+        schema:
+          type: string
+      - description: Filter by match strategy
+        in: query
+        name: match_strategy
+        required: false
+        schema:
+          enum:
+          - FILENAME_EXACT
+          - SUBJECT_EXACT
+          - METADATA_FIELD_EXACT
+          type: string
+      - description: Filter by associated group IDs
+        explode: false
+        in: query
+        name: group_ids
+        required: false
+        schema:
+          items:
+            format: uuid
+            type: string
+          type: array
+        style: form
+      - description: The max size of each page of results
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+      - description: The integer offset at which to start the page. Possible values are 0 to total_records - 1
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Field to sort results by
+        in: query
+        name: sort_by
+        required: false
+        schema:
+          type: string
+      - description: Direction to sort results (asc or desc)
+        in: query
+        name: sort_direction
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPartnerDocumentSourcePublicResult'
+          description: Successful response
+      summary: Get partner document sources
+      tags:
+      - Partner Document Sources
+  /api/v1/partner_document_sources/{source_id}:
+    get:
+      description: Returns a single partner document source by ID
+      operationId: getPartnerDocumentSource
+      parameters:
+      - description: Partner document source ID
+        in: path
+        name: source_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartnerDocumentSourcePublicResult'
+          description: Successful response
+        '404':
+          description: Partner document source not found
+      summary: Get a single partner document source
+      tags:
+      - Partner Document Sources
+components:
+  schemas:
+    PaginatedPartnerDocumentSourcePublicResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of partner document source results
+          items:
+            $ref: '#/components/schemas/PartnerDocumentSourcePublicResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+    PartnerDocumentSourcePublicResult:
+      properties:
+        created:
+          description: The date the record was created
+          type: integer
+        group_ids:
+          description: Array of associated group.id
+          items:
+            format: uuid
+            type: string
+          type: array
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        name:
+          description: A human-readable name for the stream
+          example: Guardian Daily Eligibility Error Report
+          type: string
+        organization_id:
+          description: The ID of the organization this source belongs to
+          format: uuid
+          nullable: true
+          type: string
+        partner_id:
+          description: The ID of the partner entity this source belongs to (e.g., carrier ID)
+          format: uuid
+          type: string
+        partner_type:
+          description: The type of the partner entity this source belongs to (e.g., 'carrier')
+          enum:
+          - carrier
+          - organization
+          - group
+          type: string
+        report_format:
+          description: Format of the report
+          example: EDI_834
+          nullable: true
+          type: string
+        source_description:
+          description: Optional further details about the source
+          nullable: true
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - created
+      - id
+      - match_strategy
+      - match_value
+      - modified
+      - name
+      - partner_id
+      - partner_type
+      - version
+      type: object
+      x-field_order:
+      - id
+      - version
+      - created
+      - modified
+      - organization_id
+      - partner_id
+      - partner_type
+      - name
+      - source_description
+      - report_format
+      - frequency_hint
+      - match_strategy
+      - match_value
+      - source_config
+      - feed_ids
+      - group_ids

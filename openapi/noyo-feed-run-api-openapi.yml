@@ -1,0 +1,295 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Feed Run API
+  version: 1.0.0
+servers: []
+tags:
+- name: Feed Run
+paths:
+  /api/v1/feed_runs:
+    x-sumary: Get Feed Run List
+    get:
+      description: Returns a list of feed runs
+      operationId: getFeedRunPublicList
+      parameters:
+      - description: Unique identifier of the feed
+        in: query
+        name: feed_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+      - description: Unique identifier of the carrier
+        in: query
+        name: carrier_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+      - description: Unique identifier of the group
+        in: query
+        name: group_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+      - description: Return only the most recent feed run
+        in: query
+        name: latest
+        required: false
+        schema:
+          type: boolean
+      - description: The max size of each page of results
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+      - description: The integer offset at which to start the page. Possible values are 0 to total_records - 1
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                meta:
+                  offset: 0
+                  page_num: 1
+                  page_size: 20
+                  total_records: 1
+                response:
+                - carrier_id: 95ce77a6-30fd-4bd9-af10-8d3a1744ac2e
+                  completed: 1693229599
+                  created: 1693229402
+                  details:
+                    file:
+                      audit:
+                        count:
+                          dependents: 25
+                          enrollments: 200
+                          members: 100
+                          primaries: 75
+                          terminations: 0
+                      name: test.txt
+                    transmission:
+                      id: 55504298-11d6-4933-924b-de69b6c40ba7
+                      sent_timestamp: 1693229505
+                  feed_id: 0b30d7fe-ab78-4b2f-b714-36e8a9625481
+                  group_ids:
+                  - 5546d578-1952-4e73-8475-f3436d4d085b
+                  - 8efdfb13-0c30-4416-9094-a364b943631f
+                  id: 9e51951a-663d-4b57-bfca-71cc01a7ace7
+                  initiated: 1693229402
+                  modified: 1693229599
+                  status: completed
+                  version: 30c02a09-3713-4b32-a12c-55d33adf748f
+              schema:
+                $ref: '#/components/schemas/PublicPaginatedFeedRunListResult'
+          description: Successful Response - Returns all matching feed runs
+      summary: Get a list of feed runs
+      tags:
+      - Feed Run
+  /api/v1/feed_runs/{feed_run_id}:
+    x-sumary: Get Feed Run
+    get:
+      description: Returns a feed run
+      operationId: getFeedRunPublic
+      parameters:
+      - description: Unique identifier of the feed run
+        in: path
+        name: feed_run_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                carrier_id: c1ac5a2f-eb19-440d-b770-c5c58e834da3
+                completed: 1693229599
+                created: 1693229402
+                details:
+                  file:
+                    audit:
+                      count:
+                        dependents: 25
+                        enrollments: 200
+                        members: 100
+                        primaries: 75
+                        terminations: 0
+                    name: file.txt
+                  transmission:
+                    id: 55504298-11d6-4933-924b-de69b6c40ba7
+                    sent_timestamp: 1693229505
+                feed_id: 0b30d7fe-ab78-4b2f-b714-36e8a9625481
+                id: 2ff3d24b-c1e7-40a6-b8da-7e085cc17831
+                initiated: 1693229402
+                modified: 1693229599
+                status: completed
+                version: 30c02a09-3713-4b32-a12c-55d33adf748f
+              schema:
+                $ref: '#/components/schemas/PublicFeedRunResult'
+          description: Successful Response - Returns a single feed run
+      summary: 'Get a feed run '
+      tags:
+      - Feed Run
+components:
+  schemas:
+    Count:
+      properties:
+        dependents:
+          format: int32
+          type: integer
+        enrollments:
+          format: int32
+          type: integer
+        members:
+          format: int32
+          type: integer
+        primaries:
+          format: int32
+          type: integer
+        terminations:
+          format: int32
+          type: integer
+      required:
+      - dependents
+      - enrollments
+      - members
+      - primaries
+      - terminations
+      type: object
+    Details1:
+      properties:
+        file:
+          $ref: '#/components/schemas/File1'
+        transmission:
+          $ref: '#/components/schemas/Transmission'
+      type: object
+    File1:
+      properties:
+        audit:
+          $ref: '#/components/schemas/Audit2'
+        name:
+          type: string
+      required:
+      - name
+      type: object
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+    PublicPaginatedFeedRunListResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          items:
+            $ref: '#/components/schemas/PublicFeedRunResult'
+          type: array
+      required:
+      - meta
+      type: object
+      x-field_order:
+      - meta
+      - response
+    Transmission:
+      properties:
+        id:
+          format: uuid
+          type: string
+        sent_timestamp:
+          type: integer
+      required:
+      - sent_timestamp
+      type: object
+    PublicFeedRunResult:
+      properties:
+        carrier_id:
+          format: uuid
+          type: string
+        completed:
+          nullable: true
+          type: integer
+        created:
+          description: The date the record was created
+          type: integer
+        details:
+          $ref: '#/components/schemas/Details1'
+        feed_id:
+          format: uuid
+          type: string
+        group_ids:
+          items:
+            format: uuid
+            type: string
+          nullable: true
+          type: array
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        initiated:
+          type: integer
+        modified:
+          description: The date the record was last updated
+          type: integer
+        status:
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - carrier_id
+      - created
+      - details
+      - feed_id
+      - id
+      - initiated
+      - modified
+      - status
+      - version
+      type: object
+      x-field_order: []
+    Audit2:
+      properties:
+        count:
+          $ref: '#/components/schemas/Count'
+      type: object

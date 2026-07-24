@@ -1,0 +1,220 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Member Snapshot Test Population Employee API
+  version: 1.0.0
+servers: []
+tags:
+- name: Member Snapshot Test Population Employee
+paths:
+  /api/v1/member_snapshot_test_populations/{test_population_id}/employees:
+    get:
+      description: Returns a list of Member Snapshot Test Population Employees.
+      operationId: getMemberSnapshotTestPopulationEmployeesList
+      parameters:
+      - description: The unique identifier of the member snapshot test population
+        in: path
+        name: test_population_id
+        required: true
+        schema:
+          example: 30b74a44-d5b1-4123-a7a4-6d3aec251ba4
+          format: uuid
+          type: string
+      - description: The max size of each page of results
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+      - description: The integer offset at which to start the page. Possible values are 0 to total_records - 1
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedMemberSnapshotTestPopulationEmployeeResult'
+          description: Successful Response - Returns a list of all matching Member Snapshot Test Population Employees
+      summary: Retrieves a list of Member Snapshot Test Population Employees.
+      tags:
+      - Member Snapshot Test Population Employee
+    post:
+      description: Create a new Member Snapshot Test Population Employee.
+      operationId: createMemberSnapshotTestPopulationEmployee
+      parameters:
+      - description: The unique identifier of the member snapshot test population
+        in: path
+        name: test_population_id
+        required: true
+        schema:
+          example: 30b74a44-d5b1-4123-a7a4-6d3aec251ba4
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MemberSnapshotTestPopulationEmployeeCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemberSnapshotTestPopulationEmployeeResult'
+          description: Successful Response - Returns the contents of the newly created Member Snapshot Test Population Employee
+      summary: Create a Member Snapshot Test Population Employee
+      tags:
+      - Member Snapshot Test Population Employee
+  /api/v1/member_snapshot_test_populations/{test_population_id}/employees/{test_population_employee_id}:
+    delete:
+      description: Delete a member snapshot test population employee based on the IDs provided.
+      operationId: deleteMemberSnapshotTestPopulationEmployee
+      parameters:
+      - description: The unique identifier of the member snapshot test population
+        in: path
+        name: test_population_id
+        required: true
+        schema:
+          example: 30b74a44-d5b1-4123-a7a4-6d3aec251ba4
+          format: uuid
+          type: string
+      - description: The unique identifier of the member snapshot test population employee
+        in: path
+        name: test_population_employee_id
+        required: true
+        schema:
+          example: 30b74a44-d5b1-4123-a7a4-6d3aec251ba4
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: Successful Response - member snapshot test population employee was deleted successfully
+      summary: Delete a Member Snapshot Test Population Employee
+      tags:
+      - Member Snapshot Test Population Employee
+    get:
+      description: Returns a single member snapshot test population employee based on the IDs provided.
+      operationId: getMemberSnapshotTestPopulationEmployee
+      parameters:
+      - description: The unique identifier of the member snapshot test population
+        in: path
+        name: test_population_id
+        required: true
+        schema:
+          example: 30b74a44-d5b1-4123-a7a4-6d3aec251ba4
+          format: uuid
+          type: string
+      - description: The unique identifier of the member snapshot test population employee
+        in: path
+        name: test_population_employee_id
+        required: true
+        schema:
+          example: 30b74a44-d5b1-4123-a7a4-6d3aec251ba4
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemberSnapshotTestPopulationEmployeeResult'
+          description: Successful Response - Returns a single Member Snapshot Test Population Employee
+      summary: Get a single Member Snapshot Test Population Employee
+      tags:
+      - Member Snapshot Test Population Employee
+components:
+  schemas:
+    PaginatedMemberSnapshotTestPopulationEmployeeResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of member snapshot test population employee results
+          items:
+            $ref: '#/components/schemas/MemberSnapshotTestPopulationEmployeeResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    MemberSnapshotTestPopulationEmployeeCreateRequest:
+      properties:
+        employee_id:
+          format: uuid
+          type: string
+      required:
+      - employee_id
+      type: object
+      x-field_order: []
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+    MemberSnapshotTestPopulationEmployeeResult:
+      properties:
+        created:
+          description: The date the record was created
+          type: integer
+        employee_id:
+          format: uuid
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        member_snapshot_test_population_id:
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - created
+      - employee_id
+      - id
+      - member_snapshot_test_population_id
+      - modified
+      - version
+      type: object
+      x-field_order: []

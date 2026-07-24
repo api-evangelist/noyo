@@ -1,0 +1,756 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Group Plans & Enrollment API
+  version: 1.0.0
+servers: []
+tags:
+- name: Group Plans & Enrollment
+paths:
+  /api/v1/group_enrollments/{enrollment_id}:
+    x-summary: Get Group Enrollment
+    get:
+      description: Returns the latest version of a single group enrollment based on the ID provided.
+      operationId: getGroupEnrollment
+      parameters:
+      - description: Unique identifier of the group enrollment
+        in: path
+        name: enrollment_id
+        required: true
+        schema:
+          example: 7499ea07-76c9-40f2-992b-952259e98384
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                carrier_id: 8fac0992-933a-4743-8dab-0d606ef2569e
+                created: 1557512389
+                effective_end_date: '2019-12-31'
+                effective_start_date: '2019-01-01'
+                group_id: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+                id: 7499ea07-76c9-40f2-992b-952259e98384
+                line_of_coverage: medical
+                modified: 1543215342
+                open_enrollment_end_date: '2019-02-01'
+                open_enrollment_start_date: '2019-01-01'
+                status: active
+                version: c2292b67-0382-45e9-a378-b52c4129f672
+              schema:
+                $ref: '#/components/schemas/GroupEnrollmentPublicResult'
+          description: Successful Response - Returns a single Group Enrollment
+      summary: Get a single Group Enrollment
+      tags:
+      - Group Plans & Enrollment
+  /api/v1/group_enrollments/{enrollment_id}/plans:
+    x-summary: List Group Enrollment Plans
+    get:
+      description: Returns a list of all plans for a given group enrollment.
+      operationId: getGroupEnrollmentPlanList
+      parameters:
+      - description: The unique identifier of the group enrollment for which you would like to view the plans
+        in: path
+        name: enrollment_id
+        required: true
+        schema:
+          example: 31559b4b-e45a-4df8-84f6-2220d7ed0c3a
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+              - carrier_id: d0003042-eaae-4491-b219-4825456a3d16
+                cobra_rules:
+                  eligible: false
+                code: D1
+                created: 1554175253
+                effective_end_date: '9999-12-31'
+                effective_start_date: '2020-01-01'
+                eligible_member_types:
+                - employee
+                group_enrollment_id: 31559b4b-e45a-4df8-84f6-2220d7ed0c3a
+                id: 5ba915fc-afe8-4572-a60f-61ee5883e100
+                line_of_coverage: dental
+                modified: 1554175253
+                name: Dental
+                network: Dental PPO Network
+                plan_type: ppo
+                status: active
+                termination_policy: last_work_date
+                version: 1bf06a82-8d81-4849-91d3-47c60fdce605
+                voluntary: false
+                waiting_periods: []
+              - carrier_id: d0003042-eaae-4491-b219-4825456a3d16
+                cobra_rules:
+                  eligible: false
+                code: D1
+                created: 1554175253
+                effective_end_date: '9999-12-31'
+                effective_start_date: '2020-01-01'
+                eligible_member_types:
+                - spouse
+                - child
+                group_enrollment_id: 31559b4b-e45a-4df8-84f6-2220d7ed0c3a
+                id: c1279c1c-ed61-439b-bd9c-07f3228c09cb
+                line_of_coverage: dental
+                modified: 1554175253
+                name: Dental
+                network: Dental PPO Network
+                plan_type: ppo
+                status: active
+                termination_policy: last_work_date
+                version: a6404fb2-f266-45b0-a6b7-84b047f017cf
+                voluntary: false
+                waiting_periods: []
+              schema:
+                items:
+                  $ref: '#/components/schemas/GroupDentalPlanPublicResult'
+                type: array
+          description: Successful Response - Returns all matching Plans
+      summary: Get a list of all Group Enrollment Plans
+      tags:
+      - Group Plans & Enrollment
+  /api/v1/groups/{group_id}/group_enrollments:
+    x-summary: Get All Group Enrollments
+    get:
+      description: Returns a list of all group enrollments for a given group.
+      operationId: getGroupEnrollmentList
+      parameters:
+      - description: The unique identifier of the group for which you would like to view group enrollments
+        in: path
+        name: group_id
+        required: true
+        schema:
+          example: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+          format: uuid
+          type: string
+      - description: The relative date on which to view the state of the record
+        in: query
+        name: effective_date
+        required: false
+        schema:
+          type: string
+      - description: The status of the group enrollments you would like to view
+        in: query
+        name: status
+        required: false
+        schema:
+          type: string
+      - description: The max size of each page of results
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+      - description: The integer offset at which to start the page. Possible values are 0 to total_records - 1
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                meta:
+                  offset: 0
+                  page_num: 1
+                  page_size: 20
+                  total_records: 2
+                response:
+                - carrier_id: 8fac0992-933a-4743-8dab-0d606ef2569e
+                  created: 1557512389
+                  effective_end_date: '2019-12-31'
+                  effective_start_date: '2019-01-01'
+                  group_id: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+                  id: 7499ea07-76c9-40f2-992b-952259e98384
+                  line_of_coverage: medical
+                  modified: 1543215342
+                  open_enrollment_end_date: '2019-02-01'
+                  open_enrollment_start_date: '2019-01-01'
+                  status: active
+                  version: c2292b67-0382-45e9-a378-b52c4129f672
+                - carrier_id: 8fac0992-933a-4743-8dab-0d606ef2569e
+                  created: 1557512389
+                  effective_end_date: '2019-12-31'
+                  effective_start_date: '2019-01-01'
+                  group_id: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+                  id: 25cdcb18-7d01-4599-9f65-d38b36d7c370
+                  line_of_coverage: dental
+                  modified: 1543215342
+                  open_enrollment_end_date: '2019-02-01'
+                  open_enrollment_start_date: '2019-01-01'
+                  status: active
+                  version: 55c4bcbb-98ab-448d-a5b4-d7d835327f72
+              schema:
+                $ref: '#/components/schemas/PaginatedGroupEnrollmentResult'
+          description: Successful Response - Returns all matching Group Enrollments
+      summary: Get a list of all Group Enrollments
+      tags:
+      - Group Plans & Enrollment
+  /api/v1/groups/{group_id}/plans:
+    x-summary: List Group Plans
+    get:
+      description: Returns a list of all plans for a given group.
+      operationId: getGroupPlanList
+      parameters:
+      - description: The unique identifier of the group for which you would like to view plans
+        in: path
+        name: group_id
+        required: true
+        schema:
+          example: 31559b4b-e45a-4df8-84f6-2220d7ed0c3a
+          format: uuid
+          type: string
+      - description: Status of the group plans for which you would like to filter
+        in: query
+        name: status
+        required: false
+        schema:
+          type: string
+      - description: Line of coverage of the group plans for which you would like to filter
+        in: query
+        name: line_of_coverage
+        required: false
+        schema:
+          type: string
+      - description: The unique identifier of the carrier of the group plans for which you would like to filter
+        in: query
+        name: carrier_id
+        required: false
+        schema:
+          example: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+          format: uuid
+          type: string
+      - description: The relative date on which to view the state of the record
+        in: query
+        name: effective_date
+        required: false
+        schema:
+          type: string
+      - description: The max size of each page of results
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+      - description: The integer offset at which to start the page. Possible values are 0 to total_records - 1
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                meta:
+                  offset: 0
+                  page_num: 1
+                  page_size: 20
+                  total_records: 2
+                response:
+                - carrier_id: d0003042-eaae-4491-b219-4825456a3d16
+                  cobra_rules:
+                    eligible: false
+                  code: D1
+                  created: 1554175253
+                  effective_end_date: '9999-12-31'
+                  effective_start_date: '2020-01-01'
+                  eligible_member_types:
+                  - employee
+                  group_enrollment_id: 31559b4b-e45a-4df8-84f6-2220d7ed0c3a
+                  id: 5ba915fc-afe8-4572-a60f-61ee5883e100
+                  line_of_coverage: dental
+                  modified: 1554175253
+                  name: Dental - Employee
+                  network: Dental PPO Network
+                  plan_type: ppo
+                  status: active
+                  termination_policy: end_of_month
+                  version: 1bf06a82-8d81-4849-91d3-47c60fdce605
+                  voluntary: false
+                  waiting_periods:
+                  - waiting_period_enrollment_type: new_member
+                    waiting_period_rule: hire_date
+                  - waiting_period_amount: 0
+                    waiting_period_enrollment_type: current_member
+                    waiting_period_rule: after_waiting_period
+                    waiting_period_unit: day
+                - carrier_id: d0003042-eaae-4491-b219-4825456a3d16
+                  cobra_rules:
+                    eligible: false
+                  code: D1
+                  created: 1554175253
+                  effective_end_date: '9999-12-31'
+                  effective_start_date: '2020-01-01'
+                  eligible_member_types:
+                  - spouse
+                  - child
+                  group_enrollment_id: 31559b4b-e45a-4df8-84f6-2220d7ed0c3a
+                  id: c1279c1c-ed61-439b-bd9c-07f3228c09cb
+                  line_of_coverage: dental
+                  modified: 1554175253
+                  name: Dental - Dependent
+                  network: Dental PPO Network
+                  plan_type: ppo
+                  status: active
+                  termination_policy: end_of_month
+                  version: a6404fb2-f266-45b0-a6b7-84b047f017cf
+                  voluntary: false
+                  waiting_periods:
+                  - waiting_period_enrollment_type: new_member
+                    waiting_period_rule: hire_date
+                  - waiting_period_amount: 0
+                    waiting_period_enrollment_type: current_member
+                    waiting_period_rule: after_waiting_period
+                    waiting_period_unit: day
+              schema:
+                $ref: '#/components/schemas/PaginatedGroupPlanResult'
+          description: Successful Response - Returns all matching Plans
+      summary: Get a list of all Group Plans
+      tags:
+      - Group Plans & Enrollment
+  /api/v1/plans/{plan_id}:
+    x-summary: Get Single Group Plan
+    get:
+      description: Returns the group plan specified by unique identifier
+      operationId: getGroupPlanById
+      parameters:
+      - description: The unique identifier of the group plan you would like to view
+        in: path
+        name: plan_id
+        required: true
+        schema:
+          example: 31559b4b-e45a-4df8-84f6-2220d7ed0c3a
+          format: uuid
+          type: string
+      - description: The relative date on which to view the state of the record
+        in: query
+        name: effective_date
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                plan:
+                  carrier_id: d0003042-eaae-4491-b219-4825456a3d16
+                  cobra_rules:
+                    eligible: false
+                  code: D1
+                  created: 1554175253
+                  effective_end_date: '9999-12-31'
+                  effective_start_date: '2020-01-01'
+                  eligible_member_types:
+                  - employee
+                  group_enrollment_id: 31559b4b-e45a-4df8-84f6-2220d7ed0c3a
+                  id: 5ba915fc-afe8-4572-a60f-61ee5883e100
+                  line_of_coverage: dental
+                  modified: 1554175253
+                  name: Dental - Employee
+                  network: Dental PPO Network
+                  plan_type: ppo
+                  status: active
+                  termination_policy: end_of_month
+                  version: 1bf06a82-8d81-4849-91d3-47c60fdce605
+                  voluntary: false
+                  waiting_periods:
+                  - waiting_period_enrollment_type: new_member
+                    waiting_period_rule: hire_date
+                  - waiting_period_amount: 0
+                    waiting_period_enrollment_type: current_member
+                    waiting_period_rule: after_waiting_period
+                    waiting_period_unit: day
+              schema:
+                $ref: '#/components/schemas/SingleGroupPlanResult'
+          description: Successful Response - Returns matching Group Plan
+      summary: Get a Group Plan by ID
+      tags:
+      - Group Plans & Enrollment
+components:
+  schemas:
+    PaginatedGroupPlanResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of group plan results
+          items:
+            description: Group plan associated with the group
+            readOnly: true
+            type: object
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    GroupDentalPlanBenefitsSnapshot:
+      properties:
+        contributory_type:
+          description: Contribution type for the group AD&D plan
+          example: Contributory
+          type: string
+      type: object
+    GroupPlanDependentChildAgeLimit:
+      properties:
+        dependent_child_age_limit:
+          description: Age limit where dependent child is no longer eligible for plan
+          format: int32
+          minimum: 0
+          type: integer
+        dependent_child_termination_rule:
+          description: Termination rule describing when coverage ends for dependent child
+          enum:
+          - date_of_birth
+          - end_of_month_after_birthday
+          - end_of_year_after_birthday
+          type: string
+        dependent_child_type:
+          description: Dependent type to decide whether age limit rule should be applied
+          enum:
+          - dependent_child
+          - student
+          type: string
+      required:
+      - dependent_child_age_limit
+      - dependent_child_termination_rule
+      - dependent_child_type
+      type: object
+    PaginatedGroupEnrollmentResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of group enrollment results
+          items:
+            $ref: '#/components/schemas/GroupEnrollmentPublicResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    SingleGroupPlanResult:
+      properties:
+        plan:
+          description: Group plan associated to a line of coverage
+          readOnly: true
+          type: object
+      required:
+      - plan
+      type: object
+      x-field_order: []
+    GroupEnrollmentPublicResult:
+      properties:
+        carrier_id:
+          description: Unique identifier of the associated carrier in the Noyo system
+          format: uuid
+          type: string
+        created:
+          description: The date the record was created
+          type: integer
+        effective_end_date:
+          description: ISO-8601 date string for the effective end date of the record
+          example: '2018-12-31'
+          format: date
+          nullable: true
+          type: string
+        effective_start_date:
+          description: ISO-8601 date string for the effective start date of the record
+          example: '2018-01-01'
+          format: date
+          nullable: true
+          type: string
+        group_id:
+          description: Unique identifier of the associated group in the Noyo system
+          format: uuid
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        line_of_coverage:
+          description: Line of coverage for the group enrollment
+          enum:
+          - medical
+          - dental
+          - vision
+          - life
+          - add
+          - std
+          - ltd
+          - accident
+          - critical_illness
+          - cancer
+          - health_fund
+          - hospital_indemnity
+          - pharmacy
+          - wellness
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        open_enrollment_end_date:
+          description: ISO-8601 date string for the open enrollment end date of the group enrollment
+          example: '2018-11-30'
+          format: date
+          nullable: true
+          type: string
+        open_enrollment_renewal_date:
+          description: ISO-8601 date string for the open enrollment renewal start date of the group enrollment
+          example: '2018-12-01'
+          format: date
+          nullable: true
+          type: string
+        open_enrollment_start_date:
+          description: ISO-8601 date string for the open enrollment start date of the group enrollment
+          example: '2018-11-01'
+          format: date
+          nullable: true
+          type: string
+        status:
+          description: Status of the group enrollment
+          enum:
+          - pending
+          - active
+          - completed
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - carrier_id
+      - created
+      - group_id
+      - id
+      - line_of_coverage
+      - modified
+      - status
+      - version
+      type: object
+      x-field_order:
+      - id
+      - version
+      - group_id
+      - carrier_id
+      - line_of_coverage
+      - status
+      - open_enrollment_start_date
+      - open_enrollment_end_date
+      - open_enrollment_renewal_date
+      - effective_start_date
+      - effective_end_date
+      - created
+      - modified
+    GroupPlanCOBRARules:
+      properties:
+        eligible:
+          description: True if group plan is eligible for COBRA enrollments
+          type: boolean
+      type: object
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+    GroupDentalPlanPublicResult:
+      properties:
+        benefits:
+          allOf:
+          - $ref: '#/components/schemas/GroupDentalPlanBenefitsSnapshot'
+          description: Description of benefits for the group dental plan
+        carrier_id:
+          description: Unique identifier of the associated carrier in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        cobra_rules:
+          allOf:
+          - $ref: '#/components/schemas/GroupPlanCOBRARules'
+          description: COBRA rules for the group dental plan
+        code:
+          description: Plan code of the group dental plan
+          example: SP100
+          type: string
+        created:
+          description: The date the record was created
+          type: integer
+        dependent_child_age_limits:
+          description: List of all dependent child age limits configured for the group dental plan
+          items:
+            $ref: '#/components/schemas/GroupPlanDependentChildAgeLimit'
+          type: array
+        effective_end_date:
+          description: ISO-8601 date string for the effective end date of the record
+          example: '2018-12-31'
+          format: date
+          nullable: true
+          type: string
+        effective_start_date:
+          description: ISO-8601 date string for the effective start date of the record
+          example: '2018-01-01'
+          format: date
+          nullable: true
+          type: string
+        eligible_member_types:
+          description: List of member types eligible for the group dental plan
+          items:
+            description: Member type eligible for the group dental plan
+            enum:
+            - all
+            - employee
+            - child
+            - spouse
+            - domestic-partner
+            - employee-with-dependents
+            type: string
+          minItems: 1
+          type: array
+        group_enrollment_id:
+          description: Unique identifier of the associated group enrollment in the Noyo system
+          format: uuid
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        line_of_coverage:
+          description: Line of coverage for the group dental plan
+          readOnly: true
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        name:
+          description: Name of the group dental plan
+          example: Smile Plus 1000
+          type: string
+        network:
+          description: Network name of the plan designated by the carrier
+          example: Dental Select
+          type: string
+        plan_configuration:
+          description: Group plan configuration details
+          readOnly: true
+          type: object
+        plan_type:
+          description: Type of group dental plan
+          enum:
+          - ppo
+          - pos
+          - dhmo
+          - epo
+          - aso
+          - indemnity
+          type: string
+        status:
+          description: Status of the group dental plan
+          enum:
+          - pending
+          - active
+          - discontinued
+          type: string
+        termination_policy:
+          description: Termination policy for the group dental plan
+          enum:
+          - end_of_month
+          - last_work_date
+          - fifteenth_of_month
+          - first_of_following_month
+          - end_of_plan_year
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+        voluntary:
+          description: True if the group dental plan is a voluntary plan
+          type: boolean
+        waiting_periods:
+          description: Member waiting period details for the group dental plan
+          items:
+            description: Member waiting period details for the group dental plan
+            type: object
+          type: array
+      required:
+      - carrier_id
+      - cobra_rules
+      - created
+      - eligible_member_types
+      - group_enrollment_id
+      - id
+      - line_of_coverage
+      - modified
+      - name
+      - plan_configuration
+      - status
+      - termination_policy
+      - version
+      - waiting_periods
+      type: object
+      x-field_order:
+      - id
+      - version
+      - group_enrollment_id
+      - carrier_id
+      - line_of_coverage
+      - name
+      - code
+      - effective_start_date
+      - effective_end_date
+      - plan_type
+      - network
+      - voluntary
+      - status
+      - eligible_member_types
+      - waiting_periods
+      - termination_policy
+      - cobra_rules
+      - benefits
+      - created
+      - modified

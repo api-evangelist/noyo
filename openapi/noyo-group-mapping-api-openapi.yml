@@ -1,0 +1,616 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Group Mapping API
+  version: 1.0.0
+servers: []
+tags:
+- name: Group Mapping
+paths:
+  /api/v1/group_mappings/{group_mapping_id}/{version}:
+    put:
+      description: Edit a group mapping based on the ID provided. The version parameter must match the latest group mapping version.
+      operationId: editGroupMapping
+      parameters:
+      - description: The unique identifier of the group mapping you would like to edit
+        in: path
+        name: group_mapping_id
+        required: true
+        schema:
+          example: dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1
+          format: uuid
+          type: string
+      - description: The unique version of the group mapping you would like to edit
+        in: path
+        name: version
+        required: true
+        schema:
+          example: 1640fb11-bd95-4d08-aa5e-21a42fc4f954
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              success:
+                value:
+                  effective_start_date: '2021-01-01'
+                  status: ready
+            schema:
+              $ref: '#/components/schemas/GroupMappingEditRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                carrier_id: 4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1
+                effective_end_date: '2999-12-31'
+                effective_start_date: '2021-01-01'
+                group_id: d61fa455-adf4-4dc4-8c57-6d779ba9475e
+                id: dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1
+                status: ready
+                version: 1640fb11-bd95-4d08-aa5e-21a42fc4f954
+              schema:
+                $ref: '#/components/schemas/GroupMappingResult'
+          description: Successful Response - Returns the modified Group Mapping
+      summary: Edit an existing Group Mapping
+      tags:
+      - Group Mapping
+  /api/v1/groups/{group_id}/group_mappings:
+    x-summary: Group Mappings for Group
+    get:
+      description: Returns the group mappings based on the Group ID provided.
+      operationId: getGroupMappingsForGroup
+      parameters:
+      - description: The unique identifier of the group you would like to get group mappings for
+        in: path
+        name: group_id
+        required: true
+        schema:
+          example: 30b74a44-d5b1-4123-a7a4-6d3aec251ba4
+          format: uuid
+          type: string
+      - description: The unique identifier of the carrier you would like to filter
+        in: query
+        name: carrier_id
+        schema:
+          example: 4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1
+          format: uuid
+          type: string
+      - description: The statuses you would like to filter
+        in: query
+        name: status
+        schema:
+          example: ready
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                meta:
+                  offset: 0
+                  page_num: 1
+                  page_size: 20
+                  total_records: 2
+                response:
+                - carrier_id: 4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1
+                  effective_end_date: '2999-12-31'
+                  effective_start_date: '2021-01-01'
+                  group_id: d61fa455-adf4-4dc4-8c57-6d779ba9475e
+                  id: dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1
+                  status: ready
+                  version: 65b729f8-de9a-4c9b-bed9-2df020dbbfa4
+                - carrier_id: 8fac0992-933a-4743-8dab-0d606ef2569e
+                  effective_end_date: '2999-12-31'
+                  effective_start_date: '2023-01-01'
+                  group_id: f833ac4b-36aa-46f4-826c-0badcfe27922
+                  id: 787074b2-fd0f-4f52-b811-4573fbfb1dcf
+                  status: in_progress
+                  version: 5200a894-81c5-4c41-8519-86c32e9a9965
+              schema:
+                $ref: '#/components/schemas/PaginatedGroupMappingResult'
+          description: Successful Response - Returns Group Mappings
+      summary: Get Group Mappings for a Group
+      tags:
+      - Group Mapping
+    post:
+      description: Create a new Group Mapping
+      operationId: createNewGroupMapping
+      parameters:
+      - description: The unique identifier of the group you would like to create the group mapping for
+        in: path
+        name: group_id
+        required: true
+        schema:
+          example: d61fa455-adf4-4dc4-8c57-6d779ba9475e
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              success:
+                value:
+                  carrier_id: 8fac0992-933a-4743-8dab-0d606ef2569e
+                  effective_start_date: '2021-01-01'
+            schema:
+              $ref: '#/components/schemas/GroupMappingCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              example:
+                carrier_id: 8fac0992-933a-4743-8dab-0d606ef2569e
+                effective_end_date: '2999-12-31'
+                effective_start_date: '2021-01-01'
+                group_id: f833ac4b-36aa-46f4-826c-0badcfe27922
+                id: dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1
+                status: in_progress
+                version: 5200a894-81c5-4c41-8519-86c32e9a9965
+              schema:
+                $ref: '#/components/schemas/GroupMappingResult'
+          description: Successful Response - Returns the new Group Mapping
+      summary: Create a new Group Mapping
+      tags:
+      - Group Mapping
+  /ui/v1/group_mappings/{group_mapping_id}/rules:
+    get:
+      description: Returns a list of all rules and conditions for a specific group mapping
+      operationId: uiGetGroupMappingRules
+      parameters:
+      - description: The unique identifier of the group mapping for which you would like to view rules and conditions
+        in: path
+        name: group_mapping_id
+        required: true
+        schema:
+          example: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+          format: uuid
+          type: string
+      - description: The max size of each page of results
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+      - description: The integer offset at which to start the page. Possible values are 0 to total_records - 1
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                meta:
+                  offset: 0
+                  page_num: 1
+                  page_size: 20
+                  total_records: 2
+                response:
+                - conditions:
+                  - details:
+                      left_operand: JobTitle
+                      operator: is
+                      right_operand: CEO
+                    id: 7499ea07-76c9-40f2-992b-952259e98384
+                    rule_id: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+                    version: c2292b67-0382-45e9-a378-b52c4129f672
+                  rule:
+                    active: 'true'
+                    created: 1554177876
+                    group_mapping_id: d61fa455-adf4-4dc4-8c57-6d779ba9475e
+                    id: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+                    joining_operator: AND
+                    modified: 1554177876
+                    name: Rule One
+                    rank: 1
+                    resulting_field_name: bill_groups.bill_group_key
+                    resulting_field_value: 1100
+                    rule_type: normal
+                    version: 6b72d72d-cc99-4df6-8152-7183e824c80c
+                - conditions:
+                  - details:
+                      left_operand: JobTitle
+                      operator: is
+                      right_operand: Marketing Manager
+                    id: 78da694c-e27c-11eb-ba80-0242ac130004
+                    rule_id: 6a3abd60-e27c-11eb-ba80-0242ac130004
+                    version: 8a70d182-e27c-11eb-ba80-0242ac130004
+                  rule:
+                    active: 'true'
+                    created: 1554177876
+                    group_mapping_id: d61fa455-adf4-4dc4-8c57-6d779ba9475e
+                    id: 6a3abd60-e27c-11eb-ba80-0242ac130004
+                    joining_operator: AND
+                    modified: 1554177876
+                    name: Rule Two
+                    rank: 1
+                    resulting_field_name: bill_groups.bill_group_key
+                    resulting_field_value: 1100
+                    rule_type: normal
+                    version: '8f96dcec-e27c-11eb-ba80-0242ac130004 '
+              schema:
+                $ref: '#/components/schemas/PaginatedUIGroupMappingRulesResult'
+          description: Successful Response - Returns all rules and conditions
+      summary: Get a list of all rules and their respective conditions for a specific group mapping
+      tags:
+      - Group Mapping
+  /ui/v1/group_mappings/{group_mapping_id}/validate:
+    put:
+      description: Validate a group mapping based on the ID provided.
+      operationId: validateGroupMapping
+      parameters:
+      - in: path
+        name: group_mapping_id
+        required: true
+        schema:
+          example: dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: Successful Response - Group Mapping was validated without errors
+      summary: Validate a Group Mapping
+      tags:
+      - Group Mapping
+components:
+  schemas:
+    RuleResult:
+      properties:
+        active:
+          description: Boolean that dictates if the rule is active or not
+          readOnly: true
+          type: boolean
+        created:
+          description: The date the record was created
+          type: integer
+        group_mapping_id:
+          description: Unique identifier of the rule we are creating condition for
+          format: uuid
+          readOnly: true
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        joining_operator:
+          description: Operator that will join the rule's conditions
+          enum:
+          - AND
+          - OR
+          nullable: true
+          readOnly: true
+          type: string
+        mapping_type:
+          description: Describes the type of mapping this rule falls under
+          enum:
+          - account_structure
+          - plan
+          readOnly: true
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        name:
+          description: descriptive name of the rule
+          readOnly: true
+          type: string
+        rank:
+          description: Rank of the rule versus other rules
+          nullable: true
+          readOnly: true
+          type: number
+        resulting_field_name:
+          description: Name of the field this rule will result in
+          nullable: true
+          readOnly: true
+          type: string
+        resulting_field_value:
+          description: Value of the resulting_field_name this rule will result in
+          nullable: true
+          readOnly: true
+          type: string
+        rule_type:
+          description: Type of rule
+          enum:
+          - normal
+          - default
+          readOnly: true
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - active
+      - created
+      - group_mapping_id
+      - id
+      - joining_operator
+      - modified
+      - name
+      - rank
+      - resulting_field_name
+      - resulting_field_value
+      - rule_type
+      - version
+      type: object
+      x-field_order:
+      - id
+      - version
+      - created
+      - modified
+      - group_mapping_id
+      - active
+      - name
+      - mapping_type
+      - rule_type
+      - joining_operator
+      - resulting_field_name
+      - resulting_field_value
+      - rank
+    UIGroupMappingRulesConditionsResult:
+      properties:
+        conditions:
+          items:
+            allOf:
+            - $ref: '#/components/schemas/ConditionResult'
+            description: List of all conditions for the group mapping
+          type: array
+        rule:
+          $ref: '#/components/schemas/RuleResult'
+      required:
+      - conditions
+      - rule
+      type: object
+    GroupMappingResult:
+      properties:
+        carrier_id:
+          description: Unique identifier of the carrier in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        created:
+          description: The date the record was created
+          type: integer
+        effective_end_date:
+          description: ISO-8601 date string for the effective end date of the record
+          example: '2018-12-31'
+          format: date
+          nullable: true
+          type: string
+        effective_start_date:
+          description: ISO-8601 date string for the effective start date of the record
+          example: '2018-01-01'
+          format: date
+          nullable: true
+          type: string
+        group_id:
+          description: Unique identifier of the group at Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        status:
+          description: Status of the group mapping
+          readOnly: true
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - carrier_id
+      - created
+      - group_id
+      - id
+      - modified
+      - status
+      - version
+      type: object
+      x-field_order:
+      - id
+      - version
+      - created
+      - modified
+      - group_id
+      - carrier_id
+      - status
+      - effective_start_date
+      - effective_end_date
+    ConditionResult:
+      properties:
+        created:
+          description: The date the record was created
+          type: integer
+        details:
+          allOf:
+          - $ref: '#/components/schemas/ConditionDetails'
+          description: Details of the condition
+          readOnly: true
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        rule_id:
+          description: Unique identifier of the rule we are creating condition for
+          format: uuid
+          readOnly: true
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - created
+      - details
+      - id
+      - modified
+      - rule_id
+      - version
+      type: object
+      x-field_order:
+      - id
+      - version
+      - created
+      - modified
+      - rule_id
+      - details
+    GroupMappingEditRequest:
+      properties:
+        effective_end_date:
+          description: ISO-8601 date string for the effective end date of the record
+          example: '2018-12-31'
+          format: date
+          nullable: true
+          type: string
+        effective_start_date:
+          description: ISO-8601 date string for the effective start date of the record
+          example: '2018-01-01'
+          format: date
+          nullable: true
+          type: string
+        status:
+          description: Status of the group mapping
+          enum:
+          - in_progress
+          - ready
+          example: in_progress
+          type: string
+      type: object
+      x-field_order:
+      - status
+      - effective_start_date
+      - effective_end_date
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+    PaginatedGroupMappingResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of group mappings
+          items:
+            $ref: '#/components/schemas/GroupMappingResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    GroupMappingCreateRequest:
+      properties:
+        carrier_id:
+          description: Unique identifier of the carrier in Noyo
+          format: uuid
+          type: string
+        effective_end_date:
+          description: ISO-8601 date string for the effective end date of the record
+          example: '2018-12-31'
+          format: date
+          nullable: true
+          type: string
+        effective_start_date:
+          description: ISO-8601 date string for the effective start date of the record
+          example: '2018-01-01'
+          format: date
+          nullable: true
+          type: string
+      required:
+      - carrier_id
+      type: object
+      x-field_order:
+      - carrier_id
+      - effective_start_date
+      - effective_end_date
+    ConditionDetails:
+      properties:
+        left_operand:
+          description: Field name that is being evaluated
+          type: string
+        operator:
+          description: Operation we are evaluating between the left and right operands
+          enum:
+          - is
+          - is_not
+          - is_one_of
+          - is_at_least_one_of
+          - is_not_one_of
+          - greater_than
+          - less_than
+          - begins_with
+          - ends_with
+          - between
+          - contains
+          nullable: true
+          type: string
+        right_operand:
+          description: The resulting value of the conditional
+          nullable: true
+          type: string
+      type: object
+    PaginatedUIGroupMappingRulesResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of rules and conditions for a group mapping
+          items:
+            $ref: '#/components/schemas/UIGroupMappingRulesConditionsResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response

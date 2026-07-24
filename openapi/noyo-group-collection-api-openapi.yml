@@ -1,0 +1,150 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Group Collection API
+  version: 1.0.0
+servers: []
+tags:
+- name: Group Collection
+paths:
+  /api/v1/group_collections:
+    get:
+      description: Get all relevant group collections
+      operationId: getGroupCollection
+      parameters:
+      - description: The max size of each page of results
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+      - description: The integer offset at which to start the page. Possible values are 0 to total_records - 1
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: The unique identifier of the group in Noyo system.
+        in: query
+        name: group_id
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                meta:
+                  offset: 0
+                  page_num: 1
+                  page_size: 20
+                  total_records: 1
+                response:
+                - created: 1675199964
+                  group_collection_members:
+                  - 0dac0992-933a-4743-8dab-0d606ef2566h
+                  id: 0620e171-5dcc-4f2b-9143-6c96a5ee9925
+                  modified: 1675199964
+                  summary: Collection 1 summary
+                  title: Group Collection 1
+                  version: f5133f0a-30ae-443a-80f0-9975abec3213
+              schema:
+                $ref: '#/components/schemas/PaginatedGroupCollectionResult'
+          description: Successful Response - Returns Group Collections
+      summary: Get a list of all Group Collections
+      tags:
+      - Group Collection
+components:
+  schemas:
+    PaginatedGroupCollectionResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of Group Collection results
+          items:
+            $ref: '#/components/schemas/GroupCollectionResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    GroupCollectionResult:
+      properties:
+        created:
+          description: The date the record was created
+          type: integer
+        group_collection_members:
+          description: List of Group Collection results
+          items:
+            $ref: '#/components/schemas/GroupCollectionMemberResult'
+          type: array
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        summary:
+          type: string
+        title:
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - created
+      - group_collection_members
+      - id
+      - modified
+      - title
+      - version
+      type: object
+      x-field_order: []
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+    GroupCollectionMemberResult:
+      properties:
+        group_id:
+          format: uuid
+          type: string
+      required:
+      - group_id
+      type: object

@@ -1,0 +1,582 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Lookup API
+  version: 1.0.0
+servers: []
+tags:
+- name: Lookup
+paths:
+  /api/v1/lookup_instances:
+    get:
+      description: Returns a list of Lookup Instances.
+      operationId: getLookupInstancesList
+      parameters:
+      - description: The max size of each page of results
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+      - description: The integer offset at which to start the page. Possible values are 0 to total_records - 1
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Noyo specific organization UUID to filter
+        in: query
+        name: organization_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+      - description: Noyo specific Carrier UUID to filter
+        in: query
+        name: carrier_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+      - description: Noyo specific Group UUID to filter
+        in: query
+        name: group_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+      - description: Noyo specific Lookup UUID to filter
+        in: query
+        name: lookup_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedLookupInstanceResult'
+          description: Successful Response - Returns a list of all matching Lookup Instances
+      summary: Retrieves a list of Lookup Instances
+      tags:
+      - Lookup
+    post:
+      description: Create a new Lookup Instance
+      operationId: createLookupInstance
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LookupInstanceCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LookupResult'
+          description: Successful Response - Returns the contents of the newly created Lookup Instance
+      summary: Create a Lookup Instance
+      tags:
+      - Lookup
+  /api/v1/lookup_instances/{lookup_instance_id}:
+    get:
+      description: Returns the latest version of a single Lookup Instance based on the ID provided.
+      operationId: getLookupInstance
+      parameters:
+      - description: The unique identifier of the Lookup Instance you would like to view
+        in: path
+        name: lookup_instance_id
+        required: true
+        schema:
+          example: 491cfdee-a38f-4bb1-8cb4-4017c87dff2b
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LookupInstanceResult'
+          description: Successful Response - Returns a single Lookup Instance
+      summary: Get a single Lookup Instance
+      tags:
+      - Lookup
+  /api/v1/lookup_instances/{lookup_instance_id}/{version}:
+    delete:
+      description: Delete a Lookup Instance based on the ID provided. The version parameter must match the latest Lookup Instance version.
+      operationId: deleteLookupInstance
+      parameters:
+      - description: Unique identifier of the Lookup Instance you want to delete.
+        in: path
+        name: lookup_instance_id
+        required: true
+        schema:
+          example: c6db3cb5-e60d-4540-81b8-9487e148b7ad
+          format: uuid
+          type: string
+      - description: Unique version of the Lookup Instance you want to delete.
+        in: path
+        name: version
+        required: true
+        schema:
+          example: edcf866c-cab1-4fe6-b8dc-ccd8c4c09128
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: Successful Response - Lookup Instance was deleted successfully
+      summary: Delete a Lookup Instance
+      tags:
+      - Lookup
+    put:
+      description: Update a Lookup Instance based on the ID provided. The version parameter must match the latest Lookup Instance version.
+      operationId: updateLookupInstance
+      parameters:
+      - description: Unique identifier of the Lookup Instance you want to edit.
+        in: path
+        name: lookup_instance_id
+        required: true
+        schema:
+          example: c6db3cb5-e60d-4540-81b8-9487e148b7ad
+          format: uuid
+          type: string
+      - description: Unique version of the Lookup Instance you want to edit.
+        in: path
+        name: version
+        required: true
+        schema:
+          example: edcf866c-cab1-4fe6-b8dc-ccd8c4c09128
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LookupInstanceUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LookupInstanceResult'
+          description: Successful Response - Returns the modified Lookup Instance
+      summary: Update a Lookup Instance
+      tags:
+      - Lookup
+  /api/v1/lookups:
+    get:
+      description: Returns a list of Lookups.
+      operationId: getLookupsList
+      parameters:
+      - description: The max size of each page of results
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+      - description: The integer offset at which to start the page. Possible values are 0 to total_records - 1
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Noyo specific organization UUID to filter Lookup
+        in: query
+        name: organization_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+      - description: Lookup type to filter by
+        in: query
+        name: lookup_type
+        required: false
+        schema:
+          example: match
+          type: string
+      - description: Filter Lookups by the boolean value
+        in: query
+        name: supports_plan_year
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedLookupResult'
+          description: Successful Response - Returns a list of all matching Lookups
+      summary: Retrieves a list of Lookups.
+      tags:
+      - Lookup
+    post:
+      description: Create a new Lookup.
+      operationId: createLookup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LookupCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LookupResult'
+          description: Successful Response - Returns the contents of the newly created Lookup
+      summary: Create a Lookup
+      tags:
+      - Lookup
+  /api/v1/lookups/{lookup_id}:
+    get:
+      description: Returns the latest version of a single Lookup based on the ID provided.
+      operationId: getLookup
+      parameters:
+      - description: The unique identifier of the Lookup you would like to view
+        in: path
+        name: lookup_id
+        required: true
+        schema:
+          example: 491cfdee-a38f-4bb1-8cb4-4017c87dff2b
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LookupResult'
+          description: Successful Response - Returns a single Lookup
+      summary: Get a single Lookup
+      tags:
+      - Lookup
+  /api/v1/lookups/{lookup_id}/{version}:
+    delete:
+      description: Delete a Lookup based on the ID provided. The version parameter must match the latest Lookup version.
+      operationId: deleteLookup
+      parameters:
+      - description: Unique identifier of the Lookup you want to delete.
+        in: path
+        name: lookup_id
+        required: true
+        schema:
+          example: c6db3cb5-e60d-4540-81b8-9487e148b7ad
+          format: uuid
+          type: string
+      - description: Unique version of the Lookup you want to delete.
+        in: path
+        name: version
+        required: true
+        schema:
+          example: edcf866c-cab1-4fe6-b8dc-ccd8c4c09128
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: Successful Response - Lookup was deleted successfully
+      summary: Delete a Lookup
+      tags:
+      - Lookup
+    put:
+      description: Update a Lookup based on the ID provided. The version parameter must match the latest Lookup version.
+      operationId: updateLookup
+      parameters:
+      - description: Unique identifier of the Lookup you want to edit.
+        in: path
+        name: lookup_id
+        required: true
+        schema:
+          example: c6db3cb5-e60d-4540-81b8-9487e148b7ad
+          format: uuid
+          type: string
+      - description: Unique version of the Lookup you want to edit.
+        in: path
+        name: version
+        required: true
+        schema:
+          example: edcf866c-cab1-4fe6-b8dc-ccd8c4c09128
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LookupUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LookupResult'
+          description: Successful Response - Returns the modified Lookup
+      summary: Update a Lookup
+      tags:
+      - Lookup
+components:
+  schemas:
+    LookupInstanceUpdateRequest:
+      properties:
+        data:
+          items:
+            items:
+              type: string
+            minItems: 2
+            type: array
+          type: array
+        default_value:
+          nullable: true
+          type: string
+        plan_year_start:
+          items:
+            format: date
+            type: string
+          type: array
+      type: object
+      x-field_order: []
+    PaginatedLookupResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of Lookup results
+          items:
+            $ref: '#/components/schemas/LookupResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    LookupUpdateRequest:
+      properties:
+        columns:
+          items:
+            description: Name of all columns
+            type: string
+          minItems: 2
+          type: array
+        name:
+          type: string
+        use_first_available_instance:
+          type: boolean
+      type: object
+      x-field_order: []
+    LookupCreateRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/LookupData'
+        name:
+          type: string
+        organization_id:
+          format: uuid
+          type: string
+      required:
+      - data
+      - name
+      type: object
+      x-field_order: []
+    LookupResult:
+      properties:
+        created:
+          description: The date the record was created
+          type: integer
+        data:
+          $ref: '#/components/schemas/LookupData'
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        name:
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - created
+      - data
+      - id
+      - modified
+      - name
+      - organization_id
+      - version
+      type: object
+      x-field_order: []
+    LookupInstanceResult:
+      properties:
+        carrier_id:
+          format: uuid
+          type: string
+        created:
+          description: The date the record was created
+          type: integer
+        data:
+          items:
+            items:
+              type: string
+            type: array
+          type: array
+        default_value:
+          type: string
+        group_id:
+          format: uuid
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        lookup_id:
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        organization_id:
+          format: uuid
+          type: string
+        plan_year_start:
+          items:
+            format: date
+            type: string
+          type: array
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - created
+      - data
+      - id
+      - lookup_id
+      - modified
+      - organization_id
+      - version
+      type: object
+      x-field_order: []
+    LookupColumn:
+      properties:
+        name:
+          type: string
+        type:
+          enum:
+          - boolean
+          - number
+          - string
+          type: string
+      required:
+      - name
+      - type
+      type: object
+    PaginatedLookupInstanceResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of Lookup Instance results
+          items:
+            $ref: '#/components/schemas/LookupInstanceResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+    LookupInstanceCreateRequest:
+      properties:
+        carrier_id:
+          format: uuid
+          type: string
+        data:
+          items:
+            items:
+              type: string
+            minItems: 2
+            type: array
+          type: array
+        default_value:
+          type: string
+        group_id:
+          format: uuid
+          type: string
+        lookup_id:
+          format: uuid
+          type: string
+        plan_year_start:
+          items:
+            format: date
+            type: string
+          type: array
+      required:
+      - data
+      - lookup_id
+      type: object
+      x-field_order: []
+    LookupData:
+      properties:
+        columns:
+          items:
+            $ref: '#/components/schemas/LookupColumn'
+          type: array
+        lookup_type:
+          enum:
+          - match
+          - range
+          type: string
+        supports_plan_year:
+          type: boolean
+        use_first_available_instance:
+          type: boolean
+      required:
+      - columns
+      - lookup_type
+      - supports_plan_year
+      type: object

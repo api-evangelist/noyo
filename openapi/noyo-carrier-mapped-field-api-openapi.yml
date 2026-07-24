@@ -1,0 +1,169 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field API
+  version: 1.0.0
+servers: []
+tags:
+- name: Carrier Mapped Field
+paths:
+  /api/v1/carriers/{carrier_id}/mapped_fields:
+    x-summary: Carrier Mapped Fields for Carrier
+    get:
+      description: Returns a list of carrier mapped fields based on the Carrier ID provided.
+      operationId: getCarrierMappedFieldsForCarrier
+      parameters:
+      - description: The unique identifier of the rule you would like to get carrier mapped fields for
+        in: path
+        name: carrier_id
+        required: true
+        schema:
+          example: 2d370e0e-fd73-45e0-8828-796d2cacaeef
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                meta:
+                  offset: 0
+                  page_num: 1
+                  page_size: 20
+                  total_records: 2
+                response:
+                - carrier_id: 2d370e0e-fd73-45e0-8828-796d2cacaeef
+                  created: 1596838219
+                  id: 79020524-c77d-4b13-b96f-88b3e26eb54d
+                  label: bill group
+                  mapped_field: bill_group_number
+                  mapping_type: account_structure
+                  modified: 1596838219
+                  object_name: bill_groups
+                  version: ac5e9ad8-ce8a-4d3b-b7fa-830a67aef4ea
+                - carrier_id: 2d370e0e-fd73-45e0-8828-796d2cacaeef
+                  created: 1596838219
+                  id: dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1
+                  label: member group
+                  mapped_field: member_group_key
+                  mapping_type: account_structure
+                  modified: 1596838219
+                  object_name: member_groups
+                  version: 5200a894-81c5-4c41-8519-86c32e9a9965
+              schema:
+                $ref: '#/components/schemas/PaginatedCarrierMappedFieldsResult'
+          description: Successful Response - Returns Carrier Mapped Fields
+      summary: Get Mapped Fields for a Carrier
+      tags:
+      - Carrier Mapped Field
+components:
+  schemas:
+    PaginatedCarrierMappedFieldsResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of carrier mapped fields
+          items:
+            $ref: '#/components/schemas/CarrierMappedFieldResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+    CarrierMappedFieldResult:
+      properties:
+        carrier_id:
+          description: Unique identifier of the carrier we are creating mapped field for
+          format: uuid
+          readOnly: true
+          type: string
+        created:
+          description: The date the record was created
+          type: integer
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        label:
+          description: User friendly label for the mapped field name
+          nullable: true
+          readOnly: true
+          type: string
+        mapped_field:
+          description: Field name that is being mapped to within the object
+          readOnly: true
+          type: string
+        mapping_type:
+          description: Describes the type of mapping this carrier mapped field falls under
+          enum:
+          - account_structure
+          - plan
+          readOnly: true
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        object_name:
+          description: Name of group carrier configuration object
+          readOnly: true
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - carrier_id
+      - created
+      - id
+      - mapped_field
+      - modified
+      - object_name
+      - version
+      type: object
+      x-field_order:
+      - id
+      - version
+      - created
+      - modified
+      - carrier_id
+      - object_name
+      - mapped_field
+      - mapping_type
+      - label

@@ -1,0 +1,199 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Protected Groups API
+  version: 1.0.0
+servers: []
+tags:
+- name: Protected Groups
+paths:
+  /ui/v1/protected_groups:
+    get:
+      description: 'Returns active protected groups. Supplying group_id performs a scoped single-group lookup for any authorized UI user. Omitting group_id lists all active protected groups and is only available to internal Noyo users.
+
+        '
+      operationId: uiGetProtectedGroups
+      parameters:
+      - description: Group ID to look up protected state for
+        in: query
+        name: group_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+      - description: Search term for filtering protected groups by group name, DBA name, or group ID
+        in: query
+        name: name
+        required: false
+        schema:
+          type: string
+      - description: Organization ID to filter protected groups by
+        in: query
+        name: organization_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+      - description: The max size of each page of results
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+      - description: The integer offset at which to start the page
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedUIProtectedGroupResult'
+          description: Successful Response - Returns active protected groups
+        '403':
+          description: Forbidden - full protected group listing is internal only
+      summary: Get protected groups
+      tags:
+      - Protected Groups
+components:
+  schemas:
+    GroupResultWithCustomIdentifiers:
+      properties:
+        created:
+          description: The date the record was created
+          type: integer
+        dba_name:
+          description: DBA name for the company, if applicable
+          example: Floors R Us
+          type: string
+        federal_ein:
+          description: Federal Employer Identification Number for the company
+          example: '112222222'
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        name:
+          description: Name of the group
+          example: ACME Flooring
+          type: string
+        organization_id:
+          description: Unique identifier of the platform or broker organization in Noyo
+          format: uuid
+          type: string
+        sic_code:
+          description: SIC Code of the group
+          example: '5713'
+          type: string
+        source_group_id:
+          description: ID of the associated source group if this group is a test group
+          format: uuid
+          type: string
+        test_group_id:
+          description: ID of the test group associated with this group
+          format: uuid
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - created
+      - id
+      - modified
+      - name
+      - version
+      type: object
+    PaginatedUIProtectedGroupResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of protected group results
+          items:
+            $ref: '#/components/schemas/UIProtectedGroupResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+    UIProtectedGroupResult:
+      properties:
+        carrier_ids:
+          description: Carrier IDs associated with the protected group
+          items:
+            format: uuid
+            type: string
+          readOnly: true
+          type: array
+        created:
+          description: The date the record was created
+          type: integer
+        group:
+          allOf:
+          - $ref: '#/components/schemas/GroupResultWithCustomIdentifiers'
+          description: Core group details for the protected group
+          readOnly: true
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - carrier_ids
+      - created
+      - group
+      - id
+      - modified
+      - version
+      type: object
+      x-field_order: []

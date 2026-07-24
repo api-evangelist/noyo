@@ -1,0 +1,313 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Condition API
+  version: 1.0.0
+servers: []
+tags:
+- name: Condition
+paths:
+  /api/v1/conditions:
+    post:
+      description: Create a new Condition
+      operationId: createNewCondition
+      requestBody:
+        content:
+          application/json:
+            examples:
+              success:
+                value:
+                  details:
+                    left_operand: JobTitle
+                    operator: is
+                    right_operand: CEO
+                  rule_id: f833ac4b-36aa-46f4-826c-0badcfe27922
+            schema:
+              $ref: '#/components/schemas/ConditionCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              example:
+                details:
+                  left_operand: JobTitle
+                  operator: is
+                  right_operand: CEO
+                id: dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1
+                rule_id: f833ac4b-36aa-46f4-826c-0badcfe27922
+                version: 5200a894-81c5-4c41-8519-86c32e9a9965
+              schema:
+                $ref: '#/components/schemas/ConditionResult'
+          description: Successful Response - Returns the new Condition
+      summary: Create a new Condition
+      tags:
+      - Condition
+  /api/v1/conditions/{condition_id}/{version}:
+    delete:
+      description: Delete a condition based on the ID provided. The version parameter must match the latest condition version.
+      operationId: deleteCondition
+      parameters:
+      - description: Unique identifier of the condition you want to delete.
+        in: path
+        name: condition_id
+        required: true
+        schema:
+          example: f82d8c3a-111e-4537-b8f1-8df816c12e22
+          format: uuid
+          type: string
+      - description: Unique version of the condition you want to delete.
+        in: path
+        name: version
+        required: true
+        schema:
+          example: d012e6ac-05dd-4cbe-8666-940af78c9e56
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: Successful Response - Condition was deleted successfully
+      summary: Delete a Condition
+      tags:
+      - Condition
+    put:
+      description: Edit a condition based on the ID provided. The version parameter must match the latest condition version.
+      operationId: editCondition
+      parameters:
+      - description: Unique identifier of the condition you want to edit.
+        in: path
+        name: condition_id
+        required: true
+        schema:
+          example: f82d8c3a-111e-4537-b8f1-8df816c12e22
+          format: uuid
+          type: string
+      - description: Unique version of the condition you want to edit.
+        in: path
+        name: version
+        required: true
+        schema:
+          example: d012e6ac-05dd-4cbe-8666-940af78c9e56
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              success:
+                value:
+                  details:
+                    left_operand: JobTitle
+                    operator: is
+                    right_operand: CEO
+            schema:
+              $ref: '#/components/schemas/ConditionEditRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                details:
+                  left_operand: JobTitle
+                  operator: is
+                  right_operand: CEO
+                id: f82d8c3a-111e-4537-b8f1-8df816c12e22
+                rule_id: f833ac4b-36aa-46f4-826c-0badcfe27922
+                version: d012e6ac-05dd-4cbe-8666-940af78c9e56
+              schema:
+                $ref: '#/components/schemas/ConditionResult'
+          description: Successful Response - Returns the modified Condition
+      summary: Edit a Condition
+      tags:
+      - Condition
+  /api/v1/rules/{rule_id}/conditions:
+    x-summary: Conditions for Rule
+    get:
+      description: Returns a list of conditions based on the Rule ID provided.
+      operationId: getConditionsForRule
+      parameters:
+      - description: The unique identifier of the rule you would like to get conditions for
+        in: path
+        name: rule_id
+        required: true
+        schema:
+          example: 30b74a44-d5b1-4123-a7a4-6d3aec251ba4
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                meta:
+                  offset: 0
+                  page_num: 1
+                  page_size: 20
+                  total_records: 2
+                response:
+                - details:
+                    left_operand: JobTitle
+                    operator: is
+                    right_operand: CEO
+                  id: dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1
+                  rule_id: d61fa455-adf4-4dc4-8c57-6d779ba9475e
+                  version: 65b729f8-de9a-4c9b-bed9-2df020dbbfa4
+                - details:
+                    left_operand: Location
+                    operator: is
+                    right_operand: HQ
+                  id: 787074b2-fd0f-4f52-b811-4573fbfb1dcf
+                  rule_id: f833ac4b-36aa-46f4-826c-0badcfe27922
+                  version: 5200a894-81c5-4c41-8519-86c32e9a9965
+              schema:
+                $ref: '#/components/schemas/PaginatedConditionResult'
+          description: Successful Response - Returns Conditions
+      summary: Get Conditions for a Rule
+      tags:
+      - Condition
+components:
+  schemas:
+    ConditionCreateRequest:
+      properties:
+        details:
+          allOf:
+          - $ref: '#/components/schemas/ConditionDetails'
+          description: Details of the condition
+        rule_id:
+          description: Unique identifier of the rule we are creating a condition for
+          format: uuid
+          type: string
+      required:
+      - details
+      - rule_id
+      type: object
+      x-field_order:
+      - rule_id
+      - details
+    PaginatedConditionResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of conditions
+          items:
+            $ref: '#/components/schemas/ConditionResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    ConditionResult:
+      properties:
+        created:
+          description: The date the record was created
+          type: integer
+        details:
+          allOf:
+          - $ref: '#/components/schemas/ConditionDetails'
+          description: Details of the condition
+          readOnly: true
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        rule_id:
+          description: Unique identifier of the rule we are creating condition for
+          format: uuid
+          readOnly: true
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - created
+      - details
+      - id
+      - modified
+      - rule_id
+      - version
+      type: object
+      x-field_order:
+      - id
+      - version
+      - created
+      - modified
+      - rule_id
+      - details
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+    ConditionEditRequest:
+      properties:
+        details:
+          allOf:
+          - $ref: '#/components/schemas/ConditionDetails'
+          description: Details of the condition
+      required:
+      - details
+      type: object
+      x-field_order: []
+    ConditionDetails:
+      properties:
+        left_operand:
+          description: Field name that is being evaluated
+          type: string
+        operator:
+          description: Operation we are evaluating between the left and right operands
+          enum:
+          - is
+          - is_not
+          - is_one_of
+          - is_at_least_one_of
+          - is_not_one_of
+          - greater_than
+          - less_than
+          - begins_with
+          - ends_with
+          - between
+          - contains
+          nullable: true
+          type: string
+        right_operand:
+          description: The resulting value of the conditional
+          nullable: true
+          type: string
+      type: object

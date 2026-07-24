@@ -1,0 +1,514 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Rule Set API
+  version: 1.0.0
+servers: []
+tags:
+- name: Rule Set
+paths:
+  /api/v1/rule_set_traces:
+    get:
+      description: Returns a list of Rule Set Traces.
+      operationId: getRuleSetTraces
+      parameters:
+      - description: The max size of each page of results
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+      - description: The integer offset at which to start the page. Possible values are 0 to total_records - 1
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Comma separated UUIDs of rule sets to filter Rule Set Traces
+        in: query
+        name: rule_set_ids
+        required: false
+        schema:
+          format: uuid
+          type: string
+      - description: Noyo specific group UUID to filter Rule Set Traces
+        in: query
+        name: group_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+      - description: Noyo specific employee UUID to filter Rule Set Traces
+        in: query
+        name: employee_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+      - description: Noyo specific member snapshot UUID to filter Rule Set Traces
+        in: query
+        name: member_snapshot_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+      - description: Whether to include the trace in the response
+        in: query
+        name: include_trace
+        required: false
+        schema:
+          example: true
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedRuleSetTracesResult'
+          description: Successful Response - Returns a list of all matching Rule Set Traces
+      summary: Retrieves a list of Rule Set Traces.
+      tags:
+      - Rule Set
+  /api/v1/rule_set_traces/{id}:
+    get:
+      description: Returns a single Rule Set Trace based on the ID provided.
+      operationId: getRuleSetTrace
+      parameters:
+      - description: The unique identifier of the rule set trace you would like to view
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 30b74a44-d5b1-4123-a7a4-6d3aec251ba4
+          format: uuid
+          type: string
+      - description: Whether to include the trace in the response
+        in: query
+        name: include_trace
+        required: false
+        schema:
+          example: true
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleSetTraceResult'
+          description: Successful Response - Returns a single Rule Set Trace
+      summary: Get a single Rule Set Trace
+      tags:
+      - Rule Set
+  /api/v1/rule_sets:
+    get:
+      description: Returns a list of Rule Sets.
+      operationId: getRuleSetsList
+      parameters:
+      - description: The max size of each page of results
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+      - description: The integer offset at which to start the page. Possible values are 0 to total_records - 1
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Noyo specific group UUID to filter Rule Sets
+        in: query
+        name: group_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+      - description: Noyo specific organization UUID to filter Rule Sets
+        in: query
+        name: organization_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+      - description: Rule set Entry Point value to filter by
+        in: query
+        name: entry_point
+        required: false
+        schema:
+          example: member_snapshot
+          type: string
+      - description: Rule set metadata position to filter by
+        in: query
+        name: sandwich_position
+        required: false
+        schema:
+          example: pre
+          type: string
+      - description: Rule set status to filter by
+        in: query
+        name: status
+        required: false
+        schema:
+          example: active
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedRuleSetResult'
+          description: Successful Response - Returns a list of all matching Rule Sets
+      summary: Retrieves a list of Rule Sets.
+      tags:
+      - Rule Set
+    post:
+      description: Create a new Rule Set.
+      operationId: createRuleSet
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RuleSetCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleSetResult'
+          description: Successful Response - Returns the contents of the newly created Rule Set
+      summary: Create a Rule Set
+      tags:
+      - Rule Set
+  /api/v1/rule_sets/{rule_set_id}:
+    get:
+      description: Returns the latest version of a single rule set based on the ID provided.
+      operationId: getRuleSet
+      parameters:
+      - description: The unique identifier of the rule you would like to view
+        in: path
+        name: rule_set_id
+        required: true
+        schema:
+          example: 30b74a44-d5b1-4123-a7a4-6d3aec251ba4
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleSetResult'
+          description: Successful Response - Returns a single Rule Set
+      summary: Get a single Rule Set
+      tags:
+      - Rule Set
+  /api/v1/rule_sets/{rule_set_id}/{rule_set_version}/promote:
+    put:
+      description: Promotes a rule set from draft or archived status to active status. Any existing active rule sets with matching type, entry point, and sandwich position will be archived.
+      operationId: promoteRuleSet
+      parameters:
+      - description: The unique identifier of the rule set to promote
+        in: path
+        name: rule_set_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: The version of the rule set to promote
+        in: path
+        name: rule_set_version
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleSetResult'
+          description: Successful Response - Rule set promoted successfully
+      summary: Promote a Rule Set
+      tags:
+      - Rule Set
+  /api/v1/rule_sets/{rule_set_id}/{version}:
+    delete:
+      description: Delete a rule set based on the ID provided. The version parameter must match the latest rule set version.
+      operationId: deleteRuleSet
+      parameters:
+      - description: Unique identifier of the rule set you want to delete.
+        in: path
+        name: rule_set_id
+        required: true
+        schema:
+          example: c6db3cb5-e60d-4540-81b8-9487e148b7ad
+          format: uuid
+          type: string
+      - description: Unique version of the rule set you want to delete.
+        in: path
+        name: version
+        required: true
+        schema:
+          example: edcf866c-cab1-4fe6-b8dc-ccd8c4c09128
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: Successful Response - rule set was deleted successfully
+      summary: Delete a Rule Set
+      tags:
+      - Rule Set
+    put:
+      description: Update a rule set based on the ID provided. The version parameter must match the latest rule set version.
+      operationId: updateRuleSet
+      parameters:
+      - description: Unique identifier of the rule set you want to edit.
+        in: path
+        name: rule_set_id
+        required: true
+        schema:
+          example: c6db3cb5-e60d-4540-81b8-9487e148b7ad
+          format: uuid
+          type: string
+      - description: Unique version of the rule set you want to edit.
+        in: path
+        name: version
+        required: true
+        schema:
+          example: edcf866c-cab1-4fe6-b8dc-ccd8c4c09128
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RuleSetUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleSetResult'
+          description: Successful Response - Returns the modified Rule Set
+      summary: Update a Rule Set
+      tags:
+      - Rule Set
+components:
+  schemas:
+    RuleSetUpdateRequest:
+      properties:
+        entry_point:
+          enum:
+          - member_snapshot
+          nullable: true
+          type: string
+        group_id:
+          format: uuid
+          nullable: true
+          type: string
+        name:
+          type: string
+        rules:
+          type: object
+      type: object
+      x-field_order: []
+    PaginatedRuleSetResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of Rule set results
+          items:
+            $ref: '#/components/schemas/RuleSetResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    RuleSetTraceResult:
+      properties:
+        created:
+          description: The date the record was created
+          type: integer
+        employee_id:
+          format: uuid
+          type: string
+        group_id:
+          format: uuid
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        member_snapshot_id:
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        organization_id:
+          format: uuid
+          type: string
+        rule_set_ids:
+          items:
+            format: uuid
+            type: string
+          type: array
+        status:
+          type: string
+        trace:
+          type: object
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - created
+      - id
+      - modified
+      - organization_id
+      - rule_set_ids
+      - status
+      - version
+      type: object
+      x-field_order: []
+    RuleSetResult:
+      properties:
+        created:
+          description: The date the record was created
+          type: integer
+        entry_point:
+          type: string
+        group_id:
+          format: uuid
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        name:
+          type: string
+        organization_id:
+          format: uuid
+          type: string
+        rule_set_metadata:
+          $ref: '#/components/schemas/RuleSetMetadata'
+        rules:
+          type: object
+        status:
+          enum:
+          - active
+          - draft
+          - archived
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - created
+      - entry_point
+      - id
+      - modified
+      - name
+      - rule_set_metadata
+      - rules
+      - status
+      - version
+      type: object
+      x-field_order: []
+    RuleSetCreateRequest:
+      properties:
+        entry_point:
+          enum:
+          - member_snapshot
+          type: string
+        group_id:
+          format: uuid
+          nullable: true
+          type: string
+        name:
+          type: string
+        rule_set_metadata:
+          $ref: '#/components/schemas/RuleSetMetadata'
+        rules:
+          type: object
+        status:
+          default: active
+          enum:
+          - active
+          - draft
+          - archived
+          type: string
+      required:
+      - entry_point
+      - name
+      - rules
+      type: object
+      x-field_order: []
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+    RuleSetMetadata:
+      properties:
+        sandwich_position:
+          type: string
+      required:
+      - sandwich_position
+      type: object
+    PaginatedRuleSetTracesResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of Rule set traces
+          items:
+            $ref: '#/components/schemas/RuleSetTraceResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response

@@ -1,0 +1,947 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Group Disconnections API
+  version: 1.0.0
+servers: []
+tags:
+- name: Group Disconnections
+paths:
+  /api/v1/group_disconnection_requests:
+    get:
+      description: Returns a list of all group Disconnection requests.
+      operationId: getGroupDisconnectionRequestList
+      parameters:
+      - description: The max size of each page of results
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+      - description: The integer offset at which to start the page. Possible values are 0 to total_records - 1
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Status of the group Disconnection requests for which you would like to filter.
+        in: query
+        name: status
+        schema:
+          example: created
+          type: string
+      - description: Comma-separated list of carrier UUID's for which you would like to view group disconnection requests
+        in: query
+        name: carrier_id
+        required: false
+        schema:
+          example: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+          format: uuid
+          type: string
+      - in: query
+        name: group_id
+        schema:
+          type: string
+      - in: query
+        name: min_effective_end_date
+        schema:
+          type: string
+      - in: query
+        name: max_effective_end_date
+        schema:
+          type: string
+      - description: Search by group name
+        in: query
+        name: search
+        required: false
+        schema:
+          example: Widgets R Us
+          type: string
+      - description: Source type to filter by
+        in: query
+        name: source_type
+        required: false
+        schema:
+          example: platform
+          type: string
+      - description: Comma-separated list of requested Group Disconnection Request UUIDs
+        in: query
+        name: id
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                meta:
+                  offset: 0
+                  page_num: 1
+                  page_size: 20
+                  total_records: 1
+                response:
+                - carrier_id: 5200a894-81c5-4c41-8519-86c32e9a9965
+                  completed: null
+                  created: 1557329939
+                  decided: 1557329939
+                  effective_end_date: '2025-01-01'
+                  group_id: f833ac4b-36aa-46f4-826c-0badcfe27922
+                  group_name: Widgets R Us
+                  id: dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1
+                  modified: 1557329939
+                  organization_id: ca72d1e1-56a6-46ac-b400-a91e1f6b893a
+                  source_id: null
+                  source_type: platform
+                  status: processing
+                  version: 5200a894-81c5-4c41-8519-86c32e9a9965
+              schema:
+                $ref: '#/components/schemas/PaginatedGroupDisconnectionRequestResult'
+          description: Successful Response - Returns all matching Group Disconnection Requests
+      summary: List Group Disconnection Requests
+      tags:
+      - Group Disconnections
+    post:
+      description: Create a new Group Disconnection Request
+      operationId: createNewGroupDisconnectionRequest
+      requestBody:
+        content:
+          application/json:
+            examples:
+              success:
+                value:
+                  carrier_id: 5200a894-81c5-4c41-8519-86c32e9a9965
+                  effective_end_date: '2025-01-01'
+                  group_id: f833ac4b-36aa-46f4-826c-0badcfe27922
+            schema:
+              $ref: '#/components/schemas/GroupDisconnectionRequestPublicCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              example:
+                carrier_id: 5200a894-81c5-4c41-8519-86c32e9a9965
+                completed: null
+                created: 1557329939
+                decided: 1557329939
+                effective_end_date: '2025-01-01'
+                group_id: f833ac4b-36aa-46f4-826c-0badcfe27922
+                group_name: Besta LLC
+                id: dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1
+                modified: 1557329939
+                organization_id: ca72d1e1-56a6-46ac-b400-a91e1f6b893a
+                source_id: null
+                source_type: platform
+                status: processing
+                version: 5200a894-81c5-4c41-8519-86c32e9a9965
+              schema:
+                $ref: '#/components/schemas/GroupDisconnectionRequestResult'
+          description: Successful Response - Returns the new GroupDisconnectionRequest
+        '403':
+          content:
+            application/json:
+              example:
+                message: Protected group disconnection is forbidden without an internal override.
+          description: Protected group disconnection is forbidden
+      summary: Create a new Group Disconnection Request
+      tags:
+      - Group Disconnections
+  /api/v1/group_disconnection_requests/{group_disconnection_request_id}:
+    x-summary: Get Group disconnection Request by request Id
+    get:
+      description: Returns a group offboarding request by ID.
+      operationId: getGroupDisconnectionRequestById
+      parameters:
+      - description: The unique identifier of the group disconnection request you want to retrieve
+        in: path
+        name: group_disconnection_request_id
+        required: true
+        schema:
+          example: 4093a441-d4c8-4c8a-24d1-e7a132fb1bc2
+          format: uuid
+          type: string
+      responses:
+        '201':
+          content:
+            application/json:
+              example:
+                carrier_id: 5200a894-81c5-4c41-8519-86c32e9a9965
+                completed: null
+                created: 1557329939
+                decided: 1557329939
+                effective_end_date: '2025-01-01'
+                group_id: f833ac4b-36aa-46f4-826c-0badcfe27922
+                group_name: Besta LLC
+                id: dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1
+                modified: 1557329939
+                organization_id: ca72d1e1-56a6-46ac-b400-a91e1f6b893a
+                source_id: null
+                source_type: platform
+                status: processing
+                version: 5200a894-81c5-4c41-8519-86c32e9a9965
+              schema:
+                $ref: '#/components/schemas/GroupDisconnectionRequestResult'
+          description: Successful Response - Returns the GroupDisconnectionRequest
+      summary: Get an existing group offboarding request by id
+      tags:
+      - Group Disconnections
+  /api/v1/group_disconnection_requests/{group_disconnection_request_id}/confirm:
+    x-summary: Confirm group disconnection request by id
+    put:
+      description: Confirm Group Disconnection
+      operationId: confirmGroupDisconnectionRequest
+      parameters:
+      - description: The unique identifier of the group disconnection request you want to confirm
+        in: path
+        name: group_disconnection_request_id
+        required: true
+        schema:
+          example: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              success:
+                value:
+                  effective_end_date: '2024-01-01'
+            schema:
+              $ref: '#/components/schemas/GroupDisconnectionRequestPublicConfirmRequest'
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                carrier_id: 5200a894-81c5-4c41-8519-86c32e9a9965
+                completed: null
+                created: 1557329939
+                decided: 1557329939
+                group_id: f833ac4b-36aa-46f4-826c-0badcfe27922
+                group_name: Widgets R Us
+                id: dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1
+                modified: 1557329939
+                organization_id: ca72d1e1-56a6-46ac-b400-a91e1f6b893a
+                source_type: carrier
+                status: processing
+                version: 5200a894-81c5-4c41-8519-86c32e9a9965
+              schema:
+                $ref: '#/components/schemas/GroupDisconnectionRequestResult'
+          description: Successful Response - Returns the confirmed GroupDisconnectionRequest
+      summary: Confirm Group Disconnection
+      tags:
+      - Group Disconnections
+  /api/v1/group_disconnection_requests/{group_disconnection_request_id}/reject:
+    x-summary: Reject group disconnection request by id
+    put:
+      description: Reject Group Disconnection
+      operationId: rejectGroupDisconnectionRequest
+      parameters:
+      - description: The unique identifier of the group disconnection request you want to reject
+        in: path
+        name: group_disconnection_request_id
+        required: true
+        schema:
+          example: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                carrier_id: 5200a894-81c5-4c41-8519-86c32e9a9965
+                completed: null
+                created: 1557329939
+                decided: 1557329939
+                group_id: f833ac4b-36aa-46f4-826c-0badcfe27922
+                group_name: Widgets R Us
+                id: dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1
+                modified: 1557329939
+                organization_id: ca72d1e1-56a6-46ac-b400-a91e1f6b893a
+                source_type: carrier
+                status: rejected
+                version: 5200a894-81c5-4c41-8519-86c32e9a9965
+              schema:
+                $ref: '#/components/schemas/GroupDisconnectionRequestResult'
+          description: Successful Response - Returns the rejected GroupDisconnectionRequest
+      summary: Reject Group Disconnection
+      tags:
+      - Group Disconnections
+  /api/v1/group_disconnection_requests/{group_disconnection_request_id}/{version}:
+    x-summary: Edit group disconnection request by id
+    put:
+      description: Edit a Group Disconnection Request
+      operationId: editGroupDisconnectionRequest
+      parameters:
+      - description: The unique identifier of the group disconnection request you want to update
+        in: path
+        name: group_disconnection_request_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: The unique version of the group disconnection request you want to edit.
+        in: path
+        name: version
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              success:
+                value:
+                  effective_end_date: '2025-01-01'
+                  status: processing
+            schema:
+              $ref: '#/components/schemas/GroupDisconnectionRequestPublicEditRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                carrier_id: 5200a894-81c5-4c41-8519-86c32e9a9965
+                completed: null
+                created: 1557329939
+                decided: 1557329939
+                group_id: f833ac4b-36aa-46f4-826c-0badcfe27922
+                group_name: Widgets R Us
+                id: dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1
+                modified: 1557329939
+                organization_id: ca72d1e1-56a6-46ac-b400-a91e1f6b893a
+                source_id: null
+                source_type: platform
+                status: processing
+                version: 5200a894-81c5-4c41-8519-86c32e9a9965
+              schema:
+                $ref: '#/components/schemas/GroupDisconnectionRequestResult'
+          description: Successful Response - Returns the new GroupDisconnectionRequest
+      summary: Edit an existing Group Disconnection Request
+      tags:
+      - Group Disconnections
+  /api/v1/groups/{group_id}/group_disconnection_requests:
+    x-summary: Group disconnection requests by group
+    get:
+      description: Returns a list of all group disconnection requests for a given group ID.
+      operationId: getGroupDisconnectionRequestListByGroup
+      parameters:
+      - description: The unique identifier of the associated group in Noyo
+        in: path
+        name: group_id
+        required: true
+        schema:
+          example: 2ce3b54a-2535-4803-b218-e6b44081d418
+          format: uuid
+          type: string
+      - description: The max size of each page of results
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+      - description: The integer offset at which to start the page. Possible values are 0 to total_records - 1
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                meta:
+                  offset: 0
+                  page_num: 1
+                  page_size: 20
+                  total_records: 1
+                response:
+                - carrier_id: 5200a894-81c5-4c41-8519-86c32e9a9965
+                  completed: null
+                  created: 1557329939
+                  decided: 1557329939
+                  effective_end_date: '2025-01-01'
+                  group_id: f833ac4b-36aa-46f4-826c-0badcfe27922
+                  group_name: Widgets R Us
+                  id: dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1
+                  modified: 1557329939
+                  organization_id: ca72d1e1-56a6-46ac-b400-a91e1f6b893a
+                  source_id: null
+                  source_type: platform
+                  status: processing
+                  version: 5200a894-81c5-4c41-8519-86c32e9a9965
+              schema:
+                $ref: '#/components/schemas/PaginatedGroupDisconnectionRequestResult'
+          description: Successful Response - Returns all matching Group Disconnection Requests
+      summary: List Group Disconnection Requests by Group
+      tags:
+      - Group Disconnections
+  /api/v1/{group_id}/group_disconnection_requests:
+    x-summary: Group disconnection requests by group
+    get:
+      description: Returns a list of all group Disconnection requests for a given group Id.
+      operationId: getGroupDisconnectionRequestListByGroupDeprecated
+      parameters:
+      - description: The unique identifier of the associated group in Noyo
+        in: path
+        name: group_id
+        required: true
+        schema:
+          example: 2ce3b54a-2535-4803-b218-e6b44081d418
+          format: uuid
+          type: string
+      - description: The max size of each page of results
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+      - description: The integer offset at which to start the page. Possible values are 0 to total_records - 1
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                meta:
+                  offset: 0
+                  page_num: 1
+                  page_size: 20
+                  total_records: 1
+                response:
+                - carrier_id: 5200a894-81c5-4c41-8519-86c32e9a9965
+                  completed: null
+                  created: 1557329939
+                  decided: 1557329939
+                  effective_end_date: '2025-01-01'
+                  group_id: f833ac4b-36aa-46f4-826c-0badcfe27922
+                  group_name: Widgets R Us
+                  id: dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1
+                  modified: 1557329939
+                  organization_id: ca72d1e1-56a6-46ac-b400-a91e1f6b893a
+                  source_id: null
+                  source_type: platform
+                  status: processing
+                  version: 5200a894-81c5-4c41-8519-86c32e9a9965
+              schema:
+                $ref: '#/components/schemas/PaginatedGroupDisconnectionRequestResult'
+          description: Successful Response - Returns all matching Group Disconnection Requests
+      summary: List Group Disconnection Request by Group (Deprecated Endpoint)
+      tags:
+      - Group Disconnections
+  /ui/v1/group_disconnection_requests:
+    get:
+      description: Returns a list of all group Disconnection requests.
+      operationId: getUIGroupDisconnectionRequestList
+      parameters:
+      - description: The max size of each page of results
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+      - description: The integer offset at which to start the page. Possible values are 0 to total_records - 1
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: Status of the group Disconnection requests for which you would like to filter.
+        in: query
+        name: status
+        schema:
+          example: created
+          type: string
+      - description: Comma-separated list of carrier UUID's for which you would like to view group disconnection requests
+        in: query
+        name: carrier_id
+        required: false
+        schema:
+          example: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+          format: uuid
+          type: string
+      - in: query
+        name: group_id
+        schema:
+          type: string
+      - in: query
+        name: min_effective_end_date
+        schema:
+          type: string
+      - in: query
+        name: max_effective_end_date
+        schema:
+          type: string
+      - description: Search by group name
+        in: query
+        name: search
+        required: false
+        schema:
+          example: Widgets R Us
+          type: string
+      - description: Source type to filter by
+        in: query
+        name: source_type
+        required: false
+        schema:
+          example: platform
+          type: string
+      - description: Creation reason to filter by
+        in: query
+        name: creation_reason
+        required: false
+        schema:
+          example: created
+          type: string
+      - description: Comma-separated list of requested Group Disconnection Request UUIDs
+        in: query
+        name: id
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                meta:
+                  offset: 0
+                  page_num: 1
+                  page_size: 20
+                  total_records: 1
+                response:
+                - carrier_id: 5200a894-81c5-4c41-8519-86c32e9a9965
+                  completed: null
+                  created: 1557329939
+                  decided: 1557329939
+                  effective_end_date: '2025-01-01'
+                  group_id: f833ac4b-36aa-46f4-826c-0badcfe27922
+                  group_name: Widgets R Us
+                  id: dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1
+                  modified: 1557329939
+                  organization_id: ca72d1e1-56a6-46ac-b400-a91e1f6b893a
+                  source_id: null
+                  source_type: platform
+                  status: processing
+                  version: 5200a894-81c5-4c41-8519-86c32e9a9965
+              schema:
+                $ref: '#/components/schemas/UIPaginatedGroupDisconnectionRequestResult'
+          description: Successful Response - Returns all matching Group Disconnection Requests
+      summary: List Group Disconnection Requests
+      tags:
+      - Group Disconnections
+  /ui/v1/group_disconnection_requests/{group_disconnection_request_id}:
+    x-summary: Get Group disconnection Request by request Id
+    get:
+      description: Returns a group offboarding request by ID.
+      operationId: getUIGroupDisconnectionRequestById
+      parameters:
+      - description: The unique identifier of the group disconnection request you want to retrieve
+        in: path
+        name: group_disconnection_request_id
+        required: true
+        schema:
+          example: 4093a441-d4c8-4c8a-24d1-e7a132fb1bc2
+          format: uuid
+          type: string
+      responses:
+        '201':
+          content:
+            application/json:
+              example:
+                carrier_id: 5200a894-81c5-4c41-8519-86c32e9a9965
+                completed: null
+                created: 1557329939
+                decided: 1557329939
+                effective_end_date: '2025-01-01'
+                group_id: f833ac4b-36aa-46f4-826c-0badcfe27922
+                group_name: Besta LLC
+                id: dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1
+                modified: 1557329939
+                organization_id: ca72d1e1-56a6-46ac-b400-a91e1f6b893a
+                source_id: null
+                source_type: platform
+                status: processing
+                version: 5200a894-81c5-4c41-8519-86c32e9a9965
+              schema:
+                $ref: '#/components/schemas/UIGroupDisconnectionRequestResult'
+          description: Successful Response - Returns the GroupDisconnectionRequest
+      summary: Get an existing group offboarding request by id
+      tags:
+      - Group Disconnections
+components:
+  schemas:
+    GroupDisconnectionRequestPublicConfirmRequest:
+      properties:
+        effective_end_date:
+          description: The date at which the disconnection will take effect - required if not already set
+          format: date
+          type: string
+      type: object
+      x-field_order: []
+    UIGroupDisconnectionRequestNestedReason:
+      properties:
+        context_from_carrier:
+          description: Context provided by the carrier
+          readOnly: true
+          type: string
+        context_from_platform:
+          description: Context given by a platform when rejecting a disconnection
+          readOnly: true
+          type: string
+        created_by:
+          description: Which team created the reason
+          readOnly: true
+          type: string
+        other_reason:
+          description: Other reason for the request
+          readOnly: true
+          type: string
+        reason:
+          description: Why the action was taken
+          readOnly: true
+          type: string
+      required:
+      - created_by
+      type: object
+      x-field_order:
+      - created_by
+      - reason
+      - other_reason
+      - context_from_carrier
+      - context_from_platform
+    GroupDisconnectionRequestPublicCreateRequest:
+      properties:
+        carrier_id:
+          description: Unique identifier for the carrier to be disconnected from.
+          format: uuid
+          type: string
+        context:
+          description: Context on why the request was created
+          type: string
+        effective_end_date:
+          description: The date at which the disconnection will take effect.
+          format: date
+          type: string
+        group_id:
+          description: Unique identifier for the group to be disconnected.
+          format: uuid
+          type: string
+        reason:
+          description: The reason for the GDR creation
+          enum:
+          - broker_of_record
+          - changed_enrollment_method
+          - lost_group
+          - no_longer_eligible
+          - not_using_connection
+          - other
+          - terminated
+          type: string
+      required:
+      - carrier_id
+      - effective_end_date
+      - group_id
+      type: object
+      x-field_order:
+      - carrier_id
+      - group_id
+      - effective_end_date
+    UIPaginatedGroupDisconnectionRequestResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of group disconnection request results
+          items:
+            $ref: '#/components/schemas/UIGroupDisconnectionRequestResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    GroupDisconnectionRequestPublicEditRequest:
+      properties:
+        context:
+          description: Context on why the request was rejected
+          type: string
+        effective_end_date:
+          description: The date at which the disconnection will take effect - required if not already set
+          format: date
+          type: string
+        reason:
+          description: The reason for the GDR status change/creation
+          enum:
+          - connection_restored
+          - eligibility_restored
+          - other
+          - payment_reinstated
+          type: string
+        status:
+          description: The status of the disconnection request
+          enum:
+          - processing
+          - rejected
+          type: string
+      required:
+      - status
+      type: object
+      x-field_order: []
+    PaginatedGroupDisconnectionRequestResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of group disconnection request results
+          items:
+            $ref: '#/components/schemas/GroupDisconnectionRequestResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+    UIGroupDisconnectionRequestResult:
+      properties:
+        carrier_id:
+          description: Unique identifier for the carrier to be disconnected from
+          format: uuid
+          readOnly: true
+          type: string
+        completed:
+          description: Timestamp at which the disconnection was completed
+          readOnly: true
+          type: integer
+        created:
+          description: The date the record was created
+          type: integer
+        created_reason:
+          $ref: '#/components/schemas/UIGroupDisconnectionRequestNestedReason'
+        decided:
+          description: Timestamp at which the platform recorded a decision on the disconnection
+          readOnly: true
+          type: integer
+        effective_end_date:
+          description: The date at which the disconnection will take effect
+          format: date
+          readOnly: true
+          type: string
+        group_id:
+          description: Unique identifier for the group to be disconnected. May be missing if group has already been disconnected.
+          format: uuid
+          readOnly: true
+          type: string
+        group_name:
+          description: Name of the group to be disconnected from
+          readOnly: true
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        organization_id:
+          description: Unique identifier for organization associated with the request
+          format: uuid
+          readOnly: true
+          type: string
+        rejected_reason:
+          $ref: '#/components/schemas/UIGroupDisconnectionRequestNestedReason'
+        source_date:
+          description: The date associated with the source of the disconnection
+          format: date
+          readOnly: true
+          type: string
+        source_id:
+          description: If applicable, the ID associated with the source of the disconnection request
+          format: uuid
+          readOnly: true
+          type: string
+        source_type:
+          description: The source of the disconnection request
+          readOnly: true
+          type: string
+        status:
+          description: The status of the disconnection request
+          readOnly: true
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - carrier_id
+      - created
+      - group_name
+      - id
+      - modified
+      - organization_id
+      - source_id
+      - source_type
+      - status
+      - version
+      type: object
+      x-field_order:
+      - id
+      - version
+      - created
+      - modified
+      - organization_id
+      - carrier_id
+      - group_id
+      - group_name
+      - source_id
+      - source_type
+      - source_date
+      - status
+      - effective_end_date
+      - completed
+      - decided
+      - created_reason
+      - rejected_reason
+    GroupDisconnectionRequestResult:
+      properties:
+        carrier_id:
+          description: Unique identifier for the carrier to be disconnected from
+          format: uuid
+          readOnly: true
+          type: string
+        completed:
+          description: Timestamp at which the disconnection was completed
+          readOnly: true
+          type: integer
+        created:
+          description: The date the record was created
+          type: integer
+        decided:
+          description: Timestamp at which the platform recorded a decision on the disconnection
+          readOnly: true
+          type: integer
+        effective_end_date:
+          description: The date at which the disconnection will take effect
+          format: date
+          readOnly: true
+          type: string
+        group_id:
+          description: Unique identifier for the group to be disconnected. May be missing if group has already been disconnected.
+          format: uuid
+          readOnly: true
+          type: string
+        group_name:
+          description: Name of the group to be disconnected from
+          readOnly: true
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        organization_id:
+          description: Unique identifier for organization associated with the request
+          format: uuid
+          readOnly: true
+          type: string
+        source_date:
+          description: The date associated with the source of the disconnection
+          format: date
+          readOnly: true
+          type: string
+        source_id:
+          description: If applicable, the ID associated with the source of the disconnection request
+          format: uuid
+          readOnly: true
+          type: string
+        source_type:
+          description: The source of the disconnection request
+          readOnly: true
+          type: string
+        status:
+          description: The status of the disconnection request
+          readOnly: true
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - carrier_id
+      - created
+      - group_name
+      - id
+      - modified
+      - organization_id
+      - source_id
+      - source_type
+      - status
+      - version
+      type: object
+      x-field_order:
+      - id
+      - version
+      - created
+      - modified
+      - organization_id
+      - carrier_id
+      - group_id
+      - group_name
+      - source_id
+      - source_type
+      - source_date
+      - status
+      - effective_end_date
+      - completed
+      - decided

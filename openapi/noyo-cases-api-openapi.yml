@@ -1,0 +1,93 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Cases API
+  version: 1.0.0
+servers: []
+tags:
+- name: Cases
+paths:
+  /api/v1/member_transactions/{transaction_id}/case:
+    x-summary: Get a public case for a single Member Transaction
+    get:
+      description: Returns a case if one exists for the member transaction based on the ID provided.
+      operationId: getMemberTransactionCase
+      parameters:
+      - description: The unique identifier of the member transaction to get the case through.
+        in: path
+        name: transaction_id
+        required: true
+        schema:
+          example: a6e30204-87b2-4802-95a4-a156bd0f7435
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                action_owner: noyo
+                automated: false
+                created: 1704153600
+                id: 51881720-508f-4ddd-8485-0584179f4b7b
+                modified: 1704153600
+                resolved: null
+                title: Public message for Case
+                version: 160d4e95-7242-494d-a2aa-0d10042de94e
+              schema:
+                $ref: '#/components/schemas/CaseResultPublic'
+          description: Successful Response - Returns a single Case associated with the Member Transaction
+      summary: Get a Case for a Member Transaction
+      tags:
+      - Cases
+components:
+  schemas:
+    CaseResultPublic:
+      properties:
+        action_owner:
+          description: Indicates which party is responsible for the next action required
+          type: string
+        automated:
+          description: Indicates whether the case is automated or not
+          type: boolean
+        created:
+          description: The date the record was created
+          type: integer
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        resolved:
+          description: A datetime of when the case was resolved
+          format: date-time
+          nullable: true
+          type: string
+        title:
+          description: Public facing message of the case
+          nullable: true
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - action_owner
+      - automated
+      - created
+      - id
+      - modified
+      - resolved
+      - version
+      type: object
+      x-field_order:
+      - id
+      - version
+      - created
+      - modified
+      - title
+      - resolved
+      - action_owner
+      - automated

@@ -1,0 +1,20 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Ping API
+  version: 1.0.0
+servers: []
+tags:
+- name: Ping
+paths:
+  /ping:
+    get:
+      description: Returns a simple OK message with a 200 status code
+      operationId: ping
+      responses:
+        '200':
+          description: Successful Response
+      security: []
+      summary: Ping Endpoint
+      tags:
+      - Ping

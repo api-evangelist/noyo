@@ -1,0 +1,620 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Individual Enrollments API
+  version: 1.0.0
+servers: []
+tags:
+- name: Individual Enrollments
+paths:
+  /api/v1/dependents/{dependent_id}/individual_enrollments:
+    x-summary: Get All Individual Enrollments for a Dependent
+    get:
+      description: Returns a list of all individual enrollments for a given dependent.
+      operationId: getIndividualEnrollmentByDependentList
+      parameters:
+      - description: The unique identifier of the employee for which you would like to view individual enrollments
+        in: path
+        name: dependent_id
+        required: true
+        schema:
+          example: 30b74a44-d5b1-4123-a7a4-6d3aec251ba4
+          format: uuid
+          type: string
+      - description: The relative date on which to view the state of the record
+        in: query
+        name: effective_date
+        required: false
+        schema:
+          type: string
+      - description: The max size of each page of results
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+      - description: The integer offset at which to start the page. Possible values are 0 to total_records - 1
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                meta:
+                  offset: 0
+                  page_num: 1
+                  page_size: 20
+                  total_records: 1
+                response:
+                - cobra_enrollment: {}
+                  created: 1557512389
+                  effective_end_date: '2019-10-01'
+                  effective_start_date: '2018-10-01'
+                  enroll_data:
+                    premium:
+                      amount: 50
+                      unit: Month
+                  group_enrollment_id: 7499ea07-76c9-40f2-992b-952259e98384
+                  id: 6670f290-4236-4690-bece-a110f9ad924b
+                  individual_enrollment_configuration: {}
+                  individual_id: 30b74a44-d5b1-4123-a7a4-6d3aec251ba4
+                  individual_type: dependent
+                  line_of_coverage: medical
+                  modified: 1564440756
+                  plan_id: b988cd26-121a-4dd6-b0be-09399f6ecc0a
+                  status: active
+                  version: 27bbf929-78ca-4339-8bb3-39b75f92c4a4
+              schema:
+                $ref: '#/components/schemas/PaginatedIndividualEnrollmentResult'
+          description: Successful Response - Returns all matching Individual Enrollments
+      summary: Get a list of all Individual Enrollments for a Dependent
+      tags:
+      - Individual Enrollments
+  /api/v1/employees/{employee_id}/individual_enrollments:
+    x-summary: Get All Individual Enrollments for an Employee
+    get:
+      description: Returns a list of all individual enrollments for a given employee.
+      operationId: getIndividualEnrollmentByEmployeeList
+      parameters:
+      - description: The unique identifier of the employee for which you would like to view individual enrollments
+        in: path
+        name: employee_id
+        required: true
+        schema:
+          example: 30b74a44-d5b1-4123-a7a4-6d3aec251ba4
+          format: uuid
+          type: string
+      - description: The relative date on which to view the state of the record
+        in: query
+        name: effective_date
+        required: false
+        schema:
+          type: string
+      - description: Boolean, use "true" to include dependent individual enrollments in the results
+        in: query
+        name: include_dependents
+        required: false
+        schema:
+          type: string
+      - description: The max size of each page of results
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+      - description: The integer offset at which to start the page. Possible values are 0 to total_records - 1
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                meta:
+                  offset: 0
+                  page_num: 1
+                  page_size: 20
+                  total_records: 1
+                response:
+                - cobra_enrollment: {}
+                  created: 1557512389
+                  effective_end_date: '2019-10-01'
+                  effective_start_date: '2018-10-01'
+                  enroll_data:
+                    premium:
+                      amount: 50
+                      unit: Month
+                  group_enrollment_id: 7499ea07-76c9-40f2-992b-952259e98384
+                  id: 6670f290-4236-4690-bece-a110f9ad924b
+                  individual_enrollment_configuration: {}
+                  individual_id: 30b74a44-d5b1-4123-a7a4-6d3aec251ba4
+                  individual_type: employee
+                  line_of_coverage: medical
+                  modified: 1564440756
+                  plan_id: b988cd26-121a-4dd6-b0be-09399f6ecc0a
+                  status: active
+                  version: 27bbf929-78ca-4339-8bb3-39b75f92c4a4
+              schema:
+                $ref: '#/components/schemas/PaginatedIndividualEnrollmentResult'
+          description: Successful Response - Returns all matching Individual Enrollments
+      summary: Get a list of all Individual Enrollments for an Employee
+      tags:
+      - Individual Enrollments
+  /api/v1/group_enrollments/{group_enrollment_id}/individual_enrollments:
+    x-summary: Get All Individual Enrollments By Group Enrollment
+    get:
+      description: Returns a list of all individual enrollments for a given group enrollment.
+      operationId: getIndividualEnrollmentList
+      parameters:
+      - description: Unique identifier of the associated group enrollment in the Noyo system
+        in: path
+        name: group_enrollment_id
+        required: true
+        schema:
+          example: bf129409-1f0a-4f1a-b756-14471ef733c3
+          format: uuid
+          type: string
+      - description: The relative date on which to view the state of the record
+        in: query
+        name: effective_date
+        required: false
+        schema:
+          type: string
+      - description: The max size of each page of results
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+      - description: The integer offset at which to start the page. Possible values are 0 to total_records - 1
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                meta:
+                  offset: 0
+                  page_num: 1
+                  page_size: 20
+                  total_records: 1
+                response:
+                - cobra_enrollment:
+                    cobra_enrolled: true
+                    cobra_type: federal
+                  created: 1557512389
+                  effective_end_date: '2019-12-31'
+                  effective_start_date: '2019-01-01'
+                  enroll_data:
+                    premium:
+                      amount: 50
+                      unit: Month
+                  group_enrollment_id: bf129409-1f0a-4f1a-b756-14471ef733c3
+                  id: 6670f290-4236-4690-bece-a110f9ad924b
+                  individual_enrollment_configuration: {}
+                  individual_id: 30b74a44-d5b1-4123-a7a4-6d3aec251ba4
+                  individual_type: employee
+                  line_of_coverage: medical
+                  modified: 1564440756
+                  plan_id: b988cd26-121a-4dd6-b0be-09399f6ecc0a
+                  status: active
+                  version: 27bbf929-78ca-4339-8bb3-39b75f92c4a4
+              schema:
+                $ref: '#/components/schemas/PaginatedIndividualEnrollmentResult'
+          description: Successful Response - Returns all matching Individual Enrollments
+      summary: Get a list of all Individual Enrollments By Group Enrollment
+      tags:
+      - Individual Enrollments
+  /api/v1/groups/{group_id}/individual_enrollments:
+    x-summary: Get All Individual Enrollments By Group
+    get:
+      description: Returns a list of all individual enrollments for a given group.
+      operationId: getIndividualEnrollmentByGroupList
+      parameters:
+      - description: Unique identifier of the associated group in the Noyo system
+        in: path
+        name: group_id
+        required: true
+        schema:
+          example: f8de4493-3c51-4337-8fdc-f00bb1ae89bd
+          format: uuid
+          type: string
+      - description: The relative date on which to view the state of the record
+        in: query
+        name: effective_date
+        required: false
+        schema:
+          type: string
+      - description: The max size of each page of results
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+      - description: The integer offset at which to start the page. Possible values are 0 to total_records - 1
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                meta:
+                  offset: 0
+                  page_num: 1
+                  page_size: 20
+                  total_records: 1
+                response:
+                - cobra_enrollment:
+                    cobra_enrolled: true
+                    cobra_type: federal
+                  created: 1557512389
+                  effective_end_date: '2019-12-31'
+                  effective_start_date: '2019-01-01'
+                  enroll_data:
+                    premium:
+                      amount: 50
+                      unit: Month
+                  group_enrollment_id: 7499ea07-76c9-40f2-992b-952259e98384
+                  id: 6670f290-4236-4690-bece-a110f9ad924b
+                  individual_enrollment_configuration: {}
+                  individual_id: 30b74a44-d5b1-4123-a7a4-6d3aec251ba4
+                  individual_type: employee
+                  line_of_coverage: medical
+                  modified: 1564440756
+                  plan_id: b988cd26-121a-4dd6-b0be-09399f6ecc0a
+                  status: active
+                  version: 27bbf929-78ca-4339-8bb3-39b75f92c4a4
+              schema:
+                $ref: '#/components/schemas/PaginatedIndividualEnrollmentResult'
+          description: Successful Response - Returns all matching Individual Enrollments
+      summary: Get a list of all Individual Enrollments By Group
+      tags:
+      - Individual Enrollments
+  /api/v1/individual_enrollments/{individual_enrollment_id}:
+    x-summary: Get Individual Enrollment
+    get:
+      description: Returns the latest version of a single individual enrollment based on the ID provided.
+      operationId: getIndividualEnrollment
+      parameters:
+      - description: Unique identifier of the individual enrollment
+        in: path
+        name: individual_enrollment_id
+        required: true
+        schema:
+          example: 6670f290-4236-4690-bece-a110f9ad924b
+          format: uuid
+          type: string
+      - description: The relative date on which to view the state of the record
+        in: query
+        name: effective_date
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                cobra_enrollment: {}
+                created: 1557512389
+                effective_end_date: '2019-10-01'
+                effective_start_date: '2018-10-01'
+                enroll_data:
+                  premium:
+                    amount: 50
+                    unit: Month
+                group_enrollment_id: 7499ea07-76c9-40f2-992b-952259e98384
+                id: 6670f290-4236-4690-bece-a110f9ad924b
+                individual_enrollment_configuration: {}
+                individual_id: 30b74a44-d5b1-4123-a7a4-6d3aec251ba4
+                individual_type: employee
+                line_of_coverage: medical
+                modified: 1564440756
+                plan_id: b988cd26-121a-4dd6-b0be-09399f6ecc0a
+                status: active
+                version: 27bbf929-78ca-4339-8bb3-39b75f92c4a4
+              schema:
+                $ref: '#/components/schemas/PublicIndividualEnrollmentResultWithConfig'
+          description: Successful Response - Returns a single Individual Enrollment
+      summary: Get a single Individual Enrollment
+      tags:
+      - Individual Enrollments
+components:
+  schemas:
+    PrimaryCareProvider:
+      properties:
+        entity_identifier_code:
+          description: Code of the entity identifier
+          enum:
+          - pcp
+          - dental_pcp
+          - obgyn
+          type: string
+        entity_type:
+          description: Type of entity
+          enum:
+          - person
+          - non_person_entity
+          type: string
+        first_name:
+          description: First name of the primary care provider
+          type: string
+        identification_code:
+          description: Code of the identification
+          type: string
+        identification_code_type:
+          description: Type of the identification code
+          enum:
+          - service_provider_number
+          - national_provider_identifier
+          type: string
+        last_name:
+          description: Last name of the primary care provider
+          type: string
+        middle_name:
+          description: Middle name of the primary care provider
+          type: string
+        organization_name:
+          description: Organization name of the primary care provider.
+          type: string
+        patient_relationship_code:
+          description: Code which represents the relationship of the patient to the primary care provider
+          enum:
+          - established
+          - not_established
+          - unknown
+          type: string
+      required:
+      - identification_code
+      - identification_code_type
+      type: object
+    PCPDetails:
+      properties:
+        providers:
+          description: List of primary care providers
+          items:
+            $ref: '#/components/schemas/PrimaryCareProvider'
+          type: array
+      required:
+      - providers
+      type: object
+    PublicIndividualEnrollmentResultWithConfig:
+      properties:
+        cobra_details:
+          allOf:
+          - $ref: '#/components/schemas/COBRADetails'
+          readOnly: true
+        cobra_enrollment:
+          allOf:
+          - $ref: '#/components/schemas/IndividualEnrollmentCOBRAEnrollment'
+          description: Details about the member COBRA enrollment status, if applicable
+          readOnly: true
+        created:
+          description: The date the record was created
+          type: integer
+        effective_end_date:
+          description: ISO-8601 date string for the effective date of the coverage
+          example: '2017-01-17'
+          format: date
+          type: string
+        effective_start_date:
+          description: ISO-8601 date string for the effective date of the coverage
+          example: '2017-01-17'
+          format: date
+          type: string
+        enroll_data:
+          description: Line of coverage specific enroll data with volume information
+          readOnly: true
+          type: object
+        group_enrollment_id:
+          description: Unique identifier of the group enrollment in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        individual_enrollment_configuration:
+          description: Carrier-specific details describing the individual enrollment configuration
+          readOnly: true
+          type: object
+        individual_id:
+          description: Unique identifier of the employee or dependent in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        individual_type:
+          description: Type of member for the individual enrollment
+          enum:
+          - dependent
+          - employee
+          example: employee
+          readOnly: true
+          type: string
+        line_of_coverage:
+          description: Line of coverage for the individual enrollment
+          enum:
+          - medical
+          - dental
+          - vision
+          - life
+          - add
+          - std
+          - ltd
+          - accident
+          - critical_illness
+          - cancer
+          - health_fund
+          - hospital_indemnity
+          - pharmacy
+          - wellness
+          example: dental
+          readOnly: true
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        pcp_details:
+          allOf:
+          - $ref: '#/components/schemas/PCPDetails'
+          readOnly: true
+        plan_id:
+          description: Unique identifier of the group plan in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        status:
+          description: Status of the individual enrollment
+          enum:
+          - pending
+          - active
+          - waived
+          - terminated
+          example: active
+          readOnly: true
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - cobra_enrollment
+      - created
+      - enroll_data
+      - group_enrollment_id
+      - id
+      - individual_enrollment_configuration
+      - individual_id
+      - individual_type
+      - line_of_coverage
+      - modified
+      - plan_id
+      - status
+      - version
+      type: object
+      x-field_order:
+      - id
+      - version
+      - group_enrollment_id
+      - line_of_coverage
+      - status
+      - individual_type
+      - individual_id
+      - plan_id
+      - enroll_data
+      - effective_start_date
+      - effective_end_date
+      - cobra_enrollment
+      - individual_enrollment_configuration
+      - created
+      - modified
+      - cobra_details
+      - pcp_details
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+    PaginatedIndividualEnrollmentResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of individual enrollment results
+          items:
+            $ref: '#/components/schemas/PublicIndividualEnrollmentResultWithConfig'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    COBRADetails:
+      properties:
+        eligibility_end_date:
+          description: The date which represents when the individual is no longer eligible for COBRA
+          format: date
+          type: string
+        eligibility_start_date:
+          description: The date which represents when the individual is first eligible for COBRA
+          format: date
+          type: string
+        qualifying_event_date:
+          description: The date of the event which qualified the individual for COBRA
+          format: date
+          type: string
+        qualifying_event_reason:
+          description: The reason of the event which qualified the individual for COBRA
+          enum:
+          - termination_of_employment
+          - reduction_of_work_hours
+          - medicare
+          - death
+          - divorce
+          - separation
+          - ineligible_child
+          - bankruptcy_of_retirees_former_employer
+          - layoff
+          - leave_of_absence
+          type: string
+      required:
+      - eligibility_start_date
+      type: object
+    IndividualEnrollmentCOBRAEnrollment:
+      properties:
+        cobra_enrolled:
+          description: True if member is enrolled in COBRA coverage
+          type: boolean
+        cobra_type:
+          description: Type of COBRA enrollment for the member
+          enum:
+          - federal
+          - state
+          type: string
+      type: object

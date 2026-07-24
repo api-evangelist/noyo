@@ -1,0 +1,1556 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Renewal Decisions API
+  version: 1.0.0
+servers: []
+tags:
+- name: Renewal Decisions
+paths:
+  /api/v1/groups/{group_id}/renewal_decisions:
+    x-summary: Renewal decisions by group
+    get:
+      description: Returns all renewal decisions for a group. This includes the status, which determines whether the carrier is ready to accept member requests for the new plan year. If the status is `not_ready`, Noyo will return one or more issues, each with a level and message.
+      operationId: getRenewalDecisionsByGroup
+      parameters:
+      - description: The unique identifier of the group for which you are retrieving renewal decisions
+        in: path
+        name: group_id
+        required: true
+        schema:
+          example: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+          format: uuid
+          type: string
+      - description: Renewal date to filter by, exact match
+        in: query
+        name: renewal_date
+        required: false
+        schema:
+          example: Sat, 02 Jan 2021 00:00:00 GMT
+          format: date
+          type: string
+      - description: Filter request by renewal date starting from date provided
+        in: query
+        name: start_date
+        required: false
+        schema:
+          example: Mon, 01 Jan 2024 00:00:00 GMT
+          format: date
+          type: string
+      - description: Filter request by renewal date up to date provided
+        in: query
+        name: end_date
+        required: false
+        schema:
+          example: Mon, 01 Jan 2024 00:00:00 GMT
+          format: date
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                meta:
+                  offset: 0
+                  page_num: 1
+                  page_size: 20
+                  total_records: 1
+                response:
+                - body:
+                    carriers:
+                    - carrier_id: bf81f0c4-3105-4240-b62b-aa6de3f607e4
+                      lines_of_coverage:
+                        dental:
+                          open_enrollment_end_date: '2022-01-31'
+                          open_enrollment_start_date: '2022-01-01'
+                          plans:
+                          - name: Dental Plus Plan
+                            plan_id: 44bc0f4a-0a94-11ec-9a03-0242ac130003
+                        medical:
+                          open_enrollment_end_date: '2022-01-31'
+                          open_enrollment_start_date: '2022-01-01'
+                          plans:
+                          - name: Select Plus PPO HDHP Gold BRJJ /C38
+                            plan_id: 818e52d4-6c34-4914-b716-a3047c85e468
+                          - name: Select Plus PPO HDHP Silver BRJJ /C38
+                            plan_id: f9897240-87f8-4d9d-a68f-58bc445fe0b2
+                          - name: Select Plus PPO HDHP Bronze BRJJ /C38
+                            plan_id: 19437852-3795-4cb4-939c-a86543eabee0
+                  created: 1557862286
+                  group_id: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+                  id: b5f2b5f7-0336-45f7-baf1-7e11dfac50a6
+                  issues:
+                  - level: error
+                    message: Life open enrollment start date is 2021-08-01 in carrier system
+                  - level: error
+                    message: LTD Plan not available yet in carrier system
+                  modified: 1557862286
+                  renewal_date: '2022-01-01'
+                  status: not_ready
+                  version: 23be0ba3-1183-4e8e-8e9d-644527414c6e
+              schema:
+                $ref: '#/components/schemas/PaginatedRenewalDecisionResult'
+          description: Successful Response - Returns the found renewal decisions.
+      summary: Get renewal decisions by group
+      tags:
+      - Renewal Decisions
+    post:
+      description: Create a new renewal decision for a given renewal date.
+      operationId: createNewRenewalDecision
+      parameters:
+      - description: The unique identifier of the group for which you are creating a new renewal decision
+        in: path
+        name: group_id
+        required: true
+        schema:
+          example: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              success:
+                value:
+                  body:
+                    carriers:
+                    - carrier_id: bf81f0c4-3105-4240-b62b-aa6de3f607e4
+                      lines_of_coverage:
+                        dental:
+                          open_enrollment_end_date: '2022-01-31'
+                          open_enrollment_start_date: '2022-01-01'
+                          plans:
+                          - name: Dental Plus Plan
+                            plan_type: ppo
+                        medical:
+                          open_enrollment_end_date: '2022-01-31'
+                          open_enrollment_start_date: '2022-01-01'
+                          plans:
+                          - plan_id: 818e52d4-6c34-4914-b716-a3047c85e468
+                          - plan_id: f9897240-87f8-4d9d-a68f-58bc445fe0b2
+                          - metal_tier: bronze
+                            name: Select Plus PPO HDHP Bronze BRJJ /C38
+                            plan_type: ppo
+                  renewal_date: '2022-01-01'
+            schema:
+              $ref: '#/components/schemas/RenewalDecisionCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              example:
+                body:
+                  carriers:
+                  - carrier_id: bf81f0c4-3105-4240-b62b-aa6de3f607e4
+                    lines_of_coverage:
+                      dental:
+                        open_enrollment_end_date: '2022-01-31'
+                        open_enrollment_start_date: '2022-01-01'
+                        plans:
+                        - name: Dental Plus Plan
+                          plan_id: 44bc0f4a-0a94-11ec-9a03-0242ac130003
+                      medical:
+                        open_enrollment_end_date: '2022-01-31'
+                        open_enrollment_start_date: '2022-01-01'
+                        plans:
+                        - name: Select Plus PPO HDHP Gold BRJJ /C38
+                          plan_id: 818e52d4-6c34-4914-b716-a3047c85e468
+                        - name: Select Plus PPO HDHP Silver BRJJ /C38
+                          plan_id: f9897240-87f8-4d9d-a68f-58bc445fe0b2
+                        - name: Select Plus PPO HDHP Bronze BRJJ /C38
+                          plan_id: 19437852-3795-4cb4-939c-a86543eabee0
+                created: 1557862286
+                group_id: 2c4d5515-6bf8-4f8c-821a-9c56374198b2
+                id: b5f2b5f7-0336-45f7-baf1-7e11dfac50a6
+                issues: []
+                modified: 1557862286
+                renewal_date: '2022-01-01'
+                status: submitted
+                version: 23be0ba3-1183-4e8e-8e9d-644527414c6e
+              schema:
+                $ref: '#/components/schemas/RenewalDecisionResult'
+          description: Successful Response - Returns the new Renewal Decision
+      summary: Create a new renewal decision
+      tags:
+      - Renewal Decisions
+  /api/v1/groups/{group_id}/renewal_decisions/{renewal_decision_id}:
+    x-summary: Renewal decisions by id
+    get:
+      description: Returns a renewal decision by ID.
+      operationId: getRenewalDecision
+      parameters:
+      - description: The unique identifier of the group for which you are retrieving a renewal decision
+        in: path
+        name: group_id
+        required: true
+        schema:
+          example: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+          format: uuid
+          type: string
+      - description: The unique identifier of the renewal decision you want to retrieve
+        in: path
+        name: renewal_decision_id
+        required: true
+        schema:
+          example: 4093a441-d4c8-4c8a-24d1-e7a132fb1bc2
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                body:
+                  carriers:
+                  - carrier_id: bf81f0c4-3105-4240-b62b-aa6de3f607e4
+                    lines_of_coverage:
+                      dental:
+                        open_enrollment_end_date: '2022-01-31'
+                        open_enrollment_start_date: '2022-01-01'
+                        plans:
+                        - name: Dental Plus Plan
+                          plan_id: 81803f12-0a96-11ec-9a03-0242ac130003
+                      medical:
+                        open_enrollment_end_date: '2022-01-31'
+                        open_enrollment_start_date: '2022-01-01'
+                        plans:
+                        - name: Select Plus PPO HDHP Gold BRJJ /C38
+                          plan_id: 818e52d4-6c34-4914-b716-a3047c85e468
+                        - name: Select Plus PPO HDHP Silver BRJJ /C38
+                          plan_id: f9897240-87f8-4d9d-a68f-58bc445fe0b2
+                        - name: Select Plus PPO HDHP Bronze BRJJ /C38
+                          plan_id: 19437852-3795-4cb4-939c-a86543eabee0
+                created: 1557862286
+                group_id: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+                id: b5f2b5f7-0336-45f7-baf1-7e11dfac50a6
+                issues:
+                - level: error
+                  message: Life open enrollment start date is 2021-08-01 in carrier system
+                - level: error
+                  message: LTD Plan not available yet in carrier system
+                modified: 1557862286
+                renewal_date: '2022-01-01'
+                status: not_ready
+                version: 23be0ba3-1183-4e8e-8e9d-644527414c6e
+              schema:
+                $ref: '#/components/schemas/RenewalDecisionResult'
+          description: Successful Response - Returns the found renewal decision.
+      summary: Get an existing renewal decision by id
+      tags:
+      - Renewal Decisions
+  /api/v1/renewal_decisions:
+    get:
+      description: Returns all renewal decisions. This includes the status, which determines whether the carrier is ready to accept member requests for the new plan year. If the status is `not_ready`, Noyo will return one or more issues, each with a level and message.
+      operationId: getRenewalDecisions
+      parameters:
+      - description: Group name to filter by, exact match
+        in: query
+        name: group_name
+        required: false
+        schema:
+          example: Company Inc
+          format: string
+          type: string
+      - description: Status to filter by, exact match
+        in: query
+        name: status
+        required: false
+        schema:
+          example: ready
+          format: string
+          type: string
+      - description: Filter request by renewal date starting from date provided
+        in: query
+        name: start_date
+        required: false
+        schema:
+          example: Mon, 01 Jan 2024 00:00:00 GMT
+          format: date
+          type: string
+      - description: Filter request by renewal date up to date provided
+        in: query
+        name: end_date
+        required: false
+        schema:
+          example: Mon, 01 Jan 2024 00:00:00 GMT
+          format: date
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                meta:
+                  offset: 0
+                  page_num: 1
+                  page_size: 20
+                  total_records: 1
+                response:
+                - body:
+                    carriers:
+                    - carrier_id: bf81f0c4-3105-4240-b62b-aa6de3f607e4
+                      lines_of_coverage:
+                        dental:
+                          open_enrollment_end_date: '2022-01-31'
+                          open_enrollment_start_date: '2022-01-01'
+                          plans:
+                          - name: Dental Plus Plan
+                        medical:
+                          open_enrollment_end_date: '2022-01-31'
+                          open_enrollment_start_date: '2022-01-01'
+                          plans:
+                          - plan_id: 818e52d4-6c34-4914-b716-a3047c85e468
+                          - plan_id: f9897240-87f8-4d9d-a68f-58bc445fe0b2
+                          - name: Select Plus PPO HDHP Bronze BRJJ /C38
+                  created: 1557862286
+                  group_id: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+                  id: b5f2b5f7-0336-45f7-baf1-7e11dfac50a6
+                  issues:
+                  - level: error
+                    message: Life open enrollment start date is 2021-08-01 in carrier system
+                  - level: error
+                    message: LTD Plan not available yet in carrier system
+                  modified: 1557862286
+                  renewal_date: '2022-01-01'
+                  status: not_ready
+                  version: 23be0ba3-1183-4e8e-8e9d-644527414c6e
+              schema:
+                $ref: '#/components/schemas/PaginatedRenewalDecisionResult'
+          description: Successful Response - Returns the found renewal decisions.
+      summary: Get renewal decisions
+      tags:
+      - Renewal Decisions
+  /api/v1/renewal_decisions/{renewal_decision_id}/{version}:
+    x-summary: Edit renewal decision by id
+    put:
+      description: Edit an existing renewal decision for a group.
+      operationId: editRenewalDecision
+      parameters:
+      - description: The unique identifier of the renewal decision you want to edit
+        in: path
+        name: renewal_decision_id
+        required: true
+        schema:
+          example: 4093a441-d4c8-4c8a-24d1-e7a132fb1bc2
+          format: uuid
+          type: string
+      - description: The unique identifier of the renewal decision version you want to edit
+        in: path
+        name: version
+        required: true
+        schema:
+          example: d012e6ac-05dd-4cbe-8666-940af78c9e56
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              success:
+                value:
+                  body:
+                    carriers:
+                    - carrier_id: bf81f0c4-3105-4240-b62b-aa6de3f607e4
+                      lines_of_coverage:
+                        dental:
+                          open_enrollment_end_date: '2022-01-31'
+                          open_enrollment_start_date: '2022-01-01'
+                          plans:
+                          - name: Dental Plus Plan
+                            plan_type: ppo
+                        medical:
+                          open_enrollment_end_date: '2022-01-31'
+                          open_enrollment_start_date: '2022-01-01'
+                          plans:
+                          - plan_id: 818e52d4-6c34-4914-b716-a3047c85e468
+                          - plan_id: f9897240-87f8-4d9d-a68f-58bc445fe0b2
+                          - metal_tier: bronze
+                            name: Select Plus PPO HDHP Bronze BRJJ /C38
+                            plan_type: ppo
+                  renewal_date: '2022-01-01'
+            schema:
+              $ref: '#/components/schemas/RenewalDecisionEditRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                body:
+                  carriers:
+                  - carrier_id: bf81f0c4-3105-4240-b62b-aa6de3f607e4
+                    lines_of_coverage:
+                      dental:
+                        open_enrollment_end_date: '2022-01-31'
+                        open_enrollment_start_date: '2022-01-01'
+                        plans:
+                        - name: Dental Plus Plan
+                          plan_id: 44bc0f4a-0a94-11ec-9a03-0242ac130003
+                      medical:
+                        open_enrollment_end_date: '2022-01-31'
+                        open_enrollment_start_date: '2022-01-01'
+                        plans:
+                        - name: Select Plus PPO HDHP Gold BRJJ /C38
+                          plan_id: 818e52d4-6c34-4914-b716-a3047c85e468
+                        - name: Select Plus PPO HDHP Silver BRJJ /C38
+                          plan_id: f9897240-87f8-4d9d-a68f-58bc445fe0b2
+                        - name: Select Plus PPO HDHP Bronze BRJJ /C38
+                          plan_id: 19437852-3795-4cb4-939c-a86543eabee0
+                created: 1557862286
+                group_id: 2c4d5515-6bf8-4f8c-821a-9c56374198b2
+                id: b5f2b5f7-0336-45f7-baf1-7e11dfac50a6
+                issues: []
+                modified: 1557862286
+                renewal_date: '2022-01-01'
+                status: submitted
+                version: 23be0ba3-1183-4e8e-8e9d-644527414c6e
+              schema:
+                $ref: '#/components/schemas/RenewalDecisionResult'
+          description: Successful Response - Returns the edited Renewal Decision
+      summary: Edit a renewal decision
+      tags:
+      - Renewal Decisions
+  /ui/v1/renewal_decisions:
+    get:
+      description: Returns all renewal decisions for UI purposes. This includes the status, which determines whether the carrier is ready to accept member requests for the new plan year. If the status is `not_ready`, Noyo will return one or more issues, each with a level and message.
+      operationId: uiGetRenewalDecisions
+      parameters:
+      - description: Group name to filter by, partial match
+        in: query
+        name: group_name
+        required: false
+        schema:
+          example: Company Inc
+          format: string
+          type: string
+      - description: Status to filter by
+        in: query
+        name: status
+        required: false
+        schema:
+          example: ready
+          format: string
+          type: string
+      - description: Filter request by renewal date starting from date provided
+        in: query
+        name: start_date
+        required: false
+        schema:
+          example: Mon, 01 Jan 2024 00:00:00 GMT
+          format: date
+          type: string
+      - description: Filter request by renewal date up to date provided
+        in: query
+        name: end_date
+        required: false
+        schema:
+          example: Mon, 01 Jan 2024 00:00:00 GMT
+          format: date
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                meta:
+                  offset: 0
+                  page_num: 1
+                  page_size: 20
+                  total_records: 1
+                response:
+                - group:
+                    dba_name: Test Corp
+                    federal_ein: '112222222'
+                    id: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+                    name: Test Company
+                    organization_id: d61fa455-adf4-4dc4-8c57-6d779ba9475e
+                    sic_code: '7371'
+                    version: 6b72d72d-cc99-4df6-8152-7183e824c80c
+                  renewal_decision:
+                    body:
+                      carriers:
+                      - carrier_id: bf81f0c4-3105-4240-b62b-aa6de3f607e4
+                        lines_of_coverage:
+                          dental:
+                            open_enrollment_end_date: '2022-01-31'
+                            open_enrollment_start_date: '2022-01-01'
+                            plans:
+                            - name: Dental Plus Plan
+                          medical:
+                            open_enrollment_end_date: '2022-01-31'
+                            open_enrollment_start_date: '2022-01-01'
+                            plans:
+                            - plan_id: 818e52d4-6c34-4914-b716-a3047c85e468
+                            - plan_id: f9897240-87f8-4d9d-a68f-58bc445fe0b2
+                            - name: Select Plus PPO HDHP Bronze BRJJ /C38
+                    created: 1557862286
+                    id: b5f2b5f7-0336-45f7-baf1-7e11dfac50a6
+                    issues:
+                    - level: error
+                      message: Life open enrollment start date is 2021-08-01 in carrier system
+                    - level: error
+                      message: LTD Plan not available yet in carrier system
+                    modified: 1557862286
+                    renewal_date: '2022-01-01'
+                    status: not_ready
+                    version: 23be0ba3-1183-4e8e-8e9d-644527414c6e
+              schema:
+                $ref: '#/components/schemas/PaginatedUIRenewalDecisionResult'
+          description: Successful Response - Returns the found renewal decisions.
+      summary: Get renewal decisions for UI purposes
+      tags:
+      - Renewal Decisions
+  /ui/v1/renewal_decisions/counts:
+    get:
+      description: Retrieve counts of renewal decisions broken down by attributes
+      operationId: getRenewalDecisionCounts
+      parameters:
+      - description: Comma separated attributes to count by
+        in: query
+        name: counts_by
+        required: false
+        schema:
+          type: string
+      - description: Group name to filter by, partial match
+        in: query
+        name: group_name
+        required: false
+        schema:
+          example: Company Inc
+          format: string
+          type: string
+      - description: Status to filter by
+        in: query
+        name: status
+        required: false
+        schema:
+          example: ready
+          format: string
+          type: string
+      - description: Filter request by renewal date starting from date provided
+        in: query
+        name: start_date
+        required: false
+        schema:
+          example: Mon, 01 Jan 2024 00:00:00 GMT
+          format: date
+          type: string
+      - description: Filter request by renewal date up to date provided
+        in: query
+        name: end_date
+        required: false
+        schema:
+          example: Mon, 01 Jan 2024 00:00:00 GMT
+          format: date
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                response:
+                - count: 10
+              schema:
+                $ref: '#/components/schemas/RenewalDecisionCountsResult'
+          description: Successful Response - Returns the counts.
+      summary: Get counts of renewal decisions by various attributes
+      tags:
+      - Renewal Decisions
+  /ui/v1/renewal_decisions/{renewal_decision_id}/{version}/done:
+    x-summary: Mark a renewal decision as done
+    put:
+      description: Mark an existing "ready" status renewal decision as done
+      operationId: markRenewalDecisionDone
+      parameters:
+      - description: The unique identifier of the renewal decision you want to edit
+        in: path
+        name: renewal_decision_id
+        required: true
+        schema:
+          example: 4093a441-d4c8-4c8a-24d1-e7a132fb1bc2
+          format: uuid
+          type: string
+      - description: The unique identifier of the renewal decision version you want to edit
+        in: path
+        name: version
+        required: true
+        schema:
+          example: d012e6ac-05dd-4cbe-8666-940af78c9e56
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                body:
+                  carriers:
+                  - carrier_id: bf81f0c4-3105-4240-b62b-aa6de3f607e4
+                    lines_of_coverage:
+                      dental:
+                        open_enrollment_end_date: '2022-01-31'
+                        open_enrollment_start_date: '2022-01-01'
+                        plans:
+                        - name: Dental Plus Plan
+                          plan_id: 44bc0f4a-0a94-11ec-9a03-0242ac130003
+                      medical:
+                        open_enrollment_end_date: '2022-01-31'
+                        open_enrollment_start_date: '2022-01-01'
+                        plans:
+                        - name: Select Plus PPO HDHP Gold BRJJ /C38
+                          plan_id: 818e52d4-6c34-4914-b716-a3047c85e468
+                        - name: Select Plus PPO HDHP Silver BRJJ /C38
+                          plan_id: f9897240-87f8-4d9d-a68f-58bc445fe0b2
+                        - name: Select Plus PPO HDHP Bronze BRJJ /C38
+                          plan_id: 19437852-3795-4cb4-939c-a86543eabee0
+                created: 1557862286
+                group_id: 2c4d5515-6bf8-4f8c-821a-9c56374198b2
+                id: b5f2b5f7-0336-45f7-baf1-7e11dfac50a6
+                issues: []
+                modified: 1557862286
+                renewal_date: '2022-01-01'
+                status: done
+                version: 23be0ba3-1183-4e8e-8e9d-644527414c6e
+              schema:
+                $ref: '#/components/schemas/RenewalDecisionResult'
+          description: Successful Response - Returns the updated Renewal Decision
+      summary: Mark a renewal decision as done
+      tags:
+      - Renewal Decisions
+components:
+  schemas:
+    RenewalDecisionHealthFundLOC:
+      properties:
+        open_enrollment_end_date:
+          description: ISO-8601 date string for the end of the open enrollment period when member requests and changes can be processed
+          example: '2022-02-01'
+          format: date
+          type: string
+        open_enrollment_start_date:
+          description: ISO-8601 date string for the start of the open enrollment period when member requests and changes can be processed
+          example: '2022-01-01'
+          format: date
+          type: string
+        plans:
+          description: Open enrollment information related to health fund plans
+          items:
+            $ref: '#/components/schemas/RenewalDecisionHealthFundPlan'
+          minItems: 1
+          type: array
+      type: object
+      x-field_order:
+      - open_enrollment_start_date
+      - open_enrollment_end_date
+      - plans
+    RenewalDecisionBody:
+      properties:
+        carriers:
+          description: Carrier-specific open enrollment information
+          items:
+            $ref: '#/components/schemas/RenewalDecisionCarrier'
+          minItems: 1
+          type: array
+      required:
+      - carriers
+      type: object
+    RenewalDecisionADDPlan:
+      properties:
+        name:
+          description: Name of the group plan
+          type: string
+        plan_id:
+          description: Unique ID of a group plan that exists in the Noyo system
+          format: uuid
+          type: string
+      type: object
+      x-field_order:
+      - plan_id
+      - name
+    RenewalDecisionWellnessLOC:
+      properties:
+        open_enrollment_end_date:
+          description: ISO-8601 date string for the end of the open enrollment period when member requests and changes can be processed
+          example: '2022-02-01'
+          format: date
+          type: string
+        open_enrollment_start_date:
+          description: ISO-8601 date string for the start of the open enrollment period when member requests and changes can be processed
+          example: '2022-01-01'
+          format: date
+          type: string
+        plans:
+          description: Open enrollment information related to wellness plans
+          items:
+            $ref: '#/components/schemas/RenewalDecisionWellnessPlan'
+          minItems: 1
+          type: array
+      type: object
+    RenewalDecisionIssue1:
+      properties:
+        carrier_id:
+          description: Unique identifier of the associated carrier in Noyo
+          format: uuid
+          type: string
+        level:
+          description: The level or severity of the issue found
+          enum:
+          - warning
+          - error
+          type: string
+        line_of_coverage:
+          description: Line of coverage related to the issue
+          type: string
+        message:
+          description: Message describing the issue found and any steps to resolve
+          type: string
+      required:
+      - level
+      - message
+      type: object
+    RenewalDecisionWellnessPlan:
+      properties:
+        name:
+          description: Name of the group plan
+          type: string
+        plan_id:
+          description: Unique ID of a group plan that exists in the Noyo system
+          format: uuid
+          type: string
+      type: object
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+    RenewalDecisionCountsResult:
+      properties:
+        response:
+          items:
+            type: object
+          type: array
+      type: object
+      x-field_order: []
+    RenewalDecisionLifePlan:
+      properties:
+        name:
+          description: Name of the group plan
+          type: string
+        plan_id:
+          description: Unique ID of a group plan that exists in the Noyo system
+          format: uuid
+          type: string
+      type: object
+      x-field_order:
+      - plan_id
+      - name
+    RenewalDecisionMedicalLOC:
+      properties:
+        open_enrollment_end_date:
+          description: ISO-8601 date string for the end of the open enrollment period when member requests and changes can be processed
+          example: '2022-02-01'
+          format: date
+          type: string
+        open_enrollment_start_date:
+          description: ISO-8601 date string for the start of the open enrollment period when member requests and changes can be processed
+          example: '2022-01-01'
+          format: date
+          type: string
+        plans:
+          description: Open enrollment information related to medical plans
+          items:
+            $ref: '#/components/schemas/RenewalDecisionMedicalPlan'
+          minItems: 1
+          type: array
+      type: object
+      x-field_order:
+      - open_enrollment_start_date
+      - open_enrollment_end_date
+      - plans
+    RenewalDecisionCarrier:
+      properties:
+        carrier_id:
+          description: Unique identifier of the carrier in Noyo
+          format: uuid
+          type: string
+        lines_of_coverage:
+          allOf:
+          - $ref: '#/components/schemas/RenewalDecisionLinesOfCoverage'
+          description: Expected open enrollment information for each line of coverage
+      required:
+      - carrier_id
+      type: object
+      x-field_order:
+      - carrier_id
+      - lines_of_coverage
+    RenewalDecisionEditRequest:
+      properties:
+        body:
+          allOf:
+          - $ref: '#/components/schemas/RenewalDecisionBody'
+          description: The carrier and coverage expectations for the open enrollment period
+        renewal_date:
+          description: The start date for the new enrollment year when all coverage changes and decisions should become active
+          format: date
+          type: string
+      type: object
+      x-field_order:
+      - renewal_date
+      - body
+    RenewalDecisionLTDLOC:
+      properties:
+        open_enrollment_end_date:
+          description: ISO-8601 date string for the end of the open enrollment period when member requests and changes can be processed
+          example: '2022-02-01'
+          format: date
+          type: string
+        open_enrollment_start_date:
+          description: ISO-8601 date string for the start of the open enrollment period when member requests and changes can be processed
+          example: '2022-01-01'
+          format: date
+          type: string
+        plans:
+          description: Open enrollment information related to LTD plans
+          items:
+            $ref: '#/components/schemas/RenewalDecisionLTDPlan'
+          minItems: 1
+          type: array
+      type: object
+      x-field_order:
+      - open_enrollment_start_date
+      - open_enrollment_end_date
+      - plans
+    RenewalDecisionCancerLOC:
+      properties:
+        open_enrollment_end_date:
+          description: ISO-8601 date string for the end of the open enrollment period when member requests and changes can be processed
+          example: '2022-02-01'
+          format: date
+          type: string
+        open_enrollment_start_date:
+          description: ISO-8601 date string for the start of the open enrollment period when member requests and changes can be processed
+          example: '2022-01-01'
+          format: date
+          type: string
+        plans:
+          description: Open enrollment information related to cancer plans
+          items:
+            $ref: '#/components/schemas/RenewalDecisionCancerPlan'
+          minItems: 1
+          type: array
+      type: object
+      x-field_order:
+      - open_enrollment_start_date
+      - open_enrollment_end_date
+      - plans
+    RenewalDecisionCriticalIllnessLOC:
+      properties:
+        open_enrollment_end_date:
+          description: ISO-8601 date string for the end of the open enrollment period when member requests and changes can be processed
+          example: '2022-02-01'
+          format: date
+          type: string
+        open_enrollment_start_date:
+          description: ISO-8601 date string for the start of the open enrollment period when member requests and changes can be processed
+          example: '2022-01-01'
+          format: date
+          type: string
+        plans:
+          description: Open enrollment information related to critical illness plans
+          items:
+            $ref: '#/components/schemas/RenewalDecisionCriticalIllnessPlan'
+          minItems: 1
+          type: array
+      type: object
+      x-field_order:
+      - open_enrollment_start_date
+      - open_enrollment_end_date
+      - plans
+    RenewalDecisionSTDPlan:
+      properties:
+        name:
+          description: Name of the group plan
+          type: string
+        plan_id:
+          description: Unique ID of a group plan that exists in the Noyo system
+          format: uuid
+          type: string
+      type: object
+      x-field_order:
+      - plan_id
+      - name
+    RenewalDecisionLinesOfCoverage:
+      properties:
+        accident:
+          allOf:
+          - $ref: '#/components/schemas/RenewalDecisionAccidentLOC'
+          description: Open enrollment information relating to accident plans
+        add:
+          allOf:
+          - $ref: '#/components/schemas/RenewalDecisionADDLOC'
+          description: Open enrollment information relating to AD&D plans
+        cancer:
+          allOf:
+          - $ref: '#/components/schemas/RenewalDecisionCancerLOC'
+          description: Open enrollment information relating to cancer plans
+        critical_illness:
+          allOf:
+          - $ref: '#/components/schemas/RenewalDecisionCriticalIllnessLOC'
+          description: Open enrollment information relating to critical illness plans
+        dental:
+          allOf:
+          - $ref: '#/components/schemas/RenewalDecisionDentalLOC'
+          description: Open enrollment information relating to dental plans
+        health_fund:
+          allOf:
+          - $ref: '#/components/schemas/RenewalDecisionHealthFundLOC'
+          description: Open enrollment information relating to health fund plans
+        hospital_indemnity:
+          allOf:
+          - $ref: '#/components/schemas/RenewalDecisionHospitalIndemnityLOC'
+          description: Open enrollment information relating to hospital indemnity plans
+        life:
+          allOf:
+          - $ref: '#/components/schemas/RenewalDecisionLifeLOC'
+          description: Open enrollment information relating to life plans
+        ltd:
+          allOf:
+          - $ref: '#/components/schemas/RenewalDecisionLTDLOC'
+          description: Open enrollment information relating to LTD plans
+        medical:
+          allOf:
+          - $ref: '#/components/schemas/RenewalDecisionMedicalLOC'
+          description: Open enrollment information relating to medical plans
+        pharmacy:
+          allOf:
+          - $ref: '#/components/schemas/RenewalDecisionPharmacyLOC'
+          description: Open enrollment information relating to pharmacy plans
+        std:
+          allOf:
+          - $ref: '#/components/schemas/RenewalDecisionSTDLOC'
+          description: Open enrollment information relating to STD plans
+        vision:
+          allOf:
+          - $ref: '#/components/schemas/RenewalDecisionVisionLOC'
+          description: Open enrollment information relating to vision plans
+        wellness:
+          allOf:
+          - $ref: '#/components/schemas/RenewalDecisionWellnessLOC'
+          description: Open enrollment information relating to wellness plans
+      type: object
+      x-field_order:
+      - medical
+      - dental
+      - vision
+      - life
+      - add
+      - std
+      - ltd
+      - accident
+      - critical_illness
+      - cancer
+      - health_fund
+      - hospital_indemnity
+      - pharmacy
+      - wellness
+    RenewalDecisionVisionPlan:
+      properties:
+        name:
+          description: Name of the group plan
+          type: string
+        plan_id:
+          description: Unique ID of a group plan that exists in the Noyo system
+          format: uuid
+          type: string
+      type: object
+      x-field_order:
+      - plan_id
+      - name
+    RenewalDecisionHospitalIndemnityLOC:
+      properties:
+        open_enrollment_end_date:
+          description: ISO-8601 date string for the end of the open enrollment period when member requests and changes can be processed
+          example: '2022-02-01'
+          format: date
+          type: string
+        open_enrollment_start_date:
+          description: ISO-8601 date string for the start of the open enrollment period when member requests and changes can be processed
+          example: '2022-01-01'
+          format: date
+          type: string
+        plans:
+          description: Open enrollment information related to hospital indemnity plans
+          items:
+            $ref: '#/components/schemas/RenewalDecisionHospitalIndemnityPlan'
+          minItems: 1
+          type: array
+      type: object
+      x-field_order:
+      - open_enrollment_start_date
+      - open_enrollment_end_date
+      - plans
+    RenewalDecisionDentalPlan:
+      properties:
+        name:
+          description: Name of the group plan
+          type: string
+        plan_id:
+          description: Unique ID of a group plan that exists in the Noyo system
+          format: uuid
+          type: string
+      type: object
+      x-field_order:
+      - plan_id
+      - name
+    GroupResult:
+      properties:
+        created:
+          description: The date the record was created
+          type: integer
+        dba_name:
+          description: DBA name for the company, if applicable
+          example: Floors R Us
+          type: string
+        federal_ein:
+          description: Federal Employer Identification Number for the company
+          example: '112222222'
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        name:
+          description: Name of the group
+          example: ACME Flooring
+          type: string
+        organization_id:
+          description: Unique identifier of the platform or broker organization in Noyo
+          format: uuid
+          type: string
+        sic_code:
+          description: SIC Code of the group
+          example: '5713'
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - created
+      - id
+      - modified
+      - name
+      - version
+      type: object
+      x-field_order:
+      - id
+      - version
+      - created
+      - modified
+      - organization_id
+      - name
+      - sic_code
+      - dba_name
+      - federal_ein
+    RenewalDecisionLifeLOC:
+      properties:
+        open_enrollment_end_date:
+          description: ISO-8601 date string for the end of the open enrollment period when member requests and changes can be processed
+          example: '2022-02-01'
+          format: date
+          type: string
+        open_enrollment_start_date:
+          description: ISO-8601 date string for the start of the open enrollment period when member requests and changes can be processed
+          example: '2022-01-01'
+          format: date
+          type: string
+        plans:
+          description: Open enrollment information related to life plans
+          items:
+            $ref: '#/components/schemas/RenewalDecisionLifePlan'
+          minItems: 1
+          type: array
+      type: object
+      x-field_order:
+      - open_enrollment_start_date
+      - open_enrollment_end_date
+      - plans
+    PaginatedUIRenewalDecisionResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of renewal decisions.
+          items:
+            $ref: '#/components/schemas/UIRenewalDecisionResponse'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    RenewalDecisionVisionLOC:
+      properties:
+        open_enrollment_end_date:
+          description: ISO-8601 date string for the end of the open enrollment period when member requests and changes can be processed
+          example: '2022-02-01'
+          format: date
+          type: string
+        open_enrollment_start_date:
+          description: ISO-8601 date string for the start of the open enrollment period when member requests and changes can be processed
+          example: '2022-01-01'
+          format: date
+          type: string
+        plans:
+          description: Open enrollment information related to vision plans
+          items:
+            $ref: '#/components/schemas/RenewalDecisionVisionPlan'
+          minItems: 1
+          type: array
+      type: object
+      x-field_order:
+      - open_enrollment_start_date
+      - open_enrollment_end_date
+      - plans
+    RenewalDecisionHealthFundPlan:
+      properties:
+        name:
+          description: Name of the group plan
+          type: string
+        plan_id:
+          description: Unique ID of a group plan that exists in the Noyo system
+          format: uuid
+          type: string
+      type: object
+      x-field_order:
+      - plan_id
+      - name
+    RenewalDecisionCancerPlan:
+      properties:
+        name:
+          description: Name of the group plan
+          type: string
+        plan_id:
+          description: Unique ID of a group plan that exists in the Noyo system
+          format: uuid
+          type: string
+      type: object
+      x-field_order:
+      - plan_id
+      - name
+    RenewalDecisionPharmacyPlan:
+      properties:
+        name:
+          description: Name of the group plan
+          type: string
+        plan_id:
+          description: Unique ID of a group plan that exists in the Noyo system
+          format: uuid
+          type: string
+      type: object
+      x-field_order:
+      - plan_id
+      - name
+    UIRenewalDecisionResult:
+      properties:
+        body:
+          allOf:
+          - $ref: '#/components/schemas/RenewalDecisionBody'
+          description: The carrier and line of coverage data related to the open enrollment period
+        created:
+          description: The date the record was created
+          type: integer
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        issues:
+          description: List of any issues that explain why the open enrollment is 'not_ready'. Will be empty if it is status 'ready' or 'submitted'.
+          items:
+            $ref: '#/components/schemas/RenewalDecisionIssue'
+          type: array
+        modified:
+          description: The date the record was last updated
+          type: integer
+        renewal_date:
+          description: The renewal (start) date for this particular open enrollment period
+          format: date
+          readOnly: true
+          type: string
+        status:
+          description: The status on whether or not the renewal decision matches the carrier system
+          enum:
+          - submitted
+          - not_ready
+          - ready
+          - done
+          readOnly: true
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - body
+      - created
+      - id
+      - issues
+      - modified
+      - renewal_date
+      - status
+      - version
+      type: object
+    RenewalDecisionMedicalPlan:
+      properties:
+        name:
+          description: Name of the group plan
+          type: string
+        plan_id:
+          description: Unique ID of a group plan that exists in the Noyo system
+          format: uuid
+          type: string
+      type: object
+      x-field_order:
+      - plan_id
+      - name
+    RenewalDecisionIssue:
+      properties:
+        carrier_id:
+          description: Unique identifier of the associated carrier in Noyo
+          format: uuid
+          type: string
+        level:
+          description: The level or severity of the issue found
+          enum:
+          - warning
+          - error
+          type: string
+        line_of_coverage:
+          description: Line of coverage related to the issue
+          type: string
+        message:
+          description: Message describing the issue found and any steps to resolve
+          type: string
+      required:
+      - level
+      - message
+      type: object
+      x-field_order:
+      - level
+      - message
+      - carrier_id
+      - line_of_coverage
+    RenewalDecisionHospitalIndemnityPlan:
+      properties:
+        name:
+          description: Name of the group plan
+          type: string
+        plan_id:
+          description: Unique ID of a group plan that exists in the Noyo system
+          format: uuid
+          type: string
+      type: object
+      x-field_order:
+      - plan_id
+      - name
+    RenewalDecisionAccidentLOC:
+      properties:
+        open_enrollment_end_date:
+          description: ISO-8601 date string for the end of the open enrollment period when member requests and changes can be processed
+          example: '2022-02-01'
+          format: date
+          type: string
+        open_enrollment_start_date:
+          description: ISO-8601 date string for the start of the open enrollment period when member requests and changes can be processed
+          example: '2022-01-01'
+          format: date
+          type: string
+        plans:
+          description: Open enrollment information related to accident plans
+          items:
+            $ref: '#/components/schemas/RenewalDecisionAccidentPlan'
+          minItems: 1
+          type: array
+      type: object
+      x-field_order:
+      - open_enrollment_start_date
+      - open_enrollment_end_date
+      - plans
+    UIRenewalDecisionResponse:
+      properties:
+        group:
+          allOf:
+          - $ref: '#/components/schemas/GroupResult'
+          description: Group data for this renewal decision.
+        renewal_decision:
+          allOf:
+          - $ref: '#/components/schemas/UIRenewalDecisionResult'
+          description: Renewal Decision information.
+      required:
+      - group
+      - renewal_decision
+      type: object
+    RenewalDecisionADDLOC:
+      properties:
+        open_enrollment_end_date:
+          description: ISO-8601 date string for the end of the open enrollment period when member requests and changes can be processed
+          example: '2022-02-01'
+          format: date
+          type: string
+        open_enrollment_start_date:
+          description: ISO-8601 date string for the start of the open enrollment period when member requests and changes can be processed
+          example: '2022-01-01'
+          format: date
+          type: string
+        plans:
+          description: Open enrollment information related to ADD plans
+          items:
+            $ref: '#/components/schemas/RenewalDecisionADDPlan'
+          minItems: 1
+          type: array
+      type: object
+      x-field_order:
+      - open_enrollment_start_date
+      - open_enrollment_end_date
+      - plans
+    RenewalDecisionCriticalIllnessPlan:
+      properties:
+        name:
+          description: Name of the group plan
+          type: string
+        plan_id:
+          description: Unique ID of a group plan that exists in the Noyo system
+          format: uuid
+          type: string
+      type: object
+      x-field_order:
+      - plan_id
+      - name
+    RenewalDecisionLTDPlan:
+      properties:
+        name:
+          description: Name of the group plan
+          type: string
+        plan_id:
+          description: Unique ID of a group plan that exists in the Noyo system
+          format: uuid
+          type: string
+      type: object
+      x-field_order:
+      - plan_id
+      - name
+    PaginatedRenewalDecisionResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of renewal decisions
+          items:
+            $ref: '#/components/schemas/RenewalDecisionResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    RenewalDecisionAccidentPlan:
+      properties:
+        name:
+          description: Name of the group plan
+          type: string
+        plan_id:
+          description: Unique ID of a group plan that exists in the Noyo system
+          format: uuid
+          type: string
+      type: object
+      x-field_order:
+      - plan_id
+      - name
+    RenewalDecisionPharmacyLOC:
+      properties:
+        open_enrollment_end_date:
+          description: ISO-8601 date string for the end of the open enrollment period when member requests and changes can be processed
+          example: '2022-02-01'
+          format: date
+          type: string
+        open_enrollment_start_date:
+          description: ISO-8601 date string for the start of the open enrollment period when member requests and changes can be processed
+          example: '2022-01-01'
+          format: date
+          type: string
+        plans:
+          description: Open enrollment information related to pharmacy plans
+          items:
+            $ref: '#/components/schemas/RenewalDecisionPharmacyPlan'
+          minItems: 1
+          type: array
+      type: object
+      x-field_order:
+      - open_enrollment_start_date
+      - open_enrollment_end_date
+      - plans
+    RenewalDecisionDentalLOC:
+      properties:
+        open_enrollment_end_date:
+          description: ISO-8601 date string for the end of the open enrollment period when member requests and changes can be processed
+          example: '2022-02-01'
+          format: date
+          type: string
+        open_enrollment_start_date:
+          description: ISO-8601 date string for the start of the open enrollment period when member requests and changes can be processed
+          example: '2022-01-01'
+          format: date
+          type: string
+        plans:
+          description: Open enrollment information related to dental plans
+          items:
+            $ref: '#/components/schemas/RenewalDecisionDentalPlan'
+          minItems: 1
+          type: array
+      type: object
+      x-field_order:
+      - open_enrollment_start_date
+      - open_enrollment_end_date
+      - plans
+    RenewalDecisionResult:
+      properties:
+        body:
+          allOf:
+          - $ref: '#/components/schemas/RenewalDecisionBody'
+          description: The carrier and coverage expectations for the open enrollment period
+        created:
+          description: The date the record was created
+          type: integer
+        group_id:
+          description: Unique identifier of the group in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        issues:
+          description: List of any issues that explain why the open enrollment is 'not_ready'. Will be empty if it is status 'ready' or 'submitted'.
+          items:
+            $ref: '#/components/schemas/RenewalDecisionIssue1'
+          type: array
+        modified:
+          description: The date the record was last updated
+          type: integer
+        renewal_date:
+          description: The start date for the new enrollment year when all coverage changes and decisions should become active
+          format: date
+          readOnly: true
+          type: string
+        status:
+          description: Calculated status based on whether or not the carrier system matches the expected renewal decisions
+          enum:
+          - submitted
+          - not_ready
+          - ready
+          - done
+          readOnly: true
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - body
+      - created
+      - group_id
+      - id
+      - issues
+      - modified
+      - renewal_date
+      - status
+      - version
+      type: object
+      x-field_order:
+      - id
+      - version
+      - created
+      - modified
+      - status
+      - group_id
+      - renewal_date
+      - body
+      - issues
+    RenewalDecisionCreateRequest:
+      properties:
+        body:
+          allOf:
+          - $ref: '#/components/schemas/RenewalDecisionBody'
+          description: The carrier and coverage expectations for the open enrollment period
+        renewal_date:
+          description: The start date for the new enrollment year when all coverages should be active
+          format: date
+          type: string
+      required:
+      - body
+      - renewal_date
+      type: object
+      x-field_order:
+      - renewal_date
+      - body
+    RenewalDecisionSTDLOC:
+      properties:
+        open_enrollment_end_date:
+          description: ISO-8601 date string for the end of the open enrollment period when member requests and changes can be processed
+          example: '2022-02-01'
+          format: date
+          type: string
+        open_enrollment_start_date:
+          description: ISO-8601 date string for the start of the open enrollment period when member requests and changes can be processed
+          example: '2022-01-01'
+          format: date
+          type: string
+        plans:
+          description: Open enrollment information related to STD plans
+          items:
+            $ref: '#/components/schemas/RenewalDecisionSTDPlan'
+          minItems: 1
+          type: array
+      type: object
+      x-field_order:
+      - open_enrollment_start_date
+      - open_enrollment_end_date
+      - plans

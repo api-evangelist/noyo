@@ -1,0 +1,291 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Member Premiums API
+  version: 1.0.0
+servers: []
+tags:
+- name: Member Premiums
+paths:
+  /api/v1/employees/{employee_id}/premiums:
+    x-summary: Get Premiums for a single employee and family
+    get:
+      description: Returns list of Member Premium information for an employee and dependents
+      operationId: getMemberPremiumsByEmployeeId
+      parameters:
+      - description: Unique ID of the employee in Noyo
+        in: path
+        name: employee_id
+        required: true
+        schema:
+          example: 30b74a44-d5b1-4123-a7a4-6d3aec251ba4
+          format: uuid
+          type: string
+      - description: The relative date on which to view the state of the records. Defaults to today
+        in: query
+        name: effective_date
+        required: false
+        schema:
+          example: Tue, 01 Sep 2020 00:00:00 GMT
+          format: date
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                meta:
+                  offset: 0
+                  page_num: 1
+                  page_size: 20
+                  total_records: 2
+                response:
+                - amount: '50.00'
+                  billed_members:
+                  - line_of_coverage: dental
+                    member_id: 4638b93f-b20a-4922-82b1-0f406891e2e3
+                    member_type: employee
+                    plan_id: 8609ee91-772a-4047-8e2b-a79883cf05ea
+                  - line_of_coverage: vision
+                    member_id: 4638b93f-b20a-4922-82b1-0f406891e2e3
+                    member_type: employee
+                    plan_id: e1793d34-700b-4c14-9425-d0f4f426d4d0
+                  - line_of_coverage: dental
+                    member_id: 67309c4b-12f5-4bb0-92ce-a45639af9055
+                    member_type: dependent
+                    plan_id: 8609ee91-772a-4047-8e2b-a79883cf05ea
+                  - line_of_coverage: vision
+                    member_id: 8f5aaf65-c4e6-4909-9ebf-58b320645df2
+                    member_type: dependent
+                    plan_id: e1793d34-700b-4c14-9425-d0f4f426d4d0
+                  carrier_id: e2c76400-b505-432a-a1c1-c777bcec4648
+                  created: 1599184829
+                  effective_end_date: '2020-12-31'
+                  effective_start_date: '2020-01-01'
+                  modified: 1599292817
+                  period:
+                    amount: 1
+                    unit: month
+                  premium_type: employer_amount
+                - amount: '50.00'
+                  billed_members:
+                  - line_of_coverage: dental
+                    member_id: 4638b93f-b20a-4922-82b1-0f406891e2e3
+                    member_type: employee
+                    plan_id: 8609ee91-772a-4047-8e2b-a79883cf05ea
+                  - line_of_coverage: vision
+                    member_id: 4638b93f-b20a-4922-82b1-0f406891e2e3
+                    member_type: employee
+                    plan_id: e1793d34-700b-4c14-9425-d0f4f426d4d0
+                  - line_of_coverage: dental
+                    member_id: 67309c4b-12f5-4bb0-92ce-a45639af9055
+                    member_type: dependent
+                    plan_id: 8609ee91-772a-4047-8e2b-a79883cf05ea
+                  - line_of_coverage: vision
+                    member_id: 8f5aaf65-c4e6-4909-9ebf-58b320645df2
+                    member_type: dependent
+                    plan_id: e1793d34-700b-4c14-9425-d0f4f426d4d0
+                  carrier_id: e2c76400-b505-432a-a1c1-c777bcec4648
+                  created: 1599184829
+                  effective_end_date: '2020-12-31'
+                  effective_start_date: '2020-01-01'
+                  modified: 1599292817
+                  period:
+                    amount: 1
+                    unit: month
+                  premium_type: employee_amount
+              schema:
+                $ref: '#/components/schemas/PaginatedMemberPremiumResult'
+          description: Paginated List of Member Premiums
+      summary: Get a list of all Member Premiums
+      tags:
+      - Member Premiums
+components:
+  schemas:
+    PaginatedMemberPremiumResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of member premiums
+          items:
+            $ref: '#/components/schemas/MemberPremiumResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    MemberPremiumResult:
+      properties:
+        amount:
+          description: Total amount of the premium in USD
+          type: number
+        billed_members:
+          description: List of member enrollments that constitute the premium amount
+          items:
+            $ref: '#/components/schemas/MemberPremiumBilledMember'
+          type: array
+        carrier_id:
+          description: Unique ID of the carrier in Noyo
+          format: uuid
+          type: string
+        created:
+          description: The date the record was created
+          type: integer
+        effective_end_date:
+          description: ISO-8601 date string for the effective end date of the premium
+          example: '2020-12-31'
+          format: date
+          type: string
+        effective_start_date:
+          description: ISO-8601 date string for the effective start date of the premium
+          example: '2020-01-01'
+          format: date
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        period:
+          allOf:
+          - $ref: '#/components/schemas/MemberPremiumPeriod'
+          description: Time period for the premium
+        premium_type:
+          description: Premium type, either the total premium, or just the employer-paid or employee-paid portion
+          enum:
+          - total_amount
+          - employer_amount
+          - employee_amount
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - amount
+      - billed_members
+      - carrier_id
+      - created
+      - effective_start_date
+      - id
+      - modified
+      - period
+      - premium_type
+      - version
+      type: object
+      x-field_order:
+      - id
+      - version
+      - carrier_id
+      - amount
+      - period
+      - premium_type
+      - effective_start_date
+      - effective_end_date
+      - billed_members
+      - created
+      - modified
+    MemberPremiumBilledMember:
+      properties:
+        line_of_coverage:
+          description: Line of coverage for the billed group plan
+          enum:
+          - medical
+          - dental
+          - vision
+          - life
+          - add
+          - std
+          - ltd
+          - accident
+          - critical_illness
+          - cancer
+          - health_fund
+          - hospital_indemnity
+          - pharmacy
+          - wellness
+          type: string
+        member_id:
+          description: Unique ID of the billed member in Noyo
+          format: uuid
+          type: string
+        member_type:
+          description: Type of member for the billed premium
+          enum:
+          - dependent
+          - employee
+          type: string
+        plan_id:
+          description: Unique identifier of the billed group plan in Noyo
+          format: uuid
+          type: string
+      required:
+      - line_of_coverage
+      - member_id
+      - member_type
+      - plan_id
+      type: object
+      x-field_order:
+      - member_id
+      - member_type
+      - line_of_coverage
+      - plan_id
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+    MemberPremiumPeriod:
+      properties:
+        amount:
+          description: Length of premium period
+          format: int32
+          minimum: 1
+          type: integer
+        unit:
+          description: Unit frequency of premium period
+          enum:
+          - annual
+          - month
+          - semi-monthly
+          - week
+          - day
+          type: string
+      required:
+      - amount
+      - unit
+      type: object

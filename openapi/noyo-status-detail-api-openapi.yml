@@ -1,0 +1,171 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Status Detail API
+  version: 1.0.0
+servers: []
+tags:
+- name: Status Detail
+paths:
+  /api/v1/member_transactions/{transaction_id}/status_details:
+    x-summary: Get Status Details
+    get:
+      description: Returns a list of all status details for a given transaction.
+      operationId: getStatusDetailList
+      parameters:
+      - description: The unique identifier of the member transaction
+        in: path
+        name: transaction_id
+        required: true
+        schema:
+          example: 136e34f9-1eb5-4b31-af53-b3a37ef225ba
+          format: uuid
+          type: string
+      - description: The max size of each page of results
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+      - description: The integer offset at which to start the page. Possible values are 0 to total_records - 1
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      - description: The attribute on which to sort the status details
+        in: query
+        name: sort_by
+        required: false
+        schema:
+          type: string
+      - description: Either asc or desc, to denote the data's direction
+        in: query
+        name: sort_direction
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                meta:
+                  offset: 0
+                  page_num: 1
+                  page_size: 20
+                  total_records: 3
+                response:
+                - event_created: 1673510745
+                  status_detail: noyo_accepted
+                - event_created: 1673510857
+                  status_detail: carrier_accepted
+                - event_created: 1673510869
+                  status_detail: carrier_processing
+              schema:
+                $ref: '#/components/schemas/PaginatedStatusDetailResult'
+          description: Successful Response - Returns all Status Details
+      summary: Get a list of all Status Details
+      tags:
+      - Status Detail
+  /api/v1/member_transactions/{transaction_id}/status_details/latest:
+    x-summary: Get Latest Status Detail
+    get:
+      description: Returns the latest status detail for a given transaction.
+      operationId: getLatestStatusDetail
+      parameters:
+      - description: The unique identifier of the member transaction
+        in: path
+        name: transaction_id
+        required: true
+        schema:
+          example: 136e34f9-1eb5-4b31-af53-b3a37ef225ba
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                event_created: 1673510869
+                status_detail: carrier_accepted
+              schema:
+                $ref: '#/components/schemas/StatusDetailResult'
+          description: Successful Response - Returns the latest Status Detail
+      summary: Get latest Status Detail
+      tags:
+      - Status Detail
+components:
+  schemas:
+    StatusDetailResult:
+      properties:
+        event_created:
+          description: Timestamp indicating when the status detail was created
+          example: '1673452723'
+          type: integer
+        status_detail:
+          description: Type of Status detail
+          enum:
+          - noyo_accepted
+          - carrier_accepted
+          - carrier_processing
+          - carrier_completed
+          - noyo_verified
+          example: carrier_accepted
+          type: string
+      required:
+      - event_created
+      - status_detail
+      type: object
+      x-field_order:
+      - status_detail
+      - event_created
+    PaginatedStatusDetailResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of status detail results
+          items:
+            $ref: '#/components/schemas/StatusDetailResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object

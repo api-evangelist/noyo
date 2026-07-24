@@ -1,0 +1,291 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Mapping Operand API
+  version: 1.0.0
+servers: []
+tags:
+- name: Mapping Operand
+paths:
+  /api/v1/groups/{group_id}/mapping_operands:
+    get:
+      description: Get Mapping Operands for a Group
+      operationId: getMappingOperandsByGroup
+      parameters:
+      - description: The unique identifier of the group you want to get mapping_operands for
+        in: path
+        name: group_id
+        required: true
+        schema:
+          example: d61fa455-adf4-4dc4-8c57-6d779ba9475e
+          format: uuid
+          type: string
+      - description: Describes the type for the mapping_operand value looks like (string, integer, etc.)
+        in: query
+        name: field_type
+        required: false
+        schema:
+          example: string
+          type: string
+      - description: Describes the type for the mapping_operand value is used to map for (account_structure or plan_mapping)
+        in: query
+        name: mapping_type
+        required: false
+        schema:
+          example: plan_mapping
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                meta:
+                  offset: 0
+                  page_num: 1
+                  page_size: 20
+                  total_records: 1
+                response:
+                - created: 1599292817
+                  existing_value_set:
+                  - HQ
+                  - Austin
+                  - Durham
+                  field_type: string
+                  group_id: d61fa455-adf4-4dc4-8c57-6d779ba9475e
+                  id: ba9bbec3-f325-4ef3-9627-81cc7533303e
+                  mapping_type: account_structure
+                  modified: 159990018
+                  operand_path: classifications.BranchName
+                  version: 873d1fcc-2831-42b1-93ae-eed4bbe59a19
+              schema:
+                $ref: '#/components/schemas/PaginatedMappingOperandResult'
+          description: Successful Response - Returns Mapping Operands
+      summary: Get Mapping Operands by Group
+      tags:
+      - Mapping Operand
+  /api/v1/mapping_operands/{mapping_operand_id}:
+    get:
+      description: Get a mapping operand based on the ID provided. This will return the latest version of the mapping operand.
+      operationId: getMappingOperand
+      parameters:
+      - description: The unique identifier of the mapping operand you would like to get
+        in: path
+        name: mapping_operand_id
+        required: true
+        schema:
+          example: ba9bbec3-f325-4ef3-9627-81cc7533303e
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                created: 1599292817
+                existing_value_set:
+                - HQ
+                - Austin
+                - Durham
+                field_type: string
+                group_id: d61fa455-adf4-4dc4-8c57-6d779ba9475e
+                id: ba9bbec3-f325-4ef3-9627-81cc7533303e
+                mapping_type: account_structure
+                modified: 159990018
+                operand_path: classifications.BranchName
+                version: 873d1fcc-2831-42b1-93ae-eed4bbe59a19
+              schema:
+                $ref: '#/components/schemas/MappingOperandResult'
+          description: Successful Response - Returns the single Mapping Operand
+      summary: Get an existing Mapping Operand
+      tags:
+      - Mapping Operand
+  /ui/v1/group_mappings/{group_mapping_id}/mapping_operands:
+    get:
+      description: Get Mapping Operands for a Group Mapping
+      operationId: getMappingOperandsByGroupMapping
+      parameters:
+      - description: The unique identifier of the group mapping you want to get mapping_operands for
+        in: path
+        name: group_mapping_id
+        required: true
+        schema:
+          example: d61fa455-adf4-4dc4-8c57-6d779ba9475e
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                meta:
+                  offset: 0
+                  page_num: 1
+                  page_size: 20
+                  total_records: 1
+                response:
+                - carrier_mapped_field_ids:
+                  - 451c525d-fcfc-41ea-af34-9c4dfd701f37
+                  operand:
+                    created: 1599292817
+                    existing_value_set:
+                    - Dental Plan 500
+                    - Dental Plan for Dependents
+                    field_type: string
+                    group_id: d61fa455-adf4-4dc4-8c57-6d779ba9475e
+                    id: 476e7b59-ff85-4d89-a0d3-bbc74583254b
+                    mapping_type: plan
+                    modified: 159990018
+                    operand_path: group_dental_plans.plan_name
+                    version: 921718c3-15c9-4fed-be87-2215fd8a1ec2
+              schema:
+                $ref: '#/components/schemas/UIPaginatedMappingOperandResult'
+          description: Successful Response - Returns Mapping Operands
+      summary: Get Mapping Operands by Group Mapping
+      tags:
+      - Mapping Operand
+components:
+  schemas:
+    MappingOperandResult:
+      properties:
+        created:
+          description: The date the record was created
+          type: integer
+        existing_value_set:
+          description: List of values this operand can be one of
+          items:
+            type: string
+          readOnly: true
+          type: array
+        field_type:
+          description: Field type for the operand
+          readOnly: true
+          type: string
+        group_id:
+          description: Unique identifier of the group at Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        mapping_type:
+          description: Describes the type of mapping
+          readOnly: true
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        operand_path:
+          description: Path of the mapping operand from employee object
+          readOnly: true
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - created
+      - existing_value_set
+      - field_type
+      - group_id
+      - id
+      - mapping_type
+      - modified
+      - operand_path
+      - version
+      type: object
+      x-field_order:
+      - id
+      - version
+      - created
+      - modified
+      - group_id
+      - operand_path
+      - field_type
+      - mapping_type
+      - existing_value_set
+    PaginatedMappingOperandResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of mapping operands
+          items:
+            $ref: '#/components/schemas/MappingOperandResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+    UIPaginatedMappingOperandResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of mapping operands
+          items:
+            $ref: '#/components/schemas/UIMappingOperandResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    UIMappingOperandResult:
+      properties:
+        carrier_mapped_field_ids:
+          description: Associated carrier mapped fields
+          items:
+            format: uuid
+            type: string
+          type: array
+        operand:
+          allOf:
+          - $ref: '#/components/schemas/MappingOperandResult'
+          description: Mapping Operand
+      required:
+      - carrier_mapped_field_ids
+      - operand
+      type: object
+      x-field_order: []

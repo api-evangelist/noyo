@@ -1,0 +1,127 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Group-Carrier Mapping Info API
+  version: 1.0.0
+servers: []
+tags:
+- name: Group-Carrier Mapping Info
+paths:
+  /ui/v1/group/{group_id}/group_carrier_mapping_info:
+    x-summary: Retrieve Group Carrier Information for Mapping
+    get:
+      description: Retrieve Group-Carrier Information for Mapping List
+      operationId: uiGetCarrierMappingInfoList
+      parameters:
+      - description: The unique identifier of the group you want to get carrier mapping information for
+        in: path
+        name: group_id
+        required: true
+        schema:
+          example: 2705bb9f-3c90-4400-a4e7-0bc9d48e677c
+          format: uuid
+          type: string
+      - description: The max size of each page of results
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+      - description: The integer offset at which to start the page. Possible values are 0 to total_records - 1
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                meta:
+                  offset: 0
+                  page_num: 1
+                  page_size: 20
+                  total_records: 1
+                response:
+                - carrier_id: 7fdc80a1-040b-4a99-b7a2-91d4c7131044
+                  config_completed: true
+                  group_mapping_id: ebf99d09-43a3-4fe3-b0b5-41a405b95c39
+                  simple_account_structure: true
+              schema:
+                $ref: '#/components/schemas/PaginatedUICarrierMappingInfoResult'
+          description: Successful Response - Group Carrier Information for Mapping List
+      summary: Get Group-Carrier Information for Mapping List
+      tags:
+      - Group-Carrier Mapping Info
+components:
+  schemas:
+    UICarrierMappingInfoResult:
+      properties:
+        carrier_id:
+          description: Associated Carrier ID
+          format: uuid
+          type: string
+        config_completed:
+          description: Determines whether the associated group carrier configuration is complete
+          type: boolean
+        group_mapping_id:
+          description: Associated Group Mapping ID
+          format: uuid
+          type: string
+        simple_account_structure:
+          description: Based on whether we have carrier mapped fields or not
+          type: boolean
+      required:
+      - carrier_id
+      - config_completed
+      - simple_account_structure
+      type: object
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+    PaginatedUICarrierMappingInfoResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          items:
+            $ref: '#/components/schemas/UICarrierMappingInfoResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response

@@ -1,0 +1,140 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Label API
+  version: 1.0.0
+servers: []
+tags:
+- name: Label
+paths:
+  /api/v1/labels:
+    get:
+      description: Returns a list of Labels
+      operationId: getLabelList
+      parameters:
+      - in: query
+        name: display_name
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+              - created: 1626281253
+                display_name: My Label!
+                id: 4yac0992-933a-4743-8dab-0d606ef2526e
+                modified: 1626281253
+                summary: This belongs to me
+                version: 7uce0972-256a-4743-8dab-0d606ef2593q
+              - created: 1626281253
+                display_name: Your Label!
+                id: 98c00f7b-8ce6-4b2b-85f7-9c701e268c64
+                modified: 1626281253
+                summary: This doesnt belongs to me
+                version: 839412f7-bc56-4f2e-9e20-f2baf2eedc5b
+              schema:
+                $ref: '#/components/schemas/LabelPublicResult'
+          description: Successful Response - Returns all matching Labels
+      summary: Get a list of all Labels
+      tags:
+      - Label
+  /ui/v1/labels/{label_id}/bulk_assign:
+    post:
+      description: Bulk create Member Transaction Labels.
+      operationId: bulkCreateMemberTransactionLabels
+      parameters:
+      - description: The unique identifier of the label being added to member transactions
+        in: path
+        name: label_id
+        required: true
+        schema:
+          example: 2613a221-d3c8-4c8a-86d5-e7e885fd1da9
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              success:
+                value:
+                  member_transactions:
+                  - 8fac0992-933a-4743-8dab-0d606ef2569e
+            schema:
+              $ref: '#/components/schemas/BulkLabelTransactionsRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              example:
+                failed_updates: []
+                successful_updates:
+                - 8fac0992-933a-4743-8dab-0d606ef2569e
+              schema:
+                $ref: '#/components/schemas/BulkLabelResult'
+          description: Successful Response - Returns the member transaction ids that failed and succeeded
+      summary: Bulk create Member Transaction Labels
+      tags:
+      - Label
+components:
+  schemas:
+    BulkLabelTransactionsRequest:
+      properties:
+        member_transactions:
+          items:
+            description: Member Transactions UUID's to apply label
+            format: uuid
+            type: string
+          type: array
+      required:
+      - member_transactions
+      type: object
+      x-field_order: []
+    LabelPublicResult:
+      properties:
+        created:
+          description: The date the record was created
+          type: integer
+        display_name:
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        summary:
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - created
+      - display_name
+      - id
+      - modified
+      - version
+      type: object
+      x-field_order: []
+    BulkLabelResult:
+      properties:
+        failed_updates:
+          items:
+            description: UUID of member transaction with failed update
+            format: uuid
+            type: string
+          type: array
+        successful_updates:
+          items:
+            description: UUID of member transaction with successful update
+            format: uuid
+            type: string
+          type: array
+      required:
+      - failed_updates
+      - successful_updates
+      type: object
+      x-field_order: []

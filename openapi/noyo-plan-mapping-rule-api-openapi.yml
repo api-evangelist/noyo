@@ -1,0 +1,481 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Plan Mapping Rule API
+  version: 1.0.0
+servers: []
+tags:
+- name: Plan Mapping Rule
+paths:
+  /api/v1/group_mappings/{group_mapping_id}/plan_mapping_rules:
+    x-summary: Plan Mapping Rules for Group Mapping
+    get:
+      description: Returns a list of plan mapping rules based on the Group Mapping ID provided.
+      operationId: getPlanMappingRulesForGroupMapping
+      parameters:
+      - description: The unique identifier of the group mapping you would like to get plan mapping rules for
+        in: path
+        name: group_mapping_id
+        required: true
+        schema:
+          example: 30b74a44-d5b1-4123-a7a4-6d3aec251ba4
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                meta:
+                  offset: 0
+                  page_num: 1
+                  page_size: 20
+                  total_records: 2
+                response:
+                - details:
+                    group_dental_plans:
+                      Dental (PPO) - Dependent:
+                      - 428308a0-f723-452c-a3a1-f2092236d63d
+                      Dental (PPO) - Employee:
+                      - 1c928531-c7e3-4bee-bdd0-616720881396
+                    group_medical_plans:
+                      Cigna PPO 250:
+                      - dcdcc8cb-ccf8-40d4-8347-5bdebb878710
+                  group_mapping_id: d61fa455-adf4-4dc4-8c57-6d779ba9475e
+                  id: dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1
+                  version: 65b729f8-de9a-4c9b-bed9-2df020dbbfa4
+                - details:
+                    group_dental_plans:
+                      Dental (PPO) - Dependent:
+                      - f60093d1-48c5-452a-8dfa-f34108367d98
+                      Dental (PPO) - Employee:
+                      - b4957bad-74b8-468a-9577-f9be64c6655e
+                    group_medical_plans:
+                      UnitedHealthCare 200:
+                      - e49e4cee-0486-45a7-8175-ffe6bd27bdd9
+                  group_mapping_id: f833ac4b-36aa-46f4-826c-0badcfe27922
+                  id: 787074b2-fd0f-4f52-b811-4573fbfb1dcf
+                  version: 5200a894-81c5-4c41-8519-86c32e9a9965
+              schema:
+                $ref: '#/components/schemas/PaginatedPlanMappingRuleResult'
+          description: Successful Response - Returns Plan Mapping Rules
+      summary: Get Plan Mapping Rules for a Group Mapping
+      tags:
+      - Plan Mapping Rule
+    post:
+      description: Create a new Plan Mapping Rule
+      operationId: createNewPlanMappingRule
+      parameters:
+      - description: The unique identifier of the group mapping you would like to create plan mapping rule for
+        in: path
+        name: group_mapping_id
+        required: true
+        schema:
+          example: 30b74a44-d5b1-4123-a7a4-6d3aec251ba4
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              success:
+                value:
+                  details:
+                    group_dental_plans:
+                      Dental (PPO) - Dependent:
+                      - 428308a0-f723-452c-a3a1-f2092236d63d
+                      Dental (PPO) - Employee:
+                      - 1c928531-c7e3-4bee-bdd0-616720881396
+            schema:
+              $ref: '#/components/schemas/PlanMappingRuleCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              example:
+                details:
+                  group_dental_plans:
+                    Dental (PPO) - Dependent:
+                    - 428308a0-f723-452c-a3a1-f2092236d63d
+                    Dental (PPO) - Employee:
+                    - 1c928531-c7e3-4bee-bdd0-616720881396
+                group_mapping_id: 30b74a44-d5b1-4123-a7a4-6d3aec251ba4
+                id: dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1
+                version: 5200a894-81c5-4c41-8519-86c32e9a9965
+              schema:
+                $ref: '#/components/schemas/PlanMappingRuleResult'
+          description: Successful Response - Returns the new Plan Mapping Rule
+      summary: Create a new Plan Mapping Rule
+      tags:
+      - Plan Mapping Rule
+  /api/v1/plan_mapping_rules/{plan_mapping_rule_id}:
+    get:
+      description: Returns a plan mapping rule that has the unique identifier specified in parameters.
+      operationId: getPlanMappingRule
+      parameters:
+      - description: The unique identifier of the plan mapping rule you are looking for
+        in: path
+        name: plan_mapping_rule_id
+        required: true
+        schema:
+          example: 30b74a44-d5b1-4123-a7a4-6d3aec251ba4
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                details:
+                  group_dental_plans:
+                    Dental (PPO) - Dependent:
+                    - 428308a0-f723-452c-a3a1-f2092236d63d
+                    Dental (PPO) - Employee:
+                    - 1c928531-c7e3-4bee-bdd0-616720881396
+                  group_medical_plans:
+                    Cigna PPO 250:
+                    - dcdcc8cb-ccf8-40d4-8347-5bdebb878710
+                group_mapping_id: d61fa455-adf4-4dc4-8c57-6d779ba9475e
+                id: 30b74a44-d5b1-4123-a7a4-6d3aec251ba4
+                version: 65b729f8-de9a-4c9b-bed9-2df020dbbfa4
+              schema:
+                $ref: '#/components/schemas/PlanMappingRuleResult'
+          description: Successful Response - Returns a Plan Mapping Rule
+      summary: Get a Plan Mapping Rule
+      tags:
+      - Plan Mapping Rule
+  /api/v1/plan_mapping_rules/{plan_mapping_rule_id}/{version}:
+    delete:
+      description: Delete a plan mapping rule based on the ID provided. The version parameter must match the latest plan mapping rule version.
+      operationId: deletePlanMappingRule
+      parameters:
+      - description: The unique identifier of the plan mapping rule you would like to delete
+        in: path
+        name: plan_mapping_rule_id
+        required: true
+        schema:
+          example: 43601909-3f0a-4ce0-8afb-5cdd21578eb3
+          format: uuid
+          type: string
+      - description: The unique version of the plan mapping rule you would like to delete
+        in: path
+        name: version
+        required: true
+        schema:
+          example: e49d01e2-4a1b-4c90-82cb-61bcdd065301
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: Successful Response - Plan Mapping Rule was deleted successfully
+      summary: Delete a Plan Mapping Rule
+      tags:
+      - Plan Mapping Rule
+    put:
+      description: Edit a plan mapping rule based on the ID provided. The version parameter must match the latest plan mapping rule version.
+      operationId: editPlanMappingRule
+      parameters:
+      - description: The unique identifier of the plan mapping rule you would like to edit
+        in: path
+        name: plan_mapping_rule_id
+        required: true
+        schema:
+          example: 43601909-3f0a-4ce0-8afb-5cdd21578eb3
+          format: uuid
+          type: string
+      - description: The unique version of the plan mapping rule you would like to edit
+        in: path
+        name: version
+        required: true
+        schema:
+          example: e49d01e2-4a1b-4c90-82cb-61bcdd065301
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              success:
+                value:
+                  details:
+                    group_medical_plans:
+                      First Plan 200:
+                      - 428308a0-f723-452c-a3a1-f2092236d63d
+            schema:
+              $ref: '#/components/schemas/PlanMappingRuleEditRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                details:
+                  group_medical_plans:
+                    First Plan 200:
+                    - 428308a0-f723-452c-a3a1-f2092236d63d
+                group_mapping_id: f833ac4b-36aa-46f4-826c-0badcfe27922
+                id: 43601909-3f0a-4ce0-8afb-5cdd21578eb3
+                version: e49d01e2-4a1b-4c90-82cb-61bcdd065301
+              schema:
+                $ref: '#/components/schemas/PlanMappingRuleResult'
+          description: Successful Response - Returns the modified Plan Mapping Rule
+      summary: Edit a Plan Mapping Rule
+      tags:
+      - Plan Mapping Rule
+components:
+  schemas:
+    PlanMappingRuleCreateRequest:
+      properties:
+        details:
+          allOf:
+          - $ref: '#/components/schemas/PlanMappingRuleDetails'
+          description: Details of the plan mapping rule
+      required:
+      - details
+      type: object
+      x-field_order: []
+    PlanMappingRuleDetails:
+      properties:
+        group_accident_plans:
+          additionalProperties:
+            items:
+              description: Unique ID of the plan in Noyo
+              format: uuid
+              type: string
+            type: array
+          description: Plan mappings for group accident plans
+          type: object
+        group_add_plans:
+          additionalProperties:
+            items:
+              description: Unique ID of the plan in Noyo
+              format: uuid
+              type: string
+            type: array
+          description: Plan mappings for group AD&D plans
+          type: object
+        group_cancer_plans:
+          additionalProperties:
+            items:
+              description: Unique ID of the plan in Noyo
+              format: uuid
+              type: string
+            type: array
+          description: Plan mappings for group cancer plans
+          type: object
+        group_critical_illness_plans:
+          additionalProperties:
+            items:
+              description: Unique ID of the plan in Noyo
+              format: uuid
+              type: string
+            type: array
+          description: Plan mappings for group critical illness plans
+          type: object
+        group_dental_plans:
+          additionalProperties:
+            items:
+              description: Unique ID of the plan in Noyo
+              format: uuid
+              type: string
+            type: array
+          description: Plan mappings for group dental plans
+          type: object
+        group_health_fund_plans:
+          additionalProperties:
+            items:
+              description: Unique ID of the plan in Noyo
+              format: uuid
+              type: string
+            type: array
+          description: Plan mappings for group health fund plans
+          type: object
+        group_hospital_indemnity_plans:
+          additionalProperties:
+            items:
+              description: Unique ID of the plan in Noyo
+              format: uuid
+              type: string
+            type: array
+          description: Plan mappings for group hospital indemnity plans
+          type: object
+        group_life_plans:
+          additionalProperties:
+            items:
+              description: Unique ID of the plan in Noyo
+              format: uuid
+              type: string
+            type: array
+          description: Plan mappings for group life plans
+          type: object
+        group_ltd_plans:
+          additionalProperties:
+            items:
+              description: Unique ID of the plan in Noyo
+              format: uuid
+              type: string
+            type: array
+          description: Plan mappings for group LTD plans
+          type: object
+        group_medical_plans:
+          additionalProperties:
+            items:
+              description: Unique ID of the plan in Noyo
+              format: uuid
+              type: string
+            type: array
+          description: Plan mappings for group medical plans
+          type: object
+        group_pharmacy_plans:
+          additionalProperties:
+            items:
+              description: Unique ID of the plan in Noyo
+              format: uuid
+              type: string
+            type: array
+          description: Plan mappings for group pharmacy plans
+          type: object
+        group_std_plans:
+          additionalProperties:
+            items:
+              description: Unique ID of the plan in Noyo
+              format: uuid
+              type: string
+            type: array
+          description: Plan mappings for group STD plans
+          type: object
+        group_vision_plans:
+          additionalProperties:
+            items:
+              description: Unique ID of the plan in Noyo
+              format: uuid
+              type: string
+            type: array
+          description: Plan mappings for group vision plans
+          type: object
+        group_wellness_plans:
+          additionalProperties:
+            items:
+              description: Unique ID of the plan in Noyo
+              format: uuid
+              type: string
+            type: array
+          description: Plan mappings for group wellness plans
+          type: object
+      type: object
+      x-field_order:
+      - group_medical_plans
+      - group_dental_plans
+      - group_vision_plans
+      - group_life_plans
+      - group_add_plans
+      - group_std_plans
+      - group_ltd_plans
+      - group_accident_plans
+      - group_critical_illness_plans
+      - group_cancer_plans
+      - group_hospital_indemnity_plans
+      - group_health_fund_plans
+      - group_pharmacy_plans
+      - group_wellness_plans
+    PlanMappingRuleEditRequest:
+      properties:
+        details:
+          allOf:
+          - $ref: '#/components/schemas/PlanMappingRuleDetails'
+          description: Details of the plan mapping rule
+      required:
+      - details
+      type: object
+      x-field_order: []
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+    PaginatedPlanMappingRuleResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of plan mapping rules
+          items:
+            $ref: '#/components/schemas/PlanMappingRuleResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    PlanMappingRuleResult:
+      properties:
+        created:
+          description: The date the record was created
+          type: integer
+        details:
+          allOf:
+          - $ref: '#/components/schemas/PlanMappingRuleDetails'
+          description: Details of the plan mapping rule
+          readOnly: true
+        group_mapping_id:
+          description: Unique identifier of the group mapping we are creating plan mapping rule for
+          format: uuid
+          readOnly: true
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - created
+      - details
+      - group_mapping_id
+      - id
+      - modified
+      - version
+      type: object
+      x-field_order:
+      - id
+      - version
+      - created
+      - modified
+      - group_mapping_id
+      - details

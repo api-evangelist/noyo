@@ -1,0 +1,229 @@
+openapi: 3.0.1
+info:
+  description: APIs to manage and consume information about Carriers
+  title: Noyo Carrier Carrier Mapped Field Ui Group Connections API
+  version: 1.0.0
+servers: []
+tags:
+- name: Ui Group Connections
+paths:
+  /ui/v1/group_connections/{group_connection_id}:
+    get:
+      description: Returns a single group connection based on the ID provided.
+      operationId: getUiGroupConnection
+      parameters:
+      - description: The unique identifier of the group connection you would like to view
+        in: path
+        name: group_connection_id
+        required: true
+        schema:
+          example: dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                carrier_id: 8fac0992-933a-4743-8dab-0d606ef2569e
+                completed: 1557392400
+                created: 1557329939
+                group_data:
+                  carrier_group_id: '10000000'
+                  group_name: Test Company
+                group_id: 9e629e41-c706-4efd-9fbb-1ff2573fc67e
+                id: dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1
+                modified: 1557392400
+                organization_id: d61fa455-adf4-4dc4-8c57-6d779ba9475e
+                request_type: initial
+                setup_data: {}
+                setup_result: {}
+                status: completed
+                version: 9906b5d2-e76d-4bad-ba4c-8ce90b6b867b
+              schema:
+                $ref: '#/components/schemas/GroupSetupRequestUIResult'
+          description: Successful Response - Returns a single Group Connection
+      summary: Get a single Group Connection Ui
+      tags:
+      - Ui Group Connections
+  /ui/v1/group_connections/{group_connection_id}/{version}:
+    put:
+      description: Edit a group setup request based on the ID provided. The version parameter must match the latest group setup request version.
+      operationId: editGroupSetupRequestUI
+      parameters:
+      - in: path
+        name: group_connection_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - in: path
+        name: version
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupConnectionRequestEditUI'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                carrier_id: 8fac0992-933a-4743-8dab-0d606ef2569e
+                created: 1557329939
+                group_audit_request_id: ef9377ae-4402-4dc0-8190-1e81955d14b2
+                group_data:
+                  group_name: Test Company
+                  policy_number: '10000000'
+                id: dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1
+                modified: 1557329939
+                organization_id: d61fa455-adf4-4dc4-8c57-6d779ba9475e
+                request_type: initial
+                setup_data: {}
+                setup_result: {}
+                status: noyo_review
+                version: 9906b5d2-e76d-4bad-ba4c-8ce90b6b867b
+              schema:
+                $ref: '#/components/schemas/GroupSetupRequestUIResult'
+          description: Successful Response - Returns the modified Group Setup Request
+      summary: Edit an existing Group Setup Request
+      tags:
+      - Ui Group Connections
+components:
+  schemas:
+    GroupSetupRequestUIResult:
+      properties:
+        carrier_id:
+          description: Unique identifier of the carrier in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        created:
+          description: The date the record was created
+          type: integer
+        group_data:
+          allOf:
+          - $ref: '#/components/schemas/GroupSetupRequestPublicGroupDataResult'
+          description: Carrier-specific data to execute a group connection
+        group_id:
+          description: ID of associated group model
+          format: uuid
+          readOnly: true
+          type: string
+        id:
+          description: Unique identifier of the group connection in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        organization_id:
+          description: Unique identifier of the platform or broker organization in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        request_type:
+          description: Type of the group connection
+          readOnly: true
+          type: string
+        setup_data:
+          description: ''
+          readOnly: true
+          type: object
+        setup_result:
+          description: More information about the result of the group connection
+          readOnly: true
+          type: object
+        status:
+          description: Status of the group connection
+          enum:
+          - created
+          - processing
+          - noyo_review
+          - waiting_on_carrier
+          - carrier_authorization
+          - action_required
+          - unable_to_connect
+          - completed
+          readOnly: true
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - carrier_id
+      - created
+      - group_data
+      - id
+      - modified
+      - organization_id
+      - request_type
+      - setup_metadata
+      - setup_result
+      - status
+      - version
+      type: object
+      x-field_order:
+      - id
+      - version
+      - created
+      - modified
+      - organization_id
+      - group_id
+      - carrier_id
+      - request_type
+      - status
+      - group_data
+      - setup_result
+      - setup_data
+    GroupConnectionRequestEditUI:
+      properties:
+        sent_carrier_auth_comms:
+          description: Timestamp of carrier authorization request email
+          format: date-time
+          nullable: true
+          type: string
+        setup_data:
+          description: Information of the group connection setup
+          type: object
+        setup_result:
+          description: More information about the result of the group connection
+          type: object
+        status:
+          description: Status of the group connection
+          type: string
+      type: object
+      x-field_order: []
+    GroupSetupRequestPublicGroupDataResult:
+      properties:
+        broker_federal_ein:
+          description: Broker federal EIN, used in Principal groups
+          readOnly: true
+          type: string
+        broker_tin:
+          description: Broker TIN, used in Anthem groups
+          readOnly: true
+          type: string
+        carrier_group_id:
+          description: Unique identifier for the group in the carrier system
+          readOnly: true
+          type: string
+        employer_email_address:
+          description: Email address of the group's employer
+          readOnly: true
+          type: string
+        group_name:
+          description: Name for the group in the Noyo system
+          readOnly: true
+          type: string
+      required:
+      - carrier_group_id
+      - group_name
+      type: object
