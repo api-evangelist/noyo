@@ -1,0 +1,38 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/noyo-fulfillment-openapi.json + https://docs.noyo.com/docs/introduction
+standards:
+- id: rest-json
+  conforms: true
+  evidence: REST resources with application/json request/response bodies.
+- id: oauth2-client-credentials
+  conforms: true
+  evidence: Client-credentials token exchange documented at accounts.noyo.com/auth/public/token
+    (docs).
+- id: openid-connect
+  conforms: false
+- id: bearer-token
+  conforms: true
+  evidence: Access token sent as Authorization Bearer on every request.
+- id: pagination-offset
+  conforms: true
+  evidence: List endpoints accept page_size + offset with a common paginated envelope.
+- id: idempotency
+  conforms: false
+  evidence: No idempotency-key header documented or present in OpenAPI.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Error responses are application/json, not application/problem+json.
+- id: webhooks-hmac
+  conforms: true
+  evidence: HMAC-signed webhooks with x-noyo-signature; at-least-once delivery.
+- id: fhir-r4
+  conforms: false
+- id: scim2
+  conforms: false
+- id: fapi
+  conforms: false
+- id: json-api
+  conforms: false
+- id: odata
+  conforms: false

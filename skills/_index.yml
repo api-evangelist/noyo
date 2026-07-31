@@ -1,0 +1,19 @@
+generated: '2026-07-20'
+method: generated
+source: openapi/noyo-fulfillment-openapi.json, openapi/noyo-tracking-openapi.json
+skills:
+- file: noyo-enroll-new-hire.md
+  name: Enroll a new hire in coverage
+  api: openapi/noyo-fulfillment-openapi.json
+  operations: [createEmployee, createDependent, newHireEnrollmentMemberRequest, getMemberRequest,
+    getEmployeeMemberRequestList]
+- file: noyo-connect-group.md
+  name: Connect a group to a carrier
+  api: openapi/noyo-fulfillment-openapi.json
+  operations: [createGroup, createGroupConnection, createGroupConnectionWithExistingGroup,
+    getGroupConnection, getGroup]
+- file: noyo-track-changes.md
+  name: Track member changes and resolve discrepancies
+  api: openapi/noyo-tracking-openapi.json
+  operations: [createMemberSnapshot, getDifferenceList, getDifference, getEmployeeDifferenceList,
+    dismissDifference]

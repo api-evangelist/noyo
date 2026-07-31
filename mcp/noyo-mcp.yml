@@ -1,0 +1,46 @@
+generated: '2026-07-20'
+method: derived
+status: candidate
+source: openapi/noyo-fulfillment-openapi.json, openapi/noyo-tracking-openapi.json
+note: >-
+  No official Noyo-hosted MCP server was found. The following is a candidate
+  tool surface derived from marquee OpenAPI operations, offered as a starting
+  point for an agent-native wrapper. Ground every tool in the referenced
+  operationId.
+server:
+  name: noyo
+  transport: http
+tools:
+- name: list_groups
+  description: List all groups for your organization.
+  source_operation: openapi/noyo-fulfillment-openapi.json#getGroupList
+- name: get_group
+  description: Get a specific group by ID.
+  source_operation: openapi/noyo-fulfillment-openapi.json#getGroup
+- name: create_group
+  description: Create a new group.
+  source_operation: openapi/noyo-fulfillment-openapi.json#createGroup
+- name: create_group_connection
+  description: Connect a group to a carrier.
+  source_operation: openapi/noyo-fulfillment-openapi.json#createGroupConnection
+- name: list_employees
+  description: Filter employees within a group.
+  source_operation: openapi/noyo-fulfillment-openapi.json#getGroupEmployeeList
+- name: get_employee
+  description: Get the latest version of an employee.
+  source_operation: openapi/noyo-fulfillment-openapi.json#getEmployee
+- name: create_member_snapshot
+  description: Create a member snapshot describing desired coverage state.
+  source_operation: openapi/noyo-fulfillment-openapi.json#createMemberSnapshot
+- name: new_hire_member_request
+  description: Enroll a new hire (and optional dependents) in coverage.
+  source_operation: openapi/noyo-fulfillment-openapi.json#newHireEnrollmentMemberRequest
+- name: termination_member_request
+  description: Terminate an employee and dependents from coverage.
+  source_operation: openapi/noyo-fulfillment-openapi.json#terminationMemberRequest
+- name: get_member_request
+  description: Get the latest version of a member request.
+  source_operation: openapi/noyo-fulfillment-openapi.json#getMemberRequest
+- name: list_differences
+  description: List tracked field-level differences/discrepancies.
+  source_operation: openapi/noyo-tracking-openapi.json#getDifferenceList

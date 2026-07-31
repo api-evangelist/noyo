@@ -1,0 +1,27 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.noyo.com/docs/introduction/getting-started/environments
+versioning:
+  scheme: uri-path
+  current: v1
+  detail: API paths are prefixed with /api/v1.
+  docs: https://docs.noyo.com/docs/introduction/getting-started/using-the-api
+deprecation:
+  policy_url: null
+  sunset_header: false
+  detail: >-
+    No formal deprecation/Sunset (RFC 8594) policy is published. Webhook event
+    types are additive-only — consumers must tolerate new event types without
+    breaking.
+sla:
+  url: null
+  uptime_target: null
+status_page: https://www.noyostatus.com
+environments:
+  production: https://fulfillment.noyo.com
+  sandbox: https://fulfillment-sandbox.noyo.com
+deprecated_operations: []
+notes: >-
+  Change delivery is additive; the published changelog page
+  (https://docs.noyo.com/changelog) is currently a placeholder with no dated
+  entries, so no ChangeLog artifact was captured.

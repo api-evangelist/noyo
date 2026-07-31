@@ -1,0 +1,117 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/noyo-fulfillment-openapi.json
+docs: https://docs.noyo.com/docs/introduction/getting-started/using-the-api
+id_scheme: >-
+  Resources are identified by Noyo-assigned UUIDs. Integrators may also link
+  their own external identifiers (e.g. custom_individual_id) to members.
+entities:
+- name: Group
+  description: The employer/company offering coverage.
+  id: UUID
+- name: GroupPlan
+  description: A plan (product/coverage) offered by a group.
+  id: UUID
+- name: GroupConnection
+  description: A group's connection/relationship with a specific carrier.
+  id: UUID
+- name: Carrier
+  description: An insurance carrier in the Noyo network.
+  id: UUID
+- name: Employee
+  description: An individual (subscriber/member) enrolling in coverage.
+  id: UUID
+- name: Dependent
+  description: A dependent of an employee.
+  id: UUID
+- name: IndividualEnrollment
+  description: An individual's coverage details for one plan.
+  id: UUID
+- name: MemberSnapshot
+  description: Desired state of a member's coverage elections, submitted to Noyo.
+  id: UUID
+- name: MemberRequest
+  description: A change request (new hire, QLE, open enrollment, COBRA, termination,
+    demographic change).
+  id: UUID
+- name: MemberTransaction
+  description: A unit of fulfillment work produced by a member request/snapshot.
+  id: UUID
+- name: Difference
+  description: A tracked field-level change or discrepancy detected by Noyo (Tracking
+    API).
+  id: UUID
+- name: Issue
+  description: A tracked enrollment problem for reconciliation.
+  id: UUID
+- name: Contact
+  description: A contact associated with a group.
+  id: UUID
+- name: Location
+  description: A location associated with a group.
+  id: UUID
+relationships:
+- from: Employee
+  to: Group
+  type: belongs_to
+  via: group_id
+- from: Group
+  to: Employee
+  type: has_many
+  via: group_id
+- from: Dependent
+  to: Employee
+  type: belongs_to
+  via: employee_id
+- from: Employee
+  to: Dependent
+  type: has_many
+  via: employee_id
+- from: IndividualEnrollment
+  to: Employee
+  type: belongs_to
+  via: employee_id
+- from: IndividualEnrollment
+  to: GroupPlan
+  type: belongs_to
+  via: group_plan_id
+- from: GroupPlan
+  to: Group
+  type: belongs_to
+  via: group_id
+- from: GroupConnection
+  to: Group
+  type: belongs_to
+  via: group_id
+- from: GroupConnection
+  to: Carrier
+  type: belongs_to
+  via: carrier_id
+- from: MemberSnapshot
+  to: Group
+  type: belongs_to
+  via: group_id
+- from: MemberSnapshot
+  to: Employee
+  type: belongs_to
+  via: employee_id
+- from: MemberRequest
+  to: Employee
+  type: belongs_to
+  via: employee_id
+- from: MemberTransaction
+  to: MemberRequest
+  type: belongs_to
+  via: member_request_id
+- from: Difference
+  to: MemberTransaction
+  type: references
+  via: member_transaction_id
+- from: Contact
+  to: Group
+  type: belongs_to
+  via: group_id
+- from: Location
+  to: Group
+  type: belongs_to
+  via: group_id

@@ -1,0 +1,13 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Noyo Tracking API
+  version: 1.0.0
+extends: openapi/noyo-tracking-openapi.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: noyo
+    x-apievangelist-auth: oauth2-client-credentials-bearer
+    x-apievangelist-token-url: https://accounts.noyo.com/auth/public/token
+    x-apievangelist-sandbox: https://tracking-sandbox.noyo.com
+    x-apievangelist-purpose: field-level change tracking (differences and discrepancies)

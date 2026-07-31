@@ -1,0 +1,51 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.noyo.com/docs/introduction/getting-started/using-the-api
+docs: https://docs.noyo.com/docs/introduction/getting-started/using-the-api
+authentication:
+  style: oauth2-client-credentials-bearer
+  detail: >-
+    Exchange CLIENT_ID/CLIENT_SECRET (HTTP Basic) for a short-lived bearer
+    access token at https://accounts.noyo.com/auth/public/token, then send
+    `Authorization: Bearer <ACCESS_TOKEN>`.
+  ref: authentication/noyo-authentication.yml
+idempotency:
+  supported: false
+  detail: >-
+    Noyo does not document an idempotency-key header, and no Idempotency-Key
+    parameter is present in the OpenAPI. State changes are modeled as member
+    snapshots and member requests whose downstream fulfillment is tracked
+    rather than retried idempotently.
+pagination:
+  style: offset
+  params: [page_size, offset]
+  detail: >-
+    All list endpoints share a common structure and accept optional page_size
+    and offset query parameters. Paginated results wrap items in a common
+    envelope with pagination metadata.
+versioning:
+  scheme: uri-path
+  current: v1
+  detail: API paths are prefixed with /api/v1 (e.g. /api/v1/groups). New webhook
+    event types are added continuously and consumers must tolerate unknown types.
+datetimes:
+  timezone: UTC
+  detail: All datetimes are UTC unless noted; integer datetimes are Unix epoch seconds.
+request_tracing:
+  header: x-cloud-trace-context
+  detail: Webhook deliveries include an x-cloud-trace-context header; useful for correlating events.
+error_envelope:
+  format: application/json
+  detail: >-
+    4xx/5xx responses return JSON with a description of the errors. Snapshot
+    validation returns 4xx with a body listing each validation error. Not
+    RFC 9457 problem+json.
+  ref: errors/noyo-problem-types.yml
+webhooks:
+  signature_header: x-noyo-signature
+  algorithm: HMAC
+  delivery: at-least-once
+  detail: HMAC-signed webhook events; deduplicate on event.id; no ordering guarantee.
+  ref: asyncapi/noyo-webhooks.yml
+rate_limiting:
+  documented: false

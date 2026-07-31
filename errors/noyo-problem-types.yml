@@ -1,0 +1,43 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/noyo-fulfillment-openapi.json
+format: json
+envelope: application/json
+notes: >-
+  Derived from the 4xx/5xx responses declared across the Noyo Fulfillment API.
+  Responses are application/json (not RFC 9457 problem+json). Snapshot
+  validation errors are returned as a 4xx body enumerating each validation
+  failure (see docs error reference).
+docs: https://docs.noyo.com/docs/members/using-snapshots/snapshot-responses
+problems:
+- status: 400
+  title: Bad request
+  meaning: Invalid or malformed request body / client error.
+  occurrences: 8
+- status: 401
+  title: Unauthorized
+  meaning: Authentication required, or invalid organization ID / access token.
+  occurrences: 6
+- status: 403
+  title: Forbidden
+  meaning: Insufficient permissions (e.g. protected group disconnection without an internal
+    override).
+  occurrences: 6
+- status: 404
+  title: Not found
+  meaning: Referenced resource (group, carrier, feed, issue, volley, member, etc.) does
+    not exist.
+  occurrences: 22
+- status: 409
+  title: Conflict
+  meaning: Version conflict or a resource already exists in scope (e.g. duplicate volley
+    setting).
+  occurrences: 3
+- status: 422
+  title: Unprocessable entity
+  meaning: Schema/validation error — request well-formed but failed business validation.
+  occurrences: 4
+- status: 500
+  title: Internal server error
+  meaning: Unexpected server-side error.
+  occurrences: 1

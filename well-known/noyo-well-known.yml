@@ -1,0 +1,23 @@
+generated: '2026-07-20'
+method: searched
+source: live probes of /.well-known/ on Noyo hosts
+note: >-
+  No /.well-known/ discovery documents were served. www.noyo.com redirects
+  (308) its security.txt to the apex, which returns 404. No pointer is wired
+  because nothing was found.
+hosts:
+- host: https://noyo.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+- host: https://www.noyo.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 308
+    redirect: https://noyo.com/.well-known/security.txt
+- host: https://fulfillment.noyo.com
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404

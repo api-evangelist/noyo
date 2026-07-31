@@ -1,0 +1,50 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.noyo.com/docs/introduction/webhooks
+spec_type: Webhooks
+docs: https://docs.noyo.com/docs/introduction/webhooks
+transport: https
+delivery: at-least-once
+ordering: not-guaranteed
+availability: production-only
+signature:
+  header: x-noyo-signature
+  algorithm: HMAC
+  verification_docs: https://docs.noyo.com/docs/introduction/webhooks/webhook-verification
+  additional_headers: [x-noyo-timestamp, x-cloud-trace-context]
+subscription:
+  managed_at: https://app.noyo.com/developer/webhooks
+  secret: Consumer-supplied high-entropy string used to compute the HMAC.
+payload:
+  pii_phi: none
+  envelope: >-
+    { "data": { ... }, "event": { "id": <uuid>, "created": <unix>, "type": <event_key> } }
+  dedupe_on: event.id
+retries:
+  detail: Failed deliveries retry with backoff 15 times over 3 days; subscription moves
+    to `unhealthy`, then `failed` after 7 days.
+events:
+- name: Snapshot status changed
+  key: member_snapshot.status_change
+- name: Snapshot Fulfillment Summary updated
+  key: member_snapshot_carrier_fulfillment_status.status_change
+- name: Difference created
+  key: difference.created
+- name: Difference marked as a discrepancy
+  key: difference.discrepancy
+- name: Difference resolved
+  key: difference.resolved
+- name: Difference replaced
+  key: difference.replaced
+- name: Group Created
+  key: group.created
+- name: Group Connection Request created
+  key: group_connection_request.created
+- name: Group Connection Request status changed
+  key: group_connection_request.status_change
+- name: Group Disconnection Request created
+  key: group_disconnection_request.created
+- name: Group Disconnection Request status changed
+  key: group_disconnection_request.status_change
+- name: Test event
+  key: test.hello_world

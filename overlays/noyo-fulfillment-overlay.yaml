@@ -1,0 +1,14 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Noyo Fulfillment API
+  version: 1.0.0
+extends: openapi/noyo-fulfillment-openapi.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: noyo
+    x-apievangelist-auth: oauth2-client-credentials-bearer
+    x-apievangelist-token-url: https://accounts.noyo.com/auth/public/token
+    x-apievangelist-sandbox: https://fulfillment-sandbox.noyo.com
+    x-apievangelist-webhooks: docs/introduction/webhooks
+    x-apievangelist-pagination: offset (page_size, offset)

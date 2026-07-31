@@ -1,0 +1,13 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Noyo Carrier API
+  version: 1.0.0
+extends: openapi/noyo-carrier-openapi.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: noyo
+    x-apievangelist-auth: oauth2-client-credentials-bearer
+    x-apievangelist-base-url: https://fulfillment.noyo.com
+    x-apievangelist-note: Carrier network configuration; the published spec declares no
+      servers, so the shared Noyo production host is documented here.

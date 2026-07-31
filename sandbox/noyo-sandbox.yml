@@ -1,0 +1,46 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.noyo.com/docs/introduction/getting-started/environments
+docs: https://docs.noyo.com/docs/introduction/getting-started/environments
+environments:
+- name: production
+  base_url: https://fulfillment.noyo.com
+  description: Live data flows between Noyo and connected carriers.
+- name: sandbox
+  base_url: https://fulfillment-sandbox.noyo.com
+  description: >-
+    API-identical to production but no data leaves the Noyo system and no
+    actions are carried out against carrier systems.
+tracking_hosts:
+  production: https://tracking.noyo.com
+  sandbox: https://tracking-sandbox.noyo.com
+key_separation:
+  detail: >-
+    Sandbox and production use separate API keys. Recommend a sandbox key per
+    developer, and a separate live-only key for production.
+  token_url: https://accounts.noyo.com/auth/public/token
+preconfigured:
+  connected_groups: >-
+    Sandbox is pre-populated with several connected groups with active
+    integrations to various carriers and sample active employees.
+  discrepancies: >-
+    At least one pre-configured group has simulated data discrepancies that can
+    be explored via the Tracking API.
+  renewals: Renewal decisions can be created, managed, and tested in sandbox.
+test_behaviors:
+- New groups you create in sandbox and request connections for stay in a `connecting`
+    state indefinitely; snapshots for such groups complete but no individual enrollment
+    changes are created.
+- Group connection requests must be manually set to `complete` by the Noyo team; there
+    is no programmatic transition.
+- Custom `carrier_group_ID` values per carrier can be used to test different connection
+    status responses (found on each carrier's page in the Noyo app).
+limitations:
+- Webhooks are not available or testable in the sandbox environment.
+custom_sandbox:
+  detail: >-
+    Noyo can seed tailored sandbox data (specific carriers, lines of coverage,
+    account structures, or replicated real-world groups) on request; typically a
+    couple of working days to fulfill.
+notes: No published static test card / magic identifier list; sandbox data is seeded
+  per-account by Noyo.

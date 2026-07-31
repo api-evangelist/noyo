@@ -1,0 +1,156 @@
+# Noyo Docs
+
+## Docs
+
+- [Get Carrier Configurations for Group](https://docs.noyo.com/api-reference/groups/configurations/get-carrier-configuration-by-group-list.md): Get a list of carrier configurations for a group.
+- [Create Group Connection](https://docs.noyo.com/api-reference/groups/connections/create-group-connection.md): Create a new connection for a brand new group with a given carrier
+- [Create Group Connection with Existing Group](https://docs.noyo.com/api-reference/groups/connections/create-group-connection-with-existing-group.md): Create a new carrier connection for an existing group
+- [Get Group Connection](https://docs.noyo.com/api-reference/groups/connections/get-group-connection.md): Returns the latest status of a single group connection based on the ID provided.
+- [Get Group Connection Request List](https://docs.noyo.com/api-reference/groups/connections/get-group-connection-request-list.md): Returns a list of all group connections.
+- [Get Group Connection Request List by Group](https://docs.noyo.com/api-reference/groups/connections/get-group-connection-request-list-by-group.md): Returns a list of all group connections for a given group ID.
+- [Group Connections](https://docs.noyo.com/api-reference/groups/connections/group-connections.md): Get connection information for a group
+- [Group Connections](https://docs.noyo.com/api-reference/groups/connections/index.md): Connect and manage group-carrier relationships
+- [Retry Group Connection with Existing Group](https://docs.noyo.com/api-reference/groups/connections/retry-group-connection-with-existing-group.md): Retry a carrier connection for an existing group
+- [Create Contact](https://docs.noyo.com/api-reference/groups/contacts/create-contact.md): Create a new contact for a group.
+- [Edit Contact](https://docs.noyo.com/api-reference/groups/contacts/edit-contact.md): Edit a specific contact.
+- [Get Contact](https://docs.noyo.com/api-reference/groups/contacts/get-contact.md): Get details for a specific contact.
+- [List Contacts](https://docs.noyo.com/api-reference/groups/contacts/get-contact-list.md): Get a list of contacts for a group.
+- [Create Group](https://docs.noyo.com/api-reference/groups/create-group.md): Create a new group
+- [Confirm Group Disconnection Request](https://docs.noyo.com/api-reference/groups/disconnections/confirm-group-disconnection-request.md): Confirm a group disconnection request
+- [Create Group Disconnection Request](https://docs.noyo.com/api-reference/groups/disconnections/create-group-disconnection-request.md): Create a new group disconnection request
+- [Edit Group Disconnection Request](https://docs.noyo.com/api-reference/groups/disconnections/edit-group-disconnection-request.md): Edit an existing group disconnection request
+- [Get Group Disconnection Request](https://docs.noyo.com/api-reference/groups/disconnections/get-group-disconnection-request-by-id.md): Get a specific group disconnection request
+- [Get Group Disconnection Request List](https://docs.noyo.com/api-reference/groups/disconnections/get-group-disconnection-request-list.md): Get a list of all group disconnection requests
+- [Get Group Disconnection Requests by Group](https://docs.noyo.com/api-reference/groups/disconnections/get-group-disconnection-request-list-by-group.md): Get a list of group disconnection requests for a specific group
+- [Group Disconnections](https://docs.noyo.com/api-reference/groups/disconnections/group-disconnections.md): Get disconnection information for a group
+- [Reject Group Disconnection Request](https://docs.noyo.com/api-reference/groups/disconnections/reject-group-disconnection-request.md): Reject a group disconnection request
+- [Edit Group](https://docs.noyo.com/api-reference/groups/edit-group.md): Edit a specific group
+- [Get Feed Run](https://docs.noyo.com/api-reference/groups/feed-runs/get-feed-run.md): Get a specific feed run
+- [List Feed Runs](https://docs.noyo.com/api-reference/groups/feed-runs/get-feed-run-list.md): Get a list of all feed runs
+- [Get Feed](https://docs.noyo.com/api-reference/groups/feeds/get-feed.md): Get a specific feed
+- [List Feeds](https://docs.noyo.com/api-reference/groups/feeds/get-feed-list.md): Get a list of all feeds
+- [Get Group](https://docs.noyo.com/api-reference/groups/get-group.md): Get a specific group
+- [List Groups](https://docs.noyo.com/api-reference/groups/get-group-list.md): Get a list of all groups
+- [Get Location](https://docs.noyo.com/api-reference/groups/locations/get-location.md): Get details for a specific location.
+- [Get Location List](https://docs.noyo.com/api-reference/groups/locations/get-location-list.md): Get a list of locations for a group.
+- [Get Group Plan](https://docs.noyo.com/api-reference/groups/plans/get-group-plan.md): Returns the group plan specified by unique identifier
+- [Get Group Plan List](https://docs.noyo.com/api-reference/groups/plans/get-group-plan-list.md): Get a list of plans for a group
+- [Get Group Plan Rates List](https://docs.noyo.com/api-reference/groups/plans/get-group-plan-rates-list.md): Get a list of plan rates for a group
+- [Create Renewal Decision](https://docs.noyo.com/api-reference/groups/renewals/create-renewal-decision.md): Create a new renewal decision for a given renewal date.
+- [Edit Renewal Decision](https://docs.noyo.com/api-reference/groups/renewals/edit-renewal-decision.md): Edit an existing renewal decision for a group.
+- [Get Renewal Decision](https://docs.noyo.com/api-reference/groups/renewals/get-renewal-decision.md): Returns a renewal decision by ID.
+- [Get Renewal Decisions](https://docs.noyo.com/api-reference/groups/renewals/get-renewal-decisions.md): Returns all renewal decisions. This includes the status, which determines whether the carrier is ready to accept member requests for the new plan year. If the status is `not_ready`, Noyo will return one or more issues, each with a level and message.
+- [Get Renewal Decisions by Group](https://docs.noyo.com/api-reference/groups/renewals/get-renewal-decisions-by-group.md): Returns all renewal decisions for a group. This includes the status, which determines whether the carrier is ready to accept member requests for the new plan year. If the status is `not_ready`, Noyo will return one or more issues, each with a level and message.
+- [Get Latest Sync](https://docs.noyo.com/api-reference/groups/syncs/get-latest-group-audit-request.md): Noyo regularly audits each Group against the carrier(s) that the Group has coverage with in order to find updated data and potential mismatches. This endpoint returns metadata about the latest group audit request that was completed. If no group audits have been completed the `completed_at` timestamp…
+- [Get Latest Syncs](https://docs.noyo.com/api-reference/groups/syncs/get-latest-group-audit-request-list.md): Noyo regularly audits each Group against the carrier(s) that the Group has coverage with in order to find updated data and potential mismatches. This endpoint returns metadata about the latest group audit requests that were completed for each carrier. If no group audits have been completed the `comp…
+- [Get Issue](https://docs.noyo.com/api-reference/issues/get-issue.md): Get a specific Issue by its ID.
+- [List Issues](https://docs.noyo.com/api-reference/issues/list-issues.md): List existing Issues. Supports filtering on various fields including array containment.
+- [Get Dependent](https://docs.noyo.com/api-reference/members/dependents/getdependent.md): Returns the latest version of a single dependent based on the ID provided.
+- [Get Dependent List](https://docs.noyo.com/api-reference/members/dependents/getdependentlist.md): Returns a list of all dependents for a given employee.
+- [Get Employee Dependent](https://docs.noyo.com/api-reference/members/dependents/getemployeedependent.md): Returns the latest version of a single dependent of an employee based on the ID provided.
+- [Get Employee](https://docs.noyo.com/api-reference/members/employees/getemployee.md): Returns the latest version of a single employee based on the ID provided.
+- [Get Employee List](https://docs.noyo.com/api-reference/members/employees/getemployeelist.md): Filter employees across all groups in your organization.
+- [Get Group Employee](https://docs.noyo.com/api-reference/members/employees/getgroupemployee.md): Returns the latest version of a single employee based on the Noyo ID or Custom Individual ID provided.
+- [Get Group Employee List](https://docs.noyo.com/api-reference/members/employees/getgroupemployeelist.md): Filter employees within a group.
+- [Get Individual Enrollment](https://docs.noyo.com/api-reference/members/enrollments/getindividualenrollment.md): Returns the latest version of a single individual enrollment based on the ID provided.
+- [Get Individual Enrollments by Dependent](https://docs.noyo.com/api-reference/members/enrollments/getindividualenrollmentbydependentlist.md): Returns a list of all individual enrollments for a given dependent.
+- [Get Individual Enrollments by Employee](https://docs.noyo.com/api-reference/members/enrollments/getindividualenrollmentbyemployeelist.md): Returns a list of all individual enrollments for a given employee.
+- [Get Individual Enrollments by Group](https://docs.noyo.com/api-reference/members/enrollments/getindividualenrollmentbygrouplist.md): Returns a list of all individual enrollments for a given group.
+- [Get Individual Enrollments by Group Enrollment](https://docs.noyo.com/api-reference/members/enrollments/getindividualenrollmentlist.md): Returns a list of all individual enrollments for a given group enrollment.
+- [Individual Enrollments](https://docs.noyo.com/api-reference/members/enrollments/individual-enrollments.md): Get a list of all individual enrollments in the system
+- [Get a list of all Member Premiums](https://docs.noyo.com/api-reference/members/premiums/getmemberpremiumsbyemployeeid.md): Returns list of Member Premium information for an employee and dependents
+- [Create a COBRA Enrollment Member Request](https://docs.noyo.com/api-reference/requests/cobraenrollmentmemberrequest.md): The COBRA enrollment member request is used to add an existing employee, and optionally their dependents to multiple coverages at multiple carriers. This is for a continuation of benefits situation, when main line coverage either has already been terminated, or will be in conjunction with this membe…
+- [Create a COBRA Open Enrollment Member Request](https://docs.noyo.com/api-reference/requests/cobraopenenrollmentmemberrequest.md): The COBRA open enrollment member request is used to make changes to employees, dependents and COBRA coverages during the open enrollment period.
+- [Create a COBRA Qualifying Life Event Member Request](https://docs.noyo.com/api-reference/requests/cobraqualifyinglifeeventmemberrequest.md): The COBRA qualifying life event member request is used to make changes to employees, dependents and COBRA coverages due to a qualifying life event.
+- [Create a COBRA Termination Member Request](https://docs.noyo.com/api-reference/requests/cobraterminationmemberrequest.md): The COBRA termination member request is used to remove an employee and their dependents from COBRA coverage at all carriers. The `cobra_termination_date` is the date on which the COBRA coverage should be terminated.
+- [Create a new Dependent](https://docs.noyo.com/api-reference/requests/create-dependent.md): Create a new dependent for an employee.
+- [Create a new Employee](https://docs.noyo.com/api-reference/requests/create-employee.md): Create a new employee for a group.
+- [Create an Enrollment Snapshot Member Request](https://docs.noyo.com/api-reference/requests/createenrollmentsnapshotmemberrequest.md): The Enrollment Snapshot Member Request allows you to communicate the desired state of an employee's coverage elections during an employee's new hire period. You can use it in one of two cases:
+- [Create a Demographic Change Member Request](https://docs.noyo.com/api-reference/requests/demographicchangememberrequest.md)
+- [Get Employee Member Request List](https://docs.noyo.com/api-reference/requests/getemployeememberrequestlist.md): Returns a list of all member requests for a given employee. Each member request may have one or more associated member transactions.
+- [Get Member Request](https://docs.noyo.com/api-reference/requests/getmemberrequest.md): Returns the latest version of a single member request based on the ID provided.
+- [Get Member Transactions By Member Request](https://docs.noyo.com/api-reference/requests/getmembertransactionsbymemberrequestlist.md): Returns a list of all member transactions for a given member request.
+- [Get Organization Member Request List](https://docs.noyo.com/api-reference/requests/getorganizationmemberrequestlist.md): Returns a list of all member requests for a given organization. Each member request may have one or more associated member transactions.
+- [Create a New Hire Enrollment Member Request](https://docs.noyo.com/api-reference/requests/newhireenrollmentmemberrequest.md): The new hire member request is used to add an existing employee, and optionally their dependents to multiple coverages at multiple carriers.
+- [Create a Open Enrollment Member Request](https://docs.noyo.com/api-reference/requests/openenrollmentmemberrequest.md): The open enrollment member request is used to make changes to existing employees, dependents and coverages during the open enrollment period.
+- [Create a Qualifying Life Event Member Request](https://docs.noyo.com/api-reference/requests/qualifyinglifeeventmemberrequest.md): The qualifying life event member request is used to make changes to existing employees, dependents and coverages due to a qualifying life event.
+- [Create a Termination Member Request](https://docs.noyo.com/api-reference/requests/terminationmemberrequest.md): The `termination` member request is used to remove an employee and their dependents from coverage at all carriers. The `last_work_date` will be communicated to the carrier and the `last_day_of_coverage` will be determined by the carrier and included in the result.
+- [Create Member Snapshot](https://docs.noyo.com/api-reference/snapshots/create-member-snapshot.md): Create a new member snapshot for a group
+- [Get Member Snapshot](https://docs.noyo.com/api-reference/snapshots/get-member-snapshot.md): Get a specific member snapshot by ID
+- [Get CalculatedMember Snapshot for Employee](https://docs.noyo.com/api-reference/snapshots/get-member-snapshot-for-employee.md): Get a Member Snapshot by Employee ID. This will be calculated based on the current state of Noyo data for the employee.
+- [Get Member Snapshots for Employee](https://docs.noyo.com/api-reference/snapshots/get-member-snapshots-for-employee-list.md): Get a list of all member snapshots for a specific employee
+- [List Member Snapshots for Group](https://docs.noyo.com/api-reference/snapshots/get-member-snapshots-for-group-list.md): Get a list of all member snapshots for a specific group
+- [List Member Snapshots](https://docs.noyo.com/api-reference/snapshots/get-member-snapshots-list.md): Get a list of all member snapshots in the system
+- [List Differences](https://docs.noyo.com/api-reference/tracking/get-differences.md): Returns a list of differences.
+- [Get a Transaction](https://docs.noyo.com/api-reference/transactions/getmembertransaction.md): Returns the latest version of a single member transaction based on the ID provided.
+- [Get Member Transactions by Member Request](https://docs.noyo.com/api-reference/transactions/getmembertransactionsbymemberrequestlist.md): Returns a list of all member transactions for a given member request.
+- [Get a list of all Member Transactions](https://docs.noyo.com/api-reference/transactions/getmembertransactionslist.md): Returns a list of transaction ids by associated difference impact score.
+- [Get Latest Status Detail](https://docs.noyo.com/api-reference/transactions/status-detail/getlateststatusdetail.md): Returns the latest status detail for a given transaction.
+- [Get Status Details](https://docs.noyo.com/api-reference/transactions/status-detail/getstatusdetaillist.md): Returns a list of all status details for a given transaction.
+- [Group and Plan Data](https://docs.noyo.com/docs/data/group-data-endpoints.md): Data available for groups, enrollments, and plans
+- [Member Data](https://docs.noyo.com/docs/data/member-data-endpoints.md): Data available for employees and dependents
+- [Temporal Data](https://docs.noyo.com/docs/data/temporal-data.md): How to handle data that changes over time
+- [Using Noyo Data](https://docs.noyo.com/docs/data/using-noyo-data.md): The building blocks you need for your next amazing product
+- [Carrier Authorization](https://docs.noyo.com/docs/groups/connections/authorization.md): Carriers enforce different authorization models on ben-admins, brokers, and Noyo
+- [Disconnecting a Group](https://docs.noyo.com/docs/groups/connections/disconnect-a-group.md): Tell Noyo to stop exchanging data for a group
+- [Connecting a Group](https://docs.noyo.com/docs/groups/connections/request-a-group-connection.md): The first step in administering enrollments via Noyo
+- [Create a Group](https://docs.noyo.com/docs/groups/create-a-group.md): Learn how to create and configure a new group
+- [Explicit vs Dynamic Configuration](https://docs.noyo.com/docs/groups/mapping/explicit-vs-dynamic-configuration.md)
+- [Linking Members](https://docs.noyo.com/docs/groups/mapping/linking-members.md): Associate your employee and dependent records to ours
+- [Mapping Plans and Account Structures](https://docs.noyo.com/docs/groups/mapping/mapping-plans-and-account-structures.md): Matching plans and account structures between our two systems
+- [Managing Renewals](https://docs.noyo.com/docs/groups/renewal-readiness.md): Peace of mind and a smoother open enrollment period
+- [About Noyo](https://docs.noyo.com/docs/introduction/about-noyo.md): Your partner for seamless enrollment data exchange
+- [Getting Started](https://docs.noyo.com/docs/introduction/getting-started.md)
+- [Authentication](https://docs.noyo.com/docs/introduction/getting-started/authentication.md): Authenticate to our API so you can start using the sandbox.
+- [Environments](https://docs.noyo.com/docs/introduction/getting-started/environments.md): Test in sandbox or send live data to production
+- [Using the API](https://docs.noyo.com/docs/introduction/getting-started/using-the-api.md): Learn how to use the Noyo API
+- [The Noyo App](https://docs.noyo.com/docs/introduction/ui.md): Your destination for managing Noyo-powered enrollments
+- [Webhooks](https://docs.noyo.com/docs/introduction/webhooks.md): Respond to important events in near-real-time
+- [Verifying webhooks](https://docs.noyo.com/docs/introduction/webhooks/webhook-verification.md): Maintain security with verified transmissions
+- [COBRA](https://docs.noyo.com/docs/members/complex-changes/cobra.md): COBRA Enrollments and Terminations
+- [Evidence of Insurability (EOI)](https://docs.noyo.com/docs/members/complex-changes/eoi.md)
+- [Primary Care Provider Data](https://docs.noyo.com/docs/members/complex-changes/pcp.md)
+- [Rehires and Reinstatements](https://docs.noyo.com/docs/members/complex-changes/rehires.md)
+- [Waiving/Canceling Coverage](https://docs.noyo.com/docs/members/complex-changes/waives.md): Waiving coverage is done differently depending on the circumstances and history
+- [Uploading Error Reports](https://docs.noyo.com/docs/members/issues/edi-errors.md): Upload carrier EDI error reports and create structured issues
+- [Issues](https://docs.noyo.com/docs/members/issues/overview.md): Issues is the primary system for tracking and resolving enrollment problems in Noyo. It provides a system of record and tools to manage reconciliation work.
+- [Snapshot & Tracking](https://docs.noyo.com/docs/members/snapshot-workflow/basic-snapshot-tracking.md): Track the outstanding updates from a snapshot, along with any discrepancies that result
+- [Feeds and Feed Runs](https://docs.noyo.com/docs/members/snapshot-workflow/feeds-feed-runs.md): Track EDI data delivery for Standard and Advanced carriers.
+- [Snapshot Statuses](https://docs.noyo.com/docs/members/snapshot-workflow/snapshot-status.md): Understanding change fulfillment and tracking
+- [The Snapshot Workflow](https://docs.noyo.com/docs/members/snapshot-workflow/the-member-change-workflow.md): What's happening behind the scenes when you send a snapshot
+- [Change Tracking and Discrepancies](https://docs.noyo.com/docs/members/tracking/the-tracking-api.md): Track in-process changes and find out when something's gone wrong
+- [Tracked Differences](https://docs.noyo.com/docs/members/tracking/tracked-differences.md): The list of possible differences raised by Noyo and their associated fields
+- [Effective End Dates](https://docs.noyo.com/docs/members/using-snapshots/end-dates.md): Unless in cases of explicit termination, the effective end date should be sent as `datemax`
+- [Using Events](https://docs.noyo.com/docs/members/using-snapshots/event-reasons.md): Improve accuracy and carrier processing times
+- [Inferred Plan Switching](https://docs.noyo.com/docs/members/using-snapshots/inferred-plan-switching.md): How Noyo automatically handles plan switches when existing coverage is omitted from a snapshot
+- [Omitted Coverage Handling](https://docs.noyo.com/docs/members/using-snapshots/omitted-coverage-handling.md): Tell us how to handle any active coverages not included in a snapshot.
+- [Identifying Plans](https://docs.noyo.com/docs/members/using-snapshots/plans.md): How to send plan info in member snapshots
+- [Responses and Errors](https://docs.noyo.com/docs/members/using-snapshots/snapshot-responses.md): Learn which responses and errors you may get, and why
+- [Member Snapshots](https://docs.noyo.com/docs/members/using-snapshots/using-snapshots.md): The easiest way to manage member eligibility
+- [Volumes](https://docs.noyo.com/docs/members/using-snapshots/volumes.md): When to include a volume amount in a snapshot
+- [Authenticate to Noyo](https://docs.noyo.com/examples/auth.md): Authenticate to our API so you can start using our endpoints
+- [Change a Member's Salary](https://docs.noyo.com/examples/change-salary.md): Update the salary for an employee
+- [Enroll an Employee in COBRA](https://docs.noyo.com/examples/enroll-cobra-employee.md): Enroll an employee in COBRA <br /> [Read COBRA guide](https://docs.noyo.com/docs/members/complex-changes/cobra#enrolling-a-member-in-cobra-coverage)
+- [Enroll an Existing Member](https://docs.noyo.com/examples/enroll-existing.md): Enroll an existing employee in a new coverage
+- [Enroll a New Hire](https://docs.noyo.com/examples/new-hire.md): Create a new employee in Noyo and enroll them in dental and vision coverage
+- [Rehire an Employee](https://docs.noyo.com/examples/rehire-employee.md): Add a rehired employee back to employment and active coverage
+- [Reinstate Coverage](https://docs.noyo.com/examples/reinstate-coverage.md): Reinstate terminated coverage for an employee
+- [Switch a Member's Plans](https://docs.noyo.com/examples/switch-plans.md): Move a member and their dependents from one plan to another
+- [Terminate an Employee on COBRA](https://docs.noyo.com/examples/terminate-cobra-employee.md): Terminate an employee currently enrolled in COBRA <br /> [Read COBRA guide](https://docs.noyo.com/docs/members/complex-changes/cobra#terminating-a-member-from-cobra-coverage)
+- [Terminate a Dependent](https://docs.noyo.com/examples/terminate-dependent.md): Remove a dependent from coverage while the rest of the family remains active
+- [Terminate an Employee](https://docs.noyo.com/examples/terminate-employee.md): Terminate an employee's employment and their coverages, along with any dependent coverages
+- [In-flight change; adding a dependent's enrollment](https://docs.noyo.com/examples/tracking/adding-dependent.md): Sample payload
+- [Address discrepancy](https://docs.noyo.com/examples/tracking/address-discrepancy.md): Sample payload
+- [Effective Start Date Discrepancy (Resolved)](https://docs.noyo.com/examples/tracking/resolved-discrepancy.md): Sample payload
+- [Waive or Cancel Coverage](https://docs.noyo.com/examples/waive-or-cancel.md): Remove a coverage as if it were never active. This is often used to correct a mistake or reflect a member's changed decision
+- [The Noyo Developer Hub](https://docs.noyo.com/introduction.md): Welcome to the Noyo developer hub! Here you'll find comprehensive guides and documentation to help you start working with Noyo as quickly as possible. We recommend starting with our Guides and then using the API Reference when you're ready to build.
+
+## OpenAPI Specs
+
+- [fulfillment](https://docs.noyo.com/api-reference/fulfillment.json)
+- [tracking](https://docs.noyo.com/api-reference/tracking.json)
+- [carrier](https://docs.noyo.com/api-reference/carrier.json)
+
+## Optional
+
+- [Carriers](https://app.noyo.com/network/carrier-ids)
