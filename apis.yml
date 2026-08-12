@@ -707,6 +707,8 @@ apis:
   - type: OpenAPI
     url: openapi/noyo-volleys-api-openapi.yml
 common:
+- type: Overlay
+  url: overlays/noyo-carrier-overlay.yaml
 - type: Website
   url: https://www.noyo.com
 - type: DeveloperPortal
