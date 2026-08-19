@@ -1,0 +1,266 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Rule Set API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Rule Set",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves a list of Rule Set Traces.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/rule_set_traces",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              },
+              {
+                "name": "rule_set_ids",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated UUIDs of rule sets to filter Rule Set Traces"
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "query",
+                "description": "Noyo specific group UUID to filter Rule Set Traces"
+              },
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "query",
+                "description": "Noyo specific employee UUID to filter Rule Set Traces"
+              },
+              {
+                "name": "member_snapshot_id",
+                "value": "",
+                "type": "query",
+                "description": "Noyo specific member snapshot UUID to filter Rule Set Traces"
+              },
+              {
+                "name": "include_trace",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include the trace in the response"
+              }
+            ]
+          },
+          "docs": "Returns a list of Rule Set Traces."
+        },
+        {
+          "info": {
+            "name": "Get a single Rule Set Trace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/rule_set_traces/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the rule set trace you would like to view"
+              },
+              {
+                "name": "include_trace",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include the trace in the response"
+              }
+            ]
+          },
+          "docs": "Returns a single Rule Set Trace based on the ID provided."
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of Rule Sets.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/rule_sets",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "query",
+                "description": "Noyo specific group UUID to filter Rule Sets"
+              },
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "Noyo specific organization UUID to filter Rule Sets"
+              },
+              {
+                "name": "entry_point",
+                "value": "",
+                "type": "query",
+                "description": "Rule set Entry Point value to filter by"
+              },
+              {
+                "name": "sandwich_position",
+                "value": "",
+                "type": "query",
+                "description": "Rule set metadata position to filter by"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Rule set status to filter by"
+              }
+            ]
+          },
+          "docs": "Returns a list of Rule Sets."
+        },
+        {
+          "info": {
+            "name": "Create a Rule Set",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/rule_sets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new Rule Set."
+        },
+        {
+          "info": {
+            "name": "Get a single Rule Set",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/rule_sets/:rule_set_id",
+            "params": [
+              {
+                "name": "rule_set_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the rule you would like to view"
+              }
+            ]
+          },
+          "docs": "Returns the latest version of a single rule set based on the ID provided."
+        },
+        {
+          "info": {
+            "name": "Promote a Rule Set",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/rule_sets/:rule_set_id/:rule_set_version/promote",
+            "params": [
+              {
+                "name": "rule_set_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the rule set to promote"
+              },
+              {
+                "name": "rule_set_version",
+                "value": "",
+                "type": "path",
+                "description": "The version of the rule set to promote"
+              }
+            ]
+          },
+          "docs": "Promotes a rule set from draft or archived status to active status. Any existing active rule sets with matching type, entry point, and sandwich position will be archived."
+        },
+        {
+          "info": {
+            "name": "Update a Rule Set",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/rule_sets/:rule_set_id/:version",
+            "params": [
+              {
+                "name": "rule_set_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the rule set you want to edit."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "Unique version of the rule set you want to edit."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a rule set based on the ID provided. The version parameter must match the latest rule set version."
+        },
+        {
+          "info": {
+            "name": "Delete a Rule Set",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/rule_sets/:rule_set_id/:version",
+            "params": [
+              {
+                "name": "rule_set_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the rule set you want to delete."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "Unique version of the rule set you want to delete."
+              }
+            ]
+          },
+          "docs": "Delete a rule set based on the ID provided. The version parameter must match the latest rule set version."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

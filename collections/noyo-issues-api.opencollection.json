@@ -1,0 +1,331 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Issues API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Issues",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Issues",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/issues",
+            "params": [
+              {
+                "name": "partner_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by associated partner ID."
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by associated group ID."
+              },
+              {
+                "name": "status",
+                "value": "open",
+                "type": "query",
+                "description": "Filter by issue status. Supports single value (status=open) or comma-separated multiple values (status=open,pending_resolution)."
+              },
+              {
+                "name": "member_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by associated member ID."
+              },
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by associated employee ID."
+              },
+              {
+                "name": "partner_document_source_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by associated partner document source ID."
+              },
+              {
+                "name": "originating_record_ids",
+                "value": "",
+                "type": "query",
+                "description": "Filter by issues containing specific originating record IDs."
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the source system or process that created this issue."
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the category of error for this issue."
+              },
+              {
+                "name": "issue_key",
+                "value": "",
+                "type": "query",
+                "description": "Filter by issue_key - a unique identifier for the issue."
+              },
+              {
+                "name": "dismissed",
+                "value": "",
+                "type": "query",
+                "description": "Filter by dismissed state."
+              },
+              {
+                "name": "resolution_action",
+                "value": "",
+                "type": "query",
+                "description": "Filter by resolution action explanation (filters on data->resolution->action->explanation). Only matches issues where the nested path exists."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to skip for pagination."
+              }
+            ]
+          },
+          "docs": "List existing Issues. Supports filtering on various fields including array containment."
+        },
+        {
+          "info": {
+            "name": "Get Issue",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/issues/:issue_id",
+            "params": [
+              {
+                "name": "issue_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the Issue."
+              }
+            ]
+          },
+          "docs": "Get a specific Issue by its ID."
+        },
+        {
+          "info": {
+            "name": "List Issues",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ui/v1/issues",
+            "params": [
+              {
+                "name": "partner_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by associated partner ID."
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by associated group ID."
+              },
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by associated organization ID."
+              },
+              {
+                "name": "status",
+                "value": "open",
+                "type": "query",
+                "description": "Filter by issue status. Supports single value (status=open) or comma-separated multiple values (status=open,pending_resolution)."
+              },
+              {
+                "name": "is_external",
+                "value": "",
+                "type": "query",
+                "description": "Filter by whether the issue is externally visible."
+              },
+              {
+                "name": "member_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by associated member ID."
+              },
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by associated employee ID."
+              },
+              {
+                "name": "partner_document_source_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by associated partner document source ID."
+              },
+              {
+                "name": "originating_record_ids",
+                "value": "",
+                "type": "query",
+                "description": "Filter by issues containing specific originating record IDs."
+              },
+              {
+                "name": "originating_record_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the type of workflow or system that originated this issue."
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the source system or process that created this issue."
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the category of error for this issue."
+              },
+              {
+                "name": "issue_key",
+                "value": "",
+                "type": "query",
+                "description": "Filter by issue_key - a unique identifier for the issue."
+              },
+              {
+                "name": "dismissed",
+                "value": "",
+                "type": "query",
+                "description": "Filter by dismissed state."
+              },
+              {
+                "name": "resolution_action",
+                "value": "",
+                "type": "query",
+                "description": "Filter by resolution action explanation (filters on data->resolution->action->explanation). Only matches issues where the nested path exists."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to skip for pagination."
+              }
+            ]
+          },
+          "docs": "List existing Issues via the UI. Supports filtering on various fields including array containment."
+        },
+        {
+          "info": {
+            "name": "Create Issue",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/ui/v1/issues",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new Issue via the UI. Generates a unique issue_key and sets defaults."
+        },
+        {
+          "info": {
+            "name": "Get Issue",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ui/v1/issues/:issue_id",
+            "params": [
+              {
+                "name": "issue_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the Issue."
+              }
+            ]
+          },
+          "docs": "Get a specific Issue by its ID."
+        },
+        {
+          "info": {
+            "name": "Regenerate Issue Guidance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/ui/v1/issues/:issue_id/guidance",
+            "params": [
+              {
+                "name": "issue_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the Issue."
+              }
+            ]
+          },
+          "docs": "Regenerate resolution guidance for a specific Issue by triggering an asynchronous process."
+        },
+        {
+          "info": {
+            "name": "Edit Issue",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/ui/v1/issues/:issue_id/:version",
+            "params": [
+              {
+                "name": "issue_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Issue to update."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version identifier of the Issue being updated (for optimistic locking)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit an Issue based on the ID provided."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,168 @@
+{
+  "item": [
+    {
+      "id": "3ae3bb01-e398-4a65-a393-d2b4945e31ff",
+      "name": "Member Transaction Labels",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bec8cf9b-b4e1-4edd-849a-90f2523ab625",
+          "name": "Get a list of all Member Transaction Labels",
+          "request": {
+            "name": "Get a list of all Member Transaction Labels",
+            "description": {
+              "content": "Returns a list of all member transaction labels",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "member_transactions",
+                ":transaction_id",
+                "labels"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "label_id",
+                  "value": "<string>",
+                  "description": "UUID of the label to search"
+                },
+                {
+                  "disabled": false,
+                  "key": "display_name",
+                  "value": "<string>",
+                  "description": "String describing the contents of the label"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "transaction_id",
+                  "description": "(Required) The unique identifier of the member transaction we are fetching labels for"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5f60544c-557d-4821-a6d5-f1d8a09f9a3b",
+              "name": "Successful Response - Returns all matching Member Transaction Labels",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "member_transactions",
+                    ":transaction_id",
+                    "labels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "label_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "display_name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "transaction_id",
+                      "description": "(Required) The unique identifier of the member transaction we are fetching labels for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 1\n  },\n  \"response\": [\n    {\n      \"context\": \"transaction_complete\",\n      \"created\": 1557512389,\n      \"id\": \"a6e30204-87b2-4802-95a4-a156bd0f7435\",\n      \"internal_note\": \"A note!\",\n      \"label\": {\n        \"created\": 3257512346,\n        \"display_name\": \"My Label\",\n        \"id\": \"7be0d550-9943-4ce1-a6ef-7f096f31f8ac\",\n        \"modified\": 3264440746,\n        \"summary\": \"This is my label\",\n        \"version\": \"67d00f72-61ee-496e-aa79-229bd4f318c7\"\n      },\n      \"member_request_id\": \"bba6ea27-4004-4a52-a3d9-f986ace0d3da\",\n      \"modified\": 1564440756,\n      \"name\": \"other\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "82998612-50e7-4b2f-bf21-05b74ef30f5b",
+    "name": "Noyo Carrier Carrier Mapped Field Member Transaction Labels API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

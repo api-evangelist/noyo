@@ -1,0 +1,164 @@
+{
+  "item": [
+    {
+      "id": "593aafef-45f6-4ac9-a3bf-d983362cb2a0",
+      "name": "Issue Persons",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3b000ec1-ee4a-495d-8379-35953f8cc5f3",
+          "name": "Get Issue Person",
+          "request": {
+            "name": "Get Issue Person",
+            "description": {
+              "content": "Get a specific IssuePerson by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "issue_persons",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier for the IssuePerson."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0c53f2d5-ceec-4eb5-b1cd-01ae2ae33b76",
+              "name": "Successful Response - Returns the IssuePerson details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "issue_persons",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier for the IssuePerson."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 1697380200,\n  \"date_of_birth\": \"1990-05-15\",\n  \"first_name\": \"Jane\",\n  \"group_id\": \"436fb487-bb75-42d4-9651-7b1471a8940e\",\n  \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n  \"last_name\": \"Doe\",\n  \"middle_name\": null,\n  \"modified\": 1697380200,\n  \"organization_id\": \"d61fa455-adf4-4dc4-8c57-6d779ba9475e\",\n  \"ssn\": null,\n  \"suffix\": null,\n  \"version\": \"ea38e798-cd61-4fa2-b485-d1c5b87a61af\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d77f65e-295a-48a6-a62d-6782540997be",
+              "name": "IssuePerson not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "issue_persons",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier for the IssuePerson."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7e602e56-290a-4088-b44e-a60c56d9a684",
+    "name": "Noyo Carrier Carrier Mapped Field Issue Persons API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

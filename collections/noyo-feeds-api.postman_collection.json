@@ -1,0 +1,310 @@
+{
+  "item": [
+    {
+      "id": "717f602e-9b67-4daa-b944-4b71927ae21f",
+      "name": "Feeds",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "662b4f1b-2d2d-427a-981f-9f2cda4b23d6",
+          "name": "Get a list of feeds",
+          "request": {
+            "name": "Get a list of feeds",
+            "description": {
+              "content": "Returns a list of feeds",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "feeds"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "group_id",
+                  "value": "<uuid>",
+                  "description": "Unique identifier of the group"
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier_id",
+                  "value": "<uuid>",
+                  "description": "Unique identifier of the carrier"
+                },
+                {
+                  "disabled": false,
+                  "key": "next_transmission_end",
+                  "value": "<string>",
+                  "description": "Filter by feeds that will run before the provided datetime"
+                },
+                {
+                  "disabled": false,
+                  "key": "paused",
+                  "value": "<boolean>",
+                  "description": "Filter by feeds that are temporarily paused from delivering files"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by feed status"
+                },
+                {
+                  "disabled": false,
+                  "key": "testing",
+                  "value": "<boolean>",
+                  "description": "Filter by feeds that are in a testing state with the carrier"
+                },
+                {
+                  "disabled": false,
+                  "key": "feed",
+                  "value": "<string>",
+                  "description": "Filter by feed name or feed ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_by",
+                  "value": "<string>",
+                  "description": "The attribute on which to sort"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_direction",
+                  "value": "<string>",
+                  "description": "Either asc or desc, to denote the data's direction"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2ed70fd9-aa4f-4c20-8fd4-8380b2aa9026",
+              "name": "Successful Response - Returns all matching feeds",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "feeds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "group_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "carrier_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "next_transmission_end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "paused",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "testing",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "feed",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_direction",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 3\n  },\n  \"response\": [\n    {\n      \"carrier_id\": \"6ccec769-aaf5-4cb0-92f0-f16b9500c21d\",\n      \"configuration\": {\n        \"cadence\": {\n          \"end_date\": \"2025-03-01\",\n          \"next_transmission\": \"2024-09-10T10:00:00+00:00\",\n          \"paused\": true,\n          \"rrule\": \"RRULE:FREQ=DAILY\",\n          \"start_date\": \"2024-03-01\",\n          \"time_of_day\": \"06:00\",\n          \"zone_info\": \"US/Eastern\"\n        }\n      },\n      \"created\": 1690395918,\n      \"group_id\": \"594ca3ab-4f98-4ec6-8158-ed59f7f96fe2\",\n      \"id\": \"00ffa55b-84e1-48d7-8587-57103c10903f\",\n      \"last_transmission\": {\n        \"id\": \"bda1b068-3e6a-4cc3-9769-0fb8a38649ce\",\n        \"sent_timestamp\": 1641171601\n      },\n      \"modified\": 1690395918,\n      \"name\": \"feed-me\",\n      \"next_transmission\": 1641171601,\n      \"paused\": false,\n      \"status\": \"active\",\n      \"version\": \"49ed5785-d8e1-4c3d-a09d-2f3625b9f2b1\"\n    },\n    {\n      \"carrier_id\": \"6ccec769-aaf5-4cb0-92f0-f16b9500c21d\",\n      \"configuration\": {\n        \"cadence\": {\n          \"end_date\": \"2025-03-01\",\n          \"next_transmission\": \"2024-09-10T10:00:00+00:00\",\n          \"paused\": true,\n          \"rrule\": \"RRULE:FREQ=DAILY\",\n          \"start_date\": \"2024-03-01\",\n          \"time_of_day\": \"06:00\",\n          \"zone_info\": \"US/Eastern\"\n        }\n      },\n      \"created\": 1690395919,\n      \"group_id\": \"594ca3ab-4f98-4ec6-8158-ed59f7f96fe2\",\n      \"id\": \"3b6e4933-c45a-4320-9770-06d6da1f035a\",\n      \"last_transmission\": {\n        \"id\": \"bda1b068-3e6a-4cc3-9769-0fb8a38649ce\",\n        \"sent_timestamp\": 1641171601\n      },\n      \"modified\": 1690395919,\n      \"name\": \"feed-you\",\n      \"next_transmission\": 1641171601,\n      \"paused\": false,\n      \"status\": \"retired\",\n      \"version\": \"3e93d0ec-4666-4cb5-9780-7f451a309754\"\n    },\n    {\n      \"carrier_id\": \"6ccec769-aaf5-4cb0-92f0-f16b9500c21d\",\n      \"configuration\": {\n        \"cadence\": {\n          \"end_date\": \"2025-03-01\",\n          \"next_transmission\": \"2024-09-10T10:00:00+00:00\",\n          \"paused\": true,\n          \"rrule\": \"RRULE:FREQ=DAILY\",\n          \"start_date\": \"2024-03-01\",\n          \"time_of_day\": \"06:00\",\n          \"zone_info\": \"US/Eastern\"\n        }\n      },\n      \"created\": 1690395920,\n      \"group_id\": \"594ca3ab-4f98-4ec6-8158-ed59f7f96fe2\",\n      \"id\": \"2d8ce8c4-623f-4aae-8bdc-5a730f523172\",\n      \"last_transmission\": {\n        \"id\": \"bda1b068-3e6a-4cc3-9769-0fb8a38649ce\",\n        \"sent_timestamp\": 1641171601\n      },\n      \"modified\": 1690395920,\n      \"name\": \"feed-who\",\n      \"next_transmission\": 1641171601,\n      \"paused\": true,\n      \"status\": \"template\",\n      \"version\": \"bf2039f2-b9e1-460e-8d67-c2083ef352a7\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "10f1174c-0013-44f5-9ff5-149da5c29bac",
+          "name": "Get a feed",
+          "request": {
+            "name": "Get a feed",
+            "description": {
+              "content": "Returns a feed",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "feeds",
+                ":feed_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "feed_id",
+                  "description": "(Required) Unique identifier of the feed"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "85650100-cd96-4e1f-ae34-540ec179617b",
+              "name": "Successful Response - Returns a single feed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "feeds",
+                    ":feed_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "feed_id",
+                      "description": "(Required) Unique identifier of the feed"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"configuration\": {\n    \"cadence\": {\n      \"end_date\": \"2024-03-01\",\n      \"next_transmission\": \"2024-08-30T10:00:00+00:00\",\n      \"paused\": true,\n      \"rrule\": \"RRULE:FREQ=DAILY\",\n      \"start_date\": \"2023-03-01\",\n      \"time_of_day\": \"06:00\",\n      \"zone_info\": \"US/Eastern\"\n    }\n  },\n  \"created\": 1690395918,\n  \"last_transmission\": {\n    \"id\": \"bda1b068-3e6a-4cc3-9769-0fb8a38649ce\",\n    \"sent_timestamp\": 1759238254\n  },\n  \"modified\": 1690395918,\n  \"name\": \"feed-me\",\n  \"next_transmission\": 1759339054,\n  \"paused\": false,\n  \"status\": \"active\",\n  \"version\": \"49ed5785-d8e1-4c3d-a09d-2f3625b9f2b1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a7c1502d-3761-45eb-807f-1b63dd8cc644",
+    "name": "Noyo Carrier Carrier Mapped Field Feeds API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

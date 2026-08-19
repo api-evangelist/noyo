@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Feed Runs API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Feed Runs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a feed run file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/feed/runs/:id/file",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the workflow"
+              }
+            ]
+          },
+          "docs": "Returns a signed URL to the feed run file based on the ID provided"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

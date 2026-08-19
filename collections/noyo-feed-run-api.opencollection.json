@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Feed Run API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Feed Run",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a list of feed runs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/feed_runs",
+            "params": [
+              {
+                "name": "feed_id",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of the feed"
+              },
+              {
+                "name": "carrier_id",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of the carrier"
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of the group"
+              },
+              {
+                "name": "latest",
+                "value": "",
+                "type": "query",
+                "description": "Return only the most recent feed run"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              }
+            ]
+          },
+          "docs": "Returns a list of feed runs"
+        },
+        {
+          "info": {
+            "name": "Get a feed run ",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/feed_runs/:feed_run_id",
+            "params": [
+              {
+                "name": "feed_run_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the feed run"
+              }
+            ]
+          },
+          "docs": "Returns a feed run"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

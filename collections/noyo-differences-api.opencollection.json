@@ -1,0 +1,815 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Differences API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Differences",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves a list of differences.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/differences",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of requested Difference UUIDs"
+              },
+              {
+                "name": "max_impact_score",
+                "value": "",
+                "type": "query",
+                "description": "Filter out differences above this impact score"
+              },
+              {
+                "name": "min_impact_score",
+                "value": "",
+                "type": "query",
+                "description": "Filter out differences below this impact score"
+              },
+              {
+                "name": "is_open",
+                "value": "",
+                "type": "query",
+                "description": "True if you want differences that still need to be resolved"
+              },
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated object types you would like to filter on"
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the object you'd like to filter on"
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the group you'd like to filter on"
+              },
+              {
+                "name": "created_before",
+                "value": "",
+                "type": "query",
+                "description": "Filter for only differences created before this date (exclusive)"
+              },
+              {
+                "name": "created_after",
+                "value": "",
+                "type": "query",
+                "description": "Filter for only differences created after this date (exclusive)"
+              },
+              {
+                "name": "impact_type",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated impact types you would like to filter on"
+              },
+              {
+                "name": "is_dismissed",
+                "value": "",
+                "type": "query",
+                "description": "show only differences with the given is_dismissed value"
+              },
+              {
+                "name": "is_discrepancy",
+                "value": "",
+                "type": "query",
+                "description": "Show only differences that are or are not discrepancies"
+              },
+              {
+                "name": "member_snapshot_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the member snapshot you'd like to filter on"
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "The attribute on which to sort"
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query",
+                "description": "Either asc or desc, to denote the data's direction"
+              },
+              {
+                "name": "include_unavailable",
+                "value": "",
+                "type": "query",
+                "description": "Include differences that are known to be unavailable at carrier"
+              },
+              {
+                "name": "classification",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated difference classifications to filter differences by"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated difference types to filter differences by"
+              }
+            ]
+          },
+          "docs": "Returns a list of differences."
+        },
+        {
+          "info": {
+            "name": "Batch assign differences",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/differences/assign",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Batch assign differences"
+        },
+        {
+          "info": {
+            "name": "Batch dismiss differences",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/differences/dismiss",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Batch dismiss differences"
+        },
+        {
+          "info": {
+            "name": "Batch reopen differences",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/differences/reopen",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Batch reopen differences"
+        },
+        {
+          "info": {
+            "name": "Retrieves a single difference",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/differences/:difference_id",
+            "params": [
+              {
+                "name": "difference_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the difference to fetch"
+              }
+            ]
+          },
+          "docs": "Returns a single difference."
+        },
+        {
+          "info": {
+            "name": "Assign a difference",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/differences/:difference_id/assign",
+            "params": [
+              {
+                "name": "difference_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the difference to dismiss"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Assign a difference"
+        },
+        {
+          "info": {
+            "name": "Dismiss a difference",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/differences/:difference_id/dismiss",
+            "params": [
+              {
+                "name": "difference_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the difference to dismiss"
+              }
+            ]
+          },
+          "docs": "Dismiss a difference"
+        },
+        {
+          "info": {
+            "name": "Reopen a difference",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/differences/:difference_id/reopen",
+            "params": [
+              {
+                "name": "difference_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the difference to reopen"
+              }
+            ]
+          },
+          "docs": "Reopen a dismissed difference"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of differences belonging to a given employee.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/employees/:employee_id/differences",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              },
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "path",
+                "description": "Show differences for this employee"
+              },
+              {
+                "name": "max_impact_score",
+                "value": "",
+                "type": "query",
+                "description": "Filter out differences above this impact score"
+              },
+              {
+                "name": "min_impact_score",
+                "value": "",
+                "type": "query",
+                "description": "Filter out differences below this impact score"
+              },
+              {
+                "name": "is_open",
+                "value": "",
+                "type": "query",
+                "description": "True if you want differences that still need to be resolved"
+              },
+              {
+                "name": "created_before",
+                "value": "",
+                "type": "query",
+                "description": "Filter for only differences created before this date (exclusive)"
+              },
+              {
+                "name": "created_after",
+                "value": "",
+                "type": "query",
+                "description": "Filter for only differences created after this date (exclusive)"
+              },
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated object types you would like to filter on"
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the object you'd like to filter on"
+              },
+              {
+                "name": "impact_type",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated impact types you would like to filter on"
+              },
+              {
+                "name": "is_dismissed",
+                "value": "",
+                "type": "query",
+                "description": "show only differences with the given is_dismissed value"
+              },
+              {
+                "name": "is_discrepancy",
+                "value": "",
+                "type": "query",
+                "description": "Show only differences that are or are not discrepancies"
+              },
+              {
+                "name": "member_snapshot_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the member snapshot you'd like to filter on"
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "The attribute on which to sort"
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query",
+                "description": "Either asc or desc, to denote the data's direction"
+              },
+              {
+                "name": "include_unavailable",
+                "value": "",
+                "type": "query",
+                "description": "Include differences that are known to be unavailable at carrier"
+              },
+              {
+                "name": "classification",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated difference classifications to filter differences by"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated difference types to filter differences by"
+              }
+            ]
+          },
+          "docs": "Returns a list of differences for an employee."
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of differences belonging to a group.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/groups/:group_id/differences",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "Show differences for this employee"
+              },
+              {
+                "name": "max_impact_score",
+                "value": "",
+                "type": "query",
+                "description": "Filter out differences above this impact score"
+              },
+              {
+                "name": "min_impact_score",
+                "value": "",
+                "type": "query",
+                "description": "Filter out differences below this impact score"
+              },
+              {
+                "name": "is_open",
+                "value": "",
+                "type": "query",
+                "description": "True if you want differences that still need to be resolved"
+              },
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated object types you would like to filter on"
+              },
+              {
+                "name": "created_before",
+                "value": "",
+                "type": "query",
+                "description": "Filter for only differences created before this date (exclusive)"
+              },
+              {
+                "name": "created_after",
+                "value": "",
+                "type": "query",
+                "description": "Filter for only differences created after this date (exclusive)"
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the object you'd like to filter on"
+              },
+              {
+                "name": "impact_type",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated impact types you would like to filter on"
+              },
+              {
+                "name": "is_dismissed",
+                "value": "",
+                "type": "query",
+                "description": "show only differences with the given is_dismissed value"
+              },
+              {
+                "name": "is_discrepancy",
+                "value": "",
+                "type": "query",
+                "description": "Show only differences that are or are not discrepancies"
+              },
+              {
+                "name": "member_snapshot_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the member snapshot you'd like to filter on"
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "The attribute on which to sort"
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query",
+                "description": "Either asc or desc, to denote the data's direction"
+              },
+              {
+                "name": "include_unavailable",
+                "value": "",
+                "type": "query",
+                "description": "Include differences that are known to be unavailable at carrier"
+              },
+              {
+                "name": "classification",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated difference classifications to filter differences by"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated difference types to filter differences by"
+              }
+            ]
+          },
+          "docs": "Returns a list of differences for a group."
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of transaction ids ",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/member_transactions",
+            "params": [
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "The attribute on which to sort"
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query",
+                "description": "Either asc or desc, to denote the data's direction"
+              },
+              {
+                "name": "difference_impact_score",
+                "value": "",
+                "type": "query",
+                "description": "Include transactions that contain the specified impact score"
+              },
+              {
+                "name": "max_impact_score",
+                "value": "",
+                "type": "query",
+                "description": "Max impact score of all differences associated to transaction"
+              }
+            ]
+          },
+          "docs": "Returns a list of transaction ids by associated difference impact score."
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of differences sourced from a member transaction.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/member_transactions/:member_transaction_id/differences",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              },
+              {
+                "name": "member_transaction_id",
+                "value": "",
+                "type": "path",
+                "description": "Show differences for this transaction"
+              },
+              {
+                "name": "max_impact_score",
+                "value": "",
+                "type": "query",
+                "description": "Filter out differences above this impact score"
+              },
+              {
+                "name": "min_impact_score",
+                "value": "",
+                "type": "query",
+                "description": "Filter out differences below this impact score"
+              },
+              {
+                "name": "is_open",
+                "value": "",
+                "type": "query",
+                "description": "True if you want differences that still need to be resolved"
+              },
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated object types you would like to filter on"
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the object you'd like to filter on"
+              },
+              {
+                "name": "impact_type",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated impact types you would like to filter on"
+              },
+              {
+                "name": "is_dismissed",
+                "value": "",
+                "type": "query",
+                "description": "show only differences with the given is_dismissed value"
+              },
+              {
+                "name": "is_discrepancy",
+                "value": "",
+                "type": "query",
+                "description": "Show only differences that are or are not discrepancies"
+              },
+              {
+                "name": "created_before",
+                "value": "",
+                "type": "query",
+                "description": "Filter for only differences created before this date (exclusive)"
+              },
+              {
+                "name": "created_after",
+                "value": "",
+                "type": "query",
+                "description": "Filter for only differences created after this date (exclusive)"
+              },
+              {
+                "name": "member_snapshot_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the member snapshot you'd like to filter on"
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "The attribute on which to sort"
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query",
+                "description": "Either asc or desc, to denote the data's direction"
+              },
+              {
+                "name": "include_unavailable",
+                "value": "",
+                "type": "query",
+                "description": "Include differences that are known to be unavailable at carrier"
+              },
+              {
+                "name": "classification",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated difference classifications to filter differences by"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated difference types to filter differences by"
+              }
+            ]
+          },
+          "docs": "Returns a list of differences for a member transaction."
+        },
+        {
+          "info": {
+            "name": "Retrieves counts of differences, split by given attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ui/v1/differences/counts",
+            "params": [
+              {
+                "name": "counts_by",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated attributes to count by"
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the group you'd like to filter on"
+              },
+              {
+                "name": "created_before",
+                "value": "",
+                "type": "query",
+                "description": "Filter for only differences created before this date (exclusive)"
+              },
+              {
+                "name": "created_after",
+                "value": "",
+                "type": "query",
+                "description": "Filter for only differences created after this date (exclusive)"
+              },
+              {
+                "name": "max_impact_score",
+                "value": "",
+                "type": "query",
+                "description": "Filter out differences above this impact score"
+              },
+              {
+                "name": "min_impact_score",
+                "value": "",
+                "type": "query",
+                "description": "Filter out differences below this impact score"
+              },
+              {
+                "name": "is_open",
+                "value": "",
+                "type": "query",
+                "description": "True if you want differences that still need to be resolved"
+              },
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated object types you would like to filter on"
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the object you'd like to filter on"
+              },
+              {
+                "name": "impact_type",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated impact types you would like to filter on"
+              },
+              {
+                "name": "is_dismissed",
+                "value": "",
+                "type": "query",
+                "description": "show only differences with the given is_dismissed value"
+              },
+              {
+                "name": "is_discrepancy",
+                "value": "",
+                "type": "query",
+                "description": "Show only differences that are or are not discrepancies"
+              },
+              {
+                "name": "member_snapshot_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the member snapshot you'd like to filter on"
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "The attribute on which to sort"
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query",
+                "description": "Either asc or desc, to denote the data's direction"
+              },
+              {
+                "name": "include_unavailable",
+                "value": "",
+                "type": "query",
+                "description": "Include differences that are known to be unavailable at carrier"
+              },
+              {
+                "name": "classification",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated difference classifications to filter differences by"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated difference types to filter differences by"
+              }
+            ]
+          },
+          "docs": "Retrieves counts of differences."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,179 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Group Plans & Enrollment API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Group Plans & Enrollment",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a single Group Enrollment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/group_enrollments/:enrollment_id",
+            "params": [
+              {
+                "name": "enrollment_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the group enrollment"
+              }
+            ]
+          },
+          "docs": "Returns the latest version of a single group enrollment based on the ID provided."
+        },
+        {
+          "info": {
+            "name": "Get a list of all Group Enrollment Plans",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/group_enrollments/:enrollment_id/plans",
+            "params": [
+              {
+                "name": "enrollment_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group enrollment for which you would like to view the plans"
+              }
+            ]
+          },
+          "docs": "Returns a list of all plans for a given group enrollment."
+        },
+        {
+          "info": {
+            "name": "Get a list of all Group Enrollments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/groups/:group_id/group_enrollments",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group for which you would like to view group enrollments"
+              },
+              {
+                "name": "effective_date",
+                "value": "",
+                "type": "query",
+                "description": "The relative date on which to view the state of the record"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "The status of the group enrollments you would like to view"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              }
+            ]
+          },
+          "docs": "Returns a list of all group enrollments for a given group."
+        },
+        {
+          "info": {
+            "name": "Get a list of all Group Plans",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/groups/:group_id/plans",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group for which you would like to view plans"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status of the group plans for which you would like to filter"
+              },
+              {
+                "name": "line_of_coverage",
+                "value": "",
+                "type": "query",
+                "description": "Line of coverage of the group plans for which you would like to filter"
+              },
+              {
+                "name": "carrier_id",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of the carrier of the group plans for which you would like to filter"
+              },
+              {
+                "name": "effective_date",
+                "value": "",
+                "type": "query",
+                "description": "The relative date on which to view the state of the record"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              }
+            ]
+          },
+          "docs": "Returns a list of all plans for a given group."
+        },
+        {
+          "info": {
+            "name": "Get a Group Plan by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/plans/:plan_id",
+            "params": [
+              {
+                "name": "plan_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group plan you would like to view"
+              },
+              {
+                "name": "effective_date",
+                "value": "",
+                "type": "query",
+                "description": "The relative date on which to view the state of the record"
+              }
+            ]
+          },
+          "docs": "Returns the group plan specified by unique identifier"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

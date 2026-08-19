@@ -1,0 +1,781 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Group Configuration API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Group Configuration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a single Dependent",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/dependents/:dependent_id",
+            "params": [
+              {
+                "name": "dependent_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the dependent you would like to view"
+              }
+            ]
+          },
+          "docs": "Returns the latest version of a single dependent based on the ID provided."
+        },
+        {
+          "info": {
+            "name": "Filter all employees",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/employees",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              },
+              {
+                "name": "first_name",
+                "value": "",
+                "type": "query",
+                "description": "The employee first name for which you would like to filter"
+              },
+              {
+                "name": "last_name",
+                "value": "",
+                "type": "query",
+                "description": "The employee last name for which you would like to filter"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The employee's name for which you would like to filter"
+              },
+              {
+                "name": "date_of_birth",
+                "value": "",
+                "type": "query",
+                "description": "The ISO-8601 (YYYY-MM-DD) employee date of birth for which you would like to filter"
+              },
+              {
+                "name": "employment_status",
+                "value": "",
+                "type": "query",
+                "description": "Status of the employees employment"
+              },
+              {
+                "name": "person_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter employees by Person ID"
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter employees by Group ID"
+              }
+            ]
+          },
+          "docs": "Filter employees across all groups in your organization."
+        },
+        {
+          "info": {
+            "name": "Create a new Employee",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/employees",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new employee for a group."
+        },
+        {
+          "info": {
+            "name": "Get a single Employee",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/employees/:employee_id",
+            "params": [
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the employee you would like to view"
+              }
+            ]
+          },
+          "docs": "Returns the latest version of a single employee based on the ID provided."
+        },
+        {
+          "info": {
+            "name": "List All Dependents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/employees/:employee_id/dependents",
+            "params": [
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the employee for which you would like to view dependents"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              }
+            ]
+          },
+          "docs": "Returns a list of all dependents for a given employee."
+        },
+        {
+          "info": {
+            "name": "Create a new Dependent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/employees/:employee_id/dependents",
+            "params": [
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the employee the dependent belongs to"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new dependent for an employee."
+        },
+        {
+          "info": {
+            "name": "Get a single Dependent of Employee",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/employees/:employee_id/dependents/:dependent_id",
+            "params": [
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the employee the dependent belongs to"
+              },
+              {
+                "name": "dependent_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the dependent you would like to view"
+              }
+            ]
+          },
+          "docs": "Returns the latest version of a single dependent of an employee based on the ID provided."
+        },
+        {
+          "info": {
+            "name": "Get a list of all Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/groups",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              },
+              {
+                "name": "company",
+                "value": "",
+                "type": "query",
+                "description": "This query param searches groups by name or dba_name values"
+              },
+              {
+                "name": "group_ids",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of requested UUID group IDs"
+              },
+              {
+                "name": "carrier_id",
+                "value": "",
+                "type": "query",
+                "description": "Used for filtering for a carrier-specific group ID. Filter by the Noyo carrier ID. Must be used with carrier_group_id"
+              },
+              {
+                "name": "carrier_group_id",
+                "value": "",
+                "type": "query",
+                "description": "Used for filtering for a carrier-specific group ID. Must be used with carrier_id"
+              }
+            ]
+          },
+          "docs": "Returns a list of all groups in the current user organization.\n\nIf you would like to search the groups list, you can use the company query param. It allows searches based on the group's name or dba_name values.\n"
+        },
+        {
+          "info": {
+            "name": "Create a new Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/groups",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new group."
+        },
+        {
+          "info": {
+            "name": "Get a single Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/groups/:group_id",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group to be retrieved"
+              }
+            ]
+          },
+          "docs": "Returns the latest version of a single group based on the ID provided."
+        },
+        {
+          "info": {
+            "name": "Get a list of all Carrier Configurations by Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/groups/:group_id/carrier_configurations",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group for which you would like to view carrier configurations."
+              },
+              {
+                "name": "effective_date",
+                "value": "",
+                "type": "query",
+                "description": "The relative date on which to view the state of the record"
+              }
+            ]
+          },
+          "docs": "Certain carriers have custom data for each group such as billing group information. This endpoint can be used to retrieve carrier-specific configuration data."
+        },
+        {
+          "info": {
+            "name": "group connection configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/groups/:group_id/carrier_configurations/:group_carrier_configuration_id/:version",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the related group"
+              },
+              {
+                "name": "group_carrier_configuration_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group carrier configuration"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The unique version of the related group carrier configuration"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit a group carrier configuration"
+        },
+        {
+          "info": {
+            "name": "Get a list of all Group Contacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/groups/:group_id/contacts",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group for which you would like to view contacts"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              }
+            ]
+          },
+          "docs": "Returns a list of all group contacts for a given group."
+        },
+        {
+          "info": {
+            "name": "Create a new Group Contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/groups/:group_id/contacts",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new contact for a group."
+        },
+        {
+          "info": {
+            "name": "Get a single Group Contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/groups/:group_id/contacts/:contact_id",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group the contact belongs to"
+              },
+              {
+                "name": "contact_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the contact to be retrieved"
+              }
+            ]
+          },
+          "docs": "Returns the latest version of a single group contact based on the ID provided."
+        },
+        {
+          "info": {
+            "name": "Edit an existing Group Contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/groups/:group_id/contacts/:contact_id/:version",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "contact_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit a group contact based on the ID provided. The version parameter must match the latest contact version."
+        },
+        {
+          "info": {
+            "name": "Filter employees in a group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/groups/:group_id/employees",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group for which you would like to view employees"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              },
+              {
+                "name": "first_name",
+                "value": "",
+                "type": "query",
+                "description": "The employee first name for which you would like to filter"
+              },
+              {
+                "name": "last_name",
+                "value": "",
+                "type": "query",
+                "description": "The employee last name for which you would like to filter"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The employee's name for which you would like to filter"
+              },
+              {
+                "name": "date_of_birth",
+                "value": "",
+                "type": "query",
+                "description": "The ISO-8601 (YYYY-MM-DD) employee date of birth for which you would like to filter"
+              },
+              {
+                "name": "employment_status",
+                "value": "",
+                "type": "query",
+                "description": "Status of the employees employment"
+              }
+            ]
+          },
+          "docs": "Filter employees within a group."
+        },
+        {
+          "info": {
+            "name": "List All Group Employee Dependents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/groups/:group_id/employees/:employee_id/dependents",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group for which you would like to view dependents"
+              },
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Noyo ID or the Custom Individual ID of the employee for which you would like to view dependents"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              }
+            ]
+          },
+          "docs": "Returns a list of all dependents for a given employee and group."
+        },
+        {
+          "info": {
+            "name": "Get a list of all Group Locations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/groups/:group_id/locations",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group for which you would like to view locations"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              }
+            ]
+          },
+          "docs": "Returns a list of all group locations for a given group."
+        },
+        {
+          "info": {
+            "name": "Get a single Group Location",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/groups/:group_id/locations/:location_id",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group the location belongs to"
+              },
+              {
+                "name": "location_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the location to be retrieved"
+              }
+            ]
+          },
+          "docs": "Returns the latest version of a single group location based on the ID provided."
+        },
+        {
+          "info": {
+            "name": "Edit an existing Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/groups/:group_id/:version",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group to be edited"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "Unique version of the group you want to edit"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit a group based on the ID provided. The version parameter must match the latest group version."
+        },
+        {
+          "info": {
+            "name": "Get a list of all Employees",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ui/v1/employees",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              },
+              {
+                "name": "first_name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "last_name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "date_of_birth",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "employment_status",
+                "value": "",
+                "type": "query",
+                "description": "Status of the employees employment"
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter employees by Group ID"
+              }
+            ]
+          },
+          "docs": "If there is a use case where you need to query employees across all the groups in your organization you can do so using this endpoint. Returns a list of all employees under your organization, regardless of group."
+        },
+        {
+          "info": {
+            "name": "Get a single Employee",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ui/v1/employees/:employee_id",
+            "params": [
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the employee you would like to view"
+              }
+            ]
+          },
+          "docs": "Returns the latest version of a single employee based on the ID provided."
+        },
+        {
+          "info": {
+            "name": "Get a list of all Employees by Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ui/v1/groups/:group_id/employees",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group for which you would like to view employees"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              },
+              {
+                "name": "first_name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "last_name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "date_of_birth",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "employment_status",
+                "value": "",
+                "type": "query",
+                "description": "Status of the employees employment"
+              }
+            ]
+          },
+          "docs": "Returns a list of all employees for a given group."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,161 @@
+{
+  "item": [
+    {
+      "id": "8b4153a1-436e-49ef-8627-1b738f47ef4c",
+      "name": "Platform Group Structure",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9b519f43-4a03-41d3-b288-2b7f909494b3",
+          "name": "Update a Platform Group Structure",
+          "request": {
+            "name": "Update a Platform Group Structure",
+            "description": {
+              "content": "Update a platform group structure based on the ID provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "platform_group_structures",
+                ":platform_group_structure_id",
+                ":version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "platform_group_structure_id",
+                  "description": "(Required) Unique identifier of the platform group structure you want to edit."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "version",
+                  "description": "(Required) Unique version of the platform group structure you want to edit."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"created\": \"<integer>\",\n  \"group_id\": \"<uuid>\",\n  \"id\": \"<uuid>\",\n  \"modified\": \"<integer>\",\n  \"organization_id\": \"<uuid>\",\n  \"version\": \"<uuid>\",\n  \"structure\": {\n    \"plans\": [\n      {\n        \"carrier_id\": \"<uuid>\",\n        \"line_of_coverage\": \"<string>\",\n        \"custom_plan_id\": \"<string>\",\n        \"id\": \"<uuid>\",\n        \"name\": \"<string>\",\n        \"temporals\": [\n          {\n            \"configuration\": \"<string>\",\n            \"end_date\": \"<date>\",\n            \"start_date\": \"<date>\"\n          },\n          {\n            \"configuration\": \"<string>\",\n            \"end_date\": \"<date>\",\n            \"start_date\": \"<date>\"\n          }\n        ]\n      },\n      {\n        \"carrier_id\": \"<uuid>\",\n        \"line_of_coverage\": \"<string>\",\n        \"custom_plan_id\": \"<string>\",\n        \"id\": \"<uuid>\",\n        \"name\": \"<string>\",\n        \"temporals\": [\n          {\n            \"configuration\": \"<string>\",\n            \"end_date\": \"<date>\",\n            \"start_date\": \"<date>\"\n          },\n          {\n            \"configuration\": \"<string>\",\n            \"end_date\": \"<date>\",\n            \"start_date\": \"<date>\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2111e009-e6e2-4345-80db-a3c345c0eadc",
+              "name": "Successful Response - Returns the modified Platform Group Structure",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "platform_group_structures",
+                    ":platform_group_structure_id",
+                    ":version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "platform_group_structure_id",
+                      "description": "(Required) Unique identifier of the platform group structure you want to edit."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version",
+                      "description": "(Required) Unique version of the platform group structure you want to edit."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"created\": \"<integer>\",\n  \"group_id\": \"<uuid>\",\n  \"id\": \"<uuid>\",\n  \"modified\": \"<integer>\",\n  \"organization_id\": \"<uuid>\",\n  \"version\": \"<uuid>\",\n  \"structure\": {\n    \"plans\": [\n      {\n        \"carrier_id\": \"<uuid>\",\n        \"line_of_coverage\": \"<string>\",\n        \"custom_plan_id\": \"<string>\",\n        \"id\": \"<uuid>\",\n        \"name\": \"<string>\",\n        \"temporals\": [\n          {\n            \"configuration\": \"<string>\",\n            \"end_date\": \"2020-01-01\",\n            \"start_date\": \"2019-01-01\"\n          },\n          {\n            \"configuration\": \"<string>\",\n            \"end_date\": \"2020-01-01\",\n            \"start_date\": \"2019-01-01\"\n          }\n        ]\n      },\n      {\n        \"carrier_id\": \"<uuid>\",\n        \"line_of_coverage\": \"<string>\",\n        \"custom_plan_id\": \"<string>\",\n        \"id\": \"<uuid>\",\n        \"name\": \"<string>\",\n        \"temporals\": [\n          {\n            \"configuration\": \"<string>\",\n            \"end_date\": \"2020-01-01\",\n            \"start_date\": \"2019-01-01\"\n          },\n          {\n            \"configuration\": \"<string>\",\n            \"end_date\": \"2020-01-01\",\n            \"start_date\": \"2019-01-01\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 1135,\n  \"group_id\": \"9d22c8c4-549d-fb4e-a569-9fb389b92ac3\",\n  \"id\": \"54895354-05aa-bcbf-1215-c2bf82967d0f\",\n  \"modified\": 5927,\n  \"organization_id\": \"1e28f393-79e0-ff1d-a123-8af48a2c110b\",\n  \"version\": \"fbb6b3dd-bcde-532f-c912-59efd6a992d8\",\n  \"structure\": {\n    \"plans\": [\n      {\n        \"carrier_id\": \"<uuid>\",\n        \"line_of_coverage\": \"<string>\",\n        \"custom_plan_id\": \"<string>\",\n        \"id\": \"<uuid>\",\n        \"name\": \"<string>\",\n        \"temporals\": [\n          {\n            \"configuration\": \"<string>\",\n            \"end_date\": \"2020-01-01\",\n            \"start_date\": \"2019-01-01\"\n          },\n          {\n            \"configuration\": \"<string>\",\n            \"end_date\": \"2020-01-01\",\n            \"start_date\": \"2019-01-01\"\n          }\n        ]\n      },\n      {\n        \"carrier_id\": \"<uuid>\",\n        \"line_of_coverage\": \"<string>\",\n        \"custom_plan_id\": \"<string>\",\n        \"id\": \"<uuid>\",\n        \"name\": \"<string>\",\n        \"temporals\": [\n          {\n            \"configuration\": \"<string>\",\n            \"end_date\": \"2020-01-01\",\n            \"start_date\": \"2019-01-01\"\n          },\n          {\n            \"configuration\": \"<string>\",\n            \"end_date\": \"2020-01-01\",\n            \"start_date\": \"2019-01-01\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "fa52afe6-a8a7-4641-a64e-9e0d88c0b9ac",
+    "name": "Noyo Carrier Carrier Mapped Field Platform Group Structure API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

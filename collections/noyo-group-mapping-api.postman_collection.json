@@ -1,0 +1,590 @@
+{
+  "item": [
+    {
+      "id": "5f837b7f-0584-4a80-a57f-91aa09406d1b",
+      "name": "Group Mapping",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d8031bc0-2261-46b2-b05b-267e1f709a7d",
+          "name": "Edit an existing Group Mapping",
+          "request": {
+            "name": "Edit an existing Group Mapping",
+            "description": {
+              "content": "Edit a group mapping based on the ID provided. The version parameter must match the latest group mapping version.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "group_mappings",
+                ":group_mapping_id",
+                ":version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_mapping_id",
+                  "description": "(Required) The unique identifier of the group mapping you would like to edit"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "version",
+                  "description": "(Required) The unique version of the group mapping you would like to edit"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"effective_end_date\": \"<date>\",\n  \"effective_start_date\": \"<date>\",\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "df82cf78-7428-4e7a-a638-0e1ead49d573",
+              "name": "Successful Response - Returns the modified Group Mapping",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_mappings",
+                    ":group_mapping_id",
+                    ":version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_mapping_id",
+                      "description": "(Required) The unique identifier of the group mapping you would like to edit"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version",
+                      "description": "(Required) The unique version of the group mapping you would like to edit"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"effective_start_date\": \"2021-01-01\",\n  \"status\": \"ready\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n  \"effective_end_date\": \"2999-12-31\",\n  \"effective_start_date\": \"2021-01-01\",\n  \"group_id\": \"d61fa455-adf4-4dc4-8c57-6d779ba9475e\",\n  \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n  \"status\": \"ready\",\n  \"version\": \"1640fb11-bd95-4d08-aa5e-21a42fc4f954\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1b50a45f-6972-43ba-927a-702300957610",
+          "name": "Get Group Mappings for a Group",
+          "request": {
+            "name": "Get Group Mappings for a Group",
+            "description": {
+              "content": "Returns the group mappings based on the Group ID provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "groups",
+                ":group_id",
+                "group_mappings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "carrier_id",
+                  "value": "<uuid>",
+                  "description": "The unique identifier of the carrier you would like to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "The statuses you would like to filter"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_id",
+                  "description": "(Required) The unique identifier of the group you would like to get group mappings for"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e8990d5b-dd43-44d7-bdd6-1348eec0a93a",
+              "name": "Successful Response - Returns Group Mappings",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "group_mappings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "carrier_id",
+                      "value": "4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1"
+                    },
+                    {
+                      "key": "status",
+                      "value": "ready"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The unique identifier of the group you would like to get group mappings for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 2\n  },\n  \"response\": [\n    {\n      \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n      \"effective_end_date\": \"2999-12-31\",\n      \"effective_start_date\": \"2021-01-01\",\n      \"group_id\": \"d61fa455-adf4-4dc4-8c57-6d779ba9475e\",\n      \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n      \"status\": \"ready\",\n      \"version\": \"65b729f8-de9a-4c9b-bed9-2df020dbbfa4\"\n    },\n    {\n      \"carrier_id\": \"8fac0992-933a-4743-8dab-0d606ef2569e\",\n      \"effective_end_date\": \"2999-12-31\",\n      \"effective_start_date\": \"2023-01-01\",\n      \"group_id\": \"f833ac4b-36aa-46f4-826c-0badcfe27922\",\n      \"id\": \"787074b2-fd0f-4f52-b811-4573fbfb1dcf\",\n      \"status\": \"in_progress\",\n      \"version\": \"5200a894-81c5-4c41-8519-86c32e9a9965\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "789e4c8f-1a8c-4a6f-b076-b0cf47c91626",
+          "name": "Create a new Group Mapping",
+          "request": {
+            "name": "Create a new Group Mapping",
+            "description": {
+              "content": "Create a new Group Mapping",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "groups",
+                ":group_id",
+                "group_mappings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_id",
+                  "description": "(Required) The unique identifier of the group you would like to create the group mapping for"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"carrier_id\": \"<uuid>\",\n  \"effective_end_date\": \"<date>\",\n  \"effective_start_date\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "903984a2-771c-43e7-9756-65307c2c1f51",
+              "name": "Successful Response - Returns the new Group Mapping",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "group_mappings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The unique identifier of the group you would like to create the group mapping for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carrier_id\": \"8fac0992-933a-4743-8dab-0d606ef2569e\",\n  \"effective_start_date\": \"2021-01-01\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"carrier_id\": \"8fac0992-933a-4743-8dab-0d606ef2569e\",\n  \"effective_end_date\": \"2999-12-31\",\n  \"effective_start_date\": \"2021-01-01\",\n  \"group_id\": \"f833ac4b-36aa-46f4-826c-0badcfe27922\",\n  \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n  \"status\": \"in_progress\",\n  \"version\": \"5200a894-81c5-4c41-8519-86c32e9a9965\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a3581b3d-d0aa-4439-b44c-11e15a0758b1",
+          "name": "Get a list of all rules and their respective conditions for a specific group mapping",
+          "request": {
+            "name": "Get a list of all rules and their respective conditions for a specific group mapping",
+            "description": {
+              "content": "Returns a list of all rules and conditions for a specific group mapping",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "group_mappings",
+                ":group_mapping_id",
+                "rules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_mapping_id",
+                  "description": "(Required) The unique identifier of the group mapping for which you would like to view rules and conditions"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "835c1763-b3f3-4b21-9e6a-a43eeb6aa385",
+              "name": "Successful Response - Returns all rules and conditions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "group_mappings",
+                    ":group_mapping_id",
+                    "rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_mapping_id",
+                      "description": "(Required) The unique identifier of the group mapping for which you would like to view rules and conditions"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 2\n  },\n  \"response\": [\n    {\n      \"conditions\": [\n        {\n          \"details\": {\n            \"left_operand\": \"JobTitle\",\n            \"operator\": \"is\",\n            \"right_operand\": \"CEO\"\n          },\n          \"id\": \"7499ea07-76c9-40f2-992b-952259e98384\",\n          \"rule_id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n          \"version\": \"c2292b67-0382-45e9-a378-b52c4129f672\"\n        }\n      ],\n      \"rule\": {\n        \"active\": \"true\",\n        \"created\": 1554177876,\n        \"group_mapping_id\": \"d61fa455-adf4-4dc4-8c57-6d779ba9475e\",\n        \"id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n        \"joining_operator\": \"AND\",\n        \"modified\": 1554177876,\n        \"name\": \"Rule One\",\n        \"rank\": 1,\n        \"resulting_field_name\": \"bill_groups.bill_group_key\",\n        \"resulting_field_value\": 1100,\n        \"rule_type\": \"normal\",\n        \"version\": \"6b72d72d-cc99-4df6-8152-7183e824c80c\"\n      }\n    },\n    {\n      \"conditions\": [\n        {\n          \"details\": {\n            \"left_operand\": \"JobTitle\",\n            \"operator\": \"is\",\n            \"right_operand\": \"Marketing Manager\"\n          },\n          \"id\": \"78da694c-e27c-11eb-ba80-0242ac130004\",\n          \"rule_id\": \"6a3abd60-e27c-11eb-ba80-0242ac130004\",\n          \"version\": \"8a70d182-e27c-11eb-ba80-0242ac130004\"\n        }\n      ],\n      \"rule\": {\n        \"active\": \"true\",\n        \"created\": 1554177876,\n        \"group_mapping_id\": \"d61fa455-adf4-4dc4-8c57-6d779ba9475e\",\n        \"id\": \"6a3abd60-e27c-11eb-ba80-0242ac130004\",\n        \"joining_operator\": \"AND\",\n        \"modified\": 1554177876,\n        \"name\": \"Rule Two\",\n        \"rank\": 1,\n        \"resulting_field_name\": \"bill_groups.bill_group_key\",\n        \"resulting_field_value\": 1100,\n        \"rule_type\": \"normal\",\n        \"version\": \"8f96dcec-e27c-11eb-ba80-0242ac130004 \"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "785e5cfd-f2b2-4ec0-a97e-60e2133ce4ca",
+          "name": "Validate a Group Mapping",
+          "request": {
+            "name": "Validate a Group Mapping",
+            "description": {
+              "content": "Validate a group mapping based on the ID provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "group_mappings",
+                ":group_mapping_id",
+                "validate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_mapping_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "27d9dbc6-c787-4fe5-8bd9-037a91c822c2",
+              "name": "Successful Response - Group Mapping was validated without errors",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "group_mappings",
+                    ":group_mapping_id",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_mapping_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "50f85096-b30b-44e3-8d90-e9a67ba5580b",
+    "name": "Noyo Carrier Carrier Mapped Field Group Mapping API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

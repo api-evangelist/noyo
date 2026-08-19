@@ -1,0 +1,110 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Reconcilation Issues API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reconcilation Issues",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Reconciliation Issues",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/reconciliation_issues",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status of the reconciliation issues"
+              },
+              {
+                "name": "status_grouping",
+                "value": "",
+                "type": "query",
+                "description": "Status grouping of the reconciliation issues"
+              },
+              {
+                "name": "type_grouping",
+                "value": "",
+                "type": "query",
+                "description": "Type grouping of the reconciliation issues"
+              },
+              {
+                "name": "carrier_id",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of the carrier for which you would like to view reconciliation issues"
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of the group for which you would like to view reconciliation issues"
+              },
+              {
+                "name": "subject_id",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of the model that is the subject of the reconciliation issue"
+              },
+              {
+                "name": "subject_type",
+                "value": "",
+                "type": "query",
+                "description": "The type of the model that is the subject of the reconciliation issue"
+              },
+              {
+                "name": "reconciliation_issue_type",
+                "value": "",
+                "type": "query",
+                "description": "The categorization of the reconciliation issue"
+              }
+            ]
+          },
+          "docs": "Returns a list of all reconciliation issues matching the given query"
+        },
+        {
+          "info": {
+            "name": "Get Reconciliation Issue",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/reconciliation_issues/:reconciliation_issue_id",
+            "params": [
+              {
+                "name": "reconciliation_issue_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the reconciliation issue you would like to retrieve"
+              }
+            ]
+          },
+          "docs": "Returns the latest version of a single reconciliation issue based on the ID provided"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

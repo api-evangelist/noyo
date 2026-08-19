@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Protected Groups API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Protected Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get protected groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ui/v1/protected_groups",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "query",
+                "description": "Group ID to look up protected state for"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Search term for filtering protected groups by group name, DBA name, or group ID"
+              },
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "Organization ID to filter protected groups by"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page"
+              }
+            ]
+          },
+          "docs": "Returns active protected groups. Supplying group_id performs a scoped single-group lookup for any authorized UI user. Omitting group_id lists all active protected groups and is only available to internal Noyo users.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,2086 @@
+{
+  "item": [
+    {
+      "id": "11062352-a3ad-41e8-81d7-f7ddef902125",
+      "name": "Member Requests",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0317729e-6c0f-4fa3-b2d4-feb18f4db9c0",
+          "name": "Get all Member Requests for Employee",
+          "request": {
+            "name": "Get all Member Requests for Employee",
+            "description": {
+              "content": "Returns a list of all member requests for a given employee. Each member request may have one or more associated member transactions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "employees",
+                ":employee_id",
+                "member_requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employee_id",
+                  "description": "(Required) The unique identifier of the employee for which you would like to view member requests"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "07dcea2d-2a0b-422f-95d5-7c4e9c64ed2c",
+              "name": "Successful Response - Returns all matching Member Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "employees",
+                    ":employee_id",
+                    "member_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employee_id",
+                      "description": "(Required) The unique identifier of the employee for which you would like to view member requests"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 2\n  },\n  \"response\": [\n    {\n      \"body\": {\n        \"coverages\": [\n          {\n            \"carrier_config\": {\n              \"bill_group\": \"1000001\",\n              \"member_group\": \"99999\"\n            },\n            \"carrier_id\": \"d0003042-eaae-4491-b219-4825456a3d16\",\n            \"lines_of_coverage\": {\n              \"dental\": {\n                \"waiving_members\": [\n                  {\n                    \"id\": \"f471a562-fa8f-41c9-93fd-12b372e16c72\",\n                    \"member_type\": \"employee\",\n                    \"reason\": \"other-spouse-group\"\n                  }\n                ]\n              }\n            }\n          }\n        ]\n      },\n      \"completed\": 1557565200,\n      \"created\": 1557512389,\n      \"employee_id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n      \"id\": \"4f57e463-f4d5-4255-83d4-806b0cabaac5\",\n      \"modified\": 1557565200,\n      \"request_type\": \"new_hire\",\n      \"status\": \"processing\",\n      \"transactions\": [\n        \"a6e30204-87b2-4802-95a4-a156bd0f7435\"\n      ]\n    },\n    {\n      \"body\": {\n        \"employee_id\": \"6dc22bed-27fc-458c-b732-bdaf5b5a1031\",\n        \"last_work_date\": \"2018-01-15\",\n        \"reason\": \"voluntary\"\n      },\n      \"completed\": 1557565200,\n      \"created\": 1557512394,\n      \"employee_id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n      \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n      \"modified\": 1557565200,\n      \"request_type\": \"termination\",\n      \"status\": \"processing\",\n      \"transactions\": [\n        \"f4ecdaa5-e019-4a24-98c7-2caee9a58ccd\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0c2c9140-bb46-4ea6-8f2d-9ad84cef7606",
+          "name": "Create a COBRA Enrollment Member Request",
+          "request": {
+            "name": "Create a COBRA Enrollment Member Request",
+            "description": {
+              "content": "The COBRA enrollment member request is used to add an existing employee, and optionally their dependents to multiple coverages at multiple carriers. This is for a continuation of benefits situation, when main line coverage either has already been terminated, or will be in conjunction with this member request.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "employees",
+                ":employee_id",
+                "member_requests",
+                "cobra_enrollment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employee_id",
+                  "description": "(Required) The unique identifier of the employee related to the member request"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"coverages\": [\n    {\n      \"carrier_config\": \"<object>\",\n      \"carrier_id\": \"<uuid>\",\n      \"lines_of_coverage\": {\n        \"accident\": {\n          \"description\": \"Member transaction requests relating to accident coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"add\": {\n          \"description\": \"Member transaction requests relating to AD&D coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"cancer\": {\n          \"description\": \"Member transaction requests relating to cancer coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"critical_illness\": {\n          \"description\": \"Member transaction requests relating to critical illness coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"dental\": {\n          \"description\": \"Member transaction requests relating to dental coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"health_fund\": {\n          \"description\": \"Member transaction requests relating to health fund coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"hospital_indemnity\": {\n          \"description\": \"Member transaction requests relating to hospital indemnity coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"life\": {\n          \"description\": \"Member transaction requests relating to life coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"ltd\": {\n          \"description\": \"Member transaction requests relating to LTD coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"medical\": {\n          \"description\": \"Member transaction requests relating to medical coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"pharmacy\": {\n          \"description\": \"Member transaction requests relating to pharmacy coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"std\": {\n          \"description\": \"Member transaction requests relating to STD coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"vision\": {\n          \"description\": \"Member transaction requests relating to vision coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"wellness\": {\n          \"description\": \"Member transaction requests relating to wellness coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"signature_date\": \"<string>\"\n    }\n  ],\n  \"termination_info\": {\n    \"last_work_date\": \"<string>\",\n    \"reason\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f8ee380c-6961-4f79-aef1-6a1b3203827d",
+              "name": "Successful Response - Returns the new Member Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "employees",
+                    ":employee_id",
+                    "member_requests",
+                    "cobra_enrollment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employee_id",
+                      "description": "(Required) The unique identifier of the employee related to the member request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"coverages\": [\n    {\n      \"carrier_config\": {},\n      \"carrier_id\": \"9a0a7437-4097-4251-9e71-85384c0eb1c9\",\n      \"lines_of_coverage\": {\n        \"dental\": {\n          \"enrolling_members\": [\n            {\n              \"id\": \"72af10df-a8b3-46f1-a114-ac36d4b8a6ea\",\n              \"member_type\": \"employee\",\n              \"plan_id\": \"ff033377-59e2-40df-8206-8cec3a725411\"\n            },\n            {\n              \"id\": \"165d4537-be5f-4744-8a97-a5b10fcb75b1\",\n              \"member_type\": \"dependent\",\n              \"plan_id\": \"ff033377-59e2-40df-8206-8cec3a725411\"\n            }\n          ]\n        },\n        \"vision\": {\n          \"enrolling_members\": [\n            {\n              \"id\": \"72af10df-a8b3-46f1-a114-ac36d4b8a6ea\",\n              \"member_type\": \"employee\",\n              \"plan_id\": \"08f9e430-9686-4b07-9e2c-6b26b8133dc3\"\n            },\n            {\n              \"id\": \"165d4537-be5f-4744-8a97-a5b10fcb75b1\",\n              \"member_type\": \"dependent\",\n              \"plan_id\": \"08f9e430-9686-4b07-9e2c-6b26b8133dc3\"\n            }\n          ]\n        }\n      },\n      \"signature_date\": \"2020-01-15\"\n    }\n  ],\n  \"termination_info\": {\n    \"last_work_date\": \"2020-01-01\",\n    \"reason\": \"voluntary\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"body\": {\n    \"coverages\": [\n      {\n        \"carrier_config\": {},\n        \"carrier_id\": \"9a0a7437-4097-4251-9e71-85384c0eb1c9\",\n        \"lines_of_coverage\": {\n          \"dental\": {\n            \"enrolling_members\": [\n              {\n                \"id\": \"72af10df-a8b3-46f1-a114-ac36d4b8a6ea\",\n                \"member_type\": \"employee\",\n                \"plan_id\": \"ff033377-59e2-40df-8206-8cec3a725411\"\n              },\n              {\n                \"id\": \"165d4537-be5f-4744-8a97-a5b10fcb75b1\",\n                \"member_type\": \"dependent\",\n                \"plan_id\": \"ff033377-59e2-40df-8206-8cec3a725411\"\n              }\n            ]\n          },\n          \"vision\": {\n            \"enrolling_members\": [\n              {\n                \"id\": \"72af10df-a8b3-46f1-a114-ac36d4b8a6ea\",\n                \"member_type\": \"employee\",\n                \"plan_id\": \"08f9e430-9686-4b07-9e2c-6b26b8133dc3\"\n              },\n              {\n                \"id\": \"165d4537-be5f-4744-8a97-a5b10fcb75b1\",\n                \"member_type\": \"dependent\",\n                \"plan_id\": \"08f9e430-9686-4b07-9e2c-6b26b8133dc3\"\n              }\n            ]\n          }\n        },\n        \"signature_date\": \"2020-01-15\"\n      }\n    ],\n    \"termination_info\": {\n      \"last_work_date\": \"2020-01-01\",\n      \"reason\": \"voluntary\"\n    }\n  },\n  \"created\": 1557512389,\n  \"employee_id\": \"72af10df-a8b3-46f1-a114-ac36d4b8a6ea\",\n  \"id\": \"4f57e463-f4d5-4255-83d4-806b0cabaac5\",\n  \"modified\": 1564440756,\n  \"request_type\": \"cobra_enrollment\",\n  \"result\": {},\n  \"status\": \"processing\",\n  \"transactions\": [\n    \"a6e30204-87b2-4802-95a4-a156bd0f7435\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5960b99a-3c25-4c3b-af2d-6be387d389b3",
+          "name": "Create a COBRA Open Enrollment Member Request",
+          "request": {
+            "name": "Create a COBRA Open Enrollment Member Request",
+            "description": {
+              "content": "The COBRA open enrollment member request is used to make changes to employees, dependents and COBRA coverages during the open enrollment period.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "employees",
+                ":employee_id",
+                "member_requests",
+                "cobra_open_enrollment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employee_id",
+                  "description": "(Required) The unique identifier of the employee related to the member request"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"coverages\": [\n    {\n      \"carrier_config\": \"<object>\",\n      \"carrier_id\": \"<uuid>\",\n      \"lines_of_coverage\": {\n        \"dental\": {\n          \"description\": \"Member transaction requests relating to dental coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"medical\": {\n          \"description\": \"Member transaction requests relating to medical coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"vision\": {\n          \"description\": \"Member transaction requests relating to vision coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"coverage_start_date\": \"<string>\",\n      \"signature_date\": \"<string>\"\n    }\n  ],\n  \"event\": {\n    \"event_date\": \"<string>\",\n    \"event_type\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f462ea1b-6491-4bd4-9632-24e53716b1b9",
+              "name": "Successful Response - Returns the new Member Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "employees",
+                    ":employee_id",
+                    "member_requests",
+                    "cobra_open_enrollment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employee_id",
+                      "description": "(Required) The unique identifier of the employee related to the member request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"coverages\": [\n    {\n      \"carrier_config\": {},\n      \"carrier_id\": \"9a0a7437-4097-4251-9e71-85384c0eb1c9\",\n      \"lines_of_coverage\": {\n        \"medical\": {\n          \"adding_coverage\": [\n            {\n              \"id\": \"fd62665c-0846-4e9d-bd29-80779b5f685c\",\n              \"member_type\": \"dependent\",\n              \"plan_id\": \"b988cd26-121a-4dd6-b0be-09399f6ecc0a\"\n            }\n          ]\n        }\n      },\n      \"signature_date\": \"2021-01-15\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"body\": {\n    \"coverages\": [\n      {\n        \"carrier_config\": {},\n        \"carrier_id\": \"9a0a7437-4097-4251-9e71-85384c0eb1c9\",\n        \"lines_of_coverage\": {\n          \"medical\": {\n            \"adding_coverage\": [\n              {\n                \"id\": \"fd62665c-0846-4e9d-bd29-80779b5f685c\",\n                \"member_type\": \"dependent\",\n                \"plan_id\": \"b988cd26-121a-4dd6-b0be-09399f6ecc0a\"\n              }\n            ]\n          }\n        },\n        \"signature_date\": \"2021-01-15\"\n      }\n    ]\n  },\n  \"created\": 1557512389,\n  \"employee_id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n  \"id\": \"f4517b87-275a-42e1-85e5-47ea6ab5312b\",\n  \"modified\": 1564440756,\n  \"request_type\": \"cobra_open_enrollment\",\n  \"status\": \"processing\",\n  \"transactions\": [\n    \"579952dd-9a66-4587-a4f7-72a63bf9ec86\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a883c2c7-5f3b-4c24-b3eb-4deb7cf437d3",
+          "name": "Create a COBRA Qualifying Life Event Member Request",
+          "request": {
+            "name": "Create a COBRA Qualifying Life Event Member Request",
+            "description": {
+              "content": "The COBRA qualifying life event member request is used to make changes to employees, dependents and COBRA coverages due to a qualifying life event.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "employees",
+                ":employee_id",
+                "member_requests",
+                "cobra_qualifying_life_event"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employee_id",
+                  "description": "(Required) The unique identifier of the employee related to the member request"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"coverages\": [\n    {\n      \"carrier_config\": \"<object>\",\n      \"carrier_id\": \"<uuid>\",\n      \"lines_of_coverage\": {\n        \"dental\": {\n          \"description\": \"Member transaction requests relating to dental coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"medical\": {\n          \"description\": \"Member transaction requests relating to medical coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"vision\": {\n          \"description\": \"Member transaction requests relating to vision coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"signature_date\": \"<string>\"\n    }\n  ],\n  \"event\": {\n    \"event_date\": \"<string>\",\n    \"event_type\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "92bc7964-ae6a-4359-8ef9-eb09af2b8cba",
+              "name": "Successful Response - Returns the new Member Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "employees",
+                    ":employee_id",
+                    "member_requests",
+                    "cobra_qualifying_life_event"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employee_id",
+                      "description": "(Required) The unique identifier of the employee related to the member request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"coverages\": [\n    {\n      \"carrier_config\": {},\n      \"carrier_id\": \"9a0a7437-4097-4251-9e71-85384c0eb1c9\",\n      \"lines_of_coverage\": {\n        \"medical\": {\n          \"adding_coverage\": [\n            {\n              \"id\": \"fd62665c-0846-4e9d-bd29-80779b5f685c\",\n              \"member_type\": \"dependent\",\n              \"plan_id\": \"b988cd26-121a-4dd6-b0be-09399f6ecc0a\"\n            }\n          ]\n        }\n      },\n      \"signature_date\": \"2021-01-15\"\n    }\n  ],\n  \"event\": {\n    \"event_date\": \"2021-01-01\",\n    \"event_type\": \"newborn\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"body\": {\n    \"coverages\": [\n      {\n        \"carrier_config\": {},\n        \"carrier_id\": \"9a0a7437-4097-4251-9e71-85384c0eb1c9\",\n        \"lines_of_coverage\": {\n          \"medical\": {\n            \"adding_coverage\": [\n              {\n                \"id\": \"fd62665c-0846-4e9d-bd29-80779b5f685c\",\n                \"member_type\": \"dependent\",\n                \"plan_id\": \"b988cd26-121a-4dd6-b0be-09399f6ecc0a\"\n              }\n            ]\n          }\n        },\n        \"signature_date\": \"2021-01-15\"\n      }\n    ],\n    \"event\": {\n      \"event_date\": \"2021-01-01\",\n      \"event_type\": \"newborn\"\n    }\n  },\n  \"created\": 1557512389,\n  \"employee_id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n  \"id\": \"f4517b87-275a-42e1-85e5-47ea6ab5312b\",\n  \"modified\": 1564440756,\n  \"request_type\": \"cobra_qualifying_life_event\",\n  \"status\": \"processing\",\n  \"transactions\": [\n    \"579952dd-9a66-4587-a4f7-72a63bf9ec86\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a1f0ef61-3f41-44f0-b4bc-c269159e4e99",
+          "name": "Create a COBRA Termination Member Request",
+          "request": {
+            "name": "Create a COBRA Termination Member Request",
+            "description": {
+              "content": "The COBRA termination member request is used to remove an employee and their dependents from COBRA coverage at all carriers. The `cobra_termination_date` is the date on which the COBRA coverage should be terminated.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "employees",
+                ":employee_id",
+                "member_requests",
+                "cobra_termination"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employee_id",
+                  "description": "(Required) The unique identifier of the employee related to the member request"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cobra_termination_date\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"signature_date\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e0c6be84-6a05-4813-bbd3-55e793a34864",
+              "name": "Successful Response - Returns the new Member Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "employees",
+                    ":employee_id",
+                    "member_requests",
+                    "cobra_termination"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employee_id",
+                      "description": "(Required) The unique identifier of the employee related to the member request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cobra_termination_date\": \"2021-01-15\",\n  \"reason\": \"voluntary\",\n  \"signature_date\": \"2021-01-01\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"body\": {\n    \"cobra_termination_date\": \"2021-01-15\",\n    \"reason\": \"voluntary\",\n    \"signature_date\": \"2021-01-01\"\n  },\n  \"created\": 1557512389,\n  \"employee_id\": \"6dc22bed-27fc-458c-b732-bdaf5b5a1031\",\n  \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n  \"modified\": 1564440756,\n  \"request_type\": \"cobra_termination\",\n  \"status\": \"processing\",\n  \"transactions\": [\n    \"f4ecdaa5-e019-4a24-98c7-2caee9a58ccd\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "479de6d6-50b0-4c0e-aca3-57b3f80bd594",
+          "name": "Create a Demographic Change Member Request",
+          "request": {
+            "name": "Create a Demographic Change Member Request",
+            "description": {
+              "content": "The demographic change member request is used to update information such as name, address, and salary for one or many members. The updates will be carried out for each carrier that has a record of each member.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "employees",
+                ":employee_id",
+                "member_requests",
+                "demographic"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employee_id",
+                  "description": "(Required) The unique identifier of the employee related to the member request"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"member_changes\": [\n    {\n      \"member\": {\n        \"id\": \"<uuid>\",\n        \"type\": \"<string>\"\n      },\n      \"address_change\": {\n        \"home_address\": {\n          \"description\": \"New home address of the person\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"mailing_address\": {\n          \"description\": \"New mailing address of the person\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"classifications_change\": \"<object>\",\n      \"contact_change\": {\n        \"email_address\": \"<email>\",\n        \"email_address_type\": \"<string>\",\n        \"home_phone\": \"<string>\",\n        \"work_phone\": \"<string>\"\n      },\n      \"dob_change\": {\n        \"date_of_birth\": \"<string>\"\n      },\n      \"employment_change\": {\n        \"employment_status\": \"<string>\",\n        \"hire_date\": \"<string>\",\n        \"hours_worked\": \"<integer>\",\n        \"occupation\": \"<string>\"\n      },\n      \"name_change\": {\n        \"first_name\": \"<string>\",\n        \"last_name\": \"<string>\",\n        \"middle_name\": \"<string>\",\n        \"suffix\": \"<string>\"\n      },\n      \"salary_change\": {\n        \"amount\": \"<number>\",\n        \"type\": \"<string>\",\n        \"unit\": \"<string>\"\n      },\n      \"sex_change\": {\n        \"sex\": \"<string>\"\n      },\n      \"ssn_change\": {\n        \"ssn\": \"<string>\"\n      }\n    }\n  ],\n  \"change_date\": \"<string>\",\n  \"signature_date\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4a359a61-c783-4698-a9a9-09df5127a1d2",
+              "name": "Successful Response - Returns the new Member Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "employees",
+                    ":employee_id",
+                    "member_requests",
+                    "demographic"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employee_id",
+                      "description": "(Required) The unique identifier of the employee related to the member request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"change_date\": \"2020-01-15\",\n  \"member_changes\": [\n    {\n      \"contact_change\": {\n        \"email_address\": \"david.williamson@example.com\",\n        \"email_address_type\": \"home\",\n        \"home_phone\": \"+15555551212\",\n        \"work_phone\": \"+15555551212\"\n      },\n      \"member\": {\n        \"id\": \"f471a562-fa8f-41c9-93fd-12b372e16c72\",\n        \"type\": \"employee\"\n      },\n      \"name_change\": {\n        \"first_name\": \"David\",\n        \"last_name\": \"Williamson\"\n      },\n      \"salary_change\": {\n        \"amount\": 55000,\n        \"type\": \"salary\",\n        \"unit\": \"annual\"\n      }\n    }\n  ],\n  \"signature_date\": \"2020-01-15\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"body\": {\n    \"change_date\": \"2020-01-15\",\n    \"member_changes\": [\n      {\n        \"contact_change\": {\n          \"email_address\": \"david.williamson@example.com\",\n          \"email_address_type\": \"home\",\n          \"home_phone\": \"+15555551212\",\n          \"work_phone\": \"+15555551212\"\n        },\n        \"member\": {\n          \"id\": \"f471a562-fa8f-41c9-93fd-12b372e16c72\",\n          \"member_type\": \"employee\"\n        },\n        \"name_change\": {\n          \"first_name\": \"David\",\n          \"last_name\": \"Williamson\"\n        },\n        \"salary_change\": {\n          \"amount\": 55000,\n          \"type\": \"salary\",\n          \"unit\": \"annual\"\n        }\n      }\n    ],\n    \"signature_date\": \"2020-01-15\"\n  },\n  \"created\": 1557512389,\n  \"employee_id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n  \"id\": \"db6f362a-9f90-49b2-a73d-830cd2726537\",\n  \"modified\": 1564440756,\n  \"request_type\": \"demographic\",\n  \"status\": \"processing\",\n  \"transactions\": [\n    \"b56bfe70-2632-49e9-b269-1eaa36ed7fd6\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0539e7c8-8948-496a-8ea1-97c53042b082",
+          "name": "Create an Enrollment Snapshot Member Request",
+          "request": {
+            "name": "Create an Enrollment Snapshot Member Request",
+            "description": {
+              "content": "The Enrollment Snapshot Member Request allows you to communicate the desired state of an employee's coverage elections during an employee's new hire period. You can use it in one of two cases:\n\n* To enroll an employee and their dependents for the first time. Please reference the [New Hire Enrollment](#new-hire-enrollment) documentation section for more details.\n* To amend and replace a previous New Hire member request with the latest complete set of coverage elections, described in this section below.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "employees",
+                ":employee_id",
+                "member_requests",
+                "enrollment_snapshot"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employee_id",
+                  "description": "(Required) The unique identifier of the employee related to the member request"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"coverages\": [\n    {\n      \"carrier_config\": \"<object>\",\n      \"carrier_id\": \"<uuid>\",\n      \"lines_of_coverage\": {\n        \"accident\": {\n          \"description\": \"Member transaction requests relating to accident coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"add\": {\n          \"description\": \"Member transaction requests relating to AD&D coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"cancer\": {\n          \"description\": \"Member transaction requests relating to cancer coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"critical_illness\": {\n          \"description\": \"Member transaction requests relating to critical illness coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"dental\": {\n          \"description\": \"Member transaction requests relating to dental coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"health_fund\": {\n          \"description\": \"Member transaction requests relating to health fund coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"hospital_indemnity\": {\n          \"description\": \"Member transaction requests relating to hospital indemnity coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"life\": {\n          \"description\": \"Member transaction requests relating to life coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"ltd\": {\n          \"description\": \"Member transaction requests relating to LTD coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"medical\": {\n          \"description\": \"Member transaction requests relating to medical coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"pharmacy\": {\n          \"description\": \"Member transaction requests relating to pharmacy coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"std\": {\n          \"description\": \"Member transaction requests relating to STD coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"vision\": {\n          \"description\": \"Member transaction requests relating to vision coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"wellness\": {\n          \"description\": \"Member transaction requests relating to wellness coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"signature_date\": \"<string>\"\n    }\n  ],\n  \"enrollment_type\": \"<string>\",\n  \"target_date\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "17b4a1f3-89d3-4eb2-ba5d-0b23e74092a3",
+              "name": "Successful Response - Returns the new Member Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "employees",
+                    ":employee_id",
+                    "member_requests",
+                    "enrollment_snapshot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employee_id",
+                      "description": "(Required) The unique identifier of the employee related to the member request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"coverages\": [\n    {\n      \"carrier_config\": {},\n      \"carrier_id\": \"9a0a7437-4097-4251-9e71-85384c0eb1c9\",\n      \"lines_of_coverage\": {\n        \"dental\": {\n          \"enrolling_members\": [\n            {\n              \"id\": \"72af10df-a8b3-46f1-a114-ac36d4b8a6ea\",\n              \"member_type\": \"employee\",\n              \"plan_id\": \"ff033377-59e2-40df-8206-8cec3a725411\"\n            },\n            {\n              \"id\": \"165d4537-be5f-4744-8a97-a5b10fcb75b1\",\n              \"member_type\": \"dependent\",\n              \"plan_id\": \"ff033377-59e2-40df-8206-8cec3a725411\"\n            }\n          ]\n        },\n        \"vision\": {\n          \"enrolling_members\": [\n            {\n              \"id\": \"72af10df-a8b3-46f1-a114-ac36d4b8a6ea\",\n              \"member_type\": \"employee\",\n              \"plan_id\": \"08f9e430-9686-4b07-9e2c-6b26b8133dc3\"\n            },\n            {\n              \"id\": \"165d4537-be5f-4744-8a97-a5b10fcb75b1\",\n              \"member_type\": \"dependent\",\n              \"plan_id\": \"08f9e430-9686-4b07-9e2c-6b26b8133dc3\"\n            }\n          ]\n        }\n      },\n      \"signature_date\": \"2020-01-15\"\n    }\n  ],\n  \"enrollment_type\": \"new_hire\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"body\": {\n    \"coverages\": [\n      {\n        \"carrier_config\": {},\n        \"carrier_id\": \"9a0a7437-4097-4251-9e71-85384c0eb1c9\",\n        \"lines_of_coverage\": {\n          \"dental\": {\n            \"enrolling_members\": [\n              {\n                \"id\": \"72af10df-a8b3-46f1-a114-ac36d4b8a6ea\",\n                \"member_type\": \"employee\",\n                \"plan_id\": \"ff033377-59e2-40df-8206-8cec3a725411\"\n              },\n              {\n                \"id\": \"165d4537-be5f-4744-8a97-a5b10fcb75b1\",\n                \"member_type\": \"dependent\",\n                \"plan_id\": \"ff033377-59e2-40df-8206-8cec3a725411\"\n              }\n            ]\n          },\n          \"vision\": {\n            \"enrolling_members\": [\n              {\n                \"id\": \"72af10df-a8b3-46f1-a114-ac36d4b8a6ea\",\n                \"member_type\": \"employee\",\n                \"plan_id\": \"08f9e430-9686-4b07-9e2c-6b26b8133dc3\"\n              },\n              {\n                \"id\": \"165d4537-be5f-4744-8a97-a5b10fcb75b1\",\n                \"member_type\": \"dependent\",\n                \"plan_id\": \"08f9e430-9686-4b07-9e2c-6b26b8133dc3\"\n              }\n            ]\n          }\n        },\n        \"signature_date\": \"2020-01-15\"\n      }\n    ],\n    \"enrollment_type\": \"new_hire\"\n  },\n  \"created\": 1557512389,\n  \"employee_id\": \"72af10df-a8b3-46f1-a114-ac36d4b8a6ea\",\n  \"id\": \"4f57e463-f4d5-4255-83d4-806b0cabaac5\",\n  \"modified\": 1564440756,\n  \"request_type\": \"enrollment_snapshot\",\n  \"result\": {},\n  \"status\": \"processing\",\n  \"transactions\": [\n    \"a6e30204-87b2-4802-95a4-a156bd0f7435\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7c5e07d7-8456-4bdf-bbf5-87c6acd0ffe1",
+          "name": "Create a New Hire Enrollment Member Request",
+          "request": {
+            "name": "Create a New Hire Enrollment Member Request",
+            "description": {
+              "content": "The new hire member request is used to add an existing employee, and optionally their dependents to multiple coverages at multiple carriers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "employees",
+                ":employee_id",
+                "member_requests",
+                "new_hire"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employee_id",
+                  "description": "(Required) The unique identifier of the employee related to the member request"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"coverages\": [\n    {\n      \"carrier_config\": \"<object>\",\n      \"carrier_id\": \"<uuid>\",\n      \"lines_of_coverage\": {\n        \"accident\": {\n          \"description\": \"Member transaction requests relating to accident coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"add\": {\n          \"description\": \"Member transaction requests relating to AD&D coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"cancer\": {\n          \"description\": \"Member transaction requests relating to cancer coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"critical_illness\": {\n          \"description\": \"Member transaction requests relating to critical illness coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"dental\": {\n          \"description\": \"Member transaction requests relating to dental coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"health_fund\": {\n          \"description\": \"Member transaction requests relating to health fund coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"hospital_indemnity\": {\n          \"description\": \"Member transaction requests relating to hospital indemnity coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"life\": {\n          \"description\": \"Member transaction requests relating to life coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"ltd\": {\n          \"description\": \"Member transaction requests relating to LTD coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"medical\": {\n          \"description\": \"Member transaction requests relating to medical coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"pharmacy\": {\n          \"description\": \"Member transaction requests relating to pharmacy coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"std\": {\n          \"description\": \"Member transaction requests relating to STD coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"vision\": {\n          \"description\": \"Member transaction requests relating to vision coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"wellness\": {\n          \"description\": \"Member transaction requests relating to wellness coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"signature_date\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e5beb350-61dc-42bb-be08-3ebc38d85796",
+              "name": "Successful Response - Returns the new Member Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "employees",
+                    ":employee_id",
+                    "member_requests",
+                    "new_hire"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employee_id",
+                      "description": "(Required) The unique identifier of the employee related to the member request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"coverages\": [\n    {\n      \"carrier_config\": {},\n      \"carrier_id\": \"9a0a7437-4097-4251-9e71-85384c0eb1c9\",\n      \"created\": 1557512389,\n      \"lines_of_coverage\": {\n        \"dental\": {\n          \"enrolling_members\": [\n            {\n              \"id\": \"72af10df-a8b3-46f1-a114-ac36d4b8a6ea\",\n              \"member_type\": \"employee\",\n              \"plan_id\": \"ff033377-59e2-40df-8206-8cec3a725411\"\n            },\n            {\n              \"id\": \"165d4537-be5f-4744-8a97-a5b10fcb75b1\",\n              \"member_type\": \"dependent\",\n              \"plan_id\": \"ff033377-59e2-40df-8206-8cec3a725411\"\n            }\n          ]\n        },\n        \"vision\": {\n          \"enrolling_members\": [\n            {\n              \"id\": \"72af10df-a8b3-46f1-a114-ac36d4b8a6ea\",\n              \"member_type\": \"employee\",\n              \"plan_id\": \"08f9e430-9686-4b07-9e2c-6b26b8133dc3\"\n            },\n            {\n              \"id\": \"165d4537-be5f-4744-8a97-a5b10fcb75b1\",\n              \"member_type\": \"dependent\",\n              \"plan_id\": \"08f9e430-9686-4b07-9e2c-6b26b8133dc3\"\n            }\n          ]\n        }\n      },\n      \"modified\": 1564440756,\n      \"signature_date\": \"2020-01-15\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"body\": {\n    \"coverages\": [\n      {\n        \"carrier_config\": {},\n        \"carrier_id\": \"9a0a7437-4097-4251-9e71-85384c0eb1c9\",\n        \"lines_of_coverage\": {\n          \"dental\": {\n            \"enrolling_members\": [\n              {\n                \"id\": \"72af10df-a8b3-46f1-a114-ac36d4b8a6ea\",\n                \"member_type\": \"employee\",\n                \"plan_id\": \"ff033377-59e2-40df-8206-8cec3a725411\"\n              },\n              {\n                \"id\": \"165d4537-be5f-4744-8a97-a5b10fcb75b1\",\n                \"member_type\": \"dependent\",\n                \"plan_id\": \"ff033377-59e2-40df-8206-8cec3a725411\"\n              }\n            ]\n          },\n          \"vision\": {\n            \"enrolling_members\": [\n              {\n                \"id\": \"72af10df-a8b3-46f1-a114-ac36d4b8a6ea\",\n                \"member_type\": \"employee\",\n                \"plan_id\": \"08f9e430-9686-4b07-9e2c-6b26b8133dc3\"\n              },\n              {\n                \"id\": \"165d4537-be5f-4744-8a97-a5b10fcb75b1\",\n                \"member_type\": \"dependent\",\n                \"plan_id\": \"08f9e430-9686-4b07-9e2c-6b26b8133dc3\"\n              }\n            ]\n          }\n        },\n        \"signature_date\": \"2020-01-15\"\n      }\n    ]\n  },\n  \"employee_id\": \"72af10df-a8b3-46f1-a114-ac36d4b8a6ea\",\n  \"id\": \"4f57e463-f4d5-4255-83d4-806b0cabaac5\",\n  \"request_type\": \"new_hire\",\n  \"result\": {},\n  \"status\": \"processing\",\n  \"transactions\": [\n    \"a6e30204-87b2-4802-95a4-a156bd0f7435\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "44400c35-7e45-4bdf-886c-10cf8864d5a9",
+          "name": "Create a Open Enrollment Member Request",
+          "request": {
+            "name": "Create a Open Enrollment Member Request",
+            "description": {
+              "content": "The open enrollment member request is used to make changes to existing employees, dependents and coverages during the open enrollment period.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "employees",
+                ":employee_id",
+                "member_requests",
+                "open_enrollment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employee_id",
+                  "description": "(Required) The unique identifier of the employee related to the member request"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"coverages\": [\n    {\n      \"carrier_config\": \"<object>\",\n      \"carrier_id\": \"<uuid>\",\n      \"lines_of_coverage\": {\n        \"accident\": {\n          \"description\": \"Member transaction requests relating to accident coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"add\": {\n          \"description\": \"Member transaction requests relating to AD&D coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"cancer\": {\n          \"description\": \"Member transaction requests relating to cancer coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"critical_illness\": {\n          \"description\": \"Member transaction requests relating to critical illness coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"dental\": {\n          \"description\": \"Member transaction requests relating to dental coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"health_fund\": {\n          \"description\": \"Member transaction requests relating to health fund coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"hospital_indemnity\": {\n          \"description\": \"Member transaction requests relating to hospital indemnity coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"life\": {\n          \"description\": \"Member transaction requests relating to life coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"ltd\": {\n          \"description\": \"Member transaction requests relating to LTD coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"medical\": {\n          \"description\": \"Member transaction requests relating to medical coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"pharmacy\": {\n          \"description\": \"Member transaction requests relating to pharmacy coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"std\": {\n          \"description\": \"Member transaction requests relating to STD coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"vision\": {\n          \"description\": \"Member transaction requests relating to vision coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"wellness\": {\n          \"description\": \"Member transaction requests relating to wellness coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"coverage_start_date\": \"<string>\",\n      \"signature_date\": \"<string>\"\n    }\n  ],\n  \"event\": {\n    \"event_date\": \"<string>\",\n    \"event_type\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "13e8024c-36b9-4b7a-a930-75583d9cdf28",
+              "name": "Successful Response - Returns the new Member Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "employees",
+                    ":employee_id",
+                    "member_requests",
+                    "open_enrollment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employee_id",
+                      "description": "(Required) The unique identifier of the employee related to the member request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"coverages\": [\n    {\n      \"carrier_config\": {},\n      \"carrier_id\": \"9a0a7437-4097-4251-9e71-85384c0eb1c9\",\n      \"created\": 1557512389,\n      \"lines_of_coverage\": {\n        \"medical\": {\n          \"adding_coverage\": [\n            {\n              \"id\": \"fd62665c-0846-4e9d-bd29-80779b5f685c\",\n              \"member_type\": \"dependent\",\n              \"plan_id\": \"b988cd26-121a-4dd6-b0be-09399f6ecc0a\"\n            }\n          ]\n        }\n      },\n      \"modified\": 1564440756,\n      \"signature_date\": \"2022-01-15\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"body\": {\n    \"coverages\": [\n      {\n        \"carrier_config\": {},\n        \"carrier_id\": \"9a0a7437-4097-4251-9e71-85384c0eb1c9\",\n        \"lines_of_coverage\": {\n          \"medical\": {\n            \"adding_coverage\": [\n              {\n                \"id\": \"fd62665c-0846-4e9d-bd29-80779b5f685c\",\n                \"member_type\": \"dependent\",\n                \"plan_id\": \"b988cd26-121a-4dd6-b0be-09399f6ecc0a\"\n              }\n            ]\n          }\n        },\n        \"signature_date\": \"2022-01-15\"\n      }\n    ]\n  },\n  \"employee_id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n  \"id\": \"f4517b87-275a-42e1-85e5-47ea6ab5312b\",\n  \"request_type\": \"open_enrollment\",\n  \"status\": \"processing\",\n  \"transactions\": [\n    \"579952dd-9a66-4587-a4f7-72a63bf9ec86\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "64caf729-d20c-47b0-aa92-6aaadfed531d",
+          "name": "Create a Qualifying Life Event Member Request",
+          "request": {
+            "name": "Create a Qualifying Life Event Member Request",
+            "description": {
+              "content": "The qualifying life event member request is used to make changes to existing employees, dependents and coverages due to a qualifying life event.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "employees",
+                ":employee_id",
+                "member_requests",
+                "qualifying_life_event"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employee_id",
+                  "description": "(Required) The unique identifier of the employee related to the member request"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"coverages\": [\n    {\n      \"carrier_config\": \"<object>\",\n      \"carrier_id\": \"<uuid>\",\n      \"lines_of_coverage\": {\n        \"accident\": {\n          \"description\": \"Member transaction requests relating to accident coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"add\": {\n          \"description\": \"Member transaction requests relating to AD&D coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"cancer\": {\n          \"description\": \"Member transaction requests relating to cancer coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"critical_illness\": {\n          \"description\": \"Member transaction requests relating to critical illness coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"dental\": {\n          \"description\": \"Member transaction requests relating to dental coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"health_fund\": {\n          \"description\": \"Member transaction requests relating to health fund coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"hospital_indemnity\": {\n          \"description\": \"Member transaction requests relating to hospital indemnity coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"life\": {\n          \"description\": \"Member transaction requests relating to life coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"ltd\": {\n          \"description\": \"Member transaction requests relating to LTD coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"medical\": {\n          \"description\": \"Member transaction requests relating to medical coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"pharmacy\": {\n          \"description\": \"Member transaction requests relating to pharmacy coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"std\": {\n          \"description\": \"Member transaction requests relating to STD coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"vision\": {\n          \"description\": \"Member transaction requests relating to vision coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"wellness\": {\n          \"description\": \"Member transaction requests relating to wellness coverage\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"signature_date\": \"<string>\"\n    }\n  ],\n  \"event\": {\n    \"event_date\": \"<string>\",\n    \"event_type\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "aeb7ca7d-9ee1-49f0-a8a6-17e12a175e02",
+              "name": "Successful Response - Returns the new Member Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "employees",
+                    ":employee_id",
+                    "member_requests",
+                    "qualifying_life_event"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employee_id",
+                      "description": "(Required) The unique identifier of the employee related to the member request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"coverages\": [\n    {\n      \"carrier_config\": {},\n      \"carrier_id\": \"9a0a7437-4097-4251-9e71-85384c0eb1c9\",\n      \"created\": 1557512389,\n      \"lines_of_coverage\": {\n        \"medical\": {\n          \"adding_coverage\": [\n            {\n              \"id\": \"fd62665c-0846-4e9d-bd29-80779b5f685c\",\n              \"member_type\": \"dependent\",\n              \"plan_id\": \"b988cd26-121a-4dd6-b0be-09399f6ecc0a\"\n            }\n          ]\n        }\n      },\n      \"modified\": 1564440756,\n      \"signature_date\": \"2020-01-15\"\n    }\n  ],\n  \"event\": {\n    \"event_date\": \"2020-01-01\",\n    \"event_type\": \"newborn\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"body\": {\n    \"coverages\": [\n      {\n        \"carrier_config\": {},\n        \"carrier_id\": \"9a0a7437-4097-4251-9e71-85384c0eb1c9\",\n        \"lines_of_coverage\": {\n          \"medical\": {\n            \"adding_coverage\": [\n              {\n                \"id\": \"fd62665c-0846-4e9d-bd29-80779b5f685c\",\n                \"member_type\": \"dependent\",\n                \"plan_id\": \"b988cd26-121a-4dd6-b0be-09399f6ecc0a\"\n              }\n            ]\n          }\n        },\n        \"signature_date\": \"2020-01-15\"\n      }\n    ],\n    \"event\": {\n      \"event_date\": \"2020-01-01\",\n      \"event_type\": \"newborn\"\n    }\n  },\n  \"employee_id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n  \"id\": \"f4517b87-275a-42e1-85e5-47ea6ab5312b\",\n  \"request_type\": \"qualifying_life_event\",\n  \"status\": \"processing\",\n  \"transactions\": [\n    \"579952dd-9a66-4587-a4f7-72a63bf9ec86\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5b4d8ea8-3e19-4be0-a4ce-92e969c42b4d",
+          "name": "Create a Termination Member Request",
+          "request": {
+            "name": "Create a Termination Member Request",
+            "description": {
+              "content": "The `termination` member request is used to remove an employee and their dependents from coverage at all carriers. The `last_work_date` will be communicated to the carrier and the `last_day_of_coverage` will be determined by the carrier and included in the result.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "employees",
+                ":employee_id",
+                "member_requests",
+                "termination"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employee_id",
+                  "description": "(Required) The unique identifier of the employee related to the member request"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"last_work_date\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"signature_date\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8f794582-62b0-40a6-9019-c8be42d4a5ca",
+              "name": "Successful Response - Returns the new Member Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "employees",
+                    ":employee_id",
+                    "member_requests",
+                    "termination"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employee_id",
+                      "description": "(Required) The unique identifier of the employee related to the member request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"employee_id\": \"6dc22bed-27fc-458c-b732-bdaf5b5a1031\",\n  \"last_work_date\": \"2020-01-15\",\n  \"reason\": \"voluntary\",\n  \"signature_date\": \"2020-01-01\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"body\": {\n    \"employee_id\": \"6dc22bed-27fc-458c-b732-bdaf5b5a1031\",\n    \"last_work_date\": \"2020-01-15\",\n    \"reason\": \"voluntary\",\n    \"signature_date\": \"2020-01-01\"\n  },\n  \"created\": 1557512389,\n  \"employee_id\": \"6dc22bed-27fc-458c-b732-bdaf5b5a1031\",\n  \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n  \"modified\": 1564440756,\n  \"request_type\": \"termination\",\n  \"status\": \"processing\",\n  \"transactions\": [\n    \"f4ecdaa5-e019-4a24-98c7-2caee9a58ccd\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "64f86fe7-4e71-46e7-9c89-09290f9d351c",
+          "name": "Get all Member Requests for Organization",
+          "request": {
+            "name": "Get all Member Requests for Organization",
+            "description": {
+              "content": "Returns a list of all member requests for a given organization. Each member request may have one or more associated member transactions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "member_requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "employee_id",
+                  "value": "<uuid>",
+                  "description": "Unique identifier of the employee in Noyo for which you would like to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "The member request status for which you would like to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "request_type",
+                  "value": "<string>",
+                  "description": "The member request type for which you would like to filter"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4e74d0f6-68a2-490b-bf3d-78d05b6afada",
+              "name": "Successful Response - Returns all matching Member Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "member_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "employee_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "request_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 2\n  },\n  \"response\": [\n    {\n      \"body\": {\n        \"coverages\": [\n          {\n            \"carrier_config\": {\n              \"bill_group\": \"1000001\",\n              \"member_group\": \"99999\"\n            },\n            \"carrier_id\": \"d0003042-eaae-4491-b219-4825456a3d16\",\n            \"lines_of_coverage\": {\n              \"dental\": {\n                \"waiving_members\": [\n                  {\n                    \"id\": \"f471a562-fa8f-41c9-93fd-12b372e16c72\",\n                    \"member_type\": \"employee\",\n                    \"reason\": \"other-spouse-group\"\n                  }\n                ]\n              }\n            }\n          }\n        ]\n      },\n      \"completed\": 1557565200,\n      \"created\": 1557512389,\n      \"employee_id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n      \"id\": \"4f57e463-f4d5-4255-83d4-806b0cabaac5\",\n      \"modified\": 1557565200,\n      \"request_type\": \"new_hire\",\n      \"status\": \"processing\",\n      \"transactions\": [\n        \"a6e30204-87b2-4802-95a4-a156bd0f7435\"\n      ]\n    },\n    {\n      \"body\": {\n        \"employee_id\": \"6dc22bed-27fc-458c-b732-bdaf5b5a1031\",\n        \"last_work_date\": \"2018-01-15\",\n        \"reason\": \"voluntary\"\n      },\n      \"completed\": 1557565200,\n      \"created\": 1557512389,\n      \"employee_id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n      \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n      \"modified\": 1557565200,\n      \"request_type\": \"termination\",\n      \"status\": \"processing\",\n      \"transactions\": [\n        \"f4ecdaa5-e019-4a24-98c7-2caee9a58ccd\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7f68aec5-e57f-43c3-8c83-2329e8e51bd0",
+          "name": "Get a single Member Request",
+          "request": {
+            "name": "Get a single Member Request",
+            "description": {
+              "content": "Returns the latest version of a single member request based on the ID provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "member_requests",
+                ":request_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "request_id",
+                  "description": "(Required) The unique identifier of the member request you would like to view"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "34b54ca2-45db-4198-bc80-07c48f6e9b5c",
+              "name": "Successful Response - Returns a single Member Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "member_requests",
+                    ":request_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "request_id",
+                      "description": "(Required) The unique identifier of the member request you would like to view"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"body\": {\n    \"employee_id\": \"6dc22bed-27fc-458c-b732-bdaf5b5a1031\",\n    \"last_work_date\": \"2018-01-15\",\n    \"reason\": \"voluntary\"\n  },\n  \"completed\": 1557565200,\n  \"created\": 1557512389,\n  \"employee_id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n  \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n  \"modified\": 1557565200,\n  \"request_type\": \"termination\",\n  \"status\": \"processing\",\n  \"transactions\": [\n    \"f4ecdaa5-e019-4a24-98c7-2caee9a58ccd\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b6092dd2-1926-485b-887e-fe24ee6712f4",
+          "name": "Get a list of all Member Requests by Employee",
+          "request": {
+            "name": "Get a list of all Member Requests by Employee",
+            "description": {
+              "content": "Returns a list of all member requests for a given employee.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "employees",
+                ":employee_id",
+                "member_requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "first_name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "last_name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "employee_id",
+                  "description": "(Required) The unique identifier of the employee for which you would like to view member requests"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a7f76566-10fc-4d79-ae57-78a959b70521",
+              "name": "Successful Response - Returns all matching Member Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "employees",
+                    ":employee_id",
+                    "member_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "first_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "last_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "employee_id",
+                      "description": "(Required) The unique identifier of the employee for which you would like to view member requests"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 2\n  },\n  \"response\": [\n    {\n      \"employee\": {\n        \"id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n        \"person\": {\n          \"first_name\": \"Otto\",\n          \"last_name\": \"Oscar\",\n          \"middle_name\": \"Oswald\"\n        }\n      },\n      \"member_requests\": {\n        \"body\": {\n          \"carrier_id\": \"9a0a7437-4097-4251-9e71-85384c0eb1c9\",\n          \"lines_of_coverage\": {\n            \"dental\": {\n              \"enrolling_members\": [\n                {\n                  \"id\": \"72af10df-a8b3-46f1-a114-ac36d4b8a6ea\",\n                  \"member_type\": \"employee\",\n                  \"plan_id\": \"ff033377-59e2-40df-8206-8cec3a725411\"\n                },\n                {\n                  \"id\": \"165d4537-be5f-4744-8a97-a5b10fcb75b1\",\n                  \"member_type\": \"dependent\",\n                  \"plan_id\": \"ff033377-59e2-40df-8206-8cec3a725411\"\n                }\n              ]\n            }\n          }\n        },\n        \"completed\": 1554285600,\n        \"created\": 1554177876,\n        \"group_id\": \"56d574de-c0b3-443f-8477-8f9c5f7fd5a8\",\n        \"group_name\": \"Widgets R Us\",\n        \"id\": \"4f57e463-f4d5-4255-83d4-806b0cabaac5\",\n        \"modified\": 1554285600,\n        \"request_type\": \"new_hire\",\n        \"status\": \"processing\"\n      }\n    },\n    {\n      \"employee\": {\n        \"id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n        \"person\": {\n          \"first_name\": \"Betty\",\n          \"last_name\": \"Batts\",\n          \"middle_name\": \"Elizabeth\"\n        }\n      },\n      \"member_request\": {\n        \"body\": {\n          \"employee_id\": \"6dc22bed-27fc-458c-b732-bdaf5b5a1031\",\n          \"last_work_date\": \"2018-01-15\",\n          \"reason\": \"voluntary\"\n        },\n        \"completed\": 1554285600,\n        \"created\": 1554177876,\n        \"group_id\": \"56d574de-c0b3-443f-8477-8f9c5f7fd5a8\",\n        \"group_name\": \"Fiona's Flowers\",\n        \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n        \"modified\": 1554285600,\n        \"request_type\": \"termination\",\n        \"status\": \"processing\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "639356e5-8095-4b0e-a893-ca723d2b4f99",
+          "name": "Get a list of all Member Requests by Group",
+          "request": {
+            "name": "Get a list of all Member Requests by Group",
+            "description": {
+              "content": "Returns a list of all member requests for a given group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "groups",
+                ":group_id",
+                "member_requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "first_name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "last_name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_by",
+                  "value": "<string>",
+                  "description": "The attribute on which to sort the member requests"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_direction",
+                  "value": "<string>",
+                  "description": "Either asc or desc, to denote the data's direction"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "group_id",
+                  "description": "(Required) The unique identifier of the group for which you would like to view member requests"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ece9e30d-445f-48eb-878b-97021b2255e6",
+              "name": "Successful Response - Returns all matching Member Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "member_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "first_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "last_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_direction",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group_id",
+                      "description": "(Required) The unique identifier of the group for which you would like to view member requests"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 2\n  },\n  \"response\": [\n    {\n      \"employee\": {\n        \"id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n        \"person\": {\n          \"first_name\": \"Otto\",\n          \"last_name\": \"Oscar\",\n          \"middle_name\": \"Oswald\"\n        }\n      },\n      \"member_requests\": {\n        \"body\": {\n          \"carrier_id\": \"9a0a7437-4097-4251-9e71-85384c0eb1c9\",\n          \"lines_of_coverage\": {\n            \"dental\": {\n              \"enrolling_members\": [\n                {\n                  \"id\": \"72af10df-a8b3-46f1-a114-ac36d4b8a6ea\",\n                  \"member_type\": \"employee\",\n                  \"plan_id\": \"ff033377-59e2-40df-8206-8cec3a725411\"\n                },\n                {\n                  \"id\": \"165d4537-be5f-4744-8a97-a5b10fcb75b1\",\n                  \"member_type\": \"dependent\",\n                  \"plan_id\": \"ff033377-59e2-40df-8206-8cec3a725411\"\n                }\n              ]\n            }\n          }\n        },\n        \"created\": 1554177876,\n        \"group_id\": \"56d574de-c0b3-443f-8477-8f9c5f7fd5a8\",\n        \"group_name\": \"Widgets R Us\",\n        \"id\": \"4f57e463-f4d5-4255-83d4-806b0cabaac5\",\n        \"modified\": 1554177876,\n        \"request_type\": \"new_hire\",\n        \"status\": \"processing\"\n      }\n    },\n    {\n      \"employee\": {\n        \"id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n        \"person\": {\n          \"first_name\": \"Betty\",\n          \"last_name\": \"Batts\",\n          \"middle_name\": \"Elizabeth\"\n        }\n      },\n      \"member_request\": {\n        \"body\": {\n          \"employee_id\": \"6dc22bed-27fc-458c-b732-bdaf5b5a1031\",\n          \"last_work_date\": \"2018-01-15\",\n          \"reason\": \"voluntary\"\n        },\n        \"created\": 1554177876,\n        \"group_id\": \"56d574de-c0b3-443f-8477-8f9c5f7fd5a8\",\n        \"group_name\": \"Fiona's Flowers\",\n        \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n        \"modified\": 1554177876,\n        \"request_type\": \"termination\",\n        \"status\": \"processing\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "04f7661a-4f8d-45df-a6a9-3b171e4f0cab",
+          "name": "Get a list of all Member Requests",
+          "request": {
+            "name": "Get a list of all Member Requests",
+            "description": {
+              "content": "Returns a list of all member requests.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "member_requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "first_name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "last_name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "group_id",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_by",
+                  "value": "<string>",
+                  "description": "The attribute on which to sort the member requests"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_direction",
+                  "value": "<string>",
+                  "description": "Either asc or desc, to denote the data's direction"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a9b9f4b0-3e57-46a5-b89d-c8e769644e35",
+              "name": "Successful Response - Returns all matching Member Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "member_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "first_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "last_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "group_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_direction",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 2\n  },\n  \"response\": [\n    {\n      \"employee\": {\n        \"id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n        \"person\": {\n          \"first_name\": \"Otto\",\n          \"last_name\": \"Oscar\",\n          \"middle_name\": \"Oswald\"\n        }\n      },\n      \"member_requests\": {\n        \"body\": {\n          \"carrier_id\": \"9a0a7437-4097-4251-9e71-85384c0eb1c9\",\n          \"lines_of_coverage\": {\n            \"dental\": {\n              \"enrolling_members\": [\n                {\n                  \"id\": \"72af10df-a8b3-46f1-a114-ac36d4b8a6ea\",\n                  \"member_type\": \"employee\",\n                  \"plan_id\": \"ff033377-59e2-40df-8206-8cec3a725411\"\n                },\n                {\n                  \"id\": \"165d4537-be5f-4744-8a97-a5b10fcb75b1\",\n                  \"member_type\": \"dependent\",\n                  \"plan_id\": \"ff033377-59e2-40df-8206-8cec3a725411\"\n                }\n              ]\n            }\n          }\n        },\n        \"completed\": 1554285600,\n        \"created\": 1554177876,\n        \"group_id\": \"56d574de-c0b3-443f-8477-8f9c5f7fd5a8\",\n        \"group_name\": \"Widgets R Us\",\n        \"id\": \"4f57e463-f4d5-4255-83d4-806b0cabaac5\",\n        \"modified\": 1554285600,\n        \"request_type\": \"new_hire\",\n        \"status\": \"processing\"\n      }\n    },\n    {\n      \"employee\": {\n        \"id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n        \"person\": {\n          \"first_name\": \"Betty\",\n          \"last_name\": \"Batts\",\n          \"middle_name\": \"Elizabeth\"\n        }\n      },\n      \"member_request\": {\n        \"body\": {\n          \"employee_id\": \"6dc22bed-27fc-458c-b732-bdaf5b5a1031\",\n          \"last_work_date\": \"2018-01-15\",\n          \"reason\": \"voluntary\"\n        },\n        \"completed\": 1554285600,\n        \"created\": 1554177876,\n        \"group_name\": \"Fiona's Flowers\",\n        \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n        \"modified\": 1554285600,\n        \"request_type\": \"termination\",\n        \"status\": \"processing\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b21e9376-9513-4911-9016-5b244a2dffdf",
+          "name": "Get a single Member Request",
+          "request": {
+            "name": "Get a single Member Request",
+            "description": {
+              "content": "Returns the latest version of a single member request based on the ID provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "member_requests",
+                ":request_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "request_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0e89767f-701b-456b-9c2d-36f7d16452ec",
+              "name": "Successful Response - Returns a single Member Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "member_requests",
+                    ":request_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "request_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"employee\": {\n    \"id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n    \"person\": {\n      \"first_name\": \"Otto\",\n      \"last_name\": \"Oscar\",\n      \"middle_name\": \"Oswald\"\n    }\n  },\n  \"member_requests\": {\n    \"created\": 1554177876,\n    \"group_id\": \"56d574de-c0b3-443f-8477-8f9c5f7fd5a8\",\n    \"group_name\": \"Widgets R Us\",\n    \"id\": \"4f57e463-f4d5-4255-83d4-806b0cabaac5\",\n    \"modified\": 1554177876,\n    \"request_type\": \"new_hire\",\n    \"status\": \"processing\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "89a0fd38-5cf7-4a0e-add1-522cc6f73a82",
+    "name": "Noyo Carrier Carrier Mapped Field Member Requests API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,138 @@
+{
+  "item": [
+    {
+      "id": "fa9e3281-8669-489c-89fc-5fe663343c96",
+      "name": "Group Collection",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "283e6420-f75f-41c1-8b7a-3a4f766e5af4",
+          "name": "Get a list of all Group Collections",
+          "request": {
+            "name": "Get a list of all Group Collections",
+            "description": {
+              "content": "Get all relevant group collections",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "group_collections"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "group_id",
+                  "value": "<string>",
+                  "description": "The unique identifier of the group in Noyo system."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b873640e-5d4c-449e-a562-38ecc99d0483",
+              "name": "Successful Response - Returns Group Collections",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_collections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "group_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 1\n  },\n  \"response\": [\n    {\n      \"created\": 1675199964,\n      \"group_collection_members\": [\n        \"0dac0992-933a-4743-8dab-0d606ef2566h\"\n      ],\n      \"id\": \"0620e171-5dcc-4f2b-9143-6c96a5ee9925\",\n      \"modified\": 1675199964,\n      \"summary\": \"Collection 1 summary\",\n      \"title\": \"Group Collection 1\",\n      \"version\": \"f5133f0a-30ae-443a-80f0-9975abec3213\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6cb2679f-c662-481a-b735-30832f025ede",
+    "name": "Noyo Carrier Carrier Mapped Field Group Collection API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,848 @@
+{
+  "item": [
+    {
+      "id": "a3fe4a2c-3e84-4a54-8c65-5acdf1e49157",
+      "name": "Groups",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0dee5a61-e0ee-48b6-8e04-b80da282a684",
+          "name": "Get a list of all Groups",
+          "request": {
+            "name": "Get a list of all Groups",
+            "description": {
+              "content": "Returns a list of all groups",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "group_ids",
+                  "value": "<string>",
+                  "description": "Comma-separated list of requested UUID group IDs"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier_id",
+                  "value": "<integer>",
+                  "description": "Used for filtering for a carrier-specific group ID. Must be used with carrier_group_id."
+                },
+                {
+                  "disabled": false,
+                  "key": "organization_id",
+                  "value": "<uuid>",
+                  "description": "Used for filtering for organization-specific groups"
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier_group_id",
+                  "value": "<string>",
+                  "description": "Used for filtering for a carrier-specific group ID. Must be used with carrier_id."
+                },
+                {
+                  "disabled": false,
+                  "key": "company",
+                  "value": "<string>",
+                  "description": "Searches groups for name or dba_name values that contain the search term"
+                },
+                {
+                  "disabled": false,
+                  "key": "name_starts_with",
+                  "value": "<string>",
+                  "description": "Searches groups for name or dba_name values that start with the search term"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ef998a67-6517-4402-ac44-69d0eef26713",
+              "name": "Successful Response - Returns all matching Groups",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "group_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "carrier_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "organization_id",
+                      "value": "a88f4b6f-7c26-4dd0-8b62-6c76f06412ad"
+                    },
+                    {
+                      "key": "carrier_group_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "company",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name_starts_with",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 2\n  },\n  \"response\": [\n    {\n      \"group\": {\n        \"created\": 1554177876,\n        \"dba_name\": \"Test Corp\",\n        \"federal_ein\": \"112222222\",\n        \"id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n        \"is_protected_group\": true,\n        \"modified\": 1554177876,\n        \"name\": \"Test Company\",\n        \"organization_id\": \"d61fa455-adf4-4dc4-8c57-6d779ba9475e\",\n        \"protected_at\": 1554177876,\n        \"sic_code\": \"7371\",\n        \"version\": \"6b72d72d-cc99-4df6-8152-7183e824c80c\"\n      },\n      \"group_enrollments\": [\n        {\n          \"carrier_id\": \"8fac0992-933a-4743-8dab-0d606ef2569e\",\n          \"effective_end_date\": \"2019-12-31\",\n          \"effective_start_date\": \"2019-01-01\",\n          \"group_id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n          \"id\": \"7499ea07-76c9-40f2-992b-952259e98384\",\n          \"line_of_coverage\": \"medical\",\n          \"open_enrollment_end_date\": \"2019-02-01\",\n          \"open_enrollment_start_date\": \"2019-01-01\",\n          \"status\": \"active\",\n          \"version\": \"c2292b67-0382-45e9-a378-b52c4129f672\"\n        }\n      ],\n      \"locations\": [\n        {\n          \"created\": 1557862286,\n          \"display_name\": \"Company Location (10001)\",\n          \"group_id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n          \"id\": \"a42a8cf5-d0dd-4701-af92-aa945c71f6da\",\n          \"modified\": 1557862286,\n          \"version\": \"51d8edbc-2999-4b5e-b524-7a53332f0a0a\"\n        }\n      ]\n    },\n    {\n      \"group\": {\n        \"created\": 1554177876,\n        \"dba_name\": \"Lawyer Corp\",\n        \"federal_ein\": \"113333333\",\n        \"id\": \"3c970610-e2f8-428a-bb20-89b74e319b60\",\n        \"is_protected_group\": false,\n        \"modified\": 1554177876,\n        \"name\": \"We R Good Lawyers, LLP\",\n        \"organization_id\": \"d61fa455-adf4-4dc4-8c57-6d779ba9475e\",\n        \"sic_code\": \"7371\",\n        \"version\": \"6b72d72d-cc99-4df6-8152-7183e824c80c\"\n      },\n      \"group_enrollments\": [\n        {\n          \"carrier_id\": \"8fac0992-933a-4743-8dab-0d606ef2569e\",\n          \"effective_end_date\": \"2019-12-31\",\n          \"effective_start_date\": \"2019-01-01\",\n          \"group_id\": \"3c970610-e2f8-428a-bb20-89b74e319b60\",\n          \"id\": \"453dbb34-30cb-40f4-92b3-b4e3dcb5ac60\",\n          \"line_of_coverage\": \"medical\",\n          \"open_enrollment_end_date\": \"2019-02-01\",\n          \"open_enrollment_start_date\": \"2019-01-01\",\n          \"status\": \"active\",\n          \"version\": \"cfe31ac3-1c60-416c-9b79-7fad2f6cba5e\"\n        }\n      ],\n      \"locations\": [\n        {\n          \"created\": 1557862286,\n          \"display_name\": \"Company Location (10001)\",\n          \"group_id\": \"3c970610-e2f8-428a-bb20-89b74e319b60\",\n          \"id\": \"ec58c8c6-6b9b-45d0-a8fa-6a940681d39a\",\n          \"modified\": 1557862286,\n          \"version\": \"28a23680-a48e-4756-a02b-5ff3a72e36d3\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d67eb8b2-770a-4dcb-8a1b-4dea5292fe89",
+          "name": "Get a single Group",
+          "request": {
+            "name": "Get a single Group",
+            "description": {
+              "content": "Returns the latest version of a single group based on the ID provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "groups",
+                ":group_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "group_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "633b6f21-537e-4e71-9c48-6bbe91e98e9e",
+              "name": "Successful Response - Returns a single Group",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "groups",
+                    ":group_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"group\": {\n    \"created\": 1554177876,\n    \"custom_identifiers\": {},\n    \"id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n    \"is_protected_group\": true,\n    \"modified\": 1554177876,\n    \"name\": \"Test Company\",\n    \"organization_id\": \"d61fa455-adf4-4dc4-8c57-6d779ba9475e\",\n    \"protected_at\": 1554177876,\n    \"version\": \"4313a221-d3c8-4c8a-86d5-e7e885fd1da9\"\n  },\n  \"group_enrollments\": [\n    {\n      \"carrier_id\": \"8fac0992-933a-4743-8dab-0d606ef2569e\",\n      \"created\": 1554177876,\n      \"effective_end_date\": \"2019-12-31\",\n      \"effective_start_date\": \"2019-01-01\",\n      \"group_id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n      \"id\": \"7499ea07-76c9-40f2-992b-952259e98384\",\n      \"line_of_coverage\": \"medical\",\n      \"modified\": 1554177876,\n      \"open_enrollment_end_date\": \"2019-02-01\",\n      \"open_enrollment_start_date\": \"2019-01-01\",\n      \"status\": \"active\",\n      \"version\": \"c2292b67-0382-45e9-a378-b52c4129f672\"\n    }\n  ],\n  \"locations\": [\n    {\n      \"address\": {\n        \"city\": \"Des Moines\",\n        \"county\": \"\",\n        \"state\": \"IA\",\n        \"street_one\": \"123 Street\",\n        \"street_two\": \"\",\n        \"zip_code\": \"50392\"\n      },\n      \"created\": 1557862286,\n      \"display_name\": \"Company Location (10001)\",\n      \"group_id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n      \"id\": \"a42a8cf5-d0dd-4701-af92-aa945c71f6da\",\n      \"modified\": 1557862286,\n      \"version\": \"51d8edbc-2999-4b5e-b524-7a53332f0a0a\"\n    }\n  ],\n  \"plans\": {\n    \"dental\": [\n      {\n        \"carrier_id\": \"d0003042-eaae-4491-b219-4825456a3d16\",\n        \"cobra_rules\": {},\n        \"code\": \"D1\",\n        \"created\": 1554175253,\n        \"effective_end_date\": \"2020-12-31\",\n        \"effective_start_date\": \"2020-01-01\",\n        \"eligible_member_types\": [\n          \"employee\"\n        ],\n        \"group_enrollment_id\": \"31559b4b-e45a-4df8-84f6-2220d7ed0c3a\",\n        \"id\": \"5ba915fc-afe8-4572-a60f-61ee5883e100\",\n        \"line_of_coverage\": \"dental\",\n        \"modified\": 1554175253,\n        \"name\": \"Dental\",\n        \"network\": \"Dental PPO Network\",\n        \"plan_type\": \"ppo\",\n        \"status\": \"active\",\n        \"termination_policy\": \"last_work_date\",\n        \"version\": \"1bf06a82-8d81-4849-91d3-47c60fdce605\",\n        \"voluntary\": false,\n        \"waiting_periods\": []\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a1904b96-8be0-4a90-9e32-761a3c06081e",
+          "name": "Get a list of all Carriers for a Group",
+          "request": {
+            "name": "Get a list of all Carriers for a Group",
+            "description": {
+              "content": "Returns a list of carrier IDs",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "groups",
+                ":group_id",
+                "carriers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "disconnection_eligible",
+                  "value": "<boolean>",
+                  "description": "Whether to filter the list of carriers to those eligible for disconnection"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_id",
+                  "description": "(Required) The unique identifier of the group."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c51f11c8-e615-4283-87c5-8618a04b4ddd",
+              "name": "Successful Response - Returns all of the Group's carriers",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "carriers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "disconnection_eligible",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The unique identifier of the group."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  \"99c7b0ea-6222-47cc-acfb-69cef43e4be3\",\n  \"d0003042-eaae-4491-b219-4825456a3d16\"\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "44fc3898-199e-4845-bfd2-89873158be68",
+          "name": "Get a list of all Group Plans",
+          "request": {
+            "name": "Get a list of all Group Plans",
+            "description": {
+              "content": "Returns a list of all group plans",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "groups",
+                ":group_id",
+                "group_plans"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "group_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "77d1b1c5-7404-49a1-8ab3-1b38ee97b256",
+              "name": "Successful Response - Returns all matching group plans",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "group_plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 2\n  },\n  \"response\": [\n    {\n      \"carrier_id\": \"c62a7be4-1551-4fb5-90c0-151121be785b\",\n      \"group_enrollment_id\": \"227894df-ae68-45b3-bce8-6a7717a8fcf7\",\n      \"id\": \"002bd568-6f05-4a71-8293-4d16562a430f\",\n      \"line_of_coverage\": \"medical\",\n      \"name\": \"SuperAwesome Medical Plan\"\n    },\n    {\n      \"carrier_id\": \"c62a7be4-1551-4fb5-90c0-151121be785b\",\n      \"group_enrollment_id\": \"539b60cc-d9cb-4554-834d-e63a4f6a1c54\",\n      \"id\": \"aaeeeaa3-0916-40b6-a639-5c19c0584e14\",\n      \"line_of_coverage\": \"dental\",\n      \"name\": \"PrettyNice Dental Plan\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "63035583-3e76-4b2e-8204-46694e9bffdd",
+          "name": "Get a list of all Mappable Fields for the Group and Carrier",
+          "request": {
+            "name": "Get a list of all Mappable Fields for the Group and Carrier",
+            "description": {},
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "groups",
+                ":group_id",
+                "mappable_fields"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "effective_date",
+                  "value": "<string>",
+                  "description": "The relative date on which to view the state of the record"
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier_id",
+                  "value": "<uuid>",
+                  "description": "(Required) Unique identifier of the carrier in Noyo"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_id",
+                  "description": "(Required) The unique identifier of the group."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0ddb63c6-67a8-4e4a-91d6-2c98040cdacc",
+              "name": "Successful Response - Returns all possible mappable fields",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "mappable_fields"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "effective_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "carrier_id",
+                      "value": "d0003042-eaae-4491-b219-4825456a3d16"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The unique identifier of the group."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 2\n  },\n  \"response\": [\n    {\n      \"configurable_values\": [\n        {\n          \"bill_group_description\": \"Some Members\",\n          \"bill_group_number\": 10001,\n          \"bill_group_status\": \"open\"\n        },\n        {\n          \"bill_group_description\": \"Other members\",\n          \"bill_group_number\": 10002,\n          \"bill_group_status\": \"open\"\n        }\n      ],\n      \"mapped_field\": {\n        \"carrier_id\": \"d0003042-eaae-4491-b219-4825456a3d16\",\n        \"id\": \"79020524-c77d-4b13-b96f-88b3e26eb54d\",\n        \"mapped_field\": \"bill_group_number\",\n        \"object_name\": \"bill_groups\",\n        \"version\": \"ac5e9ad8-ce8a-4d3b-b7fa-830a67aef4ea\"\n      }\n    },\n    {\n      \"configurable_values\": [\n        {\n          \"member_group_key\": 10001,\n          \"member_group_name\": \"Some Members\",\n          \"member_group_status\": \"open\"\n        },\n        {\n          \"member_group_key\": 10002,\n          \"member_group_name\": \"Other members\",\n          \"member_group_status\": \"open\"\n        }\n      ],\n      \"mapped_field\": {\n        \"carrier_id\": \"d0003042-eaae-4491-b219-4825456a3d16\",\n        \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n        \"mapped_field\": \"member_group_key\",\n        \"object_name\": \"member_groups\",\n        \"version\": \"5200a894-81c5-4c41-8519-86c32e9a9965\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0a40c63d-06f9-4611-a346-47f252f2c0cb",
+          "name": "Get Platform Group Structure",
+          "request": {
+            "name": "Get Platform Group Structure",
+            "description": {},
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "groups",
+                ":group_id",
+                "platform_group_structure"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_id",
+                  "description": "(Required) The unique identifier of the group."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "658472ba-b79f-4d22-b13d-24117560ba5d",
+              "name": "Successful Response - Returns a platform group structure",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "platform_group_structure"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The unique identifier of the group."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 1744662582,\n  \"group_id\": \"d2a929df-b5f2-4374-bfdf-18ac610494b8\",\n  \"id\": \"0599efad-8b03-4395-b91d-2da3cdc5dea6\",\n  \"modified\": 1744662582,\n  \"organization_id\": \"ce7d8907-a834-406e-83bd-c180fcc05bdc\",\n  \"structure\": {\n    \"plans\": [\n      {\n        \"carrier_id\": \"9a0a7437-4097-4251-9e71-85384c0eb1c9\",\n        \"id\": \"7ae064ed-330d-44bf-910f-4fa6438a9897\",\n        \"line_of_coverage\": \"dental\",\n        \"name\": \"dental\",\n        \"temporals\": [\n          {\n            \"configuration\": {\n              \"department_number\": [\n                \"1\"\n              ]\n            },\n            \"end_date\": \"2026-01-01\",\n            \"start_date\": \"2025-01-01\"\n          }\n        ]\n      }\n    ]\n  },\n  \"version\": \"3fa18941-00f1-412b-b4d1-c70f6493f95b\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "49217a6f-691c-4bd6-8caa-7031064360ca",
+          "name": "Get Platform Mapping - Platform Account Structure and Group Mapping",
+          "request": {
+            "name": "Get Platform Mapping - Platform Account Structure and Group Mapping",
+            "description": {},
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "groups",
+                ":group_id",
+                "platform_mapping"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "effective_date",
+                  "value": "<string>",
+                  "description": "The relative date on which to view the state of the record"
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier_id",
+                  "value": "<uuid>",
+                  "description": "(Required) Unique identifier of the carrier in Noyo"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_id",
+                  "description": "(Required) The unique identifier of the group."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "59d7f3ba-8f31-4ee8-9da6-2aa0c534e296",
+              "name": "Successful Response - Returns a platform mapping",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "platform_mapping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "effective_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "carrier_id",
+                      "value": "d0003042-eaae-4491-b219-4825456a3d16"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The unique identifier of the group."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"group_mapping\": {\n    \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n    \"effective_end_date\": \"2999-12-31\",\n    \"effective_start_date\": \"2021-01-01\",\n    \"group_id\": \"2705bb9f-3c90-4400-a4e7-0bc9d48e677c\",\n    \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n    \"status\": \"ready\",\n    \"version\": \"65b729f8-de9a-4c9b-bed9-2df020dbbfa4\"\n  },\n  \"group_name\": \"Test Company\",\n  \"platform_account_structure\": {\n    \"account_structure\": {\n      \"account_structure_fields\": [\n        {\n          \"existing_value_set\": [\n            \"North Branch\",\n            \"HQ\",\n            \"Springfield\"\n          ],\n          \"field_name\": \"BranchName\",\n          \"field_type\": \"string\"\n        }\n      ],\n      \"plans\": {\n        \"group_dental_plans\": [\n          \"Dental Plan Low\",\n          \"Dental Plan High\"\n        ],\n        \"group_medical_plans\": [\n          \"Medical Plan A\",\n          \"Medical Plan B\"\n        ]\n      }\n    },\n    \"group_id\": \"2705bb9f-3c90-4400-a4e7-0bc9d48e677c\",\n    \"id\": \"2705bb9f-3c90-4400-a4e7-0bc9d48e677c\",\n    \"version\": \"7a2b0437-4027-4251-9e71-85384c0eb1c9\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d68ae87d-4d82-4d33-844d-01d7870caec6",
+    "name": "Noyo Carrier Carrier Mapped Field Groups API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

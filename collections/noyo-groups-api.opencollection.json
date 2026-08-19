@@ -1,0 +1,250 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Groups API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a list of all Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ui/v1/groups",
+            "params": [
+              {
+                "name": "group_ids",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of requested UUID group IDs"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "carrier_id",
+                "value": "",
+                "type": "query",
+                "description": "Used for filtering for a carrier-specific group ID. Must be used with carrier_group_id."
+              },
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "Used for filtering for organization-specific groups"
+              },
+              {
+                "name": "carrier_group_id",
+                "value": "",
+                "type": "query",
+                "description": "Used for filtering for a carrier-specific group ID. Must be used with carrier_id."
+              },
+              {
+                "name": "company",
+                "value": "",
+                "type": "query",
+                "description": "Searches groups for name or dba_name values that contain the search term"
+              },
+              {
+                "name": "name_starts_with",
+                "value": "",
+                "type": "query",
+                "description": "Searches groups for name or dba_name values that start with the search term"
+              }
+            ]
+          },
+          "docs": "Returns a list of all groups"
+        },
+        {
+          "info": {
+            "name": "Get a single Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ui/v1/groups/:group_id",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the latest version of a single group based on the ID provided."
+        },
+        {
+          "info": {
+            "name": "Get a list of all Carriers for a Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ui/v1/groups/:group_id/carriers",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group."
+              },
+              {
+                "name": "disconnection_eligible",
+                "value": "",
+                "type": "query",
+                "description": "Whether to filter the list of carriers to those eligible for disconnection"
+              }
+            ]
+          },
+          "docs": "Returns a list of carrier IDs"
+        },
+        {
+          "info": {
+            "name": "Get a list of all Group Plans",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ui/v1/groups/:group_id/group_plans",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              }
+            ]
+          },
+          "docs": "Returns a list of all group plans"
+        },
+        {
+          "info": {
+            "name": "Get a list of all Mappable Fields for the Group and Carrier",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ui/v1/groups/:group_id/mappable_fields",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group."
+              },
+              {
+                "name": "effective_date",
+                "value": "",
+                "type": "query",
+                "description": "The relative date on which to view the state of the record"
+              },
+              {
+                "name": "carrier_id",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of the carrier in Noyo"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              }
+            ]
+          },
+          "docs": "Get a list of all Mappable Fields for the Group and Carrier"
+        },
+        {
+          "info": {
+            "name": "Get Platform Group Structure",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ui/v1/groups/:group_id/platform_group_structure",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group."
+              }
+            ]
+          },
+          "docs": "Get Platform Group Structure"
+        },
+        {
+          "info": {
+            "name": "Get Platform Mapping - Platform Account Structure and Group Mapping",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ui/v1/groups/:group_id/platform_mapping",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group."
+              },
+              {
+                "name": "effective_date",
+                "value": "",
+                "type": "query",
+                "description": "The relative date on which to view the state of the record"
+              },
+              {
+                "name": "carrier_id",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of the carrier in Noyo"
+              }
+            ]
+          },
+          "docs": "Get Platform Mapping - Platform Account Structure and Group Mapping"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

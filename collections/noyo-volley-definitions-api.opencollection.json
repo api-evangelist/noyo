@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Volley Definitions API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Volley Definitions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Volley Definition By Type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/volley_definitions/:volley_type",
+            "params": [
+              {
+                "name": "volley_type",
+                "value": "",
+                "type": "path",
+                "description": "The type of the volley definition to get"
+              }
+            ]
+          },
+          "docs": "Get a volley definition by type."
+        },
+        {
+          "info": {
+            "name": "Get Volley Definition By Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/volley_definitions/:volley_type/:version",
+            "params": [
+              {
+                "name": "volley_type",
+                "value": "",
+                "type": "path",
+                "description": "The type of the volley definition to get"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version of the volley definition to get"
+              }
+            ]
+          },
+          "docs": "Get a volley definition by type and version."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

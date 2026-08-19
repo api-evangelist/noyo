@@ -1,0 +1,168 @@
+{
+  "item": [
+    {
+      "id": "162c3399-bd5f-4f29-b3ff-438fcfcdc9a7",
+      "name": "Member Snapshot Test Results",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "59d28047-5565-4a8e-83bd-5773e4a4c8f2",
+          "name": "Retrieves a list of Member Snapshot Test Results.",
+          "request": {
+            "name": "Retrieves a list of Member Snapshot Test Results.",
+            "description": {
+              "content": "Returns a list of Member Snapshot Test Results.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "member_snapshot_test_reports",
+                ":member_snapshot_test_report_id",
+                "results"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Member Snapshot Test Result status to filter by"
+                },
+                {
+                  "disabled": false,
+                  "key": "employee_id",
+                  "value": "<uuid>",
+                  "description": "Noyo employee UUID to filter Member Snapshot Test Result"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "member_snapshot_test_report_id",
+                  "description": "(Required) The unique identifier of the member snapshot test report"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9d86140d-6a61-42cc-9df1-4e13d4b3dd1b",
+              "name": "Successful Response - Returns a list of all matching Member Snapshot Test Results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "member_snapshot_test_reports",
+                    ":member_snapshot_test_report_id",
+                    "results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "failure"
+                    },
+                    {
+                      "key": "employee_id",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "member_snapshot_test_report_id",
+                      "description": "(Required) The unique identifier of the member snapshot test report"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 1753,\n    \"page_num\": 3073,\n    \"page_size\": 9487,\n    \"total_records\": 5679\n  },\n  \"response\": [\n    {\n      \"created\": 9614,\n      \"employee_id\": \"b48f7948-4e6c-170a-b850-33e395dd8295\",\n      \"id\": \"1eba5e95-7049-0449-34b5-61c28be1c86c\",\n      \"member_snapshot_id\": \"87c4e72d-72a1-2203-5b79-2d5f29d6837d\",\n      \"member_snapshot_test_report_id\": \"78a48428-778e-7034-fe77-59f37f5759b4\",\n      \"modified\": 651,\n      \"result\": {\n        \"modified_snapshot\": {\n          \"employee\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"snapshot_mode\": \"current_open\",\n          \"coverages\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"dependents\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"enable_member_auto_link\": false,\n          \"events\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"omitted_coverage_handling\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"status\": \"string\",\n        \"trace_ids\": [\n          \"266b23de-a0aa-2280-5d2e-890067f14bf7\",\n          \"abc495be-f434-6eb9-6d13-32ca4821395e\"\n        ],\n        \"failure_data\": {\n          \"api_error\": \"string\",\n          \"under_test_carrier_fulfillment_statuses\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"included_carrier\": true\n      },\n      \"version\": \"57bd1b6e-9914-633e-086e-c638785e480c\"\n    },\n    {\n      \"created\": 3336,\n      \"employee_id\": \"6a35270b-1c6e-514b-c15d-4cd173332d23\",\n      \"id\": \"345b09fa-3d57-9c22-6721-71dd23f3d435\",\n      \"member_snapshot_id\": \"d20d4196-ca12-8c81-da1d-646f54bdb06d\",\n      \"member_snapshot_test_report_id\": \"9871dd83-378c-6ba2-5418-5710dcd73873\",\n      \"modified\": 4813,\n      \"result\": {\n        \"modified_snapshot\": {\n          \"employee\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"snapshot_mode\": \"current_open\",\n          \"coverages\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"dependents\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"enable_member_auto_link\": false,\n          \"events\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"omitted_coverage_handling\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"status\": \"string\",\n        \"trace_ids\": [\n          \"4828eecc-653e-4ce8-ddf0-52a8f5406c25\",\n          \"6523e478-8b0d-d48f-7226-f09df1e54d82\"\n        ],\n        \"failure_data\": {\n          \"api_error\": \"string\",\n          \"under_test_carrier_fulfillment_statuses\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"included_carrier\": true\n      },\n      \"version\": \"684337c0-4f4b-aa50-931a-95362282172a\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "30c3fc85-a1b5-46ba-9ba1-4a394df16b17",
+    "name": "Noyo Carrier Carrier Mapped Field Member Snapshot Test Results API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

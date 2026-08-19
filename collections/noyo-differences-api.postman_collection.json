@@ -1,0 +1,2196 @@
+{
+  "item": [
+    {
+      "id": "9221b328-5a19-4e56-8217-b24f7dcb0c9f",
+      "name": "Differences",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3e3e75e7-3941-49fd-b827-a2382e63d446",
+          "name": "Retrieves a list of differences.",
+          "request": {
+            "name": "Retrieves a list of differences.",
+            "description": {
+              "content": "Returns a list of differences.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "differences"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "Comma-separated list of requested Difference UUIDs"
+                },
+                {
+                  "disabled": false,
+                  "key": "max_impact_score",
+                  "value": "<integer>",
+                  "description": "Filter out differences above this impact score"
+                },
+                {
+                  "disabled": false,
+                  "key": "min_impact_score",
+                  "value": "<integer>",
+                  "description": "Filter out differences below this impact score"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_open",
+                  "value": "<boolean>",
+                  "description": "True if you want differences that still need to be resolved"
+                },
+                {
+                  "disabled": false,
+                  "key": "object_type",
+                  "value": "<string>",
+                  "description": "Comma separated object types you would like to filter on"
+                },
+                {
+                  "disabled": false,
+                  "key": "object_id",
+                  "value": "<uuid>",
+                  "description": "The ID of the object you'd like to filter on"
+                },
+                {
+                  "disabled": false,
+                  "key": "group_id",
+                  "value": "<uuid>",
+                  "description": "The ID of the group you'd like to filter on"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_before",
+                  "value": "<string>",
+                  "description": "Filter for only differences created before this date (exclusive)"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_after",
+                  "value": "<string>",
+                  "description": "Filter for only differences created after this date (exclusive)"
+                },
+                {
+                  "disabled": false,
+                  "key": "impact_type",
+                  "value": "<string>",
+                  "description": "Comma separated impact types you would like to filter on"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_dismissed",
+                  "value": "<boolean>",
+                  "description": "show only differences with the given is_dismissed value"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_discrepancy",
+                  "value": "<boolean>",
+                  "description": "Show only differences that are or are not discrepancies"
+                },
+                {
+                  "disabled": false,
+                  "key": "member_snapshot_id",
+                  "value": "<uuid>",
+                  "description": "The ID of the member snapshot you'd like to filter on"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_by",
+                  "value": "<string>",
+                  "description": "The attribute on which to sort"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_direction",
+                  "value": "<string>",
+                  "description": "Either asc or desc, to denote the data's direction"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_unavailable",
+                  "value": "<boolean>",
+                  "description": "Include differences that are known to be unavailable at carrier"
+                },
+                {
+                  "disabled": false,
+                  "key": "classification",
+                  "value": "<string>",
+                  "description": "Comma separated difference classifications to filter differences by"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Comma separated difference types to filter differences by"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8e59c482-4214-42e9-9595-c553f343a55b",
+              "name": "Successful Response - Returns all matching differences",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "differences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "max_impact_score",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "min_impact_score",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "is_open",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "object_type",
+                      "value": "employee,individual_enrollment"
+                    },
+                    {
+                      "key": "object_id",
+                      "value": "2ce3b54a-2535-4803-b218-e6b44081d418"
+                    },
+                    {
+                      "key": "group_id",
+                      "value": "8da8e28d-1dbe-44b4-a973-46e8fc191b6c"
+                    },
+                    {
+                      "key": "created_before",
+                      "value": "2020-12-1"
+                    },
+                    {
+                      "key": "created_after",
+                      "value": "2020-12-1"
+                    },
+                    {
+                      "key": "impact_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_dismissed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_discrepancy",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "member_snapshot_id",
+                      "value": "8da8e28d-1dbe-44b4-a973-46e8fc191b6c"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_unavailable",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "classification",
+                      "value": "field_mismatch,missing_from_platform"
+                    },
+                    {
+                      "key": "type",
+                      "value": "new_hire,phone_number"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 2,\n    \"total_records\": 97\n  },\n  \"response\": [\n    {\n      \"carrier_id\": \"2d370e0e-fd73-45e0-8828-796d2cacaeef\",\n      \"created\": 1698264758,\n      \"difference_classification\": \"field_mismatch\",\n      \"difference_type\": \"dob\",\n      \"discrepancy_time\": 1698265273,\n      \"employee_id\": \"556f553b-4626-419c-b26e-30bb69956eb0\",\n      \"fields\": [\n        {\n          \"carrier_value\": \"1989-01-12\",\n          \"key\": \"person.date_of_birth\",\n          \"platform_value\": \"1999-01-12\"\n        }\n      ],\n      \"group_id\": \"26faa540-9ca3-454b-914e-a84701ea04cd\",\n      \"id\": \"ac951a10-5115-4f1b-a374-5510d818fd07\",\n      \"impact_score\": 3,\n      \"is_dismissed\": false,\n      \"is_suppressed\": false,\n      \"modified\": 1706815155,\n      \"object_id\": \"d1898ad7-02f8-414f-9f94-5a1acd535c08\",\n      \"object_type\": \"dependent\",\n      \"organization_id\": \"34a3ac5b-fa32-4714-b2fe-2ff5a6a3e68c\",\n      \"resolved\": 1706815154,\n      \"version\": \"be22f69e-84b5-4cb0-a66a-a763641861c1\"\n    },\n    {\n      \"carrier_id\": \"2d370e0e-fd73-45e0-8828-796d2cacaeef\",\n      \"created\": 1698264983,\n      \"difference_classification\": \"field_mismatch\",\n      \"difference_type\": \"ie_effective_end_date\",\n      \"discrepancy_time\": 1698265071,\n      \"employee_id\": \"05da283a-bf0c-4fb6-b3ca-d658350f0ee2\",\n      \"fields\": [\n        {\n          \"carrier_value\": \"2023-10-31\",\n          \"key\": \"effective_end_date\",\n          \"platform_value\": \"9999-12-31\"\n        }\n      ],\n      \"group_id\": \"26faa540-9ca3-454b-914e-a84701ea04cd\",\n      \"id\": \"21150bdf-478a-4ac8-a214-bdd413df984e\",\n      \"impact_score\": 3,\n      \"is_dismissed\": false,\n      \"is_suppressed\": false,\n      \"modified\": 1707342911,\n      \"object_id\": \"751437b9-1380-485f-937b-d86cec916f3e\",\n      \"object_type\": \"individual_enrollment\",\n      \"organization_id\": \"34a3ac5b-fa32-4714-b2fe-2ff5a6a3e68c\",\n      \"resolved\": 1707342908,\n      \"version\": \"44707efe-3900-48dc-a243-e9d3c0781f40\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8b3a13ed-8516-4059-a019-84ef66109498",
+          "name": "Batch assign differences",
+          "request": {
+            "name": "Batch assign differences",
+            "description": {
+              "content": "Batch assign differences",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "differences",
+                "assign"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"assignee_id\": 322.7140688503605\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5bfbdb32-d870-4dae-8683-0e43fe3c114e",
+              "name": "Successful Response - Returns a list of IDs that were updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "differences",
+                    "assign"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assignee_id\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ids\": [\n    \"55ec9165-2ffb-1031-ee96-de72243d7b8f\",\n    \"437a33ae-9b21-6d18-35ad-2ca4a8dadbeb\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e85b7ba1-6492-4279-a34c-3ba7e001c5f9",
+          "name": "Batch dismiss differences",
+          "request": {
+            "name": "Batch dismiss differences",
+            "description": {
+              "content": "Batch dismiss differences",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "differences",
+                "dismiss"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ids\": [\n    \"<uuid>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "81ddbfcd-eab1-494f-80a4-1e3b87d01773",
+              "name": "Successful Response - Returns a list of IDs that were updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "differences",
+                    "dismiss"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ids\": [\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ids\": [\n    \"58fa557c-c1be-140b-a03c-2e20cabe7269\",\n    \"1ac4ce36-bf27-1384-846e-41aa52737876\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "74fbca3a-9ce6-4fcd-b9de-b72f673154fb",
+          "name": "Batch reopen differences",
+          "request": {
+            "name": "Batch reopen differences",
+            "description": {
+              "content": "Batch reopen differences",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "differences",
+                "reopen"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ids\": [\n    \"<uuid>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "286d7215-83bf-47ee-b641-390ec9069421",
+              "name": "Successful Response - Returns a list of IDs that were updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "differences",
+                    "reopen"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ids\": [\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ids\": [\n    \"58fa557c-c1be-140b-a03c-2e20cabe7269\",\n    \"1ac4ce36-bf27-1384-846e-41aa52737876\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5854d7fe-d100-4b73-b4e5-43cb88a6bf94",
+          "name": "Retrieves a single difference",
+          "request": {
+            "name": "Retrieves a single difference",
+            "description": {
+              "content": "Returns a single difference.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "differences",
+                ":difference_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "difference_id",
+                  "description": "(Required) The unique ID of the difference to fetch"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b8562006-1f97-4a93-a612-4573030813f3",
+              "name": "Successful Response - Returns all difference",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "differences",
+                    ":difference_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "difference_id",
+                      "description": "(Required) The unique ID of the difference to fetch"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"carrier_id\": \"2d370e0e-fd73-45e0-8828-796d2cacaeef\",\n  \"created\": 1698264758,\n  \"difference_classification\": \"field_mismatch\",\n  \"difference_type\": \"dob\",\n  \"discrepancy_time\": 1698265273,\n  \"employee_id\": \"556f553b-4626-419c-b26e-30bb69956eb0\",\n  \"fields\": [\n    {\n      \"carrier_value\": \"1989-01-12\",\n      \"key\": \"person.date_of_birth\",\n      \"platform_value\": \"1999-01-12\"\n    }\n  ],\n  \"group_id\": \"26faa540-9ca3-454b-914e-a84701ea04cd\",\n  \"id\": \"ac951a10-5115-4f1b-a374-5510d818fd07\",\n  \"impact_score\": 3,\n  \"is_dismissed\": false,\n  \"is_suppressed\": false,\n  \"modified\": 1706815155,\n  \"object_id\": \"d1898ad7-02f8-414f-9f94-5a1acd535c08\",\n  \"object_type\": \"dependent\",\n  \"organization_id\": \"34a3ac5b-fa32-4714-b2fe-2ff5a6a3e68c\",\n  \"resolved\": 1706815154,\n  \"sources\": [\n    {\n      \"carrier_fetch_time\": 1698264756,\n      \"created\": 1698264758,\n      \"id\": \"0f50a532-7915-43d7-8aaa-f1d8171d21ce\",\n      \"is_discrepancy\": false,\n      \"last_seen\": 1698264756,\n      \"member_snapshot_id\": \"384ea7c2-fd54-4ac3-9b69-dff17910a302\",\n      \"modified\": 1698264758,\n      \"object_id\": \"3a51e82a-073b-4d74-b207-1669127723d9\",\n      \"object_type\": \"member_transaction\",\n      \"resolves_difference\": false,\n      \"stage\": \"member_snapshot_sent_to_noyo\",\n      \"suppress_discrepancies\": false,\n      \"version\": \"db79b7b6-be47-403f-b7ab-0acd30369cc5\"\n    },\n    {\n      \"carrier_fetch_time\": 1698264940,\n      \"created\": 1698265348,\n      \"id\": \"d91263b8-ea8b-4292-b13c-1da162ebc0b4\",\n      \"is_discrepancy\": false,\n      \"last_seen\": 1698264940,\n      \"member_snapshot_id\": \"384ea7c2-fd54-4ac3-9b69-dff17910a302\",\n      \"modified\": 1698265348,\n      \"object_id\": \"3a51e82a-073b-4d74-b207-1669127723d9\",\n      \"object_type\": \"member_transaction\",\n      \"resolves_difference\": false,\n      \"stage\": \"member_snapshot_confirm\",\n      \"suppress_discrepancies\": false,\n      \"version\": \"7487692a-52b2-428a-b724-6fa110d6acca\"\n    },\n    {\n      \"carrier_fetch_time\": 1698265158,\n      \"created\": 1698265348,\n      \"id\": \"124a9fcd-9431-41f0-a45e-a194dc078865\",\n      \"is_discrepancy\": false,\n      \"last_seen\": 1698265158,\n      \"member_snapshot_id\": \"384ea7c2-fd54-4ac3-9b69-dff17910a302\",\n      \"modified\": 1698265348,\n      \"object_id\": \"3a51e82a-073b-4d74-b207-1669127723d9\",\n      \"object_type\": \"member_transaction\",\n      \"resolves_difference\": false,\n      \"stage\": \"member_snapshot_confirm\",\n      \"suppress_discrepancies\": false,\n      \"version\": \"e2fecf68-4cfc-4c8a-a964-ea6a1734e0cd\"\n    },\n    {\n      \"carrier_fetch_time\": 1698265273,\n      \"created\": 1698265349,\n      \"id\": \"9ebb5b47-992a-4a7d-a533-282c819762f8\",\n      \"is_discrepancy\": true,\n      \"last_seen\": 1698265273,\n      \"member_snapshot_id\": \"384ea7c2-fd54-4ac3-9b69-dff17910a302\",\n      \"modified\": 1698265349,\n      \"object_id\": \"3a51e82a-073b-4d74-b207-1669127723d9\",\n      \"object_type\": \"member_transaction\",\n      \"resolves_difference\": false,\n      \"stage\": \"member_snapshot_confirm\",\n      \"suppress_discrepancies\": false,\n      \"version\": \"7733d5ee-c0da-4c8b-a484-1374c4daa2e7\"\n    },\n    {\n      \"carrier_fetch_time\": 1706815154,\n      \"created\": 1706815155,\n      \"id\": \"baf5824a-073c-4027-8c6e-d0b2ace050eb\",\n      \"is_discrepancy\": false,\n      \"last_seen\": 1706815154,\n      \"member_snapshot_id\": \"feb720cb-e28e-41de-97a1-044bf31bc2f2\",\n      \"modified\": 1706815155,\n      \"object_id\": \"1562d508-4739-41e0-9f84-18a1c8fcbb99\",\n      \"object_type\": \"member_transaction\",\n      \"resolves_difference\": true,\n      \"stage\": \"member_snapshot_sent_to_noyo\",\n      \"suppress_discrepancies\": false,\n      \"version\": \"082a5b0e-4481-406b-9f71-cc5fe11825ae\"\n    }\n  ],\n  \"version\": \"be22f69e-84b5-4cb0-a66a-a763641861c1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3820b1d3-07a5-4add-901b-5ce0f3a658cc",
+          "name": "Assign a difference",
+          "request": {
+            "name": "Assign a difference",
+            "description": {
+              "content": "Assign a difference",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "differences",
+                ":difference_id",
+                "assign"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "difference_id",
+                  "description": "(Required) The unique ID of the difference to dismiss"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"assignee_id\": 322.7140688503605\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2081ca79-8ddc-4b5d-9ce8-003e3ff85898",
+              "name": "Successful Response - Returns the updated difference",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "differences",
+                    ":difference_id",
+                    "assign"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "difference_id",
+                      "description": "(Required) The unique ID of the difference to dismiss"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assignee_id\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"assignee_id\": \"p2898ad7-02f8-414f-9f94-5a1acd535c27\",\n  \"carrier_id\": \"2d370e0e-fd73-45e0-8828-796d2cacaeef\",\n  \"created\": 1698264758,\n  \"difference_classification\": \"field_mismatch\",\n  \"difference_type\": \"dob\",\n  \"discrepancy_time\": 1698265273,\n  \"employee_id\": \"556f553b-4626-419c-b26e-30bb69956eb0\",\n  \"fields\": [\n    {\n      \"carrier_value\": \"1989-01-12\",\n      \"key\": \"person.date_of_birth\",\n      \"platform_value\": \"1999-01-12\"\n    }\n  ],\n  \"group_id\": \"26faa540-9ca3-454b-914e-a84701ea04cd\",\n  \"id\": \"ac951a10-5115-4f1b-a374-5510d818fd07\",\n  \"impact_score\": 3,\n  \"is_dismissed\": true,\n  \"is_suppressed\": false,\n  \"modified\": 1706815155,\n  \"object_id\": \"d1898ad7-02f8-414f-9f94-5a1acd535c08\",\n  \"object_type\": \"dependent\",\n  \"organization_id\": \"34a3ac5b-fa32-4714-b2fe-2ff5a6a3e68c\",\n  \"resolved\": 1706815154,\n  \"version\": \"be22f69e-84b5-4cb0-a66a-a763641861c1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a78522a2-4313-4ea4-9045-fd370cba6e23",
+          "name": "Dismiss a difference",
+          "request": {
+            "name": "Dismiss a difference",
+            "description": {
+              "content": "Dismiss a difference",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "differences",
+                ":difference_id",
+                "dismiss"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "difference_id",
+                  "description": "(Required) The unique ID of the difference to dismiss"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1481bfec-0840-463f-9e49-5249834740bf",
+              "name": "Successful Response - Returns the updated difference",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "differences",
+                    ":difference_id",
+                    "dismiss"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "difference_id",
+                      "description": "(Required) The unique ID of the difference to dismiss"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"carrier_id\": \"2d370e0e-fd73-45e0-8828-796d2cacaeef\",\n  \"created\": 1698264758,\n  \"difference_classification\": \"field_mismatch\",\n  \"difference_type\": \"dob\",\n  \"discrepancy_time\": 1698265273,\n  \"employee_id\": \"556f553b-4626-419c-b26e-30bb69956eb0\",\n  \"fields\": [\n    {\n      \"carrier_value\": \"1989-01-12\",\n      \"key\": \"person.date_of_birth\",\n      \"platform_value\": \"1999-01-12\"\n    }\n  ],\n  \"group_id\": \"26faa540-9ca3-454b-914e-a84701ea04cd\",\n  \"id\": \"ac951a10-5115-4f1b-a374-5510d818fd07\",\n  \"impact_score\": 3,\n  \"is_dismissed\": true,\n  \"is_suppressed\": false,\n  \"modified\": 1706815155,\n  \"object_id\": \"d1898ad7-02f8-414f-9f94-5a1acd535c08\",\n  \"object_type\": \"dependent\",\n  \"organization_id\": \"34a3ac5b-fa32-4714-b2fe-2ff5a6a3e68c\",\n  \"resolved\": 1706815154,\n  \"version\": \"be22f69e-84b5-4cb0-a66a-a763641861c1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f28583be-269a-461f-b850-a1c30baa158e",
+          "name": "Reopen a difference",
+          "request": {
+            "name": "Reopen a difference",
+            "description": {
+              "content": "Reopen a dismissed difference",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "differences",
+                ":difference_id",
+                "reopen"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "difference_id",
+                  "description": "(Required) The unique ID of the difference to reopen"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "38ade95c-e6d7-4d0a-8d1a-1ca5914da84b",
+              "name": "Successful Response - Returns the updated difference",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "differences",
+                    ":difference_id",
+                    "reopen"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "difference_id",
+                      "description": "(Required) The unique ID of the difference to reopen"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"carrier_id\": \"2d370e0e-fd73-45e0-8828-796d2cacaeef\",\n  \"created\": 1698264758,\n  \"difference_classification\": \"field_mismatch\",\n  \"difference_type\": \"dob\",\n  \"discrepancy_time\": 1698265273,\n  \"employee_id\": \"556f553b-4626-419c-b26e-30bb69956eb0\",\n  \"fields\": [\n    {\n      \"carrier_value\": \"1989-01-12\",\n      \"key\": \"person.date_of_birth\",\n      \"platform_value\": \"1999-01-12\"\n    }\n  ],\n  \"group_id\": \"26faa540-9ca3-454b-914e-a84701ea04cd\",\n  \"id\": \"ac951a10-5115-4f1b-a374-5510d818fd07\",\n  \"impact_score\": 3,\n  \"is_dismissed\": false,\n  \"is_suppressed\": false,\n  \"modified\": 1706815155,\n  \"object_id\": \"d1898ad7-02f8-414f-9f94-5a1acd535c08\",\n  \"object_type\": \"dependent\",\n  \"organization_id\": \"34a3ac5b-fa32-4714-b2fe-2ff5a6a3e68c\",\n  \"resolved\": 1706815154,\n  \"version\": \"be22f69e-84b5-4cb0-a66a-a763641861c1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "52fd3f04-d4bc-4c5d-bff4-1a1f785de591",
+          "name": "Retrieves a list of differences belonging to a given employee.",
+          "request": {
+            "name": "Retrieves a list of differences belonging to a given employee.",
+            "description": {
+              "content": "Returns a list of differences for an employee.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "employees",
+                ":employee_id",
+                "differences"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "max_impact_score",
+                  "value": "<integer>",
+                  "description": "Filter out differences above this impact score"
+                },
+                {
+                  "disabled": false,
+                  "key": "min_impact_score",
+                  "value": "<integer>",
+                  "description": "Filter out differences below this impact score"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_open",
+                  "value": "<boolean>",
+                  "description": "True if you want differences that still need to be resolved"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_before",
+                  "value": "<string>",
+                  "description": "Filter for only differences created before this date (exclusive)"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_after",
+                  "value": "<string>",
+                  "description": "Filter for only differences created after this date (exclusive)"
+                },
+                {
+                  "disabled": false,
+                  "key": "object_type",
+                  "value": "<string>",
+                  "description": "Comma separated object types you would like to filter on"
+                },
+                {
+                  "disabled": false,
+                  "key": "object_id",
+                  "value": "<uuid>",
+                  "description": "The ID of the object you'd like to filter on"
+                },
+                {
+                  "disabled": false,
+                  "key": "impact_type",
+                  "value": "<string>",
+                  "description": "Comma separated impact types you would like to filter on"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_dismissed",
+                  "value": "<boolean>",
+                  "description": "show only differences with the given is_dismissed value"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_discrepancy",
+                  "value": "<boolean>",
+                  "description": "Show only differences that are or are not discrepancies"
+                },
+                {
+                  "disabled": false,
+                  "key": "member_snapshot_id",
+                  "value": "<uuid>",
+                  "description": "The ID of the member snapshot you'd like to filter on"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_by",
+                  "value": "<string>",
+                  "description": "The attribute on which to sort"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_direction",
+                  "value": "<string>",
+                  "description": "Either asc or desc, to denote the data's direction"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_unavailable",
+                  "value": "<boolean>",
+                  "description": "Include differences that are known to be unavailable at carrier"
+                },
+                {
+                  "disabled": false,
+                  "key": "classification",
+                  "value": "<string>",
+                  "description": "Comma separated difference classifications to filter differences by"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Comma separated difference types to filter differences by"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "employee_id",
+                  "description": "(Required) Show differences for this employee"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2bee80f7-ae83-433f-a245-0592cbd6ff4f",
+              "name": "Successful Response - Returns all matching differences for an employee",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "employees",
+                    ":employee_id",
+                    "differences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "max_impact_score",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "min_impact_score",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "is_open",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "created_before",
+                      "value": "Tue, 01 Dec 2020 00:00:00 GMT"
+                    },
+                    {
+                      "key": "created_after",
+                      "value": "Tue, 01 Dec 2020 00:00:00 GMT"
+                    },
+                    {
+                      "key": "object_type",
+                      "value": "employee,individual_enrollment"
+                    },
+                    {
+                      "key": "object_id",
+                      "value": "2ce3b54a-2535-4803-b218-e6b44081d418"
+                    },
+                    {
+                      "key": "impact_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_dismissed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_discrepancy",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "member_snapshot_id",
+                      "value": "8da8e28d-1dbe-44b4-a973-46e8fc191b6c"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_unavailable",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "classification",
+                      "value": "field_mismatch,missing_from_platform"
+                    },
+                    {
+                      "key": "type",
+                      "value": "new_hire,phone_number"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "employee_id",
+                      "description": "(Required) Show differences for this employee"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 2,\n    \"total_records\": 97\n  },\n  \"response\": [\n    {\n      \"carrier_id\": \"2d370e0e-fd73-45e0-8828-796d2cacaeef\",\n      \"created\": 1698264758,\n      \"difference_classification\": \"field_mismatch\",\n      \"difference_type\": \"dob\",\n      \"discrepancy_time\": 1698265273,\n      \"employee_id\": \"556f553b-4626-419c-b26e-30bb69956eb0\",\n      \"fields\": [\n        {\n          \"carrier_value\": \"1989-01-12\",\n          \"key\": \"person.date_of_birth\",\n          \"platform_value\": \"1999-01-12\"\n        }\n      ],\n      \"group_id\": \"26faa540-9ca3-454b-914e-a84701ea04cd\",\n      \"id\": \"ac951a10-5115-4f1b-a374-5510d818fd07\",\n      \"impact_score\": 3,\n      \"is_dismissed\": false,\n      \"is_suppressed\": false,\n      \"modified\": 1706815155,\n      \"object_id\": \"d1898ad7-02f8-414f-9f94-5a1acd535c08\",\n      \"object_type\": \"dependent\",\n      \"organization_id\": \"34a3ac5b-fa32-4714-b2fe-2ff5a6a3e68c\",\n      \"resolved\": 1706815154,\n      \"version\": \"be22f69e-84b5-4cb0-a66a-a763641861c1\"\n    },\n    {\n      \"carrier_id\": \"2d370e0e-fd73-45e0-8828-796d2cacaeef\",\n      \"created\": 1698264983,\n      \"difference_classification\": \"field_mismatch\",\n      \"difference_type\": \"ie_effective_end_date\",\n      \"discrepancy_time\": 1698265071,\n      \"employee_id\": \"556f553b-4626-419c-b26e-30bb69956eb0\",\n      \"fields\": [\n        {\n          \"carrier_value\": \"2023-10-31\",\n          \"key\": \"effective_end_date\",\n          \"platform_value\": \"9999-12-31\"\n        }\n      ],\n      \"group_id\": \"26faa540-9ca3-454b-914e-a84701ea04cd\",\n      \"id\": \"21150bdf-478a-4ac8-a214-bdd413df984e\",\n      \"impact_score\": 3,\n      \"is_dismissed\": false,\n      \"is_suppressed\": false,\n      \"modified\": 1707342911,\n      \"object_id\": \"751437b9-1380-485f-937b-d86cec916f3e\",\n      \"object_type\": \"individual_enrollment\",\n      \"organization_id\": \"34a3ac5b-fa32-4714-b2fe-2ff5a6a3e68c\",\n      \"resolved\": 1707342908,\n      \"version\": \"44707efe-3900-48dc-a243-e9d3c0781f40\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "42c4241e-956b-4826-8a9c-7fbd4b88b33b",
+          "name": "Retrieves a list of differences belonging to a group.",
+          "request": {
+            "name": "Retrieves a list of differences belonging to a group.",
+            "description": {
+              "content": "Returns a list of differences for a group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "groups",
+                ":group_id",
+                "differences"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "max_impact_score",
+                  "value": "<integer>",
+                  "description": "Filter out differences above this impact score"
+                },
+                {
+                  "disabled": false,
+                  "key": "min_impact_score",
+                  "value": "<integer>",
+                  "description": "Filter out differences below this impact score"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_open",
+                  "value": "<boolean>",
+                  "description": "True if you want differences that still need to be resolved"
+                },
+                {
+                  "disabled": false,
+                  "key": "object_type",
+                  "value": "<string>",
+                  "description": "Comma separated object types you would like to filter on"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_before",
+                  "value": "<string>",
+                  "description": "Filter for only differences created before this date (exclusive)"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_after",
+                  "value": "<string>",
+                  "description": "Filter for only differences created after this date (exclusive)"
+                },
+                {
+                  "disabled": false,
+                  "key": "object_id",
+                  "value": "<uuid>",
+                  "description": "The ID of the object you'd like to filter on"
+                },
+                {
+                  "disabled": false,
+                  "key": "impact_type",
+                  "value": "<string>",
+                  "description": "Comma separated impact types you would like to filter on"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_dismissed",
+                  "value": "<boolean>",
+                  "description": "show only differences with the given is_dismissed value"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_discrepancy",
+                  "value": "<boolean>",
+                  "description": "Show only differences that are or are not discrepancies"
+                },
+                {
+                  "disabled": false,
+                  "key": "member_snapshot_id",
+                  "value": "<uuid>",
+                  "description": "The ID of the member snapshot you'd like to filter on"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_by",
+                  "value": "<string>",
+                  "description": "The attribute on which to sort"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_direction",
+                  "value": "<string>",
+                  "description": "Either asc or desc, to denote the data's direction"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_unavailable",
+                  "value": "<boolean>",
+                  "description": "Include differences that are known to be unavailable at carrier"
+                },
+                {
+                  "disabled": false,
+                  "key": "classification",
+                  "value": "<string>",
+                  "description": "Comma separated difference classifications to filter differences by"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Comma separated difference types to filter differences by"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "group_id",
+                  "description": "(Required) Show differences for this employee"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d0c65a91-ee45-46dc-9e1e-d7859befb36f",
+              "name": "Successful Response - Returns all matching differences for a group",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "differences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "max_impact_score",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "min_impact_score",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "is_open",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "object_type",
+                      "value": "employee,individual_enrollment"
+                    },
+                    {
+                      "key": "created_before",
+                      "value": "Tue, 01 Dec 2020 00:00:00 GMT"
+                    },
+                    {
+                      "key": "created_after",
+                      "value": "Tue, 01 Dec 2020 00:00:00 GMT"
+                    },
+                    {
+                      "key": "object_id",
+                      "value": "2ce3b54a-2535-4803-b218-e6b44081d418"
+                    },
+                    {
+                      "key": "impact_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_dismissed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_discrepancy",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "member_snapshot_id",
+                      "value": "8da8e28d-1dbe-44b4-a973-46e8fc191b6c"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_unavailable",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "classification",
+                      "value": "field_mismatch,missing_from_platform"
+                    },
+                    {
+                      "key": "type",
+                      "value": "new_hire,phone_number"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group_id",
+                      "description": "(Required) Show differences for this employee"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 2,\n    \"total_records\": 97\n  },\n  \"response\": [\n    {\n      \"carrier_id\": \"2d370e0e-fd73-45e0-8828-796d2cacaeef\",\n      \"created\": 1698264758,\n      \"difference_classification\": \"field_mismatch\",\n      \"difference_type\": \"dob\",\n      \"discrepancy_time\": 1698265273,\n      \"employee_id\": \"556f553b-4626-419c-b26e-30bb69956eb0\",\n      \"fields\": [\n        {\n          \"carrier_value\": \"1989-01-12\",\n          \"key\": \"person.date_of_birth\",\n          \"platform_value\": \"1999-01-12\"\n        }\n      ],\n      \"group_id\": \"26faa540-9ca3-454b-914e-a84701ea04cd\",\n      \"id\": \"ac951a10-5115-4f1b-a374-5510d818fd07\",\n      \"impact_score\": 3,\n      \"is_dismissed\": false,\n      \"is_suppressed\": false,\n      \"modified\": 1706815155,\n      \"object_id\": \"d1898ad7-02f8-414f-9f94-5a1acd535c08\",\n      \"object_type\": \"dependent\",\n      \"organization_id\": \"34a3ac5b-fa32-4714-b2fe-2ff5a6a3e68c\",\n      \"resolved\": 1706815154,\n      \"version\": \"be22f69e-84b5-4cb0-a66a-a763641861c1\"\n    },\n    {\n      \"carrier_id\": \"2d370e0e-fd73-45e0-8828-796d2cacaeef\",\n      \"created\": 1698264983,\n      \"difference_classification\": \"field_mismatch\",\n      \"difference_type\": \"ie_effective_end_date\",\n      \"discrepancy_time\": 1698265071,\n      \"employee_id\": \"556f553b-4626-419c-b26e-30bb69956eb0\",\n      \"fields\": [\n        {\n          \"carrier_value\": \"2023-10-31\",\n          \"key\": \"effective_end_date\",\n          \"platform_value\": \"9999-12-31\"\n        }\n      ],\n      \"group_id\": \"26faa540-9ca3-454b-914e-a84701ea04cd\",\n      \"id\": \"21150bdf-478a-4ac8-a214-bdd413df984e\",\n      \"impact_score\": 3,\n      \"is_dismissed\": false,\n      \"is_suppressed\": false,\n      \"modified\": 1707342911,\n      \"object_id\": \"751437b9-1380-485f-937b-d86cec916f3e\",\n      \"object_type\": \"individual_enrollment\",\n      \"organization_id\": \"34a3ac5b-fa32-4714-b2fe-2ff5a6a3e68c\",\n      \"resolved\": 1707342908,\n      \"version\": \"44707efe-3900-48dc-a243-e9d3c0781f40\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9bc8b00e-971a-4914-9102-2c70df0d7784",
+          "name": "Retrieves a list of transaction ids ",
+          "request": {
+            "name": "Retrieves a list of transaction ids ",
+            "description": {
+              "content": "Returns a list of transaction ids by associated difference impact score.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "member_transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sort_by",
+                  "value": "<string>",
+                  "description": "The attribute on which to sort"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_direction",
+                  "value": "<string>",
+                  "description": "Either asc or desc, to denote the data's direction"
+                },
+                {
+                  "disabled": false,
+                  "key": "difference_impact_score",
+                  "value": "<integer>",
+                  "description": "Include transactions that contain the specified impact score"
+                },
+                {
+                  "disabled": false,
+                  "key": "max_impact_score",
+                  "value": "<boolean>",
+                  "description": "Max impact score of all differences associated to transaction"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b33248c4-e9b2-402e-aa2f-bafe43eadb88",
+              "name": "Successful Response - Returns transaction by associated difference",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "member_transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sort_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "difference_impact_score",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "max_impact_score",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 2\n  },\n  \"response\": [\n    \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n    \"fa5a1813-34f7-4c7e-86bc-f041f2cbd9a1\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f3f1033a-6488-4a6a-80e3-7e2592e65ab7",
+          "name": "Retrieves a list of differences sourced from a member transaction.",
+          "request": {
+            "name": "Retrieves a list of differences sourced from a member transaction.",
+            "description": {
+              "content": "Returns a list of differences for a member transaction.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "member_transactions",
+                ":member_transaction_id",
+                "differences"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "max_impact_score",
+                  "value": "<integer>",
+                  "description": "Filter out differences above this impact score"
+                },
+                {
+                  "disabled": false,
+                  "key": "min_impact_score",
+                  "value": "<integer>",
+                  "description": "Filter out differences below this impact score"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_open",
+                  "value": "<boolean>",
+                  "description": "True if you want differences that still need to be resolved"
+                },
+                {
+                  "disabled": false,
+                  "key": "object_type",
+                  "value": "<string>",
+                  "description": "Comma separated object types you would like to filter on"
+                },
+                {
+                  "disabled": false,
+                  "key": "object_id",
+                  "value": "<uuid>",
+                  "description": "The ID of the object you'd like to filter on"
+                },
+                {
+                  "disabled": false,
+                  "key": "impact_type",
+                  "value": "<string>",
+                  "description": "Comma separated impact types you would like to filter on"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_dismissed",
+                  "value": "<boolean>",
+                  "description": "show only differences with the given is_dismissed value"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_discrepancy",
+                  "value": "<boolean>",
+                  "description": "Show only differences that are or are not discrepancies"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_before",
+                  "value": "<string>",
+                  "description": "Filter for only differences created before this date (exclusive)"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_after",
+                  "value": "<string>",
+                  "description": "Filter for only differences created after this date (exclusive)"
+                },
+                {
+                  "disabled": false,
+                  "key": "member_snapshot_id",
+                  "value": "<uuid>",
+                  "description": "The ID of the member snapshot you'd like to filter on"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_by",
+                  "value": "<string>",
+                  "description": "The attribute on which to sort"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_direction",
+                  "value": "<string>",
+                  "description": "Either asc or desc, to denote the data's direction"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_unavailable",
+                  "value": "<boolean>",
+                  "description": "Include differences that are known to be unavailable at carrier"
+                },
+                {
+                  "disabled": false,
+                  "key": "classification",
+                  "value": "<string>",
+                  "description": "Comma separated difference classifications to filter differences by"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Comma separated difference types to filter differences by"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "member_transaction_id",
+                  "description": "(Required) Show differences for this transaction"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f01b9f46-aa5b-4fe5-bfc8-49a9902b0a1b",
+              "name": "Successful Response - Returns all matching differences for a member transaction",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "member_transactions",
+                    ":member_transaction_id",
+                    "differences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "max_impact_score",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "min_impact_score",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "is_open",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "object_type",
+                      "value": "employee,individual_enrollment"
+                    },
+                    {
+                      "key": "object_id",
+                      "value": "2ce3b54a-2535-4803-b218-e6b44081d418"
+                    },
+                    {
+                      "key": "impact_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_dismissed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_discrepancy",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "created_before",
+                      "value": "Tue, 01 Dec 2020 00:00:00 GMT"
+                    },
+                    {
+                      "key": "created_after",
+                      "value": "Tue, 01 Dec 2020 00:00:00 GMT"
+                    },
+                    {
+                      "key": "member_snapshot_id",
+                      "value": "8da8e28d-1dbe-44b4-a973-46e8fc191b6c"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_unavailable",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "classification",
+                      "value": "field_mismatch,missing_from_platform"
+                    },
+                    {
+                      "key": "type",
+                      "value": "new_hire,phone_number"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "member_transaction_id",
+                      "description": "(Required) Show differences for this transaction"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 2,\n    \"total_records\": 97\n  },\n  \"response\": [\n    {\n      \"carrier_id\": \"2d370e0e-fd73-45e0-8828-796d2cacaeef\",\n      \"created\": 1698264758,\n      \"difference_classification\": \"field_mismatch\",\n      \"difference_type\": \"dob\",\n      \"discrepancy_time\": 1698265273,\n      \"employee_id\": \"556f553b-4626-419c-b26e-30bb69956eb0\",\n      \"fields\": [\n        {\n          \"carrier_value\": \"1989-01-12\",\n          \"key\": \"person.date_of_birth\",\n          \"platform_value\": \"1999-01-12\"\n        }\n      ],\n      \"group_id\": \"26faa540-9ca3-454b-914e-a84701ea04cd\",\n      \"id\": \"ac951a10-5115-4f1b-a374-5510d818fd07\",\n      \"impact_score\": 3,\n      \"is_dismissed\": false,\n      \"is_suppressed\": false,\n      \"modified\": 1706815155,\n      \"object_id\": \"d1898ad7-02f8-414f-9f94-5a1acd535c08\",\n      \"object_type\": \"dependent\",\n      \"organization_id\": \"34a3ac5b-fa32-4714-b2fe-2ff5a6a3e68c\",\n      \"resolved\": 1706815154,\n      \"version\": \"be22f69e-84b5-4cb0-a66a-a763641861c1\"\n    },\n    {\n      \"carrier_id\": \"2d370e0e-fd73-45e0-8828-796d2cacaeef\",\n      \"created\": 1698264983,\n      \"difference_classification\": \"field_mismatch\",\n      \"difference_type\": \"ie_effective_end_date\",\n      \"discrepancy_time\": 1698265071,\n      \"employee_id\": \"556f553b-4626-419c-b26e-30bb69956eb0\",\n      \"fields\": [\n        {\n          \"carrier_value\": \"2023-10-31\",\n          \"key\": \"effective_end_date\",\n          \"platform_value\": \"9999-12-31\"\n        }\n      ],\n      \"group_id\": \"26faa540-9ca3-454b-914e-a84701ea04cd\",\n      \"id\": \"21150bdf-478a-4ac8-a214-bdd413df984e\",\n      \"impact_score\": 3,\n      \"is_dismissed\": false,\n      \"is_suppressed\": false,\n      \"modified\": 1707342911,\n      \"object_id\": \"751437b9-1380-485f-937b-d86cec916f3e\",\n      \"object_type\": \"individual_enrollment\",\n      \"organization_id\": \"34a3ac5b-fa32-4714-b2fe-2ff5a6a3e68c\",\n      \"resolved\": 1707342908,\n      \"version\": \"44707efe-3900-48dc-a243-e9d3c0781f40\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5ddf1e10-742d-476a-98ad-2f8e5552a061",
+          "name": "Retrieves counts of differences, split by given attributes",
+          "request": {
+            "name": "Retrieves counts of differences, split by given attributes",
+            "description": {
+              "content": "Retrieves counts of differences.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "differences",
+                "counts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "counts_by",
+                  "value": "<string>",
+                  "description": "Comma separated attributes to count by"
+                },
+                {
+                  "disabled": false,
+                  "key": "group_id",
+                  "value": "<uuid>",
+                  "description": "The ID of the group you'd like to filter on"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_before",
+                  "value": "<string>",
+                  "description": "Filter for only differences created before this date (exclusive)"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_after",
+                  "value": "<string>",
+                  "description": "Filter for only differences created after this date (exclusive)"
+                },
+                {
+                  "disabled": false,
+                  "key": "max_impact_score",
+                  "value": "<integer>",
+                  "description": "Filter out differences above this impact score"
+                },
+                {
+                  "disabled": false,
+                  "key": "min_impact_score",
+                  "value": "<integer>",
+                  "description": "Filter out differences below this impact score"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_open",
+                  "value": "<boolean>",
+                  "description": "True if you want differences that still need to be resolved"
+                },
+                {
+                  "disabled": false,
+                  "key": "object_type",
+                  "value": "<string>",
+                  "description": "Comma separated object types you would like to filter on"
+                },
+                {
+                  "disabled": false,
+                  "key": "object_id",
+                  "value": "<uuid>",
+                  "description": "The ID of the object you'd like to filter on"
+                },
+                {
+                  "disabled": false,
+                  "key": "impact_type",
+                  "value": "<string>",
+                  "description": "Comma separated impact types you would like to filter on"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_dismissed",
+                  "value": "<boolean>",
+                  "description": "show only differences with the given is_dismissed value"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_discrepancy",
+                  "value": "<boolean>",
+                  "description": "Show only differences that are or are not discrepancies"
+                },
+                {
+                  "disabled": false,
+                  "key": "member_snapshot_id",
+                  "value": "<uuid>",
+                  "description": "The ID of the member snapshot you'd like to filter on"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_by",
+                  "value": "<string>",
+                  "description": "The attribute on which to sort"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_direction",
+                  "value": "<string>",
+                  "description": "Either asc or desc, to denote the data's direction"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_unavailable",
+                  "value": "<boolean>",
+                  "description": "Include differences that are known to be unavailable at carrier"
+                },
+                {
+                  "disabled": false,
+                  "key": "classification",
+                  "value": "<string>",
+                  "description": "Comma separated difference classifications to filter differences by"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Comma separated difference types to filter differences by"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "266acf4a-254a-4af5-9200-7df9b37ddbd2",
+              "name": "Successful Response - Returns counts by specified attributes",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "differences",
+                    "counts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "counts_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "group_id",
+                      "value": "8da8e28d-1dbe-44b4-a973-46e8fc191b6c"
+                    },
+                    {
+                      "key": "created_before",
+                      "value": "Tue, 01 Dec 2020 00:00:00 GMT"
+                    },
+                    {
+                      "key": "created_after",
+                      "value": "Tue, 01 Dec 2020 00:00:00 GMT"
+                    },
+                    {
+                      "key": "max_impact_score",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "min_impact_score",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "is_open",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "object_type",
+                      "value": "employee,individual_enrollment"
+                    },
+                    {
+                      "key": "object_id",
+                      "value": "2ce3b54a-2535-4803-b218-e6b44081d418"
+                    },
+                    {
+                      "key": "impact_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_dismissed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_discrepancy",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "member_snapshot_id",
+                      "value": "8da8e28d-1dbe-44b4-a973-46e8fc191b6c"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_unavailable",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "classification",
+                      "value": "field_mismatch,missing_from_platform"
+                    },
+                    {
+                      "key": "type",
+                      "value": "new_hire,phone_number"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"response\": [\n    {\n      \"count\": 10\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2ac90395-d733-4cb4-96e3-72c65a32877b",
+    "name": "Noyo Carrier Carrier Mapped Field Differences API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

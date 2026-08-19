@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Carrier Mapped Field",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Mapped Fields for a Carrier",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/carriers/:carrier_id/mapped_fields",
+            "params": [
+              {
+                "name": "carrier_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the rule you would like to get carrier mapped fields for"
+              }
+            ]
+          },
+          "docs": "Returns a list of carrier mapped fields based on the Carrier ID provided."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

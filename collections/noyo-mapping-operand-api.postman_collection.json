@@ -1,0 +1,334 @@
+{
+  "item": [
+    {
+      "id": "3d7c4c22-efd1-459e-b7b2-1e67c0f35057",
+      "name": "Mapping Operand",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b866d5e8-4c6a-4606-956d-1b2f68edb271",
+          "name": "Get Mapping Operands by Group",
+          "request": {
+            "name": "Get Mapping Operands by Group",
+            "description": {
+              "content": "Get Mapping Operands for a Group",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "groups",
+                ":group_id",
+                "mapping_operands"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "field_type",
+                  "value": "<string>",
+                  "description": "Describes the type for the mapping_operand value looks like (string, integer, etc.)"
+                },
+                {
+                  "disabled": false,
+                  "key": "mapping_type",
+                  "value": "<string>",
+                  "description": "Describes the type for the mapping_operand value is used to map for (account_structure or plan_mapping)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_id",
+                  "description": "(Required) The unique identifier of the group you want to get mapping_operands for"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "54ae9140-e9a6-4142-88a7-22c8326abad0",
+              "name": "Successful Response - Returns Mapping Operands",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "mapping_operands"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "field_type",
+                      "value": "string"
+                    },
+                    {
+                      "key": "mapping_type",
+                      "value": "plan_mapping"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The unique identifier of the group you want to get mapping_operands for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 1\n  },\n  \"response\": [\n    {\n      \"created\": 1599292817,\n      \"existing_value_set\": [\n        \"HQ\",\n        \"Austin\",\n        \"Durham\"\n      ],\n      \"field_type\": \"string\",\n      \"group_id\": \"d61fa455-adf4-4dc4-8c57-6d779ba9475e\",\n      \"id\": \"ba9bbec3-f325-4ef3-9627-81cc7533303e\",\n      \"mapping_type\": \"account_structure\",\n      \"modified\": 159990018,\n      \"operand_path\": \"classifications.BranchName\",\n      \"version\": \"873d1fcc-2831-42b1-93ae-eed4bbe59a19\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "88e293bc-22dc-496a-8f47-e727dec81962",
+          "name": "Get an existing Mapping Operand",
+          "request": {
+            "name": "Get an existing Mapping Operand",
+            "description": {
+              "content": "Get a mapping operand based on the ID provided. This will return the latest version of the mapping operand.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "mapping_operands",
+                ":mapping_operand_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "mapping_operand_id",
+                  "description": "(Required) The unique identifier of the mapping operand you would like to get"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9d67d49d-13aa-44f6-9c2d-90d53d5916ba",
+              "name": "Successful Response - Returns the single Mapping Operand",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "mapping_operands",
+                    ":mapping_operand_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "mapping_operand_id",
+                      "description": "(Required) The unique identifier of the mapping operand you would like to get"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 1599292817,\n  \"existing_value_set\": [\n    \"HQ\",\n    \"Austin\",\n    \"Durham\"\n  ],\n  \"field_type\": \"string\",\n  \"group_id\": \"d61fa455-adf4-4dc4-8c57-6d779ba9475e\",\n  \"id\": \"ba9bbec3-f325-4ef3-9627-81cc7533303e\",\n  \"mapping_type\": \"account_structure\",\n  \"modified\": 159990018,\n  \"operand_path\": \"classifications.BranchName\",\n  \"version\": \"873d1fcc-2831-42b1-93ae-eed4bbe59a19\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c03dfb7b-b6a1-4e28-a45b-b922b3b9b6dc",
+          "name": "Get Mapping Operands by Group Mapping",
+          "request": {
+            "name": "Get Mapping Operands by Group Mapping",
+            "description": {
+              "content": "Get Mapping Operands for a Group Mapping",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "group_mappings",
+                ":group_mapping_id",
+                "mapping_operands"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_mapping_id",
+                  "description": "(Required) The unique identifier of the group mapping you want to get mapping_operands for"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6d92453e-6448-48c7-8b47-525a7b6e8ec8",
+              "name": "Successful Response - Returns Mapping Operands",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "group_mappings",
+                    ":group_mapping_id",
+                    "mapping_operands"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_mapping_id",
+                      "description": "(Required) The unique identifier of the group mapping you want to get mapping_operands for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 1\n  },\n  \"response\": [\n    {\n      \"carrier_mapped_field_ids\": [\n        \"451c525d-fcfc-41ea-af34-9c4dfd701f37\"\n      ],\n      \"operand\": {\n        \"created\": 1599292817,\n        \"existing_value_set\": [\n          \"Dental Plan 500\",\n          \"Dental Plan for Dependents\"\n        ],\n        \"field_type\": \"string\",\n        \"group_id\": \"d61fa455-adf4-4dc4-8c57-6d779ba9475e\",\n        \"id\": \"476e7b59-ff85-4d89-a0d3-bbc74583254b\",\n        \"mapping_type\": \"plan\",\n        \"modified\": 159990018,\n        \"operand_path\": \"group_dental_plans.plan_name\",\n        \"version\": \"921718c3-15c9-4fed-be87-2215fd8a1ec2\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ead513d0-b0ad-4cb8-a64c-8e50bd4f6056",
+    "name": "Noyo Carrier Carrier Mapped Field Mapping Operand API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

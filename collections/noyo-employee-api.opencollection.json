@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Employee API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Employee",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a single Employee within a Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/groups/:group_id/employees/:employee_id",
+            "params": [
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "path",
+                "description": "The Noyo ID or Custom Individual ID of the employee you would like to view"
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The Noyo ID of the Group the employee belongs to."
+              }
+            ]
+          },
+          "docs": "Returns the latest version of a single employee based on the Noyo ID or Custom Individual ID provided."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

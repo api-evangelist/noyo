@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Connection Eligibility API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Connection Eligibility",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getConnectionEligibility",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/groups/:group_id/connection_eligibility",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the group to check eligibility for"
+              },
+              {
+                "name": "carrier_id",
+                "value": "",
+                "type": "query",
+                "description": "Optional carrier ID to filter results for a specific carrier"
+              }
+            ]
+          },
+          "docs": "Returns connection eligibility information for a group. If a carrier_id is provided,\nreturns eligibility information for that specific carrier. Otherwise, returns\neligibility information for all carriers for the given group.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

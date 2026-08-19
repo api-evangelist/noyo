@@ -1,0 +1,558 @@
+{
+  "item": [
+    {
+      "id": "912e8089-fdd3-47b9-a976-773c791de626",
+      "name": "Rule",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7cbb6058-fcb0-45a0-b9ec-595bbf042291",
+          "name": "Get Rules for a Group Mapping",
+          "request": {
+            "name": "Get Rules for a Group Mapping",
+            "description": {
+              "content": "Returns a list of conditions based on the Group Mapping ID provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "group_mappings",
+                ":group_mapping_id",
+                "rules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_mapping_id",
+                  "description": "(Required) The unique identifier of the group mapping you would like to get rules for"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c38962a3-d053-472d-a57a-f62457fa7e97",
+              "name": "Successful Response - Returns Rules",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_mappings",
+                    ":group_mapping_id",
+                    "rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_mapping_id",
+                      "description": "(Required) The unique identifier of the group mapping you would like to get rules for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 2\n  },\n  \"response\": [\n    {\n      \"active\": true,\n      \"group_mapping_id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n      \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n      \"joining_operator\": \"AND\",\n      \"mapping_type\": \"account_structure\",\n      \"name\": \"Rule 1\",\n      \"rank\": \"1\",\n      \"resulting_field_name\": \"bill_groups.bill_group_number\",\n      \"resulting_field_value\": \"1001\",\n      \"rule_type\": \"normal\",\n      \"version\": \"ad2fd914-b9bf-4e27-9c25-d2794ab1f548\"\n    },\n    {\n      \"active\": true,\n      \"group_mapping_id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n      \"id\": \"e49b79fa-0419-4cc6-b8dc-bad037e18e4b\",\n      \"joining_operator\": null,\n      \"mapping_type\": \"account_structure\",\n      \"name\": \"Rule 2\",\n      \"rank\": null,\n      \"resulting_field_name\": \"member_groups.member_group_key\",\n      \"resulting_field_value\": \"1001\",\n      \"rule_type\": \"default\",\n      \"version\": \"5200a894-81c5-4c41-8519-86c32e9a9965\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "17c949a7-78ed-4387-9e6e-dce751bd59b8",
+          "name": "Create a new Rule",
+          "request": {
+            "name": "Create a new Rule",
+            "description": {
+              "content": "Create a new Rule for a Group Mapping",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "group_mappings",
+                ":group_mapping_id",
+                "rules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_mapping_id",
+                  "description": "(Required) The unique identifier of the group mapping you are creating a new rule for"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"rule_type\": \"<string>\",\n  \"active\": \"<boolean>\",\n  \"joining_operator\": \"<string>\",\n  \"mapping_type\": \"<string>\",\n  \"rank\": \"<number>\",\n  \"resulting_field_name\": \"<string>\",\n  \"resulting_field_value\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "511cfa89-3f05-4e26-a268-d3f09619a30a",
+              "name": "Successful Response - Returns the new Rule",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_mappings",
+                    ":group_mapping_id",
+                    "rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_mapping_id",
+                      "description": "(Required) The unique identifier of the group mapping you are creating a new rule for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"active\": true,\n  \"joining_operator\": null,\n  \"mapping_type\": \"account_structure\",\n  \"name\": \"Rule 1\",\n  \"rank\": null,\n  \"resulting_field_name\": \"member_groups.member_group_key\",\n  \"resulting_field_value\": \"1001\",\n  \"rule_type\": \"default\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"active\": true,\n  \"created\": 1557512389,\n  \"group_mapping_id\": \"f833ac4b-36aa-46f4-826c-0badcfe27922\",\n  \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n  \"mapping_type\": \"account_structure\",\n  \"modified\": 1564440756,\n  \"name\": \"Rule 1\",\n  \"resulting_field_name\": \"member_groups.member_group_key\",\n  \"resulting_field_value\": \"1001\",\n  \"rule_type\": \"default\",\n  \"version\": \"5200a894-81c5-4c41-8519-86c32e9a9965\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f82c4ee5-56ae-424c-920a-80a0091df709",
+          "name": "Get a single Rule",
+          "request": {
+            "name": "Get a single Rule",
+            "description": {
+              "content": "Returns the latest version of a single rule based on the ID provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "rules",
+                ":rule_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "rule_id",
+                  "description": "(Required) The unique identifier of the rule you would like to view"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d7e8c35c-95b6-43f2-9de7-8bb0414fc49e",
+              "name": "Successful Response - Returns a single Rule",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "rules",
+                    ":rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "rule_id",
+                      "description": "(Required) The unique identifier of the rule you would like to view"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"active\": true,\n  \"group_mapping_id\": \"f833ac4b-36aa-46f4-826c-0badcfe27922\",\n  \"id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n  \"joining_operator\": null,\n  \"mapping_type\": \"account_structure\",\n  \"name\": \"Rule 1\",\n  \"rank\": null,\n  \"resulting_field_name\": \"member_groups.member_group_key\",\n  \"resulting_field_value\": \"1001\",\n  \"rule_type\": \"default\",\n  \"version\": \"5200a894-81c5-4c41-8519-86c32e9a9965\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "55030d09-7f62-405b-b08e-817ec58caf69",
+          "name": "Delete a Rule",
+          "request": {
+            "name": "Delete a Rule",
+            "description": {
+              "content": "Delete a rule based on the ID provided. The version parameter must match the latest rule version. Also deletes all conditions for this rule.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "rules",
+                ":rule_id",
+                ":version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "rule_id",
+                  "description": "(Required) Unique identifier of the rule you want to delete"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "version",
+                  "description": "(Required) Unique version of the rule you want to delete"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b6b035e3-8705-48e9-ac4a-1639a07c03f0",
+              "name": "Successful Response - Rule and its conditions was deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "rules",
+                    ":rule_id",
+                    ":version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "rule_id",
+                      "description": "(Required) Unique identifier of the rule you want to delete"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version",
+                      "description": "(Required) Unique version of the rule you want to delete"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ea5ddb63-6199-4199-9c8a-ea940a9415a1",
+          "name": "Edit a Rule",
+          "request": {
+            "name": "Edit a Rule",
+            "description": {
+              "content": "Edit a rule based on the ID provided. The version parameter must match the latest rule version.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "rules",
+                ":rule_id",
+                ":version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "rule_id",
+                  "description": "(Required) Unique identifier of the rule you want to edit."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "version",
+                  "description": "(Required) Unique version of the rule you want to edit."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"active\": \"<boolean>\",\n  \"joining_operator\": \"<string>\",\n  \"name\": \"<string>\",\n  \"rank\": \"<number>\",\n  \"resulting_field_name\": \"<string>\",\n  \"resulting_field_value\": \"<string>\",\n  \"rule_type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c9a44012-a5b9-4f6c-b356-c7c75e7be534",
+              "name": "Successful Response - Returns the modified Rule",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "rules",
+                    ":rule_id",
+                    ":version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "rule_id",
+                      "description": "(Required) Unique identifier of the rule you want to edit."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version",
+                      "description": "(Required) Unique version of the rule you want to edit."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"joining_operator\": \"AND\",\n  \"rank\": \"1\",\n  \"rule_type\": \"normal\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"active\": true,\n  \"created\": 1557512389,\n  \"group_mapping_id\": \"f833ac4b-36aa-46f4-826c-0badcfe27922\",\n  \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n  \"joining_operator\": \"AND\",\n  \"mapping_type\": \"account_structure\",\n  \"modified\": 1564440756,\n  \"name\": \"Rule 1\",\n  \"rank\": \"1\",\n  \"resulting_field_name\": \"member_groups.member_group_key\",\n  \"resulting_field_value\": \"1001\",\n  \"rule_type\": \"normal\",\n  \"version\": \"5200a894-81c5-4c41-8519-86c32e9a9965\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "bf091211-830b-4bd6-9271-45f16e617222",
+    "name": "Noyo Carrier Carrier Mapped Field Rule API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

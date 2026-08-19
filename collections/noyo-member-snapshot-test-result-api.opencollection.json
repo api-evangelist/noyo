@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Member Snapshot Test Result API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Member Snapshot Test Result",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a single Member Snapshot Test Result",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/member_snapshot_test_results/:member_snapshot_test_result_id",
+            "params": [
+              {
+                "name": "member_snapshot_test_result_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the member snapshot test result you would like to view"
+              }
+            ]
+          },
+          "docs": "Returns a single member snapshot test result based on the ID provided."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

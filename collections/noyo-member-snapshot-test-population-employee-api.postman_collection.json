@@ -1,0 +1,471 @@
+{
+  "item": [
+    {
+      "id": "6271f236-9e1f-4b86-bbfa-ca9ea5de542c",
+      "name": "Member Snapshot Test Population Employee",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "dce79ef5-a678-48e9-974e-e1b7e4a541af",
+          "name": "Retrieves a list of Member Snapshot Test Population Employees.",
+          "request": {
+            "name": "Retrieves a list of Member Snapshot Test Population Employees.",
+            "description": {
+              "content": "Returns a list of Member Snapshot Test Population Employees.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "member_snapshot_test_populations",
+                ":test_population_id",
+                "employees"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "test_population_id",
+                  "description": "(Required) The unique identifier of the member snapshot test population"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4eb6db23-4e8e-4fd0-9e22-471cfa39b090",
+              "name": "Successful Response - Returns a list of all matching Member Snapshot Test Population Employees",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "member_snapshot_test_populations",
+                    ":test_population_id",
+                    "employees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "test_population_id",
+                      "description": "(Required) The unique identifier of the member snapshot test population"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 9033,\n    \"page_num\": 5905,\n    \"page_size\": 2950,\n    \"total_records\": 5708\n  },\n  \"response\": [\n    {\n      \"created\": 4178,\n      \"employee_id\": \"936aa46e-c303-e674-4cec-c4c947fcff0e\",\n      \"id\": \"efd7e4a0-c6b6-e433-7db2-09db5d1cbef1\",\n      \"member_snapshot_test_population_id\": \"aaa39cdd-cabd-8d3c-2c8d-88281464ee78\",\n      \"modified\": 9734,\n      \"version\": \"971abdf4-c9b6-b9e7-854b-5993616aa99d\"\n    },\n    {\n      \"created\": 2666,\n      \"employee_id\": \"604193fd-35ec-5d4d-03cb-55322e49e3bd\",\n      \"id\": \"701ed986-4720-eab5-0a4a-638bf1c9ebc9\",\n      \"member_snapshot_test_population_id\": \"5cbf4b72-97f8-7864-ad3b-d786a5bb96b9\",\n      \"modified\": 9659,\n      \"version\": \"a43b9d47-e022-f553-bdf9-a0c5e8bb5b05\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2f7d8205-8781-42bd-b3f0-30d638d1b458",
+          "name": "Create a Member Snapshot Test Population Employee",
+          "request": {
+            "name": "Create a Member Snapshot Test Population Employee",
+            "description": {
+              "content": "Create a new Member Snapshot Test Population Employee.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "member_snapshot_test_populations",
+                ":test_population_id",
+                "employees"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "test_population_id",
+                  "description": "(Required) The unique identifier of the member snapshot test population"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employee_id\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4e2d0779-5e5a-421a-a1d6-0a6552c157b9",
+              "name": "Successful Response - Returns the contents of the newly created Member Snapshot Test Population Employee",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "member_snapshot_test_populations",
+                    ":test_population_id",
+                    "employees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "test_population_id",
+                      "description": "(Required) The unique identifier of the member snapshot test population"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"employee_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 8166,\n  \"employee_id\": \"56d9b255-9e25-8830-5950-302f8213d505\",\n  \"id\": \"3bebf2ca-91eb-3466-b468-af03bbc08638\",\n  \"member_snapshot_test_population_id\": \"b4a565d0-40b8-8dfb-8eee-47c3efef52b7\",\n  \"modified\": 2932,\n  \"version\": \"a0464d73-e692-a245-f4c7-5337176053f8\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c118e79c-4299-4ac4-a957-34750acd7f14",
+          "name": "Delete a Member Snapshot Test Population Employee",
+          "request": {
+            "name": "Delete a Member Snapshot Test Population Employee",
+            "description": {
+              "content": "Delete a member snapshot test population employee based on the IDs provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "member_snapshot_test_populations",
+                ":test_population_id",
+                "employees",
+                ":test_population_employee_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "test_population_id",
+                  "description": "(Required) The unique identifier of the member snapshot test population"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "test_population_employee_id",
+                  "description": "(Required) The unique identifier of the member snapshot test population employee"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e36dc482-738a-4db5-b5da-369256038cf0",
+              "name": "Successful Response - member snapshot test population employee was deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "member_snapshot_test_populations",
+                    ":test_population_id",
+                    "employees",
+                    ":test_population_employee_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "test_population_id",
+                      "description": "(Required) The unique identifier of the member snapshot test population"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "test_population_employee_id",
+                      "description": "(Required) The unique identifier of the member snapshot test population employee"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "74f4a770-93b8-4c05-a414-59fe22a15681",
+          "name": "Get a single Member Snapshot Test Population Employee",
+          "request": {
+            "name": "Get a single Member Snapshot Test Population Employee",
+            "description": {
+              "content": "Returns a single member snapshot test population employee based on the IDs provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "member_snapshot_test_populations",
+                ":test_population_id",
+                "employees",
+                ":test_population_employee_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "test_population_id",
+                  "description": "(Required) The unique identifier of the member snapshot test population"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "test_population_employee_id",
+                  "description": "(Required) The unique identifier of the member snapshot test population employee"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "635311cf-cd36-4d9b-bc56-b90227391f39",
+              "name": "Successful Response - Returns a single Member Snapshot Test Population Employee",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "member_snapshot_test_populations",
+                    ":test_population_id",
+                    "employees",
+                    ":test_population_employee_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "test_population_id",
+                      "description": "(Required) The unique identifier of the member snapshot test population"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "test_population_employee_id",
+                      "description": "(Required) The unique identifier of the member snapshot test population employee"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 8166,\n  \"employee_id\": \"56d9b255-9e25-8830-5950-302f8213d505\",\n  \"id\": \"3bebf2ca-91eb-3466-b468-af03bbc08638\",\n  \"member_snapshot_test_population_id\": \"b4a565d0-40b8-8dfb-8eee-47c3efef52b7\",\n  \"modified\": 2932,\n  \"version\": \"a0464d73-e692-a245-f4c7-5337176053f8\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "55154416-c909-4823-a49b-eaf63536ba09",
+    "name": "Noyo Carrier Carrier Mapped Field Member Snapshot Test Population Employee API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

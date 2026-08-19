@@ -1,0 +1,446 @@
+{
+  "item": [
+    {
+      "id": "cc2fe5a6-0f11-49c6-8dd0-884251d233a6",
+      "name": "Condition",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "aa7dd536-42e8-4237-bdff-e63b8994d407",
+          "name": "Create a new Condition",
+          "request": {
+            "name": "Create a new Condition",
+            "description": {
+              "content": "Create a new Condition",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "conditions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"details\": {\n    \"left_operand\": \"<string>\",\n    \"operator\": \"<string>\",\n    \"right_operand\": \"<string>\"\n  },\n  \"rule_id\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9568e146-3313-4b0f-9cd2-b9caa9f002b7",
+              "name": "Successful Response - Returns the new Condition",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "conditions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"details\": {\n    \"left_operand\": \"JobTitle\",\n    \"operator\": \"is\",\n    \"right_operand\": \"CEO\"\n  },\n  \"rule_id\": \"f833ac4b-36aa-46f4-826c-0badcfe27922\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": {\n    \"left_operand\": \"JobTitle\",\n    \"operator\": \"is\",\n    \"right_operand\": \"CEO\"\n  },\n  \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n  \"rule_id\": \"f833ac4b-36aa-46f4-826c-0badcfe27922\",\n  \"version\": \"5200a894-81c5-4c41-8519-86c32e9a9965\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f834cf39-fc19-46b5-8c65-d29aa65cc268",
+          "name": "Delete a Condition",
+          "request": {
+            "name": "Delete a Condition",
+            "description": {
+              "content": "Delete a condition based on the ID provided. The version parameter must match the latest condition version.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "conditions",
+                ":condition_id",
+                ":version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "condition_id",
+                  "description": "(Required) Unique identifier of the condition you want to delete."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "version",
+                  "description": "(Required) Unique version of the condition you want to delete."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2fdfccb6-aa1b-4d24-a58a-17287b7e97c1",
+              "name": "Successful Response - Condition was deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "conditions",
+                    ":condition_id",
+                    ":version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "condition_id",
+                      "description": "(Required) Unique identifier of the condition you want to delete."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version",
+                      "description": "(Required) Unique version of the condition you want to delete."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f93185cd-6f21-4163-806c-16bb3603ec42",
+          "name": "Edit a Condition",
+          "request": {
+            "name": "Edit a Condition",
+            "description": {
+              "content": "Edit a condition based on the ID provided. The version parameter must match the latest condition version.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "conditions",
+                ":condition_id",
+                ":version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "condition_id",
+                  "description": "(Required) Unique identifier of the condition you want to edit."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "version",
+                  "description": "(Required) Unique version of the condition you want to edit."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"details\": {\n    \"left_operand\": \"<string>\",\n    \"operator\": \"<string>\",\n    \"right_operand\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0d64d346-0429-4ca7-8eaf-930710414aca",
+              "name": "Successful Response - Returns the modified Condition",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "conditions",
+                    ":condition_id",
+                    ":version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "condition_id",
+                      "description": "(Required) Unique identifier of the condition you want to edit."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version",
+                      "description": "(Required) Unique version of the condition you want to edit."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"details\": {\n    \"left_operand\": \"JobTitle\",\n    \"operator\": \"is\",\n    \"right_operand\": \"CEO\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": {\n    \"left_operand\": \"JobTitle\",\n    \"operator\": \"is\",\n    \"right_operand\": \"CEO\"\n  },\n  \"id\": \"f82d8c3a-111e-4537-b8f1-8df816c12e22\",\n  \"rule_id\": \"f833ac4b-36aa-46f4-826c-0badcfe27922\",\n  \"version\": \"d012e6ac-05dd-4cbe-8666-940af78c9e56\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4a489124-0101-4cd7-b3d7-84bf4360f861",
+          "name": "Get Conditions for a Rule",
+          "request": {
+            "name": "Get Conditions for a Rule",
+            "description": {
+              "content": "Returns a list of conditions based on the Rule ID provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "rules",
+                ":rule_id",
+                "conditions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "rule_id",
+                  "description": "(Required) The unique identifier of the rule you would like to get conditions for"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "736e1d89-6e9a-4774-85c8-5067caed91c2",
+              "name": "Successful Response - Returns Conditions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "rules",
+                    ":rule_id",
+                    "conditions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "rule_id",
+                      "description": "(Required) The unique identifier of the rule you would like to get conditions for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 2\n  },\n  \"response\": [\n    {\n      \"details\": {\n        \"left_operand\": \"JobTitle\",\n        \"operator\": \"is\",\n        \"right_operand\": \"CEO\"\n      },\n      \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n      \"rule_id\": \"d61fa455-adf4-4dc4-8c57-6d779ba9475e\",\n      \"version\": \"65b729f8-de9a-4c9b-bed9-2df020dbbfa4\"\n    },\n    {\n      \"details\": {\n        \"left_operand\": \"Location\",\n        \"operator\": \"is\",\n        \"right_operand\": \"HQ\"\n      },\n      \"id\": \"787074b2-fd0f-4f52-b811-4573fbfb1dcf\",\n      \"rule_id\": \"f833ac4b-36aa-46f4-826c-0badcfe27922\",\n      \"version\": \"5200a894-81c5-4c41-8519-86c32e9a9965\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "61cb033d-fa49-421c-bb6b-5623f5a8ab56",
+    "name": "Noyo Carrier Carrier Mapped Field Condition API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

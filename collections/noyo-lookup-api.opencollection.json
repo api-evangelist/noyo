@@ -1,0 +1,286 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Lookup API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Lookup",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves a list of Lookup Instances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/lookup_instances",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              },
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "Noyo specific organization UUID to filter"
+              },
+              {
+                "name": "carrier_id",
+                "value": "",
+                "type": "query",
+                "description": "Noyo specific Carrier UUID to filter"
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "query",
+                "description": "Noyo specific Group UUID to filter"
+              },
+              {
+                "name": "lookup_id",
+                "value": "",
+                "type": "query",
+                "description": "Noyo specific Lookup UUID to filter"
+              }
+            ]
+          },
+          "docs": "Returns a list of Lookup Instances."
+        },
+        {
+          "info": {
+            "name": "Create a Lookup Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/lookup_instances",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new Lookup Instance"
+        },
+        {
+          "info": {
+            "name": "Get a single Lookup Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/lookup_instances/:lookup_instance_id",
+            "params": [
+              {
+                "name": "lookup_instance_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Lookup Instance you would like to view"
+              }
+            ]
+          },
+          "docs": "Returns the latest version of a single Lookup Instance based on the ID provided."
+        },
+        {
+          "info": {
+            "name": "Update a Lookup Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/lookup_instances/:lookup_instance_id/:version",
+            "params": [
+              {
+                "name": "lookup_instance_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Lookup Instance you want to edit."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "Unique version of the Lookup Instance you want to edit."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a Lookup Instance based on the ID provided. The version parameter must match the latest Lookup Instance version."
+        },
+        {
+          "info": {
+            "name": "Delete a Lookup Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/lookup_instances/:lookup_instance_id/:version",
+            "params": [
+              {
+                "name": "lookup_instance_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Lookup Instance you want to delete."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "Unique version of the Lookup Instance you want to delete."
+              }
+            ]
+          },
+          "docs": "Delete a Lookup Instance based on the ID provided. The version parameter must match the latest Lookup Instance version."
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of Lookups.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/lookups",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              },
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "Noyo specific organization UUID to filter Lookup"
+              },
+              {
+                "name": "lookup_type",
+                "value": "",
+                "type": "query",
+                "description": "Lookup type to filter by"
+              },
+              {
+                "name": "supports_plan_year",
+                "value": "",
+                "type": "query",
+                "description": "Filter Lookups by the boolean value"
+              }
+            ]
+          },
+          "docs": "Returns a list of Lookups."
+        },
+        {
+          "info": {
+            "name": "Create a Lookup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/lookups",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new Lookup."
+        },
+        {
+          "info": {
+            "name": "Get a single Lookup",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/lookups/:lookup_id",
+            "params": [
+              {
+                "name": "lookup_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Lookup you would like to view"
+              }
+            ]
+          },
+          "docs": "Returns the latest version of a single Lookup based on the ID provided."
+        },
+        {
+          "info": {
+            "name": "Update a Lookup",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/lookups/:lookup_id/:version",
+            "params": [
+              {
+                "name": "lookup_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Lookup you want to edit."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "Unique version of the Lookup you want to edit."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a Lookup based on the ID provided. The version parameter must match the latest Lookup version."
+        },
+        {
+          "info": {
+            "name": "Delete a Lookup",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/lookups/:lookup_id/:version",
+            "params": [
+              {
+                "name": "lookup_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the Lookup you want to delete."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "Unique version of the Lookup you want to delete."
+              }
+            ]
+          },
+          "docs": "Delete a Lookup based on the ID provided. The version parameter must match the latest Lookup version."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

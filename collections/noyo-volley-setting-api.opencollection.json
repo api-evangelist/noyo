@@ -1,0 +1,124 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Volley Setting API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Volley Setting",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves a list of Volley Settings.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/volley_settings",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              },
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "Noyo specific organization UUID to filter Volley Settings"
+              },
+              {
+                "name": "volley_type",
+                "value": "",
+                "type": "query",
+                "description": "Volley type value to filter by"
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query",
+                "description": "Sort direction (asc or desc)"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of Volley Settings."
+        },
+        {
+          "info": {
+            "name": "Create a Volley Setting",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/volley_settings",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new Volley Setting."
+        },
+        {
+          "info": {
+            "name": "Get a single Volley Setting",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/volley_settings/:volley_setting_id",
+            "params": [
+              {
+                "name": "volley_setting_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the volley setting you would like to view."
+              }
+            ]
+          },
+          "docs": "Returns the latest version of a single volley setting based on the ID provided."
+        },
+        {
+          "info": {
+            "name": "Update a Volley Setting",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/volley_settings/:volley_setting_id/:version",
+            "params": [
+              {
+                "name": "volley_setting_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the volley setting you want to edit."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "Unique version of the volley setting you want to edit."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a volley setting based on the ID provided. The version parameter must match the latest volley setting version."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

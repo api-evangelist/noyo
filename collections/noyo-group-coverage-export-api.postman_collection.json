@@ -1,0 +1,523 @@
+{
+  "item": [
+    {
+      "id": "49da0a20-0c64-4691-943a-d4fc3365cb75",
+      "name": "Group Coverage Export",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a4b640e9-ce53-43e5-a1a0-8e39dd87cdc6",
+          "name": "Get a list of all Group Coverage Exports",
+          "request": {
+            "name": "Get a list of all Group Coverage Exports",
+            "description": {
+              "content": "Get all relevant group coverage exports",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "group_coverage_exports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "94b043d7-bd2a-4340-9285-0132fc1a8565",
+              "name": "Successful Response - Returns Group Coverage Exports",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_coverage_exports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 1\n  },\n  \"response\": [\n    {\n      \"as_of\": \"2023-01-31\",\n      \"carrier_ids\": [\n        \"8fac0992-933a-4743-8dab-0d606ef2569e\"\n      ],\n      \"completed\": null,\n      \"created\": 1675199964,\n      \"expires\": null,\n      \"file_format\": \"csv\",\n      \"file_key\": \"csv-uploads/2613a221-d3c8-4c8a-86d5-e7e885fd1da9/2023-02-01-test-group-coverage-export.xlsx\",\n      \"group_id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n      \"id\": \"0620e171-5dcc-4f2b-9143-6c96a5ee9925\",\n      \"modified\": 1675199964,\n      \"percentage_complete\": 0,\n      \"request_user_id\": \"00112806-bd97-442d-8884-83e71c3de057\",\n      \"status\": \"processing\",\n      \"version\": \"f5133f0a-30ae-443a-80f0-9975abec3213\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c3dc2aa8-2bc5-4dd2-bb5e-16b1c2fb7c8f",
+          "name": "Get a Group Coverage Export",
+          "request": {
+            "name": "Get a Group Coverage Export",
+            "description": {
+              "content": "Get a Group Coverage Export by ID",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "group_coverage_exports",
+                ":group_coverage_export_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_coverage_export_id",
+                  "description": "(Required) The unique identifier of the group coverage export"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "858e76ae-ac6a-4d17-9a39-7817323eaab3",
+              "name": "Successful Response - Returns the Group Coverage Export contents",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_coverage_exports",
+                    ":group_coverage_export_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_coverage_export_id",
+                      "description": "(Required) The unique identifier of the group coverage export"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"as_of\": \"2023-01-31\",\n  \"carrier_ids\": [\n    \"8fac0992-933a-4743-8dab-0d606ef2569e\"\n  ],\n  \"completed\": null,\n  \"created\": 1675199964,\n  \"expires\": null,\n  \"file_format\": \"csv\",\n  \"group_id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n  \"id\": \"0620e171-5dcc-4f2b-9143-6c96a5ee9925\",\n  \"modified\": 1675199964,\n  \"percentage_complete\": 0,\n  \"request_user_id\": \"00112806-bd97-442d-8884-83e71c3de057\",\n  \"status\": \"processing\",\n  \"version\": \"f5133f0a-30ae-443a-80f0-9975abec3213\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1b53317f-8dd2-4f2a-ae29-0e4ca784cdc3",
+          "name": "Get file associated with group coverage export",
+          "request": {
+            "name": "Get file associated with group coverage export",
+            "description": {
+              "content": "Returns file contents for a group coverage export",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "group_coverage_exports",
+                ":group_coverage_export_id",
+                "file"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_coverage_export_id",
+                  "description": "(Required) The unique identifier of the group coverage export"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/csv"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "43c591fd-3130-4430-9eb3-e764b41474f0",
+              "name": "Successful Response - Returns file contents",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_coverage_exports",
+                    ":group_coverage_export_id",
+                    "file"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_coverage_export_id",
+                      "description": "(Required) The unique identifier of the group coverage export"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/csv"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/csv"
+                }
+              ],
+              "body": "Member Type,Relationship,Custom Individual ID,Employee Noyo ID,Noyo Member ID,First Name,Middle Name,Last Name,Date of Birth,SSN,Sex,Home Address Street 1,Home Address Street 2,Home Address City,Home Address State,Home Address ZIP Code,Home Address County,Hire Date,Full Time Start,Hours Worked,Job Title,Email,Home Phone Number,Employment Status,Line of Coverage,Carrier ID,Carrier Name,Noyo Plan ID,Plan Type,Carrier Plan Name,Effective Start Date,Effective End Date,Enrollment Status,COBRA Enrolled,Department Number,Division Number,Class Number,System ID,Cert Number,Claimant Number,Coverage Code",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ce0542b8-cfba-4167-8924-3f9897ccecbf",
+          "name": "Get Group Coverage Exports for a Group",
+          "request": {
+            "name": "Get Group Coverage Exports for a Group",
+            "description": {
+              "content": "Returns a list of group coverage exports based on the Group ID provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "groups",
+                ":group_id",
+                "coverage_exports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_id",
+                  "description": "(Required) The unique identifier of the group you would like to get group exports for"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "aee5d03a-e607-45cf-b8fe-feb1d4805b79",
+              "name": "Successful Response - Returns Group Coverage Exports",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "coverage_exports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The unique identifier of the group you would like to get group exports for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 1\n  },\n  \"response\": [\n    {\n      \"as_of\": \"2023-01-31\",\n      \"carrier_ids\": [\n        \"8fac0992-933a-4743-8dab-0d606ef2569e\"\n      ],\n      \"completed\": null,\n      \"created\": 1675199964,\n      \"expires\": null,\n      \"file_format\": \"csv\",\n      \"file_key\": \"csv-uploads/2613a221-d3c8-4c8a-86d5-e7e885fd1da9/2023-02-01-test-group-coverage-export.xlsx\",\n      \"group_id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n      \"id\": \"0620e171-5dcc-4f2b-9143-6c96a5ee9925\",\n      \"modified\": 1675199964,\n      \"percentage_complete\": 0,\n      \"request_user_id\": \"00112806-bd97-442d-8884-83e71c3de057\",\n      \"status\": \"processing\",\n      \"version\": \"f5133f0a-30ae-443a-80f0-9975abec3213\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2dbf6433-aebe-4ae5-a80e-8ad7280dc98a",
+          "name": "Create a Group Coverage Export",
+          "request": {
+            "name": "Create a Group Coverage Export",
+            "description": {
+              "content": "Request a new Group Coverage Export for a group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "groups",
+                ":group_id",
+                "coverage_exports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_id",
+                  "description": "(Required) The unique identifier of the group to create a Group Coverage Export for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"as_of\": \"<date>\",\n  \"carrier_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4ff99f23-325f-448d-890b-d25bb8ea77d6",
+              "name": "Successful Response - Returns the contents of the newly requested Group Coverage Export",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "coverage_exports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The unique identifier of the group to create a Group Coverage Export for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"as_of\": \"2023-01-31\",\n  \"carrier_ids\": [\n    \"8fac0992-933a-4743-8dab-0d606ef2569e\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"as_of\": \"2023-01-31\",\n  \"carrier_ids\": [\n    \"8fac0992-933a-4743-8dab-0d606ef2569e\"\n  ],\n  \"created\": 1675113819,\n  \"file_format\": \"csv\",\n  \"group_id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n  \"id\": \"0620e171-5dcc-4f2b-9143-6c96a5ee9925\",\n  \"modified\": 1675113819,\n  \"percentage_complete\": 0,\n  \"request_user_id\": \"00112806-bd97-442d-8884-83e71c3de057\",\n  \"status\": \"processing\",\n  \"version\": \"e3fa3878-e5ec-449f-975a-1c2dadf4ae87\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "797326f3-de9f-4407-bf42-9c8b27e16f55",
+    "name": "Noyo Carrier Carrier Mapped Field Group Coverage Export API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

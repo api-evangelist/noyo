@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Member Transaction Labels API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Member Transaction Labels",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a list of all Member Transaction Labels",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ui/v1/member_transactions/:transaction_id/labels",
+            "params": [
+              {
+                "name": "transaction_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the member transaction we are fetching labels for"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              },
+              {
+                "name": "label_id",
+                "value": "",
+                "type": "query",
+                "description": "UUID of the label to search"
+              },
+              {
+                "name": "display_name",
+                "value": "",
+                "type": "query",
+                "description": "String describing the contents of the label"
+              }
+            ]
+          },
+          "docs": "Returns a list of all member transaction labels"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

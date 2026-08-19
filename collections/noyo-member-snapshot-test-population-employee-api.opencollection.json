@@ -1,0 +1,122 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Member Snapshot Test Population Employee API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Member Snapshot Test Population Employee",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves a list of Member Snapshot Test Population Employees.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/member_snapshot_test_populations/:test_population_id/employees",
+            "params": [
+              {
+                "name": "test_population_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the member snapshot test population"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              }
+            ]
+          },
+          "docs": "Returns a list of Member Snapshot Test Population Employees."
+        },
+        {
+          "info": {
+            "name": "Create a Member Snapshot Test Population Employee",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/member_snapshot_test_populations/:test_population_id/employees",
+            "params": [
+              {
+                "name": "test_population_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the member snapshot test population"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new Member Snapshot Test Population Employee."
+        },
+        {
+          "info": {
+            "name": "Get a single Member Snapshot Test Population Employee",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/member_snapshot_test_populations/:test_population_id/employees/:test_population_employee_id",
+            "params": [
+              {
+                "name": "test_population_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the member snapshot test population"
+              },
+              {
+                "name": "test_population_employee_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the member snapshot test population employee"
+              }
+            ]
+          },
+          "docs": "Returns a single member snapshot test population employee based on the IDs provided."
+        },
+        {
+          "info": {
+            "name": "Delete a Member Snapshot Test Population Employee",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/member_snapshot_test_populations/:test_population_id/employees/:test_population_employee_id",
+            "params": [
+              {
+                "name": "test_population_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the member snapshot test population"
+              },
+              {
+                "name": "test_population_employee_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the member snapshot test population employee"
+              }
+            ]
+          },
+          "docs": "Delete a member snapshot test population employee based on the IDs provided."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

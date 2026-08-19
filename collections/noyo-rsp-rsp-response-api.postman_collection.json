@@ -1,0 +1,307 @@
+{
+  "item": [
+    {
+      "id": "196ccadb-889f-44f5-9545-b0350e34ce0a",
+      "name": "RSP (RSP Response)",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7a23223e-0ed8-44ca-9d35-e2b63b3d31ba",
+          "name": "Create RSP (RSP Response)",
+          "request": {
+            "name": "Create RSP (RSP Response)",
+            "description": {
+              "content": "Create a new RSP (RSP Response) request following the LDExRSP specification version 2.0.2024.09.13",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "rsp"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"transmissionResponse\": {\n    \"creationDateTime\": \"<string>\",\n    \"sourceTransmissionGUID\": \"<string>\",\n    \"transmissionGUID\": \"<string>\",\n    \"transmissionStatusCode\": \"<string>\",\n    \"audit\": {\n      \"auditID\": \"<string>\",\n      \"auditRecord\": [\n        {\n          \"recordFieldName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"recordQuantity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    },\n    \"transactionDetail\": [\n      {\n        \"referenceElement\": \"<string>\",\n        \"referenceElementID\": \"<string>\",\n        \"transactionRemark\": [\n          {\n            \"entityCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"entityReferenceValue\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fieldName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"remarkStatusCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fieldReferenceValue\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"messageText\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"messageTypeCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"entityCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"entityReferenceValue\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fieldName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"remarkStatusCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fieldReferenceValue\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"messageText\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"messageTypeCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      {\n        \"referenceElement\": \"<string>\",\n        \"referenceElementID\": \"<string>\",\n        \"transactionRemark\": [\n          {\n            \"entityCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"entityReferenceValue\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fieldName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"remarkStatusCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fieldReferenceValue\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"messageText\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"messageTypeCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"entityCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"entityReferenceValue\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fieldName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"remarkStatusCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fieldReferenceValue\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"messageText\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"messageTypeCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    ],\n    \"transmissionRemark\": [\n      {\n        \"entityCode\": \"<string>\",\n        \"entityReferenceValue\": \"<string>\",\n        \"fieldName\": \"<string>\",\n        \"remarkStatusCode\": \"<string>\",\n        \"fieldReferenceValue\": \"<string>\",\n        \"messageText\": \"<string>\",\n        \"messageTypeCode\": \"<string>\"\n      },\n      {\n        \"entityCode\": \"<string>\",\n        \"entityReferenceValue\": \"<string>\",\n        \"fieldName\": \"<string>\",\n        \"remarkStatusCode\": \"<string>\",\n        \"fieldReferenceValue\": \"<string>\",\n        \"messageText\": \"<string>\",\n        \"messageTypeCode\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c0c885e9-646d-4878-8d1f-58dc789fc174",
+              "name": "Successful Response - RSP request created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "rsp"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transmissionResponse\": {\n    \"audit\": {\n      \"auditID\": \"audit-001\",\n      \"auditRecord\": [\n        {\n          \"recordFieldName\": \"employeeRecordQuantity\",\n          \"recordQuantity\": 1\n        }\n      ]\n    },\n    \"creationDateTime\": \"2024-01-15T10:30:00Z\",\n    \"sourceTransmissionGUID\": \"source-550e8400-e29b-41d4-a716-446655440000\",\n    \"transmissionGUID\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"transmissionRemark\": [\n      {\n        \"entityCode\": \"CoverageID\",\n        \"entityReferenceValue\": \"trans-001\",\n        \"fieldName\": \"status\",\n        \"messageText\": \"Invalid coverage configuration detected\",\n        \"messageTypeCode\": \"Invalid\",\n        \"remarkStatusCode\": \"Error\"\n      }\n    ],\n    \"transmissionStatusCode\": \"Failure\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Record created successfully\",\n  \"status\": \"success\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "178b5c9b-42ce-4707-84fe-ee060e9cc831",
+              "name": "Bad Request - Invalid request data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "rsp"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transmissionResponse\": {\n    \"audit\": {\n      \"auditID\": \"audit-001\",\n      \"auditRecord\": [\n        {\n          \"recordFieldName\": \"employeeRecordQuantity\",\n          \"recordQuantity\": 1\n        }\n      ]\n    },\n    \"creationDateTime\": \"2024-01-15T10:30:00Z\",\n    \"sourceTransmissionGUID\": \"source-550e8400-e29b-41d4-a716-446655440000\",\n    \"transmissionGUID\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"transmissionRemark\": [\n      {\n        \"entityCode\": \"CoverageID\",\n        \"entityReferenceValue\": \"trans-001\",\n        \"fieldName\": \"status\",\n        \"messageText\": \"Invalid coverage configuration detected\",\n        \"messageTypeCode\": \"Invalid\",\n        \"remarkStatusCode\": \"Error\"\n      }\n    ],\n    \"transmissionStatusCode\": \"Failure\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid transmission status code\",\n  \"status\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bdc4171e-4190-4bfc-80bc-3b27e728d55e",
+              "name": "Unauthorized - Invalid organization ID",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "rsp"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transmissionResponse\": {\n    \"audit\": {\n      \"auditID\": \"audit-001\",\n      \"auditRecord\": [\n        {\n          \"recordFieldName\": \"employeeRecordQuantity\",\n          \"recordQuantity\": 1\n        }\n      ]\n    },\n    \"creationDateTime\": \"2024-01-15T10:30:00Z\",\n    \"sourceTransmissionGUID\": \"source-550e8400-e29b-41d4-a716-446655440000\",\n    \"transmissionGUID\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"transmissionRemark\": [\n      {\n        \"entityCode\": \"CoverageID\",\n        \"entityReferenceValue\": \"trans-001\",\n        \"fieldName\": \"status\",\n        \"messageText\": \"Invalid coverage configuration detected\",\n        \"messageTypeCode\": \"Invalid\",\n        \"remarkStatusCode\": \"Error\"\n      }\n    ],\n    \"transmissionStatusCode\": \"Failure\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized organization ID: invalid_org_id\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "63f57735-20d7-42ea-b780-231c48b360ca",
+              "name": "Unprocessable Entity - Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "rsp"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transmissionResponse\": {\n    \"audit\": {\n      \"auditID\": \"audit-001\",\n      \"auditRecord\": [\n        {\n          \"recordFieldName\": \"employeeRecordQuantity\",\n          \"recordQuantity\": 1\n        }\n      ]\n    },\n    \"creationDateTime\": \"2024-01-15T10:30:00Z\",\n    \"sourceTransmissionGUID\": \"source-550e8400-e29b-41d4-a716-446655440000\",\n    \"transmissionGUID\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"transmissionRemark\": [\n      {\n        \"entityCode\": \"CoverageID\",\n        \"entityReferenceValue\": \"trans-001\",\n        \"fieldName\": \"status\",\n        \"messageText\": \"Invalid coverage configuration detected\",\n        \"messageTypeCode\": \"Invalid\",\n        \"remarkStatusCode\": \"Error\"\n      }\n    ],\n    \"transmissionStatusCode\": \"Failure\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"TransmissionResponse.transmissionGUID: Transmission GUID is required; TransmissionResponse.transmissionStatusCode: Transmission status code is required\",\n  \"status\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7574f571-2255-4055-9a77-b9244804ceea",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "rsp"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transmissionResponse\": {\n    \"audit\": {\n      \"auditID\": \"audit-001\",\n      \"auditRecord\": [\n        {\n          \"recordFieldName\": \"employeeRecordQuantity\",\n          \"recordQuantity\": 1\n        }\n      ]\n    },\n    \"creationDateTime\": \"2024-01-15T10:30:00Z\",\n    \"sourceTransmissionGUID\": \"source-550e8400-e29b-41d4-a716-446655440000\",\n    \"transmissionGUID\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"transmissionRemark\": [\n      {\n        \"entityCode\": \"CoverageID\",\n        \"entityReferenceValue\": \"trans-001\",\n        \"fieldName\": \"status\",\n        \"messageText\": \"Invalid coverage configuration detected\",\n        \"messageTypeCode\": \"Invalid\",\n        \"remarkStatusCode\": \"Error\"\n      }\n    ],\n    \"transmissionStatusCode\": \"Failure\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Internal server error occurred\",\n  \"status\": \"error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b43feceb-7eff-49b3-a319-bf82d594f830",
+    "name": "Noyo Carrier Carrier Mapped Field RSP (RSP Response) API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

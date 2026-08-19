@@ -1,0 +1,240 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Partner Documents API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Partner Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Partner Documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/partner_documents",
+            "params": [
+              {
+                "name": "group_ids",
+                "value": "",
+                "type": "query",
+                "description": "Filter by associated group IDs"
+              },
+              {
+                "name": "feed_ids",
+                "value": "",
+                "type": "query",
+                "description": "Filter by associated feed IDs"
+              },
+              {
+                "name": "partner_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by associated partner ID"
+              },
+              {
+                "name": "partner_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by associated partner type (e.g., 'carrier' or 'broker')"
+              },
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by associated organization ID"
+              },
+              {
+                "name": "file_name",
+                "value": "",
+                "type": "query",
+                "description": "Search by file name (partial matches)"
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query",
+                "description": "Filter by document source (SFTP, EMAIL, UPLOAD, PORTAL)"
+              },
+              {
+                "name": "content_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by document content type"
+              },
+              {
+                "name": "effective_date_start",
+                "value": "",
+                "type": "query",
+                "description": "Start date for filtering by effective date (YYYY-MM-DD)"
+              },
+              {
+                "name": "effective_date_end",
+                "value": "",
+                "type": "query",
+                "description": "End date for filtering by effective date (YYYY-MM-DD)"
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "Field to sort by"
+              },
+              {
+                "name": "sort_order",
+                "value": "",
+                "type": "query",
+                "description": "Sort order"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "exclude_total_count",
+                "value": "",
+                "type": "query",
+                "description": "Exclude total count from the response"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of partner documents with filtering options.\n\nThis endpoint supports filtering by:\n* group\n* partner\n* date range (effective_date)\n* file name\n* source\n* content type\n\nIt also supports sorting by:\n* file_name\n* creation date\n* effective_date\n"
+        },
+        {
+          "info": {
+            "name": "---",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/partner_documents",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new partner document"
+        },
+        {
+          "info": {
+            "name": "Get statuses for a partner document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/partner_documents/:id/status",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the partner document"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip"
+              }
+            ]
+          },
+          "docs": "Get statuses for a partner document"
+        },
+        {
+          "info": {
+            "name": "Edit an existing Partner Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/partner_documents/:id/:version",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the partner document"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "Version of the partner document"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit a partner document based on the ID provided"
+        },
+        {
+          "info": {
+            "name": "Delete a partner document",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/partner_documents/:id/:version",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the partner document to delete"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "Current version of the partner document"
+              }
+            ]
+          },
+          "docs": "Delete a partner document"
+        },
+        {
+          "info": {
+            "name": "Get Partner Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/partner_documents/:partner_document_id",
+            "params": [
+              {
+                "name": "partner_document_id",
+                "value": "",
+                "type": "path",
+                "description": "Partner Document ID"
+              }
+            ]
+          },
+          "docs": "Returns a single partner document by ID.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

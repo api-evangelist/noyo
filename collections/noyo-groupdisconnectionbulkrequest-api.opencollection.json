@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field GroupDisconnectionBulkRequest API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "GroupDisconnectionBulkRequest",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Bulk create new Group Disconnecting Requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/ui/v1/group_disconnection_requests",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk create new Group Disconnecting Requests"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

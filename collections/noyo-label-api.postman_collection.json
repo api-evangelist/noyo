@@ -1,0 +1,232 @@
+{
+  "item": [
+    {
+      "id": "53538c26-a932-4527-b192-e6ef92a28471",
+      "name": "Label",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "171e5e17-440f-4e3b-bec4-4a9ca27bdfe1",
+          "name": "Get a list of all Labels",
+          "request": {
+            "name": "Get a list of all Labels",
+            "description": {
+              "content": "Returns a list of Labels",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "labels"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "display_name",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cd3223fa-727b-430e-823c-415398e110c8",
+              "name": "Successful Response - Returns all matching Labels",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "labels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "display_name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"created\": 1626281253,\n    \"display_name\": \"My Label!\",\n    \"id\": \"4yac0992-933a-4743-8dab-0d606ef2526e\",\n    \"modified\": 1626281253,\n    \"summary\": \"This belongs to me\",\n    \"version\": \"7uce0972-256a-4743-8dab-0d606ef2593q\"\n  },\n  {\n    \"created\": 1626281253,\n    \"display_name\": \"Your Label!\",\n    \"id\": \"98c00f7b-8ce6-4b2b-85f7-9c701e268c64\",\n    \"modified\": 1626281253,\n    \"summary\": \"This doesnt belongs to me\",\n    \"version\": \"839412f7-bc56-4f2e-9e20-f2baf2eedc5b\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b983fd08-6571-4c6a-9a51-eb45ff321c45",
+          "name": "Bulk create Member Transaction Labels",
+          "request": {
+            "name": "Bulk create Member Transaction Labels",
+            "description": {
+              "content": "Bulk create Member Transaction Labels.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "labels",
+                ":label_id",
+                "bulk_assign"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "label_id",
+                  "description": "(Required) The unique identifier of the label being added to member transactions"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"member_transactions\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d4f5b581-25a7-4093-be61-539812bd54f8",
+              "name": "Successful Response - Returns the member transaction ids that failed and succeeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "labels",
+                    ":label_id",
+                    "bulk_assign"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "label_id",
+                      "description": "(Required) The unique identifier of the label being added to member transactions"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"member_transactions\": [\n    \"8fac0992-933a-4743-8dab-0d606ef2569e\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"failed_updates\": [],\n  \"successful_updates\": [\n    \"8fac0992-933a-4743-8dab-0d606ef2569e\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "70fe450e-a51b-48d2-aebb-d71086d9b0a0",
+    "name": "Noyo Carrier Carrier Mapped Field Label API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

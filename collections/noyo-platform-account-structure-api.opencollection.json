@@ -1,0 +1,126 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Platform Account Structure API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Platform Account Structure",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a Platform Account Structure by Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/groups/:group_id/platform_account_structures",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group you want to get a platform account structure for"
+              },
+              {
+                "name": "effective_date",
+                "value": "",
+                "type": "query",
+                "description": "The relative date on which to view the state of the record"
+              }
+            ]
+          },
+          "docs": "Retrieve a Platform Account Structure by Group"
+        },
+        {
+          "info": {
+            "name": "Create a new Platform Account Structure",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/groups/:group_id/platform_account_structures",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the associated group in the Noyo system"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new Platform Account Structure"
+        },
+        {
+          "info": {
+            "name": "Get a single Platform Account Structure",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/platform_account_structures/:platform_account_structure_id",
+            "params": [
+              {
+                "name": "platform_account_structure_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the platform account structure to be retrieved."
+              },
+              {
+                "name": "effective_date",
+                "value": "",
+                "type": "query",
+                "description": "The relative date on which to view the state of the record"
+              }
+            ]
+          },
+          "docs": "Retrieve a Platform Account Structure"
+        },
+        {
+          "info": {
+            "name": "Edit an existing Platform Account Structure",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/platform_account_structures/:platform_account_structure_id/:version",
+            "params": [
+              {
+                "name": "platform_account_structure_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the platform account structure in the Noyo system"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "Current version of the model"
+              },
+              {
+                "name": "effective_date",
+                "value": "",
+                "type": "query",
+                "description": "The relative date on which to view the state of the record"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit a platform account structure based on the ID provided. The version parameter must match the latest platform account structure version."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

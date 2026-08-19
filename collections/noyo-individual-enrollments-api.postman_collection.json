@@ -1,0 +1,650 @@
+{
+  "item": [
+    {
+      "id": "aa3f94f0-9ae1-49ca-9494-7674956cc962",
+      "name": "Individual Enrollments",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "66d776b2-16e4-4e87-9c85-32dead67bd6c",
+          "name": "Get a list of all Individual Enrollments for a Dependent",
+          "request": {
+            "name": "Get a list of all Individual Enrollments for a Dependent",
+            "description": {
+              "content": "Returns a list of all individual enrollments for a given dependent.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "dependents",
+                ":dependent_id",
+                "individual_enrollments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "effective_date",
+                  "value": "<string>",
+                  "description": "The relative date on which to view the state of the record"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "dependent_id",
+                  "description": "(Required) The unique identifier of the employee for which you would like to view individual enrollments"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a54f03b1-1680-4855-a60a-266e9ad3ae20",
+              "name": "Successful Response - Returns all matching Individual Enrollments",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "dependents",
+                    ":dependent_id",
+                    "individual_enrollments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "effective_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "dependent_id",
+                      "description": "(Required) The unique identifier of the employee for which you would like to view individual enrollments"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 1\n  },\n  \"response\": [\n    {\n      \"cobra_enrollment\": {},\n      \"created\": 1557512389,\n      \"effective_end_date\": \"2019-10-01\",\n      \"effective_start_date\": \"2018-10-01\",\n      \"enroll_data\": {\n        \"premium\": {\n          \"amount\": 50,\n          \"unit\": \"Month\"\n        }\n      },\n      \"group_enrollment_id\": \"7499ea07-76c9-40f2-992b-952259e98384\",\n      \"id\": \"6670f290-4236-4690-bece-a110f9ad924b\",\n      \"individual_enrollment_configuration\": {},\n      \"individual_id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n      \"individual_type\": \"dependent\",\n      \"line_of_coverage\": \"medical\",\n      \"modified\": 1564440756,\n      \"plan_id\": \"b988cd26-121a-4dd6-b0be-09399f6ecc0a\",\n      \"status\": \"active\",\n      \"version\": \"27bbf929-78ca-4339-8bb3-39b75f92c4a4\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "de8b6260-f673-4d19-a253-e9b5f1d480ae",
+          "name": "Get a list of all Individual Enrollments for an Employee",
+          "request": {
+            "name": "Get a list of all Individual Enrollments for an Employee",
+            "description": {
+              "content": "Returns a list of all individual enrollments for a given employee.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "employees",
+                ":employee_id",
+                "individual_enrollments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "effective_date",
+                  "value": "<string>",
+                  "description": "The relative date on which to view the state of the record"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_dependents",
+                  "value": "<string>",
+                  "description": "Boolean, use \"true\" to include dependent individual enrollments in the results"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employee_id",
+                  "description": "(Required) The unique identifier of the employee for which you would like to view individual enrollments"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2ad16a47-f9fd-4ad0-aaaf-1650d808ae86",
+              "name": "Successful Response - Returns all matching Individual Enrollments",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "employees",
+                    ":employee_id",
+                    "individual_enrollments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "effective_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_dependents",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employee_id",
+                      "description": "(Required) The unique identifier of the employee for which you would like to view individual enrollments"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 1\n  },\n  \"response\": [\n    {\n      \"cobra_enrollment\": {},\n      \"created\": 1557512389,\n      \"effective_end_date\": \"2019-10-01\",\n      \"effective_start_date\": \"2018-10-01\",\n      \"enroll_data\": {\n        \"premium\": {\n          \"amount\": 50,\n          \"unit\": \"Month\"\n        }\n      },\n      \"group_enrollment_id\": \"7499ea07-76c9-40f2-992b-952259e98384\",\n      \"id\": \"6670f290-4236-4690-bece-a110f9ad924b\",\n      \"individual_enrollment_configuration\": {},\n      \"individual_id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n      \"individual_type\": \"employee\",\n      \"line_of_coverage\": \"medical\",\n      \"modified\": 1564440756,\n      \"plan_id\": \"b988cd26-121a-4dd6-b0be-09399f6ecc0a\",\n      \"status\": \"active\",\n      \"version\": \"27bbf929-78ca-4339-8bb3-39b75f92c4a4\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "03353874-0fc2-451c-9d4a-3b9192bd32fb",
+          "name": "Get a list of all Individual Enrollments By Group Enrollment",
+          "request": {
+            "name": "Get a list of all Individual Enrollments By Group Enrollment",
+            "description": {
+              "content": "Returns a list of all individual enrollments for a given group enrollment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "group_enrollments",
+                ":group_enrollment_id",
+                "individual_enrollments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "effective_date",
+                  "value": "<string>",
+                  "description": "The relative date on which to view the state of the record"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_enrollment_id",
+                  "description": "(Required) Unique identifier of the associated group enrollment in the Noyo system"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dc7917e0-2f57-43ed-845f-85c9b81857c7",
+              "name": "Successful Response - Returns all matching Individual Enrollments",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_enrollments",
+                    ":group_enrollment_id",
+                    "individual_enrollments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "effective_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_enrollment_id",
+                      "description": "(Required) Unique identifier of the associated group enrollment in the Noyo system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 1\n  },\n  \"response\": [\n    {\n      \"cobra_enrollment\": {\n        \"cobra_enrolled\": true,\n        \"cobra_type\": \"federal\"\n      },\n      \"created\": 1557512389,\n      \"effective_end_date\": \"2019-12-31\",\n      \"effective_start_date\": \"2019-01-01\",\n      \"enroll_data\": {\n        \"premium\": {\n          \"amount\": 50,\n          \"unit\": \"Month\"\n        }\n      },\n      \"group_enrollment_id\": \"bf129409-1f0a-4f1a-b756-14471ef733c3\",\n      \"id\": \"6670f290-4236-4690-bece-a110f9ad924b\",\n      \"individual_enrollment_configuration\": {},\n      \"individual_id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n      \"individual_type\": \"employee\",\n      \"line_of_coverage\": \"medical\",\n      \"modified\": 1564440756,\n      \"plan_id\": \"b988cd26-121a-4dd6-b0be-09399f6ecc0a\",\n      \"status\": \"active\",\n      \"version\": \"27bbf929-78ca-4339-8bb3-39b75f92c4a4\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "96c90296-9d4e-43eb-9937-7bee72b47f85",
+          "name": "Get a list of all Individual Enrollments By Group",
+          "request": {
+            "name": "Get a list of all Individual Enrollments By Group",
+            "description": {
+              "content": "Returns a list of all individual enrollments for a given group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "groups",
+                ":group_id",
+                "individual_enrollments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "effective_date",
+                  "value": "<string>",
+                  "description": "The relative date on which to view the state of the record"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_id",
+                  "description": "(Required) Unique identifier of the associated group in the Noyo system"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6afd12f2-c131-4130-a9c7-c479fe82bae6",
+              "name": "Successful Response - Returns all matching Individual Enrollments",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "individual_enrollments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "effective_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) Unique identifier of the associated group in the Noyo system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 1\n  },\n  \"response\": [\n    {\n      \"cobra_enrollment\": {\n        \"cobra_enrolled\": true,\n        \"cobra_type\": \"federal\"\n      },\n      \"created\": 1557512389,\n      \"effective_end_date\": \"2019-12-31\",\n      \"effective_start_date\": \"2019-01-01\",\n      \"enroll_data\": {\n        \"premium\": {\n          \"amount\": 50,\n          \"unit\": \"Month\"\n        }\n      },\n      \"group_enrollment_id\": \"7499ea07-76c9-40f2-992b-952259e98384\",\n      \"id\": \"6670f290-4236-4690-bece-a110f9ad924b\",\n      \"individual_enrollment_configuration\": {},\n      \"individual_id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n      \"individual_type\": \"employee\",\n      \"line_of_coverage\": \"medical\",\n      \"modified\": 1564440756,\n      \"plan_id\": \"b988cd26-121a-4dd6-b0be-09399f6ecc0a\",\n      \"status\": \"active\",\n      \"version\": \"27bbf929-78ca-4339-8bb3-39b75f92c4a4\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "123ee8a3-8f85-4bc3-beca-a8a23483ee07",
+          "name": "Get a single Individual Enrollment",
+          "request": {
+            "name": "Get a single Individual Enrollment",
+            "description": {
+              "content": "Returns the latest version of a single individual enrollment based on the ID provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "individual_enrollments",
+                ":individual_enrollment_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "effective_date",
+                  "value": "<string>",
+                  "description": "The relative date on which to view the state of the record"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "individual_enrollment_id",
+                  "description": "(Required) Unique identifier of the individual enrollment"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "50d776ea-c3fc-451f-b454-4194c8dfbcb1",
+              "name": "Successful Response - Returns a single Individual Enrollment",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "individual_enrollments",
+                    ":individual_enrollment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "effective_date",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "individual_enrollment_id",
+                      "description": "(Required) Unique identifier of the individual enrollment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cobra_enrollment\": {},\n  \"created\": 1557512389,\n  \"effective_end_date\": \"2019-10-01\",\n  \"effective_start_date\": \"2018-10-01\",\n  \"enroll_data\": {\n    \"premium\": {\n      \"amount\": 50,\n      \"unit\": \"Month\"\n    }\n  },\n  \"group_enrollment_id\": \"7499ea07-76c9-40f2-992b-952259e98384\",\n  \"id\": \"6670f290-4236-4690-bece-a110f9ad924b\",\n  \"individual_enrollment_configuration\": {},\n  \"individual_id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n  \"individual_type\": \"employee\",\n  \"line_of_coverage\": \"medical\",\n  \"modified\": 1564440756,\n  \"plan_id\": \"b988cd26-121a-4dd6-b0be-09399f6ecc0a\",\n  \"status\": \"active\",\n  \"version\": \"27bbf929-78ca-4339-8bb3-39b75f92c4a4\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2fe154d9-d57c-4428-8bf3-198947e6672a",
+    "name": "Noyo Carrier Carrier Mapped Field Individual Enrollments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

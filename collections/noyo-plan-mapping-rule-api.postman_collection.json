@@ -1,0 +1,558 @@
+{
+  "item": [
+    {
+      "id": "4498d1e0-4269-40f3-9b39-b8b426fe8afa",
+      "name": "Plan Mapping Rule",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "33570ff1-6651-4b2b-9da9-7a8b9086fa17",
+          "name": "Get Plan Mapping Rules for a Group Mapping",
+          "request": {
+            "name": "Get Plan Mapping Rules for a Group Mapping",
+            "description": {
+              "content": "Returns a list of plan mapping rules based on the Group Mapping ID provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "group_mappings",
+                ":group_mapping_id",
+                "plan_mapping_rules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_mapping_id",
+                  "description": "(Required) The unique identifier of the group mapping you would like to get plan mapping rules for"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1823b7db-867d-4801-9c8c-0f0ca8c91133",
+              "name": "Successful Response - Returns Plan Mapping Rules",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_mappings",
+                    ":group_mapping_id",
+                    "plan_mapping_rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_mapping_id",
+                      "description": "(Required) The unique identifier of the group mapping you would like to get plan mapping rules for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 2\n  },\n  \"response\": [\n    {\n      \"details\": {\n        \"group_dental_plans\": {\n          \"Dental (PPO) - Dependent\": [\n            \"428308a0-f723-452c-a3a1-f2092236d63d\"\n          ],\n          \"Dental (PPO) - Employee\": [\n            \"1c928531-c7e3-4bee-bdd0-616720881396\"\n          ]\n        },\n        \"group_medical_plans\": {\n          \"Cigna PPO 250\": [\n            \"dcdcc8cb-ccf8-40d4-8347-5bdebb878710\"\n          ]\n        }\n      },\n      \"group_mapping_id\": \"d61fa455-adf4-4dc4-8c57-6d779ba9475e\",\n      \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n      \"version\": \"65b729f8-de9a-4c9b-bed9-2df020dbbfa4\"\n    },\n    {\n      \"details\": {\n        \"group_dental_plans\": {\n          \"Dental (PPO) - Dependent\": [\n            \"f60093d1-48c5-452a-8dfa-f34108367d98\"\n          ],\n          \"Dental (PPO) - Employee\": [\n            \"b4957bad-74b8-468a-9577-f9be64c6655e\"\n          ]\n        },\n        \"group_medical_plans\": {\n          \"UnitedHealthCare 200\": [\n            \"e49e4cee-0486-45a7-8175-ffe6bd27bdd9\"\n          ]\n        }\n      },\n      \"group_mapping_id\": \"f833ac4b-36aa-46f4-826c-0badcfe27922\",\n      \"id\": \"787074b2-fd0f-4f52-b811-4573fbfb1dcf\",\n      \"version\": \"5200a894-81c5-4c41-8519-86c32e9a9965\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "313640e8-ef0c-4c54-8108-51ecc323211b",
+          "name": "Create a new Plan Mapping Rule",
+          "request": {
+            "name": "Create a new Plan Mapping Rule",
+            "description": {
+              "content": "Create a new Plan Mapping Rule",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "group_mappings",
+                ":group_mapping_id",
+                "plan_mapping_rules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_mapping_id",
+                  "description": "(Required) The unique identifier of the group mapping you would like to create plan mapping rule for"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"details\": {\n    \"group_accident_plans\": {\n      \"key_0\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"key_1\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"group_add_plans\": {\n      \"key_0\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"group_cancer_plans\": {\n      \"key_0\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"key_1\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"group_critical_illness_plans\": {\n      \"key_0\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"group_dental_plans\": {\n      \"key_0\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"key_1\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"key_2\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"key_3\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"key_4\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"group_health_fund_plans\": {\n      \"key_0\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"key_1\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"group_hospital_indemnity_plans\": {\n      \"key_0\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"key_1\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"key_2\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"key_3\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"group_life_plans\": {\n      \"key_0\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"key_1\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"key_2\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"group_ltd_plans\": {\n      \"key_0\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"group_medical_plans\": {\n      \"key_0\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"key_1\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"group_pharmacy_plans\": {\n      \"key_0\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"key_1\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"key_2\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"group_std_plans\": {\n      \"key_0\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"key_1\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"group_vision_plans\": {\n      \"key_0\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"group_wellness_plans\": {\n      \"key_0\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"key_1\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "be568f53-57ae-471e-af28-682846abb53e",
+              "name": "Successful Response - Returns the new Plan Mapping Rule",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_mappings",
+                    ":group_mapping_id",
+                    "plan_mapping_rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_mapping_id",
+                      "description": "(Required) The unique identifier of the group mapping you would like to create plan mapping rule for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"details\": {\n    \"group_dental_plans\": {\n      \"Dental (PPO) - Dependent\": [\n        \"428308a0-f723-452c-a3a1-f2092236d63d\"\n      ],\n      \"Dental (PPO) - Employee\": [\n        \"1c928531-c7e3-4bee-bdd0-616720881396\"\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": {\n    \"group_dental_plans\": {\n      \"Dental (PPO) - Dependent\": [\n        \"428308a0-f723-452c-a3a1-f2092236d63d\"\n      ],\n      \"Dental (PPO) - Employee\": [\n        \"1c928531-c7e3-4bee-bdd0-616720881396\"\n      ]\n    }\n  },\n  \"group_mapping_id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n  \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n  \"version\": \"5200a894-81c5-4c41-8519-86c32e9a9965\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "97e3131a-27bb-4dae-81c3-86a0eb417fdf",
+          "name": "Get a Plan Mapping Rule",
+          "request": {
+            "name": "Get a Plan Mapping Rule",
+            "description": {
+              "content": "Returns a plan mapping rule that has the unique identifier specified in parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "plan_mapping_rules",
+                ":plan_mapping_rule_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "plan_mapping_rule_id",
+                  "description": "(Required) The unique identifier of the plan mapping rule you are looking for"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "26c6fb7c-82c1-4b77-90e0-078ca9526e5f",
+              "name": "Successful Response - Returns a Plan Mapping Rule",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "plan_mapping_rules",
+                    ":plan_mapping_rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "plan_mapping_rule_id",
+                      "description": "(Required) The unique identifier of the plan mapping rule you are looking for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": {\n    \"group_dental_plans\": {\n      \"Dental (PPO) - Dependent\": [\n        \"428308a0-f723-452c-a3a1-f2092236d63d\"\n      ],\n      \"Dental (PPO) - Employee\": [\n        \"1c928531-c7e3-4bee-bdd0-616720881396\"\n      ]\n    },\n    \"group_medical_plans\": {\n      \"Cigna PPO 250\": [\n        \"dcdcc8cb-ccf8-40d4-8347-5bdebb878710\"\n      ]\n    }\n  },\n  \"group_mapping_id\": \"d61fa455-adf4-4dc4-8c57-6d779ba9475e\",\n  \"id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n  \"version\": \"65b729f8-de9a-4c9b-bed9-2df020dbbfa4\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "97e87382-0b96-4c10-97a8-c940d49c42ae",
+          "name": "Delete a Plan Mapping Rule",
+          "request": {
+            "name": "Delete a Plan Mapping Rule",
+            "description": {
+              "content": "Delete a plan mapping rule based on the ID provided. The version parameter must match the latest plan mapping rule version.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "plan_mapping_rules",
+                ":plan_mapping_rule_id",
+                ":version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "plan_mapping_rule_id",
+                  "description": "(Required) The unique identifier of the plan mapping rule you would like to delete"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "version",
+                  "description": "(Required) The unique version of the plan mapping rule you would like to delete"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6e6c4e75-60a1-4f1f-ae38-3ff65a700c6b",
+              "name": "Successful Response - Plan Mapping Rule was deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "plan_mapping_rules",
+                    ":plan_mapping_rule_id",
+                    ":version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "plan_mapping_rule_id",
+                      "description": "(Required) The unique identifier of the plan mapping rule you would like to delete"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version",
+                      "description": "(Required) The unique version of the plan mapping rule you would like to delete"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d6a26f0c-3b26-46c8-ac35-382b9cab78fc",
+          "name": "Edit a Plan Mapping Rule",
+          "request": {
+            "name": "Edit a Plan Mapping Rule",
+            "description": {
+              "content": "Edit a plan mapping rule based on the ID provided. The version parameter must match the latest plan mapping rule version.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "plan_mapping_rules",
+                ":plan_mapping_rule_id",
+                ":version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "plan_mapping_rule_id",
+                  "description": "(Required) The unique identifier of the plan mapping rule you would like to edit"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "version",
+                  "description": "(Required) The unique version of the plan mapping rule you would like to edit"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"details\": {\n    \"group_accident_plans\": {\n      \"key_0\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"group_add_plans\": {\n      \"key_0\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"group_cancer_plans\": {\n      \"key_0\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"key_1\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"group_critical_illness_plans\": {\n      \"key_0\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"key_1\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"group_dental_plans\": {\n      \"key_0\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"key_1\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"key_2\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"group_health_fund_plans\": {\n      \"key_0\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"group_hospital_indemnity_plans\": {\n      \"key_0\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"key_1\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"key_2\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"group_life_plans\": {\n      \"key_0\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"key_1\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"group_ltd_plans\": {\n      \"key_0\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"group_medical_plans\": {\n      \"key_0\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"group_pharmacy_plans\": {\n      \"key_0\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"key_1\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"group_std_plans\": {\n      \"key_0\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"key_1\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"group_vision_plans\": {\n      \"key_0\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"key_1\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"key_2\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"group_wellness_plans\": {\n      \"key_0\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"key_1\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ba541172-e782-453e-abb4-81eb55467283",
+              "name": "Successful Response - Returns the modified Plan Mapping Rule",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "plan_mapping_rules",
+                    ":plan_mapping_rule_id",
+                    ":version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "plan_mapping_rule_id",
+                      "description": "(Required) The unique identifier of the plan mapping rule you would like to edit"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version",
+                      "description": "(Required) The unique version of the plan mapping rule you would like to edit"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"details\": {\n    \"group_medical_plans\": {\n      \"First Plan 200\": [\n        \"428308a0-f723-452c-a3a1-f2092236d63d\"\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": {\n    \"group_medical_plans\": {\n      \"First Plan 200\": [\n        \"428308a0-f723-452c-a3a1-f2092236d63d\"\n      ]\n    }\n  },\n  \"group_mapping_id\": \"f833ac4b-36aa-46f4-826c-0badcfe27922\",\n  \"id\": \"43601909-3f0a-4ce0-8afb-5cdd21578eb3\",\n  \"version\": \"e49d01e2-4a1b-4c90-82cb-61bcdd065301\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "563cae34-a3af-4c1e-82ee-0847d0da4e88",
+    "name": "Noyo Carrier Carrier Mapped Field Plan Mapping Rule API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

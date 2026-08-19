@@ -1,0 +1,136 @@
+{
+  "item": [
+    {
+      "id": "33091930-7849-455b-afa1-27c2a8044f29",
+      "name": "Ui",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "917017ea-595a-408a-8c13-195f4595ece9",
+          "name": "Get a single Member Transaction",
+          "request": {
+            "name": "Get a single Member Transaction",
+            "description": {
+              "content": "Returns the latest version of a single member transaction based on the ID provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "member_transactions",
+                ":transaction_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ui_body",
+                  "value": "<boolean>",
+                  "description": "Optionally include a restructured form of the body for UI display purposes"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "transaction_id",
+                  "description": "(Required) The unique identifier of the member transaction you would like to view"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "362582d9-f9d4-4f6e-beb6-d9648d320ce5",
+              "name": "Successful Response - Returns a single Member Transaction",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "member_transactions",
+                    ":transaction_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ui_body",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "transaction_id",
+                      "description": "(Required) The unique identifier of the member transaction you would like to view"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"member_snapshot_id\": \"2e6a04b6-21f3-40d7-a9e2-735196cc451x\",\n  \"member_transaction\": {\n    \"body\": {\n      \"coverages\": [\n        {\n          \"carrier_config\": {\n            \"bill_group\": \"1000001\",\n            \"member_group\": \"99999\"\n          },\n          \"carrier_id\": \"d0003042-eaae-4491-b219-4825456a3d16\",\n          \"lines_of_coverage\": {\n            \"dental\": {\n              \"enrolling_members\": [\n                {\n                  \"id\": \"25434576-e85d-481b-a825-962fd575046f\",\n                  \"member_type\": \"employee\",\n                  \"plan_id\": \"2e6a04b6-21f3-40d7-a9e2-735196cc451b\"\n                }\n              ],\n              \"waiving_members\": []\n            },\n            \"medical\": {\n              \"enrolling_members\": [\n                {\n                  \"id\": \"25434576-e85d-481b-a825-962fd575046f\",\n                  \"member_type\": \"employee\",\n                  \"plan_id\": \"1873df52-c9e9-4e3a-995c-f47f32d0bd62\"\n                }\n              ],\n              \"waiving_members\": []\n            },\n            \"vision\": {\n              \"enrolling_members\": [\n                {\n                  \"id\": \"25434576-e85d-481b-a825-962fd575046f\",\n                  \"member_type\": \"employee\",\n                  \"plan_id\": \"9cb64800-022e-40af-ab80-8d945e430592\"\n                }\n              ],\n              \"waiving_members\": []\n            }\n          }\n        }\n      ]\n    },\n    \"carrier_id\": \"478e066e-9696-490e-b60f-47f40c96dc7c\",\n    \"created\": 1557512389,\n    \"employee_id\": \"25434576-e85d-481b-a825-962fd575046f\",\n    \"id\": \"a6e30204-87b2-4802-95a4-a156bd0f7435\",\n    \"lines_of_coverage\": [\n      \"medical\",\n      \"dental\",\n      \"vision\"\n    ],\n    \"member_request_id\": \"bba6ea27-4004-4a52-a3d9-f986ace0d3da\",\n    \"modified\": 1564440756,\n    \"status\": \"processing\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6ee8c586-4d37-4941-b202-33a07fa75de3",
+    "name": "Noyo Carrier Carrier Mapped Field Ui API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

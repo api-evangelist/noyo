@@ -1,0 +1,2934 @@
+{
+  "item": [
+    {
+      "id": "ad0f9646-a30c-4aae-8f03-e5f6eeefa9da",
+      "name": "Group Configuration",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1b714640-9ab5-4506-9eea-2747669c6d2f",
+          "name": "Get a single Dependent",
+          "request": {
+            "name": "Get a single Dependent",
+            "description": {
+              "content": "Returns the latest version of a single dependent based on the ID provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "dependents",
+                ":dependent_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "dependent_id",
+                  "description": "(Required) The unique identifier of the dependent you would like to view"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a45ccc32-5a88-4876-afaf-c01669712cb0",
+              "name": "Successful Response - Returns a single Dependent",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "dependents",
+                    ":dependent_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "dependent_id",
+                      "description": "(Required) The unique identifier of the dependent you would like to view"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 1557512389,\n  \"employee_id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n  \"id\": \"fd62665c-0846-4e9d-bd29-80779b5f685c\",\n  \"modified\": 1547412389,\n  \"person\": {\n    \"contact\": {\n      \"email_address\": \"diane@testemail.com\",\n      \"email_address_type\": \"home\",\n      \"home_phone\": \"+12065551234\"\n    },\n    \"date_of_birth\": \"1982-01-02\",\n    \"first_name\": \"Diane\",\n    \"home_address\": {\n      \"city\": \"San Francisco\",\n      \"county\": \"San Francisco\",\n      \"state\": \"CA\",\n      \"street_one\": \"1234 Home Ave\",\n      \"zip_code\": \"94107\"\n    },\n    \"last_name\": \"Johnson\",\n    \"marital_status\": \"married\",\n    \"sex\": \"F\",\n    \"ssn\": \"987654321\"\n  },\n  \"relationship\": \"spouse\",\n  \"version\": \"669fbe16-9960-4069-91aa-832ada3f4e42\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "daaff1cd-2b13-4964-943e-d87b39a2c683",
+          "name": "Filter all employees",
+          "request": {
+            "name": "Filter all employees",
+            "description": {
+              "content": "Filter employees across all groups in your organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "employees"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "first_name",
+                  "value": "<string>",
+                  "description": "The employee first name for which you would like to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "last_name",
+                  "value": "<string>",
+                  "description": "The employee last name for which you would like to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "The employee's name for which you would like to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "date_of_birth",
+                  "value": "<string>",
+                  "description": "The ISO-8601 (YYYY-MM-DD) employee date of birth for which you would like to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "employment_status",
+                  "value": "<string>",
+                  "description": "Status of the employees employment"
+                },
+                {
+                  "disabled": false,
+                  "key": "person_id",
+                  "value": "<string>",
+                  "description": "Filter employees by Person ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "group_id",
+                  "value": "<uuid>",
+                  "description": "Filter employees by Group ID"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e9cba939-f341-4c5f-92d8-468f23c4a63e",
+              "name": "Successful Response - Returns all matching Employees",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "employees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "first_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "last_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date_of_birth",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "employment_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "person_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "group_id",
+                      "value": "4613a221-d3c8-4c8a-86d5-e7e885fd1da9"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 1\n  },\n  \"response\": [\n    {\n      \"employment\": {\n        \"employment_dates\": {\n          \"full_time_start\": \"2015-01-01\",\n          \"hire_date\": \"2014-12-10\"\n        },\n        \"employment_status\": \"full-time\",\n        \"hours_worked\": 50,\n        \"occupation\": \"Senior Analyst\",\n        \"salary\": {\n          \"amount\": 55000,\n          \"type\": \"salary\",\n          \"unit\": \"annual\"\n        },\n        \"work_state\": \"CA\"\n      },\n      \"group_id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n      \"id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n      \"location_id\": \"bd957820-4652-4ee7-8a3a-6413df21e28d\",\n      \"person\": {\n        \"contact\": {\n          \"email_address\": \"david@testemail.com\",\n          \"email_address_type\": \"home\",\n          \"home_phone\": \"+12065551234\",\n          \"preferred_method\": \"email\",\n          \"work_phone\": \"+12065559876\"\n        },\n        \"date_of_birth\": \"1981-06-22\",\n        \"first_name\": \"David\",\n        \"home_address\": {\n          \"city\": \"San Francisco\",\n          \"county\": \"San Francisco\",\n          \"state\": \"CA\",\n          \"street_one\": \"1234 Home Ave\",\n          \"zip_code\": \"94107\"\n        },\n        \"last_name\": \"Johnson\",\n        \"marital_status\": \"single\",\n        \"sex\": \"M\",\n        \"ssn\": \"123456789\"\n      },\n      \"version\": \"6260146a-3486-4c3d-b2a6-fcd3f8c84043\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "53eb8ca0-d41a-499e-be6e-74cf6050dd55",
+          "name": "Create a new Employee",
+          "request": {
+            "name": "Create a new Employee",
+            "description": {
+              "content": "Create a new employee for a group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "employees"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employment\": {\n    \"employment_dates\": {\n      \"hire_date\": \"<date>\",\n      \"full_time_start\": \"<string>\",\n      \"rehire\": \"<string>\",\n      \"retirement\": \"<string>\",\n      \"terminated\": \"<string>\"\n    },\n    \"employment_status\": \"<string>\",\n    \"hours_worked\": \"<integer>\",\n    \"occupation\": \"<string>\",\n    \"salary\": {\n      \"amount\": \"<number>\",\n      \"type\": \"<string>\",\n      \"unit\": \"<string>\"\n    }\n  },\n  \"group_id\": \"<uuid>\",\n  \"person\": {\n    \"date_of_birth\": \"<date>\",\n    \"first_name\": \"<string>\",\n    \"home_address\": {\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"street_one\": \"<string>\",\n      \"zip_code\": \"<string>\",\n      \"county\": \"<string>\",\n      \"street_two\": \"<string>\"\n    },\n    \"last_name\": \"<string>\",\n    \"sex\": \"<string>\",\n    \"contact\": {\n      \"email_address\": \"<email>\",\n      \"email_address_type\": \"<string>\",\n      \"home_phone\": \"<string>\",\n      \"preferred_language\": \"<string>\",\n      \"preferred_method\": \"<string>\",\n      \"speaks_english\": \"<boolean>\",\n      \"work_phone\": \"<string>\"\n    },\n    \"details\": {\n      \"american_indian\": {\n        \"state\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"tribe\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"disability\": {\n        \"communication\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"disabled\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"reason\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"is_military\": \"<boolean>\",\n      \"is_student\": \"<boolean>\",\n      \"tobacco\": {\n        \"duration\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"frequency\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"types\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"user\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"maiden_name\": \"<string>\",\n    \"mailing_address\": {\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"street_one\": \"<string>\",\n      \"zip_code\": \"<string>\",\n      \"county\": \"<string>\",\n      \"street_two\": \"<string>\"\n    },\n    \"marital_status\": \"<string>\",\n    \"middle_name\": \"<string>\",\n    \"ssn\": \"<string>\",\n    \"suffix\": \"<string>\"\n  },\n  \"classifications\": \"<object>\",\n  \"location_id\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "47f7c34f-240e-4d29-a12f-1696b6c9b6a2",
+              "name": "Successful Response - Returns the new Employee",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "employees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"classifications\": {\n    \"BranchName\": \"HQ\"\n  },\n  \"employment\": {\n    \"employment_dates\": {\n      \"full_time_start\": \"2015-01-01\",\n      \"hire_date\": \"2014-12-10\"\n    },\n    \"employment_status\": \"full-time\",\n    \"hours_worked\": 50,\n    \"occupation\": \"Senior Analyst\",\n    \"salary\": {\n      \"amount\": 55000,\n      \"type\": \"salary\",\n      \"unit\": \"annual\"\n    },\n    \"work_state\": \"CA\"\n  },\n  \"group_id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n  \"location_id\": \"bd957820-4652-4ee7-8a3a-6413df21e28d\",\n  \"person\": {\n    \"contact\": {\n      \"email_address\": \"david@testemail.com\",\n      \"email_address_type\": \"home\",\n      \"home_phone\": \"+12065551234\",\n      \"preferred_method\": \"email\",\n      \"work_phone\": \"+12065559876\"\n    },\n    \"date_of_birth\": \"1981-06-22\",\n    \"first_name\": \"David\",\n    \"home_address\": {\n      \"city\": \"San Francisco\",\n      \"county\": \"San Francisco\",\n      \"state\": \"CA\",\n      \"street_one\": \"1234 Home Ave\",\n      \"zip_code\": \"94107\"\n    },\n    \"last_name\": \"Johnson\",\n    \"marital_status\": \"married\",\n    \"sex\": \"M\",\n    \"ssn\": \"123456789\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"classifications\": {\n    \"BranchName\": \"HQ\"\n  },\n  \"created\": 1626281253,\n  \"employment\": {\n    \"employment_dates\": {\n      \"full_time_start\": \"2015-01-01\",\n      \"hire_date\": \"2014-12-10\"\n    },\n    \"employment_status\": \"full-time\",\n    \"hours_worked\": 50,\n    \"occupation\": \"Senior Analyst\",\n    \"salary\": {\n      \"amount\": 55000,\n      \"type\": \"salary\",\n      \"unit\": \"annual\"\n    }\n  },\n  \"group_id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n  \"id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n  \"location_id\": \"bd957820-4652-4ee7-8a3a-6413df21e28d\",\n  \"modified\": 1626281253,\n  \"person\": {\n    \"contact\": {\n      \"email_address\": \"david@testemail.com\",\n      \"email_address_type\": \"home\",\n      \"home_phone\": \"+12065551234\",\n      \"preferred_method\": \"email\",\n      \"work_phone\": \"+12065559876\"\n    },\n    \"date_of_birth\": \"1981-06-22\",\n    \"first_name\": \"David\",\n    \"home_address\": {\n      \"city\": \"San Francisco\",\n      \"county\": \"San Francisco\",\n      \"state\": \"CA\",\n      \"street_one\": \"1234 Home Ave\",\n      \"zip_code\": \"94107\"\n    },\n    \"last_name\": \"Johnson\",\n    \"marital_status\": \"married\",\n    \"sex\": \"M\",\n    \"ssn\": \"123456789\"\n  },\n  \"version\": \"6260146a-3486-4c3d-b2a6-fcd3f8c84043\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4c022563-7f10-4baf-8d01-eac1a22b29a2",
+          "name": "Get a single Employee",
+          "request": {
+            "name": "Get a single Employee",
+            "description": {
+              "content": "Returns the latest version of a single employee based on the ID provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "employees",
+                ":employee_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employee_id",
+                  "description": "(Required) The unique identifier of the employee you would like to view"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eaa48d2a-7455-4f26-92e1-d28faca7bba9",
+              "name": "Successful Response - Returns a single Employee",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "employees",
+                    ":employee_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employee_id",
+                      "description": "(Required) The unique identifier of the employee you would like to view"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"employment\": {\n    \"employment_dates\": {\n      \"full_time_start\": \"2015-01-01\",\n      \"hire_date\": \"2014-12-10\"\n    },\n    \"employment_status\": \"full-time\",\n    \"hours_worked\": 50,\n    \"occupation\": \"Senior Analyst\",\n    \"salary\": {\n      \"amount\": 55000,\n      \"type\": \"salary\",\n      \"unit\": \"annual\"\n    },\n    \"work_state\": \"CA\"\n  },\n  \"group_id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n  \"id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n  \"location_id\": \"bd957820-4652-4ee7-8a3a-6413df21e28d\",\n  \"person\": {\n    \"contact\": {\n      \"email_address\": \"david@testemail.com\",\n      \"email_address_type\": \"home\",\n      \"home_phone\": \"+12065551234\",\n      \"preferred_method\": \"email\",\n      \"work_phone\": \"+12065559876\"\n    },\n    \"date_of_birth\": \"1981-06-22\",\n    \"first_name\": \"David\",\n    \"home_address\": {\n      \"city\": \"San Francisco\",\n      \"county\": \"San Francisco\",\n      \"state\": \"CA\",\n      \"street_one\": \"1234 Home Ave\",\n      \"zip_code\": \"94107\"\n    },\n    \"last_name\": \"Johnson\",\n    \"marital_status\": \"\",\n    \"sex\": \"M\",\n    \"ssn\": \"123456789\"\n  },\n  \"version\": \"6260146a-3486-4c3d-b2a6-fcd3f8c84043\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a61bab9e-66bb-4dfb-a397-581ebe1ffd6b",
+          "name": "List All Dependents",
+          "request": {
+            "name": "List All Dependents",
+            "description": {
+              "content": "Returns a list of all dependents for a given employee.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "employees",
+                ":employee_id",
+                "dependents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employee_id",
+                  "description": "(Required) The unique identifier of the employee for which you would like to view dependents"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bd5dd418-0841-4433-926a-69a4c0c0a7a1",
+              "name": "Successful Response - Returns all matching Dependents",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "employees",
+                    ":employee_id",
+                    "dependents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employee_id",
+                      "description": "(Required) The unique identifier of the employee for which you would like to view dependents"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 1\n  },\n  \"response\": [\n    {\n      \"created\": 1557512389,\n      \"employee_id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n      \"id\": \"fd62665c-0846-4e9d-bd29-80779b5f685c\",\n      \"modified\": 1547412389,\n      \"person\": {\n        \"contact\": {\n          \"email_address\": \"diane@testemail.com\",\n          \"email_address_type\": \"home\",\n          \"home_phone\": \"+12065551234\"\n        },\n        \"date_of_birth\": \"1982-01-02\",\n        \"first_name\": \"Diane\",\n        \"home_address\": {\n          \"city\": \"San Francisco\",\n          \"county\": \"San Francisco\",\n          \"state\": \"CA\",\n          \"street_one\": \"1234 Home Ave\",\n          \"zip_code\": \"94107\"\n        },\n        \"last_name\": \"Johnson\",\n        \"marital_status\": \"\",\n        \"sex\": \"F\",\n        \"ssn\": \"987654321\"\n      },\n      \"relationship\": \"spouse\",\n      \"version\": \"669fbe16-9960-4069-91aa-832ada3f4e42\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1572b0f3-7f4f-4fde-bf1c-354d7745c798",
+          "name": "Create a new Dependent",
+          "request": {
+            "name": "Create a new Dependent",
+            "description": {
+              "content": "Create a new dependent for an employee.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "employees",
+                ":employee_id",
+                "dependents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employee_id",
+                  "description": "(Required) The unique identifier of the employee the dependent belongs to"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"person\": {\n    \"date_of_birth\": \"<date>\",\n    \"first_name\": \"<string>\",\n    \"home_address\": {\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"street_one\": \"<string>\",\n      \"zip_code\": \"<string>\",\n      \"county\": \"<string>\",\n      \"street_two\": \"<string>\"\n    },\n    \"last_name\": \"<string>\",\n    \"sex\": \"<string>\",\n    \"contact\": {\n      \"email_address\": \"<email>\",\n      \"email_address_type\": \"<string>\",\n      \"home_phone\": \"<string>\",\n      \"preferred_language\": \"<string>\",\n      \"preferred_method\": \"<string>\",\n      \"speaks_english\": \"<boolean>\",\n      \"work_phone\": \"<string>\"\n    },\n    \"details\": {\n      \"american_indian\": {\n        \"state\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"tribe\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"disability\": {\n        \"communication\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"disabled\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"reason\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"is_military\": \"<boolean>\",\n      \"is_student\": \"<boolean>\",\n      \"tobacco\": {\n        \"duration\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"frequency\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"types\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"user\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"maiden_name\": \"<string>\",\n    \"mailing_address\": {\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"street_one\": \"<string>\",\n      \"zip_code\": \"<string>\",\n      \"county\": \"<string>\",\n      \"street_two\": \"<string>\"\n    },\n    \"marital_status\": \"<string>\",\n    \"middle_name\": \"<string>\",\n    \"ssn\": \"<string>\",\n    \"suffix\": \"<string>\"\n  },\n  \"relationship\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fde0323f-e7b8-4786-8740-a970ea9f0167",
+              "name": "Successful Response - Returns the new Dependent",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "employees",
+                    ":employee_id",
+                    "dependents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employee_id",
+                      "description": "(Required) The unique identifier of the employee the dependent belongs to"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"person\": {\n    \"contact\": {\n      \"email_address\": \"jamie@testemail.com\",\n      \"email_address_type\": \"home\",\n      \"home_phone\": \"+12065551234\"\n    },\n    \"date_of_birth\": \"2000-01-02\",\n    \"first_name\": \"Jamie\",\n    \"home_address\": {\n      \"city\": \"San Francisco\",\n      \"county\": \"San Francisco\",\n      \"state\": \"CA\",\n      \"street_one\": \"1234 Home Ave\",\n      \"zip_code\": \"94107\"\n    },\n    \"last_name\": \"Johnson\",\n    \"marital_status\": \"single\",\n    \"sex\": \"F\",\n    \"ssn\": \"384032999\"\n  },\n  \"relationship\": \"child\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 1626281253,\n  \"employee_id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n  \"id\": \"fd62665c-0846-4e9d-bd29-80779b5f685c\",\n  \"modified\": 1626281253,\n  \"person\": {\n    \"contact\": {\n      \"email_address\": \"jamie@testemail.com\",\n      \"email_address_type\": \"home\",\n      \"home_phone\": \"+12065551234\"\n    },\n    \"date_of_birth\": \"2000-01-02\",\n    \"first_name\": \"Jamie\",\n    \"home_address\": {\n      \"city\": \"San Francisco\",\n      \"county\": \"San Francisco\",\n      \"state\": \"CA\",\n      \"street_one\": \"1234 Home Ave\",\n      \"zip_code\": \"94107\"\n    },\n    \"last_name\": \"Johnson\",\n    \"marital_status\": \"single\",\n    \"sex\": \"F\",\n    \"ssn\": \"384032999\"\n  },\n  \"relationship\": \"child\",\n  \"version\": \"669fbe16-9960-4069-91aa-832ada3f4e42\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "036ccb14-cda5-485f-aba9-497649ebae60",
+          "name": "Get a single Dependent of Employee",
+          "request": {
+            "name": "Get a single Dependent of Employee",
+            "description": {
+              "content": "Returns the latest version of a single dependent of an employee based on the ID provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "employees",
+                ":employee_id",
+                "dependents",
+                ":dependent_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employee_id",
+                  "description": "(Required) The unique identifier of the employee the dependent belongs to"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "dependent_id",
+                  "description": "(Required) The unique identifier of the dependent you would like to view"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b456febc-b061-4e25-a07b-985daa41f74a",
+              "name": "Successful Response - Returns a single Dependent",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "employees",
+                    ":employee_id",
+                    "dependents",
+                    ":dependent_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employee_id",
+                      "description": "(Required) The unique identifier of the employee the dependent belongs to"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "dependent_id",
+                      "description": "(Required) The unique identifier of the dependent you would like to view"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 1557512389,\n  \"employee_id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n  \"id\": \"fd62665c-0846-4e9d-bd29-80779b5f685c\",\n  \"modified\": 1547412389,\n  \"person\": {\n    \"contact\": {\n      \"email_address\": \"diane@testemail.com\",\n      \"email_address_type\": \"home\",\n      \"home_phone\": \"+12065551234\"\n    },\n    \"date_of_birth\": \"1982-01-02\",\n    \"first_name\": \"Diane\",\n    \"home_address\": {\n      \"city\": \"San Francisco\",\n      \"county\": \"San Francisco\",\n      \"state\": \"CA\",\n      \"street_one\": \"1234 Home Ave\",\n      \"zip_code\": \"94107\"\n    },\n    \"last_name\": \"Johnson\",\n    \"marital_status\": \"\",\n    \"sex\": \"F\",\n    \"ssn\": \"987654321\"\n  },\n  \"relationship\": \"spouse\",\n  \"version\": \"669fbe16-9960-4069-91aa-832ada3f4e42\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7e13b572-6fb7-4fc5-9620-d4e3ceeeae77",
+          "name": "Get a list of all Groups",
+          "request": {
+            "name": "Get a list of all Groups",
+            "description": {
+              "content": "Returns a list of all groups in the current user organization.\n\nIf you would like to search the groups list, you can use the company query param. It allows searches based on the group's name or dba_name values.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "company",
+                  "value": "<string>",
+                  "description": "This query param searches groups by name or dba_name values"
+                },
+                {
+                  "disabled": false,
+                  "key": "group_ids",
+                  "value": "<string>",
+                  "description": "Comma-separated list of requested UUID group IDs"
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier_id",
+                  "value": "<string>",
+                  "description": "Used for filtering for a carrier-specific group ID. Filter by the Noyo carrier ID. Must be used with carrier_group_id"
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier_group_id",
+                  "value": "<string>",
+                  "description": "Used for filtering for a carrier-specific group ID. Must be used with carrier_id"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "aeebab79-66ec-4785-822d-729df9f0f87f",
+              "name": "Successful Response - Returns all matching Groups",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "company",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "group_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "carrier_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "carrier_group_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 1\n  },\n  \"response\": [\n    {\n      \"created\": 1557512389,\n      \"dba_name\": \"Test Corp\",\n      \"federal_ein\": \"112222222\",\n      \"id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n      \"modified\": 1543215342,\n      \"name\": \"Test Company\",\n      \"organization_id\": \"d61fa455-adf4-4dc4-8c57-6d779ba9475e\",\n      \"sic_code\": \"7371\",\n      \"version\": \"6b72d72d-cc99-4df6-8152-7183e824c80c\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fcf74565-35e6-4315-9967-6149eed2c9db",
+          "name": "Create a new Group",
+          "request": {
+            "name": "Create a new Group",
+            "description": {
+              "content": "Create a new group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"dba_name\": \"<string>\",\n  \"federal_ein\": \"<string>\",\n  \"organization_id\": \"<uuid>\",\n  \"sic_code\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "59aadfdd-57f1-4647-a1c3-4e08490e5c36",
+              "name": "Successful Response - Returns the new Group",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"ACME Flooring\",\n  \"dba_name\": \"Floors R Us\",\n  \"federal_ein\": \"112222222\",\n  \"organization_id\": \"<uuid>\",\n  \"sic_code\": \"5713\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 1557512389,\n  \"dba_name\": \"Test Corp\",\n  \"federal_ein\": \"112222222\",\n  \"id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n  \"modified\": 1557512389,\n  \"name\": \"Test Company\",\n  \"organization_id\": \"d61fa455-adf4-4dc4-8c57-6d779ba9475e\",\n  \"sic_code\": \"7371\",\n  \"version\": \"6b72d72d-cc99-4df6-8152-7183e824c80c\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "07d41bf3-5e7a-4d48-b3e3-53d124fb46df",
+          "name": "Get a single Group",
+          "request": {
+            "name": "Get a single Group",
+            "description": {
+              "content": "Returns the latest version of a single group based on the ID provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "groups",
+                ":group_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_id",
+                  "description": "(Required) The unique identifier of the group to be retrieved"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eb1d6a59-7d9b-442c-8e36-533c7e7bea2a",
+              "name": "Successful Response - Returns a single Group",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The unique identifier of the group to be retrieved"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 1557512389,\n  \"dba_name\": \"Test Corp\",\n  \"federal_ein\": \"112222222\",\n  \"id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n  \"modified\": 1543215342,\n  \"name\": \"Test Company\",\n  \"organization_id\": \"d61fa455-adf4-4dc4-8c57-6d779ba9475e\",\n  \"sic_code\": \"7371\",\n  \"version\": \"6b72d72d-cc99-4df6-8152-7183e824c80c\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "82891479-478a-4947-bc5b-7426cc433b30",
+          "name": "Get a list of all Carrier Configurations by Group",
+          "request": {
+            "name": "Get a list of all Carrier Configurations by Group",
+            "description": {
+              "content": "Certain carriers have custom data for each group such as billing group information. This endpoint can be used to retrieve carrier-specific configuration data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "groups",
+                ":group_id",
+                "carrier_configurations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "effective_date",
+                  "value": "<string>",
+                  "description": "The relative date on which to view the state of the record"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_id",
+                  "description": "(Required) The unique identifier of the group for which you would like to view carrier configurations."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "50905dea-d4d9-4cfb-8040-398f7072b13b",
+              "name": "Successful Response - Returns all matching Carrier Configurations",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "carrier_configurations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "effective_date",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The unique identifier of the group for which you would like to view carrier configurations."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"carrier_group_id\": \"9100084\",\n    \"carrier_id\": \"d0003042-eaae-4491-b219-4825456a3d16\",\n    \"configuration\": {\n      \"bill_groups\": [\n        {\n          \"bill_group_description\": \"All Members\",\n          \"bill_group_number\": 10001,\n          \"bill_group_status\": \"open\"\n        }\n      ],\n      \"member_groups\": [\n        {\n          \"member_group_key\": 2613038,\n          \"member_group_name\": \"MEMBERS A\",\n          \"member_group_status\": \"open\"\n        },\n        {\n          \"member_group_key\": 2613037,\n          \"member_group_name\": \"MEMBERS B\",\n          \"member_group_status\": \"open\"\n        }\n      ],\n      \"policy_number\": \"9100084\"\n    },\n    \"group_id\": \"2705bb9f-3c90-4400-a4e7-0bc9d48e677c\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cea8143b-a74d-4968-ada5-c1fe6bcc5f85",
+          "name": "group connection configuration",
+          "request": {
+            "name": "group connection configuration",
+            "description": {
+              "content": "Edit a group carrier configuration",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "groups",
+                ":group_id",
+                "carrier_configurations",
+                ":group_carrier_configuration_id",
+                ":version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_id",
+                  "description": "(Required) The unique identifier of the related group"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_carrier_configuration_id",
+                  "description": "(Required) The unique identifier of the group carrier configuration"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "version",
+                  "description": "(Required) The unique version of the related group carrier configuration"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"connection_configuration\": {\n    \"connection_tier\": \"<string>\",\n    \"data_exchange\": {\n      \"enrollment_errors\": {\n        \"default_method\": null,\n        \"enabled\": false\n      },\n      \"enrollments\": {\n        \"from_carrier\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"to_carrier\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"group_structure\": {\n        \"default_method\": null,\n        \"enabled\": false\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "73bc1cd6-3118-4bc9-bdcc-34f7207c27be",
+              "name": "Successful Response - Returns the new group carrier configuration",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "carrier_configurations",
+                    ":group_carrier_configuration_id",
+                    ":version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The unique identifier of the related group"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_carrier_configuration_id",
+                      "description": "(Required) The unique identifier of the group carrier configuration"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version",
+                      "description": "(Required) The unique version of the related group carrier configuration"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connection_configuration\": {\n    \"data_exchange\": {\n      \"enrollments\": {\n        \"from_carrier\": {\n          \"enabled\": true\n        },\n        \"to_carrier\": {\n          \"default_method\": \"api\",\n          \"enabled\": true\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"carrier_group_id\": \"9100084\",\n  \"carrier_id\": \"9a0a7437-4097-4251-9e71-85384c0eb1c9\",\n  \"configuration\": {\n    \"bill_groups\": [\n      {\n        \"bill_group_description\": \"All Members\",\n        \"bill_group_number\": 10001,\n        \"bill_group_status\": \"open\"\n      }\n    ],\n    \"member_groups\": [\n      {\n        \"member_group_key\": 2613038,\n        \"member_group_name\": \"MEMBERS A\",\n        \"member_group_status\": \"open\"\n      },\n      {\n        \"member_group_key\": 2613037,\n        \"member_group_name\": \"MEMBERS B\",\n        \"member_group_status\": \"open\"\n      }\n    ],\n    \"policy_number\": \"9100084\"\n  },\n  \"connection_configuration\": {\n    \"data_exchange\": {\n      \"enrollments\": {\n        \"from_carrier\": {\n          \"enabled\": true\n        },\n        \"to_carrier\": {\n          \"default_method\": \"api\",\n          \"enabled\": true\n        }\n      }\n    }\n  },\n  \"group_id\": \"2c4d5515-6bf8-4f8c-821a-9c56374198b2\",\n  \"id\": \"744d1906-feeb-4234-b49d-1d9cb26b7406\",\n  \"version\": \"7a2b0437-4027-4251-9e71-85384c0eb1c9\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "77604513-0b33-4c3e-91fa-3ade9b284d46",
+          "name": "Get a list of all Group Contacts",
+          "request": {
+            "name": "Get a list of all Group Contacts",
+            "description": {
+              "content": "Returns a list of all group contacts for a given group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "groups",
+                ":group_id",
+                "contacts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_id",
+                  "description": "(Required) The unique identifier of the group for which you would like to view contacts"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e028f2de-14f0-4bf2-be78-0567929a6a98",
+              "name": "Successful Response - Returns all matching Group Contacts",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "contacts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The unique identifier of the group for which you would like to view contacts"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 2\n  },\n  \"response\": [\n    {\n      \"created\": 1557512389,\n      \"email\": \"davidsmith@testcorp.com\",\n      \"first_name\": \"David\",\n      \"group_id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n      \"id\": \"c2f5489d-36d1-4fb0-bf9f-105ad5dd0b3e\",\n      \"last_name\": \"Smith\",\n      \"modified\": 1543215342,\n      \"phone_number\": \"+14255551234\",\n      \"primary_contact\": true,\n      \"title\": \"Chief People Officer\",\n      \"types\": [\n        \"company\",\n        \"billing\"\n      ],\n      \"version\": \"6ba43c6e-69f2-435f-a126-8595a798eb52\"\n    },\n    {\n      \"created\": 1557512389,\n      \"email\": \"carolinejohnson@testcorp.com\",\n      \"first_name\": \"Caroline\",\n      \"group_id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n      \"id\": \"7e3c1f14-e7e7-42b8-81d8-3fcd7bd7d418\",\n      \"last_name\": \"Johnson\",\n      \"modified\": 1543215342,\n      \"phone_number\": \"+14255551234\",\n      \"primary_contact\": false,\n      \"title\": \"VP of Human Resources\",\n      \"types\": [\n        \"executive\"\n      ],\n      \"version\": \"88bfbe28-7f8b-4497-a50b-932ee3387b68\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3a99a2d9-940a-4e9a-a36b-95768644dc38",
+          "name": "Create a new Group Contact",
+          "request": {
+            "name": "Create a new Group Contact",
+            "description": {
+              "content": "Create a new contact for a group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "groups",
+                ":group_id",
+                "contacts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"types\": [\n    \"<string>\"\n  ],\n  \"carrier_id\": \"<uuid>\",\n  \"phone_number\": \"<string>\",\n  \"primary_contact\": \"<boolean>\",\n  \"title\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c19c625f-a06c-4067-8fa3-f126d13b0a3a",
+              "name": "Successful Response - Returns the new Group Contact",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "contacts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"catherine.briggs@example.com\",\n  \"first_name\": \"Catherine\",\n  \"last_name\": \"Briggs\",\n  \"types\": [\n    \"<string>\"\n  ],\n  \"carrier_id\": \"<uuid>\",\n  \"phone_number\": \"+15555551212\",\n  \"primary_contact\": \"<boolean>\",\n  \"title\": \"Engineer\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 1626281253,\n  \"email\": \"davidsmith@testcorp.com\",\n  \"first_name\": \"David\",\n  \"group_id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n  \"id\": \"c2f5489d-36d1-4fb0-bf9f-105ad5dd0b3e\",\n  \"last_name\": \"Smith\",\n  \"modified\": 1626281253,\n  \"phone_number\": \"+14255551234\",\n  \"primary_contact\": true,\n  \"title\": \"Chief People Officer\",\n  \"types\": [\n    \"company\",\n    \"billing\"\n  ],\n  \"version\": \"6ba43c6e-69f2-435f-a126-8595a798eb52\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8c84b4fa-797f-4e3b-a7e6-7a977c01d836",
+          "name": "Get a single Group Contact",
+          "request": {
+            "name": "Get a single Group Contact",
+            "description": {
+              "content": "Returns the latest version of a single group contact based on the ID provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "groups",
+                ":group_id",
+                "contacts",
+                ":contact_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_id",
+                  "description": "(Required) The unique identifier of the group the contact belongs to"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "contact_id",
+                  "description": "(Required) The unique identifier of the contact to be retrieved"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "13b7bff7-f089-4d5d-a679-a3130b90844c",
+              "name": "Successful Response - Returns a single Group Contact",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "contacts",
+                    ":contact_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The unique identifier of the group the contact belongs to"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "contact_id",
+                      "description": "(Required) The unique identifier of the contact to be retrieved"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 1557512389,\n  \"email\": \"davidsmith@testcorp.com\",\n  \"first_name\": \"David\",\n  \"group_id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n  \"id\": \"c2f5489d-36d1-4fb0-bf9f-105ad5dd0b3e\",\n  \"last_name\": \"Smith\",\n  \"modified\": 1543215342,\n  \"phone_number\": \"+14255551234\",\n  \"primary_contact\": true,\n  \"title\": \"Chief People Officer\",\n  \"types\": [\n    \"company\",\n    \"billing\",\n    \"executive\"\n  ],\n  \"version\": \"ef3fef8d-4889-40f4-a0f8-377b9dd23d98\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7dcba40d-8192-4f88-9332-31060b877048",
+          "name": "Edit an existing Group Contact",
+          "request": {
+            "name": "Edit an existing Group Contact",
+            "description": {
+              "content": "Edit a group contact based on the ID provided. The version parameter must match the latest contact version.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "groups",
+                ":group_id",
+                "contacts",
+                ":contact_id",
+                ":version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "contact_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "version",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"carrier_id\": \"<uuid>\",\n  \"email\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"phone_number\": \"<string>\",\n  \"primary_contact\": \"<boolean>\",\n  \"title\": \"<string>\",\n  \"types\": [\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "777abca9-fa64-4103-95e9-ba4b82177ba4",
+              "name": "Successful Response - Returns the modified Group Contact",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "contacts",
+                    ":contact_id",
+                    ":version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "contact_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carrier_id\": \"<uuid>\",\n  \"email\": \"catherine.briggs@example.com\",\n  \"first_name\": \"Catherine\",\n  \"last_name\": \"Briggs\",\n  \"phone_number\": \"+15555551212\",\n  \"primary_contact\": \"<boolean>\",\n  \"title\": \"Engineer\",\n  \"types\": [\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 1557512389,\n  \"email\": \"davidsmith@testcorp.com\",\n  \"first_name\": \"David\",\n  \"group_id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n  \"id\": \"c2f5489d-36d1-4fb0-bf9f-105ad5dd0b3e\",\n  \"last_name\": \"Smith\",\n  \"modified\": 1543215342,\n  \"phone_number\": \"+14255551234\",\n  \"primary_contact\": true,\n  \"title\": \"Chief People Officer\",\n  \"types\": [\n    \"company\",\n    \"billing\",\n    \"executive\"\n  ],\n  \"version\": \"ef3fef8d-4889-40f4-a0f8-377b9dd23d98\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6e8fa3f2-0938-4957-8b46-196217fdb655",
+          "name": "Filter employees in a group",
+          "request": {
+            "name": "Filter employees in a group",
+            "description": {
+              "content": "Filter employees within a group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "groups",
+                ":group_id",
+                "employees"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "first_name",
+                  "value": "<string>",
+                  "description": "The employee first name for which you would like to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "last_name",
+                  "value": "<string>",
+                  "description": "The employee last name for which you would like to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "The employee's name for which you would like to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "date_of_birth",
+                  "value": "<string>",
+                  "description": "The ISO-8601 (YYYY-MM-DD) employee date of birth for which you would like to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "employment_status",
+                  "value": "<string>",
+                  "description": "Status of the employees employment"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_id",
+                  "description": "(Required) The unique identifier of the group for which you would like to view employees"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "31aef6d6-ed9e-48da-804f-e563ed7307b7",
+              "name": "Successful Response - Returns all matching Employees",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "employees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "first_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "last_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date_of_birth",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "employment_status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The unique identifier of the group for which you would like to view employees"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 1\n  },\n  \"response\": [\n    {\n      \"employment\": {\n        \"employment_dates\": {\n          \"full_time_start\": \"2015-01-01\",\n          \"hire_date\": \"2014-12-10\"\n        },\n        \"employment_status\": \"full-time\",\n        \"hours_worked\": 50,\n        \"occupation\": \"Senior Analyst\",\n        \"salary\": {\n          \"amount\": 55000,\n          \"type\": \"salary\",\n          \"unit\": \"annual\"\n        }\n      },\n      \"group_id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n      \"id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n      \"location_id\": \"bd957820-4652-4ee7-8a3a-6413df21e28d\",\n      \"person\": {\n        \"contact\": {\n          \"email_address\": \"david@testemail.com\",\n          \"email_address_type\": \"home\",\n          \"home_phone\": \"+12065551234\",\n          \"preferred_method\": \"email\",\n          \"work_phone\": \"+12065559876\"\n        },\n        \"date_of_birth\": \"1981-06-22\",\n        \"first_name\": \"David\",\n        \"home_address\": {\n          \"city\": \"San Francisco\",\n          \"county\": \"San Francisco\",\n          \"state\": \"CA\",\n          \"street_one\": \"1234 Home Ave\",\n          \"zip_code\": \"94107\"\n        },\n        \"last_name\": \"Johnson\",\n        \"marital_status\": \"\",\n        \"sex\": \"M\",\n        \"ssn\": \"123456789\"\n      },\n      \"version\": \"6260146a-3486-4c3d-b2a6-fcd3f8c84043\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f75563cf-f481-4a5f-9d71-5c473a197f34",
+          "name": "List All Group Employee Dependents",
+          "request": {
+            "name": "List All Group Employee Dependents",
+            "description": {
+              "content": "Returns a list of all dependents for a given employee and group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "groups",
+                ":group_id",
+                "employees",
+                ":employee_id",
+                "dependents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_id",
+                  "description": "(Required) The unique identifier of the group for which you would like to view dependents"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "employee_id",
+                  "description": "(Required) Either the Noyo ID or the Custom Individual ID of the employee for which you would like to view dependents"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ff3b6d68-88a2-4722-b776-55d0f81d403d",
+              "name": "Successful Response - Returns all matching Dependents",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "employees",
+                    ":employee_id",
+                    "dependents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The unique identifier of the group for which you would like to view dependents"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "employee_id",
+                      "description": "(Required) Either the Noyo ID or the Custom Individual ID of the employee for which you would like to view dependents"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 1\n  },\n  \"response\": [\n    {\n      \"created\": 1557512389,\n      \"custom_individual_id\": \"FD1324345\",\n      \"employee_id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n      \"id\": \"fd62665c-0846-4e9d-bd29-80779b5f685c\",\n      \"modified\": 1547412389,\n      \"person\": {\n        \"contact\": {\n          \"email_address\": \"diane@testemail.com\",\n          \"email_address_type\": \"home\",\n          \"home_phone\": \"+12065551234\"\n        },\n        \"date_of_birth\": \"1982-01-02\",\n        \"first_name\": \"Diane\",\n        \"home_address\": {\n          \"city\": \"San Francisco\",\n          \"county\": \"San Francisco\",\n          \"state\": \"CA\",\n          \"street_one\": \"1234 Home Ave\",\n          \"zip_code\": \"94107\"\n        },\n        \"last_name\": \"Johnson\",\n        \"marital_status\": \"\",\n        \"sex\": \"F\",\n        \"ssn\": \"987654321\"\n      },\n      \"relationship\": \"spouse\",\n      \"version\": \"669fbe16-9960-4069-91aa-832ada3f4e42\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fdd763bc-6aef-4e04-9169-85509319f88d",
+          "name": "Get a list of all Group Locations",
+          "request": {
+            "name": "Get a list of all Group Locations",
+            "description": {
+              "content": "Returns a list of all group locations for a given group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "groups",
+                ":group_id",
+                "locations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_id",
+                  "description": "(Required) The unique identifier of the group for which you would like to view locations"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f5960b52-86a0-46bd-ab60-f2b94e6df244",
+              "name": "Successful Response - Returns all matching Group Locations",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The unique identifier of the group for which you would like to view locations"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 2\n  },\n  \"response\": [\n    {\n      \"address\": {\n        \"city\": \"San Francisco\",\n        \"county\": \"San Francisco\",\n        \"state\": \"CA\",\n        \"street_one\": \"1234 Test Ln\",\n        \"zip_code\": \"94107\"\n      },\n      \"created\": 1557512389,\n      \"group_id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n      \"id\": \"bd957820-4652-4ee7-8a3a-6413df21e28d\",\n      \"modified\": 1543215342,\n      \"version\": \"f4142cba-f3eb-4917-b3bd-123d683f18d7\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f68c5415-42c0-4e27-b126-0a570416c9b8",
+          "name": "Get a single Group Location",
+          "request": {
+            "name": "Get a single Group Location",
+            "description": {
+              "content": "Returns the latest version of a single group location based on the ID provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "groups",
+                ":group_id",
+                "locations",
+                ":location_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_id",
+                  "description": "(Required) The unique identifier of the group the location belongs to"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "location_id",
+                  "description": "(Required) The unique identifier of the location to be retrieved"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "66f694c3-b594-4adf-b09f-8b6192810a2b",
+              "name": "Successful Response - Returns a single Group Location",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "locations",
+                    ":location_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The unique identifier of the group the location belongs to"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "location_id",
+                      "description": "(Required) The unique identifier of the location to be retrieved"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"address\": {\n    \"city\": \"San Francisco\",\n    \"county\": \"San Francisco\",\n    \"state\": \"CA\",\n    \"street_one\": \"1234 Test Ln\",\n    \"zip_code\": \"94107\"\n  },\n  \"created\": 1557512389,\n  \"group_id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n  \"id\": \"bd957820-4652-4ee7-8a3a-6413df21e28d\",\n  \"modified\": 1543215342,\n  \"version\": \"f4142cba-f3eb-4917-b3bd-123d683f18d7\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7a3b925c-6f2c-41ff-9c9c-e1062ef2bc20",
+          "name": "Edit an existing Group",
+          "request": {
+            "name": "Edit an existing Group",
+            "description": {
+              "content": "Edit a group based on the ID provided. The version parameter must match the latest group version.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "groups",
+                ":group_id",
+                ":version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_id",
+                  "description": "(Required) The unique identifier of the group to be edited"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "version",
+                  "description": "(Required) Unique version of the group you want to edit"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dba_name\": \"<string>\",\n  \"federal_ein\": \"<string>\",\n  \"name\": \"<string>\",\n  \"sic_code\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "15596d62-8753-495e-9732-957f9dd52655",
+              "name": "Successful Response - Returns the modified Group",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    ":version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The unique identifier of the group to be edited"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version",
+                      "description": "(Required) Unique version of the group you want to edit"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dba_name\": \"Test Corporation\",\n  \"federal_ein\": \"221111111\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 1557512389,\n  \"dba_name\": \"Test Corporation\",\n  \"federal_ein\": \"221111111\",\n  \"id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n  \"modified\": 1543215342,\n  \"name\": \"Test Company\",\n  \"organization_id\": \"d61fa455-adf4-4dc4-8c57-6d779ba9475e\",\n  \"sic_code\": \"7371\",\n  \"version\": \"097abf09-336a-4ea1-95d5-633107feb562\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ae3eb27d-a47e-4da7-a320-10d77af3b824",
+          "name": "Get a list of all Employees",
+          "request": {
+            "name": "Get a list of all Employees",
+            "description": {
+              "content": "If there is a use case where you need to query employees across all the groups in your organization you can do so using this endpoint. Returns a list of all employees under your organization, regardless of group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "employees"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "first_name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "last_name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "date_of_birth",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "employment_status",
+                  "value": "<string>",
+                  "description": "Status of the employees employment"
+                },
+                {
+                  "disabled": false,
+                  "key": "group_id",
+                  "value": "<uuid>",
+                  "description": "Filter employees by Group ID"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d5972c1e-ea83-4dfb-995b-eaf085f07b1f",
+              "name": "Successful Response - Returns all matching Employees",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "employees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "first_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "last_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date_of_birth",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "employment_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "group_id",
+                      "value": "9613a221-d3c8-4c8a-86d5-e7e885fd1df9"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 1\n  },\n  \"response\": [\n    {\n      \"dependents\": [\n        {\n          \"employee_id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n          \"id\": \"fd62665c-0846-4e9d-bd29-80779b5f685c\",\n          \"person\": {\n            \"contact\": {\n              \"email_address\": \"diane@testemail.com\",\n              \"email_address_type\": \"home\",\n              \"home_phone\": \"+12065551234\"\n            },\n            \"date_of_birth\": \"1982-01-02\",\n            \"first_name\": \"Diane\",\n            \"home_address\": {\n              \"city\": \"San Francisco\",\n              \"county\": \"San Francisco\",\n              \"state\": \"CA\",\n              \"street_one\": \"1234 Home Ave\",\n              \"zip_code\": \"94107\"\n            },\n            \"last_name\": \"Johnson\",\n            \"marital_status\": \"\",\n            \"sex\": \"F\",\n            \"ssn\": \"987654321\"\n          },\n          \"relationship\": \"spouse\",\n          \"version\": \"669fbe16-9960-4069-91aa-832ada3f4e42\"\n        }\n      ],\n      \"employee\": {\n        \"employment\": {\n          \"employment_dates\": {\n            \"full_time_start\": \"2015-01-01\",\n            \"hire_date\": \"2014-12-10\"\n          },\n          \"employment_status\": \"full-time\",\n          \"hours_worked\": 50,\n          \"occupation\": \"Senior Analyst\",\n          \"salary\": {\n            \"amount\": 55000,\n            \"type\": \"salary\",\n            \"unit\": \"annual\"\n          }\n        },\n        \"group_id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n        \"id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n        \"location_id\": \"bd957820-4652-4ee7-8a3a-6413df21e28d\",\n        \"person\": {\n          \"contact\": {\n            \"email_address\": \"david@testemail.com\",\n            \"email_address_type\": \"home\",\n            \"home_phone\": \"+12065551234\",\n            \"preferred_method\": \"email\",\n            \"work_phone\": \"+12065559876\"\n          },\n          \"date_of_birth\": \"1981-06-22\",\n          \"first_name\": \"David\",\n          \"home_address\": {\n            \"city\": \"San Francisco\",\n            \"county\": \"San Francisco\",\n            \"state\": \"CA\",\n            \"street_one\": \"1234 Home Ave\",\n            \"zip_code\": \"94107\"\n          },\n          \"last_name\": \"Johnson\",\n          \"marital_status\": \"single\",\n          \"sex\": \"M\",\n          \"ssn\": \"123456789\"\n        },\n        \"version\": \"6260146a-3486-4c3d-b2a6-fcd3f8c84043\"\n      },\n      \"individual_enrollments\": [\n        {\n          \"group_enrollment_id\": \"56df742c-9176-459d-9c5a-9314ae11924e\",\n          \"id\": \"6616ad50-02ae-4f84-8aa5-c4dd5c4d2a1c\",\n          \"individual_id\": \"2c62ba83-3024-443f-944e-f3c6e20074f3\",\n          \"individual_type\": \"employee\",\n          \"line_of_coverage\": \"life\",\n          \"plan_id\": \"3538982e-4d4c-4ac1-9228-03ab70838dd8\",\n          \"status\": \"active\",\n          \"version\": \"46ef7838-be4c-446d-a38e-c05bfa73e7ad\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d82a63a0-6735-405a-b3e1-427989669275",
+          "name": "Get a single Employee",
+          "request": {
+            "name": "Get a single Employee",
+            "description": {
+              "content": "Returns the latest version of a single employee based on the ID provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "employees",
+                ":employee_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employee_id",
+                  "description": "(Required) The unique identifier of the employee you would like to view"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "53be8b2c-db90-488d-8578-4fccb06191b3",
+              "name": "Successful Response - Returns a single Employee",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "employees",
+                    ":employee_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employee_id",
+                      "description": "(Required) The unique identifier of the employee you would like to view"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"dependents\": [\n    {\n      \"employee_id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n      \"id\": \"fd62665c-0846-4e9d-bd29-80779b5f685c\",\n      \"person\": {\n        \"contact\": {\n          \"email_address\": \"diane@testemail.com\",\n          \"email_address_type\": \"home\",\n          \"home_phone\": \"+12065551234\"\n        },\n        \"date_of_birth\": \"1982-01-02\",\n        \"first_name\": \"Diane\",\n        \"home_address\": {\n          \"city\": \"San Francisco\",\n          \"county\": \"San Francisco\",\n          \"state\": \"CA\",\n          \"street_one\": \"1234 Home Ave\",\n          \"zip_code\": \"94107\"\n        },\n        \"last_name\": \"Johnson\",\n        \"marital_status\": \"\",\n        \"sex\": \"F\",\n        \"ssn\": \"987654321\"\n      },\n      \"relationship\": \"spouse\",\n      \"version\": \"669fbe16-9960-4069-91aa-832ada3f4e42\"\n    }\n  ],\n  \"employee\": {\n    \"employment\": {\n      \"employment_dates\": {\n        \"full_time_start\": \"2015-01-01\",\n        \"hire_date\": \"2014-12-10\"\n      },\n      \"employment_status\": \"full-time\",\n      \"hours_worked\": 50,\n      \"occupation\": \"Senior Analyst\",\n      \"salary\": {\n        \"amount\": 55000,\n        \"type\": \"salary\",\n        \"unit\": \"annual\"\n      }\n    },\n    \"group_id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n    \"id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n    \"location_id\": \"bd957820-4652-4ee7-8a3a-6413df21e28d\",\n    \"person\": {\n      \"contact\": {\n        \"email_address\": \"david@testemail.com\",\n        \"email_address_type\": \"home\",\n        \"home_phone\": \"+12065551234\",\n        \"preferred_method\": \"email\",\n        \"work_phone\": \"+12065559876\"\n      },\n      \"date_of_birth\": \"1981-06-22\",\n      \"first_name\": \"David\",\n      \"home_address\": {\n        \"city\": \"San Francisco\",\n        \"county\": \"San Francisco\",\n        \"state\": \"CA\",\n        \"street_one\": \"1234 Home Ave\",\n        \"zip_code\": \"94107\"\n      },\n      \"last_name\": \"Johnson\",\n      \"marital_status\": \"married\",\n      \"sex\": \"M\",\n      \"ssn\": \"123456789\"\n    },\n    \"version\": \"6260146a-3486-4c3d-b2a6-fcd3f8c84043\"\n  },\n  \"individual_enrollments\": [\n    {\n      \"group_enrollment_id\": \"56df742c-9176-459d-9c5a-9314ae11924e\",\n      \"id\": \"6616ad50-02ae-4f84-8aa5-c4dd5c4d2a1c\",\n      \"individual_id\": \"2c62ba83-3024-443f-944e-f3c6e20074f3\",\n      \"individual_type\": \"employee\",\n      \"line_of_coverage\": \"life\",\n      \"plan_id\": \"3538982e-4d4c-4ac1-9228-03ab70838dd8\",\n      \"status\": \"active\",\n      \"version\": \"46ef7838-be4c-446d-a38e-c05bfa73e7ad\"\n    },\n    {\n      \"group_enrollment_id\": \"56df742c-9176-459d-9c5a-9314ae11924e\",\n      \"id\": \"8ce384e2-60f3-4423-8a2c-c9e8a8266888\",\n      \"individual_id\": \"fd62665c-0846-4e9d-bd29-80779b5f685c\",\n      \"individual_type\": \"dependent\",\n      \"line_of_coverage\": \"life\",\n      \"plan_id\": \"3538982e-4d4c-4ac1-9228-03ab70838dd8\",\n      \"status\": \"active\",\n      \"version\": \"8ce384e2-60f3-4423-8a2c-c9e8a8266888\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "74dc36a1-19b9-4442-9533-d0d2e8b0b4f2",
+          "name": "Get a list of all Employees by Group",
+          "request": {
+            "name": "Get a list of all Employees by Group",
+            "description": {
+              "content": "Returns a list of all employees for a given group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "groups",
+                ":group_id",
+                "employees"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "first_name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "last_name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "date_of_birth",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "employment_status",
+                  "value": "<string>",
+                  "description": "Status of the employees employment"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_id",
+                  "description": "(Required) The unique identifier of the group for which you would like to view employees"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "43c93f98-80ac-491f-8642-bbfabb51f043",
+              "name": "Successful Response - Returns all matching Employees",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "employees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "first_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "last_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date_of_birth",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "employment_status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The unique identifier of the group for which you would like to view employees"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 1\n  },\n  \"response\": [\n    {\n      \"dependents\": [\n        {\n          \"employee_id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n          \"id\": \"fd62665c-0846-4e9d-bd29-80779b5f685c\",\n          \"person\": {\n            \"contact\": {\n              \"email_address\": \"diane@testemail.com\",\n              \"email_address_type\": \"home\",\n              \"home_phone\": \"+12065551234\"\n            },\n            \"date_of_birth\": \"1982-01-02\",\n            \"first_name\": \"Diane\",\n            \"home_address\": {\n              \"city\": \"San Francisco\",\n              \"county\": \"San Francisco\",\n              \"state\": \"CA\",\n              \"street_one\": \"1234 Home Ave\",\n              \"zip_code\": \"94107\"\n            },\n            \"last_name\": \"Johnson\",\n            \"marital_status\": \"\",\n            \"sex\": \"F\",\n            \"ssn\": \"987654321\"\n          },\n          \"relationship\": \"spouse\",\n          \"version\": \"669fbe16-9960-4069-91aa-832ada3f4e42\"\n        }\n      ],\n      \"employee\": {\n        \"employment\": {\n          \"employment_dates\": {\n            \"full_time_start\": \"2015-01-01\",\n            \"hire_date\": \"2014-12-10\"\n          },\n          \"employment_status\": \"full-time\",\n          \"hours_worked\": 50,\n          \"occupation\": \"Senior Analyst\",\n          \"salary\": {\n            \"amount\": 55000,\n            \"type\": \"salary\",\n            \"unit\": \"annual\"\n          }\n        },\n        \"group_id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n        \"id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n        \"location_id\": \"bd957820-4652-4ee7-8a3a-6413df21e28d\",\n        \"person\": {\n          \"contact\": {\n            \"email_address\": \"david@testemail.com\",\n            \"email_address_type\": \"home\",\n            \"home_phone\": \"+12065551234\",\n            \"preferred_method\": \"email\",\n            \"work_phone\": \"+12065559876\"\n          },\n          \"date_of_birth\": \"1981-06-22\",\n          \"first_name\": \"David\",\n          \"home_address\": {\n            \"city\": \"San Francisco\",\n            \"county\": \"San Francisco\",\n            \"state\": \"CA\",\n            \"street_one\": \"1234 Home Ave\",\n            \"zip_code\": \"94107\"\n          },\n          \"last_name\": \"Johnson\",\n          \"marital_status\": \"\",\n          \"sex\": \"M\",\n          \"ssn\": \"123456789\"\n        },\n        \"version\": \"6260146a-3486-4c3d-b2a6-fcd3f8c84043\"\n      },\n      \"individual_enrollments\": [\n        {\n          \"group_enrollment_id\": \"56df742c-9176-459d-9c5a-9314ae11924e\",\n          \"id\": \"6616ad50-02ae-4f84-8aa5-c4dd5c4d2a1c\",\n          \"individual_id\": \"2c62ba83-3024-443f-944e-f3c6e20074f3\",\n          \"individual_type\": \"employee\",\n          \"line_of_coverage\": \"life\",\n          \"plan_id\": \"3538982e-4d4c-4ac1-9228-03ab70838dd8\",\n          \"status\": \"active\",\n          \"version\": \"46ef7838-be4c-446d-a38e-c05bfa73e7ad\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ea9d8168-024d-42f2-a086-de72f093efbb",
+    "name": "Noyo Carrier Carrier Mapped Field Group Configuration API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

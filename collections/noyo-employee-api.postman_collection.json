@@ -1,0 +1,142 @@
+{
+  "item": [
+    {
+      "id": "ff66e2b3-5147-43bc-9867-f5a9e85c0c3a",
+      "name": "Employee",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1396cad6-4773-439c-add6-99c79f26926d",
+          "name": "Get a single Employee within a Group",
+          "request": {
+            "name": "Get a single Employee within a Group",
+            "description": {
+              "content": "Returns the latest version of a single employee based on the Noyo ID or Custom Individual ID provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "groups",
+                ":group_id",
+                "employees",
+                ":employee_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "employee_id",
+                  "description": "(Required) The Noyo ID or Custom Individual ID of the employee you would like to view"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_id",
+                  "description": "(Required) The Noyo ID of the Group the employee belongs to."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2e9ab803-16eb-4523-95e0-22c9f80f0708",
+              "name": "Successful Response - Returns a single Employee",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "employees",
+                    ":employee_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "employee_id",
+                      "description": "(Required) The Noyo ID or Custom Individual ID of the employee you would like to view"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The Noyo ID of the Group the employee belongs to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"custom_individual_id\": \"12FEXC13431\",\n  \"employment\": {\n    \"employment_dates\": {\n      \"full_time_start\": \"2015-01-01\",\n      \"hire_date\": \"2014-12-10\"\n    },\n    \"employment_status\": \"full-time\",\n    \"hours_worked\": 50,\n    \"occupation\": \"Senior Analyst\",\n    \"salary\": {\n      \"amount\": 55000,\n      \"type\": \"salary\",\n      \"unit\": \"annual\"\n    },\n    \"work_state\": \"CA\"\n  },\n  \"group_id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n  \"id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n  \"location_id\": \"bd957820-4652-4ee7-8a3a-6413df21e28d\",\n  \"person\": {\n    \"contact\": {\n      \"email_address\": \"david@testemail.com\",\n      \"email_address_type\": \"home\",\n      \"home_phone\": \"+12065551234\",\n      \"preferred_method\": \"email\",\n      \"work_phone\": \"+12065559876\"\n    },\n    \"date_of_birth\": \"1981-06-22\",\n    \"first_name\": \"David\",\n    \"home_address\": {\n      \"city\": \"San Francisco\",\n      \"county\": \"San Francisco\",\n      \"state\": \"CA\",\n      \"street_one\": \"1234 Home Ave\",\n      \"zip_code\": \"94107\"\n    },\n    \"last_name\": \"Johnson\",\n    \"marital_status\": \"\",\n    \"sex\": \"M\",\n    \"ssn\": \"123456789\"\n  },\n  \"version\": \"6260146a-3486-4c3d-b2a6-fcd3f8c84043\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7784dd50-5f0b-454c-b954-e9a1922d7def",
+    "name": "Noyo Carrier Carrier Mapped Field Employee API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,198 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Volleys API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Volleys",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a list of all Volleys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/volleys",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search for volleys by partial match on group name or group ID"
+              },
+              {
+                "name": "volley_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "carrier_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "group_setup_request_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "definition_version",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a list of Volleys"
+        },
+        {
+          "info": {
+            "name": "Get Volley",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/volleys/:volley_id",
+            "params": [
+              {
+                "name": "volley_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the Volley."
+              }
+            ]
+          },
+          "docs": "Get a specific Volley by its ID."
+        },
+        {
+          "info": {
+            "name": "Get available transitions for a volley",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/volleys/:volley_id/available_transitions",
+            "params": [
+              {
+                "name": "actor_type",
+                "value": "",
+                "type": "query",
+                "description": "Only show transitions from steps assigned to this actor type"
+              },
+              {
+                "name": "volley_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the Volley"
+              }
+            ]
+          },
+          "docs": "Returns a list of available transitions for a volley"
+        },
+        {
+          "info": {
+            "name": "Transition Volley",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/volleys/:volley_id/transition",
+            "params": [
+              {
+                "name": "volley_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the volley to transition"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Execute a transition on a volley, moving it from one step to another based on the volley definition."
+        },
+        {
+          "info": {
+            "name": "Get Volley Transitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/volleys/:volley_id/transitions",
+            "params": [
+              {
+                "name": "volley_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the volley"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of transitions for a volley, including any attachments."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

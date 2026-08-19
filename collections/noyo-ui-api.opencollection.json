@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Ui API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Ui",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a single Member Transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ui/v1/member_transactions/:transaction_id",
+            "params": [
+              {
+                "name": "transaction_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the member transaction you would like to view"
+              },
+              {
+                "name": "ui_body",
+                "value": "",
+                "type": "query",
+                "description": "Optionally include a restructured form of the body for UI display purposes"
+              }
+            ]
+          },
+          "docs": "Returns the latest version of a single member transaction based on the ID provided."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,197 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Individual Enrollments API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Individual Enrollments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a list of all Individual Enrollments for a Dependent",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/dependents/:dependent_id/individual_enrollments",
+            "params": [
+              {
+                "name": "dependent_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the employee for which you would like to view individual enrollments"
+              },
+              {
+                "name": "effective_date",
+                "value": "",
+                "type": "query",
+                "description": "The relative date on which to view the state of the record"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              }
+            ]
+          },
+          "docs": "Returns a list of all individual enrollments for a given dependent."
+        },
+        {
+          "info": {
+            "name": "Get a list of all Individual Enrollments for an Employee",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/employees/:employee_id/individual_enrollments",
+            "params": [
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the employee for which you would like to view individual enrollments"
+              },
+              {
+                "name": "effective_date",
+                "value": "",
+                "type": "query",
+                "description": "The relative date on which to view the state of the record"
+              },
+              {
+                "name": "include_dependents",
+                "value": "",
+                "type": "query",
+                "description": "Boolean, use \"true\" to include dependent individual enrollments in the results"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              }
+            ]
+          },
+          "docs": "Returns a list of all individual enrollments for a given employee."
+        },
+        {
+          "info": {
+            "name": "Get a list of all Individual Enrollments By Group Enrollment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/group_enrollments/:group_enrollment_id/individual_enrollments",
+            "params": [
+              {
+                "name": "group_enrollment_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the associated group enrollment in the Noyo system"
+              },
+              {
+                "name": "effective_date",
+                "value": "",
+                "type": "query",
+                "description": "The relative date on which to view the state of the record"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              }
+            ]
+          },
+          "docs": "Returns a list of all individual enrollments for a given group enrollment."
+        },
+        {
+          "info": {
+            "name": "Get a list of all Individual Enrollments By Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/groups/:group_id/individual_enrollments",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the associated group in the Noyo system"
+              },
+              {
+                "name": "effective_date",
+                "value": "",
+                "type": "query",
+                "description": "The relative date on which to view the state of the record"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              }
+            ]
+          },
+          "docs": "Returns a list of all individual enrollments for a given group."
+        },
+        {
+          "info": {
+            "name": "Get a single Individual Enrollment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/individual_enrollments/:individual_enrollment_id",
+            "params": [
+              {
+                "name": "individual_enrollment_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the individual enrollment"
+              },
+              {
+                "name": "effective_date",
+                "value": "",
+                "type": "query",
+                "description": "The relative date on which to view the state of the record"
+              }
+            ]
+          },
+          "docs": "Returns the latest version of a single individual enrollment based on the ID provided."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

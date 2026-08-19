@@ -1,0 +1,126 @@
+{
+  "item": [
+    {
+      "id": "1532c617-893a-4b45-b260-79b63dfce1bf",
+      "name": "Cases",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6bdf7115-a46e-4488-a4b5-dfc436bc223f",
+          "name": "Get a Case for a Member Transaction",
+          "request": {
+            "name": "Get a Case for a Member Transaction",
+            "description": {
+              "content": "Returns a case if one exists for the member transaction based on the ID provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "member_transactions",
+                ":transaction_id",
+                "case"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "transaction_id",
+                  "description": "(Required) The unique identifier of the member transaction to get the case through."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "27fcbb4c-84a8-4be2-bca6-4db8ebe13103",
+              "name": "Successful Response - Returns a single Case associated with the Member Transaction",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "member_transactions",
+                    ":transaction_id",
+                    "case"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "transaction_id",
+                      "description": "(Required) The unique identifier of the member transaction to get the case through."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action_owner\": \"noyo\",\n  \"automated\": false,\n  \"created\": 1704153600,\n  \"id\": \"51881720-508f-4ddd-8485-0584179f4b7b\",\n  \"modified\": 1704153600,\n  \"resolved\": null,\n  \"title\": \"Public message for Case\",\n  \"version\": \"160d4e95-7242-494d-a2aa-0d10042de94e\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "54e7f611-4456-4f5e-bf22-11a371db3811",
+    "name": "Noyo Carrier Carrier Mapped Field Cases API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

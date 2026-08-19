@@ -1,0 +1,133 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Rule API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Rule",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Rules for a Group Mapping",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/group_mappings/:group_mapping_id/rules",
+            "params": [
+              {
+                "name": "group_mapping_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group mapping you would like to get rules for"
+              }
+            ]
+          },
+          "docs": "Returns a list of conditions based on the Group Mapping ID provided."
+        },
+        {
+          "info": {
+            "name": "Create a new Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/group_mappings/:group_mapping_id/rules",
+            "params": [
+              {
+                "name": "group_mapping_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group mapping you are creating a new rule for"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new Rule for a Group Mapping"
+        },
+        {
+          "info": {
+            "name": "Get a single Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/rules/:rule_id",
+            "params": [
+              {
+                "name": "rule_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the rule you would like to view"
+              }
+            ]
+          },
+          "docs": "Returns the latest version of a single rule based on the ID provided."
+        },
+        {
+          "info": {
+            "name": "Edit a Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/rules/:rule_id/:version",
+            "params": [
+              {
+                "name": "rule_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the rule you want to edit."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "Unique version of the rule you want to edit."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit a rule based on the ID provided. The version parameter must match the latest rule version."
+        },
+        {
+          "info": {
+            "name": "Delete a Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/rules/:rule_id/:version",
+            "params": [
+              {
+                "name": "rule_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the rule you want to delete"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "Unique version of the rule you want to delete"
+              }
+            ]
+          },
+          "docs": "Delete a rule based on the ID provided. The version parameter must match the latest rule version. Also deletes all conditions for this rule."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

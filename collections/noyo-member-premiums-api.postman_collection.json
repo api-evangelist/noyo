@@ -1,0 +1,138 @@
+{
+  "item": [
+    {
+      "id": "752c4839-84d2-491c-81c6-d974f71b9f8b",
+      "name": "Member Premiums",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0930735e-0451-4677-b8be-c6d080e313a7",
+          "name": "Get a list of all Member Premiums",
+          "request": {
+            "name": "Get a list of all Member Premiums",
+            "description": {
+              "content": "Returns list of Member Premium information for an employee and dependents",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "employees",
+                ":employee_id",
+                "premiums"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "effective_date",
+                  "value": "<date>",
+                  "description": "The relative date on which to view the state of the records. Defaults to today"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employee_id",
+                  "description": "(Required) Unique ID of the employee in Noyo"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6d2eeea8-ed38-49c8-a661-226f89ab98a6",
+              "name": "Paginated List of Member Premiums",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "employees",
+                    ":employee_id",
+                    "premiums"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "effective_date",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employee_id",
+                      "description": "(Required) Unique ID of the employee in Noyo"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 2\n  },\n  \"response\": [\n    {\n      \"amount\": \"50.00\",\n      \"billed_members\": [\n        {\n          \"line_of_coverage\": \"dental\",\n          \"member_id\": \"4638b93f-b20a-4922-82b1-0f406891e2e3\",\n          \"member_type\": \"employee\",\n          \"plan_id\": \"8609ee91-772a-4047-8e2b-a79883cf05ea\"\n        },\n        {\n          \"line_of_coverage\": \"vision\",\n          \"member_id\": \"4638b93f-b20a-4922-82b1-0f406891e2e3\",\n          \"member_type\": \"employee\",\n          \"plan_id\": \"e1793d34-700b-4c14-9425-d0f4f426d4d0\"\n        },\n        {\n          \"line_of_coverage\": \"dental\",\n          \"member_id\": \"67309c4b-12f5-4bb0-92ce-a45639af9055\",\n          \"member_type\": \"dependent\",\n          \"plan_id\": \"8609ee91-772a-4047-8e2b-a79883cf05ea\"\n        },\n        {\n          \"line_of_coverage\": \"vision\",\n          \"member_id\": \"8f5aaf65-c4e6-4909-9ebf-58b320645df2\",\n          \"member_type\": \"dependent\",\n          \"plan_id\": \"e1793d34-700b-4c14-9425-d0f4f426d4d0\"\n        }\n      ],\n      \"carrier_id\": \"e2c76400-b505-432a-a1c1-c777bcec4648\",\n      \"created\": 1599184829,\n      \"effective_end_date\": \"2020-12-31\",\n      \"effective_start_date\": \"2020-01-01\",\n      \"modified\": 1599292817,\n      \"period\": {\n        \"amount\": 1,\n        \"unit\": \"month\"\n      },\n      \"premium_type\": \"employer_amount\"\n    },\n    {\n      \"amount\": \"50.00\",\n      \"billed_members\": [\n        {\n          \"line_of_coverage\": \"dental\",\n          \"member_id\": \"4638b93f-b20a-4922-82b1-0f406891e2e3\",\n          \"member_type\": \"employee\",\n          \"plan_id\": \"8609ee91-772a-4047-8e2b-a79883cf05ea\"\n        },\n        {\n          \"line_of_coverage\": \"vision\",\n          \"member_id\": \"4638b93f-b20a-4922-82b1-0f406891e2e3\",\n          \"member_type\": \"employee\",\n          \"plan_id\": \"e1793d34-700b-4c14-9425-d0f4f426d4d0\"\n        },\n        {\n          \"line_of_coverage\": \"dental\",\n          \"member_id\": \"67309c4b-12f5-4bb0-92ce-a45639af9055\",\n          \"member_type\": \"dependent\",\n          \"plan_id\": \"8609ee91-772a-4047-8e2b-a79883cf05ea\"\n        },\n        {\n          \"line_of_coverage\": \"vision\",\n          \"member_id\": \"8f5aaf65-c4e6-4909-9ebf-58b320645df2\",\n          \"member_type\": \"dependent\",\n          \"plan_id\": \"e1793d34-700b-4c14-9425-d0f4f426d4d0\"\n        }\n      ],\n      \"carrier_id\": \"e2c76400-b505-432a-a1c1-c777bcec4648\",\n      \"created\": 1599184829,\n      \"effective_end_date\": \"2020-12-31\",\n      \"effective_start_date\": \"2020-01-01\",\n      \"modified\": 1599292817,\n      \"period\": {\n        \"amount\": 1,\n        \"unit\": \"month\"\n      },\n      \"premium_type\": \"employee_amount\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "334b7864-baa7-4720-a8ef-ccfff96080fa",
+    "name": "Noyo Carrier Carrier Mapped Field Member Premiums API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

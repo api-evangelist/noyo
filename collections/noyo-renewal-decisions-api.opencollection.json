@@ -1,0 +1,274 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Renewal Decisions API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Renewal Decisions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get renewal decisions by group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/groups/:group_id/renewal_decisions",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group for which you are retrieving renewal decisions"
+              },
+              {
+                "name": "renewal_date",
+                "value": "",
+                "type": "query",
+                "description": "Renewal date to filter by, exact match"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Filter request by renewal date starting from date provided"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Filter request by renewal date up to date provided"
+              }
+            ]
+          },
+          "docs": "Returns all renewal decisions for a group. This includes the status, which determines whether the carrier is ready to accept member requests for the new plan year. If the status is `not_ready`, Noyo will return one or more issues, each with a level and message."
+        },
+        {
+          "info": {
+            "name": "Create a new renewal decision",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/groups/:group_id/renewal_decisions",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group for which you are creating a new renewal decision"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new renewal decision for a given renewal date."
+        },
+        {
+          "info": {
+            "name": "Get an existing renewal decision by id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/groups/:group_id/renewal_decisions/:renewal_decision_id",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group for which you are retrieving a renewal decision"
+              },
+              {
+                "name": "renewal_decision_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the renewal decision you want to retrieve"
+              }
+            ]
+          },
+          "docs": "Returns a renewal decision by ID."
+        },
+        {
+          "info": {
+            "name": "Get renewal decisions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/renewal_decisions",
+            "params": [
+              {
+                "name": "group_name",
+                "value": "",
+                "type": "query",
+                "description": "Group name to filter by, exact match"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status to filter by, exact match"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Filter request by renewal date starting from date provided"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Filter request by renewal date up to date provided"
+              }
+            ]
+          },
+          "docs": "Returns all renewal decisions. This includes the status, which determines whether the carrier is ready to accept member requests for the new plan year. If the status is `not_ready`, Noyo will return one or more issues, each with a level and message."
+        },
+        {
+          "info": {
+            "name": "Edit a renewal decision",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/renewal_decisions/:renewal_decision_id/:version",
+            "params": [
+              {
+                "name": "renewal_decision_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the renewal decision you want to edit"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the renewal decision version you want to edit"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit an existing renewal decision for a group."
+        },
+        {
+          "info": {
+            "name": "Get renewal decisions for UI purposes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ui/v1/renewal_decisions",
+            "params": [
+              {
+                "name": "group_name",
+                "value": "",
+                "type": "query",
+                "description": "Group name to filter by, partial match"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status to filter by"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Filter request by renewal date starting from date provided"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Filter request by renewal date up to date provided"
+              }
+            ]
+          },
+          "docs": "Returns all renewal decisions for UI purposes. This includes the status, which determines whether the carrier is ready to accept member requests for the new plan year. If the status is `not_ready`, Noyo will return one or more issues, each with a level and message."
+        },
+        {
+          "info": {
+            "name": "Get counts of renewal decisions by various attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ui/v1/renewal_decisions/counts",
+            "params": [
+              {
+                "name": "counts_by",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated attributes to count by"
+              },
+              {
+                "name": "group_name",
+                "value": "",
+                "type": "query",
+                "description": "Group name to filter by, partial match"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status to filter by"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Filter request by renewal date starting from date provided"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Filter request by renewal date up to date provided"
+              }
+            ]
+          },
+          "docs": "Retrieve counts of renewal decisions broken down by attributes"
+        },
+        {
+          "info": {
+            "name": "Mark a renewal decision as done",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/ui/v1/renewal_decisions/:renewal_decision_id/:version/done",
+            "params": [
+              {
+                "name": "renewal_decision_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the renewal decision you want to edit"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the renewal decision version you want to edit"
+              }
+            ]
+          },
+          "docs": "Mark an existing \"ready\" status renewal decision as done"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

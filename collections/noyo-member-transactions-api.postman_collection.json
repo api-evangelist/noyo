@@ -1,0 +1,948 @@
+{
+  "item": [
+    {
+      "id": "a59812a3-7afc-4262-9a1a-1e209ddae56a",
+      "name": "Member Transactions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9f066896-4dc6-4c05-ad82-fadfb3340209",
+          "name": "Get a list of all Member Transactions",
+          "request": {
+            "name": "Get a list of all Member Transactions",
+            "description": {
+              "content": "Returns a list of all member transactions for a given member request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "member_requests",
+                ":request_id",
+                "member_transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "request_id",
+                  "description": "(Required) The unique identifier of the member request for which you would like to view member transaction"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1bc30590-0a72-4f52-95d0-530fb559e437",
+              "name": "Successful Response - Returns all matching Member Transactions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "member_requests",
+                    ":request_id",
+                    "member_transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "request_id",
+                      "description": "(Required) The unique identifier of the member request for which you would like to view member transaction"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 1\n  },\n  \"response\": [\n    {\n      \"body\": {\n        \"coverages\": [\n          {\n            \"carrier_config\": {\n              \"bill_group\": \"1000001\",\n              \"member_group\": \"99999\"\n            },\n            \"carrier_id\": \"d0003042-eaae-4491-b219-4825456a3d16\",\n            \"lines_of_coverage\": {\n              \"dental\": {\n                \"enrolling_members\": [\n                  {\n                    \"id\": \"25434576-e85d-481b-a825-962fd575046f\",\n                    \"member_type\": \"employee\",\n                    \"plan_id\": \"2e6a04b6-21f3-40d7-a9e2-735196cc451b\"\n                  }\n                ],\n                \"waiving_members\": []\n              },\n              \"medical\": {\n                \"enrolling_members\": [\n                  {\n                    \"id\": \"25434576-e85d-481b-a825-962fd575046f\",\n                    \"member_type\": \"employee\",\n                    \"plan_id\": \"1873df52-c9e9-4e3a-995c-f47f32d0bd62\"\n                  }\n                ],\n                \"waiving_members\": []\n              },\n              \"vision\": {\n                \"enrolling_members\": [\n                  {\n                    \"id\": \"25434576-e85d-481b-a825-962fd575046f\",\n                    \"member_type\": \"employee\",\n                    \"plan_id\": \"9cb64800-022e-40af-ab80-8d945e430592\"\n                  }\n                ],\n                \"waiving_members\": []\n              }\n            }\n          }\n        ]\n      },\n      \"carrier_id\": \"478e066e-9696-490e-b60f-47f40c96dc7c\",\n      \"created\": 1557512389,\n      \"employee_id\": \"25434576-e85d-481b-a825-962fd575046f\",\n      \"id\": \"a6e30204-87b2-4802-95a4-a156bd0f7435\",\n      \"lines_of_coverage\": [\n        \"medical\",\n        \"dental\",\n        \"vision\"\n      ],\n      \"member_request_id\": \"bba6ea27-4004-4a52-a3d9-f986ace0d3da\",\n      \"modified\": 1564440756,\n      \"status\": \"processing\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c1b9749d-976d-4cd8-9425-d0a5be99199c",
+          "name": "Get a list of all Member Transactions",
+          "request": {
+            "name": "Get a list of all Member Transactions",
+            "description": {
+              "content": "Returns a list of all member transactions",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "member_transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "ids",
+                  "value": "<string>",
+                  "description": "Comma-separated member transaction IDs you would like to view"
+                },
+                {
+                  "disabled": false,
+                  "key": "status_details",
+                  "value": "<string>",
+                  "description": "Comma-separated list of status details to be filtered on"
+                },
+                {
+                  "disabled": false,
+                  "key": "current_status_detail",
+                  "value": "<boolean>",
+                  "description": "indicates whether the filter should operate on the current status detail or the entire history of status details"
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier_ids",
+                  "value": "<string>",
+                  "description": "Comma-separated list of carrier IDs to be filtered on"
+                },
+                {
+                  "disabled": false,
+                  "key": "transaction_type",
+                  "value": "<string>",
+                  "description": "Transaction type of the member transaction"
+                },
+                {
+                  "disabled": false,
+                  "key": "transaction_min_date",
+                  "value": "<string>",
+                  "description": "Earliest date that the transaction was created"
+                },
+                {
+                  "disabled": false,
+                  "key": "transaction_max_date",
+                  "value": "<string>",
+                  "description": "Latest date that the transaction was created"
+                },
+                {
+                  "disabled": false,
+                  "key": "status_detail_min_date",
+                  "value": "<string>",
+                  "description": "Earliest date that the transaction entered the given status detail(s)"
+                },
+                {
+                  "disabled": false,
+                  "key": "status_detail_max_date",
+                  "value": "<string>",
+                  "description": "Latest date that the transaction entered the given status detail(s)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0af99007-5474-4457-b94c-c990fe8ef3a1",
+              "name": "Successful Response - Returns all matching Member Transactions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "member_transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status_details",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "current_status_detail",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "carrier_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_min_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_max_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status_detail_min_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status_detail_max_date",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 1\n  },\n  \"response\": [\n    {\n      \"body\": {\n        \"coverages\": [\n          {\n            \"carrier_config\": {\n              \"bill_group\": \"1000001\",\n              \"member_group\": \"99999\"\n            },\n            \"carrier_id\": \"d0003042-eaae-4491-b219-4825456a3d16\",\n            \"lines_of_coverage\": {\n              \"dental\": {\n                \"enrolling_members\": [\n                  {\n                    \"id\": \"25434576-e85d-481b-a825-962fd575046f\",\n                    \"member_type\": \"employee\",\n                    \"plan_id\": \"2e6a04b6-21f3-40d7-a9e2-735196cc451b\"\n                  }\n                ],\n                \"waiving_members\": []\n              },\n              \"medical\": {\n                \"enrolling_members\": [\n                  {\n                    \"id\": \"25434576-e85d-481b-a825-962fd575046f\",\n                    \"member_type\": \"employee\",\n                    \"plan_id\": \"1873df52-c9e9-4e3a-995c-f47f32d0bd62\"\n                  }\n                ],\n                \"waiving_members\": []\n              },\n              \"vision\": {\n                \"enrolling_members\": [\n                  {\n                    \"id\": \"25434576-e85d-481b-a825-962fd575046f\",\n                    \"member_type\": \"employee\",\n                    \"plan_id\": \"9cb64800-022e-40af-ab80-8d945e430592\"\n                  }\n                ],\n                \"waiving_members\": []\n              }\n            }\n          }\n        ]\n      },\n      \"carrier_id\": \"478e066e-9696-490e-b60f-47f40c96dc7c\",\n      \"created\": 1557512389,\n      \"employee_id\": \"25434576-e85d-481b-a825-962fd575046f\",\n      \"id\": \"a6e30204-87b2-4802-95a4-a156bd0f7435\",\n      \"lines_of_coverage\": [\n        \"medical\",\n        \"dental\",\n        \"vision\"\n      ],\n      \"member_request_id\": \"bba6ea27-4004-4a52-a3d9-f986ace0d3da\",\n      \"modified\": 1564440756,\n      \"status\": \"processing\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3ac8caa5-c9e2-4dc5-b821-b15afa1e252e",
+          "name": "Get a single Member Transaction",
+          "request": {
+            "name": "Get a single Member Transaction",
+            "description": {
+              "content": "Returns the latest version of a single member transaction based on the ID provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "member_transactions",
+                ":transaction_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "transaction_id",
+                  "description": "(Required) The unique identifier of the member transaction you would like to view"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "446192f3-a17a-4e51-89c7-9856fb3e24a9",
+              "name": "Successful Response - Returns a single Member Transaction",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "member_transactions",
+                    ":transaction_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "transaction_id",
+                      "description": "(Required) The unique identifier of the member transaction you would like to view"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"body\": {\n    \"coverages\": [\n      {\n        \"carrier_config\": {\n          \"bill_group\": \"1000001\",\n          \"member_group\": \"99999\"\n        },\n        \"carrier_id\": \"d0003042-eaae-4491-b219-4825456a3d16\",\n        \"lines_of_coverage\": {\n          \"dental\": {\n            \"enrolling_members\": [\n              {\n                \"id\": \"25434576-e85d-481b-a825-962fd575046f\",\n                \"member_type\": \"employee\",\n                \"plan_id\": \"2e6a04b6-21f3-40d7-a9e2-735196cc451b\"\n              }\n            ],\n            \"waiving_members\": []\n          },\n          \"medical\": {\n            \"enrolling_members\": [\n              {\n                \"id\": \"25434576-e85d-481b-a825-962fd575046f\",\n                \"member_type\": \"employee\",\n                \"plan_id\": \"1873df52-c9e9-4e3a-995c-f47f32d0bd62\"\n              }\n            ],\n            \"waiving_members\": []\n          },\n          \"vision\": {\n            \"enrolling_members\": [\n              {\n                \"id\": \"25434576-e85d-481b-a825-962fd575046f\",\n                \"member_type\": \"employee\",\n                \"plan_id\": \"9cb64800-022e-40af-ab80-8d945e430592\"\n              }\n            ],\n            \"waiving_members\": []\n          }\n        }\n      }\n    ]\n  },\n  \"carrier_id\": \"478e066e-9696-490e-b60f-47f40c96dc7c\",\n  \"created\": 1557512389,\n  \"employee_id\": \"25434576-e85d-481b-a825-962fd575046f\",\n  \"id\": \"a6e30204-87b2-4802-95a4-a156bd0f7435\",\n  \"lines_of_coverage\": [\n    \"medical\",\n    \"dental\",\n    \"vision\"\n  ],\n  \"member_request_id\": \"bba6ea27-4004-4a52-a3d9-f986ace0d3da\",\n  \"modified\": 1564440756,\n  \"status\": \"processing\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d86d0165-11a0-4421-8bad-2551beb0a80c",
+          "name": "Get a Case for a Member Transaction",
+          "request": {
+            "name": "Get a Case for a Member Transaction",
+            "description": {
+              "content": "Returns a case if one exists for the member transaction based on the ID provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "member_transactions",
+                ":transaction_id",
+                "case"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "transaction_id",
+                  "description": "(Required) The unique identifier of the member transaction to get the case through."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "70f49df3-ba1c-4fdf-b780-385ff818e2ff",
+              "name": "Successful Response - Returns a single Case associated with the Member Transaction",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "member_transactions",
+                    ":transaction_id",
+                    "case"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "transaction_id",
+                      "description": "(Required) The unique identifier of the member transaction to get the case through."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action_owner\": \"noyo\",\n  \"automated\": false,\n  \"created\": 1704153600,\n  \"id\": \"51881720-508f-4ddd-8485-0584179f4b7b\",\n  \"modified\": 1704153600,\n  \"resolved\": null,\n  \"title\": \"Public message for Case\",\n  \"version\": \"160d4e95-7242-494d-a2aa-0d10042de94e\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7f71f867-faac-4d04-a6f1-db5821597a67",
+          "name": "Get a list of all Member Transactions by Member Request",
+          "request": {
+            "name": "Get a list of all Member Transactions by Member Request",
+            "description": {
+              "content": "Returns a list of all member transactions for a given member request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "member_requests",
+                ":request_id",
+                "member_transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "ui_body",
+                  "value": "<boolean>",
+                  "description": "Optionally include a restructured form of the body for UI display purposes"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "request_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6746ea10-4de2-4fa3-b5a3-b9c073b53dc0",
+              "name": "Successful Response - Returns all matching Member Transactions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "member_requests",
+                    ":request_id",
+                    "member_transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ui_body",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "request_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 1\n  },\n  \"response\": [\n    {\n      \"body\": {\n        \"coverages\": [\n          {\n            \"carrier_config\": {\n              \"bill_group\": \"1000001\",\n              \"member_group\": \"99999\"\n            },\n            \"carrier_id\": \"d0003042-eaae-4491-b219-4825456a3d16\",\n            \"lines_of_coverage\": {\n              \"dental\": {\n                \"enrolling_members\": [\n                  {\n                    \"id\": \"25434576-e85d-481b-a825-962fd575046f\",\n                    \"member_type\": \"employee\",\n                    \"plan_id\": \"2e6a04b6-21f3-40d7-a9e2-735196cc451b\"\n                  }\n                ],\n                \"waiving_members\": []\n              },\n              \"medical\": {\n                \"enrolling_members\": [\n                  {\n                    \"id\": \"25434576-e85d-481b-a825-962fd575046f\",\n                    \"member_type\": \"employee\",\n                    \"plan_id\": \"1873df52-c9e9-4e3a-995c-f47f32d0bd62\"\n                  }\n                ],\n                \"waiving_members\": []\n              },\n              \"vision\": {\n                \"enrolling_members\": [\n                  {\n                    \"id\": \"25434576-e85d-481b-a825-962fd575046f\",\n                    \"member_type\": \"employee\",\n                    \"plan_id\": \"9cb64800-022e-40af-ab80-8d945e430592\"\n                  }\n                ],\n                \"waiving_members\": []\n              }\n            }\n          }\n        ]\n      },\n      \"carrier_id\": \"478e066e-9696-490e-b60f-47f40c96dc7c\",\n      \"employee_id\": \"25434576-e85d-481b-a825-962fd575046f\",\n      \"id\": \"a6e30204-87b2-4802-95a4-a156bd0f7435\",\n      \"lines_of_coverage\": [\n        \"medical\",\n        \"dental\",\n        \"vision\"\n      ],\n      \"member_request_id\": \"bba6ea27-4004-4a52-a3d9-f986ace0d3da\",\n      \"status\": \"processing\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ec1c2a2d-06ef-4bb4-b201-f0bae669625b",
+          "name": "Gets member snapshot currently associated with a transaction",
+          "request": {
+            "name": "Gets member snapshot currently associated with a transaction",
+            "description": {
+              "content": "Gets member snapshot currently associated with a transaction",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "member_snapshots",
+                "member_transaction",
+                ":transaction_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "transaction_id",
+                  "description": "(Required) The unique identifier of the member transaction we are using to get associated member snapshot"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "adaa9bd3-8346-451f-9628-8317b5798d56",
+              "name": "Successful Response - Returns the Member Snapshot contents",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "member_snapshots",
+                    "member_transaction",
+                    ":transaction_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "transaction_id",
+                      "description": "(Required) The unique identifier of the member transaction we are using to get associated member snapshot"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 1656030390,\n  \"created_members\": [\n    {\n      \"custom_individual_id\": \"bb6bfcd8-6657-4b77-8151-949ea8b5e44e\",\n      \"id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n      \"type\": \"employee\"\n    },\n    {\n      \"custom_individual_id\": \"3f093cc0-4fef-4d5d-9267-ba5cdfc09827\",\n      \"id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n      \"type\": \"dependent\"\n    }\n  ],\n  \"employee_id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n  \"fulfillment_summary\": [\n    {\n      \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n      \"errors\": [],\n      \"status\": \"processing\"\n    }\n  ],\n  \"id\": \"7bea80ac-499d-560b-5512-60be9e2349cb\",\n  \"member_snapshot\": {\n    \"coverages\": [\n      {\n        \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n        \"enrolled_members\": [\n          {\n            \"effective_end_date\": \"9999-12-31\",\n            \"effective_start_date\": \"2022-01-01\",\n            \"event_id\": \"1\",\n            \"individual_id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n            \"individual_type\": \"employee\"\n          },\n          {\n            \"effective_end_date\": \"9999-12-31\",\n            \"effective_start_date\": \"2022-01-01\",\n            \"event_id\": \"1\",\n            \"individual_id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n            \"individual_type\": \"dependent\"\n          }\n        ],\n        \"line_of_coverage\": \"medical\",\n        \"plan_id\": \"4bf04f73-0aad-48ac-b28a-e5f4def7c5e9\",\n        \"signature_date\": \"2021-12-23\"\n      }\n    ],\n    \"dependents\": [\n      {\n        \"custom_individual_id\": \"3f093cc0-4fef-4d5d-9267-ba5cdfc09827\",\n        \"event_id\": \"1\",\n        \"id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n        \"person\": {\n          \"date_of_birth\": \"1990-01-02\",\n          \"first_name\": \"Jamie\",\n          \"last_name\": \"Johnson\",\n          \"sex\": \"F\"\n        },\n        \"relationship\": \"spouse\"\n      }\n    ],\n    \"employee\": {\n      \"custom_individual_id\": \"bb6bfcd8-6657-4b77-8151-949ea8b5e44e\",\n      \"event_id\": \"1\",\n      \"group_id\": \"d0ec3837-3499-4a2f-8c58-966ef7e46d95\",\n      \"id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n      \"person\": {\n        \"contact\": {\n          \"email_address\": \"david@testemail.com\"\n        },\n        \"date_of_birth\": \"1985-06-22\",\n        \"first_name\": \"David\",\n        \"home_address\": {\n          \"city\": \"San Francisco\",\n          \"state\": \"CA\",\n          \"street_one\": \"1234 Home Ave\",\n          \"zip_code\": \"94107\"\n        },\n        \"last_name\": \"Johnson\",\n        \"sex\": \"M\"\n      }\n    },\n    \"events\": [\n      {\n        \"date\": \"2022-01-01\",\n        \"id\": \"1\",\n        \"reason\": \"open_enrollment\",\n        \"type\": \"enrollment\"\n      }\n    ]\n  },\n  \"modified\": 1656030390,\n  \"status\": \"processing\",\n  \"version\": \"271c60d6-f009-4b3d-8bba-aac49b2dd9a4\",\n  \"warnings\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6f33d2e4-51ff-47e1-a116-3c9db069f6db",
+              "name": "Failure Response - Not found error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "member_snapshots",
+                    "member_transaction",
+                    ":transaction_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "transaction_id",
+                      "description": "(Required) The unique identifier of the member transaction we are using to get associated member snapshot"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"MemberTransaction not found with UUID 30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2d40e40d-abfd-4b56-a8a0-15913b78c895",
+          "name": "Get a list of all Member Transactions",
+          "request": {
+            "name": "Get a list of all Member Transactions",
+            "description": {
+              "content": "Returns a list of all member transactions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "member_transactions",
+                "public"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "group_id",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "case_id",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_resolved",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "min_date",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "max_date",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "transaction_type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "label_id",
+                  "value": "<uuid>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1f071c9f-9119-4a7e-9ad8-0ded87fabca3",
+              "name": "Successful Response - Returns all matching Member Transactions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "member_transactions",
+                    "public"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "group_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "case_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "is_resolved",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "min_date",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "max_date",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "transaction_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "label_id",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 2\n  },\n  \"response\": [\n    {\n      \"member_transaction\": {\n        \"body\": {\n          \"coverages\": [\n            {\n              \"carrier_config\": {\n                \"bill_group\": \"1000001\",\n                \"member_group\": \"99999\"\n              },\n              \"carrier_id\": \"d0003042-eaae-4491-b219-4825456a3d16\",\n              \"lines_of_coverage\": {\n                \"dental\": {\n                  \"enrolling_members\": [\n                    {\n                      \"id\": \"25434576-e85d-481b-a825-962fd575046f\",\n                      \"member_type\": \"employee\",\n                      \"plan_id\": \"2e6a04b6-21f3-40d7-a9e2-735196cc451b\"\n                    }\n                  ],\n                  \"waiving_members\": []\n                },\n                \"medical\": {\n                  \"enrolling_members\": [\n                    {\n                      \"id\": \"25434576-e85d-481b-a825-962fd575046f\",\n                      \"member_type\": \"employee\",\n                      \"plan_id\": \"1873df52-c9e9-4e3a-995c-f47f32d0bd62\"\n                    }\n                  ],\n                  \"waiving_members\": []\n                },\n                \"vision\": {\n                  \"enrolling_members\": [\n                    {\n                      \"id\": \"25434576-e85d-481b-a825-962fd575046f\",\n                      \"member_type\": \"employee\",\n                      \"plan_id\": \"9cb64800-022e-40af-ab80-8d945e430592\"\n                    }\n                  ],\n                  \"waiving_members\": []\n                }\n              }\n            }\n          ]\n        },\n        \"carrier_id\": \"478e066e-9696-490e-b60f-47f40c96dc7c\",\n        \"employee_id\": \"25434576-e85d-481b-a825-962fd575046f\",\n        \"id\": \"a6e30204-87b2-4802-95a4-a156bd0f7435\",\n        \"internal_status\": \"created\",\n        \"lines_of_coverage\": [\n          \"medical\",\n          \"dental\",\n          \"vision\"\n        ],\n        \"member_request_id\": \"bba6ea27-4004-4a52-a3d9-f986ace0d3da\",\n        \"status\": \"processing\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "30dc0800-47cc-4318-a37f-c7f40c8b7e80",
+    "name": "Noyo Carrier Carrier Mapped Field Member Transactions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

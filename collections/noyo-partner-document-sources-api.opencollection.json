@@ -1,0 +1,98 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Partner Document Sources API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Partner Document Sources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get partner document sources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/partner_document_sources",
+            "params": [
+              {
+                "name": "partner_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by partner ID"
+              },
+              {
+                "name": "partner_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by partner type"
+              },
+              {
+                "name": "match_strategy",
+                "value": "",
+                "type": "query",
+                "description": "Filter by match strategy"
+              },
+              {
+                "name": "group_ids",
+                "value": "",
+                "type": "query",
+                "description": "Filter by associated group IDs"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "Field to sort results by"
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query",
+                "description": "Direction to sort results (asc or desc)"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of partner document sources"
+        },
+        {
+          "info": {
+            "name": "Get a single partner document source",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/partner_document_sources/:source_id",
+            "params": [
+              {
+                "name": "source_id",
+                "value": "",
+                "type": "path",
+                "description": "Partner document source ID"
+              }
+            ]
+          },
+          "docs": "Returns a single partner document source by ID"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

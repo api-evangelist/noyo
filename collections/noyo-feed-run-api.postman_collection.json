@@ -1,0 +1,260 @@
+{
+  "item": [
+    {
+      "id": "728685e3-40ca-4a76-98b7-78b0ff42edb4",
+      "name": "Feed Run",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "62427a8d-3008-4be4-a3f8-c2da5fc41c29",
+          "name": "Get a list of feed runs",
+          "request": {
+            "name": "Get a list of feed runs",
+            "description": {
+              "content": "Returns a list of feed runs",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "feed_runs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "feed_id",
+                  "value": "<uuid>",
+                  "description": "Unique identifier of the feed"
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier_id",
+                  "value": "<uuid>",
+                  "description": "Unique identifier of the carrier"
+                },
+                {
+                  "disabled": false,
+                  "key": "group_id",
+                  "value": "<uuid>",
+                  "description": "Unique identifier of the group"
+                },
+                {
+                  "disabled": false,
+                  "key": "latest",
+                  "value": "<boolean>",
+                  "description": "Return only the most recent feed run"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4f423e98-6ed3-48a0-98d6-9b10385a7fd5",
+              "name": "Successful Response - Returns all matching feed runs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "feed_runs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "feed_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "carrier_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "group_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "latest",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 1\n  },\n  \"response\": [\n    {\n      \"carrier_id\": \"95ce77a6-30fd-4bd9-af10-8d3a1744ac2e\",\n      \"completed\": 1693229599,\n      \"created\": 1693229402,\n      \"details\": {\n        \"file\": {\n          \"audit\": {\n            \"count\": {\n              \"dependents\": 25,\n              \"enrollments\": 200,\n              \"members\": 100,\n              \"primaries\": 75,\n              \"terminations\": 0\n            }\n          },\n          \"name\": \"test.txt\"\n        },\n        \"transmission\": {\n          \"id\": \"55504298-11d6-4933-924b-de69b6c40ba7\",\n          \"sent_timestamp\": 1693229505\n        }\n      },\n      \"feed_id\": \"0b30d7fe-ab78-4b2f-b714-36e8a9625481\",\n      \"group_ids\": [\n        \"5546d578-1952-4e73-8475-f3436d4d085b\",\n        \"8efdfb13-0c30-4416-9094-a364b943631f\"\n      ],\n      \"id\": \"9e51951a-663d-4b57-bfca-71cc01a7ace7\",\n      \"initiated\": 1693229402,\n      \"modified\": 1693229599,\n      \"status\": \"completed\",\n      \"version\": \"30c02a09-3713-4b32-a12c-55d33adf748f\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2d071b09-2e55-4216-9f7c-cae7d9c046ed",
+          "name": "Get a feed run ",
+          "request": {
+            "name": "Get a feed run ",
+            "description": {
+              "content": "Returns a feed run",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "feed_runs",
+                ":feed_run_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "feed_run_id",
+                  "description": "(Required) Unique identifier of the feed run"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f68fd408-5117-4702-896e-77231c9f998a",
+              "name": "Successful Response - Returns a single feed run",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "feed_runs",
+                    ":feed_run_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "feed_run_id",
+                      "description": "(Required) Unique identifier of the feed run"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"carrier_id\": \"c1ac5a2f-eb19-440d-b770-c5c58e834da3\",\n  \"completed\": 1693229599,\n  \"created\": 1693229402,\n  \"details\": {\n    \"file\": {\n      \"audit\": {\n        \"count\": {\n          \"dependents\": 25,\n          \"enrollments\": 200,\n          \"members\": 100,\n          \"primaries\": 75,\n          \"terminations\": 0\n        }\n      },\n      \"name\": \"file.txt\"\n    },\n    \"transmission\": {\n      \"id\": \"55504298-11d6-4933-924b-de69b6c40ba7\",\n      \"sent_timestamp\": 1693229505\n    }\n  },\n  \"feed_id\": \"0b30d7fe-ab78-4b2f-b714-36e8a9625481\",\n  \"id\": \"2ff3d24b-c1e7-40a6-b8da-7e085cc17831\",\n  \"initiated\": 1693229402,\n  \"modified\": 1693229599,\n  \"status\": \"completed\",\n  \"version\": \"30c02a09-3713-4b32-a12c-55d33adf748f\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "974de76b-95fc-45d0-b66f-c5d6d8fa26f8",
+    "name": "Noyo Carrier Carrier Mapped Field Feed Run API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

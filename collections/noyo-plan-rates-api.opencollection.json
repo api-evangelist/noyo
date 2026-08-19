@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Plan Rates API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Plan Rates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Plan Rates by Group ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/groups/:group_id/plan_rates",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "123e4567-e89b-12d3-a456-426614174000",
+                "type": "path",
+                "description": "Unique identifier of the group to filter by"
+              }
+            ]
+          },
+          "docs": "Retrieves all temporal plan rates for a specific group, organized by plan ID.\nThis endpoint queries plan rates by filtering by group_id.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,520 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Member Requests API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Member Requests",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all Member Requests for Employee",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/employees/:employee_id/member_requests",
+            "params": [
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the employee for which you would like to view member requests"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              }
+            ]
+          },
+          "docs": "Returns a list of all member requests for a given employee. Each member request may have one or more associated member transactions."
+        },
+        {
+          "info": {
+            "name": "Create a COBRA Enrollment Member Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/employees/:employee_id/member_requests/cobra_enrollment",
+            "params": [
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the employee related to the member request"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The COBRA enrollment member request is used to add an existing employee, and optionally their dependents to multiple coverages at multiple carriers. This is for a continuation of benefits situation, when main line coverage either has already been terminated, or will be in conjunction with this member request.\n"
+        },
+        {
+          "info": {
+            "name": "Create a COBRA Open Enrollment Member Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/employees/:employee_id/member_requests/cobra_open_enrollment",
+            "params": [
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the employee related to the member request"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The COBRA open enrollment member request is used to make changes to employees, dependents and COBRA coverages during the open enrollment period."
+        },
+        {
+          "info": {
+            "name": "Create a COBRA Qualifying Life Event Member Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/employees/:employee_id/member_requests/cobra_qualifying_life_event",
+            "params": [
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the employee related to the member request"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The COBRA qualifying life event member request is used to make changes to employees, dependents and COBRA coverages due to a qualifying life event."
+        },
+        {
+          "info": {
+            "name": "Create a COBRA Termination Member Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/employees/:employee_id/member_requests/cobra_termination",
+            "params": [
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the employee related to the member request"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The COBRA termination member request is used to remove an employee and their dependents from COBRA coverage at all carriers. The `cobra_termination_date` is the date on which the COBRA coverage should be terminated."
+        },
+        {
+          "info": {
+            "name": "Create a Demographic Change Member Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/employees/:employee_id/member_requests/demographic",
+            "params": [
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the employee related to the member request"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The demographic change member request is used to update information such as name, address, and salary for one or many members. The updates will be carried out for each carrier that has a record of each member."
+        },
+        {
+          "info": {
+            "name": "Create an Enrollment Snapshot Member Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/employees/:employee_id/member_requests/enrollment_snapshot",
+            "params": [
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the employee related to the member request"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The Enrollment Snapshot Member Request allows you to communicate the desired state of an employee's coverage elections during an employee's new hire period. You can use it in one of two cases:\n\n* To enroll an employee and their dependents for the first time. Please reference the [New Hire Enrollment](#new-hire-enrollment) documentation section for more details.\n* To amend and replace a previous New Hire member request with the latest complete set of coverage elections, described in this section "
+        },
+        {
+          "info": {
+            "name": "Create a New Hire Enrollment Member Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/employees/:employee_id/member_requests/new_hire",
+            "params": [
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the employee related to the member request"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The new hire member request is used to add an existing employee, and optionally their dependents to multiple coverages at multiple carriers."
+        },
+        {
+          "info": {
+            "name": "Create a Open Enrollment Member Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/employees/:employee_id/member_requests/open_enrollment",
+            "params": [
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the employee related to the member request"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The open enrollment member request is used to make changes to existing employees, dependents and coverages during the open enrollment period."
+        },
+        {
+          "info": {
+            "name": "Create a Qualifying Life Event Member Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/employees/:employee_id/member_requests/qualifying_life_event",
+            "params": [
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the employee related to the member request"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The qualifying life event member request is used to make changes to existing employees, dependents and coverages due to a qualifying life event."
+        },
+        {
+          "info": {
+            "name": "Create a Termination Member Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/employees/:employee_id/member_requests/termination",
+            "params": [
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the employee related to the member request"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The `termination` member request is used to remove an employee and their dependents from coverage at all carriers. The `last_work_date` will be communicated to the carrier and the `last_day_of_coverage` will be determined by the carrier and included in the result."
+        },
+        {
+          "info": {
+            "name": "Get all Member Requests for Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/member_requests",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              },
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of the employee in Noyo for which you would like to filter"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "The member request status for which you would like to filter"
+              },
+              {
+                "name": "request_type",
+                "value": "",
+                "type": "query",
+                "description": "The member request type for which you would like to filter"
+              }
+            ]
+          },
+          "docs": "Returns a list of all member requests for a given organization. Each member request may have one or more associated member transactions."
+        },
+        {
+          "info": {
+            "name": "Get a single Member Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/member_requests/:request_id",
+            "params": [
+              {
+                "name": "request_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the member request you would like to view"
+              }
+            ]
+          },
+          "docs": "Returns the latest version of a single member request based on the ID provided."
+        },
+        {
+          "info": {
+            "name": "Get a list of all Member Requests by Employee",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ui/v1/employees/:employee_id/member_requests",
+            "params": [
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the employee for which you would like to view member requests"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              },
+              {
+                "name": "first_name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "last_name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a list of all member requests for a given employee."
+        },
+        {
+          "info": {
+            "name": "Get a list of all Member Requests by Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ui/v1/groups/:group_id/member_requests",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group for which you would like to view member requests"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              },
+              {
+                "name": "first_name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "last_name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "The attribute on which to sort the member requests"
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query",
+                "description": "Either asc or desc, to denote the data's direction"
+              }
+            ]
+          },
+          "docs": "Returns a list of all member requests for a given group."
+        },
+        {
+          "info": {
+            "name": "Get a list of all Member Requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ui/v1/member_requests",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              },
+              {
+                "name": "first_name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "last_name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "The attribute on which to sort the member requests"
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query",
+                "description": "Either asc or desc, to denote the data's direction"
+              }
+            ]
+          },
+          "docs": "Returns a list of all member requests."
+        },
+        {
+          "info": {
+            "name": "Get a single Member Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ui/v1/member_requests/:request_id",
+            "params": [
+              {
+                "name": "request_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the latest version of a single member request based on the ID provided."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

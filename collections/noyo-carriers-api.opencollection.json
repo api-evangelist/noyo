@@ -1,0 +1,100 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Carriers API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Carriers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query for list of matching carriers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/carriers",
+            "params": [
+              {
+                "name": "state",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "internal_name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "line_of_coverage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of the organization for which you would like to view carriers"
+              },
+              {
+                "name": "is_listed",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "is_send",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a list of all Carriers matching an optional query by name, state, line of coverage, or list of IDs."
+        },
+        {
+          "info": {
+            "name": "Create a new Organization Carrier Connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/carriers/request",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new Organization Carrier Connection"
+        },
+        {
+          "info": {
+            "name": "Get a single carrier",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/carriers/:carrier_id",
+            "params": [
+              {
+                "name": "carrier_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the latest version of a single Carrier based on the ID provided"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

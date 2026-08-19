@@ -1,0 +1,64 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Ui Group Connections API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Ui Group Connections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a single Group Connection Ui",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ui/v1/group_connections/:group_connection_id",
+            "params": [
+              {
+                "name": "group_connection_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group connection you would like to view"
+              }
+            ]
+          },
+          "docs": "Returns a single group connection based on the ID provided."
+        },
+        {
+          "info": {
+            "name": "Edit an existing Group Setup Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/ui/v1/group_connections/:group_connection_id/:version",
+            "params": [
+              {
+                "name": "group_connection_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit a group setup request based on the ID provided. The version parameter must match the latest group setup request version."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

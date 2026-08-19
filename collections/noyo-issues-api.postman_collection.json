@@ -1,0 +1,1105 @@
+{
+  "item": [
+    {
+      "id": "866d358d-bd32-4239-9af8-751862654bd1",
+      "name": "Issues",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "455dcb79-40bc-406e-b4bf-3dabaa6bc541",
+          "name": "List Issues",
+          "request": {
+            "name": "List Issues",
+            "description": {
+              "content": "List existing Issues. Supports filtering on various fields including array containment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "issues"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "partner_id",
+                  "value": "<uuid>",
+                  "description": "Filter by associated partner ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "group_id",
+                  "value": "<uuid>",
+                  "description": "Filter by associated group ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>,<string>",
+                  "description": "Filter by issue status. Supports single value (status=open) or comma-separated multiple values (status=open,pending_resolution)."
+                },
+                {
+                  "disabled": false,
+                  "key": "member_id",
+                  "value": "<uuid>",
+                  "description": "Filter by associated member ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "employee_id",
+                  "value": "<uuid>",
+                  "description": "Filter by associated employee ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "partner_document_source_id",
+                  "value": "<uuid>",
+                  "description": "Filter by associated partner document source ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "originating_record_ids",
+                  "value": "<uuid>,<uuid>",
+                  "description": "Filter by issues containing specific originating record IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>",
+                  "description": "Filter by the source system or process that created this issue."
+                },
+                {
+                  "disabled": false,
+                  "key": "category",
+                  "value": "<string>",
+                  "description": "Filter by the category of error for this issue."
+                },
+                {
+                  "disabled": false,
+                  "key": "issue_key",
+                  "value": "<string>",
+                  "description": "Filter by issue_key - a unique identifier for the issue."
+                },
+                {
+                  "disabled": false,
+                  "key": "dismissed",
+                  "value": "<boolean>",
+                  "description": "Filter by dismissed state."
+                },
+                {
+                  "disabled": false,
+                  "key": "resolution_action",
+                  "value": "<string>",
+                  "description": "Filter by resolution action explanation (filters on data->resolution->action->explanation). Only matches issues where the nested path exists."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Number of records to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Number of records to skip for pagination."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1d9432a2-47be-4bab-b9d6-404a0f5c777a",
+              "name": "Successful Response - Returns a paginated list of Issues.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "issues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partner_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "group_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "member_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "employee_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "partner_document_source_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "originating_record_ids",
+                      "value": "<uuid>,<uuid>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "issue_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dismissed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "resolution_action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 2\n  },\n  \"response\": [\n    {\n      \"category\": \"invalid_ssn\",\n      \"created\": 1697380200,\n      \"dismissed\": false,\n      \"employee_id\": \"7027d416-3bed-43e8-b824-508d9c0d323e\",\n      \"group_id\": \"436fb487-bb75-42d4-9651-7b1471a8940e\",\n      \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n      \"issue_key\": \"a1b2c3d4e5f6789012345678901234567890123456789012345678901234567890\",\n      \"last_seen\": \"2023-10-15T14:30:00Z\",\n      \"member_id\": \"7027d416-3bed-43e8-b824-508d9c0d323e\",\n      \"member_type\": \"employee\",\n      \"modified\": 1697380200,\n      \"partner_id\": \"8fac0992-933a-4743-8dab-0d606ef2569e\",\n      \"resolved_at\": null,\n      \"status\": \"open\",\n      \"version\": \"ea38e798-cd61-4fa2-b485-d1c5b87a61af\"\n    },\n    {\n      \"category\": \"invalid_demographic_info\",\n      \"created\": 1697280900,\n      \"dismissed\": false,\n      \"employee_id\": \"7027d416-3bed-43e8-b824-508d9c0d323e\",\n      \"group_id\": \"436fb487-bb75-42d4-9651-7b1471a8940e\",\n      \"id\": \"cc8b2924-48e8-5d8f-97cd-e152e3dce8b2\",\n      \"issue_key\": \"b2c3d4e5f6789012345678901234567890123456789012345678901234567891\",\n      \"last_seen\": \"2023-10-14T10:15:00Z\",\n      \"member_id\": \"8138e527-4cfe-54f9-c935-619e9d1d434f\",\n      \"member_type\": \"dependent\",\n      \"modified\": 1697304300,\n      \"partner_id\": \"8fac0992-933a-4743-8dab-0d606ef2569e\",\n      \"resolved_at\": \"2023-10-14T16:45:00Z\",\n      \"status\": \"resolved\",\n      \"version\": \"fb49f8a9-de72-5gb3-c596-e2d6c98b72bg\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ae00a2c8-9428-4796-b354-b0c0d666039c",
+          "name": "Get Issue",
+          "request": {
+            "name": "Get Issue",
+            "description": {
+              "content": "Get a specific Issue by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "issues",
+                ":issue_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "issue_id",
+                  "description": "(Required) The unique identifier for the Issue."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0613a883-9483-476a-89c7-4eeae8b9eb53",
+              "name": "Successful Response - Returns the Issue details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "issues",
+                    ":issue_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "issue_id",
+                      "description": "(Required) The unique identifier for the Issue."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"category\": \"invalid_ssn\",\n  \"created\": 1697380200,\n  \"dismissed\": false,\n  \"employee_id\": \"7027d416-3bed-43e8-b824-508d9c0d323e\",\n  \"group_id\": \"436fb487-bb75-42d4-9651-7b1471a8940e\",\n  \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n  \"issue_key\": \"a1b2c3d4e5f6789012345678901234567890123456789012345678901234567890\",\n  \"last_seen\": \"2023-10-15T14:30:00Z\",\n  \"member_id\": \"7027d416-3bed-43e8-b824-508d9c0d323e\",\n  \"member_type\": \"employee\",\n  \"modified\": 1697380200,\n  \"partner_id\": \"8fac0992-933a-4743-8dab-0d606ef2569e\",\n  \"resolved_at\": null,\n  \"status\": \"open\",\n  \"version\": \"ea38e798-cd61-4fa2-b485-d1c5b87a61af\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "50449994-df96-4cf8-9600-c28bcfd09303",
+              "name": "Issue not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "issues",
+                    ":issue_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "issue_id",
+                      "description": "(Required) The unique identifier for the Issue."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f80b946c-f107-440c-ada3-95c750a97115",
+          "name": "List Issues",
+          "request": {
+            "name": "List Issues",
+            "description": {
+              "content": "List existing Issues via the UI. Supports filtering on various fields including array containment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "issues"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "partner_id",
+                  "value": "<uuid>",
+                  "description": "Filter by associated partner ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "group_id",
+                  "value": "<uuid>",
+                  "description": "Filter by associated group ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "organization_id",
+                  "value": "<uuid>",
+                  "description": "Filter by associated organization ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>,<string>",
+                  "description": "Filter by issue status. Supports single value (status=open) or comma-separated multiple values (status=open,pending_resolution)."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_external",
+                  "value": "<boolean>",
+                  "description": "Filter by whether the issue is externally visible."
+                },
+                {
+                  "disabled": false,
+                  "key": "member_id",
+                  "value": "<uuid>",
+                  "description": "Filter by associated member ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "employee_id",
+                  "value": "<uuid>",
+                  "description": "Filter by associated employee ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "partner_document_source_id",
+                  "value": "<uuid>",
+                  "description": "Filter by associated partner document source ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "originating_record_ids",
+                  "value": "<uuid>,<uuid>",
+                  "description": "Filter by issues containing specific originating record IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "originating_record_type",
+                  "value": "<string>",
+                  "description": "Filter by the type of workflow or system that originated this issue."
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>",
+                  "description": "Filter by the source system or process that created this issue."
+                },
+                {
+                  "disabled": false,
+                  "key": "category",
+                  "value": "<string>",
+                  "description": "Filter by the category of error for this issue."
+                },
+                {
+                  "disabled": false,
+                  "key": "issue_key",
+                  "value": "<string>",
+                  "description": "Filter by issue_key - a unique identifier for the issue."
+                },
+                {
+                  "disabled": false,
+                  "key": "dismissed",
+                  "value": "<boolean>",
+                  "description": "Filter by dismissed state."
+                },
+                {
+                  "disabled": false,
+                  "key": "resolution_action",
+                  "value": "<string>",
+                  "description": "Filter by resolution action explanation (filters on data->resolution->action->explanation). Only matches issues where the nested path exists."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Number of records to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Number of records to skip for pagination."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9c0a89b9-9a73-4f5a-a0bf-e4a286462bbd",
+              "name": "Successful Response - Returns a paginated list of Issues.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "issues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partner_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "group_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "organization_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "is_external",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "member_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "employee_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "partner_document_source_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "originating_record_ids",
+                      "value": "<uuid>,<uuid>"
+                    },
+                    {
+                      "key": "originating_record_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "issue_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dismissed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "resolution_action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 2\n  },\n  \"response\": [\n    {\n      \"created\": 1697380200,\n      \"dismissed\": false,\n      \"employee_id\": \"7027d416-3bed-43e8-b824-508d9c0d323e\",\n      \"group_id\": \"436fb487-bb75-42d4-9651-7b1471a8940e\",\n      \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n      \"internal_notes\": null,\n      \"issue_key\": \"a1b2c3d4e5f6789012345678901234567890123456789012345678901234567890\",\n      \"last_seen\": \"2023-10-15T14:30:00Z\",\n      \"member_id\": \"7027d416-3bed-43e8-b824-508d9c0d323e\",\n      \"member_type\": \"employee\",\n      \"modified\": 1697380200,\n      \"partner_id\": \"8fac0992-933a-4743-8dab-0d606ef2569e\",\n      \"resolution_guidance\": \"Please contact support to provide your Social Security Number\",\n      \"resolution_method\": null,\n      \"resolved_at\": null,\n      \"status\": \"open\",\n      \"version\": \"ea38e798-cd61-4fa2-b485-d1c5b87a61af\"\n    },\n    {\n      \"created\": 1697280900,\n      \"dismissed\": false,\n      \"employee_id\": \"7027d416-3bed-43e8-b824-508d9c0d323e\",\n      \"group_id\": \"436fb487-bb75-42d4-9651-7b1471a8940e\",\n      \"id\": \"cc8b2924-48e8-5d8f-97cd-e152e3dce8b2\",\n      \"internal_notes\": \"Fixed DOB format issue in system, validated with customer\",\n      \"issue_key\": \"b2c3d4e5f6789012345678901234567890123456789012345678901234567891\",\n      \"last_seen\": \"2023-10-14T10:15:00Z\",\n      \"member_id\": \"8138e527-4cfe-54f9-c935-619e9d1d434f\",\n      \"member_type\": \"dependent\",\n      \"modified\": 1697304300,\n      \"partner_id\": \"8fac0992-933a-4743-8dab-0d606ef2569e\",\n      \"resolution_guidance\": \"Please verify and resubmit the date of birth in MM/DD/YYYY format\",\n      \"resolution_method\": \"manual_correction\",\n      \"resolved_at\": \"2023-10-14T16:45:00Z\",\n      \"status\": \"resolved\",\n      \"version\": \"fb49f8a9-de72-5gb3-c596-e2d6c98b72bg\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "84dc26bf-212d-498e-97dd-25f5853460d0",
+          "name": "Create Issue",
+          "request": {
+            "name": "Create Issue",
+            "description": {
+              "content": "Create a new Issue via the UI. Generates a unique issue_key and sets defaults.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "issues"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"issue_key\": \"<string>\",\n  \"organization_id\": \"<uuid>\",\n  \"originating_record_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"originating_record_type\": \"<string>\",\n  \"source\": \"<string>\",\n  \"category\": \"<string>\",\n  \"data\": {\n    \"blocking_difference_ids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"difference_ids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"error_key\": \"<string>\",\n    \"notes\": {\n      \"customer\": \"<string>\"\n    },\n    \"plan_id_for_key\": \"<uuid>\",\n    \"plan_ids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"resolution\": {\n      \"action\": {\n        \"completed_at\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"completed_by\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"explanation\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"pending_time\": \"<dateTime>\"\n    },\n    \"resolution_guidance\": {\n      \"context\": [\n        {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"references\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    },\n    \"summary\": \"<string>\"\n  },\n  \"group_id\": \"<uuid>\",\n  \"is_external\": \"<boolean>\",\n  \"issue_person_id\": \"<uuid>\",\n  \"partner_id\": \"<uuid>\",\n  \"partner_type\": \"<string>\",\n  \"raw_issue_data\": \"<object>\",\n  \"resolution_guidance\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1c987feb-3364-4146-b619-feaa01f7c07c",
+              "name": "Successful Response - Returns the created Issue details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "issues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"group_id\": \"436fb487-bb75-42d4-9651-7b1471a8940e\",\n  \"is_external\": false,\n  \"organization_id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n  \"originating_record_ids\": [\n    \"7027d416-3bed-43e8-b824-508d9c0d323e\"\n  ],\n  \"originating_record_type\": \"partner_document\",\n  \"partner_document_source_id\": \"9f8e7d6c-5b4a-3c2d-1e0f-9e8d7c6b5a4d\",\n  \"partner_id\": \"8fac0992-933a-4743-8dab-0d606ef2569e\",\n  \"partner_type\": \"carrier\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 1697380200,\n  \"employee_id\": null,\n  \"group_id\": \"436fb487-bb75-42d4-9651-7b1471a8940e\",\n  \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n  \"internal_notes\": null,\n  \"issue_key\": \"a1b2c3d4e5f6789012345678901234567890123456789012345678901234567890\",\n  \"last_seen\": \"2023-10-15T14:30:00Z\",\n  \"member_id\": null,\n  \"member_type\": null,\n  \"modified\": 1697380200,\n  \"partner_id\": \"8fac0992-933a-4743-8dab-0d606ef2569e\",\n  \"resolution_guidance\": null,\n  \"resolution_method\": null,\n  \"resolved_at\": null,\n  \"status\": \"open\",\n  \"version\": \"ea38e798-cd61-4fa2-b485-d1c5b87a61af\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b7a17ac8-c92c-4642-baf4-ad52a80aa5f4",
+          "name": "Get Issue",
+          "request": {
+            "name": "Get Issue",
+            "description": {
+              "content": "Get a specific Issue by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "issues",
+                ":issue_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "issue_id",
+                  "description": "(Required) The unique identifier for the Issue."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1beaef5e-998c-4b2c-8b8a-685a52b7c2fc",
+              "name": "Successful Response - Returns the Issue details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "issues",
+                    ":issue_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "issue_id",
+                      "description": "(Required) The unique identifier for the Issue."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 1697380200,\n  \"dismissed\": false,\n  \"employee_id\": \"7027d416-3bed-43e8-b824-508d9c0d323e\",\n  \"group_id\": \"436fb487-bb75-42d4-9651-7b1471a8940e\",\n  \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n  \"internal_notes\": null,\n  \"issue_key\": \"a1b2c3d4e5f6789012345678901234567890123456789012345678901234567890\",\n  \"last_seen\": \"2023-10-15T14:30:00Z\",\n  \"member_id\": \"7027d416-3bed-43e8-b824-508d9c0d323e\",\n  \"member_type\": \"employee\",\n  \"modified\": 1697380200,\n  \"partner_id\": \"8fac0992-933a-4743-8dab-0d606ef2569e\",\n  \"resolution_guidance\": \"Please contact support to provide your Social Security Number\",\n  \"resolution_method\": null,\n  \"resolved_at\": null,\n  \"status\": \"open\",\n  \"version\": \"ea38e798-cd61-4fa2-b485-d1c5b87a61af\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ade8a947-4e2a-47d5-8a95-e6c5ff68ee55",
+              "name": "Issue not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "issues",
+                    ":issue_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "issue_id",
+                      "description": "(Required) The unique identifier for the Issue."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eff1263f-e4f4-4c50-8614-094385b7c424",
+          "name": "Regenerate Issue Guidance",
+          "request": {
+            "name": "Regenerate Issue Guidance",
+            "description": {
+              "content": "Regenerate resolution guidance for a specific Issue by triggering an asynchronous process.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "issues",
+                ":issue_id",
+                "guidance"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "issue_id",
+                  "description": "(Required) The unique identifier for the Issue."
+                }
+              ]
+            },
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8a464b04-f3d9-4289-b2af-c3d1004f9421",
+              "name": "Request accepted - Issue guidance regeneration has been queued for processing.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "issues",
+                    ":issue_id",
+                    "guidance"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "issue_id",
+                      "description": "(Required) The unique identifier for the Issue."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "834cd97d-6647-4542-8595-bde13c9d1f2f",
+              "name": "Issue not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "issues",
+                    ":issue_id",
+                    "guidance"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "issue_id",
+                      "description": "(Required) The unique identifier for the Issue."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "58638913-8d18-4483-97be-8cbf3a032d0e",
+          "name": "Edit Issue",
+          "request": {
+            "name": "Edit Issue",
+            "description": {
+              "content": "Edit an Issue based on the ID provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "issues",
+                ":issue_id",
+                ":version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "issue_id",
+                  "description": "(Required) The unique identifier of the Issue to update."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "version",
+                  "description": "(Required) The version identifier of the Issue being updated (for optimistic locking)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"category\": \"<string>\",\n  \"data\": {\n    \"blocking_difference_ids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"difference_ids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"error_key\": \"<string>\",\n    \"notes\": {\n      \"customer\": \"<string>\"\n    },\n    \"plan_id_for_key\": \"<uuid>\",\n    \"plan_ids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"resolution\": {\n      \"action\": {\n        \"completed_at\": \"<dateTime>\",\n        \"completed_by\": \"<string>\",\n        \"explanation\": \"<string>\"\n      },\n      \"pending_time\": \"<dateTime>\"\n    },\n    \"resolution_guidance\": {\n      \"context\": [\n        {\n          \"id\": \"<uuid>\",\n          \"references\": \"<object>\",\n          \"type\": \"<string>\"\n        }\n      ]\n    },\n    \"summary\": \"<string>\"\n  },\n  \"dismissed\": \"<boolean>\",\n  \"employee_id\": \"<uuid>\",\n  \"group_id\": \"<uuid>\",\n  \"internal_notes\": \"<string>\",\n  \"is_external\": \"<boolean>\",\n  \"issue_person_id\": \"<uuid>\",\n  \"last_seen\": \"<dateTime>\",\n  \"member_id\": \"<uuid>\",\n  \"member_type\": \"<string>\",\n  \"originating_record_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"originating_record_type\": \"<string>\",\n  \"partner_document_source_id\": \"<uuid>\",\n  \"raw_issue_data\": \"<object>\",\n  \"resolution_guidance\": \"<string>\",\n  \"resolution_method\": \"<string>\",\n  \"resolution_partner_document_id\": \"<uuid>\",\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "90727ba9-0942-46fb-87d6-5020e74983e8",
+              "name": "Successful Response - Returns the updated Issue details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "issues",
+                    ":issue_id",
+                    ":version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "issue_id",
+                      "description": "(Required) The unique identifier of the Issue to update."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version",
+                      "description": "(Required) The version identifier of the Issue being updated (for optimistic locking)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dismissed\": false,\n  \"employee_id\": \"7027d416-3bed-43e8-b824-508d9c0d323e\",\n  \"internal_notes\": \"Customer called and provided SSN verbally, manually updated in system\",\n  \"member_id\": \"7027d416-3bed-43e8-b824-508d9c0d323e\",\n  \"member_type\": \"employee\",\n  \"resolution_guidance\": \"Please contact support to provide your Social Security Number\",\n  \"resolution_method\": \"manual_correction\",\n  \"status\": \"resolved\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 1697380200,\n  \"dismissed\": false,\n  \"employee_id\": \"7027d416-3bed-43e8-b824-508d9c0d323e\",\n  \"group_id\": \"436fb487-bb75-42d4-9651-7b1471a8940e\",\n  \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n  \"internal_notes\": \"Customer called and provided SSN verbally, manually updated in system\",\n  \"issue_key\": \"a1b2c3d4e5f6789012345678901234567890123456789012345678901234567890\",\n  \"last_seen\": \"2023-10-15T16:45:00Z\",\n  \"member_id\": \"7027d416-3bed-43e8-b824-508d9c0d323e\",\n  \"member_type\": \"employee\",\n  \"modified\": 1697388300,\n  \"partner_id\": \"8fac0992-933a-4743-8dab-0d606ef2569e\",\n  \"resolution_guidance\": \"Please contact support to provide your Social Security Number\",\n  \"resolution_method\": \"manual_correction\",\n  \"resolved_at\": \"2023-10-15T16:45:00Z\",\n  \"status\": \"resolved\",\n  \"version\": \"fa49f8a9-de72-5gb3-c596-e2d6c98b72bg\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ba7356ab-783b-4489-840d-559d50dfed19",
+    "name": "Noyo Carrier Carrier Mapped Field Issues API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,167 @@
+{
+  "item": [
+    {
+      "id": "ff672370-96ea-4684-ab22-1773a573a667",
+      "name": "Eligibility Rules",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2ee596c4-b6bf-460d-8265-54d5fe469df7",
+          "name": "Get Eligibility Rules for a Carrier",
+          "request": {
+            "name": "Get Eligibility Rules for a Carrier",
+            "description": {
+              "content": "Returns eligibility rules and requirements for a specific carrier across all supported data exchange configurations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "carriers",
+                ":carrier_id",
+                "eligibility_rules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "carrier_id",
+                  "description": "(Required) The unique identifier of the carrier to get eligibility rules for"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bd5bd595-3ca4-4432-aa3d-12fb0de56674",
+              "name": "Successful Response - Returns eligibility rules for the carrier",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "carriers",
+                    ":carrier_id",
+                    "eligibility_rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "carrier_id",
+                      "description": "(Required) The unique identifier of the carrier to get eligibility rules for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 9371,\n    \"page_num\": 9469,\n    \"page_size\": 3256,\n    \"total_records\": 1114\n  },\n  \"response\": [\n    {\n      \"data_exchange_configuration_name\": \"string\",\n      \"rules\": [\n        {\n          \"description\": \"string\"\n        },\n        {\n          \"description\": \"string\"\n        }\n      ]\n    },\n    {\n      \"data_exchange_configuration_name\": \"string\",\n      \"rules\": [\n        {\n          \"description\": \"string\"\n        },\n        {\n          \"description\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "687ba486-6e77-42b3-811f-26fcfc713d68",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "carriers",
+                    ":carrier_id",
+                    "eligibility_rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "carrier_id",
+                      "description": "(Required) The unique identifier of the carrier to get eligibility rules for"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a76ffc7f-432d-4466-b9cd-9a7cbb4d25d3",
+    "name": "Noyo Carrier Carrier Mapped Field Eligibility Rules API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "item": [
+    {
+      "id": "721163e3-c173-48cd-8669-2ebe18c75b0c",
+      "name": "Carrier Mapped Field",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e9d02128-8052-4936-a111-c3af4c35a481",
+          "name": "Get Mapped Fields for a Carrier",
+          "request": {
+            "name": "Get Mapped Fields for a Carrier",
+            "description": {
+              "content": "Returns a list of carrier mapped fields based on the Carrier ID provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "carriers",
+                ":carrier_id",
+                "mapped_fields"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "carrier_id",
+                  "description": "(Required) The unique identifier of the rule you would like to get carrier mapped fields for"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9cfb218d-85cd-4322-9367-9e0b68c32385",
+              "name": "Successful Response - Returns Carrier Mapped Fields",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "carriers",
+                    ":carrier_id",
+                    "mapped_fields"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "carrier_id",
+                      "description": "(Required) The unique identifier of the rule you would like to get carrier mapped fields for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 2\n  },\n  \"response\": [\n    {\n      \"carrier_id\": \"2d370e0e-fd73-45e0-8828-796d2cacaeef\",\n      \"created\": 1596838219,\n      \"id\": \"79020524-c77d-4b13-b96f-88b3e26eb54d\",\n      \"label\": \"bill group\",\n      \"mapped_field\": \"bill_group_number\",\n      \"mapping_type\": \"account_structure\",\n      \"modified\": 1596838219,\n      \"object_name\": \"bill_groups\",\n      \"version\": \"ac5e9ad8-ce8a-4d3b-b7fa-830a67aef4ea\"\n    },\n    {\n      \"carrier_id\": \"2d370e0e-fd73-45e0-8828-796d2cacaeef\",\n      \"created\": 1596838219,\n      \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n      \"label\": \"member group\",\n      \"mapped_field\": \"member_group_key\",\n      \"mapping_type\": \"account_structure\",\n      \"modified\": 1596838219,\n      \"object_name\": \"member_groups\",\n      \"version\": \"5200a894-81c5-4c41-8519-86c32e9a9965\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c64430eb-b5a3-41c0-bbdf-1e86b3f4bf97",
+    "name": "Noyo Carrier Carrier Mapped Field API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

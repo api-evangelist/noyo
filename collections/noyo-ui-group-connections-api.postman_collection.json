@@ -1,0 +1,253 @@
+{
+  "item": [
+    {
+      "id": "7ef09917-c80a-4081-ba88-4a55497799b8",
+      "name": "Ui Group Connections",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "41a4e232-05ca-4c03-a2c5-f111e43c505e",
+          "name": "Get a single Group Connection Ui",
+          "request": {
+            "name": "Get a single Group Connection Ui",
+            "description": {
+              "content": "Returns a single group connection based on the ID provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "group_connections",
+                ":group_connection_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_connection_id",
+                  "description": "(Required) The unique identifier of the group connection you would like to view"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4e0d670b-af8d-4738-817f-097c6c9780fb",
+              "name": "Successful Response - Returns a single Group Connection",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "group_connections",
+                    ":group_connection_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_connection_id",
+                      "description": "(Required) The unique identifier of the group connection you would like to view"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"carrier_id\": \"8fac0992-933a-4743-8dab-0d606ef2569e\",\n  \"completed\": 1557392400,\n  \"created\": 1557329939,\n  \"group_data\": {\n    \"carrier_group_id\": \"10000000\",\n    \"group_name\": \"Test Company\"\n  },\n  \"group_id\": \"9e629e41-c706-4efd-9fbb-1ff2573fc67e\",\n  \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n  \"modified\": 1557392400,\n  \"organization_id\": \"d61fa455-adf4-4dc4-8c57-6d779ba9475e\",\n  \"request_type\": \"initial\",\n  \"setup_data\": {},\n  \"setup_result\": {},\n  \"status\": \"completed\",\n  \"version\": \"9906b5d2-e76d-4bad-ba4c-8ce90b6b867b\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e162cf81-9497-4f8d-be32-7bd918c8da14",
+          "name": "Edit an existing Group Setup Request",
+          "request": {
+            "name": "Edit an existing Group Setup Request",
+            "description": {
+              "content": "Edit a group setup request based on the ID provided. The version parameter must match the latest group setup request version.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "group_connections",
+                ":group_connection_id",
+                ":version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_connection_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "version",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sent_carrier_auth_comms\": \"<dateTime>\",\n  \"setup_data\": \"<object>\",\n  \"setup_result\": \"<object>\",\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f6a794ec-0357-4540-9ca9-84dba629cb98",
+              "name": "Successful Response - Returns the modified Group Setup Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "group_connections",
+                    ":group_connection_id",
+                    ":version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_connection_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sent_carrier_auth_comms\": \"<dateTime>\",\n  \"setup_data\": \"<object>\",\n  \"setup_result\": \"<object>\",\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"carrier_id\": \"8fac0992-933a-4743-8dab-0d606ef2569e\",\n  \"created\": 1557329939,\n  \"group_audit_request_id\": \"ef9377ae-4402-4dc0-8190-1e81955d14b2\",\n  \"group_data\": {\n    \"group_name\": \"Test Company\",\n    \"policy_number\": \"10000000\"\n  },\n  \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n  \"modified\": 1557329939,\n  \"organization_id\": \"d61fa455-adf4-4dc4-8c57-6d779ba9475e\",\n  \"request_type\": \"initial\",\n  \"setup_data\": {},\n  \"setup_result\": {},\n  \"status\": \"noyo_review\",\n  \"version\": \"9906b5d2-e76d-4bad-ba4c-8ce90b6b867b\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a240cf2a-8e91-4946-83dd-d5858598fa14",
+    "name": "Noyo Carrier Carrier Mapped Field Ui Group Connections API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

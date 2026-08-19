@@ -1,0 +1,335 @@
+{
+  "item": [
+    {
+      "id": "4b27911c-118f-4cd5-bdad-5d3a6a6f5bef",
+      "name": "Member Snapshot Test Population",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4923b38c-51b9-4f33-ba58-7ec4e08ad4f7",
+          "name": "Retrieves a list of Member Snapshot Test Populations.",
+          "request": {
+            "name": "Retrieves a list of Member Snapshot Test Populations.",
+            "description": {
+              "content": "Returns a list of Member Snapshot Test Populations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "member_snapshot_test_populations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "group_id",
+                  "value": "<uuid>",
+                  "description": "Noyo specific group UUID to filter Member Snapshot Test Populations"
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier_id",
+                  "value": "<uuid>",
+                  "description": "Carrier UUID to filter Member Snapshot Test Populations"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "43d95848-0415-4d19-8036-25cf52d5a5fc",
+              "name": "Successful Response - Returns a list of all matching Member Snapshot Test Populations",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "member_snapshot_test_populations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "group_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "carrier_id",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 3809,\n    \"page_num\": 1533,\n    \"page_size\": 7197,\n    \"total_records\": 7768\n  },\n  \"response\": [\n    {\n      \"created\": 6286,\n      \"id\": \"053c0f12-64a8-88a7-2675-f867b2ab12d1\",\n      \"modified\": 3348,\n      \"version\": \"36803c43-fd8f-eab3-bca5-ae5213c8e73c\",\n      \"carrier_id\": \"db4cbc08-683d-a550-84ef-118c4c87a7f6\",\n      \"group_id\": \"79d0f1b3-bdb3-1f51-f561-9160d2c02f40\"\n    },\n    {\n      \"created\": 9321,\n      \"id\": \"bfd2629c-41e0-d0b2-c40a-023767593a09\",\n      \"modified\": 3589,\n      \"version\": \"ee50d6af-4b19-3b34-bf3f-77ff865301fb\",\n      \"carrier_id\": \"379cb927-0dea-adb5-e2ee-7175621d9166\",\n      \"group_id\": \"09d1b2f2-083c-fedb-21bb-2fa3da1e2e94\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2ef65bcc-0393-4458-a63e-567bca2eeff3",
+          "name": "Create a Member Snapshot Test Population",
+          "request": {
+            "name": "Create a Member Snapshot Test Population",
+            "description": {
+              "content": "Create a new Member Snapshot Test Population.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "member_snapshot_test_populations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"carrier_id\": \"<uuid>\",\n  \"group_id\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7c089bef-837d-4624-8e0b-eca69a4377cd",
+              "name": "Successful Response - Returns the contents of the newly created Member Snapshot Test Population",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "member_snapshot_test_populations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carrier_id\": \"<uuid>\",\n  \"group_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 6573,\n  \"id\": \"38fc3c35-0040-23b4-1793-0255e86a809b\",\n  \"modified\": 6183,\n  \"version\": \"1a769477-b80d-991c-e2da-e4372f1e4c6d\",\n  \"carrier_id\": \"be04d4ab-e61a-d482-6cef-75bb4d8b1a64\",\n  \"group_id\": \"827c9ea6-2422-d962-8b32-a13869806acd\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2b072c39-b3e0-4819-a548-ee59c414cdbd",
+          "name": "Get a single Member Snapshot Test Population",
+          "request": {
+            "name": "Get a single Member Snapshot Test Population",
+            "description": {
+              "content": "Returns a single member snapshot test population based on the ID provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "member_snapshot_test_populations",
+                ":member_snapshot_test_population_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "member_snapshot_test_population_id",
+                  "description": "(Required) The unique identifier of the member snapshot test population you would like to view"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6483cfe8-a3e4-48af-ae95-d0c74c3ccf1c",
+              "name": "Successful Response - Returns a single Member Snapshot Test Population",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "member_snapshot_test_populations",
+                    ":member_snapshot_test_population_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "member_snapshot_test_population_id",
+                      "description": "(Required) The unique identifier of the member snapshot test population you would like to view"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 6573,\n  \"id\": \"38fc3c35-0040-23b4-1793-0255e86a809b\",\n  \"modified\": 6183,\n  \"version\": \"1a769477-b80d-991c-e2da-e4372f1e4c6d\",\n  \"carrier_id\": \"be04d4ab-e61a-d482-6cef-75bb4d8b1a64\",\n  \"group_id\": \"827c9ea6-2422-d962-8b32-a13869806acd\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "216d8cd1-a1b5-4dae-b227-acbae4351a71",
+    "name": "Noyo Carrier Carrier Mapped Field Member Snapshot Test Population API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

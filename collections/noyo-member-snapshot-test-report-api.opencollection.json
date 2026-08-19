@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Member Snapshot Test Report API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Member Snapshot Test Report",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves a list of Member Snapshot Test Reports.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/member_snapshot_test_reports",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "query",
+                "description": "Noyo group UUID to filter Member Snapshot Test Report"
+              },
+              {
+                "name": "carrier_id",
+                "value": "",
+                "type": "query",
+                "description": "Noyo carrier UUID to filter Member Snapshot Test Report"
+              }
+            ]
+          },
+          "docs": "Returns a list of Member Snapshot Test Reports."
+        },
+        {
+          "info": {
+            "name": "Get a single Member Snapshot Test Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/member_snapshot_test_reports/:member_snapshot_test_report_id",
+            "params": [
+              {
+                "name": "member_snapshot_test_report_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Member Snapshot Test Report you would like to view"
+              }
+            ]
+          },
+          "docs": "Returns the latest version of a single Member Snapshot Test Report based on the ID provided."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

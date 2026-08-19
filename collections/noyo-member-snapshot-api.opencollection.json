@@ -1,0 +1,399 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Member Snapshot API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Member Snapshot",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a Member Snapshot by Employee",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/employees/:employee_id/member_snapshot",
+            "params": [
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the employee"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by associated status"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by ID (comma separated)"
+              },
+              {
+                "name": "fulfillment_summary_carrier_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by fulfillment summary carrier ID (comma separated)"
+              },
+              {
+                "name": "fulfillment_summary_status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by fulfillment summary status (comma separated)"
+              }
+            ]
+          },
+          "docs": "Get a Member Snapshot by Employee ID. This will be calculated based on the current state of Noyo data for the employee."
+        },
+        {
+          "info": {
+            "name": "Get all Member Snapshots by Employee",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/employees/:employee_id/member_snapshots",
+            "params": [
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the employee for which you would like to view member snapshots"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              }
+            ]
+          },
+          "docs": "Returns a list with metadata for all member snapshots for a given employee."
+        },
+        {
+          "info": {
+            "name": "Get Employee Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/employees/:employee_id/status",
+            "params": [
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the employee"
+              }
+            ]
+          },
+          "docs": "Returns the status of the employee and family, summarized by carrier and including any pending or completed enrollment changes requested by the platform."
+        },
+        {
+          "info": {
+            "name": "Get all Member Snapshots by Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/groups/:group_id/member_snapshots",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group for which you would like to view member snapshots"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              },
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "query",
+                "description": "The employee ID associated with the member snapshot"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by associated status"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by ID (comma separated)"
+              },
+              {
+                "name": "fulfillment_summary_carrier_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by fulfillment summary carrier ID (comma separated)"
+              },
+              {
+                "name": "fulfillment_summary_status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by fulfillment summary status (comma separated)"
+              }
+            ]
+          },
+          "docs": "Returns a list with metadata for all member snapshots for a given group."
+        },
+        {
+          "info": {
+            "name": "Create a Member Snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/groups/:group_id/member_snapshots",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group for the employee referenced in the snapshot"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new Member Snapshot for an employee associated with a group."
+        },
+        {
+          "info": {
+            "name": "Test creating a member snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/groups/:group_id/member_snapshots/test",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group for the employee referenced in the snapshot"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Test creating a Member Snapshot for an employee associated with a group"
+        },
+        {
+          "info": {
+            "name": "Get all Member Snapshots",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/member_snapshots",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by associated status"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by ID (comma separated)"
+              },
+              {
+                "name": "fulfillment_summary_carrier_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by fulfillment summary carrier ID (comma separated)"
+              },
+              {
+                "name": "fulfillment_summary_status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by fulfillment summary status (comma separated)"
+              },
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "query",
+                "description": "The employee ID associated with the member snapshot"
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "query",
+                "description": "The group ID associated with the member snapshot"
+              }
+            ]
+          },
+          "docs": "Returns a list with metadata for all member snapshots."
+        },
+        {
+          "info": {
+            "name": "Get a Member Snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/member_snapshots/:snapshot_id",
+            "params": [
+              {
+                "name": "snapshot_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the member snapshot"
+              }
+            ]
+          },
+          "docs": "Get a Member Snapshot by ID"
+        },
+        {
+          "info": {
+            "name": "Get a list of all Member Snapshots",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ui/v1/member_snapshots",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "member_request_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "group_name_search",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "The attribute on which to sort the member snapshots"
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query",
+                "description": "Either asc or desc, to denote the data's direction"
+              }
+            ]
+          },
+          "docs": "Returns a list of all member snapshots."
+        },
+        {
+          "info": {
+            "name": "Gets member snapshot currently associated with a transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ui/v1/member_snapshots/member_transaction/:transaction_id",
+            "params": [
+              {
+                "name": "transaction_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the member transaction we are using to get associated member snapshot"
+              }
+            ]
+          },
+          "docs": "Gets member snapshot currently associated with a transaction"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,123 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Group Coverage Export API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Group Coverage Export",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a list of all Group Coverage Exports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/group_coverage_exports",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              }
+            ]
+          },
+          "docs": "Get all relevant group coverage exports"
+        },
+        {
+          "info": {
+            "name": "Get a Group Coverage Export",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/group_coverage_exports/:group_coverage_export_id",
+            "params": [
+              {
+                "name": "group_coverage_export_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group coverage export"
+              }
+            ]
+          },
+          "docs": "Get a Group Coverage Export by ID"
+        },
+        {
+          "info": {
+            "name": "Get file associated with group coverage export",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/group_coverage_exports/:group_coverage_export_id/file",
+            "params": [
+              {
+                "name": "group_coverage_export_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group coverage export"
+              }
+            ]
+          },
+          "docs": "Returns file contents for a group coverage export"
+        },
+        {
+          "info": {
+            "name": "Get Group Coverage Exports for a Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/groups/:group_id/coverage_exports",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group you would like to get group exports for"
+              }
+            ]
+          },
+          "docs": "Returns a list of group coverage exports based on the Group ID provided."
+        },
+        {
+          "info": {
+            "name": "Create a Group Coverage Export",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/groups/:group_id/coverage_exports",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group to create a Group Coverage Export for."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Request a new Group Coverage Export for a group."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

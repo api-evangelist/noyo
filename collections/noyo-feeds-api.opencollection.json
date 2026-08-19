@@ -1,0 +1,116 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Feeds API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Feeds",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a list of feeds",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/feeds",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of the group"
+              },
+              {
+                "name": "carrier_id",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of the carrier"
+              },
+              {
+                "name": "next_transmission_end",
+                "value": "",
+                "type": "query",
+                "description": "Filter by feeds that will run before the provided datetime"
+              },
+              {
+                "name": "paused",
+                "value": "",
+                "type": "query",
+                "description": "Filter by feeds that are temporarily paused from delivering files"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by feed status"
+              },
+              {
+                "name": "testing",
+                "value": "",
+                "type": "query",
+                "description": "Filter by feeds that are in a testing state with the carrier"
+              },
+              {
+                "name": "feed",
+                "value": "",
+                "type": "query",
+                "description": "Filter by feed name or feed ID"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "The attribute on which to sort"
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query",
+                "description": "Either asc or desc, to denote the data's direction"
+              }
+            ]
+          },
+          "docs": "Returns a list of feeds"
+        },
+        {
+          "info": {
+            "name": "Get a feed",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/feeds/:feed_id",
+            "params": [
+              {
+                "name": "feed_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the feed"
+              }
+            ]
+          },
+          "docs": "Returns a feed"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

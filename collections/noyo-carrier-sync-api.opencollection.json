@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Carrier Sync API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Carrier Sync",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Latest Group Audit Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/groups/:group_id/audit_requests/latest",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the associated group in Noyo"
+              },
+              {
+                "name": "carrier_id",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of the carrier for which you would like to view audit requests"
+              }
+            ]
+          },
+          "docs": "Noyo regularly audits each Group against the carrier(s) that the Group has coverage with in order to find updated data and potential mismatches. This endpoint returns metadata about the latest group audit request that was completed. If no group audits have been completed the `completed_at` timestamp will be the timestamp of when the group was created and the `carrier_ids` array will be empty."
+        },
+        {
+          "info": {
+            "name": "Get Latest Group Audit Request List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/groups/:group_id/audit_requests/list_latest",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the associated group in Noyo"
+              },
+              {
+                "name": "effective_date",
+                "value": "",
+                "type": "query",
+                "description": "The relative date on which to view the state of the record"
+              }
+            ]
+          },
+          "docs": "Noyo regularly audits each Group against the carrier(s) that the Group has coverage with in order to find updated data and potential mismatches. This endpoint returns metadata about the latest group audit requests that were completed for each carrier. If no group audits have been completed the `completed_at` timestamp will be the timestamp of when the group was created and the `carrier_ids` array will be empty."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -2,11 +2,9 @@ generated: '2026-07-20'
 method: derived
 status: candidate
 source: openapi/noyo-fulfillment-openapi.json, openapi/noyo-tracking-openapi.json
-note: >-
-  No official Noyo-hosted MCP server was found. The following is a candidate
-  tool surface derived from marquee OpenAPI operations, offered as a starting
-  point for an agent-native wrapper. Ground every tool in the referenced
-  operationId.
+note: No official Noyo-hosted MCP server was found. The following is a candidate tool surface derived
+  from marquee OpenAPI operations, offered as a starting point for an agent-native wrapper. Ground every
+  tool in the referenced operationId.
 server:
   name: noyo
   transport: http
@@ -44,3 +42,9 @@ tools:
 - name: list_differences
   description: List tracked field-level differences/discrepancies.
   source_operation: openapi/noyo-tracking-openapi.json#getDifferenceList
+deployment:
+  mode: none
+  verified: derived
+  tools: 11
+  checked: '2026-08-12'
+  source: catalog MCP census

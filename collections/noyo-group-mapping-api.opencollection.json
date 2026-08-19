@@ -1,0 +1,150 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Group Mapping API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Group Mapping",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Edit an existing Group Mapping",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/group_mappings/:group_mapping_id/:version",
+            "params": [
+              {
+                "name": "group_mapping_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group mapping you would like to edit"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The unique version of the group mapping you would like to edit"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit a group mapping based on the ID provided. The version parameter must match the latest group mapping version."
+        },
+        {
+          "info": {
+            "name": "Get Group Mappings for a Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/groups/:group_id/group_mappings",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group you would like to get group mappings for"
+              },
+              {
+                "name": "carrier_id",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of the carrier you would like to filter"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "The statuses you would like to filter"
+              }
+            ]
+          },
+          "docs": "Returns the group mappings based on the Group ID provided."
+        },
+        {
+          "info": {
+            "name": "Create a new Group Mapping",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/groups/:group_id/group_mappings",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group you would like to create the group mapping for"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new Group Mapping"
+        },
+        {
+          "info": {
+            "name": "Get a list of all rules and their respective conditions for a specific group mapping",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ui/v1/group_mappings/:group_mapping_id/rules",
+            "params": [
+              {
+                "name": "group_mapping_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group mapping for which you would like to view rules and conditions"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              }
+            ]
+          },
+          "docs": "Returns a list of all rules and conditions for a specific group mapping"
+        },
+        {
+          "info": {
+            "name": "Validate a Group Mapping",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/ui/v1/group_mappings/:group_mapping_id/validate",
+            "params": [
+              {
+                "name": "group_mapping_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Validate a group mapping based on the ID provided."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

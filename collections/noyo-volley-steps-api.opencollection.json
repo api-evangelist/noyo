@@ -1,0 +1,99 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Volley Steps API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Volley Steps",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a list of all Volley Steps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/volley_steps",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search by group name or group ID associated with parent volley"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by step status"
+              },
+              {
+                "name": "carrier_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by carrier ID on parent volley"
+              },
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by organization ID"
+              },
+              {
+                "name": "volley_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by volley type on parent volley"
+              },
+              {
+                "name": "step_key",
+                "value": "",
+                "type": "query",
+                "description": "Filter by step key"
+              },
+              {
+                "name": "volley_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by parent volley ID"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "actor_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the actor that owns the step"
+              }
+            ]
+          },
+          "docs": "Returns a list of Volley Steps"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,301 @@
+{
+  "item": [
+    {
+      "id": "14cf78da-002a-493a-8c33-ef30f55bb9b0",
+      "name": "Export",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d6cbe5cd-c9dc-48ed-828e-5ad092fc13f7",
+          "name": "Create a Export",
+          "request": {
+            "name": "Create a Export",
+            "description": {
+              "content": "Create a new Export.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "exports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"export_type\": \"<string>\",\n  \"export_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "26f4ab65-50a8-479b-903e-7ff4d307487c",
+              "name": "Successful Response - Returns the contents of the newly created Export",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "exports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"export_ids\": [\n    \"8fac0992-933a-4743-8dab-0d606ef2569e\"\n  ],\n  \"export_type\": \"differences_export\",\n  \"filters\": {\n    \"type\": \"a_type\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 1626281253,\n  \"export_ids\": [],\n  \"export_type\": \"differences_export\",\n  \"id\": \"7dac0992-933a-4743-8dab-0d606ef2525r\",\n  \"modified\": 1626281253,\n  \"organization_id\": \"8fac0992-933a-4743-8dab-0d606ef2569e\",\n  \"status\": \"processing\",\n  \"version\": \"2gce0972-236a-4743-8dab-0d606ef2596e\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cc2e7974-0c2e-410b-9c98-4165fe552bbe",
+          "name": "Get a Export",
+          "request": {
+            "name": "Get a Export",
+            "description": {
+              "content": "Get a single Export",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "exports",
+                ":export_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "export_id",
+                  "description": "(Required) UUID of the requested export"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ac449a34-5beb-4457-af29-8cc84f98ffd4",
+              "name": "Successful Response - Returns an Export",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "exports",
+                    ":export_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "export_id",
+                      "description": "(Required) UUID of the requested export"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"completed\": 1730391791,\n  \"created\": 1626281253,\n  \"export_ids\": [],\n  \"export_type\": \"differences_export\",\n  \"file_key\": \"/path/to/a/file\",\n  \"filters\": {\n    \"type\": \"a_filter_type\"\n  },\n  \"id\": \"7dac0992-933a-4743-8dab-0d606ef2525r\",\n  \"modified\": 1730391791,\n  \"organization_id\": \"8fac0992-933a-4743-8dab-0d606ef2569e\",\n  \"status\": \"complete\",\n  \"version\": \"2gce0972-236a-4743-8dab-0d606ef2596e\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e1848756-fc78-4cb0-b393-e01160890adf",
+          "name": "Get file associated with Export",
+          "request": {
+            "name": "Get file associated with Export",
+            "description": {
+              "content": "Returns file contents for an export",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "exports",
+                ":export_id",
+                "download"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "export_id",
+                  "description": "(Required) The unique identifier of the export"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a7ad2096-17bb-4665-bfa1-dca320f18627",
+              "name": "Successful Response - Returns file contents",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "exports",
+                    ":export_id",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "export_id",
+                      "description": "(Required) The unique identifier of the export"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "463f199e-e130-4684-829e-1c33d776860d",
+    "name": "Noyo Carrier Carrier Mapped Field Export API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

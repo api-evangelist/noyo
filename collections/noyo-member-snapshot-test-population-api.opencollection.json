@@ -1,0 +1,89 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Member Snapshot Test Population API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Member Snapshot Test Population",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves a list of Member Snapshot Test Populations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/member_snapshot_test_populations",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "query",
+                "description": "Noyo specific group UUID to filter Member Snapshot Test Populations"
+              },
+              {
+                "name": "carrier_id",
+                "value": "",
+                "type": "query",
+                "description": "Carrier UUID to filter Member Snapshot Test Populations"
+              }
+            ]
+          },
+          "docs": "Returns a list of Member Snapshot Test Populations."
+        },
+        {
+          "info": {
+            "name": "Create a Member Snapshot Test Population",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/member_snapshot_test_populations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new Member Snapshot Test Population."
+        },
+        {
+          "info": {
+            "name": "Get a single Member Snapshot Test Population",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/member_snapshot_test_populations/:member_snapshot_test_population_id",
+            "params": [
+              {
+                "name": "member_snapshot_test_population_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the member snapshot test population you would like to view"
+              }
+            ]
+          },
+          "docs": "Returns a single member snapshot test population based on the ID provided."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1236 @@
+{
+  "item": [
+    {
+      "id": "89b28770-fae1-4492-9794-b105648d5906",
+      "name": "Discrepancies",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7d21b388-9dbb-4b2f-a189-adc42a01af28",
+          "name": "List Discrepancies",
+          "request": {
+            "name": "List Discrepancies",
+            "description": {
+              "content": "Returns a list of all discrepancies matching the given query",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "discrepancies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Status of the discrepancies"
+                },
+                {
+                  "disabled": false,
+                  "key": "status_grouping",
+                  "value": "<string>",
+                  "description": "Status grouping of the discrepancies"
+                },
+                {
+                  "disabled": false,
+                  "key": "type_grouping",
+                  "value": "<string>",
+                  "description": "Type grouping of the discrepancies"
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier_id",
+                  "value": "<uuid>",
+                  "description": "The unique identifier of the carrier for which you would like to view discrepancies"
+                },
+                {
+                  "disabled": false,
+                  "key": "group_id",
+                  "value": "<uuid>",
+                  "description": "The unique identifier of the group for which you would like to view discrepancies"
+                },
+                {
+                  "disabled": false,
+                  "key": "subject_id",
+                  "value": "<uuid>",
+                  "description": "Unique identifier of the model that is the subject of the discrepancy"
+                },
+                {
+                  "disabled": false,
+                  "key": "subject_type",
+                  "value": "<string>",
+                  "description": "The type of the model that is the subject of the discrepancy"
+                },
+                {
+                  "disabled": false,
+                  "key": "discrepancy_type",
+                  "value": "<string>",
+                  "description": "The categorization of the discrepancy"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bea6dc17-843a-4fa0-bd2e-84c8d2fb3267",
+              "name": "Successful Response - Returns all matching Discrepancies",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "discrepancies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status_grouping",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type_grouping",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "carrier_id",
+                      "value": "2613a221-d3c8-4c8a-86d5-e7e885fd1da9"
+                    },
+                    {
+                      "key": "group_id",
+                      "value": "2613a221-d3c8-4c8a-86d5-e7e885fd1da9"
+                    },
+                    {
+                      "key": "subject_id",
+                      "value": "2613a221-d3c8-4c8a-86d5-e7e885fd1da9"
+                    },
+                    {
+                      "key": "subject_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "discrepancy_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 1\n  },\n  \"response\": [\n    {\n      \"body\": {\n        \"carrier_value\": \"2020-01-01\",\n        \"distributor_value\": \"2020-02-01\"\n      },\n      \"carrier_id\": \"8fac0992-933a-4743-8dab-0d606ef2569e\",\n      \"context\": \"\",\n      \"created\": 1557862286,\n      \"discrepancy_type\": \"individual_enrollment_effective_start_date_mismatch\",\n      \"group_id\": \"436fb487-bb75-42d4-9651-7b1471a8940e\",\n      \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n      \"modified\": 1557862286,\n      \"status\": \"pending_resolution\",\n      \"subject_id\": \"7027d416-3bed-43e8-b824-508d9c0d323e\",\n      \"subject_type\": \"IndividualEnrollment\",\n      \"version\": \"ea38e798-cd61-4fa2-b485-d1c5b87a61af\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8bfb751c-bb5f-4d5f-be43-d36601554d79",
+          "name": "Get Discrepancy",
+          "request": {
+            "name": "Get Discrepancy",
+            "description": {
+              "content": "Returns the latest version of a single discrepancy based on the ID provided",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "discrepancies",
+                ":discrepancy_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "discrepancy_id",
+                  "description": "(Required) The unique identifier of the discrepancy you would like to retrieve"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6263b30d-dec0-4c1e-a83d-828ffb99c413",
+              "name": "Successful Response - Returns a single Discrepancy",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "discrepancies",
+                    ":discrepancy_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "discrepancy_id",
+                      "description": "(Required) The unique identifier of the discrepancy you would like to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"body\": {\n    \"carrier_value\": \"2020-01-01\",\n    \"distributor_value\": \"2020-02-01\"\n  },\n  \"carrier_id\": \"8fac0992-933a-4743-8dab-0d606ef2569e\",\n  \"context\": \"\",\n  \"created\": 1557862286,\n  \"discrepancy_type\": \"individual_enrollment_effective_start_date_mismatch\",\n  \"group_id\": \"436fb487-bb75-42d4-9651-7b1471a8940e\",\n  \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n  \"modified\": 1557862286,\n  \"status\": \"pending_resolution\",\n  \"subject_id\": \"7027d416-3bed-43e8-b824-508d9c0d323e\",\n  \"subject_type\": \"IndividualEnrollment\",\n  \"version\": \"ea38e798-cd61-4fa2-b485-d1c5b87a61af\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ce795467-d54b-4751-a0ac-44f61cdabd77",
+          "name": "Acknowledge Discrepancy",
+          "request": {
+            "name": "Acknowledge Discrepancy",
+            "description": {
+              "content": "Acknowledge receipt of a discrepancy",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "discrepancies",
+                ":discrepancy_id",
+                "ack"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "discrepancy_id",
+                  "description": "(Required) Unique identifier of the discrepancy in the Noyo system"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "166ecd6d-4538-4af7-aca8-3a06a934c819",
+              "name": "Successful Response - Returns the updated Discrepancy",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "discrepancies",
+                    ":discrepancy_id",
+                    "ack"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "discrepancy_id",
+                      "description": "(Required) Unique identifier of the discrepancy in the Noyo system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "null",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"body\": {\n    \"carrier_value\": \"2020-01-01\",\n    \"distributor_value\": \"2020-02-01\"\n  },\n  \"carrier_id\": \"8fac0992-933a-4743-8dab-0d606ef2569e\",\n  \"context\": \"\",\n  \"created\": 1557862286,\n  \"discrepancy_type\": \"individual_enrollment_effective_start_date_mismatch\",\n  \"group_id\": \"436fb487-bb75-42d4-9651-7b1471a8940e\",\n  \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n  \"modified\": 1557862286,\n  \"status\": \"acknowledged\",\n  \"subject_id\": \"7027d416-3bed-43e8-b824-508d9c0d323e\",\n  \"subject_type\": \"IndividualEnrollment\",\n  \"version\": \"ea38e798-cd61-4fa2-b485-d1c5b87a61af\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "937495ee-55e7-424e-a527-665dbfb114a2",
+          "name": "Get a list of all discrepancy notes under a single discrepancy",
+          "request": {
+            "name": "Get a list of all discrepancy notes under a single discrepancy",
+            "description": {
+              "content": "Returns a list of all notes for a given discrepancy.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "discrepancies",
+                ":discrepancy_id",
+                "notes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "discrepancy_id",
+                  "description": "(Required) The unique identifier of the discrepancy for which you would like to view notes"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a9076c06-d3d7-4d5a-b95e-594553d52a30",
+              "name": "Successful Response - Returns all matching discrepancy notes",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "discrepancies",
+                    ":discrepancy_id",
+                    "notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "discrepancy_id",
+                      "description": "(Required) The unique identifier of the discrepancy for which you would like to view notes"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 1\n  },\n  \"response\": [\n    {\n      \"author_type\": \"noyo\",\n      \"content\": \"This discrepancy is associated with 5 others that will be sent over soon.\",\n      \"discrepancy_id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n      \"id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n      \"version\": \"6260146a-3486-4c3d-b2a6-fcd3f8c84043\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fc1c2966-91b7-4f08-8c4a-74a41f38b33e",
+          "name": "Request Discrepancy Outcome",
+          "request": {
+            "name": "Request Discrepancy Outcome",
+            "description": {
+              "content": "Request a new outcome attempt for a discrepancy",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "discrepancies",
+                ":discrepancy_id",
+                "request_outcome"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "discrepancy_id",
+                  "description": "(Required) The unique identifier of the associated discrepancy"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"outcome\": \"<string>\",\n  \"distributor_action\": \"<string>\",\n  \"request_context\": \"<string>\",\n  \"resolution_type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "71499b66-cc48-44b2-8461-11a80030d7cf",
+              "name": "Successful Response - Returns the new Discrepancy Resolution",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "discrepancies",
+                    ":discrepancy_id",
+                    "request_outcome"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "discrepancy_id",
+                      "description": "(Required) The unique identifier of the associated discrepancy"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"distributor_action\": \"will_update\",\n  \"outcome\": \"distributor_change\",\n  \"request_context\": \"After checking with the team, this looks like an issue on our end, will update\",\n  \"resolution_type\": \"offline\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"discrepancy_id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n  \"distributor_action\": \"will_update\",\n  \"id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n  \"outcome\": \"distributor_change\",\n  \"request_context\": \"After checking with the team, this looks like an issue on our end, will update\",\n  \"resolution_type\": \"offline\",\n  \"result\": {},\n  \"version\": \"6260146a-3486-4c3d-b2a6-fcd3f8c84043\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "02e18923-de4b-4905-ba96-7da7a62c9c27",
+          "name": "Get a list of all discrepancy resolutions under a single discrepancy",
+          "request": {
+            "name": "Get a list of all discrepancy resolutions under a single discrepancy",
+            "description": {
+              "content": "Returns a list of all resolutions for a given discrepancy.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "discrepancies",
+                ":discrepancy_id",
+                "resolutions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "discrepancy_id",
+                  "description": "(Required) The unique identifier of the discrepancy for which you would like to view resolutions"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "224155a3-0a06-4e46-8a12-c3210f1387dc",
+              "name": "Successful Response - Returns all matching discrepancy resolutions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "discrepancies",
+                    ":discrepancy_id",
+                    "resolutions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "discrepancy_id",
+                      "description": "(Required) The unique identifier of the discrepancy for which you would like to view resolutions"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 1\n  },\n  \"response\": [\n    {\n      \"automated_change_id\": \"bd957820-4652-4ee7-8a3a-6413df21e28d\",\n      \"automated_change_type\": \"member_request\",\n      \"discrepancy_id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n      \"distributor_action\": \"no_update\",\n      \"id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n      \"outcome\": \"carrier_change\",\n      \"resolution_type\": \"member_request\",\n      \"result\": {\n        \"context\": \"Something here explaining the resolution\",\n        \"type\": \"note\"\n      },\n      \"version\": \"6260146a-3486-4c3d-b2a6-fcd3f8c84043\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f810a448-c66b-4863-9bf5-13901d712ef1",
+          "name": "List Discrepancies",
+          "request": {
+            "name": "List Discrepancies",
+            "description": {
+              "content": "Returns a list of all discrepancies matching the given query",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "discrepancies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Status of the discrepancies"
+                },
+                {
+                  "disabled": false,
+                  "key": "status_grouping",
+                  "value": "<string>",
+                  "description": "Status grouping of the discrepancies"
+                },
+                {
+                  "disabled": false,
+                  "key": "type_grouping",
+                  "value": "<string>",
+                  "description": "Type grouping of the discrepancies"
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier_id",
+                  "value": "<uuid>",
+                  "description": "The unique identifier of the carrier for which you would like to view discrepancies"
+                },
+                {
+                  "disabled": false,
+                  "key": "group_id",
+                  "value": "<uuid>",
+                  "description": "The unique identifier of the group for which you would like to view discrepancies"
+                },
+                {
+                  "disabled": false,
+                  "key": "subject_id",
+                  "value": "<uuid>",
+                  "description": "Unique identifier of the model that is the subject of the discrepancy"
+                },
+                {
+                  "disabled": false,
+                  "key": "subject_type",
+                  "value": "<string>",
+                  "description": "The type of the model that is the subject of the discrepancy"
+                },
+                {
+                  "disabled": false,
+                  "key": "discrepancy_type",
+                  "value": "<string>",
+                  "description": "The categorization of the discrepancy"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_by",
+                  "value": "<string>",
+                  "description": "The attribute on which to sort the discrepancies"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_direction",
+                  "value": "<string>",
+                  "description": "Either asc or desc, to denote the data's direction"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9caaede0-2f39-4de2-b4af-97b03b967ebb",
+              "name": "Successful Response - Returns all matching Discrepancies",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "discrepancies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status_grouping",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type_grouping",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "carrier_id",
+                      "value": "2613a221-d3c8-4c8a-86d5-e7e885fd1da9"
+                    },
+                    {
+                      "key": "group_id",
+                      "value": "2613a221-d3c8-4c8a-86d5-e7e885fd1da9"
+                    },
+                    {
+                      "key": "subject_id",
+                      "value": "2613a221-d3c8-4c8a-86d5-e7e885fd1da9"
+                    },
+                    {
+                      "key": "subject_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "discrepancy_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_direction",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 1\n  },\n  \"response\": [\n    {\n      \"discrepancy\": {\n        \"body\": {\n          \"carrier_value\": \"2020-01-01\",\n          \"distributor_value\": \"2020-02-01\"\n        },\n        \"carrier_id\": \"8fac0992-933a-4743-8dab-0d606ef2569e\",\n        \"context\": \"\",\n        \"created\": 1557862286,\n        \"discrepancy_type\": \"individual_enrollment_effective_start_date_mismatch\",\n        \"group_id\": \"436fb487-bb75-42d4-9651-7b1471a8940e\",\n        \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n        \"modified\": 1557862286,\n        \"status\": \"pending_resolution\",\n        \"subject_id\": \"7027d416-3bed-43e8-b824-508d9c0d323e\",\n        \"subject_type\": \"IndividualEnrollment\",\n        \"version\": \"ea38e798-cd61-4fa2-b485-d1c5b87a61af\"\n      },\n      \"employee\": {\n        \"employment\": {\n          \"employment_dates\": {\n            \"full_time_start\": \"2015-01-01\",\n            \"hire_date\": \"2014-12-10\"\n          },\n          \"employment_status\": \"full-time\",\n          \"hours_worked\": 50,\n          \"occupation\": \"Senior Analyst\",\n          \"salary\": {\n            \"amount\": 55000,\n            \"type\": \"salary\",\n            \"unit\": \"annual\"\n          }\n        },\n        \"group_id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n        \"id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n        \"location_id\": \"bd957820-4652-4ee7-8a3a-6413df21e28d\",\n        \"person\": {\n          \"contact\": {\n            \"email_address\": \"david@testemail.com\",\n            \"email_address_type\": \"home\",\n            \"home_phone\": \"+12065551234\",\n            \"preferred_method\": \"email\",\n            \"work_phone\": \"+12065559876\"\n          },\n          \"date_of_birth\": \"1981-06-22\",\n          \"first_name\": \"David\",\n          \"home_address\": {\n            \"city\": \"San Francisco\",\n            \"county\": \"San Francisco\",\n            \"state\": \"CA\",\n            \"street_one\": \"1234 Home Ave\",\n            \"zip_code\": \"94107\"\n          },\n          \"last_name\": \"Johnson\",\n          \"marital_status\": \"\",\n          \"sex\": \"M\",\n          \"ssn\": \"123456789\"\n        },\n        \"version\": \"6260146a-3486-4c3d-b2a6-fcd3f8c84043\"\n      },\n      \"group_plan\": {\n        \"carrier_id\": \"c62a7be4-1551-4fb5-90c0-151121be785b\",\n        \"group_enrollment_id\": \"539b60cc-d9cb-4554-834d-e63a4f6a1c54\",\n        \"id\": \"b988cd26-121a-4dd6-b0be-09399f6ecc0a\",\n        \"line_of_coverage\": \"dental\",\n        \"name\": \"PrettyNice Dental Plan\"\n      },\n      \"individual_enrollment\": {\n        \"cobra_enrollment\": {},\n        \"effective_end_date\": \"2019-12-31\",\n        \"effective_start_date\": \"2019-01-01\",\n        \"enroll_data\": {\n          \"premium\": {\n            \"amount\": 50,\n            \"unit\": \"Month\"\n          }\n        },\n        \"group_enrollment_id\": \"539b60cc-d9cb-4554-834d-e63a4f6a1c54\",\n        \"id\": \"7027d416-3bed-43e8-b824-508d9c0d323e\",\n        \"individual_enrollment_configuration\": {},\n        \"individual_id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n        \"individual_type\": \"employee\",\n        \"line_of_coverage\": \"dental\",\n        \"plan_id\": \"b988cd26-121a-4dd6-b0be-09399f6ecc0a\",\n        \"status\": \"active\",\n        \"version\": \"27bbf929-78ca-4339-8bb3-39b75f92c4a4\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "879b6c84-65e9-4afe-9d89-5b89f900fbb8",
+          "name": "Get Discrepancy",
+          "request": {
+            "name": "Get Discrepancy",
+            "description": {
+              "content": "Returns the latest version of a single discrepancy based on the ID provided",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "discrepancies",
+                ":discrepancy_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "discrepancy_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "58e6715b-2613-421c-ae3b-b540934fbf35",
+              "name": "Successful Response - Returns a single Discrepancy",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "discrepancies",
+                    ":discrepancy_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "discrepancy_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"body\": {\n    \"carrier_value\": \"2020-01-01\",\n    \"distributor_value\": \"2020-02-01\"\n  },\n  \"carrier_id\": \"8fac0992-933a-4743-8dab-0d606ef2569e\",\n  \"context\": \"\",\n  \"created\": 1557862286,\n  \"discrepancy_type\": \"individual_enrollment_effective_start_date_mismatch\",\n  \"group_id\": \"436fb487-bb75-42d4-9651-7b1471a8940e\",\n  \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n  \"modified\": 1557862286,\n  \"status\": \"pending_resolution\",\n  \"subject_id\": \"7027d416-3bed-43e8-b824-508d9c0d323e\",\n  \"subject_type\": \"IndividualEnrollment\",\n  \"version\": \"ea38e798-cd61-4fa2-b485-d1c5b87a61af\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "72835e6d-06af-42b9-b124-f471e86aae43",
+          "name": "List Discrepancies Related to an Employee",
+          "request": {
+            "name": "List Discrepancies Related to an Employee",
+            "description": {
+              "content": "Returns a list of all discrepancies related to an employee, its dependents, and individual enrollments",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "employees",
+                ":employee_id",
+                "discrepancies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Status of the discrepancies"
+                },
+                {
+                  "disabled": false,
+                  "key": "status_grouping",
+                  "value": "<string>",
+                  "description": "Status grouping of the discrepancies"
+                },
+                {
+                  "disabled": false,
+                  "key": "type_grouping",
+                  "value": "<string>",
+                  "description": "Type grouping of the discrepancies"
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier_id",
+                  "value": "<uuid>",
+                  "description": "The unique identifier of the carrier for which you would like to view discrepancies"
+                },
+                {
+                  "disabled": false,
+                  "key": "subject_id",
+                  "value": "<uuid>",
+                  "description": "Unique identifier of the model that is the subject of the discrepancy"
+                },
+                {
+                  "disabled": false,
+                  "key": "subject_type",
+                  "value": "<string>",
+                  "description": "The type of the model that is the subject of the discrepancy"
+                },
+                {
+                  "disabled": false,
+                  "key": "discrepancy_type",
+                  "value": "<string>",
+                  "description": "The categorization of the discrepancy"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employee_id",
+                  "description": "(Required) The unique identifier of the employee for which you would like to view discrepancies"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ad348313-f8c2-4bdc-9360-ac574fc91381",
+              "name": "Successful Response - Returns all matching Discrepancies for Employee",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "employees",
+                    ":employee_id",
+                    "discrepancies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status_grouping",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type_grouping",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "carrier_id",
+                      "value": "2613a221-d3c8-4c8a-86d5-e7e885fd1da9"
+                    },
+                    {
+                      "key": "subject_id",
+                      "value": "2613a221-d3c8-4c8a-86d5-e7e885fd1da9"
+                    },
+                    {
+                      "key": "subject_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "discrepancy_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employee_id",
+                      "description": "(Required) The unique identifier of the employee for which you would like to view discrepancies"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 1\n  },\n  \"response\": [\n    {\n      \"discrepancy\": {\n        \"body\": {\n          \"carrier_value\": \"2020-01-01\",\n          \"distributor_value\": \"2020-02-01\"\n        },\n        \"carrier_id\": \"8fac0992-933a-4743-8dab-0d606ef2569e\",\n        \"created\": 1557862286,\n        \"discrepancy_type\": \"individual_enrollment_effective_start_date_mismatch\",\n        \"group_id\": \"436fb487-bb75-42d4-9651-7b1471a8940e\",\n        \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n        \"modified\": 1557862286,\n        \"notes\": \"\",\n        \"status\": \"pending_resolution\",\n        \"subject_id\": \"7027d416-3bed-43e8-b824-508d9c0d323e\",\n        \"subject_type\": \"IndividualEnrollment\",\n        \"version\": \"ea38e798-cd61-4fa2-b485-d1c5b87a61af\"\n      },\n      \"employee\": {\n        \"employment\": {\n          \"employment_dates\": {\n            \"full_time_start\": \"2015-01-01\",\n            \"hire_date\": \"2014-12-10\"\n          },\n          \"employment_status\": \"full-time\",\n          \"hours_worked\": 50,\n          \"occupation\": \"Senior Analyst\",\n          \"salary\": {\n            \"amount\": 55000,\n            \"type\": \"salary\",\n            \"unit\": \"annual\"\n          }\n        },\n        \"group_id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n        \"id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n        \"location_id\": \"bd957820-4652-4ee7-8a3a-6413df21e28d\",\n        \"person\": {\n          \"contact\": {\n            \"email_address\": \"david@testemail.com\",\n            \"email_address_type\": \"home\",\n            \"home_phone\": \"+12065551234\",\n            \"preferred_method\": \"email\",\n            \"work_phone\": \"+12065559876\"\n          },\n          \"date_of_birth\": \"1981-06-22\",\n          \"first_name\": \"David\",\n          \"home_address\": {\n            \"city\": \"San Francisco\",\n            \"county\": \"San Francisco\",\n            \"state\": \"CA\",\n            \"street_one\": \"1234 Home Ave\",\n            \"zip_code\": \"94107\"\n          },\n          \"last_name\": \"Johnson\",\n          \"marital_status\": \"\",\n          \"sex\": \"M\",\n          \"ssn\": \"123456789\"\n        },\n        \"version\": \"6260146a-3486-4c3d-b2a6-fcd3f8c84043\"\n      },\n      \"group_plan\": {\n        \"carrier_id\": \"c62a7be4-1551-4fb5-90c0-151121be785b\",\n        \"group_enrollment_id\": \"539b60cc-d9cb-4554-834d-e63a4f6a1c54\",\n        \"id\": \"b988cd26-121a-4dd6-b0be-09399f6ecc0a\",\n        \"line_of_coverage\": \"dental\",\n        \"name\": \"PrettyNice Dental Plan\"\n      },\n      \"individual_enrollment\": {\n        \"cobra_enrollment\": {},\n        \"effective_end_date\": \"2019-12-31\",\n        \"effective_start_date\": \"2019-01-01\",\n        \"enroll_data\": {\n          \"premium\": {\n            \"amount\": 50,\n            \"unit\": \"Month\"\n          }\n        },\n        \"group_enrollment_id\": \"539b60cc-d9cb-4554-834d-e63a4f6a1c54\",\n        \"id\": \"7027d416-3bed-43e8-b824-508d9c0d323e\",\n        \"individual_enrollment_configuration\": {},\n        \"individual_id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n        \"individual_type\": \"employee\",\n        \"line_of_coverage\": \"dental\",\n        \"plan_id\": \"b988cd26-121a-4dd6-b0be-09399f6ecc0a\",\n        \"status\": \"active\",\n        \"version\": \"27bbf929-78ca-4339-8bb3-39b75f92c4a4\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a746e17c-1fb4-4243-bd2f-378f7980a754",
+    "name": "Noyo Carrier Carrier Mapped Field Discrepancies API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

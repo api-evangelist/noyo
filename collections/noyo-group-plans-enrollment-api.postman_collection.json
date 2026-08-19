@@ -1,0 +1,614 @@
+{
+  "item": [
+    {
+      "id": "9c44d29e-dc8f-4748-b570-5e36daeb252e",
+      "name": "Group Plans & Enrollment",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "be995e26-81f5-4e45-96d4-2dde07adbede",
+          "name": "Get a single Group Enrollment",
+          "request": {
+            "name": "Get a single Group Enrollment",
+            "description": {
+              "content": "Returns the latest version of a single group enrollment based on the ID provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "group_enrollments",
+                ":enrollment_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "enrollment_id",
+                  "description": "(Required) Unique identifier of the group enrollment"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dbd78bbf-0094-464d-881e-a81d116996b6",
+              "name": "Successful Response - Returns a single Group Enrollment",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_enrollments",
+                    ":enrollment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "enrollment_id",
+                      "description": "(Required) Unique identifier of the group enrollment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"carrier_id\": \"8fac0992-933a-4743-8dab-0d606ef2569e\",\n  \"created\": 1557512389,\n  \"effective_end_date\": \"2019-12-31\",\n  \"effective_start_date\": \"2019-01-01\",\n  \"group_id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n  \"id\": \"7499ea07-76c9-40f2-992b-952259e98384\",\n  \"line_of_coverage\": \"medical\",\n  \"modified\": 1543215342,\n  \"open_enrollment_end_date\": \"2019-02-01\",\n  \"open_enrollment_start_date\": \"2019-01-01\",\n  \"status\": \"active\",\n  \"version\": \"c2292b67-0382-45e9-a378-b52c4129f672\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4993dfe3-c1da-44ae-8e88-94c57b6e6260",
+          "name": "Get a list of all Group Enrollment Plans",
+          "request": {
+            "name": "Get a list of all Group Enrollment Plans",
+            "description": {
+              "content": "Returns a list of all plans for a given group enrollment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "group_enrollments",
+                ":enrollment_id",
+                "plans"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "enrollment_id",
+                  "description": "(Required) The unique identifier of the group enrollment for which you would like to view the plans"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b186c59a-6d5c-40ab-b115-4d088fb53e8d",
+              "name": "Successful Response - Returns all matching Plans",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_enrollments",
+                    ":enrollment_id",
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "enrollment_id",
+                      "description": "(Required) The unique identifier of the group enrollment for which you would like to view the plans"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"carrier_id\": \"d0003042-eaae-4491-b219-4825456a3d16\",\n    \"cobra_rules\": {\n      \"eligible\": false\n    },\n    \"code\": \"D1\",\n    \"created\": 1554175253,\n    \"effective_end_date\": \"9999-12-31\",\n    \"effective_start_date\": \"2020-01-01\",\n    \"eligible_member_types\": [\n      \"employee\"\n    ],\n    \"group_enrollment_id\": \"31559b4b-e45a-4df8-84f6-2220d7ed0c3a\",\n    \"id\": \"5ba915fc-afe8-4572-a60f-61ee5883e100\",\n    \"line_of_coverage\": \"dental\",\n    \"modified\": 1554175253,\n    \"name\": \"Dental\",\n    \"network\": \"Dental PPO Network\",\n    \"plan_type\": \"ppo\",\n    \"status\": \"active\",\n    \"termination_policy\": \"last_work_date\",\n    \"version\": \"1bf06a82-8d81-4849-91d3-47c60fdce605\",\n    \"voluntary\": false,\n    \"waiting_periods\": []\n  },\n  {\n    \"carrier_id\": \"d0003042-eaae-4491-b219-4825456a3d16\",\n    \"cobra_rules\": {\n      \"eligible\": false\n    },\n    \"code\": \"D1\",\n    \"created\": 1554175253,\n    \"effective_end_date\": \"9999-12-31\",\n    \"effective_start_date\": \"2020-01-01\",\n    \"eligible_member_types\": [\n      \"spouse\",\n      \"child\"\n    ],\n    \"group_enrollment_id\": \"31559b4b-e45a-4df8-84f6-2220d7ed0c3a\",\n    \"id\": \"c1279c1c-ed61-439b-bd9c-07f3228c09cb\",\n    \"line_of_coverage\": \"dental\",\n    \"modified\": 1554175253,\n    \"name\": \"Dental\",\n    \"network\": \"Dental PPO Network\",\n    \"plan_type\": \"ppo\",\n    \"status\": \"active\",\n    \"termination_policy\": \"last_work_date\",\n    \"version\": \"a6404fb2-f266-45b0-a6b7-84b047f017cf\",\n    \"voluntary\": false,\n    \"waiting_periods\": []\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7f1ee646-1f6c-46e8-a997-1b831dc3fd37",
+          "name": "Get a list of all Group Enrollments",
+          "request": {
+            "name": "Get a list of all Group Enrollments",
+            "description": {
+              "content": "Returns a list of all group enrollments for a given group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "groups",
+                ":group_id",
+                "group_enrollments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "effective_date",
+                  "value": "<string>",
+                  "description": "The relative date on which to view the state of the record"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "The status of the group enrollments you would like to view"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_id",
+                  "description": "(Required) The unique identifier of the group for which you would like to view group enrollments"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bb8af322-abeb-4daa-acb9-4c6ca8ad7d22",
+              "name": "Successful Response - Returns all matching Group Enrollments",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "group_enrollments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "effective_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The unique identifier of the group for which you would like to view group enrollments"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 2\n  },\n  \"response\": [\n    {\n      \"carrier_id\": \"8fac0992-933a-4743-8dab-0d606ef2569e\",\n      \"created\": 1557512389,\n      \"effective_end_date\": \"2019-12-31\",\n      \"effective_start_date\": \"2019-01-01\",\n      \"group_id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n      \"id\": \"7499ea07-76c9-40f2-992b-952259e98384\",\n      \"line_of_coverage\": \"medical\",\n      \"modified\": 1543215342,\n      \"open_enrollment_end_date\": \"2019-02-01\",\n      \"open_enrollment_start_date\": \"2019-01-01\",\n      \"status\": \"active\",\n      \"version\": \"c2292b67-0382-45e9-a378-b52c4129f672\"\n    },\n    {\n      \"carrier_id\": \"8fac0992-933a-4743-8dab-0d606ef2569e\",\n      \"created\": 1557512389,\n      \"effective_end_date\": \"2019-12-31\",\n      \"effective_start_date\": \"2019-01-01\",\n      \"group_id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n      \"id\": \"25cdcb18-7d01-4599-9f65-d38b36d7c370\",\n      \"line_of_coverage\": \"dental\",\n      \"modified\": 1543215342,\n      \"open_enrollment_end_date\": \"2019-02-01\",\n      \"open_enrollment_start_date\": \"2019-01-01\",\n      \"status\": \"active\",\n      \"version\": \"55c4bcbb-98ab-448d-a5b4-d7d835327f72\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "244ab4b4-22c7-4c63-a680-ea23ba709e0e",
+          "name": "Get a list of all Group Plans",
+          "request": {
+            "name": "Get a list of all Group Plans",
+            "description": {
+              "content": "Returns a list of all plans for a given group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "groups",
+                ":group_id",
+                "plans"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Status of the group plans for which you would like to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "line_of_coverage",
+                  "value": "<string>",
+                  "description": "Line of coverage of the group plans for which you would like to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier_id",
+                  "value": "<uuid>",
+                  "description": "The unique identifier of the carrier of the group plans for which you would like to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "effective_date",
+                  "value": "<string>",
+                  "description": "The relative date on which to view the state of the record"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_id",
+                  "description": "(Required) The unique identifier of the group for which you would like to view plans"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "77befe51-b31d-4732-98ae-34d7b8be2fd3",
+              "name": "Successful Response - Returns all matching Plans",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "line_of_coverage",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "carrier_id",
+                      "value": "2613a221-d3c8-4c8a-86d5-e7e885fd1da9"
+                    },
+                    {
+                      "key": "effective_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The unique identifier of the group for which you would like to view plans"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 2\n  },\n  \"response\": [\n    {\n      \"carrier_id\": \"d0003042-eaae-4491-b219-4825456a3d16\",\n      \"cobra_rules\": {\n        \"eligible\": false\n      },\n      \"code\": \"D1\",\n      \"created\": 1554175253,\n      \"effective_end_date\": \"9999-12-31\",\n      \"effective_start_date\": \"2020-01-01\",\n      \"eligible_member_types\": [\n        \"employee\"\n      ],\n      \"group_enrollment_id\": \"31559b4b-e45a-4df8-84f6-2220d7ed0c3a\",\n      \"id\": \"5ba915fc-afe8-4572-a60f-61ee5883e100\",\n      \"line_of_coverage\": \"dental\",\n      \"modified\": 1554175253,\n      \"name\": \"Dental - Employee\",\n      \"network\": \"Dental PPO Network\",\n      \"plan_type\": \"ppo\",\n      \"status\": \"active\",\n      \"termination_policy\": \"end_of_month\",\n      \"version\": \"1bf06a82-8d81-4849-91d3-47c60fdce605\",\n      \"voluntary\": false,\n      \"waiting_periods\": [\n        {\n          \"waiting_period_enrollment_type\": \"new_member\",\n          \"waiting_period_rule\": \"hire_date\"\n        },\n        {\n          \"waiting_period_amount\": 0,\n          \"waiting_period_enrollment_type\": \"current_member\",\n          \"waiting_period_rule\": \"after_waiting_period\",\n          \"waiting_period_unit\": \"day\"\n        }\n      ]\n    },\n    {\n      \"carrier_id\": \"d0003042-eaae-4491-b219-4825456a3d16\",\n      \"cobra_rules\": {\n        \"eligible\": false\n      },\n      \"code\": \"D1\",\n      \"created\": 1554175253,\n      \"effective_end_date\": \"9999-12-31\",\n      \"effective_start_date\": \"2020-01-01\",\n      \"eligible_member_types\": [\n        \"spouse\",\n        \"child\"\n      ],\n      \"group_enrollment_id\": \"31559b4b-e45a-4df8-84f6-2220d7ed0c3a\",\n      \"id\": \"c1279c1c-ed61-439b-bd9c-07f3228c09cb\",\n      \"line_of_coverage\": \"dental\",\n      \"modified\": 1554175253,\n      \"name\": \"Dental - Dependent\",\n      \"network\": \"Dental PPO Network\",\n      \"plan_type\": \"ppo\",\n      \"status\": \"active\",\n      \"termination_policy\": \"end_of_month\",\n      \"version\": \"a6404fb2-f266-45b0-a6b7-84b047f017cf\",\n      \"voluntary\": false,\n      \"waiting_periods\": [\n        {\n          \"waiting_period_enrollment_type\": \"new_member\",\n          \"waiting_period_rule\": \"hire_date\"\n        },\n        {\n          \"waiting_period_amount\": 0,\n          \"waiting_period_enrollment_type\": \"current_member\",\n          \"waiting_period_rule\": \"after_waiting_period\",\n          \"waiting_period_unit\": \"day\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "88032f34-ae72-4a6d-a9ae-366f56b5225b",
+          "name": "Get a Group Plan by ID",
+          "request": {
+            "name": "Get a Group Plan by ID",
+            "description": {
+              "content": "Returns the group plan specified by unique identifier",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "plans",
+                ":plan_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "effective_date",
+                  "value": "<string>",
+                  "description": "The relative date on which to view the state of the record"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "plan_id",
+                  "description": "(Required) The unique identifier of the group plan you would like to view"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5e365206-3b63-4ccd-9ef4-171f449189fd",
+              "name": "Successful Response - Returns matching Group Plan",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "plans",
+                    ":plan_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "effective_date",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "plan_id",
+                      "description": "(Required) The unique identifier of the group plan you would like to view"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"plan\": {\n    \"carrier_id\": \"d0003042-eaae-4491-b219-4825456a3d16\",\n    \"cobra_rules\": {\n      \"eligible\": false\n    },\n    \"code\": \"D1\",\n    \"created\": 1554175253,\n    \"effective_end_date\": \"9999-12-31\",\n    \"effective_start_date\": \"2020-01-01\",\n    \"eligible_member_types\": [\n      \"employee\"\n    ],\n    \"group_enrollment_id\": \"31559b4b-e45a-4df8-84f6-2220d7ed0c3a\",\n    \"id\": \"5ba915fc-afe8-4572-a60f-61ee5883e100\",\n    \"line_of_coverage\": \"dental\",\n    \"modified\": 1554175253,\n    \"name\": \"Dental - Employee\",\n    \"network\": \"Dental PPO Network\",\n    \"plan_type\": \"ppo\",\n    \"status\": \"active\",\n    \"termination_policy\": \"end_of_month\",\n    \"version\": \"1bf06a82-8d81-4849-91d3-47c60fdce605\",\n    \"voluntary\": false,\n    \"waiting_periods\": [\n      {\n        \"waiting_period_enrollment_type\": \"new_member\",\n        \"waiting_period_rule\": \"hire_date\"\n      },\n      {\n        \"waiting_period_amount\": 0,\n        \"waiting_period_enrollment_type\": \"current_member\",\n        \"waiting_period_rule\": \"after_waiting_period\",\n        \"waiting_period_unit\": \"day\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ccd964ab-9d88-4198-b6e0-980220e426d2",
+    "name": "Noyo Carrier Carrier Mapped Field Group Plans & Enrollment API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

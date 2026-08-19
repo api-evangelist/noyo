@@ -1,0 +1,2136 @@
+{
+  "item": [
+    {
+      "id": "82556545-9a38-4004-ac06-d2661d57bcb9",
+      "name": "Member Snapshot",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6db24d81-b5ed-4397-bebd-a39de9536acc",
+          "name": "Get a Member Snapshot by Employee",
+          "request": {
+            "name": "Get a Member Snapshot by Employee",
+            "description": {
+              "content": "Get a Member Snapshot by Employee ID. This will be calculated based on the current state of Noyo data for the employee.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "employees",
+                ":employee_id",
+                "member_snapshot"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by associated status"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by associated status"
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<uuid>",
+                  "description": "Filter by ID (comma separated)"
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<uuid>",
+                  "description": "Filter by ID (comma separated)"
+                },
+                {
+                  "disabled": false,
+                  "key": "fulfillment_summary_carrier_id",
+                  "value": "<uuid>",
+                  "description": "Filter by fulfillment summary carrier ID (comma separated)"
+                },
+                {
+                  "disabled": false,
+                  "key": "fulfillment_summary_carrier_id",
+                  "value": "<uuid>",
+                  "description": "Filter by fulfillment summary carrier ID (comma separated)"
+                },
+                {
+                  "disabled": false,
+                  "key": "fulfillment_summary_status",
+                  "value": "<string>",
+                  "description": "Filter by fulfillment summary status (comma separated)"
+                },
+                {
+                  "disabled": false,
+                  "key": "fulfillment_summary_status",
+                  "value": "<string>",
+                  "description": "Filter by fulfillment summary status (comma separated)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employee_id",
+                  "description": "(Required) The unique identifier of the employee"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b74e5e8f-b42b-4d55-bf58-b1d7803e4f4f",
+              "name": "Successful Response - Returns the Member Snapshot contents for an employee",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "employees",
+                    ":employee_id",
+                    "member_snapshot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "fulfillment_summary_carrier_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "fulfillment_summary_carrier_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "fulfillment_summary_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fulfillment_summary_status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employee_id",
+                      "description": "(Required) The unique identifier of the employee"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"coverages\": [\n    {\n      \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n      \"enrolled_members\": [\n        {\n          \"effective_end_date\": \"9999-12-31\",\n          \"effective_start_date\": \"2022-01-01\",\n          \"individual_id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n          \"individual_type\": \"employee\",\n          \"latest_change_effective_date\": \"2022-02-13\"\n        },\n        {\n          \"effective_end_date\": \"9999-12-31\",\n          \"effective_start_date\": \"2022-01-01\",\n          \"individual_id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n          \"individual_type\": \"dependent\"\n        }\n      ],\n      \"line_of_coverage\": \"medical\",\n      \"plan_id\": \"4bf04f73-0aad-48ac-b28a-e5f4def7c5e9\",\n      \"signature_date\": \"2021-12-23\"\n    },\n    {\n      \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n      \"enrolled_members\": [\n        {\n          \"effective_end_date\": \"9999-12-31\",\n          \"effective_start_date\": \"2022-01-01\",\n          \"individual_type\": \"employee\"\n        },\n        {\n          \"effective_end_date\": \"2021-12-31\",\n          \"effective_start_date\": \"2022-01-01\",\n          \"individual_id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n          \"individual_type\": \"dependent\"\n        }\n      ],\n      \"line_of_coverage\": \"dental\",\n      \"plan_name\": \"DHMO Smile Plus\",\n      \"signature_date\": \"2021-12-23\"\n    },\n    {\n      \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n      \"enrolled_members\": [\n        {\n          \"effective_end_date\": \"9999-12-31\",\n          \"effective_start_date\": \"2022-01-01\",\n          \"individual_type\": \"employee\",\n          \"volume\": 50000\n        }\n      ],\n      \"line_of_coverage\": \"life\",\n      \"plan_name\": \"50k Employee Basic Life\",\n      \"signature_date\": \"2021-12-23\"\n    }\n  ],\n  \"dependents\": [\n    {\n      \"custom_individual_id\": \"3f093cc0-4fef-4d5d-9267-ba5cdfc09827\",\n      \"id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n      \"person\": {\n        \"contact\": {\n          \"email_address\": \"jamie@testemail.com\",\n          \"email_address_type\": \"home\",\n          \"home_phone\": \"+12065551234\"\n        },\n        \"date_of_birth\": \"1990-01-02\",\n        \"first_name\": \"Jamie\",\n        \"home_address\": {\n          \"city\": \"San Francisco\",\n          \"county\": \"San Francisco\",\n          \"state\": \"CA\",\n          \"street_one\": \"1234 Home Ave\",\n          \"zip_code\": \"94107\"\n        },\n        \"last_name\": \"Johnson\",\n        \"mailing_address\": {\n          \"city\": \"San Francisco\",\n          \"state\": \"CA\",\n          \"street_one\": \"P.O. Box 1234\",\n          \"zip_code\": \"94107\"\n        },\n        \"marital_status\": \"married\",\n        \"sex\": \"F\",\n        \"ssn\": \"987654321\"\n      },\n      \"relationship\": \"spouse\"\n    }\n  ],\n  \"employee\": {\n    \"classifications\": {\n      \"BranchName\": \"HQ\",\n      \"Department\": \"Sales\"\n    },\n    \"custom_individual_id\": \"bb6bfcd8-6657-4b77-8151-949ea8b5e44e\",\n    \"employment\": {\n      \"employment_dates\": {\n        \"full_time_start\": \"2015-01-01\",\n        \"hire_date\": \"2014-12-10\"\n      },\n      \"employment_status\": \"full-time\",\n      \"hours_worked\": 50,\n      \"occupation\": \"Senior Analyst\",\n      \"salary\": {\n        \"amount\": 55000,\n        \"effective_date\": \"2022-01-31\",\n        \"type\": \"salary\",\n        \"unit\": \"annual\"\n      }\n    },\n    \"group_id\": \"d0ec3837-3499-4a2f-8c58-966ef7e46d95\",\n    \"id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n    \"person\": {\n      \"contact\": {\n        \"email_address\": \"david@testemail.com\",\n        \"email_address_type\": \"home\",\n        \"home_phone\": \"+12065551234\",\n        \"preferred_method\": \"email\",\n        \"work_phone\": \"+12065559876\"\n      },\n      \"date_of_birth\": \"1985-06-22\",\n      \"first_name\": \"David\",\n      \"home_address\": {\n        \"city\": \"San Francisco\",\n        \"county\": \"San Francisco\",\n        \"state\": \"CA\",\n        \"street_one\": \"1234 Home Ave\",\n        \"zip_code\": \"94107\"\n      },\n      \"last_name\": \"Johnson\",\n      \"mailing_address\": {\n        \"city\": \"San Francisco\",\n        \"state\": \"CA\",\n        \"street_one\": \"P.O. Box 1234\",\n        \"zip_code\": \"94107\"\n      },\n      \"marital_status\": \"married\",\n      \"middle_name\": \"A\",\n      \"sex\": \"M\",\n      \"ssn\": \"123456789\",\n      \"suffix\": \"Jr\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "29def60c-6159-4d66-8442-437a3570ab61",
+              "name": "Failure Response - Not found error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "employees",
+                    ":employee_id",
+                    "member_snapshot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "fulfillment_summary_carrier_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "fulfillment_summary_carrier_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "fulfillment_summary_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fulfillment_summary_status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employee_id",
+                      "description": "(Required) The unique identifier of the employee"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Employee not found with UUID 2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8d0775f0-48de-4e58-8866-80e38b17072f",
+          "name": "Get all Member Snapshots by Employee",
+          "request": {
+            "name": "Get all Member Snapshots by Employee",
+            "description": {
+              "content": "Returns a list with metadata for all member snapshots for a given employee.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "employees",
+                ":employee_id",
+                "member_snapshots"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employee_id",
+                  "description": "(Required) The unique identifier of the employee for which you would like to view member snapshots"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5548c844-62eb-44e5-8e14-90d4b46ea50f",
+              "name": "Successful Response - Returns metadata for any matching Member Snapshots",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "employees",
+                    ":employee_id",
+                    "member_snapshots"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employee_id",
+                      "description": "(Required) The unique identifier of the employee for which you would like to view member snapshots"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 2\n  },\n  \"response\": [\n    {\n      \"created\": 1599184829,\n      \"employee_id\": \"7f39b5e0-460d-49e2-83b7-a1b6f2726b12\",\n      \"fulfillment_summary\": [\n        {\n          \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n          \"errors\": [],\n          \"status\": \"processing\"\n        }\n      ],\n      \"id\": \"bc4aea3e-f728-4b05-85dc-e1ea14456e83\",\n      \"modified\": 1599184829,\n      \"status\": \"processing\",\n      \"version\": \"431b7d10-3da6-4c5e-bb2f-58a6ebb1224f\"\n    },\n    {\n      \"created\": 1557512389,\n      \"employee_id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n      \"fulfillment_summary\": [\n        {\n          \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n          \"errors\": [],\n          \"status\": \"sent\"\n        }\n      ],\n      \"id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n      \"modified\": 1564440756,\n      \"status\": \"completed\",\n      \"version\": \"6260146a-3486-4c3d-b2a6-fcd3f8c84043\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "652c25d2-02f0-4bac-b730-b3751b173828",
+              "name": "Failure Response - Not found error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "employees",
+                    ":employee_id",
+                    "member_snapshots"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employee_id",
+                      "description": "(Required) The unique identifier of the employee for which you would like to view member snapshots"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Employee not found with UUID 2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a02f6d89-e216-48a8-aa0c-c80e5f689c7b",
+          "name": "Get Employee Status",
+          "request": {
+            "name": "Get Employee Status",
+            "description": {
+              "content": "Returns the status of the employee and family, summarized by carrier and including any pending or completed enrollment changes requested by the platform.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "employees",
+                ":employee_id",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "employee_id",
+                  "description": "(Required) The unique identifier of the employee"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a5c4f886-17bb-4d2f-acf4-c105c9a5d598",
+              "name": "Returns details about the current status of the Employee",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "employees",
+                    ":employee_id",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employee_id",
+                      "description": "(Required) The unique identifier of the employee"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"carrier_statuses\": [\n    {\n      \"carrier_id\": \"1012fbfe-3fbf-422b-807c-b449a3119a61\",\n      \"pending_changes\": [\n        {\n          \"id\": \"6e0d7cf3-e8a8-42a1-b2dc-269fa988b99e\",\n          \"status\": \"processing\",\n          \"type\": \"member_snapshot\"\n        }\n      ],\n      \"status\": \"pending_changes\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "70d98a2b-8730-43a8-b7ce-2b3f317922f1",
+              "name": "Failure Response - Not found error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "employees",
+                    ":employee_id",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "employee_id",
+                      "description": "(Required) The unique identifier of the employee"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Employee not found with UUID 30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a32e4d4b-bb17-40ca-98ef-48e92aab50f7",
+          "name": "Get all Member Snapshots by Group",
+          "request": {
+            "name": "Get all Member Snapshots by Group",
+            "description": {
+              "content": "Returns a list with metadata for all member snapshots for a given group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "groups",
+                ":group_id",
+                "member_snapshots"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "employee_id",
+                  "value": "<uuid>",
+                  "description": "The employee ID associated with the member snapshot"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by associated status"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by associated status"
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<uuid>",
+                  "description": "Filter by ID (comma separated)"
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<uuid>",
+                  "description": "Filter by ID (comma separated)"
+                },
+                {
+                  "disabled": false,
+                  "key": "fulfillment_summary_carrier_id",
+                  "value": "<uuid>",
+                  "description": "Filter by fulfillment summary carrier ID (comma separated)"
+                },
+                {
+                  "disabled": false,
+                  "key": "fulfillment_summary_carrier_id",
+                  "value": "<uuid>",
+                  "description": "Filter by fulfillment summary carrier ID (comma separated)"
+                },
+                {
+                  "disabled": false,
+                  "key": "fulfillment_summary_status",
+                  "value": "<string>",
+                  "description": "Filter by fulfillment summary status (comma separated)"
+                },
+                {
+                  "disabled": false,
+                  "key": "fulfillment_summary_status",
+                  "value": "<string>",
+                  "description": "Filter by fulfillment summary status (comma separated)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_id",
+                  "description": "(Required) The unique identifier of the group for which you would like to view member snapshots"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0de30566-4ce3-43ec-8e05-0563be029586",
+              "name": "Successful Response - Returns metadata for any matching Member Snapshots",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "member_snapshots"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "employee_id",
+                      "value": "a88f4b6f-7c26-4dd0-8b62-6c76f06412ad"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "fulfillment_summary_carrier_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "fulfillment_summary_carrier_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "fulfillment_summary_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fulfillment_summary_status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The unique identifier of the group for which you would like to view member snapshots"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 2\n  },\n  \"response\": [\n    {\n      \"created\": 1599184829,\n      \"employee_id\": \"7f39b5e0-460d-49e2-83b7-a1b6f2726b12\",\n      \"fulfillment_summary\": [\n        {\n          \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n          \"errors\": [],\n          \"status\": \"processing\"\n        }\n      ],\n      \"id\": \"bc4aea3e-f728-4b05-85dc-e1ea14456e83\",\n      \"modified\": 1599184829,\n      \"status\": \"processing\",\n      \"version\": \"431b7d10-3da6-4c5e-bb2f-58a6ebb1224f\"\n    },\n    {\n      \"created\": 1557512389,\n      \"employee_id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n      \"fulfillment_summary\": [\n        {\n          \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n          \"errors\": [],\n          \"status\": \"sent\"\n        }\n      ],\n      \"id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n      \"modified\": 1564440756,\n      \"status\": \"completed\",\n      \"version\": \"6260146a-3486-4c3d-b2a6-fcd3f8c84043\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "19010462-947b-49ad-9544-dd8e129101b6",
+              "name": "Failure Response - Not found error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "member_snapshots"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "employee_id",
+                      "value": "a88f4b6f-7c26-4dd0-8b62-6c76f06412ad"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "fulfillment_summary_carrier_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "fulfillment_summary_carrier_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "fulfillment_summary_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fulfillment_summary_status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The unique identifier of the group for which you would like to view member snapshots"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Group not found with UUID 2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5e629e4a-901f-4e56-9eba-d76d33d37b4a",
+          "name": "Create a Member Snapshot",
+          "request": {
+            "name": "Create a Member Snapshot",
+            "description": {
+              "content": "Create a new Member Snapshot for an employee associated with a group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "groups",
+                ":group_id",
+                "member_snapshots"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_id",
+                  "description": "(Required) The unique identifier of the group for the employee referenced in the snapshot"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employee\": {\n    \"employment\": {\n      \"employment_dates\": {\n        \"hire_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"full_time_start\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"rehire\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"retirement\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"terminated\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"employment_status\": \"<string>\",\n      \"hours_worked\": \"<integer>\",\n      \"occupation\": \"<string>\",\n      \"salary\": {\n        \"amount\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"effective_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"unit\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"person\": {\n      \"date_of_birth\": \"<date>\",\n      \"first_name\": \"<string>\",\n      \"home_address\": {\n        \"city\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"state\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"street_one\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"zip_code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"county\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"street_two\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"last_name\": \"<string>\",\n      \"mailing_address\": {\n        \"city\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"state\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"street_one\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"zip_code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"county\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"street_two\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"sex\": \"<string>\",\n      \"contact\": {\n        \"email_address\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"email_address_type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"home_phone\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"preferred_language\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"preferred_method\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"speaks_english\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"work_phone\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"details\": {\n        \"american_indian\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"disability\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"is_military\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"is_student\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"tobacco\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"maiden_name\": \"<string>\",\n      \"marital_status\": \"<string>\",\n      \"middle_name\": \"<string>\",\n      \"ssn\": \"<string>\",\n      \"suffix\": \"<string>\"\n    },\n    \"classifications\": \"<object>\",\n    \"custom_individual_id\": \"<string>\",\n    \"event_id\": \"<string>\",\n    \"group_individual_id\": \"<string>\",\n    \"id\": \"<uuid>\"\n  },\n  \"snapshot_mode\": \"<string>\",\n  \"coverages\": [\n    {\n      \"carrier_id\": \"<uuid>\",\n      \"enrolled_members\": [\n        {\n          \"effective_end_date\": \"<date>\",\n          \"effective_start_date\": \"<date>\",\n          \"individual_type\": \"<string>\",\n          \"custom_individual_id\": \"<string>\",\n          \"event_id\": \"<string>\",\n          \"individual_id\": \"<uuid>\",\n          \"latest_change_effective_date\": \"<date>\",\n          \"pcp_details\": {\n            \"providers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"volume\": \"<integer>\"\n        },\n        {\n          \"effective_end_date\": \"<date>\",\n          \"effective_start_date\": \"<date>\",\n          \"individual_type\": \"<string>\",\n          \"custom_individual_id\": \"<string>\",\n          \"event_id\": \"<string>\",\n          \"individual_id\": \"<uuid>\",\n          \"latest_change_effective_date\": \"<date>\",\n          \"pcp_details\": {\n            \"providers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"volume\": \"<integer>\"\n        }\n      ],\n      \"line_of_coverage\": \"<string>\",\n      \"carrier_config\": \"<object>\",\n      \"cobra_details\": {\n        \"cobra_enrolled\": \"<boolean>\",\n        \"eligibility_end_date\": \"<date>\",\n        \"eligibility_start_date\": \"<date>\",\n        \"qualifying_event_date\": \"<date>\",\n        \"qualifying_event_reason\": \"<string>\"\n      },\n      \"custom_plan_id\": \"<string>\",\n      \"plan_id\": \"<uuid>\",\n      \"plan_name\": \"<string>\",\n      \"signature_date\": \"<date>\"\n    },\n    {\n      \"carrier_id\": \"<uuid>\",\n      \"enrolled_members\": [\n        {\n          \"effective_end_date\": \"<date>\",\n          \"effective_start_date\": \"<date>\",\n          \"individual_type\": \"<string>\",\n          \"custom_individual_id\": \"<string>\",\n          \"event_id\": \"<string>\",\n          \"individual_id\": \"<uuid>\",\n          \"latest_change_effective_date\": \"<date>\",\n          \"pcp_details\": {\n            \"providers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"volume\": \"<integer>\"\n        },\n        {\n          \"effective_end_date\": \"<date>\",\n          \"effective_start_date\": \"<date>\",\n          \"individual_type\": \"<string>\",\n          \"custom_individual_id\": \"<string>\",\n          \"event_id\": \"<string>\",\n          \"individual_id\": \"<uuid>\",\n          \"latest_change_effective_date\": \"<date>\",\n          \"pcp_details\": {\n            \"providers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"volume\": \"<integer>\"\n        }\n      ],\n      \"line_of_coverage\": \"<string>\",\n      \"carrier_config\": \"<object>\",\n      \"cobra_details\": {\n        \"cobra_enrolled\": \"<boolean>\",\n        \"eligibility_end_date\": \"<date>\",\n        \"eligibility_start_date\": \"<date>\",\n        \"qualifying_event_date\": \"<date>\",\n        \"qualifying_event_reason\": \"<string>\"\n      },\n      \"custom_plan_id\": \"<string>\",\n      \"plan_id\": \"<uuid>\",\n      \"plan_name\": \"<string>\",\n      \"signature_date\": \"<date>\"\n    }\n  ],\n  \"dependents\": [\n    {\n      \"person\": {\n        \"date_of_birth\": \"<date>\",\n        \"first_name\": \"<string>\",\n        \"home_address\": {\n          \"city\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"state\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"street_one\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"zip_code\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"county\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"street_two\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"last_name\": \"<string>\",\n        \"mailing_address\": {\n          \"city\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"state\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"street_one\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"zip_code\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"county\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"street_two\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"sex\": \"<string>\",\n        \"contact\": {\n          \"email_address\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email_address_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"home_phone\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"preferred_language\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"preferred_method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"speaks_english\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"work_phone\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"details\": {\n          \"american_indian\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"disability\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"is_military\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"is_student\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"tobacco\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"maiden_name\": \"<string>\",\n        \"marital_status\": \"<string>\",\n        \"middle_name\": \"<string>\",\n        \"ssn\": \"<string>\",\n        \"suffix\": \"<string>\"\n      },\n      \"relationship\": \"<string>\",\n      \"custom_individual_id\": \"<string>\",\n      \"event_id\": \"<string>\",\n      \"group_individual_id\": \"<string>\",\n      \"id\": \"<uuid>\"\n    },\n    {\n      \"person\": {\n        \"date_of_birth\": \"<date>\",\n        \"first_name\": \"<string>\",\n        \"home_address\": {\n          \"city\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"state\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"street_one\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"zip_code\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"county\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"street_two\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"last_name\": \"<string>\",\n        \"mailing_address\": {\n          \"city\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"state\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"street_one\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"zip_code\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"county\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"street_two\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"sex\": \"<string>\",\n        \"contact\": {\n          \"email_address\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email_address_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"home_phone\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"preferred_language\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"preferred_method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"speaks_english\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"work_phone\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"details\": {\n          \"american_indian\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"disability\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"is_military\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"is_student\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"tobacco\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"maiden_name\": \"<string>\",\n        \"marital_status\": \"<string>\",\n        \"middle_name\": \"<string>\",\n        \"ssn\": \"<string>\",\n        \"suffix\": \"<string>\"\n      },\n      \"relationship\": \"<string>\",\n      \"custom_individual_id\": \"<string>\",\n      \"event_id\": \"<string>\",\n      \"group_individual_id\": \"<string>\",\n      \"id\": \"<uuid>\"\n    }\n  ],\n  \"enable_member_auto_link\": false,\n  \"events\": [\n    {\n      \"date\": \"<date>\",\n      \"id\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"date\": \"<date>\",\n      \"id\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"omitted_coverage_handling\": {\n    \"custom\": {\n      \"effective_end_date\": \"<date>\"\n    },\n    \"policy\": \"reject\",\n    \"termination_rule\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "79005d19-4e31-4ec0-854d-860f9a94d86f",
+              "name": "Successful Response - Returns the contents of the newly created Member Snapshot",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "member_snapshots"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The unique identifier of the group for the employee referenced in the snapshot"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"coverages\": [\n    {\n      \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n      \"enrolled_members\": [\n        {\n          \"effective_end_date\": \"9999-12-31\",\n          \"effective_start_date\": \"2022-01-01\",\n          \"event_id\": \"1\",\n          \"individual_id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n          \"individual_type\": \"employee\",\n          \"latest_change_effective_date\": \"2022-02-13\"\n        },\n        {\n          \"effective_end_date\": \"9999-12-31\",\n          \"effective_start_date\": \"2022-01-01\",\n          \"event_id\": \"1\",\n          \"individual_id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n          \"individual_type\": \"dependent\"\n        }\n      ],\n      \"line_of_coverage\": \"medical\",\n      \"plan_id\": \"4bf04f73-0aad-48ac-b28a-e5f4def7c5e9\",\n      \"signature_date\": \"2021-12-23\"\n    },\n    {\n      \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n      \"enrolled_members\": [\n        {\n          \"effective_end_date\": \"9999-12-31\",\n          \"effective_start_date\": \"2022-01-01\",\n          \"event_id\": \"1\",\n          \"individual_id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n          \"individual_type\": \"employee\"\n        },\n        {\n          \"effective_end_date\": \"2021-12-31\",\n          \"effective_start_date\": \"2022-01-01\",\n          \"event_id\": \"1\",\n          \"individual_id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n          \"individual_type\": \"dependent\"\n        }\n      ],\n      \"line_of_coverage\": \"dental\",\n      \"plan_name\": \"DHMO Smile Plus\",\n      \"signature_date\": \"2021-12-23\"\n    },\n    {\n      \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n      \"enrolled_members\": [\n        {\n          \"effective_end_date\": \"9999-12-31\",\n          \"effective_start_date\": \"2022-01-01\",\n          \"event_id\": \"1\",\n          \"individual_id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n          \"individual_type\": \"employee\",\n          \"volume\": 50000\n        }\n      ],\n      \"line_of_coverage\": \"life\",\n      \"plan_name\": \"50k Employee Basic Life\",\n      \"signature_date\": \"2021-12-23\"\n    }\n  ],\n  \"dependents\": [\n    {\n      \"custom_individual_id\": \"378713198\",\n      \"event_id\": \"1\",\n      \"id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n      \"person\": {\n        \"contact\": {\n          \"email_address\": \"jamie@testemail.com\",\n          \"email_address_type\": \"home\",\n          \"home_phone\": \"+12065551234\"\n        },\n        \"date_of_birth\": \"1990-01-02\",\n        \"first_name\": \"Jamie\",\n        \"home_address\": {\n          \"city\": \"San Francisco\",\n          \"county\": \"San Francisco\",\n          \"state\": \"CA\",\n          \"street_one\": \"1234 Home Ave\",\n          \"zip_code\": \"94107\"\n        },\n        \"last_name\": \"Johnson\",\n        \"mailing_address\": {\n          \"city\": \"San Francisco\",\n          \"state\": \"CA\",\n          \"street_one\": \"P.O. Box 1234\",\n          \"zip_code\": \"94107\"\n        },\n        \"marital_status\": \"married\",\n        \"sex\": \"F\",\n        \"ssn\": \"987654321\"\n      },\n      \"relationship\": \"spouse\"\n    }\n  ],\n  \"employee\": {\n    \"classifications\": {\n      \"BranchName\": \"HQ\",\n      \"Department\": \"Sales\"\n    },\n    \"custom_individual_id\": \"718713143\",\n    \"employment\": {\n      \"employment_dates\": {\n        \"full_time_start\": \"2015-01-01\",\n        \"hire_date\": \"2014-12-10\"\n      },\n      \"employment_status\": \"full-time\",\n      \"hours_worked\": 50,\n      \"occupation\": \"Senior Analyst\",\n      \"salary\": {\n        \"amount\": 55000,\n        \"effective_date\": \"2022-01-31\",\n        \"type\": \"salary\",\n        \"unit\": \"annual\"\n      }\n    },\n    \"event_id\": \"1\",\n    \"id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n    \"person\": {\n      \"contact\": {\n        \"email_address\": \"david@testemail.com\",\n        \"email_address_type\": \"home\",\n        \"home_phone\": \"+12065551234\",\n        \"preferred_method\": \"email\",\n        \"work_phone\": \"+12065559876\"\n      },\n      \"date_of_birth\": \"1985-06-22\",\n      \"first_name\": \"David\",\n      \"home_address\": {\n        \"city\": \"San Francisco\",\n        \"county\": \"San Francisco\",\n        \"state\": \"CA\",\n        \"street_one\": \"1234 Home Ave\",\n        \"zip_code\": \"94107\"\n      },\n      \"last_name\": \"Johnson\",\n      \"mailing_address\": {\n        \"city\": \"San Francisco\",\n        \"state\": \"CA\",\n        \"street_one\": \"P.O. Box 1234\",\n        \"zip_code\": \"94107\"\n      },\n      \"marital_status\": \"married\",\n      \"middle_name\": \"A\",\n      \"sex\": \"M\",\n      \"ssn\": \"123456789\",\n      \"suffix\": \"Jr\"\n    }\n  },\n  \"enable_member_auto_link\": false,\n  \"events\": [\n    {\n      \"date\": \"2022-01-01\",\n      \"id\": \"1\",\n      \"reason\": \"open_enrollment\",\n      \"type\": \"coverage\"\n    }\n  ],\n  \"snapshot_mode\": \"current_open\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 1656030390,\n  \"created_members\": [\n    {\n      \"custom_individual_id\": \"718713143\",\n      \"id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n      \"type\": \"employee\"\n    },\n    {\n      \"custom_individual_id\": \"378713198\",\n      \"id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n      \"type\": \"dependent\"\n    }\n  ],\n  \"employee_id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n  \"fulfillment_summary\": [\n    {\n      \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n      \"errors\": [],\n      \"status\": \"processing\"\n    }\n  ],\n  \"id\": \"7bea80ac-499d-560b-5512-60be9e2349cb\",\n  \"member_snapshot\": {\n    \"coverages\": [\n      {\n        \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n        \"enrolled_members\": [\n          {\n            \"effective_end_date\": \"9999-12-31\",\n            \"effective_start_date\": \"2022-01-01\",\n            \"event_id\": \"1\",\n            \"individual_id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n            \"individual_type\": \"employee\",\n            \"latest_change_effective_date\": \"2022-02-13\"\n          },\n          {\n            \"effective_end_date\": \"9999-12-31\",\n            \"effective_start_date\": \"2022-01-01\",\n            \"event_id\": \"1\",\n            \"individual_id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n            \"individual_type\": \"dependent\"\n          }\n        ],\n        \"line_of_coverage\": \"medical\",\n        \"plan_id\": \"4bf04f73-0aad-48ac-b28a-e5f4def7c5e9\",\n        \"signature_date\": \"2021-12-23\"\n      },\n      {\n        \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n        \"enrolled_members\": [\n          {\n            \"effective_end_date\": \"9999-12-31\",\n            \"effective_start_date\": \"2022-01-01\",\n            \"event_id\": \"1\",\n            \"individual_type\": \"employee\"\n          },\n          {\n            \"effective_end_date\": \"2021-12-31\",\n            \"effective_start_date\": \"2022-01-01\",\n            \"event_id\": \"1\",\n            \"individual_id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n            \"individual_type\": \"dependent\"\n          }\n        ],\n        \"line_of_coverage\": \"dental\",\n        \"plan_name\": \"DHMO Smile Plus\",\n        \"signature_date\": \"2021-12-23\"\n      },\n      {\n        \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n        \"enrolled_members\": [\n          {\n            \"effective_end_date\": \"9999-12-31\",\n            \"effective_start_date\": \"2022-01-01\",\n            \"event_id\": \"1\",\n            \"individual_type\": \"employee\",\n            \"volume\": 50000\n          }\n        ],\n        \"line_of_coverage\": \"life\",\n        \"plan_name\": \"50k Employee Basic Life\",\n        \"signature_date\": \"2021-12-23\"\n      }\n    ],\n    \"dependents\": [\n      {\n        \"custom_individual_id\": \"378713198\",\n        \"event_id\": \"1\",\n        \"id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n        \"person\": {\n          \"contact\": {\n            \"email_address\": \"jamie@testemail.com\",\n            \"email_address_type\": \"home\",\n            \"home_phone\": \"+12065551234\"\n          },\n          \"date_of_birth\": \"1990-01-02\",\n          \"first_name\": \"Jamie\",\n          \"home_address\": {\n            \"city\": \"San Francisco\",\n            \"county\": \"San Francisco\",\n            \"state\": \"CA\",\n            \"street_one\": \"1234 Home Ave\",\n            \"zip_code\": \"94107\"\n          },\n          \"last_name\": \"Johnson\",\n          \"mailing_address\": {\n            \"city\": \"San Francisco\",\n            \"state\": \"CA\",\n            \"street_one\": \"P.O. Box 1234\",\n            \"zip_code\": \"94107\"\n          },\n          \"marital_status\": \"married\",\n          \"sex\": \"F\",\n          \"ssn\": \"987654321\"\n        },\n        \"relationship\": \"spouse\"\n      }\n    ],\n    \"employee\": {\n      \"classifications\": {\n        \"BranchName\": \"HQ\",\n        \"Department\": \"Sales\"\n      },\n      \"custom_individual_id\": \"718713143\",\n      \"employment\": {\n        \"employment_dates\": {\n          \"full_time_start\": \"2015-01-01\",\n          \"hire_date\": \"2014-12-10\"\n        },\n        \"employment_status\": \"full-time\",\n        \"hours_worked\": 50,\n        \"occupation\": \"Senior Analyst\",\n        \"salary\": {\n          \"amount\": 55000,\n          \"effective_date\": \"2022-01-31\",\n          \"type\": \"salary\",\n          \"unit\": \"annual\"\n        }\n      },\n      \"event_id\": \"1\",\n      \"group_id\": \"d0ec3837-3499-4a2f-8c58-966ef7e46d95\",\n      \"id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n      \"person\": {\n        \"contact\": {\n          \"email_address\": \"david@testemail.com\",\n          \"email_address_type\": \"home\",\n          \"home_phone\": \"+12065551234\",\n          \"preferred_method\": \"email\",\n          \"work_phone\": \"+12065559876\"\n        },\n        \"date_of_birth\": \"1985-06-22\",\n        \"first_name\": \"David\",\n        \"home_address\": {\n          \"city\": \"San Francisco\",\n          \"county\": \"San Francisco\",\n          \"state\": \"CA\",\n          \"street_one\": \"1234 Home Ave\",\n          \"zip_code\": \"94107\"\n        },\n        \"last_name\": \"Johnson\",\n        \"mailing_address\": {\n          \"city\": \"San Francisco\",\n          \"state\": \"CA\",\n          \"street_one\": \"P.O. Box 1234\",\n          \"zip_code\": \"94107\"\n        },\n        \"marital_status\": \"married\",\n        \"middle_name\": \"A\",\n        \"sex\": \"M\",\n        \"ssn\": \"123456789\",\n        \"suffix\": \"Jr\"\n      }\n    },\n    \"enable_member_auto_link\": false,\n    \"events\": [\n      {\n        \"date\": \"2022-01-01\",\n        \"id\": \"1\",\n        \"reason\": \"open_enrollment\",\n        \"type\": \"coverage\"\n      }\n    ],\n    \"snapshot_mode\": \"current_open\"\n  },\n  \"modified\": 1656030390,\n  \"status\": \"processing\",\n  \"version\": \"271c60d6-f009-4b3d-8bba-aac49b2dd9a4\",\n  \"warnings\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a3b4ff2-5c34-4dce-8295-ed440b53ae33",
+              "name": "Failure Response - Client error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "member_snapshots"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The unique identifier of the group for the employee referenced in the snapshot"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"coverages\": [\n    {\n      \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n      \"enrolled_members\": [\n        {\n          \"effective_end_date\": \"9999-12-31\",\n          \"effective_start_date\": \"2022-01-01\",\n          \"event_id\": \"1\",\n          \"individual_id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n          \"individual_type\": \"employee\",\n          \"latest_change_effective_date\": \"2022-02-13\"\n        },\n        {\n          \"effective_end_date\": \"9999-12-31\",\n          \"effective_start_date\": \"2022-01-01\",\n          \"event_id\": \"1\",\n          \"individual_id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n          \"individual_type\": \"dependent\"\n        }\n      ],\n      \"line_of_coverage\": \"medical\",\n      \"plan_id\": \"4bf04f73-0aad-48ac-b28a-e5f4def7c5e9\",\n      \"signature_date\": \"2021-12-23\"\n    },\n    {\n      \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n      \"enrolled_members\": [\n        {\n          \"effective_end_date\": \"9999-12-31\",\n          \"effective_start_date\": \"2022-01-01\",\n          \"event_id\": \"1\",\n          \"individual_id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n          \"individual_type\": \"employee\"\n        },\n        {\n          \"effective_end_date\": \"2021-12-31\",\n          \"effective_start_date\": \"2022-01-01\",\n          \"event_id\": \"1\",\n          \"individual_id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n          \"individual_type\": \"dependent\"\n        }\n      ],\n      \"line_of_coverage\": \"dental\",\n      \"plan_name\": \"DHMO Smile Plus\",\n      \"signature_date\": \"2021-12-23\"\n    },\n    {\n      \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n      \"enrolled_members\": [\n        {\n          \"effective_end_date\": \"9999-12-31\",\n          \"effective_start_date\": \"2022-01-01\",\n          \"event_id\": \"1\",\n          \"individual_id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n          \"individual_type\": \"employee\",\n          \"volume\": 50000\n        }\n      ],\n      \"line_of_coverage\": \"life\",\n      \"plan_name\": \"50k Employee Basic Life\",\n      \"signature_date\": \"2021-12-23\"\n    }\n  ],\n  \"dependents\": [\n    {\n      \"custom_individual_id\": \"378713198\",\n      \"event_id\": \"1\",\n      \"id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n      \"person\": {\n        \"contact\": {\n          \"email_address\": \"jamie@testemail.com\",\n          \"email_address_type\": \"home\",\n          \"home_phone\": \"+12065551234\"\n        },\n        \"date_of_birth\": \"1990-01-02\",\n        \"first_name\": \"Jamie\",\n        \"home_address\": {\n          \"city\": \"San Francisco\",\n          \"county\": \"San Francisco\",\n          \"state\": \"CA\",\n          \"street_one\": \"1234 Home Ave\",\n          \"zip_code\": \"94107\"\n        },\n        \"last_name\": \"Johnson\",\n        \"mailing_address\": {\n          \"city\": \"San Francisco\",\n          \"state\": \"CA\",\n          \"street_one\": \"P.O. Box 1234\",\n          \"zip_code\": \"94107\"\n        },\n        \"marital_status\": \"married\",\n        \"sex\": \"F\",\n        \"ssn\": \"987654321\"\n      },\n      \"relationship\": \"spouse\"\n    }\n  ],\n  \"employee\": {\n    \"classifications\": {\n      \"BranchName\": \"HQ\",\n      \"Department\": \"Sales\"\n    },\n    \"custom_individual_id\": \"718713143\",\n    \"employment\": {\n      \"employment_dates\": {\n        \"full_time_start\": \"2015-01-01\",\n        \"hire_date\": \"2014-12-10\"\n      },\n      \"employment_status\": \"full-time\",\n      \"hours_worked\": 50,\n      \"occupation\": \"Senior Analyst\",\n      \"salary\": {\n        \"amount\": 55000,\n        \"effective_date\": \"2022-01-31\",\n        \"type\": \"salary\",\n        \"unit\": \"annual\"\n      }\n    },\n    \"event_id\": \"1\",\n    \"id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n    \"person\": {\n      \"contact\": {\n        \"email_address\": \"david@testemail.com\",\n        \"email_address_type\": \"home\",\n        \"home_phone\": \"+12065551234\",\n        \"preferred_method\": \"email\",\n        \"work_phone\": \"+12065559876\"\n      },\n      \"date_of_birth\": \"1985-06-22\",\n      \"first_name\": \"David\",\n      \"home_address\": {\n        \"city\": \"San Francisco\",\n        \"county\": \"San Francisco\",\n        \"state\": \"CA\",\n        \"street_one\": \"1234 Home Ave\",\n        \"zip_code\": \"94107\"\n      },\n      \"last_name\": \"Johnson\",\n      \"mailing_address\": {\n        \"city\": \"San Francisco\",\n        \"state\": \"CA\",\n        \"street_one\": \"P.O. Box 1234\",\n        \"zip_code\": \"94107\"\n      },\n      \"marital_status\": \"married\",\n      \"middle_name\": \"A\",\n      \"sex\": \"M\",\n      \"ssn\": \"123456789\",\n      \"suffix\": \"Jr\"\n    }\n  },\n  \"enable_member_auto_link\": false,\n  \"events\": [\n    {\n      \"date\": \"2022-01-01\",\n      \"id\": \"1\",\n      \"reason\": \"open_enrollment\",\n      \"type\": \"coverage\"\n    }\n  ],\n  \"snapshot_mode\": \"current_open\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Error creating dependent. Existing dependent has matching name and date of birth: ab740704-7c37-4010-92b3-d22c6926be3e\",\n  \"status\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3af7561f-76b8-4ecc-9ca9-56ab9f8e4c11",
+              "name": "Failure Response - Not found error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "member_snapshots"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The unique identifier of the group for the employee referenced in the snapshot"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"coverages\": [\n    {\n      \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n      \"enrolled_members\": [\n        {\n          \"effective_end_date\": \"9999-12-31\",\n          \"effective_start_date\": \"2022-01-01\",\n          \"event_id\": \"1\",\n          \"individual_id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n          \"individual_type\": \"employee\",\n          \"latest_change_effective_date\": \"2022-02-13\"\n        },\n        {\n          \"effective_end_date\": \"9999-12-31\",\n          \"effective_start_date\": \"2022-01-01\",\n          \"event_id\": \"1\",\n          \"individual_id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n          \"individual_type\": \"dependent\"\n        }\n      ],\n      \"line_of_coverage\": \"medical\",\n      \"plan_id\": \"4bf04f73-0aad-48ac-b28a-e5f4def7c5e9\",\n      \"signature_date\": \"2021-12-23\"\n    },\n    {\n      \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n      \"enrolled_members\": [\n        {\n          \"effective_end_date\": \"9999-12-31\",\n          \"effective_start_date\": \"2022-01-01\",\n          \"event_id\": \"1\",\n          \"individual_id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n          \"individual_type\": \"employee\"\n        },\n        {\n          \"effective_end_date\": \"2021-12-31\",\n          \"effective_start_date\": \"2022-01-01\",\n          \"event_id\": \"1\",\n          \"individual_id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n          \"individual_type\": \"dependent\"\n        }\n      ],\n      \"line_of_coverage\": \"dental\",\n      \"plan_name\": \"DHMO Smile Plus\",\n      \"signature_date\": \"2021-12-23\"\n    },\n    {\n      \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n      \"enrolled_members\": [\n        {\n          \"effective_end_date\": \"9999-12-31\",\n          \"effective_start_date\": \"2022-01-01\",\n          \"event_id\": \"1\",\n          \"individual_id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n          \"individual_type\": \"employee\",\n          \"volume\": 50000\n        }\n      ],\n      \"line_of_coverage\": \"life\",\n      \"plan_name\": \"50k Employee Basic Life\",\n      \"signature_date\": \"2021-12-23\"\n    }\n  ],\n  \"dependents\": [\n    {\n      \"custom_individual_id\": \"378713198\",\n      \"event_id\": \"1\",\n      \"id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n      \"person\": {\n        \"contact\": {\n          \"email_address\": \"jamie@testemail.com\",\n          \"email_address_type\": \"home\",\n          \"home_phone\": \"+12065551234\"\n        },\n        \"date_of_birth\": \"1990-01-02\",\n        \"first_name\": \"Jamie\",\n        \"home_address\": {\n          \"city\": \"San Francisco\",\n          \"county\": \"San Francisco\",\n          \"state\": \"CA\",\n          \"street_one\": \"1234 Home Ave\",\n          \"zip_code\": \"94107\"\n        },\n        \"last_name\": \"Johnson\",\n        \"mailing_address\": {\n          \"city\": \"San Francisco\",\n          \"state\": \"CA\",\n          \"street_one\": \"P.O. Box 1234\",\n          \"zip_code\": \"94107\"\n        },\n        \"marital_status\": \"married\",\n        \"sex\": \"F\",\n        \"ssn\": \"987654321\"\n      },\n      \"relationship\": \"spouse\"\n    }\n  ],\n  \"employee\": {\n    \"classifications\": {\n      \"BranchName\": \"HQ\",\n      \"Department\": \"Sales\"\n    },\n    \"custom_individual_id\": \"718713143\",\n    \"employment\": {\n      \"employment_dates\": {\n        \"full_time_start\": \"2015-01-01\",\n        \"hire_date\": \"2014-12-10\"\n      },\n      \"employment_status\": \"full-time\",\n      \"hours_worked\": 50,\n      \"occupation\": \"Senior Analyst\",\n      \"salary\": {\n        \"amount\": 55000,\n        \"effective_date\": \"2022-01-31\",\n        \"type\": \"salary\",\n        \"unit\": \"annual\"\n      }\n    },\n    \"event_id\": \"1\",\n    \"id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n    \"person\": {\n      \"contact\": {\n        \"email_address\": \"david@testemail.com\",\n        \"email_address_type\": \"home\",\n        \"home_phone\": \"+12065551234\",\n        \"preferred_method\": \"email\",\n        \"work_phone\": \"+12065559876\"\n      },\n      \"date_of_birth\": \"1985-06-22\",\n      \"first_name\": \"David\",\n      \"home_address\": {\n        \"city\": \"San Francisco\",\n        \"county\": \"San Francisco\",\n        \"state\": \"CA\",\n        \"street_one\": \"1234 Home Ave\",\n        \"zip_code\": \"94107\"\n      },\n      \"last_name\": \"Johnson\",\n      \"mailing_address\": {\n        \"city\": \"San Francisco\",\n        \"state\": \"CA\",\n        \"street_one\": \"P.O. Box 1234\",\n        \"zip_code\": \"94107\"\n      },\n      \"marital_status\": \"married\",\n      \"middle_name\": \"A\",\n      \"sex\": \"M\",\n      \"ssn\": \"123456789\",\n      \"suffix\": \"Jr\"\n    }\n  },\n  \"enable_member_auto_link\": false,\n  \"events\": [\n    {\n      \"date\": \"2022-01-01\",\n      \"id\": \"1\",\n      \"reason\": \"open_enrollment\",\n      \"type\": \"coverage\"\n    }\n  ],\n  \"snapshot_mode\": \"current_open\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Dependent with ID ab740704-7c37-4010-92b3-d22c6926be3e does not have an associated employee.\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca38c591-4d78-46ca-92f4-a9f4086b109d",
+              "name": "Failure Response - Schema validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "member_snapshots"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The unique identifier of the group for the employee referenced in the snapshot"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"coverages\": [\n    {\n      \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n      \"enrolled_members\": [\n        {\n          \"effective_end_date\": \"9999-12-31\",\n          \"effective_start_date\": \"2022-01-01\",\n          \"event_id\": \"1\",\n          \"individual_id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n          \"individual_type\": \"employee\",\n          \"latest_change_effective_date\": \"2022-02-13\"\n        },\n        {\n          \"effective_end_date\": \"9999-12-31\",\n          \"effective_start_date\": \"2022-01-01\",\n          \"event_id\": \"1\",\n          \"individual_id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n          \"individual_type\": \"dependent\"\n        }\n      ],\n      \"line_of_coverage\": \"medical\",\n      \"plan_id\": \"4bf04f73-0aad-48ac-b28a-e5f4def7c5e9\",\n      \"signature_date\": \"2021-12-23\"\n    },\n    {\n      \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n      \"enrolled_members\": [\n        {\n          \"effective_end_date\": \"9999-12-31\",\n          \"effective_start_date\": \"2022-01-01\",\n          \"event_id\": \"1\",\n          \"individual_id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n          \"individual_type\": \"employee\"\n        },\n        {\n          \"effective_end_date\": \"2021-12-31\",\n          \"effective_start_date\": \"2022-01-01\",\n          \"event_id\": \"1\",\n          \"individual_id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n          \"individual_type\": \"dependent\"\n        }\n      ],\n      \"line_of_coverage\": \"dental\",\n      \"plan_name\": \"DHMO Smile Plus\",\n      \"signature_date\": \"2021-12-23\"\n    },\n    {\n      \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n      \"enrolled_members\": [\n        {\n          \"effective_end_date\": \"9999-12-31\",\n          \"effective_start_date\": \"2022-01-01\",\n          \"event_id\": \"1\",\n          \"individual_id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n          \"individual_type\": \"employee\",\n          \"volume\": 50000\n        }\n      ],\n      \"line_of_coverage\": \"life\",\n      \"plan_name\": \"50k Employee Basic Life\",\n      \"signature_date\": \"2021-12-23\"\n    }\n  ],\n  \"dependents\": [\n    {\n      \"custom_individual_id\": \"378713198\",\n      \"event_id\": \"1\",\n      \"id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n      \"person\": {\n        \"contact\": {\n          \"email_address\": \"jamie@testemail.com\",\n          \"email_address_type\": \"home\",\n          \"home_phone\": \"+12065551234\"\n        },\n        \"date_of_birth\": \"1990-01-02\",\n        \"first_name\": \"Jamie\",\n        \"home_address\": {\n          \"city\": \"San Francisco\",\n          \"county\": \"San Francisco\",\n          \"state\": \"CA\",\n          \"street_one\": \"1234 Home Ave\",\n          \"zip_code\": \"94107\"\n        },\n        \"last_name\": \"Johnson\",\n        \"mailing_address\": {\n          \"city\": \"San Francisco\",\n          \"state\": \"CA\",\n          \"street_one\": \"P.O. Box 1234\",\n          \"zip_code\": \"94107\"\n        },\n        \"marital_status\": \"married\",\n        \"sex\": \"F\",\n        \"ssn\": \"987654321\"\n      },\n      \"relationship\": \"spouse\"\n    }\n  ],\n  \"employee\": {\n    \"classifications\": {\n      \"BranchName\": \"HQ\",\n      \"Department\": \"Sales\"\n    },\n    \"custom_individual_id\": \"718713143\",\n    \"employment\": {\n      \"employment_dates\": {\n        \"full_time_start\": \"2015-01-01\",\n        \"hire_date\": \"2014-12-10\"\n      },\n      \"employment_status\": \"full-time\",\n      \"hours_worked\": 50,\n      \"occupation\": \"Senior Analyst\",\n      \"salary\": {\n        \"amount\": 55000,\n        \"effective_date\": \"2022-01-31\",\n        \"type\": \"salary\",\n        \"unit\": \"annual\"\n      }\n    },\n    \"event_id\": \"1\",\n    \"id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n    \"person\": {\n      \"contact\": {\n        \"email_address\": \"david@testemail.com\",\n        \"email_address_type\": \"home\",\n        \"home_phone\": \"+12065551234\",\n        \"preferred_method\": \"email\",\n        \"work_phone\": \"+12065559876\"\n      },\n      \"date_of_birth\": \"1985-06-22\",\n      \"first_name\": \"David\",\n      \"home_address\": {\n        \"city\": \"San Francisco\",\n        \"county\": \"San Francisco\",\n        \"state\": \"CA\",\n        \"street_one\": \"1234 Home Ave\",\n        \"zip_code\": \"94107\"\n      },\n      \"last_name\": \"Johnson\",\n      \"mailing_address\": {\n        \"city\": \"San Francisco\",\n        \"state\": \"CA\",\n        \"street_one\": \"P.O. Box 1234\",\n        \"zip_code\": \"94107\"\n      },\n      \"marital_status\": \"married\",\n      \"middle_name\": \"A\",\n      \"sex\": \"M\",\n      \"ssn\": \"123456789\",\n      \"suffix\": \"Jr\"\n    }\n  },\n  \"enable_member_auto_link\": false,\n  \"events\": [\n    {\n      \"date\": \"2022-01-01\",\n      \"id\": \"1\",\n      \"reason\": \"open_enrollment\",\n      \"type\": \"coverage\"\n    }\n  ],\n  \"snapshot_mode\": \"current_open\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"This snapshot is missing the following active coverages: dental for dependent ab740704-7c37-4010-92b3-d22c6926be3e. If you intend to terminate a coverage, please send a snapshot that includes a termination date before omitting it from future snapshots.\",\n  \"status\": 422\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e7358f7b-cf30-4691-9876-aee1ed098088",
+          "name": "Test creating a member snapshot",
+          "request": {
+            "name": "Test creating a member snapshot",
+            "description": {
+              "content": "Test creating a Member Snapshot for an employee associated with a group",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "groups",
+                ":group_id",
+                "member_snapshots",
+                "test"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_id",
+                  "description": "(Required) The unique identifier of the group for the employee referenced in the snapshot"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"member_snapshot\": {\n    \"employee\": {\n      \"employment\": {\n        \"employment_dates\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"employment_status\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"hours_worked\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"occupation\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"salary\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"person\": {\n        \"date_of_birth\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"first_name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"home_address\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"last_name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"mailing_address\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"sex\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"contact\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"details\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"maiden_name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"marital_status\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"middle_name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"ssn\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"suffix\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"classifications\": \"<object>\",\n      \"custom_individual_id\": \"<string>\",\n      \"event_id\": \"<string>\",\n      \"group_individual_id\": \"<string>\",\n      \"id\": \"<uuid>\"\n    },\n    \"snapshot_mode\": \"<string>\",\n    \"coverages\": [\n      {\n        \"carrier_id\": \"<uuid>\",\n        \"enrolled_members\": [\n          {\n            \"effective_end_date\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"effective_start_date\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"individual_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"custom_individual_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"event_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"individual_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"latest_change_effective_date\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pcp_details\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"volume\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"effective_end_date\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"effective_start_date\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"individual_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"custom_individual_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"event_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"individual_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"latest_change_effective_date\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pcp_details\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"volume\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"line_of_coverage\": \"<string>\",\n        \"carrier_config\": \"<object>\",\n        \"cobra_details\": {\n          \"cobra_enrolled\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"eligibility_end_date\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"eligibility_start_date\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifying_event_date\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifying_event_reason\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"custom_plan_id\": \"<string>\",\n        \"plan_id\": \"<uuid>\",\n        \"plan_name\": \"<string>\",\n        \"signature_date\": \"<date>\"\n      },\n      {\n        \"carrier_id\": \"<uuid>\",\n        \"enrolled_members\": [\n          {\n            \"effective_end_date\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"effective_start_date\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"individual_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"custom_individual_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"event_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"individual_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"latest_change_effective_date\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pcp_details\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"volume\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"effective_end_date\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"effective_start_date\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"individual_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"custom_individual_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"event_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"individual_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"latest_change_effective_date\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pcp_details\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"volume\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"line_of_coverage\": \"<string>\",\n        \"carrier_config\": \"<object>\",\n        \"cobra_details\": {\n          \"cobra_enrolled\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"eligibility_end_date\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"eligibility_start_date\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifying_event_date\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qualifying_event_reason\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"custom_plan_id\": \"<string>\",\n        \"plan_id\": \"<uuid>\",\n        \"plan_name\": \"<string>\",\n        \"signature_date\": \"<date>\"\n      }\n    ],\n    \"dependents\": [\n      {\n        \"person\": {\n          \"date_of_birth\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"first_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"home_address\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"last_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mailing_address\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"sex\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"contact\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"details\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"maiden_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"marital_status\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"middle_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"ssn\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"suffix\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"relationship\": \"<string>\",\n        \"custom_individual_id\": \"<string>\",\n        \"event_id\": \"<string>\",\n        \"group_individual_id\": \"<string>\",\n        \"id\": \"<uuid>\"\n      },\n      {\n        \"person\": {\n          \"date_of_birth\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"first_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"home_address\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"last_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mailing_address\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"sex\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"contact\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"details\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"maiden_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"marital_status\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"middle_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"ssn\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"suffix\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"relationship\": \"<string>\",\n        \"custom_individual_id\": \"<string>\",\n        \"event_id\": \"<string>\",\n        \"group_individual_id\": \"<string>\",\n        \"id\": \"<uuid>\"\n      }\n    ],\n    \"enable_member_auto_link\": false,\n    \"events\": [\n      {\n        \"date\": \"<date>\",\n        \"id\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      {\n        \"date\": \"<date>\",\n        \"id\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    ],\n    \"omitted_coverage_handling\": {\n      \"custom\": {\n        \"effective_end_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"policy\": \"reject\",\n      \"termination_rule\": \"<string>\"\n    }\n  },\n  \"carrier_overrides\": [\n    {\n      \"carrier_id\": \"<uuid>\",\n      \"connected\": \"<boolean>\"\n    },\n    {\n      \"carrier_id\": \"<uuid>\",\n      \"connected\": \"<boolean>\"\n    }\n  ],\n  \"rule_set_overrides\": {\n    \"noyo_post\": \"<uuid>\",\n    \"noyo_pre\": \"<uuid>\",\n    \"platform_post\": \"<uuid>\",\n    \"platform_pre\": \"<uuid>\",\n    \"primary\": \"<uuid>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5cbd2059-2f38-486f-a94a-ed11cead0d7e",
+              "name": "Successful Response - Returns the contents of the test Member Snapshot",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "member_snapshots",
+                    "test"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The unique identifier of the group for the employee referenced in the snapshot"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"member_snapshot\": {\n    \"coverages\": [\n      {\n        \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n        \"enrolled_members\": [\n          {\n            \"effective_end_date\": \"9999-12-31\",\n            \"effective_start_date\": \"2022-01-01\",\n            \"event_id\": \"1\",\n            \"individual_id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n            \"individual_type\": \"employee\",\n            \"latest_change_effective_date\": \"2022-02-13\"\n          },\n          {\n            \"effective_end_date\": \"9999-12-31\",\n            \"effective_start_date\": \"2022-01-01\",\n            \"event_id\": \"1\",\n            \"individual_id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n            \"individual_type\": \"dependent\"\n          }\n        ],\n        \"line_of_coverage\": \"medical\",\n        \"plan_id\": \"4bf04f73-0aad-48ac-b28a-e5f4def7c5e9\",\n        \"signature_date\": \"2021-12-23\"\n      },\n      {\n        \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n        \"enrolled_members\": [\n          {\n            \"effective_end_date\": \"9999-12-31\",\n            \"effective_start_date\": \"2022-01-01\",\n            \"event_id\": \"1\",\n            \"individual_id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n            \"individual_type\": \"employee\"\n          },\n          {\n            \"effective_end_date\": \"2021-12-31\",\n            \"effective_start_date\": \"2022-01-01\",\n            \"event_id\": \"1\",\n            \"individual_id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n            \"individual_type\": \"dependent\"\n          }\n        ],\n        \"line_of_coverage\": \"dental\",\n        \"plan_name\": \"DHMO Smile Plus\",\n        \"signature_date\": \"2021-12-23\"\n      },\n      {\n        \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n        \"enrolled_members\": [\n          {\n            \"effective_end_date\": \"9999-12-31\",\n            \"effective_start_date\": \"2022-01-01\",\n            \"event_id\": \"1\",\n            \"individual_id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n            \"individual_type\": \"employee\",\n            \"volume\": 50000\n          }\n        ],\n        \"line_of_coverage\": \"life\",\n        \"plan_name\": \"50k Employee Basic Life\",\n        \"signature_date\": \"2021-12-23\"\n      }\n    ],\n    \"dependents\": [\n      {\n        \"custom_individual_id\": \"378713198\",\n        \"event_id\": \"1\",\n        \"id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n        \"person\": {\n          \"contact\": {\n            \"email_address\": \"jamie@testemail.com\",\n            \"email_address_type\": \"home\",\n            \"home_phone\": \"+12065551234\"\n          },\n          \"date_of_birth\": \"1990-01-02\",\n          \"first_name\": \"Jamie\",\n          \"home_address\": {\n            \"city\": \"San Francisco\",\n            \"county\": \"San Francisco\",\n            \"state\": \"CA\",\n            \"street_one\": \"1234 Home Ave\",\n            \"zip_code\": \"94107\"\n          },\n          \"last_name\": \"Johnson\",\n          \"mailing_address\": {\n            \"city\": \"San Francisco\",\n            \"state\": \"CA\",\n            \"street_one\": \"P.O. Box 1234\",\n            \"zip_code\": \"94107\"\n          },\n          \"marital_status\": \"married\",\n          \"sex\": \"F\",\n          \"ssn\": \"987654321\"\n        },\n        \"relationship\": \"spouse\"\n      }\n    ],\n    \"employee\": {\n      \"classifications\": {\n        \"BranchName\": \"HQ\",\n        \"Department\": \"Sales\"\n      },\n      \"custom_individual_id\": \"718713143\",\n      \"employment\": {\n        \"employment_dates\": {\n          \"full_time_start\": \"2015-01-01\",\n          \"hire_date\": \"2014-12-10\"\n        },\n        \"employment_status\": \"full-time\",\n        \"hours_worked\": 50,\n        \"occupation\": \"Senior Analyst\",\n        \"salary\": {\n          \"amount\": 55000,\n          \"effective_date\": \"2022-01-31\",\n          \"type\": \"salary\",\n          \"unit\": \"annual\"\n        }\n      },\n      \"event_id\": \"1\",\n      \"id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n      \"person\": {\n        \"contact\": {\n          \"email_address\": \"david@testemail.com\",\n          \"email_address_type\": \"home\",\n          \"home_phone\": \"+12065551234\",\n          \"preferred_method\": \"email\",\n          \"work_phone\": \"+12065559876\"\n        },\n        \"date_of_birth\": \"1985-06-22\",\n        \"first_name\": \"David\",\n        \"home_address\": {\n          \"city\": \"San Francisco\",\n          \"county\": \"San Francisco\",\n          \"state\": \"CA\",\n          \"street_one\": \"1234 Home Ave\",\n          \"zip_code\": \"94107\"\n        },\n        \"last_name\": \"Johnson\",\n        \"mailing_address\": {\n          \"city\": \"San Francisco\",\n          \"state\": \"CA\",\n          \"street_one\": \"P.O. Box 1234\",\n          \"zip_code\": \"94107\"\n        },\n        \"marital_status\": \"married\",\n        \"middle_name\": \"A\",\n        \"sex\": \"M\",\n        \"ssn\": \"123456789\",\n        \"suffix\": \"Jr\"\n      }\n    },\n    \"enable_member_auto_link\": false,\n    \"events\": [\n      {\n        \"date\": \"2022-01-01\",\n        \"id\": \"1\",\n        \"reason\": \"open_enrollment\",\n        \"type\": \"coverage\"\n      }\n    ],\n    \"snapshot_mode\": \"current_open\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"member_snapshot\": {\n    \"created\": 1656030390,\n    \"created_members\": [\n      {\n        \"custom_individual_id\": \"718713143\",\n        \"id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n        \"type\": \"employee\"\n      },\n      {\n        \"custom_individual_id\": \"378713198\",\n        \"id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n        \"type\": \"dependent\"\n      }\n    ],\n    \"employee_id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n    \"fulfillment_summary\": [\n      {\n        \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n        \"errors\": [],\n        \"status\": \"processing\"\n      }\n    ],\n    \"id\": \"7bea80ac-499d-560b-5512-60be9e2349cb\",\n    \"member_snapshot\": {\n      \"coverages\": [\n        {\n          \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n          \"enrolled_members\": [\n            {\n              \"effective_end_date\": \"9999-12-31\",\n              \"effective_start_date\": \"2022-01-01\",\n              \"event_id\": \"1\",\n              \"individual_id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n              \"individual_type\": \"employee\",\n              \"latest_change_effective_date\": \"2022-02-13\"\n            },\n            {\n              \"effective_end_date\": \"9999-12-31\",\n              \"effective_start_date\": \"2022-01-01\",\n              \"event_id\": \"1\",\n              \"individual_id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n              \"individual_type\": \"dependent\"\n            }\n          ],\n          \"line_of_coverage\": \"medical\",\n          \"plan_id\": \"4bf04f73-0aad-48ac-b28a-e5f4def7c5e9\",\n          \"signature_date\": \"2021-12-23\"\n        },\n        {\n          \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n          \"enrolled_members\": [\n            {\n              \"effective_end_date\": \"9999-12-31\",\n              \"effective_start_date\": \"2022-01-01\",\n              \"event_id\": \"1\",\n              \"individual_type\": \"employee\"\n            },\n            {\n              \"effective_end_date\": \"2021-12-31\",\n              \"effective_start_date\": \"2022-01-01\",\n              \"event_id\": \"1\",\n              \"individual_id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n              \"individual_type\": \"dependent\"\n            }\n          ],\n          \"line_of_coverage\": \"dental\",\n          \"plan_name\": \"DHMO Smile Plus\",\n          \"signature_date\": \"2021-12-23\"\n        },\n        {\n          \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n          \"enrolled_members\": [\n            {\n              \"effective_end_date\": \"9999-12-31\",\n              \"effective_start_date\": \"2022-01-01\",\n              \"event_id\": \"1\",\n              \"individual_type\": \"employee\",\n              \"volume\": 50000\n            }\n          ],\n          \"line_of_coverage\": \"life\",\n          \"plan_name\": \"50k Employee Basic Life\",\n          \"signature_date\": \"2021-12-23\"\n        }\n      ],\n      \"dependents\": [\n        {\n          \"custom_individual_id\": \"378713198\",\n          \"event_id\": \"1\",\n          \"id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n          \"person\": {\n            \"contact\": {\n              \"email_address\": \"jamie@testemail.com\",\n              \"email_address_type\": \"home\",\n              \"home_phone\": \"+12065551234\"\n            },\n            \"date_of_birth\": \"1990-01-02\",\n            \"first_name\": \"Jamie\",\n            \"home_address\": {\n              \"city\": \"San Francisco\",\n              \"county\": \"San Francisco\",\n              \"state\": \"CA\",\n              \"street_one\": \"1234 Home Ave\",\n              \"zip_code\": \"94107\"\n            },\n            \"last_name\": \"Johnson\",\n            \"mailing_address\": {\n              \"city\": \"San Francisco\",\n              \"state\": \"CA\",\n              \"street_one\": \"P.O. Box 1234\",\n              \"zip_code\": \"94107\"\n            },\n            \"marital_status\": \"married\",\n            \"sex\": \"F\",\n            \"ssn\": \"987654321\"\n          },\n          \"relationship\": \"spouse\"\n        }\n      ],\n      \"employee\": {\n        \"classifications\": {\n          \"BranchName\": \"HQ\",\n          \"Department\": \"Sales\"\n        },\n        \"custom_individual_id\": \"718713143\",\n        \"employment\": {\n          \"employment_dates\": {\n            \"full_time_start\": \"2015-01-01\",\n            \"hire_date\": \"2014-12-10\"\n          },\n          \"employment_status\": \"full-time\",\n          \"hours_worked\": 50,\n          \"occupation\": \"Senior Analyst\",\n          \"salary\": {\n            \"amount\": 55000,\n            \"effective_date\": \"2022-01-31\",\n            \"type\": \"salary\",\n            \"unit\": \"annual\"\n          }\n        },\n        \"event_id\": \"1\",\n        \"group_id\": \"d0ec3837-3499-4a2f-8c58-966ef7e46d95\",\n        \"id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n        \"person\": {\n          \"contact\": {\n            \"email_address\": \"david@testemail.com\",\n            \"email_address_type\": \"home\",\n            \"home_phone\": \"+12065551234\",\n            \"preferred_method\": \"email\",\n            \"work_phone\": \"+12065559876\"\n          },\n          \"date_of_birth\": \"1985-06-22\",\n          \"first_name\": \"David\",\n          \"home_address\": {\n            \"city\": \"San Francisco\",\n            \"county\": \"San Francisco\",\n            \"state\": \"CA\",\n            \"street_one\": \"1234 Home Ave\",\n            \"zip_code\": \"94107\"\n          },\n          \"last_name\": \"Johnson\",\n          \"mailing_address\": {\n            \"city\": \"San Francisco\",\n            \"state\": \"CA\",\n            \"street_one\": \"P.O. Box 1234\",\n            \"zip_code\": \"94107\"\n          },\n          \"marital_status\": \"married\",\n          \"middle_name\": \"A\",\n          \"sex\": \"M\",\n          \"ssn\": \"123456789\",\n          \"suffix\": \"Jr\"\n        }\n      },\n      \"enable_member_auto_link\": false,\n      \"events\": [\n        {\n          \"date\": \"2022-01-01\",\n          \"id\": \"1\",\n          \"reason\": \"open_enrollment\",\n          \"type\": \"coverage\"\n        }\n      ],\n      \"snapshot_mode\": \"current_open\"\n    },\n    \"modified\": 1656030390,\n    \"status\": \"processing\",\n    \"version\": \"271c60d6-f009-4b3d-8bba-aac49b2dd9a4\",\n    \"warnings\": []\n  },\n  \"trace_ids\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6df54f95-1ed8-4a0d-b9c1-e779bc860655",
+              "name": "Failure Response - Client error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "member_snapshots",
+                    "test"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The unique identifier of the group for the employee referenced in the snapshot"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"member_snapshot\": {\n    \"coverages\": [\n      {\n        \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n        \"enrolled_members\": [\n          {\n            \"effective_end_date\": \"9999-12-31\",\n            \"effective_start_date\": \"2022-01-01\",\n            \"event_id\": \"1\",\n            \"individual_id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n            \"individual_type\": \"employee\",\n            \"latest_change_effective_date\": \"2022-02-13\"\n          },\n          {\n            \"effective_end_date\": \"9999-12-31\",\n            \"effective_start_date\": \"2022-01-01\",\n            \"event_id\": \"1\",\n            \"individual_id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n            \"individual_type\": \"dependent\"\n          }\n        ],\n        \"line_of_coverage\": \"medical\",\n        \"plan_id\": \"4bf04f73-0aad-48ac-b28a-e5f4def7c5e9\",\n        \"signature_date\": \"2021-12-23\"\n      },\n      {\n        \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n        \"enrolled_members\": [\n          {\n            \"effective_end_date\": \"9999-12-31\",\n            \"effective_start_date\": \"2022-01-01\",\n            \"event_id\": \"1\",\n            \"individual_id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n            \"individual_type\": \"employee\"\n          },\n          {\n            \"effective_end_date\": \"2021-12-31\",\n            \"effective_start_date\": \"2022-01-01\",\n            \"event_id\": \"1\",\n            \"individual_id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n            \"individual_type\": \"dependent\"\n          }\n        ],\n        \"line_of_coverage\": \"dental\",\n        \"plan_name\": \"DHMO Smile Plus\",\n        \"signature_date\": \"2021-12-23\"\n      },\n      {\n        \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n        \"enrolled_members\": [\n          {\n            \"effective_end_date\": \"9999-12-31\",\n            \"effective_start_date\": \"2022-01-01\",\n            \"event_id\": \"1\",\n            \"individual_id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n            \"individual_type\": \"employee\",\n            \"volume\": 50000\n          }\n        ],\n        \"line_of_coverage\": \"life\",\n        \"plan_name\": \"50k Employee Basic Life\",\n        \"signature_date\": \"2021-12-23\"\n      }\n    ],\n    \"dependents\": [\n      {\n        \"custom_individual_id\": \"378713198\",\n        \"event_id\": \"1\",\n        \"id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n        \"person\": {\n          \"contact\": {\n            \"email_address\": \"jamie@testemail.com\",\n            \"email_address_type\": \"home\",\n            \"home_phone\": \"+12065551234\"\n          },\n          \"date_of_birth\": \"1990-01-02\",\n          \"first_name\": \"Jamie\",\n          \"home_address\": {\n            \"city\": \"San Francisco\",\n            \"county\": \"San Francisco\",\n            \"state\": \"CA\",\n            \"street_one\": \"1234 Home Ave\",\n            \"zip_code\": \"94107\"\n          },\n          \"last_name\": \"Johnson\",\n          \"mailing_address\": {\n            \"city\": \"San Francisco\",\n            \"state\": \"CA\",\n            \"street_one\": \"P.O. Box 1234\",\n            \"zip_code\": \"94107\"\n          },\n          \"marital_status\": \"married\",\n          \"sex\": \"F\",\n          \"ssn\": \"987654321\"\n        },\n        \"relationship\": \"spouse\"\n      }\n    ],\n    \"employee\": {\n      \"classifications\": {\n        \"BranchName\": \"HQ\",\n        \"Department\": \"Sales\"\n      },\n      \"custom_individual_id\": \"718713143\",\n      \"employment\": {\n        \"employment_dates\": {\n          \"full_time_start\": \"2015-01-01\",\n          \"hire_date\": \"2014-12-10\"\n        },\n        \"employment_status\": \"full-time\",\n        \"hours_worked\": 50,\n        \"occupation\": \"Senior Analyst\",\n        \"salary\": {\n          \"amount\": 55000,\n          \"effective_date\": \"2022-01-31\",\n          \"type\": \"salary\",\n          \"unit\": \"annual\"\n        }\n      },\n      \"event_id\": \"1\",\n      \"id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n      \"person\": {\n        \"contact\": {\n          \"email_address\": \"david@testemail.com\",\n          \"email_address_type\": \"home\",\n          \"home_phone\": \"+12065551234\",\n          \"preferred_method\": \"email\",\n          \"work_phone\": \"+12065559876\"\n        },\n        \"date_of_birth\": \"1985-06-22\",\n        \"first_name\": \"David\",\n        \"home_address\": {\n          \"city\": \"San Francisco\",\n          \"county\": \"San Francisco\",\n          \"state\": \"CA\",\n          \"street_one\": \"1234 Home Ave\",\n          \"zip_code\": \"94107\"\n        },\n        \"last_name\": \"Johnson\",\n        \"mailing_address\": {\n          \"city\": \"San Francisco\",\n          \"state\": \"CA\",\n          \"street_one\": \"P.O. Box 1234\",\n          \"zip_code\": \"94107\"\n        },\n        \"marital_status\": \"married\",\n        \"middle_name\": \"A\",\n        \"sex\": \"M\",\n        \"ssn\": \"123456789\",\n        \"suffix\": \"Jr\"\n      }\n    },\n    \"enable_member_auto_link\": false,\n    \"events\": [\n      {\n        \"date\": \"2022-01-01\",\n        \"id\": \"1\",\n        \"reason\": \"open_enrollment\",\n        \"type\": \"coverage\"\n      }\n    ],\n    \"snapshot_mode\": \"current_open\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Error creating dependent. Existing dependent has matching name and date of birth: ab740704-7c37-4010-92b3-d22c6926be3e\",\n  \"status\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "86a9af9d-fc27-4282-818a-344721a9289d",
+              "name": "Failure Response - Not found error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "member_snapshots",
+                    "test"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The unique identifier of the group for the employee referenced in the snapshot"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"member_snapshot\": {\n    \"coverages\": [\n      {\n        \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n        \"enrolled_members\": [\n          {\n            \"effective_end_date\": \"9999-12-31\",\n            \"effective_start_date\": \"2022-01-01\",\n            \"event_id\": \"1\",\n            \"individual_id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n            \"individual_type\": \"employee\",\n            \"latest_change_effective_date\": \"2022-02-13\"\n          },\n          {\n            \"effective_end_date\": \"9999-12-31\",\n            \"effective_start_date\": \"2022-01-01\",\n            \"event_id\": \"1\",\n            \"individual_id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n            \"individual_type\": \"dependent\"\n          }\n        ],\n        \"line_of_coverage\": \"medical\",\n        \"plan_id\": \"4bf04f73-0aad-48ac-b28a-e5f4def7c5e9\",\n        \"signature_date\": \"2021-12-23\"\n      },\n      {\n        \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n        \"enrolled_members\": [\n          {\n            \"effective_end_date\": \"9999-12-31\",\n            \"effective_start_date\": \"2022-01-01\",\n            \"event_id\": \"1\",\n            \"individual_id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n            \"individual_type\": \"employee\"\n          },\n          {\n            \"effective_end_date\": \"2021-12-31\",\n            \"effective_start_date\": \"2022-01-01\",\n            \"event_id\": \"1\",\n            \"individual_id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n            \"individual_type\": \"dependent\"\n          }\n        ],\n        \"line_of_coverage\": \"dental\",\n        \"plan_name\": \"DHMO Smile Plus\",\n        \"signature_date\": \"2021-12-23\"\n      },\n      {\n        \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n        \"enrolled_members\": [\n          {\n            \"effective_end_date\": \"9999-12-31\",\n            \"effective_start_date\": \"2022-01-01\",\n            \"event_id\": \"1\",\n            \"individual_id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n            \"individual_type\": \"employee\",\n            \"volume\": 50000\n          }\n        ],\n        \"line_of_coverage\": \"life\",\n        \"plan_name\": \"50k Employee Basic Life\",\n        \"signature_date\": \"2021-12-23\"\n      }\n    ],\n    \"dependents\": [\n      {\n        \"custom_individual_id\": \"378713198\",\n        \"event_id\": \"1\",\n        \"id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n        \"person\": {\n          \"contact\": {\n            \"email_address\": \"jamie@testemail.com\",\n            \"email_address_type\": \"home\",\n            \"home_phone\": \"+12065551234\"\n          },\n          \"date_of_birth\": \"1990-01-02\",\n          \"first_name\": \"Jamie\",\n          \"home_address\": {\n            \"city\": \"San Francisco\",\n            \"county\": \"San Francisco\",\n            \"state\": \"CA\",\n            \"street_one\": \"1234 Home Ave\",\n            \"zip_code\": \"94107\"\n          },\n          \"last_name\": \"Johnson\",\n          \"mailing_address\": {\n            \"city\": \"San Francisco\",\n            \"state\": \"CA\",\n            \"street_one\": \"P.O. Box 1234\",\n            \"zip_code\": \"94107\"\n          },\n          \"marital_status\": \"married\",\n          \"sex\": \"F\",\n          \"ssn\": \"987654321\"\n        },\n        \"relationship\": \"spouse\"\n      }\n    ],\n    \"employee\": {\n      \"classifications\": {\n        \"BranchName\": \"HQ\",\n        \"Department\": \"Sales\"\n      },\n      \"custom_individual_id\": \"718713143\",\n      \"employment\": {\n        \"employment_dates\": {\n          \"full_time_start\": \"2015-01-01\",\n          \"hire_date\": \"2014-12-10\"\n        },\n        \"employment_status\": \"full-time\",\n        \"hours_worked\": 50,\n        \"occupation\": \"Senior Analyst\",\n        \"salary\": {\n          \"amount\": 55000,\n          \"effective_date\": \"2022-01-31\",\n          \"type\": \"salary\",\n          \"unit\": \"annual\"\n        }\n      },\n      \"event_id\": \"1\",\n      \"id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n      \"person\": {\n        \"contact\": {\n          \"email_address\": \"david@testemail.com\",\n          \"email_address_type\": \"home\",\n          \"home_phone\": \"+12065551234\",\n          \"preferred_method\": \"email\",\n          \"work_phone\": \"+12065559876\"\n        },\n        \"date_of_birth\": \"1985-06-22\",\n        \"first_name\": \"David\",\n        \"home_address\": {\n          \"city\": \"San Francisco\",\n          \"county\": \"San Francisco\",\n          \"state\": \"CA\",\n          \"street_one\": \"1234 Home Ave\",\n          \"zip_code\": \"94107\"\n        },\n        \"last_name\": \"Johnson\",\n        \"mailing_address\": {\n          \"city\": \"San Francisco\",\n          \"state\": \"CA\",\n          \"street_one\": \"P.O. Box 1234\",\n          \"zip_code\": \"94107\"\n        },\n        \"marital_status\": \"married\",\n        \"middle_name\": \"A\",\n        \"sex\": \"M\",\n        \"ssn\": \"123456789\",\n        \"suffix\": \"Jr\"\n      }\n    },\n    \"enable_member_auto_link\": false,\n    \"events\": [\n      {\n        \"date\": \"2022-01-01\",\n        \"id\": \"1\",\n        \"reason\": \"open_enrollment\",\n        \"type\": \"coverage\"\n      }\n    ],\n    \"snapshot_mode\": \"current_open\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Dependent with ID ab740704-7c37-4010-92b3-d22c6926be3e does not have an associated employee.\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "52ace281-9ca3-4af1-bc3f-c604d055798a",
+              "name": "Failure Response - Schema validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "member_snapshots",
+                    "test"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The unique identifier of the group for the employee referenced in the snapshot"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"member_snapshot\": {\n    \"coverages\": [\n      {\n        \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n        \"enrolled_members\": [\n          {\n            \"effective_end_date\": \"9999-12-31\",\n            \"effective_start_date\": \"2022-01-01\",\n            \"event_id\": \"1\",\n            \"individual_id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n            \"individual_type\": \"employee\",\n            \"latest_change_effective_date\": \"2022-02-13\"\n          },\n          {\n            \"effective_end_date\": \"9999-12-31\",\n            \"effective_start_date\": \"2022-01-01\",\n            \"event_id\": \"1\",\n            \"individual_id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n            \"individual_type\": \"dependent\"\n          }\n        ],\n        \"line_of_coverage\": \"medical\",\n        \"plan_id\": \"4bf04f73-0aad-48ac-b28a-e5f4def7c5e9\",\n        \"signature_date\": \"2021-12-23\"\n      },\n      {\n        \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n        \"enrolled_members\": [\n          {\n            \"effective_end_date\": \"9999-12-31\",\n            \"effective_start_date\": \"2022-01-01\",\n            \"event_id\": \"1\",\n            \"individual_id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n            \"individual_type\": \"employee\"\n          },\n          {\n            \"effective_end_date\": \"2021-12-31\",\n            \"effective_start_date\": \"2022-01-01\",\n            \"event_id\": \"1\",\n            \"individual_id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n            \"individual_type\": \"dependent\"\n          }\n        ],\n        \"line_of_coverage\": \"dental\",\n        \"plan_name\": \"DHMO Smile Plus\",\n        \"signature_date\": \"2021-12-23\"\n      },\n      {\n        \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n        \"enrolled_members\": [\n          {\n            \"effective_end_date\": \"9999-12-31\",\n            \"effective_start_date\": \"2022-01-01\",\n            \"event_id\": \"1\",\n            \"individual_id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n            \"individual_type\": \"employee\",\n            \"volume\": 50000\n          }\n        ],\n        \"line_of_coverage\": \"life\",\n        \"plan_name\": \"50k Employee Basic Life\",\n        \"signature_date\": \"2021-12-23\"\n      }\n    ],\n    \"dependents\": [\n      {\n        \"custom_individual_id\": \"378713198\",\n        \"event_id\": \"1\",\n        \"id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n        \"person\": {\n          \"contact\": {\n            \"email_address\": \"jamie@testemail.com\",\n            \"email_address_type\": \"home\",\n            \"home_phone\": \"+12065551234\"\n          },\n          \"date_of_birth\": \"1990-01-02\",\n          \"first_name\": \"Jamie\",\n          \"home_address\": {\n            \"city\": \"San Francisco\",\n            \"county\": \"San Francisco\",\n            \"state\": \"CA\",\n            \"street_one\": \"1234 Home Ave\",\n            \"zip_code\": \"94107\"\n          },\n          \"last_name\": \"Johnson\",\n          \"mailing_address\": {\n            \"city\": \"San Francisco\",\n            \"state\": \"CA\",\n            \"street_one\": \"P.O. Box 1234\",\n            \"zip_code\": \"94107\"\n          },\n          \"marital_status\": \"married\",\n          \"sex\": \"F\",\n          \"ssn\": \"987654321\"\n        },\n        \"relationship\": \"spouse\"\n      }\n    ],\n    \"employee\": {\n      \"classifications\": {\n        \"BranchName\": \"HQ\",\n        \"Department\": \"Sales\"\n      },\n      \"custom_individual_id\": \"718713143\",\n      \"employment\": {\n        \"employment_dates\": {\n          \"full_time_start\": \"2015-01-01\",\n          \"hire_date\": \"2014-12-10\"\n        },\n        \"employment_status\": \"full-time\",\n        \"hours_worked\": 50,\n        \"occupation\": \"Senior Analyst\",\n        \"salary\": {\n          \"amount\": 55000,\n          \"effective_date\": \"2022-01-31\",\n          \"type\": \"salary\",\n          \"unit\": \"annual\"\n        }\n      },\n      \"event_id\": \"1\",\n      \"id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n      \"person\": {\n        \"contact\": {\n          \"email_address\": \"david@testemail.com\",\n          \"email_address_type\": \"home\",\n          \"home_phone\": \"+12065551234\",\n          \"preferred_method\": \"email\",\n          \"work_phone\": \"+12065559876\"\n        },\n        \"date_of_birth\": \"1985-06-22\",\n        \"first_name\": \"David\",\n        \"home_address\": {\n          \"city\": \"San Francisco\",\n          \"county\": \"San Francisco\",\n          \"state\": \"CA\",\n          \"street_one\": \"1234 Home Ave\",\n          \"zip_code\": \"94107\"\n        },\n        \"last_name\": \"Johnson\",\n        \"mailing_address\": {\n          \"city\": \"San Francisco\",\n          \"state\": \"CA\",\n          \"street_one\": \"P.O. Box 1234\",\n          \"zip_code\": \"94107\"\n        },\n        \"marital_status\": \"married\",\n        \"middle_name\": \"A\",\n        \"sex\": \"M\",\n        \"ssn\": \"123456789\",\n        \"suffix\": \"Jr\"\n      }\n    },\n    \"enable_member_auto_link\": false,\n    \"events\": [\n      {\n        \"date\": \"2022-01-01\",\n        \"id\": \"1\",\n        \"reason\": \"open_enrollment\",\n        \"type\": \"coverage\"\n      }\n    ],\n    \"snapshot_mode\": \"current_open\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"This snapshot is missing the following active coverages: dental for dependent ab740704-7c37-4010-92b3-d22c6926be3e. If you intend to terminate a coverage, please send a snapshot that includes a termination date before omitting it from future snapshots.\",\n  \"status\": 422\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a6032abe-7f19-460c-927a-b8ebb573ac5d",
+          "name": "Get all Member Snapshots",
+          "request": {
+            "name": "Get all Member Snapshots",
+            "description": {
+              "content": "Returns a list with metadata for all member snapshots.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "member_snapshots"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by associated status"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by associated status"
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<uuid>",
+                  "description": "Filter by ID (comma separated)"
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<uuid>",
+                  "description": "Filter by ID (comma separated)"
+                },
+                {
+                  "disabled": false,
+                  "key": "fulfillment_summary_carrier_id",
+                  "value": "<uuid>",
+                  "description": "Filter by fulfillment summary carrier ID (comma separated)"
+                },
+                {
+                  "disabled": false,
+                  "key": "fulfillment_summary_carrier_id",
+                  "value": "<uuid>",
+                  "description": "Filter by fulfillment summary carrier ID (comma separated)"
+                },
+                {
+                  "disabled": false,
+                  "key": "fulfillment_summary_status",
+                  "value": "<uuid>",
+                  "description": "Filter by fulfillment summary status (comma separated)"
+                },
+                {
+                  "disabled": false,
+                  "key": "fulfillment_summary_status",
+                  "value": "<uuid>",
+                  "description": "Filter by fulfillment summary status (comma separated)"
+                },
+                {
+                  "disabled": false,
+                  "key": "employee_id",
+                  "value": "<uuid>",
+                  "description": "The employee ID associated with the member snapshot"
+                },
+                {
+                  "disabled": false,
+                  "key": "group_id",
+                  "value": "<uuid>",
+                  "description": "The group ID associated with the member snapshot"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2224f8a1-b3d3-450d-8a44-5a74fc7dba03",
+              "name": "Successful Response - Returns metadata for any matching Member Snapshots",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "member_snapshots"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "fulfillment_summary_carrier_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "fulfillment_summary_carrier_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "fulfillment_summary_status",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "fulfillment_summary_status",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "employee_id",
+                      "value": "a88f4b6f-7c26-4dd0-8b62-6c76f06412ad"
+                    },
+                    {
+                      "key": "group_id",
+                      "value": "a88f4b6f-7c26-4dd0-8b62-6c76f06412ad"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 2\n  },\n  \"response\": [\n    {\n      \"created\": 1599184829,\n      \"employee_id\": \"7f39b5e0-460d-49e2-83b7-a1b6f2726b12\",\n      \"fulfillment_summary\": [\n        {\n          \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n          \"errors\": [],\n          \"status\": \"processing\"\n        }\n      ],\n      \"id\": \"bc4aea3e-f728-4b05-85dc-e1ea14456e83\",\n      \"modified\": 1599184829,\n      \"status\": \"processing\",\n      \"version\": \"431b7d10-3da6-4c5e-bb2f-58a6ebb1224f\"\n    },\n    {\n      \"created\": 1557512389,\n      \"employee_id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n      \"fulfillment_summary\": [\n        {\n          \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n          \"errors\": [],\n          \"status\": \"sent\"\n        }\n      ],\n      \"id\": \"30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n      \"modified\": 1564440756,\n      \"status\": \"completed\",\n      \"version\": \"6260146a-3486-4c3d-b2a6-fcd3f8c84043\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8c8faf1c-eb8c-4639-8fbb-b513a2d23bb5",
+          "name": "Get a Member Snapshot",
+          "request": {
+            "name": "Get a Member Snapshot",
+            "description": {
+              "content": "Get a Member Snapshot by ID",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "member_snapshots",
+                ":snapshot_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "snapshot_id",
+                  "description": "(Required) The unique identifier of the member snapshot"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5c16eca5-48d3-414c-b137-07accdeb2916",
+              "name": "Successful Response - Returns the Member Snapshot contents",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "member_snapshots",
+                    ":snapshot_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "snapshot_id",
+                      "description": "(Required) The unique identifier of the member snapshot"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 1656030390,\n  \"created_members\": [\n    {\n      \"custom_individual_id\": \"bb6bfcd8-6657-4b77-8151-949ea8b5e44e\",\n      \"id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n      \"type\": \"employee\"\n    },\n    {\n      \"custom_individual_id\": \"3f093cc0-4fef-4d5d-9267-ba5cdfc09827\",\n      \"id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n      \"type\": \"dependent\"\n    }\n  ],\n  \"employee_id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n  \"fulfillment_summary\": [\n    {\n      \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n      \"errors\": [],\n      \"status\": \"processing\"\n    }\n  ],\n  \"id\": \"7bea80ac-499d-560b-5512-60be9e2349cb\",\n  \"member_snapshot\": {\n    \"coverages\": [\n      {\n        \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n        \"enrolled_members\": [\n          {\n            \"effective_end_date\": \"9999-12-31\",\n            \"effective_start_date\": \"2022-01-01\",\n            \"event_id\": \"1\",\n            \"individual_id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n            \"individual_type\": \"employee\",\n            \"latest_change_effective_date\": \"2022-02-13\"\n          },\n          {\n            \"effective_end_date\": \"9999-12-31\",\n            \"effective_start_date\": \"2022-01-01\",\n            \"event_id\": \"1\",\n            \"individual_id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n            \"individual_type\": \"dependent\"\n          }\n        ],\n        \"line_of_coverage\": \"medical\",\n        \"plan_id\": \"4bf04f73-0aad-48ac-b28a-e5f4def7c5e9\",\n        \"signature_date\": \"2021-12-23\"\n      },\n      {\n        \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n        \"enrolled_members\": [\n          {\n            \"effective_end_date\": \"9999-12-31\",\n            \"effective_start_date\": \"2022-01-01\",\n            \"event_id\": \"1\",\n            \"individual_type\": \"employee\"\n          },\n          {\n            \"effective_end_date\": \"2021-12-31\",\n            \"effective_start_date\": \"2022-01-01\",\n            \"event_id\": \"1\",\n            \"individual_id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n            \"individual_type\": \"dependent\"\n          }\n        ],\n        \"line_of_coverage\": \"dental\",\n        \"plan_name\": \"DHMO Smile Plus\",\n        \"signature_date\": \"2021-12-23\"\n      },\n      {\n        \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n        \"enrolled_members\": [\n          {\n            \"effective_end_date\": \"9999-12-31\",\n            \"effective_start_date\": \"2022-01-01\",\n            \"event_id\": \"1\",\n            \"individual_type\": \"employee\",\n            \"volume\": 50000\n          }\n        ],\n        \"line_of_coverage\": \"life\",\n        \"plan_name\": \"50k Employee Basic Life\",\n        \"signature_date\": \"2021-12-23\"\n      }\n    ],\n    \"dependents\": [\n      {\n        \"custom_individual_id\": \"3f093cc0-4fef-4d5d-9267-ba5cdfc09827\",\n        \"event_id\": \"1\",\n        \"id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n        \"person\": {\n          \"contact\": {\n            \"email_address\": \"jamie@testemail.com\",\n            \"email_address_type\": \"home\",\n            \"home_phone\": \"+12065551234\"\n          },\n          \"date_of_birth\": \"1990-01-02\",\n          \"first_name\": \"Jamie\",\n          \"home_address\": {\n            \"city\": \"San Francisco\",\n            \"county\": \"San Francisco\",\n            \"state\": \"CA\",\n            \"street_one\": \"1234 Home Ave\",\n            \"zip_code\": \"94107\"\n          },\n          \"last_name\": \"Johnson\",\n          \"mailing_address\": {\n            \"city\": \"San Francisco\",\n            \"state\": \"CA\",\n            \"street_one\": \"P.O. Box 1234\",\n            \"zip_code\": \"94107\"\n          },\n          \"marital_status\": \"married\",\n          \"sex\": \"F\",\n          \"ssn\": \"987654321\"\n        },\n        \"relationship\": \"spouse\"\n      }\n    ],\n    \"employee\": {\n      \"classifications\": {\n        \"BranchName\": \"HQ\",\n        \"Department\": \"Sales\"\n      },\n      \"custom_individual_id\": \"bb6bfcd8-6657-4b77-8151-949ea8b5e44e\",\n      \"employment\": {\n        \"employment_dates\": {\n          \"full_time_start\": \"2015-01-01\",\n          \"hire_date\": \"2014-12-10\"\n        },\n        \"employment_status\": \"full-time\",\n        \"hours_worked\": 50,\n        \"occupation\": \"Senior Analyst\",\n        \"salary\": {\n          \"amount\": 55000,\n          \"effective_date\": \"2022-01-31\",\n          \"type\": \"salary\",\n          \"unit\": \"annual\"\n        }\n      },\n      \"event_id\": \"1\",\n      \"group_id\": \"d0ec3837-3499-4a2f-8c58-966ef7e46d95\",\n      \"id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n      \"person\": {\n        \"contact\": {\n          \"email_address\": \"david@testemail.com\",\n          \"email_address_type\": \"home\",\n          \"home_phone\": \"+12065551234\",\n          \"preferred_method\": \"email\",\n          \"work_phone\": \"+12065559876\"\n        },\n        \"date_of_birth\": \"1985-06-22\",\n        \"first_name\": \"David\",\n        \"home_address\": {\n          \"city\": \"San Francisco\",\n          \"county\": \"San Francisco\",\n          \"state\": \"CA\",\n          \"street_one\": \"1234 Home Ave\",\n          \"zip_code\": \"94107\"\n        },\n        \"last_name\": \"Johnson\",\n        \"mailing_address\": {\n          \"city\": \"San Francisco\",\n          \"state\": \"CA\",\n          \"street_one\": \"P.O. Box 1234\",\n          \"zip_code\": \"94107\"\n        },\n        \"marital_status\": \"married\",\n        \"middle_name\": \"A\",\n        \"sex\": \"M\",\n        \"ssn\": \"123456789\",\n        \"suffix\": \"Jr\"\n      }\n    },\n    \"events\": [\n      {\n        \"date\": \"2022-01-01\",\n        \"id\": \"1\",\n        \"reason\": \"open_enrollment\",\n        \"type\": \"enrollment\"\n      }\n    ],\n    \"snapshot_mode\": \"current_open\"\n  },\n  \"modified\": 1656030390,\n  \"replaced_by\": \"9aea70ac-469d-560b-2512-90be9e2348ys\",\n  \"status\": \"processing\",\n  \"version\": \"271c60d6-f009-4b3d-8bba-aac49b2dd9a4\",\n  \"warnings\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "732248bd-e739-42c6-8753-20c536f9487c",
+              "name": "Failure Response - Not found error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "member_snapshots",
+                    ":snapshot_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "snapshot_id",
+                      "description": "(Required) The unique identifier of the member snapshot"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"MemberSnapshot not found with UUID 30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "95c4d664-a439-47b8-9b40-de70228b1a38",
+          "name": "Get a list of all Member Snapshots",
+          "request": {
+            "name": "Get a list of all Member Snapshots",
+            "description": {
+              "content": "Returns a list of all member snapshots.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "member_snapshots"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "organization_id",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "employee_id",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "group_id",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "member_request_id",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "group_name_search",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_before",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_by",
+                  "value": "<string>",
+                  "description": "The attribute on which to sort the member snapshots"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_direction",
+                  "value": "<string>",
+                  "description": "Either asc or desc, to denote the data's direction"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2756de1e-d61a-4e77-8556-8881f270ba51",
+              "name": "Successful Response - Returns all matching Member Snapshots",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "member_snapshots"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "organization_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "employee_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "group_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "member_request_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "group_name_search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_direction",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 2\n  },\n  \"response\": [\n    {\n      \"employee\": {\n        \"employment\": {\n          \"employment_dates\": {\n            \"full_time_start\": \"2017-12-05\",\n            \"hire_date\": \"2018-01-01\"\n          },\n          \"employment_status\": \"full-time\",\n          \"hours_worked\": 40,\n          \"occupation\": \"Engineer\",\n          \"salary\": {\n            \"amount\": 550,\n            \"type\": \"salary\",\n            \"unit\": \"annual\"\n          }\n        },\n        \"id\": \"0ff1e7ef-16f8-42ec-b6d9-330e75d5a1e2\",\n        \"person\": {\n          \"first_name\": \"John\",\n          \"id\": \"f5d9ba72-c5f7-4a19-96ca-9daef73f59d8\",\n          \"last_name\": \"Doe\",\n          \"middle_name\": \"Frank\"\n        }\n      },\n      \"group\": {\n        \"created\": 1663100706,\n        \"dba_name\": \"Test Company LLC\",\n        \"federal_ein\": \"123123123\",\n        \"id\": \"8653c609-c08d-4951-afc5-8788d5d5fed5\",\n        \"modified\": 1663100706,\n        \"name\": \"One\",\n        \"organization_id\": \"a4c3e548-23bf-47cf-91ad-d30e190ec36b\",\n        \"sic_code\": \"7371\",\n        \"version\": \"e3c272f6-452f-4b07-b5f7-e46ec5e69d7b\"\n      },\n      \"member_snapshot\": {\n        \"created\": 1641171601,\n        \"employee_id\": \"0ff1e7ef-16f8-42ec-b6d9-330e75d5a1e2\",\n        \"id\": \"bda1b068-3e6a-4cc3-9769-0fb8a38649ce\",\n        \"modified\": 1641171601,\n        \"status\": \"processing\",\n        \"version\": \"feae8f7e-1404-446a-bcec-d0ec8aee11b4\"\n      }\n    },\n    {\n      \"employee\": {\n        \"employment\": {\n          \"employment_dates\": {\n            \"full_time_start\": \"2017-12-05\",\n            \"hire_date\": \"2018-01-01\"\n          },\n          \"employment_status\": \"full-time\",\n          \"hours_worked\": 40,\n          \"occupation\": \"Engineer\",\n          \"salary\": {\n            \"amount\": 550,\n            \"type\": \"salary\",\n            \"unit\": \"annual\"\n          }\n        },\n        \"id\": \"512649c3-e66a-475a-9bff-78b632d24702\",\n        \"person\": {\n          \"first_name\": \"John\",\n          \"id\": \"d41ef8a4-087c-4d94-906b-599c6568d218\",\n          \"last_name\": \"Doe\",\n          \"middle_name\": \"Frank\"\n        }\n      },\n      \"group\": {\n        \"created\": 1663100706,\n        \"dba_name\": \"Test Company LLC\",\n        \"federal_ein\": \"123123123\",\n        \"id\": \"8653c609-c08d-4951-afc5-8788d5d5fed5\",\n        \"modified\": 1663100706,\n        \"name\": \"One\",\n        \"organization_id\": \"a4c3e548-23bf-47cf-91ad-d30e190ec36b\",\n        \"sic_code\": \"7371\",\n        \"version\": \"e3c272f6-452f-4b07-b5f7-e46ec5e69d7b\"\n      },\n      \"member_snapshot\": {\n        \"created\": 1641085201,\n        \"employee_id\": \"512649c3-e66a-475a-9bff-78b632d24702\",\n        \"id\": \"fd70e9a6-c662-4fc6-b724-ab023ee59a12\",\n        \"modified\": 1641085201,\n        \"status\": \"completed\",\n        \"version\": \"7a26674d-5974-4173-8346-85eef354f6fd\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f0e5cca6-bd31-48b4-8e5f-b6f5da8079f6",
+          "name": "Gets member snapshot currently associated with a transaction",
+          "request": {
+            "name": "Gets member snapshot currently associated with a transaction",
+            "description": {
+              "content": "Gets member snapshot currently associated with a transaction",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "member_snapshots",
+                "member_transaction",
+                ":transaction_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "transaction_id",
+                  "description": "(Required) The unique identifier of the member transaction we are using to get associated member snapshot"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c0b38ed8-005d-4e6c-859c-7feb6afbb259",
+              "name": "Successful Response - Returns the Member Snapshot contents",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "member_snapshots",
+                    "member_transaction",
+                    ":transaction_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "transaction_id",
+                      "description": "(Required) The unique identifier of the member transaction we are using to get associated member snapshot"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 1656030390,\n  \"created_members\": [\n    {\n      \"custom_individual_id\": \"bb6bfcd8-6657-4b77-8151-949ea8b5e44e\",\n      \"id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n      \"type\": \"employee\"\n    },\n    {\n      \"custom_individual_id\": \"3f093cc0-4fef-4d5d-9267-ba5cdfc09827\",\n      \"id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n      \"type\": \"dependent\"\n    }\n  ],\n  \"employee_id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n  \"fulfillment_summary\": [\n    {\n      \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n      \"errors\": [],\n      \"status\": \"processing\"\n    }\n  ],\n  \"id\": \"7bea80ac-499d-560b-5512-60be9e2349cb\",\n  \"member_snapshot\": {\n    \"coverages\": [\n      {\n        \"carrier_id\": \"4d4d815b-ae8f-430c-901f-1c9d5ee3f4f1\",\n        \"enrolled_members\": [\n          {\n            \"effective_end_date\": \"9999-12-31\",\n            \"effective_start_date\": \"2022-01-01\",\n            \"event_id\": \"1\",\n            \"individual_id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n            \"individual_type\": \"employee\"\n          },\n          {\n            \"effective_end_date\": \"9999-12-31\",\n            \"effective_start_date\": \"2022-01-01\",\n            \"event_id\": \"1\",\n            \"individual_id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n            \"individual_type\": \"dependent\"\n          }\n        ],\n        \"line_of_coverage\": \"medical\",\n        \"plan_id\": \"4bf04f73-0aad-48ac-b28a-e5f4def7c5e9\",\n        \"signature_date\": \"2021-12-23\"\n      }\n    ],\n    \"dependents\": [\n      {\n        \"custom_individual_id\": \"3f093cc0-4fef-4d5d-9267-ba5cdfc09827\",\n        \"event_id\": \"1\",\n        \"id\": \"ab740704-7c37-4010-92b3-d22c6926be3e\",\n        \"person\": {\n          \"date_of_birth\": \"1990-01-02\",\n          \"first_name\": \"Jamie\",\n          \"last_name\": \"Johnson\",\n          \"sex\": \"F\"\n        },\n        \"relationship\": \"spouse\"\n      }\n    ],\n    \"employee\": {\n      \"custom_individual_id\": \"bb6bfcd8-6657-4b77-8151-949ea8b5e44e\",\n      \"event_id\": \"1\",\n      \"group_id\": \"d0ec3837-3499-4a2f-8c58-966ef7e46d95\",\n      \"id\": \"6e7a80fc-473e-460a-8368-454e9e8dc9cb\",\n      \"person\": {\n        \"contact\": {\n          \"email_address\": \"david@testemail.com\"\n        },\n        \"date_of_birth\": \"1985-06-22\",\n        \"first_name\": \"David\",\n        \"home_address\": {\n          \"city\": \"San Francisco\",\n          \"state\": \"CA\",\n          \"street_one\": \"1234 Home Ave\",\n          \"zip_code\": \"94107\"\n        },\n        \"last_name\": \"Johnson\",\n        \"sex\": \"M\"\n      }\n    },\n    \"events\": [\n      {\n        \"date\": \"2022-01-01\",\n        \"id\": \"1\",\n        \"reason\": \"open_enrollment\",\n        \"type\": \"enrollment\"\n      }\n    ]\n  },\n  \"modified\": 1656030390,\n  \"status\": \"processing\",\n  \"version\": \"271c60d6-f009-4b3d-8bba-aac49b2dd9a4\",\n  \"warnings\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "47b37b7b-748a-4d93-95f2-d64f70c1f028",
+              "name": "Failure Response - Not found error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "member_snapshots",
+                    "member_transaction",
+                    ":transaction_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "transaction_id",
+                      "description": "(Required) The unique identifier of the member transaction we are using to get associated member snapshot"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"MemberTransaction not found with UUID 30b74a44-d5b1-4123-a7a4-6d3aec251ba4\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a97241a3-8664-4163-9f90-41669ee937f1",
+    "name": "Noyo Carrier Carrier Mapped Field Member Snapshot API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Platform Group Structure API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Platform Group Structure",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Update a Platform Group Structure",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/ui/v1/platform_group_structures/:platform_group_structure_id/:version",
+            "params": [
+              {
+                "name": "platform_group_structure_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the platform group structure you want to edit."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "Unique version of the platform group structure you want to edit."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a platform group structure based on the ID provided."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

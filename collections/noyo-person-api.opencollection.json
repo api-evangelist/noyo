@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Person API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Person",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search people",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/people",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search for people based on various criteria including name, date of birth, and SSN"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,361 @@
+{
+  "item": [
+    {
+      "id": "b893b915-7d45-405b-b824-876e73a0e147",
+      "name": "Carriers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f1c05613-8b4c-4e27-8658-c634888a4202",
+          "name": "Query for list of matching carriers",
+          "request": {
+            "name": "Query for list of matching carriers",
+            "description": {
+              "content": "Returns a list of all Carriers matching an optional query by name, state, line of coverage, or list of IDs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "carriers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "internal_name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "line_of_coverage",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "ids",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "organization_id",
+                  "value": "<uuid>",
+                  "description": "The unique identifier of the organization for which you would like to view carriers"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_listed",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_send",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8cb24516-6203-43ae-97fb-4c10e7733899",
+              "name": "A list of Carrier models",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "carriers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "internal_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "line_of_coverage",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "organization_id",
+                      "value": "2613a221-d3c8-4c8a-86d5-e7e885fd1da9"
+                    },
+                    {
+                      "key": "is_listed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_send",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"display_name\": \"Aetna\",\n    \"id\": \"29189cfd-25e9-4d54-a630-9b3e1dafa1c9\",\n    \"internal_name\": \"Aetna\",\n    \"lines_of_coverage\": [\n      \"medical\",\n      \"dental\",\n      \"vision\",\n      \"life-basic\",\n      \"life-voluntary\",\n      \"std-basic\",\n      \"ltd-basic\"\n    ],\n    \"state\": \"AZ\",\n    \"version\": \"16e0fbbd-bf45-4955-a0ab-3ec6a898c79b\"\n  },\n  {\n    \"display_name\": \"Aetna\",\n    \"id\": \"8fac0992-933a-4743-8dab-0d606ef2569e\",\n    \"internal_name\": \"Aetna\",\n    \"lines_of_coverage\": [\n      \"medical\",\n      \"dental\",\n      \"vision\",\n      \"life-basic\",\n      \"life-voluntary\",\n      \"std-basic\"\n    ],\n    \"state\": \"CA\",\n    \"version\": \"5db1aefe-19de-463f-b19e-1c00be289ba8\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3f15887c-a726-451b-a991-faae245b7205",
+          "name": "Create a new Organization Carrier Connection",
+          "request": {
+            "name": "Create a new Organization Carrier Connection",
+            "description": {
+              "content": "Create a new Organization Carrier Connection",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "carriers",
+                "request"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"carrier_id\": \"<uuid>\",\n  \"estimated_volume\": 0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bfe1a0ea-c615-48a2-9842-49d74dfbbb93",
+              "name": "Returns the new Organization Carrier connection",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "carriers",
+                    "request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carrier_id\": \"2ffb68e0-bcd2-499b-83ea-2c8d24df4ae5\",\n  \"estimated_volume\": 2000\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"carrier_id\": \"2ffb68e0-bcd2-499b-83ea-2c8d24df4ae5\",\n  \"created\": 1557862286,\n  \"estimated_volume\": 2000,\n  \"id\": \"e620170a-8a12-4ac2-ad5d-6148b910c049\",\n  \"modified\": 1557862286,\n  \"organization_id\": \"c0d30398-4f94-48a8-8498-8983df07d036\",\n  \"status\": \"pending\",\n  \"version\": \"47ab4c14-cf9d-4b2f-a7d9-cb41860d87fa\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "968a3ee8-c0e3-4e4f-b737-cffa9c423e0c",
+          "name": "Get a single carrier",
+          "request": {
+            "name": "Get a single carrier",
+            "description": {
+              "content": "Returns the latest version of a single Carrier based on the ID provided",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "carriers",
+                ":carrier_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "carrier_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "020f6adb-df1d-4a47-b630-5fc89d10d5be",
+              "name": "Get a single carrier by ID",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "carriers",
+                    ":carrier_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "carrier_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"display_name\": \"Aetna\",\n  \"id\": \"8fac0992-933a-4743-8dab-0d606ef2569e\",\n  \"internal_name\": \"Aetna\",\n  \"lines_of_coverage\": [\n    \"medical\",\n    \"dental\",\n    \"vision\",\n    \"life-basic\",\n    \"life-voluntary\",\n    \"std-basic\"\n  ],\n  \"state\": \"CA\",\n  \"version\": \"5db1aefe-19de-463f-b19e-1c00be289ba8\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "62f29294-eb43-41f3-9846-3909a619ac37",
+    "name": "Noyo Carrier Carrier Mapped Field Carriers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

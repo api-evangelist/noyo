@@ -1,0 +1,133 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Plan Mapping Rule API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Plan Mapping Rule",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Plan Mapping Rules for a Group Mapping",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/group_mappings/:group_mapping_id/plan_mapping_rules",
+            "params": [
+              {
+                "name": "group_mapping_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group mapping you would like to get plan mapping rules for"
+              }
+            ]
+          },
+          "docs": "Returns a list of plan mapping rules based on the Group Mapping ID provided."
+        },
+        {
+          "info": {
+            "name": "Create a new Plan Mapping Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/group_mappings/:group_mapping_id/plan_mapping_rules",
+            "params": [
+              {
+                "name": "group_mapping_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group mapping you would like to create plan mapping rule for"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new Plan Mapping Rule"
+        },
+        {
+          "info": {
+            "name": "Get a Plan Mapping Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/plan_mapping_rules/:plan_mapping_rule_id",
+            "params": [
+              {
+                "name": "plan_mapping_rule_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the plan mapping rule you are looking for"
+              }
+            ]
+          },
+          "docs": "Returns a plan mapping rule that has the unique identifier specified in parameters."
+        },
+        {
+          "info": {
+            "name": "Edit a Plan Mapping Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/plan_mapping_rules/:plan_mapping_rule_id/:version",
+            "params": [
+              {
+                "name": "plan_mapping_rule_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the plan mapping rule you would like to edit"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The unique version of the plan mapping rule you would like to edit"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit a plan mapping rule based on the ID provided. The version parameter must match the latest plan mapping rule version."
+        },
+        {
+          "info": {
+            "name": "Delete a Plan Mapping Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/plan_mapping_rules/:plan_mapping_rule_id/:version",
+            "params": [
+              {
+                "name": "plan_mapping_rule_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the plan mapping rule you would like to delete"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The unique version of the plan mapping rule you would like to delete"
+              }
+            ]
+          },
+          "docs": "Delete a plan mapping rule based on the ID provided. The version parameter must match the latest plan mapping rule version."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

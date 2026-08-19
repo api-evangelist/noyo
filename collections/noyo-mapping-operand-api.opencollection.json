@@ -1,0 +1,87 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Mapping Operand API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Mapping Operand",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Mapping Operands by Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/groups/:group_id/mapping_operands",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group you want to get mapping_operands for"
+              },
+              {
+                "name": "field_type",
+                "value": "",
+                "type": "query",
+                "description": "Describes the type for the mapping_operand value looks like (string, integer, etc.)"
+              },
+              {
+                "name": "mapping_type",
+                "value": "",
+                "type": "query",
+                "description": "Describes the type for the mapping_operand value is used to map for (account_structure or plan_mapping)"
+              }
+            ]
+          },
+          "docs": "Get Mapping Operands for a Group"
+        },
+        {
+          "info": {
+            "name": "Get an existing Mapping Operand",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/mapping_operands/:mapping_operand_id",
+            "params": [
+              {
+                "name": "mapping_operand_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the mapping operand you would like to get"
+              }
+            ]
+          },
+          "docs": "Get a mapping operand based on the ID provided. This will return the latest version of the mapping operand."
+        },
+        {
+          "info": {
+            "name": "Get Mapping Operands by Group Mapping",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ui/v1/group_mappings/:group_mapping_id/mapping_operands",
+            "params": [
+              {
+                "name": "group_mapping_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group mapping you want to get mapping_operands for"
+              }
+            ]
+          },
+          "docs": "Get Mapping Operands for a Group Mapping"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,950 @@
+{
+  "item": [
+    {
+      "id": "f6d14d75-1fce-49c3-810b-525d8d0a7e8b",
+      "name": "Rule Set",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8936b473-d34e-424e-b7a6-733d01e6e3d7",
+          "name": "Retrieves a list of Rule Set Traces.",
+          "request": {
+            "name": "Retrieves a list of Rule Set Traces.",
+            "description": {
+              "content": "Returns a list of Rule Set Traces.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "rule_set_traces"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "rule_set_ids",
+                  "value": "<uuid>",
+                  "description": "Comma separated UUIDs of rule sets to filter Rule Set Traces"
+                },
+                {
+                  "disabled": false,
+                  "key": "group_id",
+                  "value": "<uuid>",
+                  "description": "Noyo specific group UUID to filter Rule Set Traces"
+                },
+                {
+                  "disabled": false,
+                  "key": "employee_id",
+                  "value": "<uuid>",
+                  "description": "Noyo specific employee UUID to filter Rule Set Traces"
+                },
+                {
+                  "disabled": false,
+                  "key": "member_snapshot_id",
+                  "value": "<uuid>",
+                  "description": "Noyo specific member snapshot UUID to filter Rule Set Traces"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_trace",
+                  "value": "<boolean>",
+                  "description": "Whether to include the trace in the response"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "689d7323-a2ca-4562-a7a1-6120cface13e",
+              "name": "Successful Response - Returns a list of all matching Rule Set Traces",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "rule_set_traces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "rule_set_ids",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "group_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "employee_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "member_snapshot_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "include_trace",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 5755,\n    \"page_num\": 7262,\n    \"page_size\": 7806,\n    \"total_records\": 953\n  },\n  \"response\": [\n    {\n      \"created\": 1459,\n      \"id\": \"4c2ec795-cfb6-3d43-fc50-918282013e2d\",\n      \"modified\": 5995,\n      \"organization_id\": \"4ab23fa0-0e8d-e946-c3bc-2ff55e10ab67\",\n      \"rule_set_ids\": [\n        \"fbf77d32-b546-432e-6e0d-cd623962d7d4\",\n        \"7bfd23f6-ce67-96df-d00a-987795cc3811\"\n      ],\n      \"status\": \"string\",\n      \"version\": \"bca89256-19c0-5741-062d-1cdcf7ae7124\",\n      \"employee_id\": \"635eee52-9dd0-62df-1d8e-da9039a7223a\",\n      \"group_id\": \"ee42c06f-56ac-e2f8-86d9-ef6680aa8c9c\",\n      \"member_snapshot_id\": \"3443c998-0d4e-6e6e-b313-cc57f8884aef\",\n      \"trace\": {}\n    },\n    {\n      \"created\": 368,\n      \"id\": \"c0159d58-756f-d6c6-a8f3-8b7625d50439\",\n      \"modified\": 6790,\n      \"organization_id\": \"875c92ab-f1a2-c332-d7d8-ccb66ee661dc\",\n      \"rule_set_ids\": [\n        \"8cf42261-840a-0729-5285-2d27fb2d44ab\",\n        \"871025ab-51e4-a6be-ef72-a454fb4c82c2\"\n      ],\n      \"status\": \"string\",\n      \"version\": \"7362515a-eb5d-ab31-f19c-a91a7b77da07\",\n      \"employee_id\": \"b98a2076-a53f-6213-975c-63cb0951b2ef\",\n      \"group_id\": \"7f86c3df-fda1-4b35-8049-06bffd096c40\",\n      \"member_snapshot_id\": \"bd64c4d3-c67c-83fb-a19b-56ba944834ad\",\n      \"trace\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5ad92f13-418f-4b9a-828e-c2f2ee58821f",
+          "name": "Get a single Rule Set Trace",
+          "request": {
+            "name": "Get a single Rule Set Trace",
+            "description": {
+              "content": "Returns a single Rule Set Trace based on the ID provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "rule_set_traces",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include_trace",
+                  "value": "<boolean>",
+                  "description": "Whether to include the trace in the response"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the rule set trace you would like to view"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "68abf3f5-d64e-4f94-9dac-08f8f731c2f1",
+              "name": "Successful Response - Returns a single Rule Set Trace",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "rule_set_traces",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_trace",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the rule set trace you would like to view"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 3982,\n  \"id\": \"b5b35b63-f257-4f65-91b8-003ecfa2467d\",\n  \"modified\": 4096,\n  \"organization_id\": \"63f51e86-c81e-a5c5-2217-941c20e9d1ac\",\n  \"rule_set_ids\": [\n    \"2242424c-7285-d774-8d07-48e640039b63\",\n    \"935de40f-7235-1d4f-8e0c-b910afb7855b\"\n  ],\n  \"status\": \"string\",\n  \"version\": \"0ef88dea-9df7-b0a4-ffa4-695dc5b5d5ae\",\n  \"employee_id\": \"ba2e356b-0541-ad5d-c54e-30a99b6a80b6\",\n  \"group_id\": \"e9c37c87-34eb-3503-3498-bf8f7bc59a38\",\n  \"member_snapshot_id\": \"97dff7ea-7ad7-751e-170a-cec450250cc3\",\n  \"trace\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c7b2b6df-a083-402d-bb74-4e2528bf42ce",
+          "name": "Retrieves a list of Rule Sets.",
+          "request": {
+            "name": "Retrieves a list of Rule Sets.",
+            "description": {
+              "content": "Returns a list of Rule Sets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "rule_sets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "group_id",
+                  "value": "<uuid>",
+                  "description": "Noyo specific group UUID to filter Rule Sets"
+                },
+                {
+                  "disabled": false,
+                  "key": "organization_id",
+                  "value": "<uuid>",
+                  "description": "Noyo specific organization UUID to filter Rule Sets"
+                },
+                {
+                  "disabled": false,
+                  "key": "entry_point",
+                  "value": "<string>",
+                  "description": "Rule set Entry Point value to filter by"
+                },
+                {
+                  "disabled": false,
+                  "key": "sandwich_position",
+                  "value": "<string>",
+                  "description": "Rule set metadata position to filter by"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Rule set status to filter by"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fc5f44a5-ec8b-490f-8e5f-98eb6ebf2bbd",
+              "name": "Successful Response - Returns a list of all matching Rule Sets",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "rule_sets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "group_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "organization_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "entry_point",
+                      "value": "member_snapshot"
+                    },
+                    {
+                      "key": "sandwich_position",
+                      "value": "pre"
+                    },
+                    {
+                      "key": "status",
+                      "value": "active"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 4946,\n    \"page_num\": 4465,\n    \"page_size\": 132,\n    \"total_records\": 8802\n  },\n  \"response\": [\n    {\n      \"created\": 4661,\n      \"entry_point\": \"string\",\n      \"id\": \"a4527c2d-8421-1508-8b65-c665d2830dfe\",\n      \"modified\": 5584,\n      \"name\": \"string\",\n      \"rule_set_metadata\": {\n        \"sandwich_position\": \"string\"\n      },\n      \"rules\": {},\n      \"status\": \"archived\",\n      \"version\": \"537fdd88-b933-ec8c-7fb0-7eb95962c0ed\",\n      \"group_id\": \"c426e1e3-c49e-ca10-0ce1-94423a8f4b46\",\n      \"organization_id\": \"043161d7-2654-b106-0f75-4fe1713b67b5\"\n    },\n    {\n      \"created\": 482,\n      \"entry_point\": \"string\",\n      \"id\": \"17e389aa-ab51-d9dd-b7c0-8a329a0cd0c0\",\n      \"modified\": 2121,\n      \"name\": \"string\",\n      \"rule_set_metadata\": {\n        \"sandwich_position\": \"string\"\n      },\n      \"rules\": {},\n      \"status\": \"archived\",\n      \"version\": \"9893e0f1-1fea-9755-f3f7-0dac7c24f765\",\n      \"group_id\": \"06105d88-9751-2ec9-b43c-8208efb0c473\",\n      \"organization_id\": \"085509ff-728e-28c4-9584-4b23cda77541\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6ae12885-e1b7-4219-aeff-64d0e6598b76",
+          "name": "Create a Rule Set",
+          "request": {
+            "name": "Create a Rule Set",
+            "description": {
+              "content": "Create a new Rule Set.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "rule_sets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"entry_point\": \"<string>\",\n  \"name\": \"<string>\",\n  \"rules\": \"<object>\",\n  \"group_id\": \"<uuid>\",\n  \"rule_set_metadata\": {\n    \"sandwich_position\": \"<string>\"\n  },\n  \"status\": \"active\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0309ece7-e2fe-499a-8d42-5b7a8b60695b",
+              "name": "Successful Response - Returns the contents of the newly created Rule Set",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "rule_sets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entry_point\": \"<string>\",\n  \"name\": \"<string>\",\n  \"rules\": \"<object>\",\n  \"group_id\": \"<uuid>\",\n  \"rule_set_metadata\": {\n    \"sandwich_position\": \"<string>\"\n  },\n  \"status\": \"active\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 8503,\n  \"entry_point\": \"string\",\n  \"id\": \"7b74277a-8b4b-efb7-a5d8-d4c3868d0c2c\",\n  \"modified\": 9605,\n  \"name\": \"string\",\n  \"rule_set_metadata\": {\n    \"sandwich_position\": \"<string>\"\n  },\n  \"rules\": {},\n  \"status\": \"archived\",\n  \"version\": \"372b1f55-520b-9b0b-f390-beaf84e4f4e9\",\n  \"group_id\": \"c4aa0dc3-b4f8-d4fa-03dc-c7b06ac957cf\",\n  \"organization_id\": \"1d27888e-693c-1fe7-1c7a-90d9a8b72fd3\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4284dc03-7776-4b5b-8e52-c00fe27b522c",
+          "name": "Get a single Rule Set",
+          "request": {
+            "name": "Get a single Rule Set",
+            "description": {
+              "content": "Returns the latest version of a single rule set based on the ID provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "rule_sets",
+                ":rule_set_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "rule_set_id",
+                  "description": "(Required) The unique identifier of the rule you would like to view"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "06b3b61c-9737-4d50-a981-7c944c062922",
+              "name": "Successful Response - Returns a single Rule Set",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "rule_sets",
+                    ":rule_set_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "rule_set_id",
+                      "description": "(Required) The unique identifier of the rule you would like to view"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 8503,\n  \"entry_point\": \"string\",\n  \"id\": \"7b74277a-8b4b-efb7-a5d8-d4c3868d0c2c\",\n  \"modified\": 9605,\n  \"name\": \"string\",\n  \"rule_set_metadata\": {\n    \"sandwich_position\": \"<string>\"\n  },\n  \"rules\": {},\n  \"status\": \"archived\",\n  \"version\": \"372b1f55-520b-9b0b-f390-beaf84e4f4e9\",\n  \"group_id\": \"c4aa0dc3-b4f8-d4fa-03dc-c7b06ac957cf\",\n  \"organization_id\": \"1d27888e-693c-1fe7-1c7a-90d9a8b72fd3\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "44d8c7f1-a480-4dc0-850e-fea200885816",
+          "name": "Promote a Rule Set",
+          "request": {
+            "name": "Promote a Rule Set",
+            "description": {
+              "content": "Promotes a rule set from draft or archived status to active status. Any existing active rule sets with matching type, entry point, and sandwich position will be archived.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "rule_sets",
+                ":rule_set_id",
+                ":rule_set_version",
+                "promote"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "rule_set_id",
+                  "description": "(Required) The unique identifier of the rule set to promote"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "rule_set_version",
+                  "description": "(Required) The version of the rule set to promote"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "815b08c6-efbc-4929-b77d-9f98dbf06397",
+              "name": "Successful Response - Rule set promoted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "rule_sets",
+                    ":rule_set_id",
+                    ":rule_set_version",
+                    "promote"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "rule_set_id",
+                      "description": "(Required) The unique identifier of the rule set to promote"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "rule_set_version",
+                      "description": "(Required) The version of the rule set to promote"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 8503,\n  \"entry_point\": \"string\",\n  \"id\": \"7b74277a-8b4b-efb7-a5d8-d4c3868d0c2c\",\n  \"modified\": 9605,\n  \"name\": \"string\",\n  \"rule_set_metadata\": {\n    \"sandwich_position\": \"<string>\"\n  },\n  \"rules\": {},\n  \"status\": \"archived\",\n  \"version\": \"372b1f55-520b-9b0b-f390-beaf84e4f4e9\",\n  \"group_id\": \"c4aa0dc3-b4f8-d4fa-03dc-c7b06ac957cf\",\n  \"organization_id\": \"1d27888e-693c-1fe7-1c7a-90d9a8b72fd3\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cd0b5f9e-e30b-4464-9d70-0e0c7ada5188",
+          "name": "Delete a Rule Set",
+          "request": {
+            "name": "Delete a Rule Set",
+            "description": {
+              "content": "Delete a rule set based on the ID provided. The version parameter must match the latest rule set version.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "rule_sets",
+                ":rule_set_id",
+                ":version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "rule_set_id",
+                  "description": "(Required) Unique identifier of the rule set you want to delete."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "version",
+                  "description": "(Required) Unique version of the rule set you want to delete."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9b4e160e-fcac-4e2a-93f1-396a64753044",
+              "name": "Successful Response - rule set was deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "rule_sets",
+                    ":rule_set_id",
+                    ":version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "rule_set_id",
+                      "description": "(Required) Unique identifier of the rule set you want to delete."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version",
+                      "description": "(Required) Unique version of the rule set you want to delete."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "09b68319-601a-4186-9753-8a8352d5b041",
+          "name": "Update a Rule Set",
+          "request": {
+            "name": "Update a Rule Set",
+            "description": {
+              "content": "Update a rule set based on the ID provided. The version parameter must match the latest rule set version.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "rule_sets",
+                ":rule_set_id",
+                ":version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "rule_set_id",
+                  "description": "(Required) Unique identifier of the rule set you want to edit."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "version",
+                  "description": "(Required) Unique version of the rule set you want to edit."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"entry_point\": \"<string>\",\n  \"group_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"rules\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ef3fdfd9-e092-4a78-a60b-5f665da38b63",
+              "name": "Successful Response - Returns the modified Rule Set",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "rule_sets",
+                    ":rule_set_id",
+                    ":version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "rule_set_id",
+                      "description": "(Required) Unique identifier of the rule set you want to edit."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version",
+                      "description": "(Required) Unique version of the rule set you want to edit."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entry_point\": \"<string>\",\n  \"group_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"rules\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 8503,\n  \"entry_point\": \"string\",\n  \"id\": \"7b74277a-8b4b-efb7-a5d8-d4c3868d0c2c\",\n  \"modified\": 9605,\n  \"name\": \"string\",\n  \"rule_set_metadata\": {\n    \"sandwich_position\": \"<string>\"\n  },\n  \"rules\": {},\n  \"status\": \"archived\",\n  \"version\": \"372b1f55-520b-9b0b-f390-beaf84e4f4e9\",\n  \"group_id\": \"c4aa0dc3-b4f8-d4fa-03dc-c7b06ac957cf\",\n  \"organization_id\": \"1d27888e-693c-1fe7-1c7a-90d9a8b72fd3\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6c8a7037-1798-4e82-945b-380558042759",
+    "name": "Noyo Carrier Carrier Mapped Field Rule Set API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

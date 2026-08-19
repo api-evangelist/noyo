@@ -1,0 +1,240 @@
+{
+  "item": [
+    {
+      "id": "f7ec4561-40db-4e25-b46c-dd96792de82f",
+      "name": "Member Snapshot Test Report",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "18df8d6c-8568-4562-9389-a8ae0575f09d",
+          "name": "Retrieves a list of Member Snapshot Test Reports.",
+          "request": {
+            "name": "Retrieves a list of Member Snapshot Test Reports.",
+            "description": {
+              "content": "Returns a list of Member Snapshot Test Reports.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "member_snapshot_test_reports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "group_id",
+                  "value": "<uuid>",
+                  "description": "Noyo group UUID to filter Member Snapshot Test Report"
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier_id",
+                  "value": "<uuid>",
+                  "description": "Noyo carrier UUID to filter Member Snapshot Test Report"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4e7b9f4b-1364-4196-9d89-23a665506563",
+              "name": "Successful Response - Returns a list of all matching Member Snapshot Test Reports",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "member_snapshot_test_reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "group_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "carrier_id",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 5875,\n    \"page_num\": 8793,\n    \"page_size\": 6244,\n    \"total_records\": 1166\n  },\n  \"response\": [\n    {\n      \"carrier_id\": \"10caf0c3-d85d-9079-57c4-623f696a33b6\",\n      \"created\": 201,\n      \"group_id\": \"c2b29827-ebe6-e13c-b192-8ebdb6fce58d\",\n      \"id\": \"49bae0dc-36ed-cb49-e2a7-05e3d0bb0df3\",\n      \"modified\": 5064,\n      \"report_data\": {\n        \"completed_at\": null,\n        \"rule_set_overrides\": {\n          \"noyo_post\": \"567a89f9-ba32-f35a-efb9-6f198581082b\",\n          \"noyo_pre\": \"5e47ad06-2e0e-2077-4331-ba611f7f5e0b\",\n          \"platform_post\": \"281be668-ab79-2403-8527-6e66260892d2\",\n          \"platform_pre\": \"1975f8bc-b76d-6e8c-06e1-d9c309b09653\",\n          \"primary\": \"e97595a0-e11d-bca3-f064-f9713a237850\"\n        },\n        \"started_at\": null\n      },\n      \"version\": \"b8cfb536-cbfd-648d-f2fd-cbef88ef192c\"\n    },\n    {\n      \"carrier_id\": \"7a372c98-a095-5014-3045-8a04ad0fa34d\",\n      \"created\": 8253,\n      \"group_id\": \"0a0fabea-25ab-bf4b-b789-19f493e1e225\",\n      \"id\": \"ddfe718d-84e4-938c-ae9f-c4f8e1249f22\",\n      \"modified\": 3596,\n      \"report_data\": {\n        \"completed_at\": null,\n        \"rule_set_overrides\": {\n          \"noyo_post\": \"b4afc5f9-d373-8dea-db71-4e1a28e2017c\",\n          \"noyo_pre\": \"14e5dc70-49c2-c570-4f30-4a3c2bd58b4a\",\n          \"platform_post\": \"5293d784-69cf-7aae-7072-ce3a01c5c6f4\",\n          \"platform_pre\": \"1e6ef770-33aa-8c96-7551-1aae11a8f1a8\",\n          \"primary\": \"da7f885b-b6cf-060d-11b1-f4364d0744c3\"\n        },\n        \"started_at\": null\n      },\n      \"version\": \"88b1e3ee-b215-b073-6e9c-5c721f59db1d\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a381f17d-2094-44eb-9132-1b207fc4f476",
+          "name": "Get a single Member Snapshot Test Report",
+          "request": {
+            "name": "Get a single Member Snapshot Test Report",
+            "description": {
+              "content": "Returns the latest version of a single Member Snapshot Test Report based on the ID provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "member_snapshot_test_reports",
+                ":member_snapshot_test_report_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "member_snapshot_test_report_id",
+                  "description": "(Required) The unique identifier of the Member Snapshot Test Report you would like to view"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4206aeee-a39c-422d-9e0e-be8ffb50e56b",
+              "name": "Successful Response - Returns a single Member Snapshot Test Report",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "member_snapshot_test_reports",
+                    ":member_snapshot_test_report_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "member_snapshot_test_report_id",
+                      "description": "(Required) The unique identifier of the Member Snapshot Test Report you would like to view"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"carrier_id\": \"729476e0-0707-05c7-ca5b-9dc79b82488e\",\n  \"created\": 8752,\n  \"group_id\": \"40636831-797b-f0a8-2952-be8cedcd6400\",\n  \"id\": \"96bde420-cff8-eb16-85cd-ef974a34f69f\",\n  \"modified\": 8837,\n  \"report_data\": {\n    \"completed_at\": null,\n    \"rule_set_overrides\": {\n      \"noyo_post\": \"8157bcab-6623-8fbb-51d8-0300df10eff1\",\n      \"noyo_pre\": \"51c1e1fb-76ba-fa96-f323-f2018a96a060\",\n      \"platform_post\": \"7a46087e-8e7a-2537-8cc6-2fede8f04e05\",\n      \"platform_pre\": \"10e55229-259b-d812-bc0d-6dffbec90b4b\",\n      \"primary\": \"3ac3aef6-1371-7029-c024-2643268bffc4\"\n    },\n    \"started_at\": null\n  },\n  \"version\": \"f9df99b3-719c-3090-f011-b078a84345fa\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "79ac42ac-c563-4843-a752-8f99f64c4c4c",
+    "name": "Noyo Carrier Carrier Mapped Field Member Snapshot Test Report API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

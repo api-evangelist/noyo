@@ -1,0 +1,232 @@
+{
+  "item": [
+    {
+      "id": "1c82e36f-3660-4fc5-a98f-6e8b7fda3926",
+      "name": "Volley Definitions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "571a45c1-5493-461f-aef5-b6345d798d7b",
+          "name": "Get Volley Definition By Type",
+          "request": {
+            "name": "Get Volley Definition By Type",
+            "description": {
+              "content": "Get a volley definition by type.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "volley_definitions",
+                ":volley_type"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "volley_type",
+                  "description": "(Required) The type of the volley definition to get"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e53f5a76-c0ff-41f2-8dd0-fa54ad9ee6a1",
+              "name": "Successful Response - Returns the volley definition",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "volley_definitions",
+                    ":volley_type"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "volley_type",
+                      "description": "(Required) The type of the volley definition to get"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"steps\": [\n    {\n      \"actor_type\": \"string\",\n      \"step_key\": \"string\",\n      \"step_type\": \"string\"\n    },\n    {\n      \"actor_type\": \"string\",\n      \"step_key\": \"string\",\n      \"step_type\": \"string\"\n    }\n  ],\n  \"transitions\": [\n    {\n      \"from_transition_keys\": [\n        \"string\",\n        \"string\"\n      ],\n      \"requires_attachment\": false,\n      \"to_step_keys\": [\n        \"string\",\n        \"string\"\n      ],\n      \"transition_key\": \"string\",\n      \"trigger_type\": \"string\",\n      \"allowed_attachment_types\": [\n        \"string\",\n        \"string\"\n      ],\n      \"from_step_key\": \"string\"\n    },\n    {\n      \"from_transition_keys\": [\n        \"string\",\n        \"string\"\n      ],\n      \"requires_attachment\": false,\n      \"to_step_keys\": [\n        \"string\",\n        \"string\"\n      ],\n      \"transition_key\": \"string\",\n      \"trigger_type\": \"string\",\n      \"allowed_attachment_types\": [\n        \"string\",\n        \"string\"\n      ],\n      \"from_step_key\": \"string\"\n    }\n  ],\n  \"version\": \"string\",\n  \"volley_type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f98d37cc-20ae-4cc5-8d7e-fa05ccfd723a",
+          "name": "Get Volley Definition By Version",
+          "request": {
+            "name": "Get Volley Definition By Version",
+            "description": {
+              "content": "Get a volley definition by type and version.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "volley_definitions",
+                ":volley_type",
+                ":version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "volley_type",
+                  "description": "(Required) The type of the volley definition to get"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "version",
+                  "description": "(Required) The version of the volley definition to get"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ebbbdc51-ed24-4dfc-90a7-9d53b1711c16",
+              "name": "Successful Response - Returns the volley definition",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "volley_definitions",
+                    ":volley_type",
+                    ":version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "volley_type",
+                      "description": "(Required) The type of the volley definition to get"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "version",
+                      "description": "(Required) The version of the volley definition to get"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"steps\": [\n    {\n      \"actor_type\": \"string\",\n      \"step_key\": \"string\",\n      \"step_type\": \"string\"\n    },\n    {\n      \"actor_type\": \"string\",\n      \"step_key\": \"string\",\n      \"step_type\": \"string\"\n    }\n  ],\n  \"transitions\": [\n    {\n      \"from_transition_keys\": [\n        \"string\",\n        \"string\"\n      ],\n      \"requires_attachment\": true,\n      \"to_step_keys\": [\n        \"string\",\n        \"string\"\n      ],\n      \"transition_key\": \"string\",\n      \"trigger_type\": \"string\",\n      \"allowed_attachment_types\": [\n        \"string\",\n        \"string\"\n      ],\n      \"from_step_key\": \"string\"\n    },\n    {\n      \"from_transition_keys\": [\n        \"string\",\n        \"string\"\n      ],\n      \"requires_attachment\": false,\n      \"to_step_keys\": [\n        \"string\",\n        \"string\"\n      ],\n      \"transition_key\": \"string\",\n      \"trigger_type\": \"string\",\n      \"allowed_attachment_types\": [\n        \"string\",\n        \"string\"\n      ],\n      \"from_step_key\": \"string\"\n    }\n  ],\n  \"version\": \"string\",\n  \"volley_type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "797f40a2-0736-4753-a10d-ba6b9a7cf910",
+    "name": "Noyo Carrier Carrier Mapped Field Volley Definitions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,220 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Group Connections API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Group Connections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Group Connections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/group_connections",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of requested Group Connection Request UUIDs"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status of the group connection for which you would like to filter. Multiple statuses can be used, separated by a comma."
+              },
+              {
+                "name": "carrier_id",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of carrier UUID's for which you would like to view group connection requests"
+              },
+              {
+                "name": "carrier_group_id",
+                "value": "",
+                "type": "query",
+                "description": "Used for filtering for a carrier-specific group ID. Must be used with a single carrier_id"
+              },
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of the organization for which you would like to view group connection requests"
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "The attribute on which to sort the group connections"
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query",
+                "description": "Either asc or desc, to denote the data's direction"
+              },
+              {
+                "name": "requires_mapping_action_from",
+                "value": "",
+                "type": "query",
+                "description": "The actor type that requires a mapping action from"
+              }
+            ]
+          },
+          "docs": "Returns a list of all group connections."
+        },
+        {
+          "info": {
+            "name": "Create a new Group Connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/group_connections",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new connection for a brand new group with a given carrier"
+        },
+        {
+          "info": {
+            "name": "Get a single Group Connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/group_connections/:connection_id",
+            "params": [
+              {
+                "name": "connection_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group connection you would like to view"
+              }
+            ]
+          },
+          "docs": "Returns the latest status of a single group connection based on the ID provided."
+        },
+        {
+          "info": {
+            "name": "Retry an existing group connection for an existing group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/group_connections/:connection_id/retry",
+            "params": [
+              {
+                "name": "connection_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group connection that needs to be reprocessed"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retry a carrier connection for an existing group"
+        },
+        {
+          "info": {
+            "name": "List Group Connections by Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/groups/:group_id/group_connections",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the associated group in Noyo"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "The attribute on which to sort the group connections"
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query",
+                "description": "Either asc or desc, to denote the data's direction"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status of group connection for which you would like to filter. Multiple statuses can be used, separated by a comma."
+              }
+            ]
+          },
+          "docs": "Returns a list of all group connections for a given group ID."
+        },
+        {
+          "info": {
+            "name": "Create a new group connection in an existing group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/groups/:group_id/group_connections",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group for which you would like to add a carrier connection"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new carrier connection for an existing group"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

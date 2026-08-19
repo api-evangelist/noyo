@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field RSP (RSP Response) API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "RSP (RSP Response)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create RSP (RSP Response)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/rsp",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new RSP (RSP Response) request following the LDExRSP specification version 2.0.2024.09.13"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,172 @@
+{
+  "item": [
+    {
+      "id": "9dedf12c-f2d6-4038-98b1-bcec0825b5d8",
+      "name": "GroupDisconnectionBulkRequest",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8d9fc434-49dd-4507-9ede-3807f523c7f4",
+          "name": "Bulk create new Group Disconnecting Requests",
+          "request": {
+            "name": "Bulk create new Group Disconnecting Requests",
+            "description": {
+              "content": "Bulk create new Group Disconnecting Requests",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "group_disconnection_requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"carrier_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"effective_end_date\": \"<date>\",\n  \"group_id\": \"<uuid>\",\n  \"context\": \"<string>\",\n  \"context_from_carrier\": \"<string>\",\n  \"protected_group_override\": \"<boolean>\",\n  \"reason\": \"<string>\",\n  \"source_date\": \"<date>\",\n  \"source_id\": \"<uuid>\",\n  \"source_type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2782c4ea-9c60-444f-b0ab-aaaa5a1b4088",
+              "name": "Successful Response - Returns a list of new GroupDisconnectionRequests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "group_disconnection_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carrier_ids\": [\n    \"5200a894-81c5-4c41-8519-86c32e9a9965\"\n  ],\n  \"effective_end_date\": \"2025-01-01\",\n  \"group_id\": \"f833ac4b-36aa-46f4-826c-0badcfe27922\",\n  \"protected_group_override\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"response\": [\n    {\n      \"carrier_id\": \"5200a894-81c5-4c41-8519-86c32e9a9965\",\n      \"completed\": null,\n      \"created\": 1557329939,\n      \"decided\": 1557329939,\n      \"effective_end_date\": \"2025-01-01\",\n      \"group_id\": \"f833ac4b-36aa-46f4-826c-0badcfe27922\",\n      \"group_name\": \"Besta LLC\",\n      \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n      \"modified\": 1557329939,\n      \"organization_id\": \"ca72d1e1-56a6-46ac-b400-a91e1f6b893a\",\n      \"source_id\": null,\n      \"source_type\": \"platform\",\n      \"status\": \"confirmed\",\n      \"version\": \"5200a894-81c5-4c41-8519-86c32e9a9965\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f7f5f8e-4277-47ba-acd1-9de1d467d433",
+              "name": "Protected group disconnection is forbidden without an internal override",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "group_disconnection_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carrier_ids\": [\n    \"5200a894-81c5-4c41-8519-86c32e9a9965\"\n  ],\n  \"effective_end_date\": \"2025-01-01\",\n  \"group_id\": \"f833ac4b-36aa-46f4-826c-0badcfe27922\",\n  \"protected_group_override\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Protected group disconnection is forbidden without an internal override.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b9b786d8-7fe1-44b2-b03d-94fded94ee30",
+    "name": "Noyo Carrier Carrier Mapped Field GroupDisconnectionBulkRequest API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

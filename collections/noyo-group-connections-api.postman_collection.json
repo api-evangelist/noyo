@@ -1,0 +1,771 @@
+{
+  "item": [
+    {
+      "id": "b300e8ca-db82-4197-922c-e27640198cfd",
+      "name": "Group Connections",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0b910f20-6d02-4230-a9b5-c01a1bdd299e",
+          "name": "List Group Connections",
+          "request": {
+            "name": "List Group Connections",
+            "description": {
+              "content": "Returns a list of all group connections.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "group_connections"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "Comma-separated list of requested Group Connection Request UUIDs"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Status of the group connection for which you would like to filter. Multiple statuses can be used, separated by a comma."
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier_id",
+                  "value": "<uuid>",
+                  "description": "Comma-separated list of carrier UUID's for which you would like to view group connection requests"
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier_group_id",
+                  "value": "<string>",
+                  "description": "Used for filtering for a carrier-specific group ID. Must be used with a single carrier_id"
+                },
+                {
+                  "disabled": false,
+                  "key": "organization_id",
+                  "value": "<uuid>",
+                  "description": "The unique identifier of the organization for which you would like to view group connection requests"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_by",
+                  "value": "<string>",
+                  "description": "The attribute on which to sort the group connections"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_direction",
+                  "value": "<string>",
+                  "description": "Either asc or desc, to denote the data's direction"
+                },
+                {
+                  "disabled": false,
+                  "key": "requires_mapping_action_from",
+                  "value": "<string>",
+                  "description": "The actor type that requires a mapping action from"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ae9187b5-d49e-4b0d-b05e-1a09189e9507",
+              "name": "Successful Response - Returns all matching Group Connection Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_connections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "carrier_id",
+                      "value": "2613a221-d3c8-4c8a-86d5-e7e885fd1da9"
+                    },
+                    {
+                      "key": "carrier_group_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "organization_id",
+                      "value": "2613a221-d3c8-4c8a-86d5-e7e885fd1da9"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requires_mapping_action_from",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 1\n  },\n  \"response\": [\n    {\n      \"carrier_id\": \"8fac0992-933a-4743-8dab-0d606ef2569e\",\n      \"completed\": 1557392400,\n      \"created\": 1557329939,\n      \"group_data\": {\n        \"carrier_group_id\": \"10000000\",\n        \"group_name\": \"Test Company\"\n      },\n      \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n      \"modified\": 1557392400,\n      \"organization_id\": \"d61fa455-adf4-4dc4-8c57-6d779ba9475e\",\n      \"request_type\": \"initial\",\n      \"status\": \"processing\",\n      \"version\": \"9906b5d2-e76d-4bad-ba4c-8ce90b6b867b\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "99b203f6-cb6a-48e7-8763-05f3cc44dcbc",
+          "name": "Create a new Group Connection",
+          "request": {
+            "name": "Create a new Group Connection",
+            "description": {
+              "content": "Create a new connection for a brand new group with a given carrier",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "group_connections"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"carrier_id\": \"<uuid>\",\n  \"group_data\": {\n    \"carrier_group_id\": \"<string>\",\n    \"group_name\": \"<string>\",\n    \"broker_federal_ein\": \"<string>\",\n    \"broker_tin\": \"<string>\",\n    \"employer_email_address\": \"<string>\"\n  },\n  \"data_exchange_configuration\": \"<string>\",\n  \"federal_ein\": \"<string>\",\n  \"ignore_eligibility\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4ce9dfa0-9438-40ff-ae5f-f808adb08589",
+              "name": "Successful Response - Returns the new Group Connection",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_connections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carrier_id\": \"8fac0992-933a-4743-8dab-0d606ef2569e\",\n  \"federal_ein\": \"123456789\",\n  \"group_data\": {\n    \"carrier_group_id\": \"10000000\",\n    \"group_name\": \"Test Company\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"carrier_id\": \"8fac0992-933a-4743-8dab-0d606ef2569e\",\n  \"created\": 1557329939,\n  \"group_data\": {\n    \"carrier_group_id\": \"10000000\",\n    \"group_name\": \"Test Company\"\n  },\n  \"group_id\": \"47c07963-2e34-4da2-86b4-cbc3c57111c1\",\n  \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n  \"modified\": 1557329939,\n  \"organization_id\": \"d61fa455-adf4-4dc4-8c57-6d779ba9475e\",\n  \"request_type\": \"initial\",\n  \"status\": \"created\",\n  \"version\": \"9906b5d2-e76d-4bad-ba4c-8ce90b6b867b\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "639bd463-82e8-4990-a1fe-705dd7c8fbf6",
+          "name": "Get a single Group Connection",
+          "request": {
+            "name": "Get a single Group Connection",
+            "description": {
+              "content": "Returns the latest status of a single group connection based on the ID provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "group_connections",
+                ":connection_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "connection_id",
+                  "description": "(Required) The unique identifier of the group connection you would like to view"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "34a0bc6c-1150-468f-8c1d-e5758eb9a25f",
+              "name": "Successful Response - Returns a single Group Connection",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_connections",
+                    ":connection_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "connection_id",
+                      "description": "(Required) The unique identifier of the group connection you would like to view"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"carrier_id\": \"8fac0992-933a-4743-8dab-0d606ef2569e\",\n  \"completed\": 1557392400,\n  \"created\": 1557329939,\n  \"group_data\": {\n    \"carrier_group_id\": \"10000000\",\n    \"group_name\": \"Test Company\"\n  },\n  \"group_id\": \"9e629e41-c706-4efd-9fbb-1ff2573fc67e\",\n  \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n  \"modified\": 1557392400,\n  \"organization_id\": \"d61fa455-adf4-4dc4-8c57-6d779ba9475e\",\n  \"request_type\": \"initial\",\n  \"setup_result\": {},\n  \"status\": \"completed\",\n  \"version\": \"9906b5d2-e76d-4bad-ba4c-8ce90b6b867b\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8dde00ca-a88d-477a-9155-0a4074acd413",
+          "name": "Retry an existing group connection for an existing group",
+          "request": {
+            "name": "Retry an existing group connection for an existing group",
+            "description": {
+              "content": "Retry a carrier connection for an existing group",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "group_connections",
+                ":connection_id",
+                "retry"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "connection_id",
+                  "description": "(Required) The unique identifier of the group connection that needs to be reprocessed"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"broker_federal_ein\": \"<string>\",\n  \"broker_tin\": \"<string>\",\n  \"carrier_group_id\": \"<string>\",\n  \"employer_email_address\": \"<string>\",\n  \"federal_ein\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9b3fa1c6-e676-4421-b21c-2a9b03b3cb60",
+              "name": "Successful Response - Returns the updated Group Connection",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "group_connections",
+                    ":connection_id",
+                    "retry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "connection_id",
+                      "description": "(Required) The unique identifier of the group connection that needs to be reprocessed"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carrier_group_id\": \"10000001\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"carrier_id\": \"8fac0992-933a-4743-8dab-0d606ef2569e\",\n  \"created\": 1667866198,\n  \"group_data\": {\n    \"carrier_group_id\": \"10000001\"\n  },\n  \"group_id\": \"47c07963-2e34-4da2-86b4-cbc3c57111c1\",\n  \"id\": \"5e20ea6a-8027-464a-941a-867c115c846d\",\n  \"modified\": 1667866198,\n  \"organization_id\": \"d61fa455-adf4-4dc4-8c57-6d779ba9475e\",\n  \"request_type\": \"incremental\",\n  \"status\": \"processing\",\n  \"version\": \"608c6f37-5945-4987-b247-0b5acdf85034\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "04b090a2-0dd1-49be-89ab-556e0b564bce",
+          "name": "List Group Connections by Group",
+          "request": {
+            "name": "List Group Connections by Group",
+            "description": {
+              "content": "Returns a list of all group connections for a given group ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "groups",
+                ":group_id",
+                "group_connections"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_by",
+                  "value": "<string>",
+                  "description": "The attribute on which to sort the group connections"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_direction",
+                  "value": "<string>",
+                  "description": "Either asc or desc, to denote the data's direction"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Status of group connection for which you would like to filter. Multiple statuses can be used, separated by a comma."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_id",
+                  "description": "(Required) The unique identifier of the associated group in Noyo"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "572eda49-6f5c-49bd-afa6-5e230184f3e2",
+              "name": "Successful Response - Returns all matching Group Connection Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "group_connections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The unique identifier of the associated group in Noyo"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 1\n  },\n  \"response\": [\n    {\n      \"carrier_id\": \"8fac0992-933a-4743-8dab-0d606ef2569e\",\n      \"completed\": 1557392400,\n      \"created\": 1557329939,\n      \"group_data\": {\n        \"carrier_group_id\": \"10000000\",\n        \"group_name\": \"Test Company\"\n      },\n      \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n      \"modified\": 1557392400,\n      \"organization_id\": \"d61fa455-adf4-4dc4-8c57-6d779ba9475e\",\n      \"request_type\": \"initial\",\n      \"status\": \"processing\",\n      \"version\": \"9906b5d2-e76d-4bad-ba4c-8ce90b6b867b\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8daaa778-d38d-441a-9c49-4e17b3167b47",
+          "name": "Create a new group connection in an existing group",
+          "request": {
+            "name": "Create a new group connection in an existing group",
+            "description": {
+              "content": "Create a new carrier connection for an existing group",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "groups",
+                ":group_id",
+                "group_connections"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_id",
+                  "description": "(Required) The unique identifier of the group for which you would like to add a carrier connection"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"carrier_id\": \"<uuid>\",\n  \"group_data\": {\n    \"carrier_group_id\": \"<string>\",\n    \"broker_federal_ein\": \"<string>\",\n    \"broker_tin\": \"<string>\",\n    \"employer_email_address\": \"<string>\"\n  },\n  \"data_exchange_configuration\": \"<string>\",\n  \"ignore_eligibility\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e90f6426-d19a-4475-8972-e1367987c19a",
+              "name": "Successful Response - Returns the new Group Connection",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "group_connections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The unique identifier of the group for which you would like to add a carrier connection"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carrier_id\": \"8fac0992-933a-4743-8dab-0d606ef2569e\",\n  \"group_data\": {\n    \"carrier_group_id\": \"10000000\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"carrier_id\": \"8fac0992-933a-4743-8dab-0d606ef2569e\",\n  \"created\": 1557329939,\n  \"group_data\": {\n    \"carrier_group_id\": \"10000000\"\n  },\n  \"group_id\": \"47c07963-2e34-4da2-86b4-cbc3c57111c1\",\n  \"id\": \"dd9a1813-34f7-4c7e-86bc-f041f2cbd9a1\",\n  \"modified\": 1557329939,\n  \"organization_id\": \"d61fa455-adf4-4dc4-8c57-6d779ba9475e\",\n  \"request_type\": \"incremental\",\n  \"status\": \"created\",\n  \"version\": \"9906b5d2-e76d-4bad-ba4c-8ce90b6b867b\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f0894e1a-b672-4466-ae53-6663cb960fe6",
+    "name": "Noyo Carrier Carrier Mapped Field Group Connections API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

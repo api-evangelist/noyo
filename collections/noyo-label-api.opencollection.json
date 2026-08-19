@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Label API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Label",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a list of all Labels",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/labels",
+            "params": [
+              {
+                "name": "display_name",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a list of Labels"
+        },
+        {
+          "info": {
+            "name": "Bulk create Member Transaction Labels",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/ui/v1/labels/:label_id/bulk_assign",
+            "params": [
+              {
+                "name": "label_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the label being added to member transactions"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk create Member Transaction Labels."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

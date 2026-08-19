@@ -1,0 +1,106 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Condition API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Condition",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a new Condition",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/conditions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new Condition"
+        },
+        {
+          "info": {
+            "name": "Edit a Condition",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/conditions/:condition_id/:version",
+            "params": [
+              {
+                "name": "condition_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the condition you want to edit."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "Unique version of the condition you want to edit."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit a condition based on the ID provided. The version parameter must match the latest condition version."
+        },
+        {
+          "info": {
+            "name": "Delete a Condition",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/conditions/:condition_id/:version",
+            "params": [
+              {
+                "name": "condition_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the condition you want to delete."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "Unique version of the condition you want to delete."
+              }
+            ]
+          },
+          "docs": "Delete a condition based on the ID provided. The version parameter must match the latest condition version."
+        },
+        {
+          "info": {
+            "name": "Get Conditions for a Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/rules/:rule_id/conditions",
+            "params": [
+              {
+                "name": "rule_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the rule you would like to get conditions for"
+              }
+            ]
+          },
+          "docs": "Returns a list of conditions based on the Rule ID provided."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

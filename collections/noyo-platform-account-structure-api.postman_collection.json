@@ -1,0 +1,498 @@
+{
+  "item": [
+    {
+      "id": "7f3b3781-8e80-4b92-a1fe-0893ab76070f",
+      "name": "Platform Account Structure",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4f2eeab4-f1de-4532-8159-cef9d25c3801",
+          "name": "Get a Platform Account Structure by Group",
+          "request": {
+            "name": "Get a Platform Account Structure by Group",
+            "description": {
+              "content": "Retrieve a Platform Account Structure by Group",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "groups",
+                ":group_id",
+                "platform_account_structures"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "effective_date",
+                  "value": "<date>",
+                  "description": "The relative date on which to view the state of the record"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_id",
+                  "description": "(Required) The unique identifier of the group you want to get a platform account structure for"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c5abb286-e65c-48e1-89e0-ac79ca1eb14a",
+              "name": "Successful Response - Returns a Platform Account Structure",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "platform_account_structures"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "effective_date",
+                      "value": "2022-01-01"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The unique identifier of the group you want to get a platform account structure for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"account_structure\": {\n    \"account_structure_fields\": [\n      {\n        \"existing_value_set\": [\n          \"North Branch\",\n          \"HQ\",\n          \"Springfield\"\n        ],\n        \"field_name\": \"BranchName\",\n        \"field_type\": \"string\"\n      }\n    ],\n    \"plans\": {\n      \"group_dental_plans\": [\n        \"Dental Plan Low\",\n        \"Dental Plan High\"\n      ],\n      \"group_medical_plans\": [\n        \"Medical Plan A\",\n        \"Medical Plan B\"\n      ]\n    }\n  },\n  \"group_id\": \"2c4d5515-6bf8-4f8c-821a-9c56374198b2\",\n  \"id\": \"2705bb9f-3c90-4400-a4e7-0bc9d48e677c\",\n  \"version\": \"7a2b0437-4027-4251-9e71-85384c0eb1c9\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9399a3b9-5e77-41c0-ac15-3c2833efd1c7",
+          "name": "Create a new Platform Account Structure",
+          "request": {
+            "name": "Create a new Platform Account Structure",
+            "description": {
+              "content": "Create a new Platform Account Structure",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "groups",
+                ":group_id",
+                "platform_account_structures"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_id",
+                  "description": "(Required) Unique identifier of the associated group in the Noyo system"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"account_structure\": {\n    \"account_structure_fields\": [\n      {\n        \"existing_value_set\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"field_name\": \"<string>\",\n        \"field_type\": \"<string>\"\n      },\n      {\n        \"existing_value_set\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"field_name\": \"<string>\",\n        \"field_type\": \"<string>\"\n      }\n    ],\n    \"plans\": {\n      \"group_accident_plans\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"group_add_plans\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"group_cancer_plans\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"group_critical_illness_plans\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"group_dental_plans\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"group_health_fund_plans\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"group_hospital_indemnity_plans\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"group_life_plans\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"group_ltd_plans\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"group_medical_plans\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"group_pharmacy_plans\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"group_std_plans\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"group_vision_plans\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"group_wellness_plans\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"end_date\": \"<date>\",\n  \"start_date\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "24439571-aea3-4a97-8529-c92951046f2c",
+              "name": "Successful Response - Returns the new Platform Account Structure",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "platform_account_structures"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) Unique identifier of the associated group in the Noyo system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_structure\": {\n    \"account_structure_fields\": [\n      {\n        \"existing_value_set\": [\n          \"North Branch\",\n          \"HQ\",\n          \"Springfield\"\n        ],\n        \"field_name\": \"BranchName\",\n        \"field_type\": \"string\"\n      }\n    ],\n    \"plans\": {\n      \"group_dental_plans\": [\n        \"Dental Plan Low\",\n        \"Dental Plan High\"\n      ],\n      \"group_medical_plans\": [\n        \"Medical Plan A\",\n        \"Medical Plan B\"\n      ]\n    }\n  },\n  \"start_date\": \"2021-01-12\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"account_structure\": {\n    \"account_structure_fields\": [\n      {\n        \"existing_value_set\": [\n          \"North Branch\",\n          \"HQ\",\n          \"Springfield\"\n        ],\n        \"field_name\": \"BranchName\",\n        \"field_type\": \"string\"\n      }\n    ],\n    \"plans\": {\n      \"group_dental_plans\": [\n        \"Dental Plan Low\",\n        \"Dental Plan High\"\n      ],\n      \"group_medical_plans\": [\n        \"Medical Plan A\",\n        \"Medical Plan B\"\n      ]\n    }\n  },\n  \"created\": 1626281253,\n  \"group_id\": \"3e366930-df4d-11eb-ba80-0242ac130004\",\n  \"id\": \"3e366930-df4d-11eb-ba80-0242ac130004\",\n  \"modified\": 1626281253,\n  \"version\": \"5200a894-81c5-4c41-8519-86c32e9a9965\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d801613c-9575-40b3-a5a2-3f23cf616cbc",
+          "name": "Get a single Platform Account Structure",
+          "request": {
+            "name": "Get a single Platform Account Structure",
+            "description": {
+              "content": "Retrieve a Platform Account Structure",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "platform_account_structures",
+                ":platform_account_structure_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "effective_date",
+                  "value": "<date>",
+                  "description": "The relative date on which to view the state of the record"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "platform_account_structure_id",
+                  "description": "(Required) The unique identifier of the platform account structure to be retrieved."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "45743312-f1ad-4b67-83c9-6e21394da5aa",
+              "name": "Successful Response - Returns the matching Platform Account Structure",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "platform_account_structures",
+                    ":platform_account_structure_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "effective_date",
+                      "value": "2022-01-01"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "platform_account_structure_id",
+                      "description": "(Required) The unique identifier of the platform account structure to be retrieved."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"account_structure\": {\n    \"account_structure_fields\": [\n      {\n        \"existing_value_set\": [\n          \"North Branch\",\n          \"HQ\",\n          \"Springfield\"\n        ],\n        \"field_name\": \"BranchName\",\n        \"field_type\": \"string\"\n      }\n    ],\n    \"plans\": {\n      \"group_dental_plans\": [\n        \"Dental Plan Low\",\n        \"Dental Plan High\"\n      ],\n      \"group_medical_plans\": [\n        \"Medical Plan A\",\n        \"Medical Plan B\"\n      ]\n    }\n  },\n  \"group_id\": \"2c4d5515-6bf8-4f8c-821a-9c56374198b2\",\n  \"id\": \"2705bb9f-3c90-4400-a4e7-0bc9d48e677c\",\n  \"version\": \"7a2b0437-4027-4251-9e71-85384c0eb1c9\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "76175d33-13f9-4bcd-a11b-70004fbc866f",
+          "name": "Edit an existing Platform Account Structure",
+          "request": {
+            "name": "Edit an existing Platform Account Structure",
+            "description": {
+              "content": "Edit a platform account structure based on the ID provided. The version parameter must match the latest platform account structure version.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "platform_account_structures",
+                ":platform_account_structure_id",
+                ":version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "effective_date",
+                  "value": "<string>",
+                  "description": "The relative date on which to view the state of the record"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "platform_account_structure_id",
+                  "description": "(Required) Unique identifier of the platform account structure in the Noyo system"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "version",
+                  "description": "(Required) Current version of the model"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"account_structure\": {\n    \"account_structure_fields\": [\n      {\n        \"existing_value_set\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"field_name\": \"<string>\",\n        \"field_type\": \"<string>\"\n      },\n      {\n        \"existing_value_set\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"field_name\": \"<string>\",\n        \"field_type\": \"<string>\"\n      }\n    ],\n    \"plans\": {\n      \"group_accident_plans\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"group_add_plans\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"group_cancer_plans\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"group_critical_illness_plans\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"group_dental_plans\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"group_health_fund_plans\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"group_hospital_indemnity_plans\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"group_life_plans\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"group_ltd_plans\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"group_medical_plans\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"group_pharmacy_plans\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"group_std_plans\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"group_vision_plans\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"group_wellness_plans\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"effective_date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"start_date\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1d30672d-f1b3-4513-ab4c-68f6be908a5e",
+              "name": "Successful Response - Returns the modified Platform Account Structure",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "platform_account_structures",
+                    ":platform_account_structure_id",
+                    ":version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "effective_date",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "platform_account_structure_id",
+                      "description": "(Required) Unique identifier of the platform account structure in the Noyo system"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version",
+                      "description": "(Required) Current version of the model"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_structure\": {\n    \"account_structure_fields\": [\n      {\n        \"existing_value_set\": [\n          \"North Branch\",\n          \"HQ\",\n          \"Springfield\"\n        ],\n        \"field_name\": \"BranchName\",\n        \"field_type\": \"date\"\n      }\n    ],\n    \"plans\": {\n      \"group_dental_plans\": [\n        \"Dental Plan Low\",\n        \"Dental Plan High\"\n      ],\n      \"group_medical_plans\": [\n        \"Medical Plan A\",\n        \"Medical Plan B\"\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"account_structure\": {\n    \"account_structure_fields\": [\n      {\n        \"existing_value_set\": [\n          \"North Branch\",\n          \"HQ\",\n          \"Springfield\"\n        ],\n        \"field_name\": \"BranchName\",\n        \"field_type\": \"date\"\n      }\n    ],\n    \"plans\": {\n      \"group_dental_plans\": [\n        \"Dental Plan Low\",\n        \"Dental Plan High\"\n      ],\n      \"group_medical_plans\": [\n        \"Medical Plan A\",\n        \"Medical Plan B\"\n      ]\n    }\n  },\n  \"created\": 1557512389,\n  \"group_id\": \"3e366930-df4d-11eb-ba80-0242ac130004\",\n  \"id\": \"3e366930-df4d-11eb-ba80-0242ac130004\",\n  \"modified\": 1543215342,\n  \"version\": \"5200a894-81c5-4c41-8519-86c32e9a9965\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7b9d6288-b7f2-4ed7-9a19-64f946d37c80",
+    "name": "Noyo Carrier Carrier Mapped Field Platform Account Structure API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

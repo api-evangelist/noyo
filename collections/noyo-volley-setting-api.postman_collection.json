@@ -1,0 +1,704 @@
+{
+  "item": [
+    {
+      "id": "71a18c17-2def-4d6f-83bd-b3e205cab8d1",
+      "name": "Volley Setting",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3dcfbd7a-5865-49ad-84b0-53ccc3ff77fa",
+          "name": "Retrieves a list of Volley Settings.",
+          "request": {
+            "name": "Retrieves a list of Volley Settings.",
+            "description": {
+              "content": "Returns a paginated list of Volley Settings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "volley_settings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "organization_id",
+                  "value": "<uuid>",
+                  "description": "Noyo specific organization UUID to filter Volley Settings"
+                },
+                {
+                  "disabled": false,
+                  "key": "volley_type",
+                  "value": "<string>",
+                  "description": "Volley type value to filter by"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_direction",
+                  "value": "<string>",
+                  "description": "Sort direction (asc or desc)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "11f6114b-4a42-4981-a68c-b60681fad561",
+              "name": "Successful Response - Returns a list of Volley Settings",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "volley_settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "organization_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "volley_type",
+                      "value": "new_connection_mapping"
+                    },
+                    {
+                      "key": "sort_direction",
+                      "value": "asc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 4595,\n    \"page_num\": 7241,\n    \"page_size\": 6677,\n    \"total_records\": 2236\n  },\n  \"response\": [\n    {\n      \"created\": 1196,\n      \"id\": \"67690771-374c-f81b-f79a-9a1dafc8bbc8\",\n      \"modified\": 9371,\n      \"organization_id\": \"1efdf8bc-57fc-ab05-e4c9-4a6051bd8807\",\n      \"version\": \"7b6aa6a4-060f-48d3-4f75-716faf8e5e9f\",\n      \"volley_type\": \"new_connection_mapping\",\n      \"configuration\": {\n        \"configuration_settings\": {\n          \"platform_email_addresses\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"volley_type\": \"string\"\n      }\n    },\n    {\n      \"created\": 2800,\n      \"id\": \"546539fe-d766-e8bc-acbe-1f40b87cca2b\",\n      \"modified\": 9258,\n      \"organization_id\": \"e17c7d2d-4d0c-044e-7707-4085807712e6\",\n      \"version\": \"2fe3ed99-14b4-4b9e-6823-02a438039633\",\n      \"volley_type\": \"new_connection_mapping\",\n      \"configuration\": {\n        \"configuration_settings\": {\n          \"platform_email_addresses\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"volley_type\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cd4dc347-725e-4e2b-bd66-63ec0870b02d",
+          "name": "Create a Volley Setting",
+          "request": {
+            "name": "Create a Volley Setting",
+            "description": {
+              "content": "Create a new Volley Setting.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "volley_settings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"volley_type\": \"<string>\",\n  \"configuration\": {\n    \"configuration_settings\": {\n      \"platform_email_addresses\": [\n        \"<email>\",\n        \"<email>\"\n      ]\n    },\n    \"volley_type\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "de2c8a5e-e0b4-44c5-8cf8-ec726fb620ac",
+              "name": "Successful Response - Returns the contents of the newly created Volley Setting",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "volley_settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"volley_type\": \"<string>\",\n  \"configuration\": {\n    \"configuration_settings\": {\n      \"platform_email_addresses\": [\n        \"<email>\",\n        \"<email>\"\n      ]\n    },\n    \"volley_type\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 3131,\n  \"id\": \"36cdc8a5-1a9d-559f-accf-cb5218f01762\",\n  \"modified\": 4919,\n  \"organization_id\": \"07657e5c-94bc-fb45-2a59-d1b4d006d57d\",\n  \"version\": \"b53c93a5-7e60-de64-9894-58db07196e1a\",\n  \"volley_type\": \"new_connection_mapping\",\n  \"configuration\": {\n    \"configuration_settings\": {\n      \"platform_email_addresses\": [\n        \"<email>\",\n        \"<email>\"\n      ]\n    },\n    \"volley_type\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df7e3816-b660-4672-bf80-9b3da2e71388",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "volley_settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"volley_type\": \"<string>\",\n  \"configuration\": {\n    \"configuration_settings\": {\n      \"platform_email_addresses\": [\n        \"<email>\",\n        \"<email>\"\n      ]\n    },\n    \"volley_type\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3cfa0bf9-77a3-42f3-883b-da8497fd619c",
+              "name": "A volley setting for this volley_type already exists in scope",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "volley_settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"volley_type\": \"<string>\",\n  \"configuration\": {\n    \"configuration_settings\": {\n      \"platform_email_addresses\": [\n        \"<email>\",\n        \"<email>\"\n      ]\n    },\n    \"volley_type\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "52057098-5e09-4de8-94a8-675f4f7dffdf",
+          "name": "Get a single Volley Setting",
+          "request": {
+            "name": "Get a single Volley Setting",
+            "description": {
+              "content": "Returns the latest version of a single volley setting based on the ID provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "volley_settings",
+                ":volley_setting_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "volley_setting_id",
+                  "description": "(Required) The unique identifier of the volley setting you would like to view."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a8e9152b-c9d4-47fb-b7a4-d3c272833f6e",
+              "name": "Successful Response - Returns a single Volley Setting",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "volley_settings",
+                    ":volley_setting_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "volley_setting_id",
+                      "description": "(Required) The unique identifier of the volley setting you would like to view."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 3131,\n  \"id\": \"36cdc8a5-1a9d-559f-accf-cb5218f01762\",\n  \"modified\": 4919,\n  \"organization_id\": \"07657e5c-94bc-fb45-2a59-d1b4d006d57d\",\n  \"version\": \"b53c93a5-7e60-de64-9894-58db07196e1a\",\n  \"volley_type\": \"new_connection_mapping\",\n  \"configuration\": {\n    \"configuration_settings\": {\n      \"platform_email_addresses\": [\n        \"<email>\",\n        \"<email>\"\n      ]\n    },\n    \"volley_type\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e61c0a6-9f89-4f5f-b5f4-517460b52981",
+              "name": "Volley setting not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "volley_settings",
+                    ":volley_setting_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "volley_setting_id",
+                      "description": "(Required) The unique identifier of the volley setting you would like to view."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d4c0b533-9ac1-48e2-b774-6c05818024af",
+          "name": "Update a Volley Setting",
+          "request": {
+            "name": "Update a Volley Setting",
+            "description": {
+              "content": "Update a volley setting based on the ID provided. The version parameter must match the latest volley setting version.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "volley_settings",
+                ":volley_setting_id",
+                ":version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "volley_setting_id",
+                  "description": "(Required) Unique identifier of the volley setting you want to edit."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "version",
+                  "description": "(Required) Unique version of the volley setting you want to edit."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"configuration\": {\n    \"configuration_settings\": {\n      \"platform_email_addresses\": [\n        \"<email>\",\n        \"<email>\"\n      ]\n    },\n    \"volley_type\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9a88d65a-28db-43fa-b464-5c5428086bf9",
+              "name": "Successful Response - Returns the modified Volley Setting",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "volley_settings",
+                    ":volley_setting_id",
+                    ":version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "volley_setting_id",
+                      "description": "(Required) Unique identifier of the volley setting you want to edit."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version",
+                      "description": "(Required) Unique version of the volley setting you want to edit."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"configuration\": {\n    \"configuration_settings\": {\n      \"platform_email_addresses\": [\n        \"<email>\",\n        \"<email>\"\n      ]\n    },\n    \"volley_type\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 3131,\n  \"id\": \"36cdc8a5-1a9d-559f-accf-cb5218f01762\",\n  \"modified\": 4919,\n  \"organization_id\": \"07657e5c-94bc-fb45-2a59-d1b4d006d57d\",\n  \"version\": \"b53c93a5-7e60-de64-9894-58db07196e1a\",\n  \"volley_type\": \"new_connection_mapping\",\n  \"configuration\": {\n    \"configuration_settings\": {\n      \"platform_email_addresses\": [\n        \"<email>\",\n        \"<email>\"\n      ]\n    },\n    \"volley_type\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "954ef255-e25a-47d9-afd3-3fb44455dbd4",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "volley_settings",
+                    ":volley_setting_id",
+                    ":version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "volley_setting_id",
+                      "description": "(Required) Unique identifier of the volley setting you want to edit."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version",
+                      "description": "(Required) Unique version of the volley setting you want to edit."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"configuration\": {\n    \"configuration_settings\": {\n      \"platform_email_addresses\": [\n        \"<email>\",\n        \"<email>\"\n      ]\n    },\n    \"volley_type\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "04156a33-94c3-4ca5-9309-6922df0d1457",
+              "name": "Version conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "volley_settings",
+                    ":volley_setting_id",
+                    ":version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "volley_setting_id",
+                      "description": "(Required) Unique identifier of the volley setting you want to edit."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version",
+                      "description": "(Required) Unique version of the volley setting you want to edit."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"configuration\": {\n    \"configuration_settings\": {\n      \"platform_email_addresses\": [\n        \"<email>\",\n        \"<email>\"\n      ]\n    },\n    \"volley_type\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "fd2312a3-a01a-43b8-8742-44f8ed6dc432",
+    "name": "Noyo Carrier Carrier Mapped Field Volley Setting API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

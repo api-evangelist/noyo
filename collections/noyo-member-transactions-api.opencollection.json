@@ -1,0 +1,281 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Member Transactions API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Member Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a list of all Member Transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/member_requests/:request_id/member_transactions",
+            "params": [
+              {
+                "name": "request_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the member request for which you would like to view member transaction"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              }
+            ]
+          },
+          "docs": "Returns a list of all member transactions for a given member request."
+        },
+        {
+          "info": {
+            "name": "Get a list of all Member Transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/member_transactions",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              },
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated member transaction IDs you would like to view"
+              },
+              {
+                "name": "status_details",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of status details to be filtered on"
+              },
+              {
+                "name": "current_status_detail",
+                "value": "",
+                "type": "query",
+                "description": "indicates whether the filter should operate on the current status detail or the entire history of status details"
+              },
+              {
+                "name": "carrier_ids",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of carrier IDs to be filtered on"
+              },
+              {
+                "name": "transaction_type",
+                "value": "",
+                "type": "query",
+                "description": "Transaction type of the member transaction"
+              },
+              {
+                "name": "transaction_min_date",
+                "value": "",
+                "type": "query",
+                "description": "Earliest date that the transaction was created"
+              },
+              {
+                "name": "transaction_max_date",
+                "value": "",
+                "type": "query",
+                "description": "Latest date that the transaction was created"
+              },
+              {
+                "name": "status_detail_min_date",
+                "value": "",
+                "type": "query",
+                "description": "Earliest date that the transaction entered the given status detail(s)"
+              },
+              {
+                "name": "status_detail_max_date",
+                "value": "",
+                "type": "query",
+                "description": "Latest date that the transaction entered the given status detail(s)"
+              }
+            ]
+          },
+          "docs": "Returns a list of all member transactions"
+        },
+        {
+          "info": {
+            "name": "Get a single Member Transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/member_transactions/:transaction_id",
+            "params": [
+              {
+                "name": "transaction_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the member transaction you would like to view"
+              }
+            ]
+          },
+          "docs": "Returns the latest version of a single member transaction based on the ID provided."
+        },
+        {
+          "info": {
+            "name": "Get a Case for a Member Transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/member_transactions/:transaction_id/case",
+            "params": [
+              {
+                "name": "transaction_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the member transaction to get the case through."
+              }
+            ]
+          },
+          "docs": "Returns a case if one exists for the member transaction based on the ID provided."
+        },
+        {
+          "info": {
+            "name": "Get a list of all Member Transactions by Member Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ui/v1/member_requests/:request_id/member_transactions",
+            "params": [
+              {
+                "name": "request_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              },
+              {
+                "name": "ui_body",
+                "value": "",
+                "type": "query",
+                "description": "Optionally include a restructured form of the body for UI display purposes"
+              }
+            ]
+          },
+          "docs": "Returns a list of all member transactions for a given member request."
+        },
+        {
+          "info": {
+            "name": "Gets member snapshot currently associated with a transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ui/v1/member_snapshots/member_transaction/:transaction_id",
+            "params": [
+              {
+                "name": "transaction_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the member transaction we are using to get associated member snapshot"
+              }
+            ]
+          },
+          "docs": "Gets member snapshot currently associated with a transaction"
+        },
+        {
+          "info": {
+            "name": "Get a list of all Member Transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ui/v1/member_transactions/public",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "case_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "is_resolved",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "min_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "max_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "transaction_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "label_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a list of all member transactions."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

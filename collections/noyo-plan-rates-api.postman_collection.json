@@ -1,0 +1,126 @@
+{
+  "item": [
+    {
+      "id": "7efeb74a-c6e0-49cb-8b41-87288b2e85af",
+      "name": "Plan Rates",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "14233660-091c-4a0d-aa1e-7ba297a50b06",
+          "name": "Get Plan Rates by Group ID",
+          "request": {
+            "name": "Get Plan Rates by Group ID",
+            "description": {
+              "content": "Retrieves all temporal plan rates for a specific group, organized by plan ID.\nThis endpoint queries plan rates by filtering by group_id.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "groups",
+                ":group_id",
+                "plan_rates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_id",
+                  "description": "(Required) Unique identifier of the group to filter by"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b4701206-3636-4ac4-8d1a-b34fed658dca",
+              "name": "Successfully retrieved plan rates organized by plan ID",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "plan_rates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) Unique identifier of the group to filter by"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 8756,\n    \"page_num\": 4945,\n    \"page_size\": 7564,\n    \"total_records\": 496\n  },\n  \"response\": [\n    {\n      \"plan_id\": \"0dce3e79-bbc6-65f6-28a8-2fece9a2833b\",\n      \"plan_rate_id\": \"70e58833-cb82-b540-149f-c58bff55d3b1\",\n      \"temporal_rates\": [\n        {\n          \"id\": \"01fb172f-f8a5-33af-8116-a59dbc0164fe\",\n          \"plan_rate_id\": \"fb2cd5fb-6b15-9513-f39d-2c62cd9e3752\",\n          \"rate_structure\": {\n            \"calculation_type\": \"member_based_volume\",\n            \"options\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"start_date\": \"1961-08-13\",\n          \"end_date\": \"2013-10-09\"\n        },\n        {\n          \"id\": \"61055bfd-8175-2f87-2e77-16ca853baf2e\",\n          \"plan_rate_id\": \"0b87e862-5f1e-4939-3d51-82c986340619\",\n          \"rate_structure\": {\n            \"calculation_type\": \"family_unit_based\",\n            \"options\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"start_date\": \"1976-01-20\",\n          \"end_date\": \"1986-03-22\"\n        }\n      ]\n    },\n    {\n      \"plan_id\": \"012b22bf-c3ed-64ed-2ccd-948fd53ac911\",\n      \"plan_rate_id\": \"7c70c229-728e-2df1-db23-bb7ece582124\",\n      \"temporal_rates\": [\n        {\n          \"id\": \"f117d979-b73f-2d7a-72a0-118b1df66bc0\",\n          \"plan_rate_id\": \"f8dd9c4b-2396-47b3-219a-28631bdb949c\",\n          \"rate_structure\": {\n            \"calculation_type\": \"member_based_volume\",\n            \"options\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"start_date\": \"1993-01-17\",\n          \"end_date\": \"2003-03-09\"\n        },\n        {\n          \"id\": \"8e918cd3-10a7-28b7-6f10-89687054040b\",\n          \"plan_rate_id\": \"5aaf4165-6f28-da1a-703e-ab4ad84ea751\",\n          \"rate_structure\": {\n            \"calculation_type\": \"member_based\",\n            \"options\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"start_date\": \"1982-08-10\",\n          \"end_date\": \"1962-08-16\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "849c354e-dc22-4d0f-8b90-76435ae91df6",
+    "name": "Noyo Carrier Carrier Mapped Field Plan Rates API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

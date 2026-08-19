@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Member Snapshot Test Results API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Member Snapshot Test Results",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves a list of Member Snapshot Test Results.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/member_snapshot_test_reports/:member_snapshot_test_report_id/results",
+            "params": [
+              {
+                "name": "member_snapshot_test_report_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the member snapshot test report"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Member Snapshot Test Result status to filter by"
+              },
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "query",
+                "description": "Noyo employee UUID to filter Member Snapshot Test Result"
+              }
+            ]
+          },
+          "docs": "Returns a list of Member Snapshot Test Results."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

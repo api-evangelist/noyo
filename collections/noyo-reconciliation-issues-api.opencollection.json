@@ -1,0 +1,95 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Reconciliation Issues API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reconciliation Issues",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Acknowledge Reconciliation Issue",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/reconciliation_issues/:reconciliation_issue_id/ack",
+            "params": [
+              {
+                "name": "reconciliation_issue_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the reconciliation issue in the Noyo system"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Acknowledge receipt of a reconciliation issue"
+        },
+        {
+          "info": {
+            "name": "Request Reconciliation Issue Outcome",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/reconciliation_issues/:reconciliation_issue_id/request_outcome",
+            "params": [
+              {
+                "name": "reconciliation_issue_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the associated reconciliation issue"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Request a new outcome attempt for a reconciliation issue"
+        },
+        {
+          "info": {
+            "name": "Get a list of all reconciliation issue resolutions under a single reconciliation issue",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/reconciliation_issues/:reconciliation_issue_id/resolutions",
+            "params": [
+              {
+                "name": "reconciliation_issue_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the reconciliation issue for which you would like to view resolutions"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              }
+            ]
+          },
+          "docs": "Returns a list of all resolutions for a given reconciliation issue."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

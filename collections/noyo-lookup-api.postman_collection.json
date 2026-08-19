@@ -1,0 +1,1118 @@
+{
+  "item": [
+    {
+      "id": "ebc9cc1b-efcb-42f5-acf5-b9a5386af445",
+      "name": "Lookup",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2fd959ce-f833-4a86-8e8e-1d226cdc5723",
+          "name": "Retrieves a list of Lookup Instances",
+          "request": {
+            "name": "Retrieves a list of Lookup Instances",
+            "description": {
+              "content": "Returns a list of Lookup Instances.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "lookup_instances"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "organization_id",
+                  "value": "<uuid>",
+                  "description": "Noyo specific organization UUID to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier_id",
+                  "value": "<uuid>",
+                  "description": "Noyo specific Carrier UUID to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "group_id",
+                  "value": "<uuid>",
+                  "description": "Noyo specific Group UUID to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "lookup_id",
+                  "value": "<uuid>",
+                  "description": "Noyo specific Lookup UUID to filter"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d6da41d5-54c4-45df-a51d-b98cb73ff68d",
+              "name": "Successful Response - Returns a list of all matching Lookup Instances",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "lookup_instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "organization_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "carrier_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "group_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "lookup_id",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 2453,\n    \"page_num\": 7638,\n    \"page_size\": 6615,\n    \"total_records\": 5852\n  },\n  \"response\": [\n    {\n      \"created\": 774,\n      \"data\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"id\": \"355d7d24-abf4-370f-b82b-c392be3d4738\",\n      \"lookup_id\": \"32a433f2-ba82-79a3-0372-abfb9b730586\",\n      \"modified\": 5538,\n      \"organization_id\": \"91c44060-4528-d0ba-086e-f02dca9d3ff2\",\n      \"version\": \"1d1e27f4-7ba7-2200-1a3c-226547430ca9\",\n      \"carrier_id\": \"196527bd-dd45-b992-42dc-e5862102ed1f\",\n      \"default_value\": \"string\",\n      \"group_id\": \"13cf5ed2-63d2-8bc0-746e-17f15bebdcb1\",\n      \"plan_year_start\": [\n        \"2024-10-17\",\n        \"1985-01-14\"\n      ]\n    },\n    {\n      \"created\": 127,\n      \"data\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"id\": \"9a22ebf3-b53a-8c67-836d-5f01493bfcae\",\n      \"lookup_id\": \"9ffd3ed0-43be-fb02-0cb2-ee4c48b71fd9\",\n      \"modified\": 6808,\n      \"organization_id\": \"19c3e69e-9779-a733-4be8-e04a2cebc1cb\",\n      \"version\": \"29103027-d9d3-2e5c-c56c-ea435f86480a\",\n      \"carrier_id\": \"d02956f5-2488-dae1-98fa-1389f8d05b99\",\n      \"default_value\": \"string\",\n      \"group_id\": \"d951c49b-1d0f-3a20-fb8b-5447c8400f61\",\n      \"plan_year_start\": [\n        \"2008-11-20\",\n        \"1962-01-30\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9747dd65-f490-4e00-ab7e-4fb0b8307091",
+          "name": "Create a Lookup Instance",
+          "request": {
+            "name": "Create a Lookup Instance",
+            "description": {
+              "content": "Create a new Lookup Instance",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "lookup_instances"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": [\n    [\n      \"<string>\",\n      \"<string>\"\n    ],\n    [\n      \"<string>\",\n      \"<string>\"\n    ]\n  ],\n  \"lookup_id\": \"<uuid>\",\n  \"carrier_id\": \"<uuid>\",\n  \"default_value\": \"<string>\",\n  \"group_id\": \"<uuid>\",\n  \"plan_year_start\": [\n    \"<date>\",\n    \"<date>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b7ff710a-7ecb-4ff1-9128-eb674efc1ced",
+              "name": "Successful Response - Returns the contents of the newly created Lookup Instance",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "lookup_instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    [\n      \"<string>\",\n      \"<string>\"\n    ],\n    [\n      \"<string>\",\n      \"<string>\"\n    ]\n  ],\n  \"lookup_id\": \"<uuid>\",\n  \"carrier_id\": \"<uuid>\",\n  \"default_value\": \"<string>\",\n  \"group_id\": \"<uuid>\",\n  \"plan_year_start\": [\n    \"<date>\",\n    \"<date>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 3858,\n  \"data\": {\n    \"columns\": [\n      {\n        \"name\": \"string\",\n        \"type\": \"boolean\"\n      },\n      {\n        \"name\": \"string\",\n        \"type\": \"boolean\"\n      }\n    ],\n    \"lookup_type\": \"match\",\n    \"supports_plan_year\": true,\n    \"use_first_available_instance\": false\n  },\n  \"id\": \"4c20bf42-e99a-bd42-a3bd-74e281f683e1\",\n  \"modified\": 1629,\n  \"name\": \"string\",\n  \"version\": \"662f770b-17fa-e129-2845-0c9c23556b6f\",\n  \"organization_id\": 9240.514738280719\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a6e35248-de89-4a07-8b09-edf94d5e28b1",
+          "name": "Get a single Lookup Instance",
+          "request": {
+            "name": "Get a single Lookup Instance",
+            "description": {
+              "content": "Returns the latest version of a single Lookup Instance based on the ID provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "lookup_instances",
+                ":lookup_instance_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "lookup_instance_id",
+                  "description": "(Required) The unique identifier of the Lookup Instance you would like to view"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2d5e0b19-21e7-4957-a7aa-98b1f0ca0ddc",
+              "name": "Successful Response - Returns a single Lookup Instance",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "lookup_instances",
+                    ":lookup_instance_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "lookup_instance_id",
+                      "description": "(Required) The unique identifier of the Lookup Instance you would like to view"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 1227,\n  \"data\": [\n    [\n      \"string\",\n      \"string\"\n    ],\n    [\n      \"string\",\n      \"string\"\n    ]\n  ],\n  \"id\": \"893ec3ef-97ff-9ce6-645a-3ff88d89c3c6\",\n  \"lookup_id\": \"06f9b117-985e-4a12-8d46-e03f77cc08be\",\n  \"modified\": 4943,\n  \"organization_id\": \"f64e6b05-34de-a9e1-6e41-510d0585d703\",\n  \"version\": \"1887f3c5-9aaf-8b08-c58a-068659ec5cc8\",\n  \"carrier_id\": \"2d64fe6d-2d94-adc6-2a42-f33d11751b85\",\n  \"default_value\": \"string\",\n  \"group_id\": \"d32b55d0-5754-4881-14ac-afe7a77fd2c0\",\n  \"plan_year_start\": [\n    \"1985-11-17\",\n    \"1996-11-26\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7cb19093-46cd-492b-8e0f-906614eaedf7",
+          "name": "Delete a Lookup Instance",
+          "request": {
+            "name": "Delete a Lookup Instance",
+            "description": {
+              "content": "Delete a Lookup Instance based on the ID provided. The version parameter must match the latest Lookup Instance version.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "lookup_instances",
+                ":lookup_instance_id",
+                ":version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "lookup_instance_id",
+                  "description": "(Required) Unique identifier of the Lookup Instance you want to delete."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "version",
+                  "description": "(Required) Unique version of the Lookup Instance you want to delete."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2d5823c0-9673-4567-b612-fca526ccd9bf",
+              "name": "Successful Response - Lookup Instance was deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "lookup_instances",
+                    ":lookup_instance_id",
+                    ":version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "lookup_instance_id",
+                      "description": "(Required) Unique identifier of the Lookup Instance you want to delete."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version",
+                      "description": "(Required) Unique version of the Lookup Instance you want to delete."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3dfe57fa-afb9-4815-89ea-d6b2b1254b3f",
+          "name": "Update a Lookup Instance",
+          "request": {
+            "name": "Update a Lookup Instance",
+            "description": {
+              "content": "Update a Lookup Instance based on the ID provided. The version parameter must match the latest Lookup Instance version.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "lookup_instances",
+                ":lookup_instance_id",
+                ":version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "lookup_instance_id",
+                  "description": "(Required) Unique identifier of the Lookup Instance you want to edit."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "version",
+                  "description": "(Required) Unique version of the Lookup Instance you want to edit."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": [\n    [\n      \"<string>\",\n      \"<string>\"\n    ],\n    [\n      \"<string>\",\n      \"<string>\"\n    ]\n  ],\n  \"default_value\": \"<string>\",\n  \"plan_year_start\": [\n    \"<date>\",\n    \"<date>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a20bf1ba-ef9b-4dd7-ba0a-125e0388b8b2",
+              "name": "Successful Response - Returns the modified Lookup Instance",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "lookup_instances",
+                    ":lookup_instance_id",
+                    ":version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "lookup_instance_id",
+                      "description": "(Required) Unique identifier of the Lookup Instance you want to edit."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version",
+                      "description": "(Required) Unique version of the Lookup Instance you want to edit."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    [\n      \"<string>\",\n      \"<string>\"\n    ],\n    [\n      \"<string>\",\n      \"<string>\"\n    ]\n  ],\n  \"default_value\": \"<string>\",\n  \"plan_year_start\": [\n    \"<date>\",\n    \"<date>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 1227,\n  \"data\": [\n    [\n      \"string\",\n      \"string\"\n    ],\n    [\n      \"string\",\n      \"string\"\n    ]\n  ],\n  \"id\": \"893ec3ef-97ff-9ce6-645a-3ff88d89c3c6\",\n  \"lookup_id\": \"06f9b117-985e-4a12-8d46-e03f77cc08be\",\n  \"modified\": 4943,\n  \"organization_id\": \"f64e6b05-34de-a9e1-6e41-510d0585d703\",\n  \"version\": \"1887f3c5-9aaf-8b08-c58a-068659ec5cc8\",\n  \"carrier_id\": \"2d64fe6d-2d94-adc6-2a42-f33d11751b85\",\n  \"default_value\": \"string\",\n  \"group_id\": \"d32b55d0-5754-4881-14ac-afe7a77fd2c0\",\n  \"plan_year_start\": [\n    \"1985-11-17\",\n    \"1996-11-26\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "44f9dfdf-ddb7-4921-9f3f-8f3ec8ebfb9a",
+          "name": "Retrieves a list of Lookups.",
+          "request": {
+            "name": "Retrieves a list of Lookups.",
+            "description": {
+              "content": "Returns a list of Lookups.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "lookups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "organization_id",
+                  "value": "<uuid>",
+                  "description": "Noyo specific organization UUID to filter Lookup"
+                },
+                {
+                  "disabled": false,
+                  "key": "lookup_type",
+                  "value": "<string>",
+                  "description": "Lookup type to filter by"
+                },
+                {
+                  "disabled": false,
+                  "key": "supports_plan_year",
+                  "value": "<boolean>",
+                  "description": "Filter Lookups by the boolean value"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ace85614-8dda-40d9-965a-914b644480ef",
+              "name": "Successful Response - Returns a list of all matching Lookups",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "lookups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "organization_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "lookup_type",
+                      "value": "match"
+                    },
+                    {
+                      "key": "supports_plan_year",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 7154,\n    \"page_num\": 8247,\n    \"page_size\": 4311,\n    \"total_records\": 1110\n  },\n  \"response\": [\n    {\n      \"created\": 4426,\n      \"data\": {\n        \"columns\": [\n          {\n            \"name\": \"string\",\n            \"type\": \"number\"\n          },\n          {\n            \"name\": \"string\",\n            \"type\": \"boolean\"\n          }\n        ],\n        \"lookup_type\": \"match\",\n        \"supports_plan_year\": false,\n        \"use_first_available_instance\": false\n      },\n      \"id\": \"342816ae-c4fd-9786-ef6d-e1e4d1beac5d\",\n      \"modified\": 2249,\n      \"name\": \"string\",\n      \"version\": \"ab26dad3-67ea-4837-eda3-a1afe37805cd\",\n      \"organization_id\": \"string\"\n    },\n    {\n      \"created\": 1668,\n      \"data\": {\n        \"columns\": [\n          {\n            \"name\": \"string\",\n            \"type\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"type\": \"number\"\n          }\n        ],\n        \"lookup_type\": \"range\",\n        \"supports_plan_year\": false,\n        \"use_first_available_instance\": false\n      },\n      \"id\": \"20bd6960-93d5-bcf2-71fe-dc3814024f3c\",\n      \"modified\": 5745,\n      \"name\": \"string\",\n      \"version\": \"d0638e80-6a16-9a02-753e-1b893c4122f5\",\n      \"organization_id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "610a4ffb-1c82-4304-aa5b-55daf5c7f365",
+          "name": "Create a Lookup",
+          "request": {
+            "name": "Create a Lookup",
+            "description": {
+              "content": "Create a new Lookup.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "lookups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"columns\": [\n      {\n        \"name\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    ],\n    \"lookup_type\": \"<string>\",\n    \"supports_plan_year\": \"<boolean>\",\n    \"use_first_available_instance\": \"<boolean>\"\n  },\n  \"name\": \"<string>\",\n  \"organization_id\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8ac8865e-9113-41c0-aa58-d8ce94abb831",
+              "name": "Successful Response - Returns the contents of the newly created Lookup",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "lookups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"columns\": [\n      {\n        \"name\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    ],\n    \"lookup_type\": \"<string>\",\n    \"supports_plan_year\": \"<boolean>\",\n    \"use_first_available_instance\": \"<boolean>\"\n  },\n  \"name\": \"<string>\",\n  \"organization_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 1278,\n  \"data\": {\n    \"columns\": [\n      {\n        \"name\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    ],\n    \"lookup_type\": \"<string>\",\n    \"supports_plan_year\": \"<boolean>\",\n    \"use_first_available_instance\": \"<boolean>\"\n  },\n  \"id\": \"532d60a4-eb93-6d99-6969-ee3ee1c353f5\",\n  \"modified\": 1890,\n  \"name\": \"string\",\n  \"version\": \"f072a477-6003-dc50-d3c7-7cc29cc78618\",\n  \"organization_id\": 389.5158293236134\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aa4f7843-fd38-4cf5-8fe1-2a55211ced93",
+          "name": "Get a single Lookup",
+          "request": {
+            "name": "Get a single Lookup",
+            "description": {
+              "content": "Returns the latest version of a single Lookup based on the ID provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "lookups",
+                ":lookup_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "lookup_id",
+                  "description": "(Required) The unique identifier of the Lookup you would like to view"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9ea61b92-03f1-4482-a103-ba1c5fa8dcb8",
+              "name": "Successful Response - Returns a single Lookup",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "lookups",
+                    ":lookup_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "lookup_id",
+                      "description": "(Required) The unique identifier of the Lookup you would like to view"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 1278,\n  \"data\": {\n    \"columns\": [\n      {\n        \"name\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    ],\n    \"lookup_type\": \"<string>\",\n    \"supports_plan_year\": \"<boolean>\",\n    \"use_first_available_instance\": \"<boolean>\"\n  },\n  \"id\": \"532d60a4-eb93-6d99-6969-ee3ee1c353f5\",\n  \"modified\": 1890,\n  \"name\": \"string\",\n  \"version\": \"f072a477-6003-dc50-d3c7-7cc29cc78618\",\n  \"organization_id\": 389.5158293236134\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3d32453c-2df6-42cf-b903-885c8de65784",
+          "name": "Delete a Lookup",
+          "request": {
+            "name": "Delete a Lookup",
+            "description": {
+              "content": "Delete a Lookup based on the ID provided. The version parameter must match the latest Lookup version.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "lookups",
+                ":lookup_id",
+                ":version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "lookup_id",
+                  "description": "(Required) Unique identifier of the Lookup you want to delete."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "version",
+                  "description": "(Required) Unique version of the Lookup you want to delete."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1519f757-f64a-4d46-8fc5-7bd2cb81f4e4",
+              "name": "Successful Response - Lookup was deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "lookups",
+                    ":lookup_id",
+                    ":version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "lookup_id",
+                      "description": "(Required) Unique identifier of the Lookup you want to delete."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version",
+                      "description": "(Required) Unique version of the Lookup you want to delete."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ecdb12b-a4fa-49e5-b99d-73b1f0d6cf8a",
+          "name": "Update a Lookup",
+          "request": {
+            "name": "Update a Lookup",
+            "description": {
+              "content": "Update a Lookup based on the ID provided. The version parameter must match the latest Lookup version.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "lookups",
+                ":lookup_id",
+                ":version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "lookup_id",
+                  "description": "(Required) Unique identifier of the Lookup you want to edit."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "version",
+                  "description": "(Required) Unique version of the Lookup you want to edit."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"columns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"name\": \"<string>\",\n  \"use_first_available_instance\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fbc6e49f-3325-4b5e-9198-dc879cc86edc",
+              "name": "Successful Response - Returns the modified Lookup",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "lookups",
+                    ":lookup_id",
+                    ":version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "lookup_id",
+                      "description": "(Required) Unique identifier of the Lookup you want to edit."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version",
+                      "description": "(Required) Unique version of the Lookup you want to edit."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"columns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"name\": \"<string>\",\n  \"use_first_available_instance\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 1278,\n  \"data\": {\n    \"columns\": [\n      {\n        \"name\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    ],\n    \"lookup_type\": \"<string>\",\n    \"supports_plan_year\": \"<boolean>\",\n    \"use_first_available_instance\": \"<boolean>\"\n  },\n  \"id\": \"532d60a4-eb93-6d99-6969-ee3ee1c353f5\",\n  \"modified\": 1890,\n  \"name\": \"string\",\n  \"version\": \"f072a477-6003-dc50-d3c7-7cc29cc78618\",\n  \"organization_id\": 389.5158293236134\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3a3d13ee-c0c3-46d6-87ac-30514bdbb0b4",
+    "name": "Noyo Carrier Carrier Mapped Field Lookup API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

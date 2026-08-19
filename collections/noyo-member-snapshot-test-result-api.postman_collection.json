@@ -1,0 +1,124 @@
+{
+  "item": [
+    {
+      "id": "b7503649-3680-43ff-9c29-eb4e07d86276",
+      "name": "Member Snapshot Test Result",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cc730950-3cfc-4da8-a0c1-b7972a03548e",
+          "name": "Get a single Member Snapshot Test Result",
+          "request": {
+            "name": "Get a single Member Snapshot Test Result",
+            "description": {
+              "content": "Returns a single member snapshot test result based on the ID provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "member_snapshot_test_results",
+                ":member_snapshot_test_result_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "member_snapshot_test_result_id",
+                  "description": "(Required) The unique identifier of the member snapshot test result you would like to view"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1d76ea05-a136-4dc7-a9c4-6a7709bf311d",
+              "name": "Successful Response - Returns a single Member Snapshot Test Result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "member_snapshot_test_results",
+                    ":member_snapshot_test_result_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "member_snapshot_test_result_id",
+                      "description": "(Required) The unique identifier of the member snapshot test result you would like to view"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 7697,\n  \"employee_id\": \"a98b0c84-57c8-a340-6335-15c71834b861\",\n  \"id\": \"2e6fc464-d053-7540-9517-24b5eafbafe9\",\n  \"member_snapshot_id\": \"ff0ede7d-13eb-c45a-10ff-9e651faeb4f3\",\n  \"member_snapshot_test_report_id\": \"d2177971-6cec-60a5-67f4-60cea7c2da41\",\n  \"modified\": 1000,\n  \"result\": {\n    \"modified_snapshot\": {\n      \"employee\": {\n        \"employment\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"person\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"classifications\": {},\n        \"custom_individual_id\": \"string\",\n        \"event_id\": \"1\",\n        \"group_individual_id\": \"string\",\n        \"id\": \"85c04462-8db6-ebbb-7b5c-eb0b02d74658\"\n      },\n      \"snapshot_mode\": \"current_open\",\n      \"coverages\": [\n        {\n          \"carrier_id\": \"9d5cc860-1130-d286-6e91-e8beb3a4b96c\",\n          \"enrolled_members\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"line_of_coverage\": \"dental\",\n          \"carrier_config\": {},\n          \"cobra_details\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"custom_plan_id\": \"string\",\n          \"plan_id\": \"710468ce-e984-0844-7697-bdea394b589f\",\n          \"plan_name\": \"string\",\n          \"signature_date\": \"2020-01-01\"\n        },\n        {\n          \"carrier_id\": \"482af8fe-3b83-3784-4567-c2af8b22686c\",\n          \"enrolled_members\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"line_of_coverage\": \"dental\",\n          \"carrier_config\": {},\n          \"cobra_details\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"custom_plan_id\": \"string\",\n          \"plan_id\": \"180c78bb-39cb-2085-fd65-1f2ebf81cf78\",\n          \"plan_name\": \"string\",\n          \"signature_date\": \"2020-01-01\"\n        }\n      ],\n      \"dependents\": [\n        {\n          \"person\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"relationship\": \"domestic-partner\",\n          \"custom_individual_id\": \"string\",\n          \"event_id\": \"1\",\n          \"group_individual_id\": \"string\",\n          \"id\": \"fdbf82af-71bf-da41-916f-6848d4bec600\"\n        },\n        {\n          \"person\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"relationship\": \"spouse\",\n          \"custom_individual_id\": \"string\",\n          \"event_id\": \"1\",\n          \"group_individual_id\": \"string\",\n          \"id\": \"01d0cc3b-507d-238b-e407-b8c86e0fe795\"\n        }\n      ],\n      \"enable_member_auto_link\": false,\n      \"events\": [\n        {\n          \"date\": \"2003-08-16\",\n          \"id\": \"string\",\n          \"reason\": \"reinstatement\",\n          \"type\": \"demographic\"\n        },\n        {\n          \"date\": \"1988-01-28\",\n          \"id\": \"string\",\n          \"reason\": \"disability_status_change\",\n          \"type\": \"demographic\"\n        }\n      ],\n      \"omitted_coverage_handling\": {\n        \"custom\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"policy\": \"terminate\",\n        \"termination_rule\": \"end_of_current_month\"\n      }\n    },\n    \"status\": \"string\",\n    \"trace_ids\": [\n      \"0bc46ea6-8f78-268b-adc4-ee1160b96804\",\n      \"9eadb56a-6e86-17d9-797b-e223e83e2c15\"\n    ],\n    \"failure_data\": {\n      \"api_error\": \"string\",\n      \"under_test_carrier_fulfillment_statuses\": [\n        {\n          \"carrier_id\": \"0bb27e23-04ff-417d-1e8b-7cb3f2a2add8\",\n          \"status\": \"invalid\",\n          \"errors\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"carrier_id\": \"2bd1b258-3552-9a1b-b99c-7e6d4a9c2ce7\",\n          \"status\": \"not_connected\",\n          \"errors\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    },\n    \"included_carrier\": true\n  },\n  \"version\": \"03d5b447-731f-99d7-becf-b102f9cfb743\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "18dd98b4-bea1-470b-a455-8d6871735f0d",
+    "name": "Noyo Carrier Carrier Mapped Field Member Snapshot Test Result API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

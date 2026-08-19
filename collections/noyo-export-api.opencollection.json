@@ -1,0 +1,71 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Export API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Export",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a Export",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/exports",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new Export."
+        },
+        {
+          "info": {
+            "name": "Get a Export",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/exports/:export_id",
+            "params": [
+              {
+                "name": "export_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the requested export"
+              }
+            ]
+          },
+          "docs": "Get a single Export"
+        },
+        {
+          "info": {
+            "name": "Get file associated with Export",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/exports/:export_id/download",
+            "params": [
+              {
+                "name": "export_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the export"
+              }
+            ]
+          },
+          "docs": "Returns file contents for an export"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

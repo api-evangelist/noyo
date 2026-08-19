@@ -1,0 +1,982 @@
+{
+  "item": [
+    {
+      "id": "eb031278-c0e7-4638-9ddf-1c03a123a21c",
+      "name": "Renewal Decisions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0af28889-b2ec-48d0-a88d-93e157006812",
+          "name": "Get renewal decisions by group",
+          "request": {
+            "name": "Get renewal decisions by group",
+            "description": {
+              "content": "Returns all renewal decisions for a group. This includes the status, which determines whether the carrier is ready to accept member requests for the new plan year. If the status is `not_ready`, Noyo will return one or more issues, each with a level and message.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "groups",
+                ":group_id",
+                "renewal_decisions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "renewal_date",
+                  "value": "<date>",
+                  "description": "Renewal date to filter by, exact match"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<date>",
+                  "description": "Filter request by renewal date starting from date provided"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<date>",
+                  "description": "Filter request by renewal date up to date provided"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_id",
+                  "description": "(Required) The unique identifier of the group for which you are retrieving renewal decisions"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "68e46bc1-07af-464f-afc7-5af1e973a6af",
+              "name": "Successful Response - Returns the found renewal decisions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "renewal_decisions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "renewal_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The unique identifier of the group for which you are retrieving renewal decisions"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 1\n  },\n  \"response\": [\n    {\n      \"body\": {\n        \"carriers\": [\n          {\n            \"carrier_id\": \"bf81f0c4-3105-4240-b62b-aa6de3f607e4\",\n            \"lines_of_coverage\": {\n              \"dental\": {\n                \"open_enrollment_end_date\": \"2022-01-31\",\n                \"open_enrollment_start_date\": \"2022-01-01\",\n                \"plans\": [\n                  {\n                    \"name\": \"Dental Plus Plan\",\n                    \"plan_id\": \"44bc0f4a-0a94-11ec-9a03-0242ac130003\"\n                  }\n                ]\n              },\n              \"medical\": {\n                \"open_enrollment_end_date\": \"2022-01-31\",\n                \"open_enrollment_start_date\": \"2022-01-01\",\n                \"plans\": [\n                  {\n                    \"name\": \"Select Plus PPO HDHP Gold BRJJ /C38\",\n                    \"plan_id\": \"818e52d4-6c34-4914-b716-a3047c85e468\"\n                  },\n                  {\n                    \"name\": \"Select Plus PPO HDHP Silver BRJJ /C38\",\n                    \"plan_id\": \"f9897240-87f8-4d9d-a68f-58bc445fe0b2\"\n                  },\n                  {\n                    \"name\": \"Select Plus PPO HDHP Bronze BRJJ /C38\",\n                    \"plan_id\": \"19437852-3795-4cb4-939c-a86543eabee0\"\n                  }\n                ]\n              }\n            }\n          }\n        ]\n      },\n      \"created\": 1557862286,\n      \"group_id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n      \"id\": \"b5f2b5f7-0336-45f7-baf1-7e11dfac50a6\",\n      \"issues\": [\n        {\n          \"level\": \"error\",\n          \"message\": \"Life open enrollment start date is 2021-08-01 in carrier system\"\n        },\n        {\n          \"level\": \"error\",\n          \"message\": \"LTD Plan not available yet in carrier system\"\n        }\n      ],\n      \"modified\": 1557862286,\n      \"renewal_date\": \"2022-01-01\",\n      \"status\": \"not_ready\",\n      \"version\": \"23be0ba3-1183-4e8e-8e9d-644527414c6e\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f7e39dad-2445-4ea4-b892-634b982959ea",
+          "name": "Create a new renewal decision",
+          "request": {
+            "name": "Create a new renewal decision",
+            "description": {
+              "content": "Create a new renewal decision for a given renewal date.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "groups",
+                ":group_id",
+                "renewal_decisions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_id",
+                  "description": "(Required) The unique identifier of the group for which you are creating a new renewal decision"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"body\": {\n    \"carriers\": [\n      {\n        \"carrier_id\": \"<uuid>\",\n        \"lines_of_coverage\": {\n          \"accident\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"add\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"cancer\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"critical_illness\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"dental\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"health_fund\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"hospital_indemnity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"life\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"ltd\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"medical\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"pharmacy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"std\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"vision\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wellness\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    ]\n  },\n  \"renewal_date\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9bca84f2-15b4-4e71-a24f-3148ad766cfc",
+              "name": "Successful Response - Returns the new Renewal Decision",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "renewal_decisions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The unique identifier of the group for which you are creating a new renewal decision"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"body\": {\n    \"carriers\": [\n      {\n        \"carrier_id\": \"bf81f0c4-3105-4240-b62b-aa6de3f607e4\",\n        \"lines_of_coverage\": {\n          \"dental\": {\n            \"open_enrollment_end_date\": \"2022-01-31\",\n            \"open_enrollment_start_date\": \"2022-01-01\",\n            \"plans\": [\n              {\n                \"name\": \"Dental Plus Plan\",\n                \"plan_type\": \"ppo\"\n              }\n            ]\n          },\n          \"medical\": {\n            \"open_enrollment_end_date\": \"2022-01-31\",\n            \"open_enrollment_start_date\": \"2022-01-01\",\n            \"plans\": [\n              {\n                \"plan_id\": \"818e52d4-6c34-4914-b716-a3047c85e468\"\n              },\n              {\n                \"plan_id\": \"f9897240-87f8-4d9d-a68f-58bc445fe0b2\"\n              },\n              {\n                \"metal_tier\": \"bronze\",\n                \"name\": \"Select Plus PPO HDHP Bronze BRJJ /C38\",\n                \"plan_type\": \"ppo\"\n              }\n            ]\n          }\n        }\n      }\n    ]\n  },\n  \"renewal_date\": \"2022-01-01\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"body\": {\n    \"carriers\": [\n      {\n        \"carrier_id\": \"bf81f0c4-3105-4240-b62b-aa6de3f607e4\",\n        \"lines_of_coverage\": {\n          \"dental\": {\n            \"open_enrollment_end_date\": \"2022-01-31\",\n            \"open_enrollment_start_date\": \"2022-01-01\",\n            \"plans\": [\n              {\n                \"name\": \"Dental Plus Plan\",\n                \"plan_id\": \"44bc0f4a-0a94-11ec-9a03-0242ac130003\"\n              }\n            ]\n          },\n          \"medical\": {\n            \"open_enrollment_end_date\": \"2022-01-31\",\n            \"open_enrollment_start_date\": \"2022-01-01\",\n            \"plans\": [\n              {\n                \"name\": \"Select Plus PPO HDHP Gold BRJJ /C38\",\n                \"plan_id\": \"818e52d4-6c34-4914-b716-a3047c85e468\"\n              },\n              {\n                \"name\": \"Select Plus PPO HDHP Silver BRJJ /C38\",\n                \"plan_id\": \"f9897240-87f8-4d9d-a68f-58bc445fe0b2\"\n              },\n              {\n                \"name\": \"Select Plus PPO HDHP Bronze BRJJ /C38\",\n                \"plan_id\": \"19437852-3795-4cb4-939c-a86543eabee0\"\n              }\n            ]\n          }\n        }\n      }\n    ]\n  },\n  \"created\": 1557862286,\n  \"group_id\": \"2c4d5515-6bf8-4f8c-821a-9c56374198b2\",\n  \"id\": \"b5f2b5f7-0336-45f7-baf1-7e11dfac50a6\",\n  \"issues\": [],\n  \"modified\": 1557862286,\n  \"renewal_date\": \"2022-01-01\",\n  \"status\": \"submitted\",\n  \"version\": \"23be0ba3-1183-4e8e-8e9d-644527414c6e\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7b321c42-7a81-433b-adf1-e051d8996238",
+          "name": "Get an existing renewal decision by id",
+          "request": {
+            "name": "Get an existing renewal decision by id",
+            "description": {
+              "content": "Returns a renewal decision by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "groups",
+                ":group_id",
+                "renewal_decisions",
+                ":renewal_decision_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_id",
+                  "description": "(Required) The unique identifier of the group for which you are retrieving a renewal decision"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "renewal_decision_id",
+                  "description": "(Required) The unique identifier of the renewal decision you want to retrieve"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c6c1c060-b70b-4472-86f2-8c65cc6bd817",
+              "name": "Successful Response - Returns the found renewal decision.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "renewal_decisions",
+                    ":renewal_decision_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The unique identifier of the group for which you are retrieving a renewal decision"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "renewal_decision_id",
+                      "description": "(Required) The unique identifier of the renewal decision you want to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"body\": {\n    \"carriers\": [\n      {\n        \"carrier_id\": \"bf81f0c4-3105-4240-b62b-aa6de3f607e4\",\n        \"lines_of_coverage\": {\n          \"dental\": {\n            \"open_enrollment_end_date\": \"2022-01-31\",\n            \"open_enrollment_start_date\": \"2022-01-01\",\n            \"plans\": [\n              {\n                \"name\": \"Dental Plus Plan\",\n                \"plan_id\": \"81803f12-0a96-11ec-9a03-0242ac130003\"\n              }\n            ]\n          },\n          \"medical\": {\n            \"open_enrollment_end_date\": \"2022-01-31\",\n            \"open_enrollment_start_date\": \"2022-01-01\",\n            \"plans\": [\n              {\n                \"name\": \"Select Plus PPO HDHP Gold BRJJ /C38\",\n                \"plan_id\": \"818e52d4-6c34-4914-b716-a3047c85e468\"\n              },\n              {\n                \"name\": \"Select Plus PPO HDHP Silver BRJJ /C38\",\n                \"plan_id\": \"f9897240-87f8-4d9d-a68f-58bc445fe0b2\"\n              },\n              {\n                \"name\": \"Select Plus PPO HDHP Bronze BRJJ /C38\",\n                \"plan_id\": \"19437852-3795-4cb4-939c-a86543eabee0\"\n              }\n            ]\n          }\n        }\n      }\n    ]\n  },\n  \"created\": 1557862286,\n  \"group_id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n  \"id\": \"b5f2b5f7-0336-45f7-baf1-7e11dfac50a6\",\n  \"issues\": [\n    {\n      \"level\": \"error\",\n      \"message\": \"Life open enrollment start date is 2021-08-01 in carrier system\"\n    },\n    {\n      \"level\": \"error\",\n      \"message\": \"LTD Plan not available yet in carrier system\"\n    }\n  ],\n  \"modified\": 1557862286,\n  \"renewal_date\": \"2022-01-01\",\n  \"status\": \"not_ready\",\n  \"version\": \"23be0ba3-1183-4e8e-8e9d-644527414c6e\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9106245a-87be-455f-a4cf-5db38736ef88",
+          "name": "Get renewal decisions",
+          "request": {
+            "name": "Get renewal decisions",
+            "description": {
+              "content": "Returns all renewal decisions. This includes the status, which determines whether the carrier is ready to accept member requests for the new plan year. If the status is `not_ready`, Noyo will return one or more issues, each with a level and message.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "renewal_decisions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "group_name",
+                  "value": "<string>",
+                  "description": "Group name to filter by, exact match"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Status to filter by, exact match"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<date>",
+                  "description": "Filter request by renewal date starting from date provided"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<date>",
+                  "description": "Filter request by renewal date up to date provided"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4b59b8bd-8f92-48cd-9aed-1c9d34e78118",
+              "name": "Successful Response - Returns the found renewal decisions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "renewal_decisions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "group_name",
+                      "value": "Company Inc"
+                    },
+                    {
+                      "key": "status",
+                      "value": "ready"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 1\n  },\n  \"response\": [\n    {\n      \"body\": {\n        \"carriers\": [\n          {\n            \"carrier_id\": \"bf81f0c4-3105-4240-b62b-aa6de3f607e4\",\n            \"lines_of_coverage\": {\n              \"dental\": {\n                \"open_enrollment_end_date\": \"2022-01-31\",\n                \"open_enrollment_start_date\": \"2022-01-01\",\n                \"plans\": [\n                  {\n                    \"name\": \"Dental Plus Plan\"\n                  }\n                ]\n              },\n              \"medical\": {\n                \"open_enrollment_end_date\": \"2022-01-31\",\n                \"open_enrollment_start_date\": \"2022-01-01\",\n                \"plans\": [\n                  {\n                    \"plan_id\": \"818e52d4-6c34-4914-b716-a3047c85e468\"\n                  },\n                  {\n                    \"plan_id\": \"f9897240-87f8-4d9d-a68f-58bc445fe0b2\"\n                  },\n                  {\n                    \"name\": \"Select Plus PPO HDHP Bronze BRJJ /C38\"\n                  }\n                ]\n              }\n            }\n          }\n        ]\n      },\n      \"created\": 1557862286,\n      \"group_id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n      \"id\": \"b5f2b5f7-0336-45f7-baf1-7e11dfac50a6\",\n      \"issues\": [\n        {\n          \"level\": \"error\",\n          \"message\": \"Life open enrollment start date is 2021-08-01 in carrier system\"\n        },\n        {\n          \"level\": \"error\",\n          \"message\": \"LTD Plan not available yet in carrier system\"\n        }\n      ],\n      \"modified\": 1557862286,\n      \"renewal_date\": \"2022-01-01\",\n      \"status\": \"not_ready\",\n      \"version\": \"23be0ba3-1183-4e8e-8e9d-644527414c6e\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8d8b8a39-4d2e-4003-82c2-65782268bb33",
+          "name": "Edit a renewal decision",
+          "request": {
+            "name": "Edit a renewal decision",
+            "description": {
+              "content": "Edit an existing renewal decision for a group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "renewal_decisions",
+                ":renewal_decision_id",
+                ":version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "renewal_decision_id",
+                  "description": "(Required) The unique identifier of the renewal decision you want to edit"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "version",
+                  "description": "(Required) The unique identifier of the renewal decision version you want to edit"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"body\": {\n    \"carriers\": [\n      {\n        \"carrier_id\": \"<uuid>\",\n        \"lines_of_coverage\": {\n          \"accident\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"add\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"cancer\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"critical_illness\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"dental\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"health_fund\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"hospital_indemnity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"life\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"ltd\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"medical\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"pharmacy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"std\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"vision\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wellness\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    ]\n  },\n  \"renewal_date\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "39d5eef8-5c15-4258-88d1-0b1b74b8c5c2",
+              "name": "Successful Response - Returns the edited Renewal Decision",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "renewal_decisions",
+                    ":renewal_decision_id",
+                    ":version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "renewal_decision_id",
+                      "description": "(Required) The unique identifier of the renewal decision you want to edit"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version",
+                      "description": "(Required) The unique identifier of the renewal decision version you want to edit"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"body\": {\n    \"carriers\": [\n      {\n        \"carrier_id\": \"bf81f0c4-3105-4240-b62b-aa6de3f607e4\",\n        \"lines_of_coverage\": {\n          \"dental\": {\n            \"open_enrollment_end_date\": \"2022-01-31\",\n            \"open_enrollment_start_date\": \"2022-01-01\",\n            \"plans\": [\n              {\n                \"name\": \"Dental Plus Plan\",\n                \"plan_type\": \"ppo\"\n              }\n            ]\n          },\n          \"medical\": {\n            \"open_enrollment_end_date\": \"2022-01-31\",\n            \"open_enrollment_start_date\": \"2022-01-01\",\n            \"plans\": [\n              {\n                \"plan_id\": \"818e52d4-6c34-4914-b716-a3047c85e468\"\n              },\n              {\n                \"plan_id\": \"f9897240-87f8-4d9d-a68f-58bc445fe0b2\"\n              },\n              {\n                \"metal_tier\": \"bronze\",\n                \"name\": \"Select Plus PPO HDHP Bronze BRJJ /C38\",\n                \"plan_type\": \"ppo\"\n              }\n            ]\n          }\n        }\n      }\n    ]\n  },\n  \"renewal_date\": \"2022-01-01\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"body\": {\n    \"carriers\": [\n      {\n        \"carrier_id\": \"bf81f0c4-3105-4240-b62b-aa6de3f607e4\",\n        \"lines_of_coverage\": {\n          \"dental\": {\n            \"open_enrollment_end_date\": \"2022-01-31\",\n            \"open_enrollment_start_date\": \"2022-01-01\",\n            \"plans\": [\n              {\n                \"name\": \"Dental Plus Plan\",\n                \"plan_id\": \"44bc0f4a-0a94-11ec-9a03-0242ac130003\"\n              }\n            ]\n          },\n          \"medical\": {\n            \"open_enrollment_end_date\": \"2022-01-31\",\n            \"open_enrollment_start_date\": \"2022-01-01\",\n            \"plans\": [\n              {\n                \"name\": \"Select Plus PPO HDHP Gold BRJJ /C38\",\n                \"plan_id\": \"818e52d4-6c34-4914-b716-a3047c85e468\"\n              },\n              {\n                \"name\": \"Select Plus PPO HDHP Silver BRJJ /C38\",\n                \"plan_id\": \"f9897240-87f8-4d9d-a68f-58bc445fe0b2\"\n              },\n              {\n                \"name\": \"Select Plus PPO HDHP Bronze BRJJ /C38\",\n                \"plan_id\": \"19437852-3795-4cb4-939c-a86543eabee0\"\n              }\n            ]\n          }\n        }\n      }\n    ]\n  },\n  \"created\": 1557862286,\n  \"group_id\": \"2c4d5515-6bf8-4f8c-821a-9c56374198b2\",\n  \"id\": \"b5f2b5f7-0336-45f7-baf1-7e11dfac50a6\",\n  \"issues\": [],\n  \"modified\": 1557862286,\n  \"renewal_date\": \"2022-01-01\",\n  \"status\": \"submitted\",\n  \"version\": \"23be0ba3-1183-4e8e-8e9d-644527414c6e\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e3bf24a6-4f63-44f8-abcd-b214d5b783af",
+          "name": "Get renewal decisions for UI purposes",
+          "request": {
+            "name": "Get renewal decisions for UI purposes",
+            "description": {
+              "content": "Returns all renewal decisions for UI purposes. This includes the status, which determines whether the carrier is ready to accept member requests for the new plan year. If the status is `not_ready`, Noyo will return one or more issues, each with a level and message.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "renewal_decisions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "group_name",
+                  "value": "<string>",
+                  "description": "Group name to filter by, partial match"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Status to filter by"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<date>",
+                  "description": "Filter request by renewal date starting from date provided"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<date>",
+                  "description": "Filter request by renewal date up to date provided"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4597bd13-57f7-4876-b0d4-ddf1cb71e53c",
+              "name": "Successful Response - Returns the found renewal decisions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "renewal_decisions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "group_name",
+                      "value": "Company Inc"
+                    },
+                    {
+                      "key": "status",
+                      "value": "ready"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 0,\n    \"page_num\": 1,\n    \"page_size\": 20,\n    \"total_records\": 1\n  },\n  \"response\": [\n    {\n      \"group\": {\n        \"dba_name\": \"Test Corp\",\n        \"federal_ein\": \"112222222\",\n        \"id\": \"2613a221-d3c8-4c8a-86d5-e7e885fd1da9\",\n        \"name\": \"Test Company\",\n        \"organization_id\": \"d61fa455-adf4-4dc4-8c57-6d779ba9475e\",\n        \"sic_code\": \"7371\",\n        \"version\": \"6b72d72d-cc99-4df6-8152-7183e824c80c\"\n      },\n      \"renewal_decision\": {\n        \"body\": {\n          \"carriers\": [\n            {\n              \"carrier_id\": \"bf81f0c4-3105-4240-b62b-aa6de3f607e4\",\n              \"lines_of_coverage\": {\n                \"dental\": {\n                  \"open_enrollment_end_date\": \"2022-01-31\",\n                  \"open_enrollment_start_date\": \"2022-01-01\",\n                  \"plans\": [\n                    {\n                      \"name\": \"Dental Plus Plan\"\n                    }\n                  ]\n                },\n                \"medical\": {\n                  \"open_enrollment_end_date\": \"2022-01-31\",\n                  \"open_enrollment_start_date\": \"2022-01-01\",\n                  \"plans\": [\n                    {\n                      \"plan_id\": \"818e52d4-6c34-4914-b716-a3047c85e468\"\n                    },\n                    {\n                      \"plan_id\": \"f9897240-87f8-4d9d-a68f-58bc445fe0b2\"\n                    },\n                    {\n                      \"name\": \"Select Plus PPO HDHP Bronze BRJJ /C38\"\n                    }\n                  ]\n                }\n              }\n            }\n          ]\n        },\n        \"created\": 1557862286,\n        \"id\": \"b5f2b5f7-0336-45f7-baf1-7e11dfac50a6\",\n        \"issues\": [\n          {\n            \"level\": \"error\",\n            \"message\": \"Life open enrollment start date is 2021-08-01 in carrier system\"\n          },\n          {\n            \"level\": \"error\",\n            \"message\": \"LTD Plan not available yet in carrier system\"\n          }\n        ],\n        \"modified\": 1557862286,\n        \"renewal_date\": \"2022-01-01\",\n        \"status\": \"not_ready\",\n        \"version\": \"23be0ba3-1183-4e8e-8e9d-644527414c6e\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "91f4de25-e891-47c1-8e6d-048d17078668",
+          "name": "Get counts of renewal decisions by various attributes",
+          "request": {
+            "name": "Get counts of renewal decisions by various attributes",
+            "description": {
+              "content": "Retrieve counts of renewal decisions broken down by attributes",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "renewal_decisions",
+                "counts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "counts_by",
+                  "value": "<string>",
+                  "description": "Comma separated attributes to count by"
+                },
+                {
+                  "disabled": false,
+                  "key": "group_name",
+                  "value": "<string>",
+                  "description": "Group name to filter by, partial match"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Status to filter by"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<date>",
+                  "description": "Filter request by renewal date starting from date provided"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<date>",
+                  "description": "Filter request by renewal date up to date provided"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8285da2f-d6a2-46d3-b136-b2f1b4a36a25",
+              "name": "Successful Response - Returns the counts.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "renewal_decisions",
+                    "counts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "counts_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "group_name",
+                      "value": "Company Inc"
+                    },
+                    {
+                      "key": "status",
+                      "value": "ready"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"response\": [\n    {\n      \"count\": 10\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1b7a5099-f2a5-4f11-8ab5-1fd147f558b2",
+          "name": "Mark a renewal decision as done",
+          "request": {
+            "name": "Mark a renewal decision as done",
+            "description": {
+              "content": "Mark an existing \"ready\" status renewal decision as done",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "renewal_decisions",
+                ":renewal_decision_id",
+                ":version",
+                "done"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "renewal_decision_id",
+                  "description": "(Required) The unique identifier of the renewal decision you want to edit"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "version",
+                  "description": "(Required) The unique identifier of the renewal decision version you want to edit"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "766c9bca-202f-4b19-94e2-7e7af0f41afa",
+              "name": "Successful Response - Returns the updated Renewal Decision",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "renewal_decisions",
+                    ":renewal_decision_id",
+                    ":version",
+                    "done"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "renewal_decision_id",
+                      "description": "(Required) The unique identifier of the renewal decision you want to edit"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version",
+                      "description": "(Required) The unique identifier of the renewal decision version you want to edit"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"body\": {\n    \"carriers\": [\n      {\n        \"carrier_id\": \"bf81f0c4-3105-4240-b62b-aa6de3f607e4\",\n        \"lines_of_coverage\": {\n          \"dental\": {\n            \"open_enrollment_end_date\": \"2022-01-31\",\n            \"open_enrollment_start_date\": \"2022-01-01\",\n            \"plans\": [\n              {\n                \"name\": \"Dental Plus Plan\",\n                \"plan_id\": \"44bc0f4a-0a94-11ec-9a03-0242ac130003\"\n              }\n            ]\n          },\n          \"medical\": {\n            \"open_enrollment_end_date\": \"2022-01-31\",\n            \"open_enrollment_start_date\": \"2022-01-01\",\n            \"plans\": [\n              {\n                \"name\": \"Select Plus PPO HDHP Gold BRJJ /C38\",\n                \"plan_id\": \"818e52d4-6c34-4914-b716-a3047c85e468\"\n              },\n              {\n                \"name\": \"Select Plus PPO HDHP Silver BRJJ /C38\",\n                \"plan_id\": \"f9897240-87f8-4d9d-a68f-58bc445fe0b2\"\n              },\n              {\n                \"name\": \"Select Plus PPO HDHP Bronze BRJJ /C38\",\n                \"plan_id\": \"19437852-3795-4cb4-939c-a86543eabee0\"\n              }\n            ]\n          }\n        }\n      }\n    ]\n  },\n  \"created\": 1557862286,\n  \"group_id\": \"2c4d5515-6bf8-4f8c-821a-9c56374198b2\",\n  \"id\": \"b5f2b5f7-0336-45f7-baf1-7e11dfac50a6\",\n  \"issues\": [],\n  \"modified\": 1557862286,\n  \"renewal_date\": \"2022-01-01\",\n  \"status\": \"done\",\n  \"version\": \"23be0ba3-1183-4e8e-8e9d-644527414c6e\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "16d1838c-cb86-471f-8803-14e0e4a63b90",
+    "name": "Noyo Carrier Carrier Mapped Field Renewal Decisions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

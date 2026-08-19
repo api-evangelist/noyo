@@ -1,0 +1,184 @@
+{
+  "item": [
+    {
+      "id": "82fbc591-60fc-4a7f-8dfb-e0b255a0183c",
+      "name": "Connection Eligibility",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f914a1b4-713d-4758-a33b-7bc1d7b34320",
+          "name": "get Connection Eligibility",
+          "request": {
+            "name": "get Connection Eligibility",
+            "description": {
+              "content": "Returns connection eligibility information for a group. If a carrier_id is provided,\nreturns eligibility information for that specific carrier. Otherwise, returns\neligibility information for all carriers for the given group.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "groups",
+                ":group_id",
+                "connection_eligibility"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "carrier_id",
+                  "value": "<uuid>",
+                  "description": "Optional carrier ID to filter results for a specific carrier"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "group_id",
+                  "description": "(Required) The ID of the group to check eligibility for"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7ef0e817-69ac-469c-92f8-54b24cf050ff",
+              "name": "Successful Response - Returns connection eligibility information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "connection_eligibility"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "carrier_id",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The ID of the group to check eligibility for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"carrier_id\": \"79796525-75b0-a558-7685-c01140abebda\",\n  \"eligibility\": \"string\",\n  \"group_id\": \"ff24d647-5a89-b9ec-d5fc-7641822ed474\",\n  \"data_exchange_configuration\": {\n    \"data_exchange\": {\n      \"enrollment_errors\": {\n        \"default_method\": null,\n        \"enabled\": false\n      },\n      \"enrollments\": {\n        \"from_carrier\": {\n          \"description\": \"Configuration for receiving data from the carrier\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"to_carrier\": {\n          \"description\": \"Configuration for sending data to the carrier\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"group_structure\": {\n        \"default_method\": null,\n        \"enabled\": false\n      }\n    },\n    \"name\": \"Not Connected\"\n  },\n  \"eligibility_rules\": [\n    {\n      \"description\": \"string\",\n      \"result\": \"string\",\n      \"rule\": \"string\"\n    },\n    {\n      \"description\": \"string\",\n      \"result\": \"string\",\n      \"rule\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "647cdb6f-81c5-4f49-9576-e31db67fcd19",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "connection_eligibility"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "carrier_id",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "group_id",
+                      "description": "(Required) The ID of the group to check eligibility for"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "93383e1f-d2de-4095-9f1c-d5ae8aa96abb",
+    "name": "Noyo Carrier Carrier Mapped Field Connection Eligibility API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}

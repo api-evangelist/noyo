@@ -1,0 +1,350 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Group Disconnections API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Group Disconnections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Group Disconnection Requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/group_disconnection_requests",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status of the group Disconnection requests for which you would like to filter."
+              },
+              {
+                "name": "carrier_id",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of carrier UUID's for which you would like to view group disconnection requests"
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "min_effective_end_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "max_effective_end_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search by group name"
+              },
+              {
+                "name": "source_type",
+                "value": "",
+                "type": "query",
+                "description": "Source type to filter by"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of requested Group Disconnection Request UUIDs"
+              }
+            ]
+          },
+          "docs": "Returns a list of all group Disconnection requests."
+        },
+        {
+          "info": {
+            "name": "Create a new Group Disconnection Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/group_disconnection_requests",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new Group Disconnection Request"
+        },
+        {
+          "info": {
+            "name": "Get an existing group offboarding request by id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/group_disconnection_requests/:group_disconnection_request_id",
+            "params": [
+              {
+                "name": "group_disconnection_request_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group disconnection request you want to retrieve"
+              }
+            ]
+          },
+          "docs": "Returns a group offboarding request by ID."
+        },
+        {
+          "info": {
+            "name": "Confirm Group Disconnection",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/group_disconnection_requests/:group_disconnection_request_id/confirm",
+            "params": [
+              {
+                "name": "group_disconnection_request_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group disconnection request you want to confirm"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Confirm Group Disconnection"
+        },
+        {
+          "info": {
+            "name": "Reject Group Disconnection",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/group_disconnection_requests/:group_disconnection_request_id/reject",
+            "params": [
+              {
+                "name": "group_disconnection_request_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group disconnection request you want to reject"
+              }
+            ]
+          },
+          "docs": "Reject Group Disconnection"
+        },
+        {
+          "info": {
+            "name": "Edit an existing Group Disconnection Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/group_disconnection_requests/:group_disconnection_request_id/:version",
+            "params": [
+              {
+                "name": "group_disconnection_request_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group disconnection request you want to update"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The unique version of the group disconnection request you want to edit."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit a Group Disconnection Request"
+        },
+        {
+          "info": {
+            "name": "List Group Disconnection Requests by Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/groups/:group_id/group_disconnection_requests",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the associated group in Noyo"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              }
+            ]
+          },
+          "docs": "Returns a list of all group disconnection requests for a given group ID."
+        },
+        {
+          "info": {
+            "name": "List Group Disconnection Request by Group (Deprecated Endpoint)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/:group_id/group_disconnection_requests",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the associated group in Noyo"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              }
+            ]
+          },
+          "docs": "Returns a list of all group Disconnection requests for a given group Id."
+        },
+        {
+          "info": {
+            "name": "List Group Disconnection Requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ui/v1/group_disconnection_requests",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status of the group Disconnection requests for which you would like to filter."
+              },
+              {
+                "name": "carrier_id",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of carrier UUID's for which you would like to view group disconnection requests"
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "min_effective_end_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "max_effective_end_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search by group name"
+              },
+              {
+                "name": "source_type",
+                "value": "",
+                "type": "query",
+                "description": "Source type to filter by"
+              },
+              {
+                "name": "creation_reason",
+                "value": "",
+                "type": "query",
+                "description": "Creation reason to filter by"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of requested Group Disconnection Request UUIDs"
+              }
+            ]
+          },
+          "docs": "Returns a list of all group Disconnection requests."
+        },
+        {
+          "info": {
+            "name": "Get an existing group offboarding request by id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ui/v1/group_disconnection_requests/:group_disconnection_request_id",
+            "params": [
+              {
+                "name": "group_disconnection_request_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group disconnection request you want to retrieve"
+              }
+            ]
+          },
+          "docs": "Returns a group offboarding request by ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

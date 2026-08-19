@@ -1,0 +1,394 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Discrepancies API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Discrepancies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Discrepancies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/discrepancies",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status of the discrepancies"
+              },
+              {
+                "name": "status_grouping",
+                "value": "",
+                "type": "query",
+                "description": "Status grouping of the discrepancies"
+              },
+              {
+                "name": "type_grouping",
+                "value": "",
+                "type": "query",
+                "description": "Type grouping of the discrepancies"
+              },
+              {
+                "name": "carrier_id",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of the carrier for which you would like to view discrepancies"
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of the group for which you would like to view discrepancies"
+              },
+              {
+                "name": "subject_id",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of the model that is the subject of the discrepancy"
+              },
+              {
+                "name": "subject_type",
+                "value": "",
+                "type": "query",
+                "description": "The type of the model that is the subject of the discrepancy"
+              },
+              {
+                "name": "discrepancy_type",
+                "value": "",
+                "type": "query",
+                "description": "The categorization of the discrepancy"
+              }
+            ]
+          },
+          "docs": "Returns a list of all discrepancies matching the given query"
+        },
+        {
+          "info": {
+            "name": "Get Discrepancy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/discrepancies/:discrepancy_id",
+            "params": [
+              {
+                "name": "discrepancy_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the discrepancy you would like to retrieve"
+              }
+            ]
+          },
+          "docs": "Returns the latest version of a single discrepancy based on the ID provided"
+        },
+        {
+          "info": {
+            "name": "Acknowledge Discrepancy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/discrepancies/:discrepancy_id/ack",
+            "params": [
+              {
+                "name": "discrepancy_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the discrepancy in the Noyo system"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Acknowledge receipt of a discrepancy"
+        },
+        {
+          "info": {
+            "name": "Get a list of all discrepancy notes under a single discrepancy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/discrepancies/:discrepancy_id/notes",
+            "params": [
+              {
+                "name": "discrepancy_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the discrepancy for which you would like to view notes"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              }
+            ]
+          },
+          "docs": "Returns a list of all notes for a given discrepancy."
+        },
+        {
+          "info": {
+            "name": "Request Discrepancy Outcome",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/discrepancies/:discrepancy_id/request_outcome",
+            "params": [
+              {
+                "name": "discrepancy_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the associated discrepancy"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Request a new outcome attempt for a discrepancy"
+        },
+        {
+          "info": {
+            "name": "Get a list of all discrepancy resolutions under a single discrepancy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/discrepancies/:discrepancy_id/resolutions",
+            "params": [
+              {
+                "name": "discrepancy_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the discrepancy for which you would like to view resolutions"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              }
+            ]
+          },
+          "docs": "Returns a list of all resolutions for a given discrepancy."
+        },
+        {
+          "info": {
+            "name": "List Discrepancies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ui/v1/discrepancies",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status of the discrepancies"
+              },
+              {
+                "name": "status_grouping",
+                "value": "",
+                "type": "query",
+                "description": "Status grouping of the discrepancies"
+              },
+              {
+                "name": "type_grouping",
+                "value": "",
+                "type": "query",
+                "description": "Type grouping of the discrepancies"
+              },
+              {
+                "name": "carrier_id",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of the carrier for which you would like to view discrepancies"
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of the group for which you would like to view discrepancies"
+              },
+              {
+                "name": "subject_id",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of the model that is the subject of the discrepancy"
+              },
+              {
+                "name": "subject_type",
+                "value": "",
+                "type": "query",
+                "description": "The type of the model that is the subject of the discrepancy"
+              },
+              {
+                "name": "discrepancy_type",
+                "value": "",
+                "type": "query",
+                "description": "The categorization of the discrepancy"
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "The attribute on which to sort the discrepancies"
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query",
+                "description": "Either asc or desc, to denote the data's direction"
+              }
+            ]
+          },
+          "docs": "Returns a list of all discrepancies matching the given query"
+        },
+        {
+          "info": {
+            "name": "Get Discrepancy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ui/v1/discrepancies/:discrepancy_id",
+            "params": [
+              {
+                "name": "discrepancy_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the latest version of a single discrepancy based on the ID provided"
+        },
+        {
+          "info": {
+            "name": "List Discrepancies Related to an Employee",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ui/v1/employees/:employee_id/discrepancies",
+            "params": [
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the employee for which you would like to view discrepancies"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max size of each page of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The integer offset at which to start the page. Possible values are 0 to total_records - 1"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status of the discrepancies"
+              },
+              {
+                "name": "status_grouping",
+                "value": "",
+                "type": "query",
+                "description": "Status grouping of the discrepancies"
+              },
+              {
+                "name": "type_grouping",
+                "value": "",
+                "type": "query",
+                "description": "Type grouping of the discrepancies"
+              },
+              {
+                "name": "carrier_id",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of the carrier for which you would like to view discrepancies"
+              },
+              {
+                "name": "subject_id",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of the model that is the subject of the discrepancy"
+              },
+              {
+                "name": "subject_type",
+                "value": "",
+                "type": "query",
+                "description": "The type of the model that is the subject of the discrepancy"
+              },
+              {
+                "name": "discrepancy_type",
+                "value": "",
+                "type": "query",
+                "description": "The categorization of the discrepancy"
+              }
+            ]
+          },
+          "docs": "Returns a list of all discrepancies related to an employee, its dependents, and individual enrollments"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

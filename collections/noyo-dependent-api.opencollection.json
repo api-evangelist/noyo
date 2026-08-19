@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Noyo Carrier Carrier Mapped Field Dependent API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Dependent",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a single Dependent by Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/groups/:group_id/dependents/:dependent_id",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group which the dependent you would like to query belows to"
+              },
+              {
+                "name": "dependent_id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Noyo ID or the Custom Individual ID of the dependent you would like to query"
+              }
+            ]
+          },
+          "docs": "Returns the latest version of a single dependent based on the Group and ID provided."
+        },
+        {
+          "info": {
+            "name": "Get a single Dependent by Group and Employee ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/groups/:group_id/employees/:employee_id/dependents/:dependent_id",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the group which the dependent you would like to query belows to"
+              },
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Noyo ID or the Custom Individual ID of the employee which the dependent you would like to query belows to"
+              },
+              {
+                "name": "dependent_id",
+                "value": "",
+                "type": "path",
+                "description": "Either the Noyo ID or the Custom Individual ID of the dependent you would like to query"
+              }
+            ]
+          },
+          "docs": "Returns the latest version of a single dependent based on the Group, Employee and ID provided."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

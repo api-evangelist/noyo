@@ -1,0 +1,210 @@
+{
+  "item": [
+    {
+      "id": "43dbb50a-c42d-4b05-8e05-75897a998994",
+      "name": "Protected Groups",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "704d65d6-1213-4f7a-bb1b-f9386b5b729f",
+          "name": "Get protected groups",
+          "request": {
+            "name": "Get protected groups",
+            "description": {
+              "content": "Returns active protected groups. Supplying group_id performs a scoped single-group lookup for any authorized UI user. Omitting group_id lists all active protected groups and is only available to internal Noyo users.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "v1",
+                "protected_groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "group_id",
+                  "value": "<uuid>",
+                  "description": "Group ID to look up protected state for"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Search term for filtering protected groups by group name, DBA name, or group ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "organization_id",
+                  "value": "<uuid>",
+                  "description": "Organization ID to filter protected groups by"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "The max size of each page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The integer offset at which to start the page"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e3f6324a-f3ce-43b9-9ad1-6761e5777800",
+              "name": "Successful Response - Returns active protected groups",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "protected_groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "group_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "organization_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"offset\": 6552,\n    \"page_num\": 5818,\n    \"page_size\": 9133,\n    \"total_records\": 1530\n  },\n  \"response\": [\n    {\n      \"carrier_ids\": [\n        \"d72a17d7-d8f4-fd83-23aa-21235fc46343\",\n        \"125ef104-c74b-a3d8-8170-5fdb8f48bd3c\"\n      ],\n      \"created\": 1347,\n      \"group\": {\n        \"created\": 1018,\n        \"id\": \"3168155e-6c72-dd6b-8292-a199c9d7d788\",\n        \"modified\": 2826,\n        \"name\": \"ACME Flooring\",\n        \"version\": \"d999f437-1804-9992-d1ad-dfb0301390f5\",\n        \"dba_name\": \"Floors R Us\",\n        \"federal_ein\": \"112222222\",\n        \"organization_id\": \"cd5deca5-f4de-1705-f79b-8ec948942898\",\n        \"sic_code\": \"5713\",\n        \"source_group_id\": \"29e80cc2-3593-29f7-ba5d-dc06c31106f5\",\n        \"test_group_id\": \"98187653-f995-dbee-6435-e2cd896c8a00\"\n      },\n      \"id\": \"b6ee4a1f-648d-1c16-e98f-0a901b909ee3\",\n      \"modified\": 3180,\n      \"version\": \"3f38b8e9-87bb-f60d-e7fa-f36b4bc08b8d\"\n    },\n    {\n      \"carrier_ids\": [\n        \"af69bc26-f476-63a7-b0d2-4bb1cf265c63\",\n        \"c861a1d3-4dd3-af81-7b9d-b186f85c49f7\"\n      ],\n      \"created\": 1018,\n      \"group\": {\n        \"created\": 9535,\n        \"id\": \"55dc03d4-e251-82d4-af5f-c6aaa38d1ea8\",\n        \"modified\": 4645,\n        \"name\": \"ACME Flooring\",\n        \"version\": \"ad2ab5ec-402c-48a1-462c-e5d15b9260a3\",\n        \"dba_name\": \"Floors R Us\",\n        \"federal_ein\": \"112222222\",\n        \"organization_id\": \"75e2c361-3908-a084-0a21-40688e445d84\",\n        \"sic_code\": \"5713\",\n        \"source_group_id\": \"d84baa61-bb54-5cf3-9e7d-ffc44524fb2f\",\n        \"test_group_id\": \"d415b50d-54b7-a8bf-a316-63f427a46774\"\n      },\n      \"id\": \"6a5ee00d-f9b4-d4cf-2a4f-03575cf1429a\",\n      \"modified\": 5919,\n      \"version\": \"cbfee4a3-597a-560c-3996-2576378aa3bb\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f2f46af-9895-49c0-b4ab-1dba69c9c8b9",
+              "name": "Forbidden - full protected group listing is internal only",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "v1",
+                    "protected_groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "group_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "organization_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f236be0a-5b0a-4dd3-8938-c6ad6b80614a",
+    "name": "Noyo Carrier Carrier Mapped Field Protected Groups API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "APIs to manage and consume information about Carriers",
+      "type": "text/plain"
+    }
+  }
+}
