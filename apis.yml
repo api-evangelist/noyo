@@ -45,6 +45,17 @@ tags:
 - Benefits Administration
 - Insurance Carriers
 - Data Exchange
+- Webhook
+- Health Insurance
+tags_raw:
+- Company
+- Healthcare
+- Insurance
+- Employee Benefits
+- Enrollment
+- Benefits Administration
+- Insurance Carriers
+- Data Exchange
 - Webhooks
 - Health Insurance
 maintainers:
@@ -312,6 +323,8 @@ apis:
   humanURL: https://docs.noyo.com/api-reference/fulfillment
   baseURL: https://fulfillment.noyo.com
   tags:
+  - Group
+  tags_raw:
   - Groups
   properties:
   - type: OpenAPI
@@ -510,6 +523,8 @@ apis:
   humanURL: https://docs.noyo.com/api-reference/fulfillment
   baseURL: https://fulfillment.noyo.com
   tags:
+  - Persons
+  tags_raw:
   - Person
   properties:
   - type: OpenAPI
@@ -622,6 +637,8 @@ apis:
   humanURL: https://docs.noyo.com/api-reference/fulfillment
   baseURL: https://fulfillment.noyo.com
   tags:
+  - rule
+  tags_raw:
   - Rule
   properties:
   - type: OpenAPI
@@ -652,6 +669,8 @@ apis:
   humanURL: https://docs.noyo.com/api-reference/fulfillment
   baseURL: https://fulfillment.noyo.com
   tags:
+  - UI
+  tags_raw:
   - Ui
   properties:
   - type: OpenAPI
