@@ -681,7 +681,7 @@ apis:
   humanURL: https://docs.noyo.com/api-reference/fulfillment
   baseURL: https://fulfillment.noyo.com
   tags:
-  - UI
+  - Ui
   tags_raw:
   - Ui
   properties:
