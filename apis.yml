@@ -102,6 +102,8 @@ apis:
   humanURL: https://docs.noyo.com/api-reference/fulfillment
   baseURL: https://fulfillment.noyo.com
   tags:
+  - Carrier
+  tags_raw:
   - Carriers
   properties:
   - type: OpenAPI
@@ -232,6 +234,8 @@ apis:
   humanURL: https://docs.noyo.com/api-reference/fulfillment
   baseURL: https://fulfillment.noyo.com
   tags:
+  - Feed
+  tags_raw:
   - Feeds
   properties:
   - type: OpenAPI
