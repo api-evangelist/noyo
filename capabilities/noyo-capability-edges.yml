@@ -1,0 +1,135 @@
+slug: noyo
+provider: Noyo
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Healthcare Providers
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 11
+edges:
+- tag: Member Requests
+  spec_file: noyo-member-requests-api-openapi.yml
+  capability_id: BC-300.30
+  capability_id_l1: BC-300
+  capability_name: Compensation & Benefits Management
+  confidence: 0.9
+  evidence: Create a New Hire Enrollment Member Request; Create a Open Enrollment Member Request; Create
+    a Qualifying Life Event Member Request; Create a COBRA Termination Member Request
+  reason: Operations submit new hire enrollments, open enrollment, qualifying life events, demographic
+    changes, terminations and COBRA events to carriers. This is unambiguously employee benefits enrollment
+    administration.
+- tag: Group Configuration
+  spec_file: noyo-group-configuration-api-openapi.yml
+  capability_id: BC-300.30
+  capability_id_l1: BC-300
+  capability_name: Compensation & Benefits Management
+  confidence: 0.85
+  evidence: 'POST /api/v1/employees  createEmployee ... GET /api/v1/employees/{employee_id}/dependents  List
+    All Dependents ... schemas: EnrollmentsToCarrier, IndividualEnrollmentCOBRAEnrollment'
+  reason: Operations maintain employees, dependents, employer groups and their carrier configurations,
+    with enrollment and COBRA schemas. This is administration of employee benefits enrolment data — Compensation
+    & Benefits Management. Slight ambiguity because the surface also carries employee master records (HR
+    Operations).
+- tag: Individual Enrollments
+  spec_file: noyo-individual-enrollments-api-openapi.yml
+  capability_id: BC-300.30
+  capability_id_l1: BC-300
+  capability_name: Compensation & Benefits Management
+  confidence: 0.85
+  evidence: Get a list of all Individual Enrollments for an Employee; schemas IndividualEnrollmentCOBRAEnrollment,
+    COBRADetails
+  reason: Operations retrieve individual employee and dependent enrollments in group benefit plans including
+    COBRA detail. This is benefits enrollment administration, a Compensation & Benefits Management capability,
+    regardless of buyer industry.
+- tag: Member Snapshot
+  spec_file: noyo-member-snapshot-api-openapi.yml
+  capability_id: BC-300.30
+  capability_id_l1: BC-300
+  capability_name: Compensation & Benefits Management
+  confidence: 0.8
+  evidence: POST /api/v1/groups/{group_id}/member_snapshots  createMemberSnapshot; schemas InboundMemberSnapshotCoverage,
+    InboundMemberSnapshotSalary, CarrierFulfillmentStatus
+  reason: Member snapshots carry employee employment, salary and benefit coverage state to carriers with
+    fulfilment status tracking — the core benefits enrollment data exchange, i.e. Compensation & Benefits
+    Management.
+- tag: Renewal Decisions
+  spec_file: noyo-renewal-decisions-api-openapi.yml
+  capability_id: BC-300.30
+  capability_id_l1: BC-300
+  capability_name: Compensation & Benefits Management
+  confidence: 0.8
+  evidence: schemas RenewalDecisionVisionLOC, RenewalDecisionLTDPlan, RenewalDecisionHospitalIndemnityPlan,
+    RenewalDecisionLinesOfCoverage; "Create a new renewal decision" by group
+  reason: Operations record group benefit plan renewal decisions across lines of coverage (life, LTD,
+    vision, critical illness) — squarely employee benefits administration, not a technical object.
+- tag: Member Transactions
+  spec_file: noyo-member-transactions-api-openapi.yml
+  capability_id: BC-300.30
+  capability_id_l1: BC-300
+  capability_name: Compensation & Benefits Management
+  confidence: 0.78
+  evidence: getUIMemberSnapshotByMemberTransaction  Gets member snapshot currently associated with a transaction;
+    schemas InboundMemberSnapshotCoverage, InboundMemberSnapshotCOBRADetails, CarrierFulfillmentStatus
+  reason: These operations expose the real enrollment transactions sent to carriers, carrying coverage,
+    COBRA and carrier fulfilment status — i.e. employee benefits enrollment administration, which realises
+    Compensation & Benefits Management regardless of who buys the API.
+- tag: Plan Rates
+  spec_file: noyo-plan-rates-api-openapi.yml
+  capability_id: BC-300.30
+  capability_id_l1: BC-300
+  capability_name: Compensation & Benefits Management
+  confidence: 0.72
+  evidence: getPlanRatesByGroupId  Get Plan Rates by Group ID; schemas PlanRateByPlanResult, RateStructure,
+    TemporalPlanRateResult
+  reason: Exposes benefit plan premium rate structures for an employer group, which is benefits plan administration
+    data — Compensation & Benefits Management. Only one read operation, hence moderate confidence.
+- tag: Carriers
+  spec_file: noyo-carriers-api-openapi.yml
+  capability_id: BC-300.30
+  capability_id_l1: BC-300
+  capability_name: Compensation & Benefits Management
+  confidence: 0.7
+  evidence: POST /api/v1/carriers/request — Create a new Organization Carrier Connection; schema CreateOrganizationCarrierPublicRequest
+  reason: Managing the set of insurance carriers and establishing carrier connections for a benefits-administration
+    platform is part of benefits administration. Not an insurance-underwriting or provider capability;
+    the frame's healthcare-provider capabilities do not fit an employer-benefits data pipe.
+- tag: Employee
+  spec_file: noyo-employee-api-openapi.yml
+  capability_id: BC-300
+  capability_id_l1: BC-300
+  capability_name: Human Capital Management
+  confidence: 0.7
+  evidence: GET /api/v1/groups/{group_id}/employees/{employee_id} — Get a single Employee within a Group;
+    schemas EmploymentResult, EmploymentDatesResult, Salary
+  reason: Employee master record including employment dates and salary within a benefits group — clearly
+    Human Capital Management, but the single read sits between HR employee records and benefits administration,
+    so no L2 is asserted.
+- tag: Groups
+  spec_file: noyo-groups-api-openapi.yml
+  capability_id: BC-300.30
+  capability_id_l1: BC-300
+  capability_name: Compensation & Benefits Management
+  confidence: 0.7
+  evidence: GET /ui/v1/groups/{group_id}/group_plans  uiGetGroupPlansList  Get a list of all Group Plans;
+    schemas GroupDentalPlanPublicResult, GroupLifePlanPublicResult, GroupPlanCOBRARules
+  reason: The Group here is an employer group whose carriers and group benefit plans (dental, life, STD,
+    AD&D, hospital indemnity, COBRA rules) are exposed. That is employee benefits plan administration
+    data, i.e. Compensation & Benefits Management. Confidence tempered because several operations (mappable_fields,
+    platform_mapping) are field-mapping plumbing.
+- tag: Member Premiums
+  spec_file: noyo-member-premiums-api-openapi.yml
+  capability_id: BC-300.30
+  capability_id_l1: BC-300
+  capability_name: Compensation & Benefits Management
+  confidence: 0.7
+  evidence: GET /api/v1/employees/{employee_id}/premiums  getMemberPremiumsByEmployeeId  Get a list of
+    all Member Premiums; schemas MemberPremiumBilledMember, MemberPremiumPeriod
+  reason: Exposes per-employee benefit premium amounts and billed periods for group insurance coverage
+    — benefits administration data under Compensation & Benefits Management. Single endpoint, so confidence
+    moderate.
