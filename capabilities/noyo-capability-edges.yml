@@ -11,7 +11,7 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 11
+edge_count: 15
 edges:
 - tag: Member Requests
   spec_file: noyo-member-requests-api-openapi.yml
@@ -24,6 +24,17 @@ edges:
   reason: Operations submit new hire enrollments, open enrollment, qualifying life events, demographic
     changes, terminations and COBRA events to carriers. This is unambiguously employee benefits enrollment
     administration.
+- tag: Group Plans & Enrollment
+  spec_file: noyo-group-plans-enrollment-api-openapi.yml
+  capability_id: BC-300.30
+  capability_id_l1: BC-300
+  capability_name: Compensation & Benefits Management
+  confidence: 0.88
+  evidence: getGroupEnrollmentPlanList  Get a list of all Group Enrollment Plans; schemas GroupDentalPlanBenefitsSnapshot,
+    GroupPlanCOBRARules
+  reason: Exposes group benefit plans (dental, COBRA rules) and group enrollments — plainly employee benefits
+    plan and enrollment administration.
+  recovered_from: sweep-20260829T005356Z-edges.json
 - tag: Group Configuration
   spec_file: noyo-group-configuration-api-openapi.yml
   capability_id: BC-300.30
@@ -79,6 +90,17 @@ edges:
   reason: These operations expose the real enrollment transactions sent to carriers, carrying coverage,
     COBRA and carrier fulfilment status — i.e. employee benefits enrollment administration, which realises
     Compensation & Benefits Management regardless of who buys the API.
+- tag: Dependent
+  spec_file: noyo-dependent-api-openapi.yml
+  capability_id: BC-300.30
+  capability_id_l1: BC-300
+  capability_name: Compensation & Benefits Management
+  confidence: 0.75
+  evidence: GET /api/v1/groups/{group_id}/employees/{employee_id}/dependents/{dependent_id}  getGroupEmployeeDependent
+  reason: Retrieval of employee dependents within a benefits group, with person demographic/tobacco/disability
+    attributes used for benefits enrollment. Dependent management is a core part of benefits administration
+    under Compensation & Benefits Management.
+  recovered_from: healthcare-vertical-edges.json
 - tag: Plan Rates
   spec_file: noyo-plan-rates-api-openapi.yml
   capability_id: BC-300.30
@@ -99,6 +121,17 @@ edges:
   reason: Managing the set of insurance carriers and establishing carrier connections for a benefits-administration
     platform is part of benefits administration. Not an insurance-underwriting or provider capability;
     the frame's healthcare-provider capabilities do not fit an employer-benefits data pipe.
+- tag: Eligibility Rules
+  spec_file: noyo-eligibility-rules-api-openapi.yml
+  capability_id: BC-300.30
+  capability_id_l1: BC-300
+  capability_name: Compensation & Benefits Management
+  confidence: 0.7
+  evidence: GET /api/v1/carriers/{carrier_id}/eligibility_rules  Get Eligibility Rules for a Carrier
+  reason: Exposes a carrier's benefits eligibility rules and configuration (EligibilityRuleDescription,
+    EligibilityRuleConfiguration) used to validate employee/dependent enrollment. Employee benefits eligibility,
+    not clinical/patient insurance eligibility verification.
+  recovered_from: healthcare-vertical-edges.json
 - tag: Employee
   spec_file: noyo-employee-api-openapi.yml
   capability_id: BC-300
@@ -110,6 +143,19 @@ edges:
   reason: Employee master record including employment dates and salary within a benefits group — clearly
     Human Capital Management, but the single read sits between HR employee records and benefits administration,
     so no L2 is asserted.
+- tag: Group Connections
+  spec_file: noyo-group-connections-api-openapi.yml
+  capability_id: BC-2140.60
+  capability_id_l1: BC-2140
+  capability_name: Group & Master Policy Administration
+  confidence: 0.7
+  evidence: '"createGroupConnection  Create a new Group Connection", "retryGroupConnectionWithExistingGroup";
+    schema "GroupSetupRequestPublicResult"'
+  reason: The operations create and track group setup requests that connect an employer group to an insurance
+    carrier — i.e. establishing the group policy relationship. Group & Master Policy Administration is
+    the closest fit; confidence moderate because the surface is the request/onboarding step rather than
+    full policy administration.
+  recovered_from: vertical-insurance-edges.json
 - tag: Groups
   spec_file: noyo-groups-api-openapi.yml
   capability_id: BC-300.30
