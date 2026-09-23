@@ -1,15 +1,18 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: APIs to manage and consume information about Carriers
-  title: Noyo Carrier Carrier Mapped Field GroupDisconnectionBulkRequest API
+  description: Policy management APIs for health and ancillary insurance
+  title: Noyo Fulfillment Group Disconnection Bulk Request API
   version: 1.0.0
-servers: []
+servers:
+- description: Noyo Fulfillment API - Live
+  url: https://fulfillment.noyo.com
+- description: Noyo Fulfillment API - Sandbox
+  url: https://fulfillment-sandbox.noyo.com
 tags:
 - name: GroupDisconnectionBulkRequest
 paths:
   /ui/v1/group_disconnection_requests:
     post:
-      description: Bulk create new Group Disconnecting Requests
       operationId: bulkCreateNewGroupDisconnectionRequests
       requestBody:
         content:
@@ -59,110 +62,17 @@ paths:
       - GroupDisconnectionBulkRequest
 components:
   schemas:
-    UIGroupDisconnectionRequestNestedReason:
+    GroupDisconnectionBulkRequestResult:
       properties:
-        context_from_carrier:
-          description: Context provided by the carrier
-          readOnly: true
-          type: string
-        context_from_platform:
-          description: Context given by a platform when rejecting a disconnection
-          readOnly: true
-          type: string
-        created_by:
-          description: Which team created the reason
-          readOnly: true
-          type: string
-        other_reason:
-          description: Other reason for the request
-          readOnly: true
-          type: string
-        reason:
-          description: Why the action was taken
-          readOnly: true
-          type: string
-      required:
-      - created_by
-      type: object
-      x-field_order:
-      - created_by
-      - reason
-      - other_reason
-      - context_from_carrier
-      - context_from_platform
-    GroupDisconnectionBulkRequestPublicCreateRequest:
-      properties:
-        carrier_ids:
-          description: Unique identifier of the carriers to be disconnected from.
+        response:
+          description: List of group disconnecting request results
           items:
-            description: Carrier ID to use for disconnecting request
-            format: uuid
-            type: string
+            $ref: '#/components/schemas/UIGroupDisconnectionRequestResult'
           type: array
-        context:
-          description: Context on why the request was rejected
-          type: string
-        context_from_carrier:
-          description: Context provided by the carrier
-          type: string
-        effective_end_date:
-          description: Unique identifier for the group to be disconnected.
-          format: date
-          type: string
-        group_id:
-          description: Unique identifier for the group to be disconnected.
-          format: uuid
-          type: string
-        protected_group_override:
-          description: Internal-only confirmation that protected group disconnection warning was acknowledged.
-          type: boolean
-        reason:
-          description: The reason for the GDR status creation
-          enum:
-          - broker_of_record
-          - changed_enrollment_method
-          - lost_access
-          - lost_group
-          - no_longer_eligible
-          - not_using_connection
-          - other
-          - payment_lapse
-          - platform_requested
-          - terminated
-          type: string
-        source_date:
-          description: The date associated with the source of the disconnection. Available for internal use only.
-          format: date
-          type: string
-        source_id:
-          description: The ID associated with the source of the disconnection. Available for internal use only.
-          format: uuid
-          type: string
-        source_type:
-          description: The source type of the disconnection. Available for internal use only.
-          enum:
-          - platform
-          - carrier
-          - group_audit_request
-          - group_setup_request
-          - member_transaction
-          type: string
       required:
-      - carrier_ids
-      - effective_end_date
-      - group_id
+      - response
       type: object
-      x-field_order:
-      - carrier_ids
-      - group_id
-      - effective_end_date
-      - source_date
-      - source_type
-      - source_id
-      - reason
-      - context
-      - context_from_carrier
-      - protected_group_override
+      x-field_order: []
     UIGroupDisconnectionRequestResult:
       properties:
         carrier_id:
@@ -263,14 +173,109 @@ components:
       - decided
       - created_reason
       - rejected_reason
-    GroupDisconnectionBulkRequestResult:
+    GroupDisconnectionBulkRequestPublicCreateRequest:
       properties:
-        response:
-          description: List of group disconnecting request results
+        carrier_ids:
+          description: Unique identifier of the carriers to be disconnected from.
           items:
-            $ref: '#/components/schemas/UIGroupDisconnectionRequestResult'
+            description: Carrier ID to use for disconnecting request
+            format: uuid
+            type: string
           type: array
+        context:
+          description: Context on why the request was rejected
+          type: string
+        context_from_carrier:
+          description: Context provided by the carrier
+          type: string
+        effective_end_date:
+          description: Unique identifier for the group to be disconnected.
+          format: date
+          type: string
+        group_id:
+          description: Unique identifier for the group to be disconnected.
+          format: uuid
+          type: string
+        protected_group_override:
+          description: Internal-only confirmation that protected group disconnection warning was acknowledged.
+          type: boolean
+        reason:
+          description: The reason for the GDR status creation
+          enum:
+          - broker_of_record
+          - changed_enrollment_method
+          - lost_access
+          - lost_group
+          - no_longer_eligible
+          - not_using_connection
+          - other
+          - payment_lapse
+          - platform_requested
+          - terminated
+          type: string
+        source_date:
+          description: The date associated with the source of the disconnection. Available for internal use only.
+          format: date
+          type: string
+        source_id:
+          description: The ID associated with the source of the disconnection. Available for internal use only.
+          format: uuid
+          type: string
+        source_type:
+          description: The source type of the disconnection. Available for internal use only.
+          enum:
+          - platform
+          - carrier
+          - group_audit_request
+          - group_setup_request
+          - member_transaction
+          type: string
       required:
-      - response
+      - carrier_ids
+      - effective_end_date
+      - group_id
       type: object
-      x-field_order: []
+      x-field_order:
+      - carrier_ids
+      - group_id
+      - effective_end_date
+      - source_date
+      - source_type
+      - source_id
+      - reason
+      - context
+      - context_from_carrier
+      - protected_group_override
+    UIGroupDisconnectionRequestNestedReason:
+      properties:
+        context_from_carrier:
+          description: Context provided by the carrier
+          readOnly: true
+          type: string
+        context_from_platform:
+          description: Context given by a platform when rejecting a disconnection
+          readOnly: true
+          type: string
+        created_by:
+          description: Which team created the reason
+          readOnly: true
+          type: string
+        other_reason:
+          description: Other reason for the request
+          readOnly: true
+          type: string
+        reason:
+          description: Why the action was taken
+          readOnly: true
+          type: string
+      required:
+      - created_by
+      type: object
+      x-field_order:
+      - created_by
+      - reason
+      - other_reason
+      - context_from_carrier
+      - context_from_platform
+x-readme:
+  explorer-enabled: false

@@ -1,9 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: APIs to manage and consume information about Carriers
-  title: Noyo Carrier Carrier Mapped Field Connection Eligibility API
+  description: Policy management APIs for health and ancillary insurance
+  title: Noyo Fulfillment Connection Eligibility API
   version: 1.0.0
-servers: []
+servers:
+- description: Noyo Fulfillment API - Live
+  url: https://fulfillment.noyo.com
+- description: Noyo Fulfillment API - Sandbox
+  url: https://fulfillment-sandbox.noyo.com
 tags:
 - name: Connection Eligibility
 paths:
@@ -14,9 +18,7 @@ paths:
 
         returns eligibility information for that specific carrier. Otherwise, returns
 
-        eligibility information for all carriers for the given group.
-
-        '
+        eligibility information for all carriers for the given group.'
       operationId: getConnectionEligibility
       parameters:
       - description: The ID of the group to check eligibility for
@@ -44,8 +46,34 @@ paths:
           description: Unauthorized
       tags:
       - Connection Eligibility
+      summary: Get connection eligibility
+      x-summary-source: derived
 components:
   schemas:
+    EnrollmentErrors:
+      properties:
+        default_method:
+          default: null
+          description: Default method for receiving enrollment errors from the carrier
+          enum:
+          - snapshot_errors
+          - error_report
+          type:
+          - string
+          - 'null'
+        enabled:
+          default: false
+          description: Flag indicating if enrollment errors are enabled
+          type: boolean
+      type: object
+    DataExchangeConfiguration:
+      properties:
+        data_exchange:
+          $ref: '#/components/schemas/DataExchange'
+        name:
+          default: Not Connected
+          type: string
+      type: object
     ConnectionEligibilityResult:
       properties:
         carrier_id:
@@ -68,47 +96,6 @@ components:
       - group_id
       type: object
       x-field_order: []
-    EnrollmentsToCarrier:
-      properties:
-        default_method:
-          default: null
-          description: Default method for sending data to the carrier
-          enum:
-          - api
-          - feeds
-          - manual_noyo
-          - manual_partner
-          nullable: true
-          type: string
-        enabled:
-          default: false
-          description: Flag indicating if sending to the carrier is enabled
-          type: boolean
-      type: object
-    DataExchangeConfiguration:
-      properties:
-        data_exchange:
-          $ref: '#/components/schemas/DataExchange'
-        name:
-          default: Not Connected
-          type: string
-      type: object
-    GroupStructure:
-      properties:
-        default_method:
-          default: null
-          description: Default method for receiving group structure
-          enum:
-          - api
-          - account_structure_file
-          nullable: true
-          type: string
-        enabled:
-          default: false
-          description: Flag indicating if receiving group structure is enabled
-          type: boolean
-      type: object
-      x-field_order: []
     Enrollments:
       properties:
         from_carrier:
@@ -127,6 +114,54 @@ components:
           description: Flag indicating if receiving data from the carrier is enabled
           type: boolean
       type: object
+    GroupStructure:
+      properties:
+        default_method:
+          default: null
+          description: Default method for receiving group structure
+          enum:
+          - api
+          - account_structure_file
+          type:
+          - string
+          - 'null'
+        enabled:
+          default: false
+          description: Flag indicating if receiving group structure is enabled
+          type: boolean
+      type: object
+      x-field_order: []
+    EligibilityRuleEvaluation:
+      properties:
+        description:
+          type: string
+        result:
+          type: string
+        rule:
+          type: string
+      required:
+      - description
+      - result
+      - rule
+      type: object
+    EnrollmentsToCarrier:
+      properties:
+        default_method:
+          default: null
+          description: Default method for sending data to the carrier
+          enum:
+          - api
+          - feeds
+          - manual_noyo
+          - manual_partner
+          type:
+          - string
+          - 'null'
+        enabled:
+          default: false
+          description: Flag indicating if sending to the carrier is enabled
+          type: boolean
+      type: object
     DataExchange:
       properties:
         enrollment_errors:
@@ -142,31 +177,5 @@ components:
           - $ref: '#/components/schemas/GroupStructure'
           description: Data exchange configuration for group structure
       type: object
-    EnrollmentErrors:
-      properties:
-        default_method:
-          default: null
-          description: Default method for receiving enrollment errors from the carrier
-          enum:
-          - snapshot_errors
-          - error_report
-          nullable: true
-          type: string
-        enabled:
-          default: false
-          description: Flag indicating if enrollment errors are enabled
-          type: boolean
-      type: object
-    EligibilityRuleEvaluation:
-      properties:
-        description:
-          type: string
-        result:
-          type: string
-        rule:
-          type: string
-      required:
-      - description
-      - result
-      - rule
-      type: object
+x-readme:
+  explorer-enabled: false

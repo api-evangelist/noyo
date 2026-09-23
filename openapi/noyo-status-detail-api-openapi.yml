@@ -1,9 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: APIs to manage and consume information about Carriers
-  title: Noyo Carrier Carrier Mapped Field Status Detail API
+  description: Policy management APIs for health and ancillary insurance
+  title: Noyo Fulfillment Status Detail API
   version: 1.0.0
-servers: []
+servers:
+- description: Noyo Fulfillment API - Live
+  url: https://fulfillment.noyo.com
+- description: Noyo Fulfillment API - Sandbox
+  url: https://fulfillment-sandbox.noyo.com
 tags:
 - name: Status Detail
 paths:
@@ -120,24 +124,6 @@ components:
       x-field_order:
       - status_detail
       - event_created
-    PaginatedStatusDetailResult:
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of status detail results
-          items:
-            $ref: '#/components/schemas/StatusDetailResult'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
     Meta:
       properties:
         offset:
@@ -169,3 +155,23 @@ components:
       - page_num
       - page_size
       type: object
+    PaginatedStatusDetailResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of status detail results
+          items:
+            $ref: '#/components/schemas/StatusDetailResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+x-readme:
+  explorer-enabled: false

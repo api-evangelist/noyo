@@ -1,9 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: APIs to manage and consume information about Carriers
-  title: Noyo Carrier Carrier Mapped Field Partner Document Sources API
+  description: Policy management APIs for health and ancillary insurance
+  title: Noyo Fulfillment Partner Document Sources API
   version: 1.0.0
-servers: []
+servers:
+- description: Noyo Fulfillment API - Live
+  url: https://fulfillment.noyo.com
+- description: Noyo Fulfillment API - Sandbox
+  url: https://fulfillment-sandbox.noyo.com
 tags:
 - name: Partner Document Sources
 paths:
@@ -106,55 +110,6 @@ paths:
       - Partner Document Sources
 components:
   schemas:
-    PaginatedPartnerDocumentSourcePublicResult:
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of partner document source results
-          items:
-            $ref: '#/components/schemas/PartnerDocumentSourcePublicResult'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
-    Meta:
-      properties:
-        offset:
-          description: The offset of the first response record within the matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
-        page_num:
-          description: The page number of the response records within the overall data set (1-based integer)
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        page_size:
-          description: The maximum number of response records on each page of results
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        total_records:
-          description: The total number of records in the entire matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
-      required:
-      - offset
-      - page_num
-      - page_size
-      type: object
     PartnerDocumentSourcePublicResult:
       properties:
         created:
@@ -180,8 +135,9 @@ components:
         organization_id:
           description: The ID of the organization this source belongs to
           format: uuid
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         partner_id:
           description: The ID of the partner entity this source belongs to (e.g., carrier ID)
           format: uuid
@@ -196,12 +152,14 @@ components:
         report_format:
           description: Format of the report
           example: EDI_834
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         source_description:
           description: Optional further details about the source
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         version:
           description: Current version of the record
           format: uuid
@@ -234,3 +192,54 @@ components:
       - source_config
       - feed_ids
       - group_ids
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+    PaginatedPartnerDocumentSourcePublicResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of partner document source results
+          items:
+            $ref: '#/components/schemas/PartnerDocumentSourcePublicResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+x-readme:
+  explorer-enabled: false

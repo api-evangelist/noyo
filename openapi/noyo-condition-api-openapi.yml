@@ -1,15 +1,18 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: APIs to manage and consume information about Carriers
-  title: Noyo Carrier Carrier Mapped Field Condition API
+  description: Policy management APIs for health and ancillary insurance
+  title: Noyo Fulfillment Condition API
   version: 1.0.0
-servers: []
+servers:
+- description: Noyo Fulfillment API - Live
+  url: https://fulfillment.noyo.com
+- description: Noyo Fulfillment API - Sandbox
+  url: https://fulfillment-sandbox.noyo.com
 tags:
 - name: Condition
 paths:
   /api/v1/conditions:
     post:
-      description: Create a new Condition
       operationId: createNewCondition
       requestBody:
         content:
@@ -168,23 +171,44 @@ paths:
       - Condition
 components:
   schemas:
-    ConditionCreateRequest:
+    ConditionEditRequest:
       properties:
         details:
           allOf:
           - $ref: '#/components/schemas/ConditionDetails'
           description: Details of the condition
-        rule_id:
-          description: Unique identifier of the rule we are creating a condition for
-          format: uuid
-          type: string
       required:
       - details
-      - rule_id
       type: object
-      x-field_order:
-      - rule_id
-      - details
+      x-field_order: []
+    ConditionDetails:
+      properties:
+        left_operand:
+          description: Field name that is being evaluated
+          type: string
+        operator:
+          description: Operation we are evaluating between the left and right operands
+          enum:
+          - is
+          - is_not
+          - is_one_of
+          - is_at_least_one_of
+          - is_not_one_of
+          - greater_than
+          - less_than
+          - begins_with
+          - ends_with
+          - between
+          - contains
+          type:
+          - string
+          - 'null'
+        right_operand:
+          description: The resulting value of the conditional
+          type:
+          - string
+          - 'null'
+      type: object
     PaginatedConditionResult:
       properties:
         meta:
@@ -203,6 +227,23 @@ components:
       x-field_order:
       - meta
       - response
+    ConditionCreateRequest:
+      properties:
+        details:
+          allOf:
+          - $ref: '#/components/schemas/ConditionDetails'
+          description: Details of the condition
+        rule_id:
+          description: Unique identifier of the rule we are creating a condition for
+          format: uuid
+          type: string
+      required:
+      - details
+      - rule_id
+      type: object
+      x-field_order:
+      - rule_id
+      - details
     ConditionResult:
       properties:
         created:
@@ -275,39 +316,5 @@ components:
       - page_num
       - page_size
       type: object
-    ConditionEditRequest:
-      properties:
-        details:
-          allOf:
-          - $ref: '#/components/schemas/ConditionDetails'
-          description: Details of the condition
-      required:
-      - details
-      type: object
-      x-field_order: []
-    ConditionDetails:
-      properties:
-        left_operand:
-          description: Field name that is being evaluated
-          type: string
-        operator:
-          description: Operation we are evaluating between the left and right operands
-          enum:
-          - is
-          - is_not
-          - is_one_of
-          - is_at_least_one_of
-          - is_not_one_of
-          - greater_than
-          - less_than
-          - begins_with
-          - ends_with
-          - between
-          - contains
-          nullable: true
-          type: string
-        right_operand:
-          description: The resulting value of the conditional
-          nullable: true
-          type: string
-      type: object
+x-readme:
+  explorer-enabled: false

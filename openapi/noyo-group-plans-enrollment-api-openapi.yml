@@ -1,9 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: APIs to manage and consume information about Carriers
-  title: Noyo Carrier Carrier Mapped Field Group Plans & Enrollment API
+  description: Policy management APIs for health and ancillary insurance
+  title: Noyo Fulfillment Group Plans & Enrollment API
   version: 1.0.0
-servers: []
+servers:
+- description: Noyo Fulfillment API - Live
+  url: https://fulfillment.noyo.com
+- description: Noyo Fulfillment API - Sandbox
+  url: https://fulfillment-sandbox.noyo.com
 tags:
 - name: Group Plans & Enrollment
 paths:
@@ -378,33 +382,6 @@ paths:
       - Group Plans & Enrollment
 components:
   schemas:
-    PaginatedGroupPlanResult:
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of group plan results
-          items:
-            description: Group plan associated with the group
-            readOnly: true
-            type: object
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
-    GroupDentalPlanBenefitsSnapshot:
-      properties:
-        contributory_type:
-          description: Contribution type for the group AD&D plan
-          example: Contributory
-          type: string
-      type: object
     GroupPlanDependentChildAgeLimit:
       properties:
         dependent_child_age_limit:
@@ -448,16 +425,6 @@ components:
       x-field_order:
       - meta
       - response
-    SingleGroupPlanResult:
-      properties:
-        plan:
-          description: Group plan associated to a line of coverage
-          readOnly: true
-          type: object
-      required:
-      - plan
-      type: object
-      x-field_order: []
     GroupEnrollmentPublicResult:
       properties:
         carrier_id:
@@ -471,14 +438,16 @@ components:
           description: ISO-8601 date string for the effective end date of the record
           example: '2018-12-31'
           format: date
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         effective_start_date:
           description: ISO-8601 date string for the effective start date of the record
           example: '2018-01-01'
           format: date
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         group_id:
           description: Unique identifier of the associated group in the Noyo system
           format: uuid
@@ -512,20 +481,23 @@ components:
           description: ISO-8601 date string for the open enrollment end date of the group enrollment
           example: '2018-11-30'
           format: date
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         open_enrollment_renewal_date:
           description: ISO-8601 date string for the open enrollment renewal start date of the group enrollment
           example: '2018-12-01'
           format: date
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         open_enrollment_start_date:
           description: ISO-8601 date string for the open enrollment start date of the group enrollment
           example: '2018-11-01'
           format: date
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         status:
           description: Status of the group enrollment
           enum:
@@ -561,43 +533,6 @@ components:
       - effective_end_date
       - created
       - modified
-    GroupPlanCOBRARules:
-      properties:
-        eligible:
-          description: True if group plan is eligible for COBRA enrollments
-          type: boolean
-      type: object
-    Meta:
-      properties:
-        offset:
-          description: The offset of the first response record within the matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
-        page_num:
-          description: The page number of the response records within the overall data set (1-based integer)
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        page_size:
-          description: The maximum number of response records on each page of results
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        total_records:
-          description: The total number of records in the entire matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
-      required:
-      - offset
-      - page_num
-      - page_size
-      type: object
     GroupDentalPlanPublicResult:
       properties:
         benefits:
@@ -629,14 +564,16 @@ components:
           description: ISO-8601 date string for the effective end date of the record
           example: '2018-12-31'
           format: date
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         effective_start_date:
           description: ISO-8601 date string for the effective start date of the record
           example: '2018-01-01'
           format: date
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         eligible_member_types:
           description: List of member types eligible for the group dental plan
           items:
@@ -754,3 +691,79 @@ components:
       - benefits
       - created
       - modified
+    GroupPlanCOBRARules:
+      properties:
+        eligible:
+          description: True if group plan is eligible for COBRA enrollments
+          type: boolean
+      type: object
+    GroupDentalPlanBenefitsSnapshot:
+      properties:
+        contributory_type:
+          description: Contribution type for the group AD&D plan
+          example: Contributory
+          type: string
+      type: object
+    PaginatedGroupPlanResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of group plan results
+          items:
+            description: Group plan associated with the group
+            readOnly: true
+            type: object
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+    SingleGroupPlanResult:
+      properties:
+        plan:
+          description: Group plan associated to a line of coverage
+          readOnly: true
+          type: object
+      required:
+      - plan
+      type: object
+      x-field_order: []
+x-readme:
+  explorer-enabled: false

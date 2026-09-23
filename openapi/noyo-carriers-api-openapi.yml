@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   description: APIs to manage and consume information about Carriers
-  title: Noyo Carrier Carrier Mapped Field Carriers API
+  title: Noyo Carrier Carriers API
   version: 1.0.0
 servers: []
 tags:
@@ -90,7 +90,6 @@ paths:
       - Carriers
   /api/v1/carriers/request:
     post:
-      description: Create a new Organization Carrier Connection
       operationId: createPublicCarrier
       requestBody:
         content:
@@ -157,6 +156,21 @@ paths:
       - Carriers
 components:
   schemas:
+    CreateOrganizationCarrierPublicRequest:
+      properties:
+        carrier_id:
+          description: Carrier ID associated with the organization
+          format: uuid
+          type: string
+        estimated_volume:
+          default: 0
+          description: estimated number of enrollments with this carrier
+          format: int32
+          type: integer
+      required:
+      - carrier_id
+      type: object
+      x-field_order: []
     OrganizationCarrierResult:
       properties:
         carrier_id:
@@ -210,21 +224,6 @@ components:
       - organization_id
       - status
       - estimated_volume
-    CreateOrganizationCarrierPublicRequest:
-      properties:
-        carrier_id:
-          description: Carrier ID associated with the organization
-          format: uuid
-          type: string
-        estimated_volume:
-          default: 0
-          description: estimated number of enrollments with this carrier
-          format: int32
-          type: integer
-      required:
-      - carrier_id
-      type: object
-      x-field_order: []
     CarrierResult:
       properties:
         display_name:

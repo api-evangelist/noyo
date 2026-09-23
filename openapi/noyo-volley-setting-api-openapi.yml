@@ -1,9 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: APIs to manage and consume information about Carriers
-  title: Noyo Carrier Carrier Mapped Field Volley Setting API
+  description: Policy management APIs for health and ancillary insurance
+  title: Noyo Fulfillment Volley Setting API
   version: 1.0.0
-servers: []
+servers:
+- description: Noyo Fulfillment API - Live
+  url: https://fulfillment.noyo.com
+- description: Noyo Fulfillment API - Sandbox
+  url: https://fulfillment-sandbox.noyo.com
 tags:
 - name: Volley Setting
 paths:
@@ -52,7 +56,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedVolleySettingResult'
           description: Successful Response - Returns a list of Volley Settings
-      summary: Retrieves a list of Volley Settings.
+      summary: Retrieves a list of Volley Settings
       tags:
       - Volley Setting
     post:
@@ -146,18 +150,11 @@ paths:
       - Volley Setting
 components:
   schemas:
-    VolleySettingCreateRequest:
+    VolleySettingUpdateRequest:
       properties:
         configuration:
           allOf:
           - $ref: '#/components/schemas/VolleySettingConfiguration'
-          nullable: true
-        volley_type:
-          enum:
-          - new_connection_mapping
-          type: string
-      required:
-      - volley_type
       type: object
       x-field_order: []
     VolleySettingConfiguration:
@@ -170,12 +167,57 @@ components:
       - configuration_settings
       - volley_type
       type: object
-    VolleySettingUpdateRequest:
+    PaginatedVolleySettingResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of Volley Setting results
+          items:
+            $ref: '#/components/schemas/VolleySettingResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    VolleySettingResult:
       properties:
         configuration:
           allOf:
           - $ref: '#/components/schemas/VolleySettingConfiguration'
-          nullable: true
+        created:
+          description: The date the record was created
+          type: integer
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        organization_id:
+          format: uuid
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+        volley_type:
+          enum:
+          - new_connection_mapping
+          type: string
+      required:
+      - created
+      - id
+      - modified
+      - organization_id
+      - version
+      - volley_type
       type: object
       x-field_order: []
     VolleySettingConfigurationSettings:
@@ -219,57 +261,18 @@ components:
       - page_num
       - page_size
       type: object
-    VolleySettingResult:
+    VolleySettingCreateRequest:
       properties:
         configuration:
           allOf:
           - $ref: '#/components/schemas/VolleySettingConfiguration'
-          nullable: true
-        created:
-          description: The date the record was created
-          type: integer
-        id:
-          description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        modified:
-          description: The date the record was last updated
-          type: integer
-        organization_id:
-          format: uuid
-          type: string
-        version:
-          description: Current version of the record
-          format: uuid
-          type: string
         volley_type:
           enum:
           - new_connection_mapping
           type: string
       required:
-      - created
-      - id
-      - modified
-      - organization_id
-      - version
       - volley_type
       type: object
       x-field_order: []
-    PaginatedVolleySettingResult:
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of Volley Setting results
-          items:
-            $ref: '#/components/schemas/VolleySettingResult'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
+x-readme:
+  explorer-enabled: false

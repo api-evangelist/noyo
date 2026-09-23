@@ -1,9 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: APIs to manage and consume information about Carriers
-  title: Noyo Carrier Carrier Mapped Field Group Disconnections API
+  description: Policy management APIs for health and ancillary insurance
+  title: Noyo Fulfillment Group Disconnections API
   version: 1.0.0
-servers: []
+servers:
+- description: Noyo Fulfillment API - Live
+  url: https://fulfillment.noyo.com
+- description: Noyo Fulfillment API - Sandbox
+  url: https://fulfillment-sandbox.noyo.com
 tags:
 - name: Group Disconnections
 paths:
@@ -102,7 +106,6 @@ paths:
       tags:
       - Group Disconnections
     post:
-      description: Create a new Group Disconnection Request
       operationId: createNewGroupDisconnectionRequest
       requestBody:
         content:
@@ -189,7 +192,6 @@ paths:
   /api/v1/group_disconnection_requests/{group_disconnection_request_id}/confirm:
     x-summary: Confirm group disconnection request by id
     put:
-      description: Confirm Group Disconnection
       operationId: confirmGroupDisconnectionRequest
       parameters:
       - description: The unique identifier of the group disconnection request you want to confirm
@@ -236,7 +238,6 @@ paths:
   /api/v1/group_disconnection_requests/{group_disconnection_request_id}/reject:
     x-summary: Reject group disconnection request by id
     put:
-      description: Reject Group Disconnection
       operationId: rejectGroupDisconnectionRequest
       parameters:
       - description: The unique identifier of the group disconnection request you want to reject
@@ -589,74 +590,100 @@ components:
           type: string
       type: object
       x-field_order: []
-    UIGroupDisconnectionRequestNestedReason:
-      properties:
-        context_from_carrier:
-          description: Context provided by the carrier
-          readOnly: true
-          type: string
-        context_from_platform:
-          description: Context given by a platform when rejecting a disconnection
-          readOnly: true
-          type: string
-        created_by:
-          description: Which team created the reason
-          readOnly: true
-          type: string
-        other_reason:
-          description: Other reason for the request
-          readOnly: true
-          type: string
-        reason:
-          description: Why the action was taken
-          readOnly: true
-          type: string
-      required:
-      - created_by
-      type: object
-      x-field_order:
-      - created_by
-      - reason
-      - other_reason
-      - context_from_carrier
-      - context_from_platform
-    GroupDisconnectionRequestPublicCreateRequest:
+    GroupDisconnectionRequestResult:
       properties:
         carrier_id:
-          description: Unique identifier for the carrier to be disconnected from.
+          description: Unique identifier for the carrier to be disconnected from
           format: uuid
+          readOnly: true
           type: string
-        context:
-          description: Context on why the request was created
-          type: string
+        completed:
+          description: Timestamp at which the disconnection was completed
+          readOnly: true
+          type: integer
+        created:
+          description: The date the record was created
+          type: integer
+        decided:
+          description: Timestamp at which the platform recorded a decision on the disconnection
+          readOnly: true
+          type: integer
         effective_end_date:
-          description: The date at which the disconnection will take effect.
+          description: The date at which the disconnection will take effect
           format: date
+          readOnly: true
           type: string
         group_id:
-          description: Unique identifier for the group to be disconnected.
+          description: Unique identifier for the group to be disconnected. May be missing if group has already been disconnected.
+          format: uuid
+          readOnly: true
+          type: string
+        group_name:
+          description: Name of the group to be disconnected from
+          readOnly: true
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
           format: uuid
           type: string
-        reason:
-          description: The reason for the GDR creation
-          enum:
-          - broker_of_record
-          - changed_enrollment_method
-          - lost_group
-          - no_longer_eligible
-          - not_using_connection
-          - other
-          - terminated
+        modified:
+          description: The date the record was last updated
+          type: integer
+        organization_id:
+          description: Unique identifier for organization associated with the request
+          format: uuid
+          readOnly: true
+          type: string
+        source_date:
+          description: The date associated with the source of the disconnection
+          format: date
+          readOnly: true
+          type: string
+        source_id:
+          description: If applicable, the ID associated with the source of the disconnection request
+          format: uuid
+          readOnly: true
+          type: string
+        source_type:
+          description: The source of the disconnection request
+          readOnly: true
+          type: string
+        status:
+          description: The status of the disconnection request
+          readOnly: true
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
           type: string
       required:
       - carrier_id
-      - effective_end_date
-      - group_id
+      - created
+      - group_name
+      - id
+      - modified
+      - organization_id
+      - source_id
+      - source_type
+      - status
+      - version
       type: object
       x-field_order:
+      - id
+      - version
+      - created
+      - modified
+      - organization_id
       - carrier_id
       - group_id
+      - group_name
+      - source_id
+      - source_type
+      - source_date
+      - status
       - effective_end_date
+      - completed
+      - decided
     UIPaginatedGroupDisconnectionRequestResult:
       properties:
         meta:
@@ -702,55 +729,43 @@ components:
       - status
       type: object
       x-field_order: []
-    PaginatedGroupDisconnectionRequestResult:
+    GroupDisconnectionRequestPublicCreateRequest:
       properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of group disconnection request results
-          items:
-            $ref: '#/components/schemas/GroupDisconnectionRequestResult'
-          type: array
+        carrier_id:
+          description: Unique identifier for the carrier to be disconnected from.
+          format: uuid
+          type: string
+        context:
+          description: Context on why the request was created
+          type: string
+        effective_end_date:
+          description: The date at which the disconnection will take effect.
+          format: date
+          type: string
+        group_id:
+          description: Unique identifier for the group to be disconnected.
+          format: uuid
+          type: string
+        reason:
+          description: The reason for the GDR creation
+          enum:
+          - broker_of_record
+          - changed_enrollment_method
+          - lost_group
+          - no_longer_eligible
+          - not_using_connection
+          - other
+          - terminated
+          type: string
       required:
-      - meta
-      - response
+      - carrier_id
+      - effective_end_date
+      - group_id
       type: object
       x-field_order:
-      - meta
-      - response
-    Meta:
-      properties:
-        offset:
-          description: The offset of the first response record within the matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
-        page_num:
-          description: The page number of the response records within the overall data set (1-based integer)
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        page_size:
-          description: The maximum number of response records on each page of results
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        total_records:
-          description: The total number of records in the entire matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
-      required:
-      - offset
-      - page_num
-      - page_size
-      type: object
+      - carrier_id
+      - group_id
+      - effective_end_date
     UIGroupDisconnectionRequestResult:
       properties:
         carrier_id:
@@ -851,97 +866,85 @@ components:
       - decided
       - created_reason
       - rejected_reason
-    GroupDisconnectionRequestResult:
+    UIGroupDisconnectionRequestNestedReason:
       properties:
-        carrier_id:
-          description: Unique identifier for the carrier to be disconnected from
-          format: uuid
+        context_from_carrier:
+          description: Context provided by the carrier
           readOnly: true
           type: string
-        completed:
-          description: Timestamp at which the disconnection was completed
-          readOnly: true
-          type: integer
-        created:
-          description: The date the record was created
-          type: integer
-        decided:
-          description: Timestamp at which the platform recorded a decision on the disconnection
-          readOnly: true
-          type: integer
-        effective_end_date:
-          description: The date at which the disconnection will take effect
-          format: date
+        context_from_platform:
+          description: Context given by a platform when rejecting a disconnection
           readOnly: true
           type: string
-        group_id:
-          description: Unique identifier for the group to be disconnected. May be missing if group has already been disconnected.
-          format: uuid
+        created_by:
+          description: Which team created the reason
           readOnly: true
           type: string
-        group_name:
-          description: Name of the group to be disconnected from
+        other_reason:
+          description: Other reason for the request
           readOnly: true
           type: string
-        id:
-          description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        modified:
-          description: The date the record was last updated
-          type: integer
-        organization_id:
-          description: Unique identifier for organization associated with the request
-          format: uuid
+        reason:
+          description: Why the action was taken
           readOnly: true
-          type: string
-        source_date:
-          description: The date associated with the source of the disconnection
-          format: date
-          readOnly: true
-          type: string
-        source_id:
-          description: If applicable, the ID associated with the source of the disconnection request
-          format: uuid
-          readOnly: true
-          type: string
-        source_type:
-          description: The source of the disconnection request
-          readOnly: true
-          type: string
-        status:
-          description: The status of the disconnection request
-          readOnly: true
-          type: string
-        version:
-          description: Current version of the record
-          format: uuid
           type: string
       required:
-      - carrier_id
-      - created
-      - group_name
-      - id
-      - modified
-      - organization_id
-      - source_id
-      - source_type
-      - status
-      - version
+      - created_by
       type: object
       x-field_order:
-      - id
-      - version
-      - created
-      - modified
-      - organization_id
-      - carrier_id
-      - group_id
-      - group_name
-      - source_id
-      - source_type
-      - source_date
-      - status
-      - effective_end_date
-      - completed
-      - decided
+      - created_by
+      - reason
+      - other_reason
+      - context_from_carrier
+      - context_from_platform
+    PaginatedGroupDisconnectionRequestResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of group disconnection request results
+          items:
+            $ref: '#/components/schemas/GroupDisconnectionRequestResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+x-readme:
+  explorer-enabled: false

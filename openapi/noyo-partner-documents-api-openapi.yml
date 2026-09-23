@@ -1,9 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: APIs to manage and consume information about Carriers
-  title: Noyo Carrier Carrier Mapped Field Partner Documents API
+  description: Policy management APIs for health and ancillary insurance
+  title: Noyo Fulfillment Partner Documents API
   version: 1.0.0
-servers: []
+servers:
+- description: Noyo Fulfillment API - Live
+  url: https://fulfillment.noyo.com
+- description: Noyo Fulfillment API - Sandbox
+  url: https://fulfillment-sandbox.noyo.com
 tags:
 - name: Partner Documents
 paths:
@@ -34,9 +38,7 @@ paths:
 
         * creation date
 
-        * effective_date
-
-        '
+        * effective_date'
       operationId: getPartnerDocumentList
       parameters:
       - description: Filter by associated group IDs
@@ -340,9 +342,7 @@ paths:
   /api/v1/partner_documents/{partner_document_id}:
     x-summary: Single Partner Document Resource
     get:
-      description: 'Returns a single partner document by ID.
-
-        '
+      description: Returns a single partner document by ID.
       operationId: getPartnerDocument
       parameters:
       - description: Partner Document ID
@@ -391,24 +391,6 @@ paths:
       - Partner Documents
 components:
   schemas:
-    PaginatedPartnerDocumentPublicResult:
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of partner document results
-          items:
-            $ref: '#/components/schemas/PartnerDocumentPublicResult'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
     PartnerDocumentPaginatedStatusResult:
       properties:
         meta:
@@ -427,71 +409,6 @@ components:
       x-field_order:
       - meta
       - response
-    PartnerDocumentPublicCreateRequest:
-      properties:
-        content_type:
-          description: Content type of the document
-          example: EDI_ERROR_REPORT
-          type: string
-        display_name:
-          description: Display name of the document
-          example: Error_Report_Acme_Corp_2023_10_27.csv
-          type: string
-        effective_date:
-          description: Effective date of the document
-          example: '2023-10-27'
-          format: date
-          type: string
-        extracted_data:
-          description: Extracted data from the document
-          nullable: true
-          type: object
-        feed_ids:
-          default: []
-          description: List of feed IDs associated with the document
-          items:
-            format: uuid
-            type: string
-          type: array
-        file_key:
-          description: GCS key for the file
-          example: uploads/partner_a/error_reports/2023-10-27.csv
-          type: string
-        group_ids:
-          default: []
-          description: List of group IDs associated with the document
-          items:
-            format: uuid
-            type: string
-          type: array
-        organization_id:
-          description: ID of the organization associated with the document (can be derived from partner_id if partner_type is 'organization')
-          format: uuid
-          nullable: true
-          type: string
-        partner_document_source_id:
-          description: ID of the partner document source
-          format: uuid
-          type: string
-        partner_id:
-          description: ID of the partner (e.g., organization or carrier) associated with the document
-          format: uuid
-          type: string
-        partner_type:
-          description: Type of the partner (e.g., 'organization' or 'carrier') associated with the document
-          type: string
-        source:
-          description: Source of the document
-          example: SFTP
-          type: string
-      required:
-      - content_type
-      - file_key
-      - partner_id
-      - partner_type
-      - source
-      type: object
-      x-field_order: []
     PartnerDocumentPublicResult:
       properties:
         content_type:
@@ -512,8 +429,9 @@ components:
           type: string
         extracted_data:
           description: Extracted data from the document
-          nullable: true
-          type: object
+          type:
+          - object
+          - 'null'
         feed_ids:
           default: []
           description: List of feed IDs associated with the document
@@ -542,8 +460,9 @@ components:
         organization_id:
           description: ID of the organization associated with the document (can be derived from partner_id if partner_type is 'organization')
           format: uuid
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         partner_document_source_id:
           description: ID of the partner document source
           format: uuid
@@ -590,6 +509,140 @@ components:
       - group_ids
       - feed_ids
       - partner_document_source_id
+    PaginatedPartnerDocumentPublicResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of partner document results
+          items:
+            $ref: '#/components/schemas/PartnerDocumentPublicResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    WorkflowStatus:
+      properties:
+        created:
+          description: The date the record was created
+          type: integer
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        status:
+          description: Current workflow status
+          type: string
+        template_name:
+          description: Name of the workflow template
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - created
+      - id
+      - modified
+      - status
+      - template_name
+      - version
+      type: object
+    PartnerDocumentPublicEditRequest:
+      properties:
+        display_name:
+          description: Display name of the document
+          example: Error_Report_Acme_Corp_2023_10_27.csv
+          type: string
+        effective_date:
+          description: Effective date of the document
+          example: '2023-10-27'
+          format: date
+          type: string
+        extracted_data:
+          description: Extracted data from the document
+          type: object
+        is_external:
+          description: Whether the document is external
+          type: boolean
+      type: object
+      x-field_order: []
+    PartnerDocumentPublicCreateRequest:
+      properties:
+        content_type:
+          description: Content type of the document
+          example: EDI_ERROR_REPORT
+          type: string
+        display_name:
+          description: Display name of the document
+          example: Error_Report_Acme_Corp_2023_10_27.csv
+          type: string
+        effective_date:
+          description: Effective date of the document
+          example: '2023-10-27'
+          format: date
+          type: string
+        extracted_data:
+          description: Extracted data from the document
+          type:
+          - object
+          - 'null'
+        feed_ids:
+          default: []
+          description: List of feed IDs associated with the document
+          items:
+            format: uuid
+            type: string
+          type: array
+        file_key:
+          description: GCS key for the file
+          example: uploads/partner_a/error_reports/2023-10-27.csv
+          type: string
+        group_ids:
+          default: []
+          description: List of group IDs associated with the document
+          items:
+            format: uuid
+            type: string
+          type: array
+        organization_id:
+          description: ID of the organization associated with the document (can be derived from partner_id if partner_type is 'organization')
+          format: uuid
+          type:
+          - string
+          - 'null'
+        partner_document_source_id:
+          description: ID of the partner document source
+          format: uuid
+          type: string
+        partner_id:
+          description: ID of the partner (e.g., organization or carrier) associated with the document
+          format: uuid
+          type: string
+        partner_type:
+          description: Type of the partner (e.g., 'organization' or 'carrier') associated with the document
+          type: string
+        source:
+          description: Source of the document
+          example: SFTP
+          type: string
+      required:
+      - content_type
+      - file_key
+      - partner_id
+      - partner_type
+      - source
+      type: object
+      x-field_order: []
     Meta:
       properties:
         offset:
@@ -621,52 +674,5 @@ components:
       - page_num
       - page_size
       type: object
-    PartnerDocumentPublicEditRequest:
-      properties:
-        display_name:
-          description: Display name of the document
-          example: Error_Report_Acme_Corp_2023_10_27.csv
-          type: string
-        effective_date:
-          description: Effective date of the document
-          example: '2023-10-27'
-          format: date
-          type: string
-        extracted_data:
-          description: Extracted data from the document
-          type: object
-        is_external:
-          description: Whether the document is external
-          type: boolean
-      type: object
-      x-field_order: []
-    WorkflowStatus:
-      properties:
-        created:
-          description: The date the record was created
-          type: integer
-        id:
-          description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        modified:
-          description: The date the record was last updated
-          type: integer
-        status:
-          description: Current workflow status
-          type: string
-        template_name:
-          description: Name of the workflow template
-          type: string
-        version:
-          description: Current version of the record
-          format: uuid
-          type: string
-      required:
-      - created
-      - id
-      - modified
-      - status
-      - template_name
-      - version
-      type: object
+x-readme:
+  explorer-enabled: false

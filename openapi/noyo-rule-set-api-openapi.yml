@@ -1,9 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: APIs to manage and consume information about Carriers
-  title: Noyo Carrier Carrier Mapped Field Rule Set API
+  description: Policy management APIs for health and ancillary insurance
+  title: Noyo Fulfillment Rule Set API
   version: 1.0.0
-servers: []
+servers:
+- description: Noyo Fulfillment API - Live
+  url: https://fulfillment.noyo.com
+- description: Noyo Fulfillment API - Sandbox
+  url: https://fulfillment-sandbox.noyo.com
 tags:
 - name: Rule Set
 paths:
@@ -66,7 +70,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedRuleSetTracesResult'
           description: Successful Response - Returns a list of all matching Rule Set Traces
-      summary: Retrieves a list of Rule Set Traces.
+      summary: Retrieves a list of Rule Set Traces
       tags:
       - Rule Set
   /api/v1/rule_set_traces/{id}:
@@ -158,7 +162,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedRuleSetResult'
           description: Successful Response - Returns a list of all matching Rule Sets
-      summary: Retrieves a list of Rule Sets.
+      summary: Retrieves a list of Rule Sets
       tags:
       - Rule Set
     post:
@@ -302,16 +306,121 @@ components:
         entry_point:
           enum:
           - member_snapshot
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         group_id:
           format: uuid
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         name:
           type: string
         rules:
           type: object
+      type: object
+      x-field_order: []
+    RuleSetCreateRequest:
+      properties:
+        entry_point:
+          enum:
+          - member_snapshot
+          type: string
+        group_id:
+          format: uuid
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+        rule_set_metadata:
+          $ref: '#/components/schemas/RuleSetMetadata'
+        rules:
+          type: object
+        status:
+          default: active
+          enum:
+          - active
+          - draft
+          - archived
+          type: string
+      required:
+      - entry_point
+      - name
+      - rules
+      type: object
+      x-field_order: []
+    RuleSetMetadata:
+      properties:
+        sandwich_position:
+          type: string
+      required:
+      - sandwich_position
+      type: object
+    PaginatedRuleSetTracesResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of Rule set traces
+          items:
+            $ref: '#/components/schemas/RuleSetTraceResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    RuleSetResult:
+      properties:
+        created:
+          description: The date the record was created
+          type: integer
+        entry_point:
+          type: string
+        group_id:
+          format: uuid
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        name:
+          type: string
+        organization_id:
+          format: uuid
+          type: string
+        rule_set_metadata:
+          $ref: '#/components/schemas/RuleSetMetadata'
+        rules:
+          type: object
+        status:
+          enum:
+          - active
+          - draft
+          - archived
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - created
+      - entry_point
+      - id
+      - modified
+      - name
+      - rule_set_metadata
+      - rules
+      - status
+      - version
       type: object
       x-field_order: []
     PaginatedRuleSetResult:
@@ -379,83 +488,6 @@ components:
       - version
       type: object
       x-field_order: []
-    RuleSetResult:
-      properties:
-        created:
-          description: The date the record was created
-          type: integer
-        entry_point:
-          type: string
-        group_id:
-          format: uuid
-          type: string
-        id:
-          description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        modified:
-          description: The date the record was last updated
-          type: integer
-        name:
-          type: string
-        organization_id:
-          format: uuid
-          type: string
-        rule_set_metadata:
-          $ref: '#/components/schemas/RuleSetMetadata'
-        rules:
-          type: object
-        status:
-          enum:
-          - active
-          - draft
-          - archived
-          type: string
-        version:
-          description: Current version of the record
-          format: uuid
-          type: string
-      required:
-      - created
-      - entry_point
-      - id
-      - modified
-      - name
-      - rule_set_metadata
-      - rules
-      - status
-      - version
-      type: object
-      x-field_order: []
-    RuleSetCreateRequest:
-      properties:
-        entry_point:
-          enum:
-          - member_snapshot
-          type: string
-        group_id:
-          format: uuid
-          nullable: true
-          type: string
-        name:
-          type: string
-        rule_set_metadata:
-          $ref: '#/components/schemas/RuleSetMetadata'
-        rules:
-          type: object
-        status:
-          default: active
-          enum:
-          - active
-          - draft
-          - archived
-          type: string
-      required:
-      - entry_point
-      - name
-      - rules
-      type: object
-      x-field_order: []
     Meta:
       properties:
         offset:
@@ -487,28 +519,5 @@ components:
       - page_num
       - page_size
       type: object
-    RuleSetMetadata:
-      properties:
-        sandwich_position:
-          type: string
-      required:
-      - sandwich_position
-      type: object
-    PaginatedRuleSetTracesResult:
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of Rule set traces
-          items:
-            $ref: '#/components/schemas/RuleSetTraceResult'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
+x-readme:
+  explorer-enabled: false

@@ -1,9 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: APIs to manage and consume information about Carriers
-  title: Noyo Carrier Carrier Mapped Field Member Snapshot Test Population API
+  description: Policy management APIs for health and ancillary insurance
+  title: Noyo Fulfillment Member Snapshot Test Population API
   version: 1.0.0
-servers: []
+servers:
+- description: Noyo Fulfillment API - Live
+  url: https://fulfillment.noyo.com
+- description: Noyo Fulfillment API - Sandbox
+  url: https://fulfillment-sandbox.noyo.com
 tags:
 - name: Member Snapshot Test Population
 paths:
@@ -45,7 +49,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedMemberSnapshotTestPopulationResult'
           description: Successful Response - Returns a list of all matching Member Snapshot Test Populations
-      summary: Retrieves a list of Member Snapshot Test Populations.
+      summary: Retrieves a list of Member Snapshot Test Populations
       tags:
       - Member Snapshot Test Population
     post:
@@ -92,17 +96,51 @@ paths:
       - Member Snapshot Test Population
 components:
   schemas:
-    MemberSnapshotTestPopulationCreateRequest:
+    PaginatedMemberSnapshotTestPopulationResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of Member Snapshot Test Population results
+          items:
+            $ref: '#/components/schemas/MemberSnapshotTestPopulationResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    MemberSnapshotTestPopulationResult:
       properties:
         carrier_id:
           format: uuid
           type: string
+        created:
+          description: The date the record was created
+          type: integer
         group_id:
           format: uuid
           type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
       required:
-      - carrier_id
-      - group_id
+      - created
+      - id
+      - modified
+      - version
       type: object
       x-field_order: []
     Meta:
@@ -136,50 +174,18 @@ components:
       - page_num
       - page_size
       type: object
-    MemberSnapshotTestPopulationResult:
+    MemberSnapshotTestPopulationCreateRequest:
       properties:
         carrier_id:
           format: uuid
           type: string
-        created:
-          description: The date the record was created
-          type: integer
         group_id:
           format: uuid
           type: string
-        id:
-          description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        modified:
-          description: The date the record was last updated
-          type: integer
-        version:
-          description: Current version of the record
-          format: uuid
-          type: string
       required:
-      - created
-      - id
-      - modified
-      - version
+      - carrier_id
+      - group_id
       type: object
       x-field_order: []
-    PaginatedMemberSnapshotTestPopulationResult:
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of Member Snapshot Test Population results
-          items:
-            $ref: '#/components/schemas/MemberSnapshotTestPopulationResult'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
+x-readme:
+  explorer-enabled: false

@@ -1,9 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: APIs to manage and consume information about Carriers
-  title: Noyo Carrier Carrier Mapped Field Person API
+  description: Policy management APIs for health and ancillary insurance
+  title: Noyo Fulfillment Person API
   version: 1.0.0
-servers: []
+servers:
+- description: Noyo Fulfillment API - Live
+  url: https://fulfillment.noyo.com
+- description: Noyo Fulfillment API - Sandbox
+  url: https://fulfillment-sandbox.noyo.com
 tags:
 - name: Person
 paths:
@@ -57,12 +61,14 @@ paths:
                       type: string
                     dependent_id:
                       format: uuid
-                      nullable: true
-                      type: string
+                      type:
+                      - string
+                      - 'null'
                     employee_id:
                       format: uuid
-                      nullable: true
-                      type: string
+                      type:
+                      - string
+                      - 'null'
                     full_name:
                       type: string
                     group_id:
@@ -84,3 +90,5 @@ paths:
       summary: Search people
       tags:
       - Person
+x-readme:
+  explorer-enabled: false

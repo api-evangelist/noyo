@@ -1,9 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: APIs to manage and consume information about Carriers
-  title: Noyo Carrier Carrier Mapped Field Feeds API
+  description: Policy management APIs for health and ancillary insurance
+  title: Noyo Fulfillment Feeds API
   version: 1.0.0
-servers: []
+servers:
+- description: Noyo Fulfillment API - Live
+  url: https://fulfillment.noyo.com
+- description: Noyo Fulfillment API - Sandbox
+  url: https://fulfillment-sandbox.noyo.com
 tags:
 - name: Feeds
 paths:
@@ -209,73 +213,6 @@ paths:
       - Feeds
 components:
   schemas:
-    UIFeedsLastTransmissionResult:
-      properties:
-        id:
-          description: ID of transmission
-          format: uuid
-          type: string
-        sent_timestamp:
-          description: DateTime the transmission was sent to the carrier
-          type: integer
-      required:
-      - id
-      - sent_timestamp
-      type: object
-    Cadence:
-      properties:
-        end_date:
-          format: date
-          type: string
-        next_transmission:
-          format: date-time
-          nullable: true
-          type: string
-        paused:
-          type: boolean
-        rrule:
-          type: string
-        start_date:
-          format: date
-          type: string
-        time_of_day:
-          pattern: ^([01]?[0-9]|2[0-3]):[0-5][0-9]$
-          type: string
-        zone_info:
-          enum:
-          - Etc/UTC
-          - US/Eastern
-          - US/Central
-          - US/Mountain
-          - US/Pacific
-          type: string
-      required:
-      - end_date
-      - next_transmission
-      - paused
-      - rrule
-      - start_date
-      - time_of_day
-      - zone_info
-      type: object
-    PaginatedPublicFeedResult:
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of feeds with public data
-          items:
-            $ref: '#/components/schemas/PublicFeedResult'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
     PublicFeedResult:
       properties:
         carrier_id:
@@ -316,12 +253,14 @@ components:
         next_transmission:
           description: Next transmission date of feed
           format: date-time
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         paused:
           description: Whether feed is paused or not
-          nullable: true
-          type: boolean
+          type:
+          - boolean
+          - 'null'
         version:
           description: Current version of the record
           format: uuid
@@ -338,6 +277,74 @@ components:
       - version
       type: object
       x-field_order: []
+    UIFeedsLastTransmissionResult:
+      properties:
+        id:
+          description: ID of transmission
+          format: uuid
+          type: string
+        sent_timestamp:
+          description: DateTime the transmission was sent to the carrier
+          type: integer
+      required:
+      - id
+      - sent_timestamp
+      type: object
+    PaginatedPublicFeedResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of feeds with public data
+          items:
+            $ref: '#/components/schemas/PublicFeedResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    Cadence:
+      properties:
+        end_date:
+          format: date
+          type: string
+        next_transmission:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        paused:
+          type: boolean
+        rrule:
+          type: string
+        start_date:
+          format: date
+          type: string
+        time_of_day:
+          pattern: ^([01]?[0-9]|2[0-3]):[0-5][0-9]$
+          type: string
+        zone_info:
+          enum:
+          - Etc/UTC
+          - US/Eastern
+          - US/Central
+          - US/Mountain
+          - US/Pacific
+          type: string
+      required:
+      - end_date
+      - next_transmission
+      - paused
+      - rrule
+      - start_date
+      - time_of_day
+      - zone_info
+      type: object
     Meta:
       properties:
         offset:
@@ -374,3 +381,5 @@ components:
         cadence:
           $ref: '#/components/schemas/Cadence'
       type: object
+x-readme:
+  explorer-enabled: false

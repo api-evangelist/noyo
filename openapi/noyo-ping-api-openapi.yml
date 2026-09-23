@@ -1,9 +1,17 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: APIs to manage and consume information about Carriers
-  title: Noyo Carrier Carrier Mapped Field Ping API
+  title: Noyo Ping API
   version: 1.0.0
-servers: []
+  description: 'Operations tagged Ping across 3 of this provider''s published API definitions: noyo-carrier-openapi.json, noyo-fulfillment-openapi.json, noyo-tracking-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- description: Noyo Fulfillment API - Live
+  url: https://fulfillment.noyo.com
+- description: Noyo Fulfillment API - Sandbox
+  url: https://fulfillment-sandbox.noyo.com
+- description: Noyo Tracking API - Live
+  url: https://tracking.noyo.com
+- description: Noyo Tracking API - Sandbox
+  url: https://tracking-sandbox.noyo.com
 tags:
 - name: Ping
 paths:
@@ -18,3 +26,7 @@ paths:
       summary: Ping Endpoint
       tags:
       - Ping
+x-refined-from:
+- noyo-carrier-openapi.json
+- noyo-fulfillment-openapi.json
+- noyo-tracking-openapi.json

@@ -1,9 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: APIs to manage and consume information about Carriers
-  title: Noyo Carrier Carrier Mapped Field Employee API
+  description: Policy management APIs for health and ancillary insurance
+  title: Noyo Fulfillment Employee API
   version: 1.0.0
-servers: []
+servers:
+- description: Noyo Fulfillment API - Live
+  url: https://fulfillment.noyo.com
+- description: Noyo Fulfillment API - Sandbox
+  url: https://fulfillment-sandbox.noyo.com
 tags:
 - name: Employee
 paths:
@@ -77,102 +81,6 @@ paths:
       - Employee
 components:
   schemas:
-    PersonTobacco:
-      properties:
-        duration:
-          description: Duration of tobacco use
-          example: 5 years
-          type: string
-        frequency:
-          description: Frequency of tobacco use
-          example: Daily
-          type: string
-        types:
-          description: List of types of tobacco use
-          example: cigarettes
-          items:
-            enum:
-            - pipe
-            - cigarettes
-            - chewing-tobacco
-            type: string
-          minItems: 1
-          type: array
-        user:
-          description: True if the person uses tobacco of any kind
-          example: true
-          type: boolean
-      type: object
-      x-field_order:
-      - user
-      - types
-      - duration
-      - frequency
-    EmployeeResult:
-      properties:
-        classifications:
-          description: Fields that classify employees for group structure mapping
-          readOnly: true
-          type: object
-        created:
-          description: The date the record was originated
-          readOnly: true
-          type: integer
-        custom_individual_id:
-          description: The custom identifier for this employee in your system
-          readOnly: true
-          type: string
-        employment:
-          allOf:
-          - $ref: '#/components/schemas/EmploymentResult'
-          description: Employment information for the employee
-        group_id:
-          description: Unique identifier of the group in Noyo
-          format: uuid
-          readOnly: true
-          type: string
-        id:
-          description: Unique identifier of the employee in Noyo
-          format: uuid
-          readOnly: true
-          type: string
-        location_id:
-          description: Unique identifier of the employee group location in Noyo
-          format: uuid
-          type: string
-        modified:
-          description: The date the record was last updated
-          readOnly: true
-          type: integer
-        person:
-          allOf:
-          - $ref: '#/components/schemas/Person'
-          description: Personal information for the employee
-        version:
-          description: Version of the employee record
-          format: uuid
-          readOnly: true
-          type: string
-      required:
-      - created
-      - employment
-      - group_id
-      - id
-      - modified
-      - person
-      - version
-      type: object
-      x-field_order:
-      - id
-      - custom_individual_id
-      - version
-      - created
-      - modified
-      - group_id
-      - location_id
-      - person
-      - employment
-      - classifications
     PersonAmericanIndian:
       properties:
         state:
@@ -284,6 +192,64 @@ components:
       - hours_worked
       - salary
       - employment_dates
+    PersonTobacco:
+      properties:
+        duration:
+          description: Duration of tobacco use
+          example: 5 years
+          type: string
+        frequency:
+          description: Frequency of tobacco use
+          example: Daily
+          type: string
+        types:
+          description: List of types of tobacco use
+          example: cigarettes
+          items:
+            enum:
+            - pipe
+            - cigarettes
+            - chewing-tobacco
+            type: string
+          minItems: 1
+          type: array
+        user:
+          description: True if the person uses tobacco of any kind
+          example: true
+          type: boolean
+      type: object
+      x-field_order:
+      - user
+      - types
+      - duration
+      - frequency
+    PersonDetails:
+      properties:
+        american_indian:
+          allOf:
+          - $ref: '#/components/schemas/PersonAmericanIndian'
+          description: American Indian status details (if applicable)
+        disability:
+          allOf:
+          - $ref: '#/components/schemas/PersonDisability'
+          description: Disability details (if applicable)
+        is_military:
+          description: True if the person is in the military
+          type: boolean
+        is_student:
+          description: True if the person is a student
+          type: boolean
+        tobacco:
+          allOf:
+          - $ref: '#/components/schemas/PersonTobacco'
+          description: Tobacco usage details (if applicable)
+      type: object
+      x-field_order:
+      - tobacco
+      - disability
+      - american_indian
+      - is_student
+      - is_military
     PersonDisability:
       properties:
         communication:
@@ -300,6 +266,95 @@ components:
       - disabled
       - reason
       - communication
+    Person:
+      properties:
+        contact:
+          allOf:
+          - $ref: '#/components/schemas/PersonContact'
+          description: Contact information for the person
+        date_of_birth:
+          description: ISO-8601 date string for the date of birth of the person
+          example: '1977-06-03'
+          format: date
+          type: string
+        details:
+          allOf:
+          - $ref: '#/components/schemas/PersonDetails'
+          description: Additional personal details of the person
+        first_name:
+          description: First name of the person
+          example: Catherine
+          type: string
+        home_address:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: Home address of the person
+        last_name:
+          description: Last name of the person
+          example: Briggs
+          type: string
+        maiden_name:
+          description: Maiden name of the person (deprecated)
+          type: string
+        mailing_address:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: Mailing address of the person, if different from home address
+        marital_status:
+          description: Marital status of the person
+          enum:
+          - single
+          - married
+          - domestic-partner
+          - divorced
+          - widowed
+          - legally-separated
+          example: married
+          type: string
+        middle_name:
+          description: Middle name of the person
+          example: S
+          type: string
+        sex:
+          description: Sex of the person
+          enum:
+          - F
+          - M
+          - U
+          - X
+          example: F
+          type: string
+        ssn:
+          description: Social Security Number of the person
+          example: '123456789'
+          pattern: ^(?!000)[0-9]{3}(?!00)[0-9]{2}(?!0000)[0-9]{4}$
+          type:
+          - string
+          - 'null'
+        suffix:
+          description: Suffix of the person
+          type: string
+      required:
+      - date_of_birth
+      - first_name
+      - home_address
+      - last_name
+      - sex
+      type: object
+      x-field_order:
+      - first_name
+      - middle_name
+      - last_name
+      - suffix
+      - home_address
+      - mailing_address
+      - date_of_birth
+      - ssn
+      - sex
+      - marital_status
+      - maiden_name
+      - contact
+      - details
     Salary:
       properties:
         amount:
@@ -508,120 +563,70 @@ components:
       - preferred_method
       - preferred_language
       - speaks_english
-    PersonDetails:
+    EmployeeResult:
       properties:
-        american_indian:
+        classifications:
+          description: Fields that classify employees for group structure mapping
+          readOnly: true
+          type: object
+        created:
+          description: The date the record was originated
+          readOnly: true
+          type: integer
+        custom_individual_id:
+          description: The custom identifier for this employee in your system
+          readOnly: true
+          type: string
+        employment:
           allOf:
-          - $ref: '#/components/schemas/PersonAmericanIndian'
-          description: American Indian status details (if applicable)
-        disability:
+          - $ref: '#/components/schemas/EmploymentResult'
+          description: Employment information for the employee
+        group_id:
+          description: Unique identifier of the group in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        id:
+          description: Unique identifier of the employee in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        location_id:
+          description: Unique identifier of the employee group location in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          readOnly: true
+          type: integer
+        person:
           allOf:
-          - $ref: '#/components/schemas/PersonDisability'
-          description: Disability details (if applicable)
-        is_military:
-          description: True if the person is in the military
-          type: boolean
-        is_student:
-          description: True if the person is a student
-          type: boolean
-        tobacco:
-          allOf:
-          - $ref: '#/components/schemas/PersonTobacco'
-          description: Tobacco usage details (if applicable)
-      type: object
-      x-field_order:
-      - tobacco
-      - disability
-      - american_indian
-      - is_student
-      - is_military
-    Person:
-      properties:
-        contact:
-          allOf:
-          - $ref: '#/components/schemas/PersonContact'
-          description: Contact information for the person
-        date_of_birth:
-          description: ISO-8601 date string for the date of birth of the person
-          example: '1977-06-03'
-          format: date
-          type: string
-        details:
-          allOf:
-          - $ref: '#/components/schemas/PersonDetails'
-          description: Additional personal details of the person
-        first_name:
-          description: First name of the person
-          example: Catherine
-          type: string
-        home_address:
-          allOf:
-          - $ref: '#/components/schemas/Address'
-          description: Home address of the person
-          nullable: true
-        last_name:
-          description: Last name of the person
-          example: Briggs
-          type: string
-        maiden_name:
-          description: Maiden name of the person (deprecated)
-          type: string
-        mailing_address:
-          allOf:
-          - $ref: '#/components/schemas/Address'
-          description: Mailing address of the person, if different from home address
-          nullable: true
-        marital_status:
-          description: Marital status of the person
-          enum:
-          - single
-          - married
-          - domestic-partner
-          - divorced
-          - widowed
-          - legally-separated
-          example: married
-          type: string
-        middle_name:
-          description: Middle name of the person
-          example: S
-          type: string
-        sex:
-          description: Sex of the person
-          enum:
-          - F
-          - M
-          - U
-          - X
-          example: F
-          type: string
-        ssn:
-          description: Social Security Number of the person
-          example: '123456789'
-          nullable: true
-          pattern: ^(?!000)[0-9]{3}(?!00)[0-9]{2}(?!0000)[0-9]{4}$
-          type: string
-        suffix:
-          description: Suffix of the person
+          - $ref: '#/components/schemas/Person'
+          description: Personal information for the employee
+        version:
+          description: Version of the employee record
+          format: uuid
+          readOnly: true
           type: string
       required:
-      - date_of_birth
-      - first_name
-      - home_address
-      - last_name
-      - sex
+      - created
+      - employment
+      - group_id
+      - id
+      - modified
+      - person
+      - version
       type: object
       x-field_order:
-      - first_name
-      - middle_name
-      - last_name
-      - suffix
-      - home_address
-      - mailing_address
-      - date_of_birth
-      - ssn
-      - sex
-      - marital_status
-      - maiden_name
-      - contact
-      - details
+      - id
+      - custom_individual_id
+      - version
+      - created
+      - modified
+      - group_id
+      - location_id
+      - person
+      - employment
+      - classifications
+x-readme:
+  explorer-enabled: false

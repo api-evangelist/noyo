@@ -1,9 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: APIs to manage and consume information about Carriers
-  title: Noyo Carrier Carrier Mapped Field Issue Persons API
+  description: Policy management APIs for health and ancillary insurance
+  title: Noyo Fulfillment Issue Persons API
   version: 1.0.0
-servers: []
+servers:
+- description: Noyo Fulfillment API - Live
+  url: https://fulfillment.noyo.com
+- description: Noyo Fulfillment API - Sandbox
+  url: https://fulfillment-sandbox.noyo.com
 tags:
 - name: Issue Persons
 paths:
@@ -54,14 +58,16 @@ components:
         date_of_birth:
           description: Date of birth
           format: date
-          nullable: true
           readOnly: true
-          type: string
+          type:
+          - string
+          - 'null'
         first_name:
           description: First name
-          nullable: true
           readOnly: true
-          type: string
+          type:
+          - string
+          - 'null'
         group_id:
           description: The unique identifier of the group associated with this issue person
           format: uuid
@@ -73,14 +79,16 @@ components:
           type: string
         last_name:
           description: Last name
-          nullable: true
           readOnly: true
-          type: string
+          type:
+          - string
+          - 'null'
         middle_name:
           description: Middle name
-          nullable: true
           readOnly: true
-          type: string
+          type:
+          - string
+          - 'null'
         modified:
           description: The date the record was last updated
           type: integer
@@ -91,14 +99,16 @@ components:
           type: string
         ssn:
           description: Social Security Number
-          nullable: true
           readOnly: true
-          type: string
+          type:
+          - string
+          - 'null'
         suffix:
           description: Name suffix
-          nullable: true
           readOnly: true
-          type: string
+          type:
+          - string
+          - 'null'
         version:
           description: Current version of the record
           format: uuid
@@ -112,3 +122,5 @@ components:
       - version
       type: object
       x-field_order: []
+x-readme:
+  explorer-enabled: false

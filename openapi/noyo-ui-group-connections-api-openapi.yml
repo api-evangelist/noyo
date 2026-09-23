@@ -1,9 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: APIs to manage and consume information about Carriers
-  title: Noyo Carrier Carrier Mapped Field Ui Group Connections API
+  description: Policy management APIs for health and ancillary insurance
+  title: Noyo Fulfillment Ui Group Connections API
   version: 1.0.0
-servers: []
+servers:
+- description: Noyo Fulfillment API - Live
+  url: https://fulfillment.noyo.com
+- description: Noyo Fulfillment API - Sandbox
+  url: https://fulfillment-sandbox.noyo.com
 tags:
 - name: Ui Group Connections
 paths:
@@ -96,6 +100,32 @@ paths:
       - Ui Group Connections
 components:
   schemas:
+    GroupSetupRequestPublicGroupDataResult:
+      properties:
+        broker_federal_ein:
+          description: Broker federal EIN, used in Principal groups
+          readOnly: true
+          type: string
+        broker_tin:
+          description: Broker TIN, used in Anthem groups
+          readOnly: true
+          type: string
+        carrier_group_id:
+          description: Unique identifier for the group in the carrier system
+          readOnly: true
+          type: string
+        employer_email_address:
+          description: Email address of the group's employer
+          readOnly: true
+          type: string
+        group_name:
+          description: Name for the group in the Noyo system
+          readOnly: true
+          type: string
+      required:
+      - carrier_group_id
+      - group_name
+      type: object
     GroupSetupRequestUIResult:
       properties:
         carrier_id:
@@ -188,8 +218,9 @@ components:
         sent_carrier_auth_comms:
           description: Timestamp of carrier authorization request email
           format: date-time
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         setup_data:
           description: Information of the group connection setup
           type: object
@@ -201,29 +232,5 @@ components:
           type: string
       type: object
       x-field_order: []
-    GroupSetupRequestPublicGroupDataResult:
-      properties:
-        broker_federal_ein:
-          description: Broker federal EIN, used in Principal groups
-          readOnly: true
-          type: string
-        broker_tin:
-          description: Broker TIN, used in Anthem groups
-          readOnly: true
-          type: string
-        carrier_group_id:
-          description: Unique identifier for the group in the carrier system
-          readOnly: true
-          type: string
-        employer_email_address:
-          description: Email address of the group's employer
-          readOnly: true
-          type: string
-        group_name:
-          description: Name for the group in the Noyo system
-          readOnly: true
-          type: string
-      required:
-      - carrier_group_id
-      - group_name
-      type: object
+x-readme:
+  explorer-enabled: false

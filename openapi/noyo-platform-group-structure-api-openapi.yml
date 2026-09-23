@@ -1,9 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: APIs to manage and consume information about Carriers
-  title: Noyo Carrier Carrier Mapped Field Platform Group Structure API
+  description: Policy management APIs for health and ancillary insurance
+  title: Noyo Fulfillment Platform Group Structure API
   version: 1.0.0
-servers: []
+servers:
+- description: Noyo Fulfillment API - Live
+  url: https://fulfillment.noyo.com
+- description: Noyo Fulfillment API - Sandbox
+  url: https://fulfillment-sandbox.noyo.com
 tags:
 - name: Platform Group Structure
 paths:
@@ -47,23 +51,61 @@ paths:
       - Platform Group Structure
 components:
   schemas:
+    UIGroupPlatformGroupStructureResult:
+      properties:
+        created:
+          description: The date the record was created
+          type: integer
+        group_id:
+          description: Unique identifier of the group
+          format: uuid
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        organization_id:
+          description: Unique identifier of the organization
+          format: uuid
+          type: string
+        structure:
+          $ref: '#/components/schemas/PlatformStructure'
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - created
+      - group_id
+      - id
+      - modified
+      - organization_id
+      - version
+      type: object
+      x-field_order: []
     PlatformStructurePlan:
       properties:
         carrier_id:
           format: uuid
           type: string
         custom_plan_id:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         id:
           format: uuid
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         line_of_coverage:
           type: string
         name:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         temporals:
           items:
             $ref: '#/components/schemas/PlatformStructureTemporalPlan'
@@ -72,30 +114,33 @@ components:
       - carrier_id
       - line_of_coverage
       type: object
-    PlatformStructure:
-      properties:
-        plans:
-          items:
-            $ref: '#/components/schemas/PlatformStructurePlan'
-          nullable: true
-          type: array
-      type: object
     PlatformStructureTemporalPlan:
       properties:
         configuration:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         end_date:
           description: Temporal end date of the record
           example: '2020-01-01'
           format: date
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         start_date:
           description: Temporal start date of the record
           example: '2019-01-01'
           format: date
           type: string
+      type: object
+    PlatformStructure:
+      properties:
+        plans:
+          items:
+            $ref: '#/components/schemas/PlatformStructurePlan'
+          type:
+          - array
+          - 'null'
       type: object
     PlatformGroupStructureUpdateRequestUI:
       properties:
@@ -132,38 +177,5 @@ components:
       - version
       type: object
       x-field_order: []
-    UIGroupPlatformGroupStructureResult:
-      properties:
-        created:
-          description: The date the record was created
-          type: integer
-        group_id:
-          description: Unique identifier of the group
-          format: uuid
-          type: string
-        id:
-          description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        modified:
-          description: The date the record was last updated
-          type: integer
-        organization_id:
-          description: Unique identifier of the organization
-          format: uuid
-          type: string
-        structure:
-          $ref: '#/components/schemas/PlatformStructure'
-        version:
-          description: Current version of the record
-          format: uuid
-          type: string
-      required:
-      - created
-      - group_id
-      - id
-      - modified
-      - organization_id
-      - version
-      type: object
-      x-field_order: []
+x-readme:
+  explorer-enabled: false

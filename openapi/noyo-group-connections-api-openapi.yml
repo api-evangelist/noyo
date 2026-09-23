@@ -1,9 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: APIs to manage and consume information about Carriers
-  title: Noyo Carrier Carrier Mapped Field Group Connections API
+  description: Policy management APIs for health and ancillary insurance
+  title: Noyo Fulfillment Group Connections API
   version: 1.0.0
-servers: []
+servers:
+- description: Noyo Fulfillment API - Live
+  url: https://fulfillment.noyo.com
+- description: Noyo Fulfillment API - Sandbox
+  url: https://fulfillment-sandbox.noyo.com
 tags:
 - name: Group Connections
 paths:
@@ -347,32 +351,6 @@ paths:
       - Group Connections
 components:
   schemas:
-    GroupSetupRequestPublicNestedGroupData:
-      properties:
-        broker_federal_ein:
-          description: 'Brokerage or Organization Federal Employer Identification Number for the group''s broker. '
-          example: '123123123'
-          type: string
-        broker_tin:
-          description: Invidividual or DRLP Federal Tax Identification Number for the group's broker. Format can be either an EIN or SSN
-          example: '123123123'
-          type: string
-        carrier_group_id:
-          description: Unique identifier for the group in the carrier system
-          minLength: 1
-          type: string
-        employer_email_address:
-          description: Email address of the group's employer
-          example: employer@example.com
-          type: string
-      required:
-      - carrier_group_id
-      type: object
-      x-field_order:
-      - carrier_group_id
-      - broker_federal_ein
-      - broker_tin
-      - employer_email_address
     GroupSetupRequestPublicAPICreateRequest:
       properties:
         carrier_id:
@@ -405,238 +383,6 @@ components:
       - organization_id
       - federal_ein
       - group_data
-    GroupSetupRequestPublicGroupDataResult:
-      properties:
-        broker_federal_ein:
-          description: Broker federal EIN, used in Principal groups
-          readOnly: true
-          type: string
-        broker_tin:
-          description: Broker TIN, used in Anthem groups
-          readOnly: true
-          type: string
-        carrier_group_id:
-          description: Unique identifier for the group in the carrier system
-          readOnly: true
-          type: string
-        employer_email_address:
-          description: Email address of the group's employer
-          readOnly: true
-          type: string
-        group_name:
-          description: Name for the group in the Noyo system
-          readOnly: true
-          type: string
-      required:
-      - carrier_group_id
-      - group_name
-      type: object
-    GroupSetupRequestPublicResult:
-      properties:
-        carrier_id:
-          description: Unique identifier of the carrier in Noyo
-          format: uuid
-          readOnly: true
-          type: string
-        completed:
-          description: Timestamp indicating when a group connection was marked as completed.
-          readOnly: true
-          type: integer
-        created:
-          description: The date the record was created
-          type: integer
-        federal_ein:
-          description: Federal Employer Identification Number for the group
-          readOnly: true
-          type: string
-        group_data:
-          allOf:
-          - $ref: '#/components/schemas/GroupSetupRequestPublicGroupDataResult'
-          description: Carrier-specific data to execute a group connection
-        group_id:
-          description: ID of associated group model
-          format: uuid
-          readOnly: true
-          type: string
-        id:
-          description: Unique identifier of the group connection in Noyo
-          format: uuid
-          readOnly: true
-          type: string
-        modified:
-          description: The date the record was last updated
-          type: integer
-        organization_id:
-          description: Unique identifier of the platform or broker organization in Noyo
-          format: uuid
-          readOnly: true
-          type: string
-        request_type:
-          description: Type of the group connection
-          readOnly: true
-          type: string
-        setup_result:
-          description: More information about the result of the group connection
-          readOnly: true
-          type: object
-        status:
-          description: Status of the group connection
-          enum:
-          - created
-          - processing
-          - noyo_review
-          - waiting_on_carrier
-          - carrier_authorization
-          - action_required
-          - unable_to_connect
-          - completed
-          readOnly: true
-          type: string
-        version:
-          description: Current version of the record
-          format: uuid
-          type: string
-      required:
-      - carrier_id
-      - created
-      - group_data
-      - id
-      - modified
-      - organization_id
-      - request_type
-      - setup_metadata
-      - setup_result
-      - status
-      - version
-      type: object
-      x-field_order:
-      - id
-      - version
-      - created
-      - modified
-      - completed
-      - organization_id
-      - group_id
-      - carrier_id
-      - request_type
-      - status
-      - group_data
-      - setup_result
-      - federal_ein
-    Meta:
-      properties:
-        offset:
-          description: The offset of the first response record within the matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
-        page_num:
-          description: The page number of the response records within the overall data set (1-based integer)
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        page_size:
-          description: The maximum number of response records on each page of results
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        total_records:
-          description: The total number of records in the entire matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
-      required:
-      - offset
-      - page_num
-      - page_size
-      type: object
-    GroupSetupRequestPublicAPINestedCreateRequest:
-      properties:
-        carrier_id:
-          description: Unique identifier of the carrier in Noyo
-          format: uuid
-          type: string
-        data_exchange_configuration:
-          description: Use the specified data exchange configuration without calculating connection eligibility
-          enum:
-          - api
-          - edi
-          type: string
-        group_data:
-          allOf:
-          - $ref: '#/components/schemas/GroupSetupRequestPublicNestedGroupData'
-          description: Carrier-specific data to execute a group connection
-        ignore_eligibility:
-          description: Use the best available data exchange configuration without calculating connection eligibility
-          type: boolean
-      required:
-      - carrier_id
-      - group_data
-      type: object
-      x-field_order:
-      - carrier_id
-      - group_data
-      - setup_data
-    GroupSetupRequestPublicAPIRetryRequest:
-      properties:
-        broker_federal_ein:
-          description: 'Brokerage or Organization Federal Employer Identification Number for the group''s broker. '
-          example: '123123123'
-          type: string
-        broker_tin:
-          description: Invidividual or DRLP Federal Tax Identification Number for the group's broker. Format can be either an EIN or SSN
-          example: '123123123'
-          type: string
-        carrier_group_id:
-          description: Unique identifier for the group in the carrier system
-          minLength: 1
-          type: string
-        employer_email_address:
-          description: Email address of the group's employer
-          example: employer@example.com
-          type: string
-        federal_ein:
-          description: Federal Employer Identification Number for the new group/company
-          example: '123123123'
-          type: string
-      type: object
-      x-field_order: []
-    GroupSetupRequestPublicGroupData:
-      properties:
-        broker_federal_ein:
-          description: 'Brokerage or Organization Federal Employer Identification Number for the group''s broker. '
-          example: '123123123'
-          type: string
-        broker_tin:
-          description: Invidividual or DRLP Federal Tax Identification Number for the group's broker. Format can be either an EIN or SSN
-          example: '123123123'
-          type: string
-        carrier_group_id:
-          description: Unique identifier for the group in the carrier system
-          minLength: 1
-          type: string
-        employer_email_address:
-          description: Email address of the group's employer
-          example: employer@example.com
-          type: string
-        group_name:
-          description: Name for the group in the Noyo system
-          minLength: 1
-          type: string
-      required:
-      - carrier_group_id
-      - group_name
-      type: object
-      x-field_order:
-      - carrier_group_id
-      - group_name
-      - broker_federal_ein
-      - broker_tin
-      - employer_email_address
     GroupSetupRequestResult:
       properties:
         carrier_id:
@@ -738,3 +484,263 @@ components:
       x-field_order:
       - meta
       - response
+    GroupSetupRequestPublicAPINestedCreateRequest:
+      properties:
+        carrier_id:
+          description: Unique identifier of the carrier in Noyo
+          format: uuid
+          type: string
+        data_exchange_configuration:
+          description: Use the specified data exchange configuration without calculating connection eligibility
+          enum:
+          - api
+          - edi
+          type: string
+        group_data:
+          allOf:
+          - $ref: '#/components/schemas/GroupSetupRequestPublicNestedGroupData'
+          description: Carrier-specific data to execute a group connection
+        ignore_eligibility:
+          description: Use the best available data exchange configuration without calculating connection eligibility
+          type: boolean
+      required:
+      - carrier_id
+      - group_data
+      type: object
+      x-field_order:
+      - carrier_id
+      - group_data
+      - setup_data
+    GroupSetupRequestPublicGroupDataResult:
+      properties:
+        broker_federal_ein:
+          description: Broker federal EIN, used in Principal groups
+          readOnly: true
+          type: string
+        broker_tin:
+          description: Broker TIN, used in Anthem groups
+          readOnly: true
+          type: string
+        carrier_group_id:
+          description: Unique identifier for the group in the carrier system
+          readOnly: true
+          type: string
+        employer_email_address:
+          description: Email address of the group's employer
+          readOnly: true
+          type: string
+        group_name:
+          description: Name for the group in the Noyo system
+          readOnly: true
+          type: string
+      required:
+      - carrier_group_id
+      - group_name
+      type: object
+    GroupSetupRequestPublicNestedGroupData:
+      properties:
+        broker_federal_ein:
+          description: 'Brokerage or Organization Federal Employer Identification Number for the group''s broker. '
+          example: '123123123'
+          type: string
+        broker_tin:
+          description: Invidividual or DRLP Federal Tax Identification Number for the group's broker. Format can be either an EIN or SSN
+          example: '123123123'
+          type: string
+        carrier_group_id:
+          description: Unique identifier for the group in the carrier system
+          minLength: 1
+          type: string
+        employer_email_address:
+          description: Email address of the group's employer
+          example: employer@example.com
+          type: string
+      required:
+      - carrier_group_id
+      type: object
+      x-field_order:
+      - carrier_group_id
+      - broker_federal_ein
+      - broker_tin
+      - employer_email_address
+    GroupSetupRequestPublicAPIRetryRequest:
+      properties:
+        broker_federal_ein:
+          description: 'Brokerage or Organization Federal Employer Identification Number for the group''s broker. '
+          example: '123123123'
+          type: string
+        broker_tin:
+          description: Invidividual or DRLP Federal Tax Identification Number for the group's broker. Format can be either an EIN or SSN
+          example: '123123123'
+          type: string
+        carrier_group_id:
+          description: Unique identifier for the group in the carrier system
+          minLength: 1
+          type: string
+        employer_email_address:
+          description: Email address of the group's employer
+          example: employer@example.com
+          type: string
+        federal_ein:
+          description: Federal Employer Identification Number for the new group/company
+          example: '123123123'
+          type: string
+      type: object
+      x-field_order: []
+    GroupSetupRequestPublicResult:
+      properties:
+        carrier_id:
+          description: Unique identifier of the carrier in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        completed:
+          description: Timestamp indicating when a group connection was marked as completed.
+          readOnly: true
+          type: integer
+        created:
+          description: The date the record was created
+          type: integer
+        federal_ein:
+          description: Federal Employer Identification Number for the group
+          readOnly: true
+          type: string
+        group_data:
+          allOf:
+          - $ref: '#/components/schemas/GroupSetupRequestPublicGroupDataResult'
+          description: Carrier-specific data to execute a group connection
+        group_id:
+          description: ID of associated group model
+          format: uuid
+          readOnly: true
+          type: string
+        id:
+          description: Unique identifier of the group connection in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        organization_id:
+          description: Unique identifier of the platform or broker organization in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        request_type:
+          description: Type of the group connection
+          readOnly: true
+          type: string
+        setup_result:
+          description: More information about the result of the group connection
+          readOnly: true
+          type: object
+        status:
+          description: Status of the group connection
+          enum:
+          - created
+          - processing
+          - noyo_review
+          - waiting_on_carrier
+          - carrier_authorization
+          - action_required
+          - unable_to_connect
+          - completed
+          readOnly: true
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - carrier_id
+      - created
+      - group_data
+      - id
+      - modified
+      - organization_id
+      - request_type
+      - setup_metadata
+      - setup_result
+      - status
+      - version
+      type: object
+      x-field_order:
+      - id
+      - version
+      - created
+      - modified
+      - completed
+      - organization_id
+      - group_id
+      - carrier_id
+      - request_type
+      - status
+      - group_data
+      - setup_result
+      - federal_ein
+    GroupSetupRequestPublicGroupData:
+      properties:
+        broker_federal_ein:
+          description: 'Brokerage or Organization Federal Employer Identification Number for the group''s broker. '
+          example: '123123123'
+          type: string
+        broker_tin:
+          description: Invidividual or DRLP Federal Tax Identification Number for the group's broker. Format can be either an EIN or SSN
+          example: '123123123'
+          type: string
+        carrier_group_id:
+          description: Unique identifier for the group in the carrier system
+          minLength: 1
+          type: string
+        employer_email_address:
+          description: Email address of the group's employer
+          example: employer@example.com
+          type: string
+        group_name:
+          description: Name for the group in the Noyo system
+          minLength: 1
+          type: string
+      required:
+      - carrier_group_id
+      - group_name
+      type: object
+      x-field_order:
+      - carrier_group_id
+      - group_name
+      - broker_federal_ein
+      - broker_tin
+      - employer_email_address
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+x-readme:
+  explorer-enabled: false

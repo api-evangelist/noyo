@@ -1,9 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: APIs to manage and consume information about Carriers
-  title: Noyo Carrier Carrier Mapped Field Rule API
+  description: Policy management APIs for health and ancillary insurance
+  title: Noyo Fulfillment Rule API
   version: 1.0.0
-servers: []
+servers:
+- description: Noyo Fulfillment API - Live
+  url: https://fulfillment.noyo.com
+- description: Noyo Fulfillment API - Sandbox
+  url: https://fulfillment-sandbox.noyo.com
 tags:
 - name: Rule
 paths:
@@ -231,48 +235,6 @@ paths:
       - Rule
 components:
   schemas:
-    RuleEditRequest:
-      properties:
-        active:
-          description: Boolean that dictates if the rule is active or not
-          type: boolean
-        joining_operator:
-          description: Operator that will join the rule's conditions
-          enum:
-          - AND
-          - OR
-          nullable: true
-          type: string
-        name:
-          description: descriptive name of the rule
-          type: string
-        rank:
-          description: Rank of the rule versus other rules
-          nullable: true
-          type: number
-        resulting_field_name:
-          description: Name of the field this rule will result in
-          nullable: true
-          type: string
-        resulting_field_value:
-          description: Value of the resulting_field_name this rule will result in
-          nullable: true
-          type: string
-        rule_type:
-          description: Type of rule
-          enum:
-          - normal
-          - default
-          type: string
-      type: object
-      x-field_order:
-      - active
-      - name
-      - rule_type
-      - joining_operator
-      - resulting_field_name
-      - resulting_field_value
-      - rank
     RuleResult:
       properties:
         active:
@@ -296,9 +258,10 @@ components:
           enum:
           - AND
           - OR
-          nullable: true
           readOnly: true
-          type: string
+          type:
+          - string
+          - 'null'
         mapping_type:
           description: Describes the type of mapping this rule falls under
           enum:
@@ -315,19 +278,22 @@ components:
           type: string
         rank:
           description: Rank of the rule versus other rules
-          nullable: true
           readOnly: true
-          type: number
+          type:
+          - number
+          - 'null'
         resulting_field_name:
           description: Name of the field this rule will result in
-          nullable: true
           readOnly: true
-          type: string
+          type:
+          - string
+          - 'null'
         resulting_field_value:
           description: Value of the resulting_field_name this rule will result in
-          nullable: true
           readOnly: true
-          type: string
+          type:
+          - string
+          - 'null'
         rule_type:
           description: Type of rule
           enum:
@@ -385,7 +351,7 @@ components:
       x-field_order:
       - meta
       - response
-    RuleCreateRequest:
+    RuleEditRequest:
       properties:
         active:
           description: Boolean that dictates if the rule is active or not
@@ -395,43 +361,37 @@ components:
           enum:
           - AND
           - OR
-          nullable: true
-          type: string
-        mapping_type:
-          description: Describes the type of mapping this rule falls under
-          enum:
-          - account_structure
-          - plan
-          type: string
+          type:
+          - string
+          - 'null'
         name:
           description: descriptive name of the rule
           type: string
         rank:
           description: Rank of the rule versus other rules
-          nullable: true
-          type: number
+          type:
+          - number
+          - 'null'
         resulting_field_name:
           description: Name of the field this rule will result in
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         resulting_field_value:
           description: Value of the resulting_field_name this rule will result in
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         rule_type:
           description: Type of rule
           enum:
           - normal
           - default
           type: string
-      required:
-      - name
-      - rule_type
       type: object
       x-field_order:
       - active
       - name
-      - mapping_type
       - rule_type
       - joining_operator
       - resulting_field_name
@@ -468,3 +428,61 @@ components:
       - page_num
       - page_size
       type: object
+    RuleCreateRequest:
+      properties:
+        active:
+          description: Boolean that dictates if the rule is active or not
+          type: boolean
+        joining_operator:
+          description: Operator that will join the rule's conditions
+          enum:
+          - AND
+          - OR
+          type:
+          - string
+          - 'null'
+        mapping_type:
+          description: Describes the type of mapping this rule falls under
+          enum:
+          - account_structure
+          - plan
+          type: string
+        name:
+          description: descriptive name of the rule
+          type: string
+        rank:
+          description: Rank of the rule versus other rules
+          type:
+          - number
+          - 'null'
+        resulting_field_name:
+          description: Name of the field this rule will result in
+          type:
+          - string
+          - 'null'
+        resulting_field_value:
+          description: Value of the resulting_field_name this rule will result in
+          type:
+          - string
+          - 'null'
+        rule_type:
+          description: Type of rule
+          enum:
+          - normal
+          - default
+          type: string
+      required:
+      - name
+      - rule_type
+      type: object
+      x-field_order:
+      - active
+      - name
+      - mapping_type
+      - rule_type
+      - joining_operator
+      - resulting_field_name
+      - resulting_field_value
+      - rank
+x-readme:
+  explorer-enabled: false

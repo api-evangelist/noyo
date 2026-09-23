@@ -1,11 +1,15 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: APIs to manage and consume information about Carriers
-  title: Noyo Carrier Carrier Mapped Field Ui API
+  description: Policy management APIs for health and ancillary insurance
+  title: Noyo Fulfillment UI API
   version: 1.0.0
-servers: []
+servers:
+- description: Noyo Fulfillment API - Live
+  url: https://fulfillment.noyo.com
+- description: Noyo Fulfillment API - Sandbox
+  url: https://fulfillment-sandbox.noyo.com
 tags:
-- name: Ui
+- name: UI
 paths:
   /ui/v1/member_transactions/{transaction_id}:
     x-summary: Single Member Transaction
@@ -75,48 +79,9 @@ paths:
           description: Successful Response - Returns a single Member Transaction
       summary: Get a single Member Transaction
       tags:
-      - Ui
+      - UI
 components:
   schemas:
-    UIGetMemberTransactionResult:
-      properties:
-        member_snapshot_id:
-          description: Associated member snapshot id
-          format: uuid
-          type: string
-        member_transaction:
-          allOf:
-          - $ref: '#/components/schemas/MemberTransactionResult'
-          description: Member transaction details
-      required:
-      - member_transaction
-      type: object
-      x-field_order:
-      - member_transaction
-      - member_snapshot_id
-    StatusDetailResult:
-      properties:
-        event_created:
-          description: Timestamp indicating when the status detail was created
-          example: '1673452723'
-          type: integer
-        status_detail:
-          description: Type of Status detail
-          enum:
-          - noyo_accepted
-          - carrier_accepted
-          - carrier_processing
-          - carrier_completed
-          - noyo_verified
-          example: carrier_accepted
-          type: string
-      required:
-      - event_created
-      - status_detail
-      type: object
-      x-field_order:
-      - status_detail
-      - event_created
     MemberTransactionResult:
       properties:
         body:
@@ -240,3 +205,44 @@ components:
       - verified
       - body
       - result
+    UIGetMemberTransactionResult:
+      properties:
+        member_snapshot_id:
+          description: Associated member snapshot id
+          format: uuid
+          type: string
+        member_transaction:
+          allOf:
+          - $ref: '#/components/schemas/MemberTransactionResult'
+          description: Member transaction details
+      required:
+      - member_transaction
+      type: object
+      x-field_order:
+      - member_transaction
+      - member_snapshot_id
+    StatusDetailResult:
+      properties:
+        event_created:
+          description: Timestamp indicating when the status detail was created
+          example: '1673452723'
+          type: integer
+        status_detail:
+          description: Type of Status detail
+          enum:
+          - noyo_accepted
+          - carrier_accepted
+          - carrier_processing
+          - carrier_completed
+          - noyo_verified
+          example: carrier_accepted
+          type: string
+      required:
+      - event_created
+      - status_detail
+      type: object
+      x-field_order:
+      - status_detail
+      - event_created
+x-readme:
+  explorer-enabled: false

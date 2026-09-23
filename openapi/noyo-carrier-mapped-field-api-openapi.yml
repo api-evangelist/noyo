@@ -1,9 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: APIs to manage and consume information about Carriers
-  title: Noyo Carrier Carrier Mapped Field API
+  description: Policy management APIs for health and ancillary insurance
+  title: Noyo Fulfillment Carrier Mapped Field API
   version: 1.0.0
-servers: []
+servers:
+- description: Noyo Fulfillment API - Live
+  url: https://fulfillment.noyo.com
+- description: Noyo Fulfillment API - Sandbox
+  url: https://fulfillment-sandbox.noyo.com
 tags:
 - name: Carrier Mapped Field
 paths:
@@ -123,9 +127,10 @@ components:
           type: string
         label:
           description: User friendly label for the mapped field name
-          nullable: true
           readOnly: true
-          type: string
+          type:
+          - string
+          - 'null'
         mapped_field:
           description: Field name that is being mapped to within the object
           readOnly: true
@@ -167,3 +172,5 @@ components:
       - mapped_field
       - mapping_type
       - label
+x-readme:
+  explorer-enabled: false

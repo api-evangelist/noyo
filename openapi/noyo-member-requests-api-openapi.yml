@@ -1,9 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: APIs to manage and consume information about Carriers
-  title: Noyo Carrier Carrier Mapped Field Member Requests API
+  description: Policy management APIs for health and ancillary insurance
+  title: Noyo Fulfillment Member Requests API
   version: 1.0.0
-servers: []
+servers:
+- description: Noyo Fulfillment API - Live
+  url: https://fulfillment.noyo.com
+- description: Noyo Fulfillment API - Sandbox
+  url: https://fulfillment-sandbox.noyo.com
 tags:
 - name: Member Requests
 paths:
@@ -87,9 +91,7 @@ paths:
   /api/v1/employees/{employee_id}/member_requests/cobra_enrollment:
     x-summary: COBRA Emrollment
     post:
-      description: 'The COBRA enrollment member request is used to add an existing employee, and optionally their dependents to multiple coverages at multiple carriers. This is for a continuation of benefits situation, when main line coverage either has already been terminated, or will be in conjunction with this member request.
-
-        '
+      description: The COBRA enrollment member request is used to add an existing employee, and optionally their dependents to multiple coverages at multiple carriers. This is for a continuation of benefits situation, when main line coverage either has already been terminated, or will be in conjunction with this member request.
       operationId: cobraEnrollmentMemberRequest
       parameters:
       - description: The unique identifier of the employee related to the member request
@@ -448,11 +450,9 @@ paths:
       description: 'The Enrollment Snapshot Member Request allows you to communicate the desired state of an employee''s coverage elections during an employee''s new hire period. You can use it in one of two cases:
 
 
-        * To enroll an employee and their dependents for the first time. Please reference the [New Hire Enrollment](#new-hire-enrollment) documentation section for more details.
+        * To enroll an employee and their dependents for the first time. Please reference the New Hire Enrollment documentation section for more details.
 
-        * To amend and replace a previous New Hire member request with the latest complete set of coverage elections, described in this section below.
-
-        '
+        * To amend and replace a previous New Hire member request with the latest complete set of coverage elections, described in this section below.'
       operationId: createEnrollmentSnapshotMemberRequest
       parameters:
       - description: The unique identifier of the employee related to the member request
@@ -1299,53 +1299,35 @@ paths:
       - Member Requests
 components:
   schemas:
-    GroupHealthFundPlanResultWithConfig:
+    BaseAddingCoveragePriorCoverage:
       properties:
-        cobra_rules:
-          allOf:
-          - $ref: '#/components/schemas/GroupPlanCOBRARules'
-          description: COBRA rules for the group health fund plan
-        code:
-          description: Plan code of the group health fund plan
-          example: HSA
+        carrier_name:
+          description: Name of insurance carrier providing prior coverage
           type: string
+        last_coverage_date:
+          description: ISO-8601 date string of the last day of coverage with the prior insurance carrier
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
+          type: string
+      required:
+      - carrier_name
+      - last_coverage_date
+      type: object
+    MemberRequestResult:
+      properties:
+        body:
+          description: Data required to execute a member request, varies depending on the request type
+          type: object
+        completed:
+          description: Timestamp indicating when a member request was marked as completed
+          readOnly: true
+          type: integer
         created:
           description: The date the record was created
           type: integer
-        dependent_child_age_limits:
-          description: List of all dependent child age limits configured for the group health fund plan
-          items:
-            $ref: '#/components/schemas/GroupPlanDependentChildAgeLimit'
-          type: array
-        effective_end_date:
-          description: ISO-8601 date string for the effective end date of the record
-          example: '2018-12-31'
-          format: date
-          nullable: true
-          type: string
-        effective_start_date:
-          description: ISO-8601 date string for the effective start date of the record
-          example: '2018-01-01'
-          format: date
-          nullable: true
-          type: string
-        eligible_member_types:
-          description: List of member types eligible for the group health fund plan
-          items:
-            description: Member type eligible for the group health fund plan
-            enum:
-            - all
-            - employee
-            - child
-            - spouse
-            - domestic-partner
-            - employee-with-dependents
-            type: string
-          minItems: 1
-          type: array
-        group_enrollment_id:
-          description: Unique identifier of the associated group enrollment in the Noyo system
+        employee_id:
+          description: Unique identifier of the employee in Noyo
           format: uuid
+          readOnly: true
           type: string
         id:
           description: Unique identifier of the record in Noyo
@@ -1354,242 +1336,117 @@ components:
         modified:
           description: The date the record was last updated
           type: integer
-        name:
-          description: Name of the group health fund plan
-          example: Health Fund - HSA
+        request_type:
+          description: Transaction type for the member request
+          enum:
+          - demographic
+          - new_hire
+          - termination
+          - open_enrollment
+          - qualifying_life_event
+          - enrollment_snapshot
+          - cobra_enrollment
+          - cobra_termination
+          - cobra_open_enrollment
+          - cobra_qualifying_life_event
           type: string
-        plan_configuration:
-          description: Group Health Fund Plan configuration details
+        result:
+          description: Result from executing the member request, varies depending on the request type
           type: object
-        plan_type:
-          description: Type of group health fund plan
-          enum:
-          - hsa
-          - fsa
-          - dca
-          - lpfsa
-          - hra
-          type: string
         status:
-          description: Status of the group health fund plan
+          description: Status of the member request
           enum:
-          - pending
-          - active
-          - discontinued
+          - processing
+          - completed
+          - failed
+          - canceled
           type: string
-        termination_policy:
-          description: Termination policy for the group health fund plan
-          enum:
-          - end_of_month
-          - last_work_date
-          - fifteenth_of_month
-          - first_of_following_month
-          - end_of_plan_year
-          type: string
+        transactions:
+          description: List of unique identifiers of all associated member transactions in Noyo
+          items:
+            format: uuid
+            type: string
+          type: array
         version:
           description: Current version of the record
           format: uuid
           type: string
-        volume_rules:
-          description: Volume rules for the group health fund plan
-          type: object
-        waiting_periods:
-          description: List of all waiting periods configured for the group health fund plan
-          items:
-            description: Member waiting period details for the group health fund plan
-            type: object
-          type: array
       required:
+      - body
       - created
-      - eligible_member_types
-      - group_enrollment_id
+      - employee_id
       - id
       - modified
-      - name
-      - plan_configuration
-      - plan_type
+      - request_type
+      - result
       - status
-      - termination_policy
       - version
-      - waiting_periods
-      type: object
-    ApiCOBRAQualifyingLifeEventCarrierCoverages:
-      properties:
-        carrier_config:
-          description: Carrier-specific data required for member request
-          type: object
-        carrier_id:
-          description: Unique identifier of the carrier in the Noyo system
-          format: uuid
-          type: string
-        lines_of_coverage:
-          allOf:
-          - $ref: '#/components/schemas/ApiCOBRAMembersChangeLinesOfCoverage'
-          description: Adding, removing and modifying information for each line of coverage
-        signature_date:
-          description: ISO-8601 date string for signature date
-          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
-          type: string
-      required:
-      - carrier_config
-      - carrier_id
-      - lines_of_coverage
       type: object
       x-field_order:
-      - carrier_id
-      - carrier_config
-      - signature_date
-      - lines_of_coverage
-    GroupPlanResultWithConfig:
+      - id
+      - version
+      - created
+      - completed
+      - modified
+      - employee_id
+      - request_type
+      - status
+      - transactions
+      - body
+      - result
+    ApiBaseOpenEnrollmentEventDetails:
       properties:
-        accident:
-          description: List of accident plans and configurations associated with the group
-          items:
-            allOf:
-            - $ref: '#/components/schemas/GroupAccidentPlanResultWithConfig'
-            description: Accident plan and plan configuration details
-          type: array
-        add:
-          description: List of AD&D plans and configurations associated with the group
-          items:
-            allOf:
-            - $ref: '#/components/schemas/GroupADDPlanResultWithConfig'
-            description: AD&D plan and plan configuration details
-          type: array
-        cancer:
-          description: List of cancer plans and configurations associated with the group
-          items:
-            allOf:
-            - $ref: '#/components/schemas/GroupCancerPlanResultWithConfig'
-            description: Cancer plan and plan configuration details
-          type: array
-        critical_illness:
-          description: List of critical illness plans and configurations associated with the group
-          items:
-            allOf:
-            - $ref: '#/components/schemas/GroupCriticalIllnessPlanResultWithConfig'
-            description: Critical illness plan and plan configuration details
-          type: array
-        dental:
-          description: List of dental plans and configurations associated with the group
-          items:
-            allOf:
-            - $ref: '#/components/schemas/GroupDentalPlanResultWithConfig'
-            description: Dental plan and plan configuration details
-          type: array
-        health_fund:
-          description: List of health fund plans and configurations associated with the group
-          items:
-            allOf:
-            - $ref: '#/components/schemas/GroupHealthFundPlanResultWithConfig'
-            description: Health fund plan and plan configuration details
-          type: array
-        hospital_indemnity:
-          description: List of hospital indemnity plans and configurations associated with the group
-          items:
-            allOf:
-            - $ref: '#/components/schemas/GroupHospitalIndemnityPlanResultWithConfig'
-            description: Hospital Indemnity plan and plan configuration details
-          type: array
-        life:
-          description: List of life plans and configurations associated with the group
-          items:
-            allOf:
-            - $ref: '#/components/schemas/GroupLifePlanResultWithConfig'
-            description: Life plan and plan configuration details
-          type: array
-        ltd:
-          description: List of LTD plans and configurations associated with the group
-          items:
-            allOf:
-            - $ref: '#/components/schemas/GroupLTDPlanResultWithConfig'
-            description: LTD plan and plan configuration details
-          type: array
-        medical:
-          description: List of medical plans and configurations associated with the group
-          items:
-            allOf:
-            - $ref: '#/components/schemas/GroupMedicalPlanResultWithConfig'
-            description: Medical plan and plan configuration details
-          type: array
-        pharmacy:
-          description: List of pharmacy plans and configurations associated with the group
-          items:
-            allOf:
-            - $ref: '#/components/schemas/GroupPharmacyPlanResultWithConfig'
-            description: Pharmacy plan and plan configuration details
-          type: array
-        std:
-          description: List of STD plans and configurations associated with the group
-          items:
-            allOf:
-            - $ref: '#/components/schemas/GroupSTDPlanResultWithConfig'
-            description: STD plan and plan configuration details
-          type: array
-        vision:
-          description: List of vision plans and configurations associated with the group
-          items:
-            allOf:
-            - $ref: '#/components/schemas/GroupVisionPlanResultWithConfig'
-            description: Vision plan and plan configuration details
-          type: array
-        wellness:
-          description: List of wellness plans and configurations associated with the group
-          items:
-            allOf:
-            - $ref: '#/components/schemas/GroupWellnessPlanResultWithConfig'
-            description: List of wellness plans and configurations associated with the group
-          type: array
-      type: object
-    ApiCOBRAMembersChangeLinesOfCoverage:
-      properties:
-        dental:
-          allOf:
-          - $ref: '#/components/schemas/ApiMembersChangeCoverageAction'
-          description: Member transaction requests relating to dental coverage
-        medical:
-          allOf:
-          - $ref: '#/components/schemas/ApiMembersChangeCoverageAction'
-          description: Member transaction requests relating to medical coverage
-        vision:
-          allOf:
-          - $ref: '#/components/schemas/ApiMembersChangeCoverageAction'
-          description: Member transaction requests relating to vision coverage
-      type: object
-      x-field_order:
-      - medical
-      - dental
-      - vision
-    MemberRequestCOBRATerminationRequest:
-      properties:
-        cobra_termination_date:
-          description: The COBRA Termination event date.
-          example: '2021-01-01'
+        event_date:
+          description: ISO-8601 date string for open enrollment date
           pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
           type: string
-        reason:
-          description: Reason the member has removed or canceled COBRA coverage
+        event_type:
+          description: Open enrollment event type
           enum:
-          - voluntary
-          - involuntary
-          - new-enrollment
-          - expiration
-          - non-payment
-          - medicare-entitlement
+          - open_enrollment
           type: string
-        signature_date:
-          description: ISO-8601 date string for signature date
-          example: '2021-01-01'
-          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
-          type: string
-      required:
-      - cobra_termination_date
-      - reason
       type: object
       x-field_order:
-      - reason
-      - cobra_termination_date
-      - signature_date
+      - event_type
+      - event_date
+    ApiBaseQualifyingLifeEventDetails:
+      properties:
+        event_date:
+          description: ISO-8601 date string for qualifying life event date
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
+          type: string
+        event_type:
+          description: Qualifying life event type
+          enum:
+          - adoption
+          - change_to_part_time
+          - change_to_full_time
+          - classifications_change
+          - court_order
+          - death
+          - dependent_open_enrollment
+          - foster_care
+          - immigration_status_change
+          - legal_guardian
+          - lost_coverage
+          - divorce
+          - marriage
+          - medicare
+          - moved
+          - newborn
+          - offline_change
+          - override
+          - rate_changed
+          - rehire
+          - reinstatement
+          type: string
+      required:
+      - event_date
+      - event_type
+      type: object
+      x-field_order:
+      - event_type
+      - event_date
     DemographicChangeMember:
       properties:
         id:
@@ -1612,7 +1469,61 @@ components:
           description: True if group plan is eligible for COBRA enrollments
           type: boolean
       type: object
-    ApiBaseMemberAddingCoveragePriorCoverageWithVolume:
+    ApiBaseCOBRAQualifyingLifeEventDetails:
+      properties:
+        event_date:
+          description: ISO-8601 date string for qualifying life event date
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
+          type: string
+        event_type:
+          description: Qualifying life event type
+          enum:
+          - adoption
+          - change_to_part_time
+          - change_to_full_time
+          - classifications_change
+          - court_order
+          - death
+          - dependent_open_enrollment
+          - foster_care
+          - immigration_status_change
+          - legal_guardian
+          - lost_coverage
+          - divorce
+          - marriage
+          - medicare
+          - moved
+          - newborn
+          - offline_change
+          - override
+          - rate_changed
+          - rehire
+          - reinstatement
+          - terminate_cobra
+          type: string
+      required:
+      - event_date
+      - event_type
+      type: object
+    MembersChangeCoverageActionWithVolume:
+      properties:
+        adding_coverage:
+          description: Details for members adding coverage with volume
+          items:
+            $ref: '#/components/schemas/BaseMemberAddingCoveragePriorCoverageWithVolume'
+          type: array
+        modifying_coverage:
+          description: Details for members modifying coverage with volume
+          items:
+            $ref: '#/components/schemas/BaseMemberModifyingCoverageWithVolume'
+          type: array
+        removing_coverage:
+          description: Details for members removing coverage
+          items:
+            $ref: '#/components/schemas/BaseMemberRemovingCoverage'
+          type: array
+      type: object
+    ApiBaseMemberAddingCoveragePriorCoverage:
       properties:
         id:
           description: Unique identifier of the employee or dependent in Noyo
@@ -1632,10 +1543,6 @@ components:
           allOf:
           - $ref: '#/components/schemas/BaseAddingCoveragePriorCoverage'
           description: Details about prior insurance coverage, if applicable
-        volume:
-          description: Elected volume for the type of coverage being selected
-          format: int32
-          type: integer
       required:
       - id
       - member_type
@@ -1646,31 +1553,85 @@ components:
       - plan_id
       - volume
       - prior_coverage
-    ApiAddressChange:
+    ApiBaseMemberModifyingCoverage:
       properties:
-        home_address:
-          allOf:
-          - $ref: '#/components/schemas/ApiAddress'
-          description: New home address of the person
-        mailing_address:
-          allOf:
-          - $ref: '#/components/schemas/ApiAddress'
-          description: New mailing address of the person
+        id:
+          description: Unique identifier of the employee or dependent in Noyo
+          format: uuid
+          type: string
+        member_type:
+          description: Type of member modifying coverage
+          enum:
+          - dependent
+          - employee
+          type: string
+        plan_id:
+          description: Unique identifier of the group plan in Noyo
+          format: uuid
+          type: string
+      required:
+      - id
+      - member_type
+      type: object
+    ApiBaseMemberAddingCoverage:
+      properties:
+        id:
+          description: Unique identifier of the employee or dependent in Noyo
+          format: uuid
+          type: string
+        member_type:
+          description: Type of member adding coverage
+          enum:
+          - dependent
+          - employee
+          type: string
+        plan_id:
+          description: Unique identifier of the group plan in Noyo
+          format: uuid
+          type: string
+      required:
+      - id
+      - member_type
       type: object
       x-field_order:
-      - home_address
-      - mailing_address
-    ApiMembersChangeCoverageAction:
+      - id
+      - member_type
+      - plan_id
+      - volume
+      - prior_coverage
+    UIPersonResult:
+      properties:
+        first_name:
+          description: First name of the person
+          example: Catherine
+          type: string
+        id:
+          description: Unique identifier of the person in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        last_name:
+          description: Last name of the person
+          example: Briggs
+          type: string
+        middle_name:
+          description: Middle name of the person
+          example: S
+          type: string
+      required:
+      - id
+      type: object
+    ApiMembersChangeCoverageActionWithVolume:
       properties:
         adding_coverage:
-          description: Details for members adding coverage
+          description: Details for members adding coverage with volume
           items:
-            $ref: '#/components/schemas/ApiBaseMemberAddingCoveragePriorCoverage'
+            $ref: '#/components/schemas/ApiBaseMemberAddingCoveragePriorCoverageWithVolume'
           type: array
         modifying_coverage:
-          description: Details for members modifying coverage
+          description: Details for members modifying coverage with volume
           items:
-            $ref: '#/components/schemas/ApiBaseMemberModifyingCoverage'
+            $ref: '#/components/schemas/ApiBaseMemberModifyingCoverageWithVolume'
           type: array
         removing_coverage:
           description: Details for members removing coverage
@@ -1682,129 +1643,422 @@ components:
       - adding_coverage
       - removing_coverage
       - modifying_coverage
-    MembersChangeCoverageActionWithVolume:
+    PaginatedMemberRequestResult:
       properties:
-        adding_coverage:
-          description: Details for members adding coverage with volume
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of member request results
           items:
-            $ref: '#/components/schemas/BaseMemberAddingCoveragePriorCoverageWithVolume'
+            $ref: '#/components/schemas/MemberRequestResult'
           type: array
-        modifying_coverage:
-          description: Details for members modifying coverage with volume
-          items:
-            $ref: '#/components/schemas/BaseMemberModifyingCoverageWithVolume'
-          type: array
-        removing_coverage:
-          description: Details for members removing coverage
-          items:
-            $ref: '#/components/schemas/BaseMemberRemovingCoverage'
-          type: array
-      type: object
-    GroupPlanDependentChildAgeLimit:
-      properties:
-        dependent_child_age_limit:
-          description: Age limit where dependent child is no longer eligible for plan
-          format: int32
-          minimum: 0
-          type: integer
-        dependent_child_termination_rule:
-          description: Termination rule describing when coverage ends for dependent child
-          enum:
-          - date_of_birth
-          - end_of_month_after_birthday
-          - end_of_year_after_birthday
-          type: string
-        dependent_child_type:
-          description: Dependent type to decide whether age limit rule should be applied
-          enum:
-          - dependent_child
-          - student
-          type: string
       required:
-      - dependent_child_age_limit
-      - dependent_child_termination_rule
-      - dependent_child_type
-      type: object
-    ApiNameChange:
-      properties:
-        first_name:
-          description: New first name of the person
-          example: Jane
-          type: string
-        last_name:
-          description: New last name of the person
-          example: Doe
-          type: string
-        middle_name:
-          description: New middle name of the person
-          example: Ellen
-          type: string
-        suffix:
-          description: New name suffix of the person
-          example: Jr
-          type: string
-      required:
-      - first_name
-      - last_name
+      - meta
+      - response
       type: object
       x-field_order:
-      - first_name
-      - middle_name
-      - last_name
-      - suffix
-    ApiSalaryChange:
+      - meta
+      - response
+    BaseMemberAddingCoveragePriorCoverage:
       properties:
-        amount:
-          description: New or updated amount of salary earned by the employee in US dollars
-          example: 55000
-          minimum: 0
-          type: number
-        type:
-          description: New or updated type of salary earned by the employee
-          enum:
-          - hourly
-          - salary
-          example: salary
+        id:
+          description: Unique identifier of the employee or dependent in Noyo
+          format: uuid
           type: string
-        unit:
-          description: New or updated unit of salary earned by the employee
+        member_type:
+          description: Type of member adding coverage
           enum:
-          - annual
-          - month
-          - semi-monthly
-          - week
-          - hour
-          example: annual
+          - dependent
+          - employee
           type: string
+        plan_id:
+          description: Unique identifier of the group plan in Noyo
+          format: uuid
+          type: string
+        prior_coverage:
+          allOf:
+          - $ref: '#/components/schemas/BaseAddingCoveragePriorCoverage'
+          description: Details about prior insurance coverage, if applicable
       required:
-      - amount
-      - type
-      - unit
+      - id
+      - member_type
+      - plan_id
       type: object
-      x-field_order:
-      - amount
-      - unit
-      - type
-    MemberRequestOpenEnrollmentRequest:
+    MemberRequestQualifyingLifeEventRequest:
       properties:
         coverages:
           description: List of coverage change actions to complete with a set of carriers
           items:
             allOf:
-            - $ref: '#/components/schemas/ApiOpenEnrollmentCarrierCoverages'
+            - $ref: '#/components/schemas/ApiQualifyingLifeEventCarrierCoverages'
             description: Coverage change actions to complete with a carrier
           minItems: 1
           type: array
         event:
           allOf:
-          - $ref: '#/components/schemas/ApiBaseOpenEnrollmentEventDetails'
-          description: Details about the eligible open enrollment event
+          - $ref: '#/components/schemas/ApiBaseQualifyingLifeEventDetails'
+          description: Details about the eligible qualifying life event
       required:
       - coverages
+      - event
       type: object
       x-field_order:
       - event
       - coverages
+    UIMemberRequestParentResult:
+      properties:
+        dependents:
+          items:
+            allOf:
+            - $ref: '#/components/schemas/UIDependentResult'
+            description: List of all dependents for the employee
+          type: array
+        employee:
+          allOf:
+          - $ref: '#/components/schemas/UIEmployeeResult'
+          description: Employee details for the member request
+        group_enrollments:
+          items:
+            allOf:
+            - $ref: '#/components/schemas/GroupEnrollmentResultWithConfig'
+            description: List of group enrollments for the member request
+          type: array
+        individual_enrollments:
+          items:
+            allOf:
+            - $ref: '#/components/schemas/IndividualEnrollmentResultWithConfig1'
+            description: List of all related individuals enrollments for the member request
+          type: array
+        member_request:
+          allOf:
+          - $ref: '#/components/schemas/UIMemberRequestResult'
+          description: Core Member request details
+        plans:
+          allOf:
+          - $ref: '#/components/schemas/GroupPlanResultWithConfig'
+          description: Object containing all group plans
+        transactions_status_detail:
+          description: List of transaction status details from a request
+          example: carrier_accepted
+          items:
+            enum:
+            - noyo_accepted
+            - carrier_accepted
+            - carrier_processing
+            - carrier_completed
+            - noyo_verified
+            type: string
+          type: array
+      required:
+      - employee
+      - member_request
+      - plans
+      - transactions_status_detail
+      type: object
+      x-field_order:
+      - member_request
+      - group_enrollments
+      - plans
+      - employee
+      - dependents
+      - individual_enrollments
+      - transactions_status_detail
+    MemberRequestCOBRAEnrollmentRequest:
+      properties:
+        coverages:
+          description: List of coverages being added or waived with a set of carriers
+          items:
+            allOf:
+            - $ref: '#/components/schemas/ApiBaseNewHireChangeCarrierCoverages'
+            description: Information for a coverage being added or waived with each carrier
+          minItems: 1
+          type: array
+        termination_info:
+          allOf:
+          - $ref: '#/components/schemas/PublicCOBRATerminationInfo'
+          description: Termination info for the cobra member request
+      required:
+      - coverages
+      type: object
+      x-field_order:
+      - termination_info
+      - coverages
+    GroupVisionPlanResultWithConfig:
+      properties:
+        cobra_rules:
+          allOf:
+          - $ref: '#/components/schemas/GroupPlanCOBRARules'
+          description: COBRA rules for the group vision plan
+        code:
+          description: Plan code of the group vision plan
+          example: VP2000
+          type: string
+        created:
+          description: The date the record was created
+          type: integer
+        dependent_child_age_limits:
+          description: List of all dependent child age limits configured for the group vision plan
+          items:
+            $ref: '#/components/schemas/GroupPlanDependentChildAgeLimit'
+          type: array
+        effective_end_date:
+          description: ISO-8601 date string for the effective end date of the record
+          example: '2018-12-31'
+          format: date
+          type:
+          - string
+          - 'null'
+        effective_start_date:
+          description: ISO-8601 date string for the effective start date of the record
+          example: '2018-01-01'
+          format: date
+          type:
+          - string
+          - 'null'
+        eligible_member_types:
+          description: List of member types eligible for the group vision plan
+          items:
+            description: Member type eligible for the group vision plan
+            enum:
+            - all
+            - employee
+            - child
+            - spouse
+            - domestic-partner
+            - employee-with-dependents
+            type: string
+          minItems: 1
+          type: array
+        group_enrollment_id:
+          description: Unique identifier of the associated group enrollment in the Noyo system
+          format: uuid
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        name:
+          description: Name of the group vision plan
+          example: Vision Plus 2000
+          type: string
+        plan_configuration:
+          description: Group Vision Plan configuration details
+          type: object
+        status:
+          description: Status of the group vision plan
+          enum:
+          - pending
+          - active
+          - discontinued
+          type: string
+        termination_policy:
+          description: Termination policy for the group vision plan
+          enum:
+          - end_of_month
+          - last_work_date
+          - fifteenth_of_month
+          - first_of_following_month
+          - end_of_plan_year
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+        voluntary:
+          description: True if the group vision plan is a voluntary plan
+          type: boolean
+        waiting_periods:
+          description: Member waiting period details for the group vision plan
+          items:
+            description: Member waiting period details for the group vision plan
+            type: object
+          type: array
+      required:
+      - cobra_rules
+      - created
+      - eligible_member_types
+      - group_enrollment_id
+      - id
+      - modified
+      - name
+      - plan_configuration
+      - status
+      - termination_policy
+      - version
+      - waiting_periods
+      type: object
+    GroupLTDPlanResultWithConfig:
+      properties:
+        code:
+          description: Plan code of the group LTD plan
+          example: LTD
+          type: string
+        created:
+          description: The date the record was created
+          type: integer
+        effective_end_date:
+          description: ISO-8601 date string for the effective end date of the record
+          example: '2018-12-31'
+          format: date
+          type:
+          - string
+          - 'null'
+        effective_start_date:
+          description: ISO-8601 date string for the effective start date of the record
+          example: '2018-01-01'
+          format: date
+          type:
+          - string
+          - 'null'
+        eligible_member_types:
+          description: List of member types eligible for the group LTD plan
+          items:
+            description: Member type eligible for the group LTD plan
+            enum:
+            - all
+            - employee
+            - child
+            - spouse
+            - domestic-partner
+            - employee-with-dependents
+            type: string
+          minItems: 1
+          type: array
+        group_enrollment_id:
+          description: Unique identifier of the associated group enrollment in the Noyo system
+          format: uuid
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        name:
+          description: Name of the group LTD plan
+          example: Employee LTD
+          type: string
+        plan_configuration:
+          description: Group LTD Plan configuration details
+          type: object
+        plan_type:
+          description: Type of group LTD plan
+          enum:
+          - basic
+          - voluntary
+          type: string
+        status:
+          description: Status of the group LTD plan
+          enum:
+          - pending
+          - active
+          - discontinued
+          type: string
+        termination_policy:
+          description: Termination policy for the group LTD plan
+          enum:
+          - end_of_month
+          - last_work_date
+          - fifteenth_of_month
+          - first_of_following_month
+          - end_of_plan_year
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+        volume_rules:
+          description: Volume rules for the group LTD plan
+          type: object
+        waiting_periods:
+          description: Member waiting period details for the group LTD plan
+          items:
+            description: Member waiting period details for the group LTD plan
+            type: object
+          type: array
+      required:
+      - created
+      - eligible_member_types
+      - group_enrollment_id
+      - id
+      - modified
+      - name
+      - plan_configuration
+      - plan_type
+      - status
+      - termination_policy
+      - version
+      - volume_rules
+      - waiting_periods
+      type: object
+    ApiOpenEnrollmentCarrierCoverages:
+      properties:
+        carrier_config:
+          description: Carrier-specific data required for member request
+          type: object
+        carrier_id:
+          description: Unique identifier of the carrier in the Noyo system
+          format: uuid
+          type: string
+        coverage_start_date:
+          description: ISO-8601 date string for coverage start date
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
+          type: string
+        lines_of_coverage:
+          allOf:
+          - $ref: '#/components/schemas/ApiMembersChangeLinesOfCoverage'
+          description: Adding, removing and modifying information for each line of coverage
+        signature_date:
+          description: ISO-8601 date string for signature date
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
+          type: string
+      required:
+      - carrier_config
+      - carrier_id
+      - lines_of_coverage
+      type: object
+      x-field_order:
+      - carrier_id
+      - carrier_config
+      - signature_date
+      - lines_of_coverage
+    PaginatedUIMemberRequestResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of member request results
+          items:
+            $ref: '#/components/schemas/UIMemberRequestParentResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    ApiBaseNewHireMemberCoverageAction:
+      properties:
+        enrolling_members:
+          description: Details for members enrolling in coverage
+          items:
+            $ref: '#/components/schemas/ApiBaseMemberAddingCoverage'
+          type: array
+        waiving_members:
+          description: Details for members waiving coverage
+          items:
+            $ref: '#/components/schemas/BaseMemberWaivingCoverage'
+          type: array
+      type: object
     GroupMedicalPlanResultWithConfig:
       properties:
         cobra_rules:
@@ -1827,14 +2081,16 @@ components:
           description: ISO-8601 date string for the effective end date of the record
           example: '2018-12-31'
           format: date
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         effective_start_date:
           description: ISO-8601 date string for the effective start date of the record
           example: '2018-01-01'
           format: date
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         group_enrollment_id:
           description: Unique identifier of the associated group enrollment in the Noyo system
           format: uuid
@@ -1914,40 +2170,33 @@ components:
       - version
       - waiting_periods
       type: object
-    ApiContactChange:
+    MemberRequestCOBRAQualifyingLifeEventRequest:
       properties:
-        email_address:
-          description: New email address of the person
-          example: jane.doe@example.com
-          format: email
-          type: string
-        email_address_type:
-          description: Type of new email address
-          enum:
-          - home
-          - work
-          example: home
-          type: string
-        home_phone:
-          description: New home phone number in E.164 format
-          example: '+15555551212'
-          type: string
-        work_phone:
-          description: New work phone number in E.164 format
-          example: '+15555551212'
-          type: string
+        coverages:
+          description: List of coverage change actions to complete with a set of carriers
+          items:
+            allOf:
+            - $ref: '#/components/schemas/ApiCOBRAQualifyingLifeEventCarrierCoverages'
+            description: Coverage change actions to complete with a carrier
+          minItems: 1
+          type: array
+        event:
+          allOf:
+          - $ref: '#/components/schemas/ApiBaseCOBRAQualifyingLifeEventDetails'
+          description: Details about the eligible qualifying life event
+      required:
+      - coverages
+      - event
       type: object
       x-field_order:
-      - home_phone
-      - work_phone
-      - email_address
-      - email_address_type
-    ApiBaseNewHireMemberCoverageActionWithVolume:
+      - event
+      - coverages
+    BaseNewHireMemberCoverageActionWithVolume:
       properties:
         enrolling_members:
           description: Details for members enrolling in coverage
           items:
-            $ref: '#/components/schemas/ApiBaseMemberAddingCoverageWithVolume'
+            $ref: '#/components/schemas/BaseMemberAddingCoverageWithVolume'
           type: array
         waiving_members:
           description: Details for members waiving coverage
@@ -1955,18 +2204,593 @@ components:
             $ref: '#/components/schemas/BaseMemberWaivingCoverage'
           type: array
       type: object
-    GroupPlanGuaranteedIssueRules:
+    ApiAddressChange:
       properties:
-        gi_over_70:
-          description: Guaranteed issue amount for members over age 70
-          format: int32
-          nullable: true
+        home_address:
+          allOf:
+          - $ref: '#/components/schemas/ApiAddress'
+          description: New home address of the person
+        mailing_address:
+          allOf:
+          - $ref: '#/components/schemas/ApiAddress'
+          description: New mailing address of the person
+      type: object
+      x-field_order:
+      - home_address
+      - mailing_address
+    MemberRequestCOBRATerminationRequest:
+      properties:
+        cobra_termination_date:
+          description: The COBRA Termination event date.
+          example: '2021-01-01'
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
+          type: string
+        reason:
+          description: Reason the member has removed or canceled COBRA coverage
+          enum:
+          - voluntary
+          - involuntary
+          - new-enrollment
+          - expiration
+          - non-payment
+          - medicare-entitlement
+          type: string
+        signature_date:
+          description: ISO-8601 date string for signature date
+          example: '2021-01-01'
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
+          type: string
+      required:
+      - cobra_termination_date
+      - reason
+      type: object
+      x-field_order:
+      - reason
+      - cobra_termination_date
+      - signature_date
+    GroupPharmacyPlanResultWithConfig:
+      properties:
+        cobra_rules:
+          allOf:
+          - $ref: '#/components/schemas/GroupPlanCOBRARules'
+          description: COBRA rules for the group pharmacy plan
+        code:
+          description: Plan code of the group pharmacy plan
+          example: RX
+          type: string
+        created:
+          description: The date the record was created
           type: integer
-        gi_under_70:
-          description: Guaranteed issue amount for members under age 70
-          format: int32
-          nullable: true
+        dependent_child_age_limits:
+          description: List of all dependent child age limits configured for the group pharmacy plan
+          items:
+            $ref: '#/components/schemas/GroupPlanDependentChildAgeLimit'
+          type: array
+        effective_end_date:
+          description: ISO-8601 date string for the effective end date of the record
+          example: '2018-12-31'
+          format: date
+          type:
+          - string
+          - 'null'
+        effective_start_date:
+          description: ISO-8601 date string for the effective start date of the record
+          example: '2018-01-01'
+          format: date
+          type:
+          - string
+          - 'null'
+        eligible_member_types:
+          description: List of member types eligible for the group pharmacy plan
+          items:
+            description: Member type eligible for the group pharmacy plan
+            enum:
+            - all
+            - employee
+            - child
+            - spouse
+            - domestic-partner
+            - employee-with-dependents
+            type: string
+          minItems: 1
+          type: array
+        group_enrollment_id:
+          description: Unique identifier of the associated group enrollment in the Noyo system
+          format: uuid
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
           type: integer
+        name:
+          description: Name of the group pharmacy plan
+          example: Pharmacy - Standard
+          type: string
+        plan_configuration:
+          description: Group Pharmacy Plan configuration details
+          type: object
+        plan_type:
+          description: Type of group pharmacy plan
+          enum:
+          - pharmacy
+          type: string
+        status:
+          description: Status of the group pharmacy plan
+          enum:
+          - pending
+          - active
+          - discontinued
+          type: string
+        termination_policy:
+          description: Termination policy for the group pharmacy plan
+          enum:
+          - end_of_month
+          - last_work_date
+          - fifteenth_of_month
+          - first_of_following_month
+          - end_of_plan_year
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+        voluntary:
+          description: Whether the group pharmacy plan is voluntary
+          type: boolean
+        waiting_periods:
+          description: List of all waiting periods configured for the group pharmacy plan
+          items:
+            description: Member waiting period details for the group pharmacy plan
+            type: object
+          type: array
+      required:
+      - created
+      - eligible_member_types
+      - group_enrollment_id
+      - id
+      - modified
+      - name
+      - plan_configuration
+      - plan_type
+      - status
+      - termination_policy
+      - version
+      - waiting_periods
+      type: object
+    GroupDentalPlanResultWithConfig:
+      properties:
+        cobra_rules:
+          allOf:
+          - $ref: '#/components/schemas/GroupPlanCOBRARules'
+          description: COBRA rules for the group dental plan
+        code:
+          description: Plan code of the group dental plan
+          example: SP100
+          type: string
+        created:
+          description: The date the record was created
+          type: integer
+        dependent_child_age_limits:
+          description: List of all dependent child age limits configured for the group dental plan
+          items:
+            $ref: '#/components/schemas/GroupPlanDependentChildAgeLimit'
+          type: array
+        effective_end_date:
+          description: ISO-8601 date string for the effective end date of the record
+          example: '2018-12-31'
+          format: date
+          type:
+          - string
+          - 'null'
+        effective_start_date:
+          description: ISO-8601 date string for the effective start date of the record
+          example: '2018-01-01'
+          format: date
+          type:
+          - string
+          - 'null'
+        eligible_member_types:
+          description: List of member types eligible for the group dental plan
+          items:
+            description: Member type eligible for the group dental plan
+            enum:
+            - all
+            - employee
+            - child
+            - spouse
+            - domestic-partner
+            - employee-with-dependents
+            type: string
+          minItems: 1
+          type: array
+        group_enrollment_id:
+          description: Unique identifier of the associated group enrollment in the Noyo system
+          format: uuid
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        name:
+          description: Name of the group dental plan
+          example: Smile Plus 1000
+          type: string
+        network:
+          description: Network name of the plan designated by the carrier
+          example: Dental Select
+          type: string
+        plan_configuration:
+          description: Group Dental Plan configuration details
+          type: object
+        plan_type:
+          description: Type of group dental plan
+          enum:
+          - ppo
+          - pos
+          - dhmo
+          - epo
+          - aso
+          - indemnity
+          type: string
+        status:
+          description: Status of the group dental plan
+          enum:
+          - pending
+          - active
+          - discontinued
+          type: string
+        termination_policy:
+          description: Termination policy for the group dental plan
+          enum:
+          - end_of_month
+          - last_work_date
+          - fifteenth_of_month
+          - first_of_following_month
+          - end_of_plan_year
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+        voluntary:
+          description: True if the group dental plan is a voluntary plan
+          type: boolean
+        waiting_periods:
+          description: Member waiting period details for the group dental plan
+          items:
+            description: Member waiting period details for the group dental plan
+            type: object
+          type: array
+      required:
+      - cobra_rules
+      - created
+      - eligible_member_types
+      - group_enrollment_id
+      - id
+      - modified
+      - name
+      - plan_configuration
+      - status
+      - termination_policy
+      - version
+      - waiting_periods
+      type: object
+    GroupCriticalIllnessPlanResultWithConfig:
+      properties:
+        code:
+          description: Plan code of the group critical illness plan
+          example: VCI
+          type: string
+        created:
+          description: The date the record was created
+          type: integer
+        dependent_child_age_limits:
+          description: List of all dependent child age limits configured for the group critical illness plan
+          items:
+            $ref: '#/components/schemas/GroupPlanDependentChildAgeLimit'
+          type: array
+        effective_end_date:
+          description: ISO-8601 date string for the effective end date of the record
+          example: '2018-12-31'
+          format: date
+          type:
+          - string
+          - 'null'
+        effective_start_date:
+          description: ISO-8601 date string for the effective start date of the record
+          example: '2018-01-01'
+          format: date
+          type:
+          - string
+          - 'null'
+        eligible_member_types:
+          description: List of member types eligible for the group critical illness plan
+          items:
+            description: Member type eligible for the group critical illness plan
+            enum:
+            - all
+            - employee
+            - child
+            - spouse
+            - domestic-partner
+            - employee-with-dependents
+            type: string
+          minItems: 1
+          type: array
+        group_enrollment_id:
+          description: Unique identifier of the associated group enrollment in the Noyo system
+          format: uuid
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        name:
+          description: Name of the group critical illness plan
+          example: Critical Illness - Employee
+          type: string
+        plan_configuration:
+          description: Group Critical Illness Plan configuration details
+          type: object
+        plan_type:
+          description: Type of group critical illness plan
+          enum:
+          - basic
+          - voluntary
+          type: string
+        status:
+          description: Status of the group critical illness plan
+          enum:
+          - pending
+          - active
+          - discontinued
+          type: string
+        termination_policy:
+          description: Termination policy for the group critical illness plan
+          enum:
+          - end_of_month
+          - last_work_date
+          - fifteenth_of_month
+          - first_of_following_month
+          - end_of_plan_year
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+        volume_rules:
+          description: Volume rules for the group critical illness plan
+          type: object
+        waiting_periods:
+          description: Member waiting period details for the group critical illness plan
+          items:
+            description: Member waiting period details for the group critical illness plan
+            type: object
+          type: array
+      required:
+      - created
+      - eligible_member_types
+      - group_enrollment_id
+      - id
+      - modified
+      - name
+      - plan_configuration
+      - plan_type
+      - status
+      - termination_policy
+      - version
+      - volume_rules
+      - waiting_periods
+      type: object
+    GroupAccidentPlanResultWithConfig:
+      properties:
+        code:
+          description: Plan code of the group accident plan
+          example: VACC
+          type: string
+        created:
+          description: The date the record was created
+          type: integer
+        dependent_child_age_limits:
+          description: List of all dependent child age limits configured for the group accident plan
+          items:
+            $ref: '#/components/schemas/GroupPlanDependentChildAgeLimit'
+          type: array
+        effective_end_date:
+          description: ISO-8601 date string for the effective end date of the record
+          example: '2018-12-31'
+          format: date
+          type:
+          - string
+          - 'null'
+        effective_start_date:
+          description: ISO-8601 date string for the effective start date of the record
+          example: '2018-01-01'
+          format: date
+          type:
+          - string
+          - 'null'
+        eligible_member_types:
+          description: List of member types eligible for the group accident plan
+          items:
+            description: Member type eligible for the group accident plan
+            enum:
+            - all
+            - employee
+            - child
+            - spouse
+            - domestic-partner
+            - employee-with-dependents
+            type: string
+          minItems: 1
+          type: array
+        group_enrollment_id:
+          description: Unique identifier of the associated group enrollment in the Noyo system
+          format: uuid
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        name:
+          description: Name of the group accident plan
+          example: Voluntary Accident - Employee
+          type: string
+        plan_configuration:
+          description: Group Accident Plan configuration details
+          type: object
+        plan_type:
+          description: Type of group accident plan
+          enum:
+          - basic
+          - voluntary
+          type: string
+        status:
+          description: Status of the group accident plan
+          enum:
+          - pending
+          - active
+          - discontinued
+          type: string
+        termination_policy:
+          description: Termination policy for the group accident plan
+          enum:
+          - end_of_month
+          - last_work_date
+          - fifteenth_of_month
+          - first_of_following_month
+          - end_of_plan_year
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+        waiting_periods:
+          description: Member waiting period details for the group accident plan
+          items:
+            description: Member waiting period details for the group accident plan
+            type: object
+          type: array
+      required:
+      - created
+      - eligible_member_types
+      - group_enrollment_id
+      - id
+      - modified
+      - name
+      - plan_configuration
+      - plan_type
+      - status
+      - termination_policy
+      - version
+      - waiting_periods
+      type: object
+    BaseMemberWaivingCoverage:
+      properties:
+        id:
+          description: Unique identifier of the employee or dependent in Noyo
+          format: uuid
+          type: string
+        member_type:
+          description: Type of member waiving coverage
+          enum:
+          - dependent
+          - employee
+          type: string
+        plan_id:
+          description: Unique identifier of the group plan in Noyo
+          format: uuid
+          type: string
+        reason:
+          description: Reason the member is waiving coverage
+          enum:
+          - other-employee-group
+          - other-spouse-group
+          - other-parent-group
+          - other-ind-on-exchange
+          - other-ind-off-exchange
+          - other-cobra
+          - other-medicare
+          - medicaid
+          - medi-cal
+          - va-coverage
+          - tricare-coverage
+          - retiree-coverage
+          - no-coverage
+          - voluntary-withdrawal
+          type: string
+      required:
+      - id
+      - member_type
+      - reason
+      type: object
+    ApiCOBRAOpenEnrollmentCarrierCoverages:
+      properties:
+        carrier_config:
+          description: Carrier-specific data required for member request
+          type: object
+        carrier_id:
+          description: Unique identifier of the carrier in the Noyo system
+          format: uuid
+          type: string
+        coverage_start_date:
+          description: ISO-8601 date string for coverage start date
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
+          type: string
+        lines_of_coverage:
+          allOf:
+          - $ref: '#/components/schemas/ApiCOBRAMembersChangeLinesOfCoverage'
+          description: Adding, removing and modifying information for each line of coverage
+        signature_date:
+          description: ISO-8601 date string for signature date
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
+          type: string
+      required:
+      - carrier_config
+      - carrier_id
+      - lines_of_coverage
+      type: object
+      x-field_order:
+      - carrier_id
+      - carrier_config
+      - signature_date
+      - lines_of_coverage
+    BaseMemberAddingCoverageWithVolume:
+      properties:
+        id:
+          description: Unique identifier of the employee or dependent in Noyo
+          format: uuid
+          type: string
+        member_type:
+          description: Type of member adding coverage
+          enum:
+          - dependent
+          - employee
+          type: string
+        plan_id:
+          description: Unique identifier of the group plan in Noyo
+          format: uuid
+          type: string
+        volume:
+          description: Elected volume for the type of coverage being selected
+          format: int32
+          type: integer
+      required:
+      - id
+      - member_type
+      - plan_id
       type: object
     GroupWellnessPlanResultWithConfig:
       properties:
@@ -1990,14 +2814,16 @@ components:
           description: ISO-8601 date string for the effective end date of the record
           example: '2018-12-31'
           format: date
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         effective_start_date:
           description: ISO-8601 date string for the effective start date of the record
           example: '2018-01-01'
           format: date
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         eligible_member_types:
           description: List of member types eligible for the group wellness plan
           items:
@@ -2076,6 +2902,307 @@ components:
       - version
       - waiting_periods
       type: object
+    GroupSTDPlanResultWithConfig:
+      properties:
+        code:
+          description: Plan code of the group STD plan
+          example: STD
+          type: string
+        created:
+          description: The date the record was created
+          type: integer
+        effective_end_date:
+          description: ISO-8601 date string for the effective end date of the record
+          example: '2018-12-31'
+          format: date
+          type:
+          - string
+          - 'null'
+        effective_start_date:
+          description: ISO-8601 date string for the effective start date of the record
+          example: '2018-01-01'
+          format: date
+          type:
+          - string
+          - 'null'
+        eligible_member_types:
+          description: List of member types eligible for the group STD plan
+          items:
+            description: Member type eligible for the group STD plan
+            enum:
+            - all
+            - employee
+            - child
+            - spouse
+            - domestic-partner
+            - employee-with-dependents
+            type: string
+          minItems: 1
+          type: array
+        group_enrollment_id:
+          description: Unique identifier of the associated group enrollment in the Noyo system
+          format: uuid
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        name:
+          description: Name of the group STD plan
+          example: Employee STD
+          type: string
+        plan_configuration:
+          description: Group STD Plan configuration details
+          type: object
+        plan_type:
+          description: Type of group STD plan
+          enum:
+          - basic
+          - voluntary
+          type: string
+        status:
+          description: Status of the group STD plan
+          enum:
+          - pending
+          - active
+          - discontinued
+          type: string
+        termination_policy:
+          description: Termination policy for the group STD plan
+          enum:
+          - end_of_month
+          - last_work_date
+          - fifteenth_of_month
+          - first_of_following_month
+          - end_of_plan_year
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+        volume_rules:
+          description: Volume rules for the group STD plan
+          type: object
+        waiting_periods:
+          description: Member waiting period details for the group STD plan
+          items:
+            description: Member waiting period details for the group STD plan
+            type: object
+          type: array
+      required:
+      - created
+      - eligible_member_types
+      - group_enrollment_id
+      - id
+      - modified
+      - name
+      - plan_configuration
+      - plan_type
+      - status
+      - termination_policy
+      - version
+      - volume_rules
+      - waiting_periods
+      type: object
+    GroupLifePlanResultWithConfig:
+      properties:
+        cobra_rules:
+          allOf:
+          - $ref: '#/components/schemas/GroupPlanCOBRARules'
+          description: COBRA rules for the group life plan
+        code:
+          description: Plan code of the group life plan
+          example: LIFE
+          type: string
+        created:
+          description: The date the record was created
+          type: integer
+        dependent_child_age_limits:
+          description: List of all dependent child age limits configured for the group life plan
+          items:
+            $ref: '#/components/schemas/GroupPlanDependentChildAgeLimit'
+          type: array
+        effective_end_date:
+          description: ISO-8601 date string for the effective end date of the record
+          example: '2018-12-31'
+          format: date
+          type:
+          - string
+          - 'null'
+        effective_start_date:
+          description: ISO-8601 date string for the effective start date of the record
+          example: '2018-01-01'
+          format: date
+          type:
+          - string
+          - 'null'
+        eligible_member_types:
+          description: List of member types eligible for the group life plan
+          items:
+            description: Member type eligible for the group life plan
+            enum:
+            - all
+            - employee
+            - child
+            - spouse
+            - domestic-partner
+            - employee-with-dependents
+            type: string
+          minItems: 1
+          type: array
+        group_enrollment_id:
+          description: Unique identifier of the associated group enrollment in the Noyo system
+          format: uuid
+          type: string
+        guaranteed_issue_rules:
+          allOf:
+          - $ref: '#/components/schemas/GroupPlanGuaranteedIssueRules'
+          description: Guaranteed issue rules for the group life plan
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        name:
+          description: Name of the group life plan
+          example: Employee Basic Life
+          type: string
+        plan_configuration:
+          description: Group Life Plan configuration details
+          type: object
+        plan_type:
+          description: Type of group life plan
+          enum:
+          - basic
+          - voluntary
+          type: string
+        status:
+          description: Status of the group life plan
+          enum:
+          - pending
+          - active
+          - discontinued
+          type: string
+        termination_policy:
+          description: Termination policy for the group life plan
+          enum:
+          - end_of_month
+          - last_work_date
+          - fifteenth_of_month
+          - first_of_following_month
+          - end_of_plan_year
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+        volume_rules:
+          description: Volume rules for the group life plan
+          type: object
+        waiting_periods:
+          description: Member waiting period details for the group life plan
+          items:
+            description: Member waiting period details for the group life plan
+            type: object
+          type: array
+      required:
+      - created
+      - eligible_member_types
+      - group_enrollment_id
+      - id
+      - modified
+      - name
+      - plan_configuration
+      - plan_type
+      - status
+      - termination_policy
+      - version
+      - volume_rules
+      - waiting_periods
+      type: object
+    BaseMemberModifyingCoverageWithVolume:
+      properties:
+        id:
+          description: Unique identifier of the employee or dependent in Noyo
+          format: uuid
+          type: string
+        member_type:
+          description: Type of member modifying coverage
+          enum:
+          - dependent
+          - employee
+          type: string
+        plan_id:
+          description: Unique identifier of the group plan in Noyo
+          format: uuid
+          type: string
+        volume:
+          description: Elected volume for the type of coverage being selected
+          format: int32
+          type: integer
+      required:
+      - id
+      - member_type
+      - plan_id
+      type: object
+    ApiContactChange:
+      properties:
+        email_address:
+          description: New email address of the person
+          example: jane.doe@example.com
+          format: email
+          type: string
+        email_address_type:
+          description: Type of new email address
+          enum:
+          - home
+          - work
+          example: home
+          type: string
+        home_phone:
+          description: New home phone number in E.164 format
+          example: '+15555551212'
+          type: string
+        work_phone:
+          description: New work phone number in E.164 format
+          example: '+15555551212'
+          type: string
+      type: object
+      x-field_order:
+      - home_phone
+      - work_phone
+      - email_address
+      - email_address_type
+    PublicCOBRATerminationInfo:
+      properties:
+        last_work_date:
+          description: ISO-8601 date string for last day of work of the terminated employee
+          example: '2020-12-15'
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
+          type: string
+        reason:
+          description: Reason for member coverage termination and enrollment in COBRA
+          enum:
+          - voluntary
+          - involuntary
+          - job-eliminated
+          - loss-of-eligibility
+          - member-deceased
+          - military-leave
+          - leave-of-absence
+          type: string
+      required:
+      - last_work_date
+      - reason
+      type: object
+      x-field_order:
+      - reason
+      - last_work_date
     IndividualEnrollmentResultWithConfig1:
       properties:
         cobra_details:
@@ -2191,7 +3318,7 @@ components:
       - status
       - version
       type: object
-    BaseMemberAddingCoveragePriorCoverage:
+    BaseMemberAddingCoverage:
       properties:
         id:
           description: Unique identifier of the employee or dependent in Noyo
@@ -2207,342 +3334,10 @@ components:
           description: Unique identifier of the group plan in Noyo
           format: uuid
           type: string
-        prior_coverage:
-          allOf:
-          - $ref: '#/components/schemas/BaseAddingCoveragePriorCoverage'
-          description: Details about prior insurance coverage, if applicable
       required:
       - id
       - member_type
       - plan_id
-      type: object
-    ApiBaseOpenEnrollmentEventDetails:
-      properties:
-        event_date:
-          description: ISO-8601 date string for open enrollment date
-          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
-          type: string
-        event_type:
-          description: Open enrollment event type
-          enum:
-          - open_enrollment
-          type: string
-      type: object
-      x-field_order:
-      - event_type
-      - event_date
-    PrimaryCareProvider:
-      properties:
-        entity_identifier_code:
-          description: Code of the entity identifier
-          enum:
-          - pcp
-          - dental_pcp
-          - obgyn
-          type: string
-        entity_type:
-          description: Type of entity
-          enum:
-          - person
-          - non_person_entity
-          type: string
-        first_name:
-          description: First name of the primary care provider
-          type: string
-        identification_code:
-          description: Code of the identification
-          type: string
-        identification_code_type:
-          description: Type of the identification code
-          enum:
-          - service_provider_number
-          - national_provider_identifier
-          type: string
-        last_name:
-          description: Last name of the primary care provider
-          type: string
-        middle_name:
-          description: Middle name of the primary care provider
-          type: string
-        organization_name:
-          description: Organization name of the primary care provider.
-          type: string
-        patient_relationship_code:
-          description: Code which represents the relationship of the patient to the primary care provider
-          enum:
-          - established
-          - not_established
-          - unknown
-          type: string
-      required:
-      - identification_code
-      - identification_code_type
-      type: object
-    PCPDetails:
-      properties:
-        providers:
-          description: List of primary care providers
-          items:
-            $ref: '#/components/schemas/PrimaryCareProvider'
-          type: array
-      required:
-      - providers
-      type: object
-    UIMemberRequestResult:
-      properties:
-        body:
-          description: Data required to execute a member request, varies depending on the request type
-          type: object
-        completed:
-          description: Timestamp indicating when a member request was marked as completed.
-          type: integer
-        created:
-          description: The date the record was created
-          type: integer
-        group_id:
-          description: Unique identifier of the dependent in Noyo
-          format: uuid
-          type: string
-        group_name:
-          description: The name of the group associated with the member request
-          type: string
-        id:
-          description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        modified:
-          description: The date the record was last updated
-          type: integer
-        request_type:
-          description: Transaction type for the member request
-          type: string
-        result:
-          description: Result from executing the member request
-          type: object
-        status:
-          description: Status of the member request
-          type: string
-        version:
-          description: Current version of the record
-          format: uuid
-          type: string
-      required:
-      - body
-      - created
-      - id
-      - modified
-      - request_type
-      - result
-      - status
-      - version
-      type: object
-    GroupCriticalIllnessPlanResultWithConfig:
-      properties:
-        code:
-          description: Plan code of the group critical illness plan
-          example: VCI
-          type: string
-        created:
-          description: The date the record was created
-          type: integer
-        dependent_child_age_limits:
-          description: List of all dependent child age limits configured for the group critical illness plan
-          items:
-            $ref: '#/components/schemas/GroupPlanDependentChildAgeLimit'
-          type: array
-        effective_end_date:
-          description: ISO-8601 date string for the effective end date of the record
-          example: '2018-12-31'
-          format: date
-          nullable: true
-          type: string
-        effective_start_date:
-          description: ISO-8601 date string for the effective start date of the record
-          example: '2018-01-01'
-          format: date
-          nullable: true
-          type: string
-        eligible_member_types:
-          description: List of member types eligible for the group critical illness plan
-          items:
-            description: Member type eligible for the group critical illness plan
-            enum:
-            - all
-            - employee
-            - child
-            - spouse
-            - domestic-partner
-            - employee-with-dependents
-            type: string
-          minItems: 1
-          type: array
-        group_enrollment_id:
-          description: Unique identifier of the associated group enrollment in the Noyo system
-          format: uuid
-          type: string
-        id:
-          description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        modified:
-          description: The date the record was last updated
-          type: integer
-        name:
-          description: Name of the group critical illness plan
-          example: Critical Illness - Employee
-          type: string
-        plan_configuration:
-          description: Group Critical Illness Plan configuration details
-          type: object
-        plan_type:
-          description: Type of group critical illness plan
-          enum:
-          - basic
-          - voluntary
-          type: string
-        status:
-          description: Status of the group critical illness plan
-          enum:
-          - pending
-          - active
-          - discontinued
-          type: string
-        termination_policy:
-          description: Termination policy for the group critical illness plan
-          enum:
-          - end_of_month
-          - last_work_date
-          - fifteenth_of_month
-          - first_of_following_month
-          - end_of_plan_year
-          type: string
-        version:
-          description: Current version of the record
-          format: uuid
-          type: string
-        volume_rules:
-          description: Volume rules for the group critical illness plan
-          type: object
-        waiting_periods:
-          description: Member waiting period details for the group critical illness plan
-          items:
-            description: Member waiting period details for the group critical illness plan
-            type: object
-          type: array
-      required:
-      - created
-      - eligible_member_types
-      - group_enrollment_id
-      - id
-      - modified
-      - name
-      - plan_configuration
-      - plan_type
-      - status
-      - termination_policy
-      - version
-      - volume_rules
-      - waiting_periods
-      type: object
-    ApiBaseMemberModifyingCoverageWithVolume:
-      properties:
-        id:
-          description: Unique identifier of the employee or dependent in Noyo
-          format: uuid
-          type: string
-        member_type:
-          description: Type of member modifying coverage
-          enum:
-          - dependent
-          - employee
-          type: string
-        plan_id:
-          description: Unique identifier of the group plan in Noyo
-          format: uuid
-          type: string
-        volume:
-          description: Elected volume for the type of coverage being selected
-          format: int32
-          type: integer
-      required:
-      - id
-      - member_type
-      type: object
-    MemberRequestTerminationRequest:
-      properties:
-        last_work_date:
-          description: ISO-8601 date string for last day of work of the terminated employee
-          example: '2019-03-04'
-          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
-          type: string
-        reason:
-          description: Reason for employee termination of coverage
-          enum:
-          - voluntary
-          - involuntary
-          - job-eliminated
-          - loss-of-eligibility
-          - member-deceased
-          - military-leave
-          - leave-of-absence
-          example: voluntary
-          type: string
-        signature_date:
-          description: ISO-8601 date string for signature date
-          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
-          type: string
-      required:
-      - last_work_date
-      - reason
-      type: object
-      x-field_order:
-      - reason
-      - last_work_date
-      - signature_date
-    MemberRequestEnrollmentSnapshotRequest:
-      properties:
-        coverages:
-          description: List of coverages being added or waived with a set of carriers
-          items:
-            allOf:
-            - $ref: '#/components/schemas/ApiBaseNewHireChangeCarrierCoverages'
-            description: Information for a coverage being added or waived with each carrier
-          minItems: 1
-          type: array
-        enrollment_type:
-          description: Enrollment type of the enrollment snapshot member request
-          enum:
-          - new_hire
-          type: string
-        target_date:
-          description: Date when the enrollment snapshot is effective
-          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
-          type: string
-      required:
-      - coverages
-      - enrollment_type
-      type: object
-      x-field_order:
-      - enrollment_type
-      - target_date
-      - coverages
-    MembersChangeCoverageAction:
-      properties:
-        adding_coverage:
-          description: Details for members adding coverage
-          items:
-            $ref: '#/components/schemas/BaseMemberAddingCoveragePriorCoverage'
-          type: array
-        modifying_coverage:
-          description: Details for members modifying coverage
-          items:
-            $ref: '#/components/schemas/BaseMemberModifyingCoverage'
-          type: array
-        removing_coverage:
-          description: Details for members removing coverage
-          items:
-            $ref: '#/components/schemas/BaseMemberRemovingCoverage'
-          type: array
       type: object
     ApiAddress:
       properties:
@@ -2644,17 +3439,237 @@ components:
       - state
       - zip_code
       - county
-    GroupCancerPlanResultWithConfig:
+    GroupPlanResultWithConfig:
       properties:
+        accident:
+          description: List of accident plans and configurations associated with the group
+          items:
+            allOf:
+            - $ref: '#/components/schemas/GroupAccidentPlanResultWithConfig'
+            description: Accident plan and plan configuration details
+          type: array
+        add:
+          description: List of AD&D plans and configurations associated with the group
+          items:
+            allOf:
+            - $ref: '#/components/schemas/GroupADDPlanResultWithConfig'
+            description: AD&D plan and plan configuration details
+          type: array
+        cancer:
+          description: List of cancer plans and configurations associated with the group
+          items:
+            allOf:
+            - $ref: '#/components/schemas/GroupCancerPlanResultWithConfig'
+            description: Cancer plan and plan configuration details
+          type: array
+        critical_illness:
+          description: List of critical illness plans and configurations associated with the group
+          items:
+            allOf:
+            - $ref: '#/components/schemas/GroupCriticalIllnessPlanResultWithConfig'
+            description: Critical illness plan and plan configuration details
+          type: array
+        dental:
+          description: List of dental plans and configurations associated with the group
+          items:
+            allOf:
+            - $ref: '#/components/schemas/GroupDentalPlanResultWithConfig'
+            description: Dental plan and plan configuration details
+          type: array
+        health_fund:
+          description: List of health fund plans and configurations associated with the group
+          items:
+            allOf:
+            - $ref: '#/components/schemas/GroupHealthFundPlanResultWithConfig'
+            description: Health fund plan and plan configuration details
+          type: array
+        hospital_indemnity:
+          description: List of hospital indemnity plans and configurations associated with the group
+          items:
+            allOf:
+            - $ref: '#/components/schemas/GroupHospitalIndemnityPlanResultWithConfig'
+            description: Hospital Indemnity plan and plan configuration details
+          type: array
+        life:
+          description: List of life plans and configurations associated with the group
+          items:
+            allOf:
+            - $ref: '#/components/schemas/GroupLifePlanResultWithConfig'
+            description: Life plan and plan configuration details
+          type: array
+        ltd:
+          description: List of LTD plans and configurations associated with the group
+          items:
+            allOf:
+            - $ref: '#/components/schemas/GroupLTDPlanResultWithConfig'
+            description: LTD plan and plan configuration details
+          type: array
+        medical:
+          description: List of medical plans and configurations associated with the group
+          items:
+            allOf:
+            - $ref: '#/components/schemas/GroupMedicalPlanResultWithConfig'
+            description: Medical plan and plan configuration details
+          type: array
+        pharmacy:
+          description: List of pharmacy plans and configurations associated with the group
+          items:
+            allOf:
+            - $ref: '#/components/schemas/GroupPharmacyPlanResultWithConfig'
+            description: Pharmacy plan and plan configuration details
+          type: array
+        std:
+          description: List of STD plans and configurations associated with the group
+          items:
+            allOf:
+            - $ref: '#/components/schemas/GroupSTDPlanResultWithConfig'
+            description: STD plan and plan configuration details
+          type: array
+        vision:
+          description: List of vision plans and configurations associated with the group
+          items:
+            allOf:
+            - $ref: '#/components/schemas/GroupVisionPlanResultWithConfig'
+            description: Vision plan and plan configuration details
+          type: array
+        wellness:
+          description: List of wellness plans and configurations associated with the group
+          items:
+            allOf:
+            - $ref: '#/components/schemas/GroupWellnessPlanResultWithConfig'
+            description: List of wellness plans and configurations associated with the group
+          type: array
+      type: object
+    ApiMembersChangeCoverageAction:
+      properties:
+        adding_coverage:
+          description: Details for members adding coverage
+          items:
+            $ref: '#/components/schemas/ApiBaseMemberAddingCoveragePriorCoverage'
+          type: array
+        modifying_coverage:
+          description: Details for members modifying coverage
+          items:
+            $ref: '#/components/schemas/ApiBaseMemberModifyingCoverage'
+          type: array
+        removing_coverage:
+          description: Details for members removing coverage
+          items:
+            $ref: '#/components/schemas/BaseMemberRemovingCoverage'
+          type: array
+      type: object
+      x-field_order:
+      - adding_coverage
+      - removing_coverage
+      - modifying_coverage
+    ApiCOBRAMembersChangeLinesOfCoverage:
+      properties:
+        dental:
+          allOf:
+          - $ref: '#/components/schemas/ApiMembersChangeCoverageAction'
+          description: Member transaction requests relating to dental coverage
+        medical:
+          allOf:
+          - $ref: '#/components/schemas/ApiMembersChangeCoverageAction'
+          description: Member transaction requests relating to medical coverage
+        vision:
+          allOf:
+          - $ref: '#/components/schemas/ApiMembersChangeCoverageAction'
+          description: Member transaction requests relating to vision coverage
+      type: object
+      x-field_order:
+      - medical
+      - dental
+      - vision
+    ApiMembersChangeLinesOfCoverage:
+      properties:
+        accident:
+          allOf:
+          - $ref: '#/components/schemas/ApiMembersChangeCoverageAction'
+          description: Member transaction requests relating to accident coverage
+        add:
+          allOf:
+          - $ref: '#/components/schemas/ApiMembersChangeCoverageActionWithVolume'
+          description: Member transaction requests relating to AD&D coverage
+        cancer:
+          allOf:
+          - $ref: '#/components/schemas/ApiMembersChangeCoverageAction'
+          description: Member transaction requests relating to cancer coverage
+        critical_illness:
+          allOf:
+          - $ref: '#/components/schemas/ApiMembersChangeCoverageActionWithVolume'
+          description: Member transaction requests relating to critical illness coverage
+        dental:
+          allOf:
+          - $ref: '#/components/schemas/ApiMembersChangeCoverageAction'
+          description: Member transaction requests relating to dental coverage
+        health_fund:
+          allOf:
+          - $ref: '#/components/schemas/MembersChangeCoverageActionWithVolume'
+          description: Member transaction requests relating to health fund coverage
+        hospital_indemnity:
+          allOf:
+          - $ref: '#/components/schemas/ApiMembersChangeCoverageAction'
+          description: Member transaction requests relating to hospital indemnity coverage
+        life:
+          allOf:
+          - $ref: '#/components/schemas/ApiMembersChangeCoverageActionWithVolume'
+          description: Member transaction requests relating to life coverage
+        ltd:
+          allOf:
+          - $ref: '#/components/schemas/ApiMembersChangeCoverageActionWithVolume'
+          description: Member transaction requests relating to LTD coverage
+        medical:
+          allOf:
+          - $ref: '#/components/schemas/ApiMembersChangeCoverageAction'
+          description: Member transaction requests relating to medical coverage
+        pharmacy:
+          allOf:
+          - $ref: '#/components/schemas/MembersChangeCoverageAction'
+          description: Member transaction requests relating to pharmacy coverage
+        std:
+          allOf:
+          - $ref: '#/components/schemas/ApiMembersChangeCoverageActionWithVolume'
+          description: Member transaction requests relating to STD coverage
+        vision:
+          allOf:
+          - $ref: '#/components/schemas/ApiMembersChangeCoverageAction'
+          description: Member transaction requests relating to vision coverage
+        wellness:
+          allOf:
+          - $ref: '#/components/schemas/MembersChangeCoverageAction'
+          description: Member transaction requests relating to wellness coverage
+      type: object
+      x-field_order:
+      - medical
+      - dental
+      - vision
+      - life
+      - add
+      - std
+      - ltd
+      - accident
+      - critical_illness
+      - cancer
+      - health_fund
+      - hospital_indemnity
+      - pharmacy
+      - wellness
+    GroupHealthFundPlanResultWithConfig:
+      properties:
+        cobra_rules:
+          allOf:
+          - $ref: '#/components/schemas/GroupPlanCOBRARules'
+          description: COBRA rules for the group health fund plan
         code:
-          description: Plan code of the group cancer plan
-          example: CAN
+          description: Plan code of the group health fund plan
+          example: HSA
           type: string
         created:
           description: The date the record was created
           type: integer
         dependent_child_age_limits:
-          description: List of all dependent child age limits configured for the group cancer plan
+          description: List of all dependent child age limits configured for the group health fund plan
           items:
             $ref: '#/components/schemas/GroupPlanDependentChildAgeLimit'
           type: array
@@ -2662,18 +3677,20 @@ components:
           description: ISO-8601 date string for the effective end date of the record
           example: '2018-12-31'
           format: date
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         effective_start_date:
           description: ISO-8601 date string for the effective start date of the record
           example: '2018-01-01'
           format: date
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         eligible_member_types:
-          description: List of member types eligible for the group cancer plan
+          description: List of member types eligible for the group health fund plan
           items:
-            description: Member type eligible for the group cancer plan
+            description: Member type eligible for the group health fund plan
             enum:
             - all
             - employee
@@ -2696,27 +3713,30 @@ components:
           description: The date the record was last updated
           type: integer
         name:
-          description: Name of the group cancer plan
-          example: Cancer - Employee
+          description: Name of the group health fund plan
+          example: Health Fund - HSA
           type: string
         plan_configuration:
-          description: Group Cancer Plan configuration details
+          description: Group Health Fund Plan configuration details
           type: object
         plan_type:
-          description: Type of group cancer plan
+          description: Type of group health fund plan
           enum:
-          - basic
-          - voluntary
+          - hsa
+          - fsa
+          - dca
+          - lpfsa
+          - hra
           type: string
         status:
-          description: Status of the group cancer plan
+          description: Status of the group health fund plan
           enum:
           - pending
           - active
           - discontinued
           type: string
         termination_policy:
-          description: Termination policy for the group cancer plan
+          description: Termination policy for the group health fund plan
           enum:
           - end_of_month
           - last_work_date
@@ -2728,10 +3748,13 @@ components:
           description: Current version of the record
           format: uuid
           type: string
+        volume_rules:
+          description: Volume rules for the group health fund plan
+          type: object
         waiting_periods:
-          description: Member waiting period details for the group cancer plan
+          description: List of all waiting periods configured for the group health fund plan
           items:
-            description: Member waiting period details for the group cancer plan
+            description: Member waiting period details for the group health fund plan
             type: object
           type: array
       required:
@@ -2748,54 +3771,75 @@ components:
       - version
       - waiting_periods
       type: object
-    SSNChange:
+    MemberRequestTerminationRequest:
       properties:
-        ssn:
-          description: New or corrected Social Security Number of the person
-          pattern: ^(?!000)[0-9]{3}(?!00)[0-9]{2}(?!0000)[0-9]{4}$
+        last_work_date:
+          description: ISO-8601 date string for last day of work of the terminated employee
+          example: '2019-03-04'
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
           type: string
-      required:
-      - ssn
-      type: object
-    COBRADetails:
-      properties:
-        eligibility_end_date:
-          description: The date which represents when the individual is no longer eligible for COBRA
-          format: date
-          type: string
-        eligibility_start_date:
-          description: The date which represents when the individual is first eligible for COBRA
-          format: date
-          type: string
-        qualifying_event_date:
-          description: The date of the event which qualified the individual for COBRA
-          format: date
-          type: string
-        qualifying_event_reason:
-          description: The reason of the event which qualified the individual for COBRA
+        reason:
+          description: Reason for employee termination of coverage
           enum:
-          - termination_of_employment
-          - reduction_of_work_hours
-          - medicare
-          - death
-          - divorce
-          - separation
-          - ineligible_child
-          - bankruptcy_of_retirees_former_employer
-          - layoff
-          - leave_of_absence
+          - voluntary
+          - involuntary
+          - job-eliminated
+          - loss-of-eligibility
+          - member-deceased
+          - military-leave
+          - leave-of-absence
+          example: voluntary
+          type: string
+        signature_date:
+          description: ISO-8601 date string for signature date
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
           type: string
       required:
-      - eligibility_start_date
+      - last_work_date
+      - reason
       type: object
-    BaseMemberWaivingCoverage:
+      x-field_order:
+      - reason
+      - last_work_date
+      - signature_date
+    MemberRequestOpenEnrollmentRequest:
+      properties:
+        coverages:
+          description: List of coverage change actions to complete with a set of carriers
+          items:
+            allOf:
+            - $ref: '#/components/schemas/ApiOpenEnrollmentCarrierCoverages'
+            description: Coverage change actions to complete with a carrier
+          minItems: 1
+          type: array
+        event:
+          allOf:
+          - $ref: '#/components/schemas/ApiBaseOpenEnrollmentEventDetails'
+          description: Details about the eligible open enrollment event
+      required:
+      - coverages
+      type: object
+      x-field_order:
+      - event
+      - coverages
+    PCPDetails:
+      properties:
+        providers:
+          description: List of primary care providers
+          items:
+            $ref: '#/components/schemas/PrimaryCareProvider'
+          type: array
+      required:
+      - providers
+      type: object
+    ApiBaseMemberAddingCoverageWithVolume:
       properties:
         id:
           description: Unique identifier of the employee or dependent in Noyo
           format: uuid
           type: string
         member_type:
-          description: Type of member waiving coverage
+          description: Type of member adding coverage
           enum:
           - dependent
           - employee
@@ -2804,28 +3848,13 @@ components:
           description: Unique identifier of the group plan in Noyo
           format: uuid
           type: string
-        reason:
-          description: Reason the member is waiving coverage
-          enum:
-          - other-employee-group
-          - other-spouse-group
-          - other-parent-group
-          - other-ind-on-exchange
-          - other-ind-off-exchange
-          - other-cobra
-          - other-medicare
-          - medicaid
-          - medi-cal
-          - va-coverage
-          - tricare-coverage
-          - retiree-coverage
-          - no-coverage
-          - voluntary-withdrawal
-          type: string
+        volume:
+          description: Elected volume for the type of coverage being selected
+          format: int32
+          type: integer
       required:
       - id
       - member_type
-      - reason
       type: object
     Salary:
       properties:
@@ -2856,97 +3885,186 @@ components:
       - amount
       - unit
       - type
-    ApiBaseMemberAddingCoverage:
+    ApiEmploymentChange:
       properties:
-        id:
-          description: Unique identifier of the employee or dependent in Noyo
-          format: uuid
-          type: string
-        member_type:
-          description: Type of member adding coverage
+        employment_status:
+          description: New or updated employee employment status
           enum:
-          - dependent
-          - employee
+          - full-time
+          - part-time
+          - contract
+          - disabled
+          - terminated
+          - retired
+          example: full-time
           type: string
-        plan_id:
-          description: Unique identifier of the group plan in Noyo
+        hire_date:
+          description: ISO-8601 date string for the new or corrected hire date of the employee
+          example: '2017-05-23'
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
+          type: string
+        hours_worked:
+          description: New number of hours worked per week by the employee
+          example: 40
+          format: int32
+          minimum: 0
+          type: integer
+        occupation:
+          description: New or updated employee occupation or job title
+          example: Engineer
+          type: string
+      type: object
+      x-field_order:
+      - hire_date
+      - employment_status
+      - occupation
+      - hours_worked
+    UIEmployeeResult:
+      properties:
+        employment:
+          allOf:
+          - $ref: '#/components/schemas/Employment'
+          description: Employment information for the employee
+        id:
+          description: Unique identifier of the employee in Noyo
           format: uuid
+          readOnly: true
           type: string
-      required:
-      - id
-      - member_type
-      type: object
-      x-field_order:
-      - id
-      - member_type
-      - plan_id
-      - volume
-      - prior_coverage
-    PaginatedUIMemberRequestResult:
-      properties:
-        meta:
+        person:
           allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of member request results
+          - $ref: '#/components/schemas/UIPersonResult'
+          description: Personal information for the employee
+      required:
+      - employment
+      - id
+      - person
+      type: object
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+    MembersChangeCoverageAction:
+      properties:
+        adding_coverage:
+          description: Details for members adding coverage
           items:
-            $ref: '#/components/schemas/UIMemberRequestParentResult'
+            $ref: '#/components/schemas/BaseMemberAddingCoveragePriorCoverage'
           type: array
+        modifying_coverage:
+          description: Details for members modifying coverage
+          items:
+            $ref: '#/components/schemas/BaseMemberModifyingCoverage'
+          type: array
+        removing_coverage:
+          description: Details for members removing coverage
+          items:
+            $ref: '#/components/schemas/BaseMemberRemovingCoverage'
+          type: array
+      type: object
+    BaseNewHireMemberCoverageAction:
+      properties:
+        enrolling_members:
+          description: Details for members enrolling in coverage
+          items:
+            $ref: '#/components/schemas/BaseMemberAddingCoverage'
+          type: array
+        waiving_members:
+          description: Details for members waiving coverage
+          items:
+            $ref: '#/components/schemas/BaseMemberWaivingCoverage'
+          type: array
+      type: object
+    SexChange:
+      properties:
+        sex:
+          description: New sex of the person
+          enum:
+          - F
+          - M
+          - U
+          - X
+          example: F
+          type: string
       required:
-      - meta
-      - response
+      - sex
+      type: object
+    ApiSalaryChange:
+      properties:
+        amount:
+          description: New or updated amount of salary earned by the employee in US dollars
+          example: 55000
+          minimum: 0
+          type: number
+        type:
+          description: New or updated type of salary earned by the employee
+          enum:
+          - hourly
+          - salary
+          example: salary
+          type: string
+        unit:
+          description: New or updated unit of salary earned by the employee
+          enum:
+          - annual
+          - month
+          - semi-monthly
+          - week
+          - hour
+          example: annual
+          type: string
+      required:
+      - amount
+      - type
+      - unit
       type: object
       x-field_order:
-      - meta
-      - response
-    GroupVisionPlanResultWithConfig:
+      - amount
+      - unit
+      - type
+    UIMemberRequestResult:
       properties:
-        cobra_rules:
-          allOf:
-          - $ref: '#/components/schemas/GroupPlanCOBRARules'
-          description: COBRA rules for the group vision plan
-        code:
-          description: Plan code of the group vision plan
-          example: VP2000
-          type: string
+        body:
+          description: Data required to execute a member request, varies depending on the request type
+          type: object
+        completed:
+          description: Timestamp indicating when a member request was marked as completed.
+          type: integer
         created:
           description: The date the record was created
           type: integer
-        dependent_child_age_limits:
-          description: List of all dependent child age limits configured for the group vision plan
-          items:
-            $ref: '#/components/schemas/GroupPlanDependentChildAgeLimit'
-          type: array
-        effective_end_date:
-          description: ISO-8601 date string for the effective end date of the record
-          example: '2018-12-31'
-          format: date
-          nullable: true
-          type: string
-        effective_start_date:
-          description: ISO-8601 date string for the effective start date of the record
-          example: '2018-01-01'
-          format: date
-          nullable: true
-          type: string
-        eligible_member_types:
-          description: List of member types eligible for the group vision plan
-          items:
-            description: Member type eligible for the group vision plan
-            enum:
-            - all
-            - employee
-            - child
-            - spouse
-            - domestic-partner
-            - employee-with-dependents
-            type: string
-          minItems: 1
-          type: array
-        group_enrollment_id:
-          description: Unique identifier of the associated group enrollment in the Noyo system
+        group_id:
+          description: Unique identifier of the dependent in Noyo
           format: uuid
+          type: string
+        group_name:
+          description: The name of the group associated with the member request
           type: string
         id:
           description: Unique identifier of the record in Noyo
@@ -2955,91 +4073,42 @@ components:
         modified:
           description: The date the record was last updated
           type: integer
-        name:
-          description: Name of the group vision plan
-          example: Vision Plus 2000
+        request_type:
+          description: Transaction type for the member request
           type: string
-        plan_configuration:
-          description: Group Vision Plan configuration details
+        result:
+          description: Result from executing the member request
           type: object
         status:
-          description: Status of the group vision plan
-          enum:
-          - pending
-          - active
-          - discontinued
-          type: string
-        termination_policy:
-          description: Termination policy for the group vision plan
-          enum:
-          - end_of_month
-          - last_work_date
-          - fifteenth_of_month
-          - first_of_following_month
-          - end_of_plan_year
+          description: Status of the member request
           type: string
         version:
           description: Current version of the record
           format: uuid
           type: string
-        voluntary:
-          description: True if the group vision plan is a voluntary plan
-          type: boolean
-        waiting_periods:
-          description: Member waiting period details for the group vision plan
-          items:
-            description: Member waiting period details for the group vision plan
-            type: object
-          type: array
       required:
-      - cobra_rules
+      - body
       - created
-      - eligible_member_types
-      - group_enrollment_id
       - id
       - modified
-      - name
-      - plan_configuration
+      - request_type
+      - result
       - status
-      - termination_policy
       - version
-      - waiting_periods
       type: object
-    PaginatedMemberRequestResult:
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of member request results
-          items:
-            $ref: '#/components/schemas/MemberRequestResult'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
-    ApiOpenEnrollmentCarrierCoverages:
+    ApiBaseNewHireChangeCarrierCoverages:
       properties:
         carrier_config:
-          description: Carrier-specific data required for member request
+          description: Carrier-specific data required for new hire enrollment
           type: object
         carrier_id:
           description: Unique identifier of the carrier in the Noyo system
           format: uuid
           type: string
-        coverage_start_date:
-          description: ISO-8601 date string for coverage start date
-          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
-          type: string
         lines_of_coverage:
           allOf:
-          - $ref: '#/components/schemas/ApiMembersChangeLinesOfCoverage'
-          description: Adding, removing and modifying information for each line of coverage
+          - $ref: '#/components/schemas/ApiBaseNewHireMemberLinesOfCoverage'
+          description: Enrollment and waiving information for each line of coverage
         signature_date:
           description: ISO-8601 date string for signature date
           pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
@@ -3054,108 +4123,21 @@ components:
       - carrier_config
       - signature_date
       - lines_of_coverage
-    ApiBaseCOBRAQualifyingLifeEventDetails:
+    MemberRequestNewHireEnrollmentRequest:
       properties:
-        event_date:
-          description: ISO-8601 date string for qualifying life event date
-          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
-          type: string
-        event_type:
-          description: Qualifying life event type
-          enum:
-          - adoption
-          - change_to_part_time
-          - change_to_full_time
-          - classifications_change
-          - court_order
-          - death
-          - dependent_open_enrollment
-          - foster_care
-          - immigration_status_change
-          - legal_guardian
-          - lost_coverage
-          - divorce
-          - marriage
-          - medicare
-          - moved
-          - newborn
-          - offline_change
-          - override
-          - rate_changed
-          - rehire
-          - reinstatement
-          - terminate_cobra
-          type: string
+        coverages:
+          description: List of coverages being added or waived with a set of carriers
+          items:
+            allOf:
+            - $ref: '#/components/schemas/ApiBaseNewHireChangeCarrierCoverages'
+            description: Information for a coverage being added or waived with each carrier
+          minItems: 1
+          type: array
       required:
-      - event_date
-      - event_type
+      - coverages
       type: object
-    DOBChange:
-      properties:
-        date_of_birth:
-          description: ISO-8601 date string for the new or corrected date of birth of the person
-          example: '1982-05-13'
-          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
-          type: string
-      required:
-      - date_of_birth
-      type: object
-    ApiBaseMemberDemographicChangeDetails:
-      properties:
-        address_change:
-          allOf:
-          - $ref: '#/components/schemas/ApiAddressChange'
-          description: Details about a demographic address change request
-        classifications_change:
-          description: Details about a demographic classifications change request
-          type: object
-        contact_change:
-          allOf:
-          - $ref: '#/components/schemas/ApiContactChange'
-          description: Details about a demographic contact change request
-        dob_change:
-          allOf:
-          - $ref: '#/components/schemas/DOBChange'
-          description: Details about a demographic date of birth change request
-        employment_change:
-          allOf:
-          - $ref: '#/components/schemas/ApiEmploymentChange'
-          description: Details about a demographic employment change request
-        member:
-          allOf:
-          - $ref: '#/components/schemas/DemographicChangeMember'
-          description: Details about the member making a demographic change request
-        name_change:
-          allOf:
-          - $ref: '#/components/schemas/ApiNameChange'
-          description: Details about a demographic name change request
-        salary_change:
-          allOf:
-          - $ref: '#/components/schemas/ApiSalaryChange'
-          description: Details about a demographic salary change request
-        sex_change:
-          allOf:
-          - $ref: '#/components/schemas/SexChange'
-          description: Details about a demographic sex change request
-        ssn_change:
-          allOf:
-          - $ref: '#/components/schemas/SSNChange'
-          description: Details about a demographic Social Security Number change request
-      required:
-      - member
-      type: object
-      x-field_order:
-      - member
-      - name_change
-      - address_change
-      - contact_change
-      - ssn_change
-      - dob_change
-      - sex_change
-      - employment_change
-      - salary_change
-      - classifications_change
-    ApiCOBRAOpenEnrollmentCarrierCoverages:
+      x-field_order: []
+    ApiCOBRAQualifyingLifeEventCarrierCoverages:
       properties:
         carrier_config:
           description: Carrier-specific data required for member request
@@ -3163,10 +4145,6 @@ components:
         carrier_id:
           description: Unique identifier of the carrier in the Noyo system
           format: uuid
-          type: string
-        coverage_start_date:
-          description: ISO-8601 date string for coverage start date
-          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
           type: string
         lines_of_coverage:
           allOf:
@@ -3186,134 +4164,111 @@ components:
       - carrier_config
       - signature_date
       - lines_of_coverage
-    BaseMemberModifyingCoverage:
+    Employment:
       properties:
-        id:
-          description: Unique identifier of the employee or dependent in Noyo
-          format: uuid
-          type: string
-        member_type:
-          description: Type of member modifying coverage
+        employment_dates:
+          allOf:
+          - $ref: '#/components/schemas/EmploymentDates'
+          description: Employee employment dates
+        employment_status:
+          description: Employee employment status
           enum:
-          - dependent
-          - employee
+          - full-time
+          - part-time
+          - contract
+          - disabled
+          - terminated
+          - retired
           type: string
-        plan_id:
-          description: Unique identifier of the group plan in Noyo
-          format: uuid
+        hours_worked:
+          description: An integer of hours worked per week by the employee
+          example: 40
+          format: int32
+          type: integer
+        occupation:
+          description: Employee occupation or job title
+          example: Engineer
           type: string
+        salary:
+          allOf:
+          - $ref: '#/components/schemas/Salary'
+          description: Employee salary information
       required:
-      - id
-      - member_type
-      - plan_id
-      type: object
-    MemberRequestResult:
-      properties:
-        body:
-          description: Data required to execute a member request, varies depending on the request type
-          type: object
-        completed:
-          description: Timestamp indicating when a member request was marked as completed
-          readOnly: true
-          type: integer
-        created:
-          description: The date the record was created
-          type: integer
-        employee_id:
-          description: Unique identifier of the employee in Noyo
-          format: uuid
-          readOnly: true
-          type: string
-        id:
-          description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        modified:
-          description: The date the record was last updated
-          type: integer
-        request_type:
-          description: Transaction type for the member request
-          enum:
-          - demographic
-          - new_hire
-          - termination
-          - open_enrollment
-          - qualifying_life_event
-          - enrollment_snapshot
-          - cobra_enrollment
-          - cobra_termination
-          - cobra_open_enrollment
-          - cobra_qualifying_life_event
-          type: string
-        result:
-          description: Result from executing the member request, varies depending on the request type
-          type: object
-        status:
-          description: Status of the member request
-          enum:
-          - processing
-          - completed
-          - failed
-          - canceled
-          type: string
-        transactions:
-          description: List of unique identifiers of all associated member transactions in Noyo
-          items:
-            format: uuid
-            type: string
-          type: array
-        version:
-          description: Current version of the record
-          format: uuid
-          type: string
-      required:
-      - body
-      - created
-      - employee_id
-      - id
-      - modified
-      - request_type
-      - result
-      - status
-      - version
+      - employment_dates
+      - employment_status
+      - hours_worked
       type: object
       x-field_order:
-      - id
-      - version
-      - created
-      - completed
-      - modified
-      - employee_id
-      - request_type
-      - status
-      - transactions
-      - body
-      - result
-    PublicCOBRATerminationInfo:
+      - employment_status
+      - occupation
+      - hours_worked
+      - salary
+      - employment_dates
+    UIDependentResult:
       properties:
-        last_work_date:
-          description: ISO-8601 date string for last day of work of the terminated employee
-          example: '2020-12-15'
+        id:
+          description: Unique identifier of the dependent in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        person:
+          allOf:
+          - $ref: '#/components/schemas/UIPersonResult'
+          description: Personal information for the dependent
+      required:
+      - id
+      - person
+      type: object
+    DOBChange:
+      properties:
+        date_of_birth:
+          description: ISO-8601 date string for the new or corrected date of birth of the person
+          example: '1982-05-13'
           pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
           type: string
-        reason:
-          description: Reason for member coverage termination and enrollment in COBRA
-          enum:
-          - voluntary
-          - involuntary
-          - job-eliminated
-          - loss-of-eligibility
-          - member-deceased
-          - military-leave
-          - leave-of-absence
+      required:
+      - date_of_birth
+      type: object
+    ApiBaseNewHireMemberCoverageActionWithVolume:
+      properties:
+        enrolling_members:
+          description: Details for members enrolling in coverage
+          items:
+            $ref: '#/components/schemas/ApiBaseMemberAddingCoverageWithVolume'
+          type: array
+        waiving_members:
+          description: Details for members waiving coverage
+          items:
+            $ref: '#/components/schemas/BaseMemberWaivingCoverage'
+          type: array
+      type: object
+    ApiQualifyingLifeEventCarrierCoverages:
+      properties:
+        carrier_config:
+          description: Carrier-specific data required for member request
+          type: object
+        carrier_id:
+          description: Unique identifier of the carrier in the Noyo system
+          format: uuid
+          type: string
+        lines_of_coverage:
+          allOf:
+          - $ref: '#/components/schemas/ApiMembersChangeLinesOfCoverage'
+          description: Adding, removing and modifying information for each line of coverage
+        signature_date:
+          description: ISO-8601 date string for signature date
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
           type: string
       required:
-      - last_work_date
-      - reason
+      - carrier_config
+      - carrier_id
+      - lines_of_coverage
       type: object
       x-field_order:
-      - reason
-      - last_work_date
+      - carrier_id
+      - carrier_config
+      - signature_date
+      - lines_of_coverage
     GroupEnrollmentResultWithConfig:
       properties:
         carrier_id:
@@ -3327,14 +4282,16 @@ components:
           description: ISO-8601 date string for the effective end date of the record
           example: '2018-12-31'
           format: date
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         effective_start_date:
           description: ISO-8601 date string for the effective start date of the record
           example: '2018-01-01'
           format: date
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         group_enrollment_configuration:
           description: Group enrollment configuration details
           type: object
@@ -3371,20 +4328,23 @@ components:
           description: ISO-8601 date string for the open enrollment end date of the group enrollment
           example: '2018-11-30'
           format: date
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         open_enrollment_start_date:
           description: ISO-8601 date string for the open enrollment start date of the group enrollment
           example: '2018-11-01'
           format: date
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         open_enrollment_temporal_date:
           description: ISO-8601 date string for the open enrollment temporal start date of the group enrollment
           example: '2018-12-01'
           format: date
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         status:
           description: Status of the group enrollment
           enum:
@@ -3407,158 +4367,121 @@ components:
       - status
       - version
       type: object
-    ApiBaseMemberAddingCoverageWithVolume:
+    EmploymentDates:
       properties:
-        id:
-          description: Unique identifier of the employee or dependent in Noyo
-          format: uuid
+        full_time_start:
+          description: ISO-8601 date string for start date as a full time employee with the group (if applicable)
+          example: '2017-01-17'
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
           type: string
-        member_type:
-          description: Type of member adding coverage
-          enum:
-          - dependent
-          - employee
-          type: string
-        plan_id:
-          description: Unique identifier of the group plan in Noyo
-          format: uuid
-          type: string
-        volume:
-          description: Elected volume for the type of coverage being selected
-          format: int32
-          type: integer
-      required:
-      - id
-      - member_type
-      type: object
-    GroupLTDPlanResultWithConfig:
-      properties:
-        code:
-          description: Plan code of the group LTD plan
-          example: LTD
-          type: string
-        created:
-          description: The date the record was created
-          type: integer
-        effective_end_date:
-          description: ISO-8601 date string for the effective end date of the record
-          example: '2018-12-31'
+        hire_date:
+          description: ISO-8601 date string for the hire date of the employee
+          example: '2017-01-17'
           format: date
-          nullable: true
           type: string
-        effective_start_date:
-          description: ISO-8601 date string for the effective start date of the record
+        rehire:
+          description: ISO-8601 date string for the rehire date of the employee (if applicable)
+          example: '2018-02-01'
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
+          type: string
+        retirement:
+          description: ISO-8601 date string for the retirement date of the employee (if applicable)
+          example: '2019-01-01'
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
+          type: string
+        terminated:
+          description: ISO-8601 date string for the termination date of the employee (if applicable)
           example: '2018-01-01'
-          format: date
-          nullable: true
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
           type: string
-        eligible_member_types:
-          description: List of member types eligible for the group LTD plan
+      required:
+      - hire_date
+      type: object
+      x-field_order: []
+    MemberRequestDemographicChangeRequest:
+      properties:
+        change_date:
+          description: ISO-8601 date string for effective date of demographic change
+          example: '2019-03-15'
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
+          type: string
+        member_changes:
+          description: List of employee or dependent demographic change actions
           items:
-            description: Member type eligible for the group LTD plan
-            enum:
-            - all
-            - employee
-            - child
-            - spouse
-            - domestic-partner
-            - employee-with-dependents
-            type: string
+            allOf:
+            - $ref: '#/components/schemas/ApiBaseMemberDemographicChangeDetails'
+            description: Employee or dependent demographic change details
           minItems: 1
           type: array
-        group_enrollment_id:
-          description: Unique identifier of the associated group enrollment in the Noyo system
-          format: uuid
+        signature_date:
+          description: ISO-8601 date string for signature date
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
           type: string
-        id:
-          description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        modified:
-          description: The date the record was last updated
-          type: integer
-        name:
-          description: Name of the group LTD plan
-          example: Employee LTD
-          type: string
-        plan_configuration:
-          description: Group LTD Plan configuration details
-          type: object
-        plan_type:
-          description: Type of group LTD plan
-          enum:
-          - basic
-          - voluntary
-          type: string
-        status:
-          description: Status of the group LTD plan
-          enum:
-          - pending
-          - active
-          - discontinued
-          type: string
-        termination_policy:
-          description: Termination policy for the group LTD plan
-          enum:
-          - end_of_month
-          - last_work_date
-          - fifteenth_of_month
-          - first_of_following_month
-          - end_of_plan_year
-          type: string
-        version:
-          description: Current version of the record
-          format: uuid
-          type: string
-        volume_rules:
-          description: Volume rules for the group LTD plan
-          type: object
-        waiting_periods:
-          description: Member waiting period details for the group LTD plan
-          items:
-            description: Member waiting period details for the group LTD plan
-            type: object
-          type: array
       required:
-      - created
-      - eligible_member_types
-      - group_enrollment_id
-      - id
-      - modified
-      - name
-      - plan_configuration
-      - plan_type
-      - status
-      - termination_policy
-      - version
-      - volume_rules
-      - waiting_periods
+      - member_changes
       type: object
-    BaseMemberAddingCoverageWithVolume:
+      x-field_order:
+      - change_date
+      - signature_date
+      - member_changes
+    COBRADetails:
       properties:
-        id:
-          description: Unique identifier of the employee or dependent in Noyo
-          format: uuid
+        eligibility_end_date:
+          description: The date which represents when the individual is no longer eligible for COBRA
+          format: date
           type: string
-        member_type:
-          description: Type of member adding coverage
+        eligibility_start_date:
+          description: The date which represents when the individual is first eligible for COBRA
+          format: date
+          type: string
+        qualifying_event_date:
+          description: The date of the event which qualified the individual for COBRA
+          format: date
+          type: string
+        qualifying_event_reason:
+          description: The reason of the event which qualified the individual for COBRA
           enum:
-          - dependent
-          - employee
+          - termination_of_employment
+          - reduction_of_work_hours
+          - medicare
+          - death
+          - divorce
+          - separation
+          - ineligible_child
+          - bankruptcy_of_retirees_former_employer
+          - layoff
+          - leave_of_absence
           type: string
-        plan_id:
-          description: Unique identifier of the group plan in Noyo
-          format: uuid
-          type: string
-        volume:
-          description: Elected volume for the type of coverage being selected
-          format: int32
-          type: integer
       required:
-      - id
-      - member_type
-      - plan_id
+      - eligibility_start_date
       type: object
+    MemberRequestEnrollmentSnapshotRequest:
+      properties:
+        coverages:
+          description: List of coverages being added or waived with a set of carriers
+          items:
+            allOf:
+            - $ref: '#/components/schemas/ApiBaseNewHireChangeCarrierCoverages'
+            description: Information for a coverage being added or waived with each carrier
+          minItems: 1
+          type: array
+        enrollment_type:
+          description: Enrollment type of the enrollment snapshot member request
+          enum:
+          - new_hire
+          type: string
+        target_date:
+          description: Date when the enrollment snapshot is effective
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
+          type: string
+      required:
+      - coverages
+      - enrollment_type
+      type: object
+      x-field_order:
+      - enrollment_type
+      - target_date
+      - coverages
     GroupHospitalIndemnityPlanResultWithConfig:
       properties:
         code:
@@ -3577,14 +4500,16 @@ components:
           description: ISO-8601 date string for the effective end date of the record
           example: '2018-12-31'
           format: date
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         effective_start_date:
           description: ISO-8601 date string for the effective start date of the record
           example: '2018-01-01'
           format: date
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         eligible_member_types:
           description: List of member types eligible for the group hospital indemnity plan
           items:
@@ -3663,52 +4588,69 @@ components:
       - version
       - waiting_periods
       type: object
-    Meta:
-      properties:
-        offset:
-          description: The offset of the first response record within the matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
-        page_num:
-          description: The page number of the response records within the overall data set (1-based integer)
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        page_size:
-          description: The maximum number of response records on each page of results
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        total_records:
-          description: The total number of records in the entire matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
-      required:
-      - offset
-      - page_num
-      - page_size
-      type: object
-    UIDependentResult:
+    BaseMemberAddingCoveragePriorCoverageWithVolume:
       properties:
         id:
-          description: Unique identifier of the dependent in Noyo
+          description: Unique identifier of the employee or dependent in Noyo
           format: uuid
-          readOnly: true
           type: string
-        person:
+        member_type:
+          description: Type of member adding coverage
+          enum:
+          - dependent
+          - employee
+          type: string
+        plan_id:
+          description: Unique identifier of the group plan in Noyo
+          format: uuid
+          type: string
+        prior_coverage:
           allOf:
-          - $ref: '#/components/schemas/UIPersonResult'
-          description: Personal information for the dependent
+          - $ref: '#/components/schemas/BaseAddingCoveragePriorCoverage'
+          description: Details about prior insurance coverage, if applicable
+        volume:
+          description: Elected volume for the type of coverage being selected
+          format: int32
+          type: integer
       required:
       - id
-      - person
+      - member_type
+      - plan_id
       type: object
+    ApiBaseMemberAddingCoveragePriorCoverageWithVolume:
+      properties:
+        id:
+          description: Unique identifier of the employee or dependent in Noyo
+          format: uuid
+          type: string
+        member_type:
+          description: Type of member adding coverage
+          enum:
+          - dependent
+          - employee
+          type: string
+        plan_id:
+          description: Unique identifier of the group plan in Noyo
+          format: uuid
+          type: string
+        prior_coverage:
+          allOf:
+          - $ref: '#/components/schemas/BaseAddingCoveragePriorCoverage'
+          description: Details about prior insurance coverage, if applicable
+        volume:
+          description: Elected volume for the type of coverage being selected
+          format: int32
+          type: integer
+      required:
+      - id
+      - member_type
+      type: object
+      x-field_order:
+      - id
+      - member_type
+      - plan_id
+      - volume
+      - prior_coverage
     GroupADDPlanResultWithConfig:
       properties:
         code:
@@ -3722,14 +4664,16 @@ components:
           description: ISO-8601 date string for the effective end date of the record
           example: '2018-12-31'
           format: date
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         effective_start_date:
           description: ISO-8601 date string for the effective start date of the record
           example: '2018-01-01'
           format: date
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         eligible_member_types:
           description: List of member types eligible for the group AD&D plan
           items:
@@ -3812,236 +4756,29 @@ components:
       - volume_rules
       - waiting_periods
       type: object
-    GroupSTDPlanResultWithConfig:
+    GroupPlanGuaranteedIssueRules:
       properties:
-        code:
-          description: Plan code of the group STD plan
-          example: STD
-          type: string
-        created:
-          description: The date the record was created
-          type: integer
-        effective_end_date:
-          description: ISO-8601 date string for the effective end date of the record
-          example: '2018-12-31'
-          format: date
-          nullable: true
-          type: string
-        effective_start_date:
-          description: ISO-8601 date string for the effective start date of the record
-          example: '2018-01-01'
-          format: date
-          nullable: true
-          type: string
-        eligible_member_types:
-          description: List of member types eligible for the group STD plan
-          items:
-            description: Member type eligible for the group STD plan
-            enum:
-            - all
-            - employee
-            - child
-            - spouse
-            - domestic-partner
-            - employee-with-dependents
-            type: string
-          minItems: 1
-          type: array
-        group_enrollment_id:
-          description: Unique identifier of the associated group enrollment in the Noyo system
-          format: uuid
-          type: string
-        id:
-          description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        modified:
-          description: The date the record was last updated
-          type: integer
-        name:
-          description: Name of the group STD plan
-          example: Employee STD
-          type: string
-        plan_configuration:
-          description: Group STD Plan configuration details
-          type: object
-        plan_type:
-          description: Type of group STD plan
-          enum:
-          - basic
-          - voluntary
-          type: string
-        status:
-          description: Status of the group STD plan
-          enum:
-          - pending
-          - active
-          - discontinued
-          type: string
-        termination_policy:
-          description: Termination policy for the group STD plan
-          enum:
-          - end_of_month
-          - last_work_date
-          - fifteenth_of_month
-          - first_of_following_month
-          - end_of_plan_year
-          type: string
-        version:
-          description: Current version of the record
-          format: uuid
-          type: string
-        volume_rules:
-          description: Volume rules for the group STD plan
-          type: object
-        waiting_periods:
-          description: Member waiting period details for the group STD plan
-          items:
-            description: Member waiting period details for the group STD plan
-            type: object
-          type: array
-      required:
-      - created
-      - eligible_member_types
-      - group_enrollment_id
-      - id
-      - modified
-      - name
-      - plan_configuration
-      - plan_type
-      - status
-      - termination_policy
-      - version
-      - volume_rules
-      - waiting_periods
+        gi_over_70:
+          description: Guaranteed issue amount for members over age 70
+          format: int32
+          type:
+          - integer
+          - 'null'
+        gi_under_70:
+          description: Guaranteed issue amount for members under age 70
+          format: int32
+          type:
+          - integer
+          - 'null'
       type: object
-    GroupDentalPlanResultWithConfig:
-      properties:
-        cobra_rules:
-          allOf:
-          - $ref: '#/components/schemas/GroupPlanCOBRARules'
-          description: COBRA rules for the group dental plan
-        code:
-          description: Plan code of the group dental plan
-          example: SP100
-          type: string
-        created:
-          description: The date the record was created
-          type: integer
-        dependent_child_age_limits:
-          description: List of all dependent child age limits configured for the group dental plan
-          items:
-            $ref: '#/components/schemas/GroupPlanDependentChildAgeLimit'
-          type: array
-        effective_end_date:
-          description: ISO-8601 date string for the effective end date of the record
-          example: '2018-12-31'
-          format: date
-          nullable: true
-          type: string
-        effective_start_date:
-          description: ISO-8601 date string for the effective start date of the record
-          example: '2018-01-01'
-          format: date
-          nullable: true
-          type: string
-        eligible_member_types:
-          description: List of member types eligible for the group dental plan
-          items:
-            description: Member type eligible for the group dental plan
-            enum:
-            - all
-            - employee
-            - child
-            - spouse
-            - domestic-partner
-            - employee-with-dependents
-            type: string
-          minItems: 1
-          type: array
-        group_enrollment_id:
-          description: Unique identifier of the associated group enrollment in the Noyo system
-          format: uuid
-          type: string
-        id:
-          description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        modified:
-          description: The date the record was last updated
-          type: integer
-        name:
-          description: Name of the group dental plan
-          example: Smile Plus 1000
-          type: string
-        network:
-          description: Network name of the plan designated by the carrier
-          example: Dental Select
-          type: string
-        plan_configuration:
-          description: Group Dental Plan configuration details
-          type: object
-        plan_type:
-          description: Type of group dental plan
-          enum:
-          - ppo
-          - pos
-          - dhmo
-          - epo
-          - aso
-          - indemnity
-          type: string
-        status:
-          description: Status of the group dental plan
-          enum:
-          - pending
-          - active
-          - discontinued
-          type: string
-        termination_policy:
-          description: Termination policy for the group dental plan
-          enum:
-          - end_of_month
-          - last_work_date
-          - fifteenth_of_month
-          - first_of_following_month
-          - end_of_plan_year
-          type: string
-        version:
-          description: Current version of the record
-          format: uuid
-          type: string
-        voluntary:
-          description: True if the group dental plan is a voluntary plan
-          type: boolean
-        waiting_periods:
-          description: Member waiting period details for the group dental plan
-          items:
-            description: Member waiting period details for the group dental plan
-            type: object
-          type: array
-      required:
-      - cobra_rules
-      - created
-      - eligible_member_types
-      - group_enrollment_id
-      - id
-      - modified
-      - name
-      - plan_configuration
-      - status
-      - termination_policy
-      - version
-      - waiting_periods
-      type: object
-    BaseMemberAddingCoveragePriorCoverageWithVolume:
+    ApiBaseMemberModifyingCoverageWithVolume:
       properties:
         id:
           description: Unique identifier of the employee or dependent in Noyo
           format: uuid
           type: string
         member_type:
-          description: Type of member adding coverage
+          description: Type of member modifying coverage
           enum:
           - dependent
           - employee
@@ -4050,10 +4787,6 @@ components:
           description: Unique identifier of the group plan in Noyo
           format: uuid
           type: string
-        prior_coverage:
-          allOf:
-          - $ref: '#/components/schemas/BaseAddingCoveragePriorCoverage'
-          description: Details about prior insurance coverage, if applicable
         volume:
           description: Elected volume for the type of coverage being selected
           format: int32
@@ -4061,434 +4794,113 @@ components:
       required:
       - id
       - member_type
+      type: object
+    BaseMemberModifyingCoverage:
+      properties:
+        id:
+          description: Unique identifier of the employee or dependent in Noyo
+          format: uuid
+          type: string
+        member_type:
+          description: Type of member modifying coverage
+          enum:
+          - dependent
+          - employee
+          type: string
+        plan_id:
+          description: Unique identifier of the group plan in Noyo
+          format: uuid
+          type: string
+      required:
+      - id
+      - member_type
       - plan_id
       type: object
-    MemberRequestDemographicChangeRequest:
+    PrimaryCareProvider:
       properties:
-        change_date:
-          description: ISO-8601 date string for effective date of demographic change
-          example: '2019-03-15'
-          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
-          type: string
-        member_changes:
-          description: List of employee or dependent demographic change actions
-          items:
-            allOf:
-            - $ref: '#/components/schemas/ApiBaseMemberDemographicChangeDetails'
-            description: Employee or dependent demographic change details
-          minItems: 1
-          type: array
-        signature_date:
-          description: ISO-8601 date string for signature date
-          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
-          type: string
-      required:
-      - member_changes
-      type: object
-      x-field_order:
-      - change_date
-      - signature_date
-      - member_changes
-    MemberRequestCOBRAQualifyingLifeEventRequest:
-      properties:
-        coverages:
-          description: List of coverage change actions to complete with a set of carriers
-          items:
-            allOf:
-            - $ref: '#/components/schemas/ApiCOBRAQualifyingLifeEventCarrierCoverages'
-            description: Coverage change actions to complete with a carrier
-          minItems: 1
-          type: array
-        event:
-          allOf:
-          - $ref: '#/components/schemas/ApiBaseCOBRAQualifyingLifeEventDetails'
-          description: Details about the eligible qualifying life event
-      required:
-      - coverages
-      - event
-      type: object
-      x-field_order:
-      - event
-      - coverages
-    GroupPharmacyPlanResultWithConfig:
-      properties:
-        cobra_rules:
-          allOf:
-          - $ref: '#/components/schemas/GroupPlanCOBRARules'
-          description: COBRA rules for the group pharmacy plan
-        code:
-          description: Plan code of the group pharmacy plan
-          example: RX
-          type: string
-        created:
-          description: The date the record was created
-          type: integer
-        dependent_child_age_limits:
-          description: List of all dependent child age limits configured for the group pharmacy plan
-          items:
-            $ref: '#/components/schemas/GroupPlanDependentChildAgeLimit'
-          type: array
-        effective_end_date:
-          description: ISO-8601 date string for the effective end date of the record
-          example: '2018-12-31'
-          format: date
-          nullable: true
-          type: string
-        effective_start_date:
-          description: ISO-8601 date string for the effective start date of the record
-          example: '2018-01-01'
-          format: date
-          nullable: true
-          type: string
-        eligible_member_types:
-          description: List of member types eligible for the group pharmacy plan
-          items:
-            description: Member type eligible for the group pharmacy plan
-            enum:
-            - all
-            - employee
-            - child
-            - spouse
-            - domestic-partner
-            - employee-with-dependents
-            type: string
-          minItems: 1
-          type: array
-        group_enrollment_id:
-          description: Unique identifier of the associated group enrollment in the Noyo system
-          format: uuid
-          type: string
-        id:
-          description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        modified:
-          description: The date the record was last updated
-          type: integer
-        name:
-          description: Name of the group pharmacy plan
-          example: Pharmacy - Standard
-          type: string
-        plan_configuration:
-          description: Group Pharmacy Plan configuration details
-          type: object
-        plan_type:
-          description: Type of group pharmacy plan
+        entity_identifier_code:
+          description: Code of the entity identifier
           enum:
-          - pharmacy
+          - pcp
+          - dental_pcp
+          - obgyn
           type: string
-        status:
-          description: Status of the group pharmacy plan
+        entity_type:
+          description: Type of entity
           enum:
-          - pending
-          - active
-          - discontinued
+          - person
+          - non_person_entity
           type: string
-        termination_policy:
-          description: Termination policy for the group pharmacy plan
-          enum:
-          - end_of_month
-          - last_work_date
-          - fifteenth_of_month
-          - first_of_following_month
-          - end_of_plan_year
-          type: string
-        version:
-          description: Current version of the record
-          format: uuid
-          type: string
-        voluntary:
-          description: Whether the group pharmacy plan is voluntary
-          type: boolean
-        waiting_periods:
-          description: List of all waiting periods configured for the group pharmacy plan
-          items:
-            description: Member waiting period details for the group pharmacy plan
-            type: object
-          type: array
-      required:
-      - created
-      - eligible_member_types
-      - group_enrollment_id
-      - id
-      - modified
-      - name
-      - plan_configuration
-      - plan_type
-      - status
-      - termination_policy
-      - version
-      - waiting_periods
-      type: object
-    MemberRequestQualifyingLifeEventRequest:
-      properties:
-        coverages:
-          description: List of coverage change actions to complete with a set of carriers
-          items:
-            allOf:
-            - $ref: '#/components/schemas/ApiQualifyingLifeEventCarrierCoverages'
-            description: Coverage change actions to complete with a carrier
-          minItems: 1
-          type: array
-        event:
-          allOf:
-          - $ref: '#/components/schemas/ApiBaseQualifyingLifeEventDetails'
-          description: Details about the eligible qualifying life event
-      required:
-      - coverages
-      - event
-      type: object
-      x-field_order:
-      - event
-      - coverages
-    ApiEmploymentChange:
-      properties:
-        employment_status:
-          description: New or updated employee employment status
-          enum:
-          - full-time
-          - part-time
-          - contract
-          - disabled
-          - terminated
-          - retired
-          example: full-time
-          type: string
-        hire_date:
-          description: ISO-8601 date string for the new or corrected hire date of the employee
-          example: '2017-05-23'
-          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
-          type: string
-        hours_worked:
-          description: New number of hours worked per week by the employee
-          example: 40
-          format: int32
-          minimum: 0
-          type: integer
-        occupation:
-          description: New or updated employee occupation or job title
-          example: Engineer
-          type: string
-      type: object
-      x-field_order:
-      - hire_date
-      - employment_status
-      - occupation
-      - hours_worked
-    MemberRequestCOBRAEnrollmentRequest:
-      properties:
-        coverages:
-          description: List of coverages being added or waived with a set of carriers
-          items:
-            allOf:
-            - $ref: '#/components/schemas/ApiBaseNewHireChangeCarrierCoverages'
-            description: Information for a coverage being added or waived with each carrier
-          minItems: 1
-          type: array
-        termination_info:
-          allOf:
-          - $ref: '#/components/schemas/PublicCOBRATerminationInfo'
-          description: Termination info for the cobra member request
-      required:
-      - coverages
-      type: object
-      x-field_order:
-      - termination_info
-      - coverages
-    ApiBaseQualifyingLifeEventDetails:
-      properties:
-        event_date:
-          description: ISO-8601 date string for qualifying life event date
-          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
-          type: string
-        event_type:
-          description: Qualifying life event type
-          enum:
-          - adoption
-          - change_to_part_time
-          - change_to_full_time
-          - classifications_change
-          - court_order
-          - death
-          - dependent_open_enrollment
-          - foster_care
-          - immigration_status_change
-          - legal_guardian
-          - lost_coverage
-          - divorce
-          - marriage
-          - medicare
-          - moved
-          - newborn
-          - offline_change
-          - override
-          - rate_changed
-          - rehire
-          - reinstatement
-          type: string
-      required:
-      - event_date
-      - event_type
-      type: object
-      x-field_order:
-      - event_type
-      - event_date
-    UIPersonResult:
-      properties:
         first_name:
-          description: First name of the person
-          example: Catherine
+          description: First name of the primary care provider
           type: string
-        id:
-          description: Unique identifier of the person in Noyo
-          format: uuid
-          readOnly: true
+        identification_code:
+          description: Code of the identification
+          type: string
+        identification_code_type:
+          description: Type of the identification code
+          enum:
+          - service_provider_number
+          - national_provider_identifier
           type: string
         last_name:
-          description: Last name of the person
-          example: Briggs
+          description: Last name of the primary care provider
           type: string
         middle_name:
-          description: Middle name of the person
-          example: S
+          description: Middle name of the primary care provider
+          type: string
+        organization_name:
+          description: Organization name of the primary care provider.
+          type: string
+        patient_relationship_code:
+          description: Code which represents the relationship of the patient to the primary care provider
+          enum:
+          - established
+          - not_established
+          - unknown
           type: string
       required:
-      - id
+      - identification_code
+      - identification_code_type
       type: object
-    EmploymentDates:
+    BaseMemberRemovingCoverage:
       properties:
-        full_time_start:
-          description: ISO-8601 date string for start date as a full time employee with the group (if applicable)
-          example: '2017-01-17'
-          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
-          type: string
-        hire_date:
-          description: ISO-8601 date string for the hire date of the employee
-          example: '2017-01-17'
-          format: date
-          type: string
-        rehire:
-          description: ISO-8601 date string for the rehire date of the employee (if applicable)
-          example: '2018-02-01'
-          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
-          type: string
-        retirement:
-          description: ISO-8601 date string for the retirement date of the employee (if applicable)
-          example: '2019-01-01'
-          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
-          type: string
-        terminated:
-          description: ISO-8601 date string for the termination date of the employee (if applicable)
-          example: '2018-01-01'
-          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
-          type: string
-      required:
-      - hire_date
-      type: object
-      x-field_order: []
-    GroupAccidentPlanResultWithConfig:
-      properties:
-        code:
-          description: Plan code of the group accident plan
-          example: VACC
-          type: string
-        created:
-          description: The date the record was created
-          type: integer
-        dependent_child_age_limits:
-          description: List of all dependent child age limits configured for the group accident plan
-          items:
-            $ref: '#/components/schemas/GroupPlanDependentChildAgeLimit'
-          type: array
-        effective_end_date:
-          description: ISO-8601 date string for the effective end date of the record
-          example: '2018-12-31'
-          format: date
-          nullable: true
-          type: string
-        effective_start_date:
-          description: ISO-8601 date string for the effective start date of the record
-          example: '2018-01-01'
-          format: date
-          nullable: true
-          type: string
-        eligible_member_types:
-          description: List of member types eligible for the group accident plan
-          items:
-            description: Member type eligible for the group accident plan
-            enum:
-            - all
-            - employee
-            - child
-            - spouse
-            - domestic-partner
-            - employee-with-dependents
-            type: string
-          minItems: 1
-          type: array
-        group_enrollment_id:
-          description: Unique identifier of the associated group enrollment in the Noyo system
-          format: uuid
-          type: string
         id:
-          description: Unique identifier of the record in Noyo
+          description: Unique identifier of the employee or dependent in Noyo
           format: uuid
           type: string
-        modified:
-          description: The date the record was last updated
-          type: integer
-        name:
-          description: Name of the group accident plan
-          example: Voluntary Accident - Employee
-          type: string
-        plan_configuration:
-          description: Group Accident Plan configuration details
-          type: object
-        plan_type:
-          description: Type of group accident plan
+        member_type:
+          description: Type of member removing coverage
           enum:
-          - basic
-          - voluntary
+          - dependent
+          - employee
           type: string
-        status:
-          description: Status of the group accident plan
-          enum:
-          - pending
-          - active
-          - discontinued
-          type: string
-        termination_policy:
-          description: Termination policy for the group accident plan
-          enum:
-          - end_of_month
-          - last_work_date
-          - fifteenth_of_month
-          - first_of_following_month
-          - end_of_plan_year
-          type: string
-        version:
-          description: Current version of the record
+        plan_id:
+          description: Unique identifier of the group plan in Noyo
           format: uuid
           type: string
-        waiting_periods:
-          description: Member waiting period details for the group accident plan
-          items:
-            description: Member waiting period details for the group accident plan
-            type: object
-          type: array
+        reason:
+          description: Reason the member is removing or canceling coverage
+          enum:
+          - other-employee-group
+          - other-spouse-group
+          - other-parent-group
+          - other-ind-on-exchange
+          - other-ind-off-exchange
+          - other-cobra
+          - other-medicare
+          - medicaid
+          - medi-cal
+          - va-coverage
+          - tricare-coverage
+          - retiree-coverage
+          - no-coverage
+          - voluntary-withdrawal
+          type: string
       required:
-      - created
-      - eligible_member_types
-      - group_enrollment_id
       - id
-      - modified
-      - name
-      - plan_configuration
-      - plan_type
-      - status
-      - termination_policy
-      - version
-      - waiting_periods
+      - member_type
+      - reason
       type: object
     MemberRequestCOBRAOpenEnrollmentRequest:
       properties:
@@ -4510,26 +4922,239 @@ components:
       x-field_order:
       - event
       - coverages
-    BaseMemberAddingCoverage:
+    ApiNameChange:
       properties:
-        id:
-          description: Unique identifier of the employee or dependent in Noyo
-          format: uuid
+        first_name:
+          description: New first name of the person
+          example: Jane
           type: string
-        member_type:
-          description: Type of member adding coverage
-          enum:
-          - dependent
-          - employee
+        last_name:
+          description: New last name of the person
+          example: Doe
           type: string
-        plan_id:
-          description: Unique identifier of the group plan in Noyo
-          format: uuid
+        middle_name:
+          description: New middle name of the person
+          example: Ellen
+          type: string
+        suffix:
+          description: New name suffix of the person
+          example: Jr
           type: string
       required:
+      - first_name
+      - last_name
+      type: object
+      x-field_order:
+      - first_name
+      - middle_name
+      - last_name
+      - suffix
+    GroupCancerPlanResultWithConfig:
+      properties:
+        code:
+          description: Plan code of the group cancer plan
+          example: CAN
+          type: string
+        created:
+          description: The date the record was created
+          type: integer
+        dependent_child_age_limits:
+          description: List of all dependent child age limits configured for the group cancer plan
+          items:
+            $ref: '#/components/schemas/GroupPlanDependentChildAgeLimit'
+          type: array
+        effective_end_date:
+          description: ISO-8601 date string for the effective end date of the record
+          example: '2018-12-31'
+          format: date
+          type:
+          - string
+          - 'null'
+        effective_start_date:
+          description: ISO-8601 date string for the effective start date of the record
+          example: '2018-01-01'
+          format: date
+          type:
+          - string
+          - 'null'
+        eligible_member_types:
+          description: List of member types eligible for the group cancer plan
+          items:
+            description: Member type eligible for the group cancer plan
+            enum:
+            - all
+            - employee
+            - child
+            - spouse
+            - domestic-partner
+            - employee-with-dependents
+            type: string
+          minItems: 1
+          type: array
+        group_enrollment_id:
+          description: Unique identifier of the associated group enrollment in the Noyo system
+          format: uuid
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        name:
+          description: Name of the group cancer plan
+          example: Cancer - Employee
+          type: string
+        plan_configuration:
+          description: Group Cancer Plan configuration details
+          type: object
+        plan_type:
+          description: Type of group cancer plan
+          enum:
+          - basic
+          - voluntary
+          type: string
+        status:
+          description: Status of the group cancer plan
+          enum:
+          - pending
+          - active
+          - discontinued
+          type: string
+        termination_policy:
+          description: Termination policy for the group cancer plan
+          enum:
+          - end_of_month
+          - last_work_date
+          - fifteenth_of_month
+          - first_of_following_month
+          - end_of_plan_year
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+        waiting_periods:
+          description: Member waiting period details for the group cancer plan
+          items:
+            description: Member waiting period details for the group cancer plan
+            type: object
+          type: array
+      required:
+      - created
+      - eligible_member_types
+      - group_enrollment_id
       - id
-      - member_type
-      - plan_id
+      - modified
+      - name
+      - plan_configuration
+      - plan_type
+      - status
+      - termination_policy
+      - version
+      - waiting_periods
+      type: object
+    GroupPlanDependentChildAgeLimit:
+      properties:
+        dependent_child_age_limit:
+          description: Age limit where dependent child is no longer eligible for plan
+          format: int32
+          minimum: 0
+          type: integer
+        dependent_child_termination_rule:
+          description: Termination rule describing when coverage ends for dependent child
+          enum:
+          - date_of_birth
+          - end_of_month_after_birthday
+          - end_of_year_after_birthday
+          type: string
+        dependent_child_type:
+          description: Dependent type to decide whether age limit rule should be applied
+          enum:
+          - dependent_child
+          - student
+          type: string
+      required:
+      - dependent_child_age_limit
+      - dependent_child_termination_rule
+      - dependent_child_type
+      type: object
+    SSNChange:
+      properties:
+        ssn:
+          description: New or corrected Social Security Number of the person
+          pattern: ^(?!000)[0-9]{3}(?!00)[0-9]{2}(?!0000)[0-9]{4}$
+          type: string
+      required:
+      - ssn
+      type: object
+    ApiBaseMemberDemographicChangeDetails:
+      properties:
+        address_change:
+          allOf:
+          - $ref: '#/components/schemas/ApiAddressChange'
+          description: Details about a demographic address change request
+        classifications_change:
+          description: Details about a demographic classifications change request
+          type: object
+        contact_change:
+          allOf:
+          - $ref: '#/components/schemas/ApiContactChange'
+          description: Details about a demographic contact change request
+        dob_change:
+          allOf:
+          - $ref: '#/components/schemas/DOBChange'
+          description: Details about a demographic date of birth change request
+        employment_change:
+          allOf:
+          - $ref: '#/components/schemas/ApiEmploymentChange'
+          description: Details about a demographic employment change request
+        member:
+          allOf:
+          - $ref: '#/components/schemas/DemographicChangeMember'
+          description: Details about the member making a demographic change request
+        name_change:
+          allOf:
+          - $ref: '#/components/schemas/ApiNameChange'
+          description: Details about a demographic name change request
+        salary_change:
+          allOf:
+          - $ref: '#/components/schemas/ApiSalaryChange'
+          description: Details about a demographic salary change request
+        sex_change:
+          allOf:
+          - $ref: '#/components/schemas/SexChange'
+          description: Details about a demographic sex change request
+        ssn_change:
+          allOf:
+          - $ref: '#/components/schemas/SSNChange'
+          description: Details about a demographic Social Security Number change request
+      required:
+      - member
+      type: object
+      x-field_order:
+      - member
+      - name_change
+      - address_change
+      - contact_change
+      - ssn_change
+      - dob_change
+      - sex_change
+      - employment_change
+      - salary_change
+      - classifications_change
+    IndividualEnrollmentCOBRAEnrollment:
+      properties:
+        cobra_enrolled:
+          description: True if member is enrolled in COBRA coverage
+          type: boolean
+        cobra_type:
+          description: Type of COBRA enrollment for the member
+          enum:
+          - federal
+          - state
+          type: string
       type: object
     ApiBaseNewHireMemberLinesOfCoverage:
       properties:
@@ -4602,593 +5227,5 @@ components:
       - critical_illness
       - cancer
       - hospital_indemnity
-    ApiMembersChangeLinesOfCoverage:
-      properties:
-        accident:
-          allOf:
-          - $ref: '#/components/schemas/ApiMembersChangeCoverageAction'
-          description: Member transaction requests relating to accident coverage
-        add:
-          allOf:
-          - $ref: '#/components/schemas/ApiMembersChangeCoverageActionWithVolume'
-          description: Member transaction requests relating to AD&D coverage
-        cancer:
-          allOf:
-          - $ref: '#/components/schemas/ApiMembersChangeCoverageAction'
-          description: Member transaction requests relating to cancer coverage
-        critical_illness:
-          allOf:
-          - $ref: '#/components/schemas/ApiMembersChangeCoverageActionWithVolume'
-          description: Member transaction requests relating to critical illness coverage
-        dental:
-          allOf:
-          - $ref: '#/components/schemas/ApiMembersChangeCoverageAction'
-          description: Member transaction requests relating to dental coverage
-        health_fund:
-          allOf:
-          - $ref: '#/components/schemas/MembersChangeCoverageActionWithVolume'
-          description: Member transaction requests relating to health fund coverage
-        hospital_indemnity:
-          allOf:
-          - $ref: '#/components/schemas/ApiMembersChangeCoverageAction'
-          description: Member transaction requests relating to hospital indemnity coverage
-        life:
-          allOf:
-          - $ref: '#/components/schemas/ApiMembersChangeCoverageActionWithVolume'
-          description: Member transaction requests relating to life coverage
-        ltd:
-          allOf:
-          - $ref: '#/components/schemas/ApiMembersChangeCoverageActionWithVolume'
-          description: Member transaction requests relating to LTD coverage
-        medical:
-          allOf:
-          - $ref: '#/components/schemas/ApiMembersChangeCoverageAction'
-          description: Member transaction requests relating to medical coverage
-        pharmacy:
-          allOf:
-          - $ref: '#/components/schemas/MembersChangeCoverageAction'
-          description: Member transaction requests relating to pharmacy coverage
-        std:
-          allOf:
-          - $ref: '#/components/schemas/ApiMembersChangeCoverageActionWithVolume'
-          description: Member transaction requests relating to STD coverage
-        vision:
-          allOf:
-          - $ref: '#/components/schemas/ApiMembersChangeCoverageAction'
-          description: Member transaction requests relating to vision coverage
-        wellness:
-          allOf:
-          - $ref: '#/components/schemas/MembersChangeCoverageAction'
-          description: Member transaction requests relating to wellness coverage
-      type: object
-      x-field_order:
-      - medical
-      - dental
-      - vision
-      - life
-      - add
-      - std
-      - ltd
-      - accident
-      - critical_illness
-      - cancer
-      - health_fund
-      - hospital_indemnity
-      - pharmacy
-      - wellness
-    ApiBaseMemberModifyingCoverage:
-      properties:
-        id:
-          description: Unique identifier of the employee or dependent in Noyo
-          format: uuid
-          type: string
-        member_type:
-          description: Type of member modifying coverage
-          enum:
-          - dependent
-          - employee
-          type: string
-        plan_id:
-          description: Unique identifier of the group plan in Noyo
-          format: uuid
-          type: string
-      required:
-      - id
-      - member_type
-      type: object
-    ApiBaseNewHireMemberCoverageAction:
-      properties:
-        enrolling_members:
-          description: Details for members enrolling in coverage
-          items:
-            $ref: '#/components/schemas/ApiBaseMemberAddingCoverage'
-          type: array
-        waiving_members:
-          description: Details for members waiving coverage
-          items:
-            $ref: '#/components/schemas/BaseMemberWaivingCoverage'
-          type: array
-      type: object
-    UIMemberRequestParentResult:
-      properties:
-        dependents:
-          items:
-            allOf:
-            - $ref: '#/components/schemas/UIDependentResult'
-            description: List of all dependents for the employee
-          type: array
-        employee:
-          allOf:
-          - $ref: '#/components/schemas/UIEmployeeResult'
-          description: Employee details for the member request
-        group_enrollments:
-          items:
-            allOf:
-            - $ref: '#/components/schemas/GroupEnrollmentResultWithConfig'
-            description: List of group enrollments for the member request
-          type: array
-        individual_enrollments:
-          items:
-            allOf:
-            - $ref: '#/components/schemas/IndividualEnrollmentResultWithConfig1'
-            description: List of all related individuals enrollments for the member request
-          type: array
-        member_request:
-          allOf:
-          - $ref: '#/components/schemas/UIMemberRequestResult'
-          description: Core Member request details
-        plans:
-          allOf:
-          - $ref: '#/components/schemas/GroupPlanResultWithConfig'
-          description: Object containing all group plans
-        transactions_status_detail:
-          description: List of transaction status details from a request
-          example: carrier_accepted
-          items:
-            enum:
-            - noyo_accepted
-            - carrier_accepted
-            - carrier_processing
-            - carrier_completed
-            - noyo_verified
-            type: string
-          type: array
-      required:
-      - employee
-      - member_request
-      - plans
-      - transactions_status_detail
-      type: object
-      x-field_order:
-      - member_request
-      - group_enrollments
-      - plans
-      - employee
-      - dependents
-      - individual_enrollments
-      - transactions_status_detail
-    BaseNewHireMemberCoverageAction:
-      properties:
-        enrolling_members:
-          description: Details for members enrolling in coverage
-          items:
-            $ref: '#/components/schemas/BaseMemberAddingCoverage'
-          type: array
-        waiving_members:
-          description: Details for members waiving coverage
-          items:
-            $ref: '#/components/schemas/BaseMemberWaivingCoverage'
-          type: array
-      type: object
-    BaseMemberModifyingCoverageWithVolume:
-      properties:
-        id:
-          description: Unique identifier of the employee or dependent in Noyo
-          format: uuid
-          type: string
-        member_type:
-          description: Type of member modifying coverage
-          enum:
-          - dependent
-          - employee
-          type: string
-        plan_id:
-          description: Unique identifier of the group plan in Noyo
-          format: uuid
-          type: string
-        volume:
-          description: Elected volume for the type of coverage being selected
-          format: int32
-          type: integer
-      required:
-      - id
-      - member_type
-      - plan_id
-      type: object
-    BaseMemberRemovingCoverage:
-      properties:
-        id:
-          description: Unique identifier of the employee or dependent in Noyo
-          format: uuid
-          type: string
-        member_type:
-          description: Type of member removing coverage
-          enum:
-          - dependent
-          - employee
-          type: string
-        plan_id:
-          description: Unique identifier of the group plan in Noyo
-          format: uuid
-          type: string
-        reason:
-          description: Reason the member is removing or canceling coverage
-          enum:
-          - other-employee-group
-          - other-spouse-group
-          - other-parent-group
-          - other-ind-on-exchange
-          - other-ind-off-exchange
-          - other-cobra
-          - other-medicare
-          - medicaid
-          - medi-cal
-          - va-coverage
-          - tricare-coverage
-          - retiree-coverage
-          - no-coverage
-          - voluntary-withdrawal
-          type: string
-      required:
-      - id
-      - member_type
-      - reason
-      type: object
-    ApiBaseMemberAddingCoveragePriorCoverage:
-      properties:
-        id:
-          description: Unique identifier of the employee or dependent in Noyo
-          format: uuid
-          type: string
-        member_type:
-          description: Type of member adding coverage
-          enum:
-          - dependent
-          - employee
-          type: string
-        plan_id:
-          description: Unique identifier of the group plan in Noyo
-          format: uuid
-          type: string
-        prior_coverage:
-          allOf:
-          - $ref: '#/components/schemas/BaseAddingCoveragePriorCoverage'
-          description: Details about prior insurance coverage, if applicable
-      required:
-      - id
-      - member_type
-      type: object
-      x-field_order:
-      - id
-      - member_type
-      - plan_id
-      - volume
-      - prior_coverage
-    Employment:
-      properties:
-        employment_dates:
-          allOf:
-          - $ref: '#/components/schemas/EmploymentDates'
-          description: Employee employment dates
-        employment_status:
-          description: Employee employment status
-          enum:
-          - full-time
-          - part-time
-          - contract
-          - disabled
-          - terminated
-          - retired
-          type: string
-        hours_worked:
-          description: An integer of hours worked per week by the employee
-          example: 40
-          format: int32
-          type: integer
-        occupation:
-          description: Employee occupation or job title
-          example: Engineer
-          type: string
-        salary:
-          allOf:
-          - $ref: '#/components/schemas/Salary'
-          description: Employee salary information
-      required:
-      - employment_dates
-      - employment_status
-      - hours_worked
-      type: object
-      x-field_order:
-      - employment_status
-      - occupation
-      - hours_worked
-      - salary
-      - employment_dates
-    BaseNewHireMemberCoverageActionWithVolume:
-      properties:
-        enrolling_members:
-          description: Details for members enrolling in coverage
-          items:
-            $ref: '#/components/schemas/BaseMemberAddingCoverageWithVolume'
-          type: array
-        waiving_members:
-          description: Details for members waiving coverage
-          items:
-            $ref: '#/components/schemas/BaseMemberWaivingCoverage'
-          type: array
-      type: object
-    GroupLifePlanResultWithConfig:
-      properties:
-        cobra_rules:
-          allOf:
-          - $ref: '#/components/schemas/GroupPlanCOBRARules'
-          description: COBRA rules for the group life plan
-        code:
-          description: Plan code of the group life plan
-          example: LIFE
-          type: string
-        created:
-          description: The date the record was created
-          type: integer
-        dependent_child_age_limits:
-          description: List of all dependent child age limits configured for the group life plan
-          items:
-            $ref: '#/components/schemas/GroupPlanDependentChildAgeLimit'
-          type: array
-        effective_end_date:
-          description: ISO-8601 date string for the effective end date of the record
-          example: '2018-12-31'
-          format: date
-          nullable: true
-          type: string
-        effective_start_date:
-          description: ISO-8601 date string for the effective start date of the record
-          example: '2018-01-01'
-          format: date
-          nullable: true
-          type: string
-        eligible_member_types:
-          description: List of member types eligible for the group life plan
-          items:
-            description: Member type eligible for the group life plan
-            enum:
-            - all
-            - employee
-            - child
-            - spouse
-            - domestic-partner
-            - employee-with-dependents
-            type: string
-          minItems: 1
-          type: array
-        group_enrollment_id:
-          description: Unique identifier of the associated group enrollment in the Noyo system
-          format: uuid
-          type: string
-        guaranteed_issue_rules:
-          allOf:
-          - $ref: '#/components/schemas/GroupPlanGuaranteedIssueRules'
-          description: Guaranteed issue rules for the group life plan
-        id:
-          description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        modified:
-          description: The date the record was last updated
-          type: integer
-        name:
-          description: Name of the group life plan
-          example: Employee Basic Life
-          type: string
-        plan_configuration:
-          description: Group Life Plan configuration details
-          type: object
-        plan_type:
-          description: Type of group life plan
-          enum:
-          - basic
-          - voluntary
-          type: string
-        status:
-          description: Status of the group life plan
-          enum:
-          - pending
-          - active
-          - discontinued
-          type: string
-        termination_policy:
-          description: Termination policy for the group life plan
-          enum:
-          - end_of_month
-          - last_work_date
-          - fifteenth_of_month
-          - first_of_following_month
-          - end_of_plan_year
-          type: string
-        version:
-          description: Current version of the record
-          format: uuid
-          type: string
-        volume_rules:
-          description: Volume rules for the group life plan
-          type: object
-        waiting_periods:
-          description: Member waiting period details for the group life plan
-          items:
-            description: Member waiting period details for the group life plan
-            type: object
-          type: array
-      required:
-      - created
-      - eligible_member_types
-      - group_enrollment_id
-      - id
-      - modified
-      - name
-      - plan_configuration
-      - plan_type
-      - status
-      - termination_policy
-      - version
-      - volume_rules
-      - waiting_periods
-      type: object
-    ApiQualifyingLifeEventCarrierCoverages:
-      properties:
-        carrier_config:
-          description: Carrier-specific data required for member request
-          type: object
-        carrier_id:
-          description: Unique identifier of the carrier in the Noyo system
-          format: uuid
-          type: string
-        lines_of_coverage:
-          allOf:
-          - $ref: '#/components/schemas/ApiMembersChangeLinesOfCoverage'
-          description: Adding, removing and modifying information for each line of coverage
-        signature_date:
-          description: ISO-8601 date string for signature date
-          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
-          type: string
-      required:
-      - carrier_config
-      - carrier_id
-      - lines_of_coverage
-      type: object
-      x-field_order:
-      - carrier_id
-      - carrier_config
-      - signature_date
-      - lines_of_coverage
-    MemberRequestNewHireEnrollmentRequest:
-      properties:
-        coverages:
-          description: List of coverages being added or waived with a set of carriers
-          items:
-            allOf:
-            - $ref: '#/components/schemas/ApiBaseNewHireChangeCarrierCoverages'
-            description: Information for a coverage being added or waived with each carrier
-          minItems: 1
-          type: array
-      required:
-      - coverages
-      type: object
-      x-field_order: []
-    BaseAddingCoveragePriorCoverage:
-      properties:
-        carrier_name:
-          description: Name of insurance carrier providing prior coverage
-          type: string
-        last_coverage_date:
-          description: ISO-8601 date string of the last day of coverage with the prior insurance carrier
-          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
-          type: string
-      required:
-      - carrier_name
-      - last_coverage_date
-      type: object
-    ApiBaseNewHireChangeCarrierCoverages:
-      properties:
-        carrier_config:
-          description: Carrier-specific data required for new hire enrollment
-          type: object
-        carrier_id:
-          description: Unique identifier of the carrier in the Noyo system
-          format: uuid
-          type: string
-        lines_of_coverage:
-          allOf:
-          - $ref: '#/components/schemas/ApiBaseNewHireMemberLinesOfCoverage'
-          description: Enrollment and waiving information for each line of coverage
-        signature_date:
-          description: ISO-8601 date string for signature date
-          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
-          type: string
-      required:
-      - carrier_config
-      - carrier_id
-      - lines_of_coverage
-      type: object
-      x-field_order:
-      - carrier_id
-      - carrier_config
-      - signature_date
-      - lines_of_coverage
-    SexChange:
-      properties:
-        sex:
-          description: New sex of the person
-          enum:
-          - F
-          - M
-          - U
-          - X
-          example: F
-          type: string
-      required:
-      - sex
-      type: object
-    UIEmployeeResult:
-      properties:
-        employment:
-          allOf:
-          - $ref: '#/components/schemas/Employment'
-          description: Employment information for the employee
-        id:
-          description: Unique identifier of the employee in Noyo
-          format: uuid
-          readOnly: true
-          type: string
-        person:
-          allOf:
-          - $ref: '#/components/schemas/UIPersonResult'
-          description: Personal information for the employee
-      required:
-      - employment
-      - id
-      - person
-      type: object
-    IndividualEnrollmentCOBRAEnrollment:
-      properties:
-        cobra_enrolled:
-          description: True if member is enrolled in COBRA coverage
-          type: boolean
-        cobra_type:
-          description: Type of COBRA enrollment for the member
-          enum:
-          - federal
-          - state
-          type: string
-      type: object
-    ApiMembersChangeCoverageActionWithVolume:
-      properties:
-        adding_coverage:
-          description: Details for members adding coverage with volume
-          items:
-            $ref: '#/components/schemas/ApiBaseMemberAddingCoveragePriorCoverageWithVolume'
-          type: array
-        modifying_coverage:
-          description: Details for members modifying coverage with volume
-          items:
-            $ref: '#/components/schemas/ApiBaseMemberModifyingCoverageWithVolume'
-          type: array
-        removing_coverage:
-          description: Details for members removing coverage
-          items:
-            $ref: '#/components/schemas/BaseMemberRemovingCoverage'
-          type: array
-      type: object
-      x-field_order:
-      - adding_coverage
-      - removing_coverage
-      - modifying_coverage
+x-readme:
+  explorer-enabled: false

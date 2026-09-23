@@ -1,9 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: APIs to manage and consume information about Carriers
-  title: Noyo Carrier Carrier Mapped Field Plan Rates API
+  description: Policy management APIs for health and ancillary insurance
+  title: Noyo Fulfillment Plan Rates API
   version: 1.0.0
-servers: []
+servers:
+- description: Noyo Fulfillment API - Live
+  url: https://fulfillment.noyo.com
+- description: Noyo Fulfillment API - Sandbox
+  url: https://fulfillment-sandbox.noyo.com
 tags:
 - name: Plan Rates
 paths:
@@ -12,9 +16,7 @@ paths:
     get:
       description: 'Retrieves all temporal plan rates for a specific group, organized by plan ID.
 
-        This endpoint queries plan rates by filtering by group_id.
-
-        '
+        This endpoint queries plan rates by filtering by group_id.'
       operationId: getPlanRatesByGroupId
       parameters:
       - description: Unique identifier of the group to filter by
@@ -37,21 +39,49 @@ paths:
       - Plan Rates
 components:
   schemas:
-    RateStructure:
+    TemporalPlanRateResult:
       properties:
-        calculation_type:
-          enum:
-          - member_based
-          - member_based_volume
-          - family_unit_based
+        end_date:
+          format: date
+          type:
+          - string
+          - 'null'
+        id:
+          format: uuid
           type: string
-        options:
+        plan_rate_id:
+          format: uuid
+          type: string
+        rate_structure:
+          $ref: '#/components/schemas/RateStructure'
+        start_date:
+          format: date
+          type: string
+      required:
+      - id
+      - plan_rate_id
+      - rate_structure
+      - start_date
+      type: object
+    PlanRateByPlanResult:
+      properties:
+        plan_id:
+          description: Unique identifier of the plan
+          format: uuid
+          type: string
+        plan_rate_id:
+          description: Unique identifier of the plan rate
+          format: uuid
+          type: string
+        temporal_rates:
+          description: List of temporal rates for this plan
           items:
-            type: string
+            $ref: '#/components/schemas/TemporalPlanRateResult'
           type: array
       required:
-      - calculation_type
-      - options
+      - plan_id
+      - plan_rate_id
+      - temporal_rates
       type: object
     Meta:
       properties:
@@ -84,49 +114,6 @@ components:
       - page_num
       - page_size
       type: object
-    PlanRateByPlanResult:
-      properties:
-        plan_id:
-          description: Unique identifier of the plan
-          format: uuid
-          type: string
-        plan_rate_id:
-          description: Unique identifier of the plan rate
-          format: uuid
-          type: string
-        temporal_rates:
-          description: List of temporal rates for this plan
-          items:
-            $ref: '#/components/schemas/TemporalPlanRateResult'
-          type: array
-      required:
-      - plan_id
-      - plan_rate_id
-      - temporal_rates
-      type: object
-    TemporalPlanRateResult:
-      properties:
-        end_date:
-          format: date
-          nullable: true
-          type: string
-        id:
-          format: uuid
-          type: string
-        plan_rate_id:
-          format: uuid
-          type: string
-        rate_structure:
-          $ref: '#/components/schemas/RateStructure'
-        start_date:
-          format: date
-          type: string
-      required:
-      - id
-      - plan_rate_id
-      - rate_structure
-      - start_date
-      type: object
     PaginatedPlanRateByPlanResult:
       properties:
         meta:
@@ -145,3 +132,21 @@ components:
       x-field_order:
       - meta
       - response
+    RateStructure:
+      properties:
+        calculation_type:
+          enum:
+          - member_based
+          - member_based_volume
+          - family_unit_based
+          type: string
+        options:
+          items:
+            type: string
+          type: array
+      required:
+      - calculation_type
+      - options
+      type: object
+x-readme:
+  explorer-enabled: false

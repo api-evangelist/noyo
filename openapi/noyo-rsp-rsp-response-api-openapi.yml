@@ -1,9 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: APIs to manage and consume information about Carriers
-  title: Noyo Carrier Carrier Mapped Field RSP (RSP Response) API
+  description: Policy management APIs for health and ancillary insurance
+  title: Noyo Fulfillment RSP (RSP Response) API
   version: 1.0.0
-servers: []
+servers:
+- description: Noyo Fulfillment API - Live
+  url: https://fulfillment.noyo.com
+- description: Noyo Fulfillment API - Sandbox
+  url: https://fulfillment-sandbox.noyo.com
 tags:
 - name: RSP (RSP Response)
 paths:
@@ -192,6 +196,102 @@ paths:
       - RSP (RSP Response)
 components:
   schemas:
+    AuditRecord:
+      properties:
+        recordFieldName:
+          description: Record type name (e.g., employeeRecordQuantity)
+          type: string
+        recordQuantity:
+          description: Count of records processed
+          format: int32
+          type: integer
+      required:
+      - recordFieldName
+      - recordQuantity
+      type: object
+    TransmissionResponse:
+      properties:
+        audit:
+          allOf:
+          - $ref: '#/components/schemas/Audit3'
+          description: Record count summary
+        creationDateTime:
+          description: ISO 8601 creation timestamp
+          type: string
+        sourceTransmissionGUID:
+          description: Original transmission request identifier
+          type: string
+        transactionDetail:
+          description: Transaction processing details
+          items:
+            $ref: '#/components/schemas/TransactionDetail'
+          minItems: 0
+          type: array
+        transmissionGUID:
+          description: Unique transmission identifier
+          type: string
+        transmissionRemark:
+          description: Overall transmission remarks
+          items:
+            $ref: '#/components/schemas/Remark'
+          minItems: 0
+          type: array
+        transmissionStatusCode:
+          description: Processing status (Success, Partial, Failure)
+          enum:
+          - Failure
+          - Partial
+          - Success
+          type: string
+      required:
+      - creationDateTime
+      - sourceTransmissionGUID
+      - transmissionGUID
+      - transmissionStatusCode
+      type: object
+    Remark:
+      properties:
+        entityCode:
+          description: Entity code for the reference element
+          type: string
+        entityReferenceValue:
+          description: Unique identifier for the referenced entity
+          type: string
+        fieldName:
+          description: Field that triggered this remark
+          type: string
+        fieldReferenceValue:
+          description: Additional reference for the field
+          type:
+          - string
+          - 'null'
+        messageText:
+          description: Human-readable remark description
+          type:
+          - string
+          - 'null'
+        messageTypeCode:
+          description: Business error type (Duplicate, Invalid, Missing)
+          enum:
+          - Duplicate
+          - Invalid
+          - Missing
+          type:
+          - string
+          - 'null'
+        remarkStatusCode:
+          description: Remark status (Error, Warning, OK)
+          enum:
+          - Error
+          - OK
+          - Warning
+          type: string
+      required:
+      - entityCode
+      - entityReferenceValue
+      - fieldName
+      - remarkStatusCode
+      type: object
     CreateRspRequest:
       properties:
         transmissionResponse:
@@ -246,96 +346,5 @@ components:
       - referenceElement
       - referenceElementID
       type: object
-    AuditRecord:
-      properties:
-        recordFieldName:
-          description: Record type name (e.g., employeeRecordQuantity)
-          type: string
-        recordQuantity:
-          description: Count of records processed
-          format: int32
-          type: integer
-      required:
-      - recordFieldName
-      - recordQuantity
-      type: object
-    Remark:
-      properties:
-        entityCode:
-          description: Entity code for the reference element
-          type: string
-        entityReferenceValue:
-          description: Unique identifier for the referenced entity
-          type: string
-        fieldName:
-          description: Field that triggered this remark
-          type: string
-        fieldReferenceValue:
-          description: Additional reference for the field
-          nullable: true
-          type: string
-        messageText:
-          description: Human-readable remark description
-          nullable: true
-          type: string
-        messageTypeCode:
-          description: Business error type (Duplicate, Invalid, Missing)
-          enum:
-          - Duplicate
-          - Invalid
-          - Missing
-          nullable: true
-          type: string
-        remarkStatusCode:
-          description: Remark status (Error, Warning, OK)
-          enum:
-          - Error
-          - OK
-          - Warning
-          type: string
-      required:
-      - entityCode
-      - entityReferenceValue
-      - fieldName
-      - remarkStatusCode
-      type: object
-    TransmissionResponse:
-      properties:
-        audit:
-          allOf:
-          - $ref: '#/components/schemas/Audit3'
-          description: Record count summary
-        creationDateTime:
-          description: ISO 8601 creation timestamp
-          type: string
-        sourceTransmissionGUID:
-          description: Original transmission request identifier
-          type: string
-        transactionDetail:
-          description: Transaction processing details
-          items:
-            $ref: '#/components/schemas/TransactionDetail'
-          minItems: 0
-          type: array
-        transmissionGUID:
-          description: Unique transmission identifier
-          type: string
-        transmissionRemark:
-          description: Overall transmission remarks
-          items:
-            $ref: '#/components/schemas/Remark'
-          minItems: 0
-          type: array
-        transmissionStatusCode:
-          description: Processing status (Success, Partial, Failure)
-          enum:
-          - Failure
-          - Partial
-          - Success
-          type: string
-      required:
-      - creationDateTime
-      - sourceTransmissionGUID
-      - transmissionGUID
-      - transmissionStatusCode
-      type: object
+x-readme:
+  explorer-enabled: false

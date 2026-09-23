@@ -1,9 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: APIs to manage and consume information about Carriers
-  title: Noyo Carrier Carrier Mapped Field Member Snapshot Test Report API
+  description: Policy management APIs for health and ancillary insurance
+  title: Noyo Fulfillment Member Snapshot Test Report API
   version: 1.0.0
-servers: []
+servers:
+- description: Noyo Fulfillment API - Live
+  url: https://fulfillment.noyo.com
+- description: Noyo Fulfillment API - Sandbox
+  url: https://fulfillment-sandbox.noyo.com
 tags:
 - name: Member Snapshot Test Report
 paths:
@@ -45,7 +49,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/MemberSnapshotTestReportPaginatedResult'
           description: Successful Response - Returns a list of all matching Member Snapshot Test Reports
-      summary: Retrieves a list of Member Snapshot Test Reports.
+      summary: Retrieves a list of Member Snapshot Test Reports
       tags:
       - Member Snapshot Test Report
   /api/v1/member_snapshot_test_reports/{member_snapshot_test_report_id}:
@@ -73,21 +77,6 @@ paths:
       - Member Snapshot Test Report
 components:
   schemas:
-    PublicMemberSnapshotReportData:
-      properties:
-        completed_at:
-          default: null
-          description: Time the report was completed
-          nullable: true
-          type: integer
-        rule_set_overrides:
-          $ref: '#/components/schemas/RuleSetOverrides'
-        started_at:
-          default: null
-          description: Time the report started being actually filled out
-          nullable: true
-          type: integer
-      type: object
     MemberSnapshotTestReportPaginatedResult:
       properties:
         meta:
@@ -105,6 +94,23 @@ components:
       x-field_order:
       - meta
       - response
+    PublicMemberSnapshotReportData:
+      properties:
+        completed_at:
+          default: null
+          description: Time the report was completed
+          type:
+          - integer
+          - 'null'
+        rule_set_overrides:
+          $ref: '#/components/schemas/RuleSetOverrides'
+        started_at:
+          default: null
+          description: Time the report started being actually filled out
+          type:
+          - integer
+          - 'null'
+      type: object
     MemberSnapshotTestReportResult:
       properties:
         carrier_id:
@@ -193,3 +199,5 @@ components:
       - page_num
       - page_size
       type: object
+x-readme:
+  explorer-enabled: false

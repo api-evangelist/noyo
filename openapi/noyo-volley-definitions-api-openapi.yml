@@ -1,9 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: APIs to manage and consume information about Carriers
-  title: Noyo Carrier Carrier Mapped Field Volley Definitions API
+  description: Policy management APIs for health and ancillary insurance
+  title: Noyo Fulfillment Volley Definitions API
   version: 1.0.0
-servers: []
+servers:
+- description: Noyo Fulfillment API - Live
+  url: https://fulfillment.noyo.com
+- description: Noyo Fulfillment API - Sandbox
+  url: https://fulfillment-sandbox.noyo.com
 tags:
 - name: Volley Definitions
 paths:
@@ -85,20 +89,6 @@ components:
       - volley_type
       type: object
       x-field_order: []
-    VolleyStepDefinition:
-      properties:
-        actor_type:
-          type: string
-        step_key:
-          type: string
-        step_type:
-          type: string
-      required:
-      - actor_type
-      - step_key
-      - step_type
-      type: object
-      x-field_order: []
     VolleyTransitionRule:
       properties:
         allowed_attachment_types:
@@ -106,8 +96,9 @@ components:
             type: string
           type: array
         from_step_key:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         from_transition_keys:
           items:
             type: string
@@ -130,3 +121,19 @@ components:
       - trigger_type
       type: object
       x-field_order: []
+    VolleyStepDefinition:
+      properties:
+        actor_type:
+          type: string
+        step_key:
+          type: string
+        step_type:
+          type: string
+      required:
+      - actor_type
+      - step_key
+      - step_type
+      type: object
+      x-field_order: []
+x-readme:
+  explorer-enabled: false

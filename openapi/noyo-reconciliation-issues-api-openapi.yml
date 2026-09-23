@@ -1,9 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: APIs to manage and consume information about Carriers
-  title: Noyo Carrier Carrier Mapped Field Reconciliation Issues API
+  description: Policy management APIs for health and ancillary insurance
+  title: Noyo Fulfillment Reconciliation Issues API
   version: 1.0.0
-servers: []
+servers:
+- description: Noyo Fulfillment API - Live
+  url: https://fulfillment.noyo.com
+- description: Noyo Fulfillment API - Sandbox
+  url: https://fulfillment-sandbox.noyo.com
 tags:
 - name: Reconciliation Issues
 paths:
@@ -152,11 +156,113 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedReconciliationIssueResolutionResult'
           description: Successful Response - Returns all matching reconciliation issue resolutions
-      summary: Get a list of all reconciliation issue resolutions under a single reconciliation issue
+      summary: Get a list of all reconciliation issue resolutions under a single…
       tags:
       - Reconciliation Issues
 components:
   schemas:
+    PaginatedReconciliationIssueResolutionResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of reconciliation issue resolutions
+          items:
+            $ref: '#/components/schemas/ReconciliationIssueResolutionResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    ReconciliationIssueResolutionResult:
+      properties:
+        automated_change_id:
+          description: Unique identifier of the associated automated change model
+          format: uuid
+          readOnly: true
+          type: string
+        automated_change_type:
+          description: The type or model of the associated automated change, 'MemberRequest' or 'MemberSnapshot'
+          enum:
+          - member_request
+          - member_snapshot
+          - no_change
+          readOnly: true
+          type: string
+        created:
+          description: The date the record was created
+          type: integer
+        distributor_action:
+          description: The distributor action taken to sync up with Noyo's system, as a result of this change
+          example: already_updated
+          readOnly: true
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        outcome:
+          description: The outcome of the resolution, in order words, what change took place
+          example: carrier_change
+          readOnly: true
+          type: string
+        reconciliation_issue_id:
+          description: Unique identifier of the associated reconciliation issue
+          format: uuid
+          readOnly: true
+          type: string
+        request_context:
+          description: Additional context provided by the distributor when requesting an outcome
+          example: Our records reflect that they should be enrolled at the carrier, can you update?
+          readOnly: true
+          type: string
+        resolution_type:
+          description: The technique used to resolve the reconciliation issue
+          example: member_request
+          readOnly: true
+          type: string
+        result:
+          description: Result of the discrepancy resolution
+          type: object
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - created
+      - distributor_action
+      - id
+      - modified
+      - reconciliation_issue_id
+      - request_context
+      - resolution_type
+      - version
+      type: object
+      x-field_order:
+      - id
+      - version
+      - reconciliation_issue_id
+      - automated_change_id
+      - automated_change_type
+      - resolution_type
+      - outcome
+      - distributor_action
+      - request_context
+      - result
+      - created
+      - modified
+    ReconciliationIssueAckRequest:
+      properties: {}
+      type: object
+      x-field_order: []
     ReconciliationIssuePublicResult:
       properties:
         body:
@@ -240,86 +346,37 @@ components:
       - body
       - created
       - modified
-    ReconciliationIssueResolutionResult:
+    Meta:
       properties:
-        automated_change_id:
-          description: Unique identifier of the associated automated change model
-          format: uuid
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
           readOnly: true
-          type: string
-        automated_change_type:
-          description: The type or model of the associated automated change, 'MemberRequest' or 'MemberSnapshot'
-          enum:
-          - member_request
-          - member_snapshot
-          - no_change
-          readOnly: true
-          type: string
-        created:
-          description: The date the record was created
           type: integer
-        distributor_action:
-          description: The distributor action taken to sync up with Noyo's system, as a result of this change
-          example: already_updated
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
           readOnly: true
-          type: string
-        id:
-          description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        modified:
-          description: The date the record was last updated
           type: integer
-        outcome:
-          description: The outcome of the resolution, in order words, what change took place
-          example: carrier_change
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
           readOnly: true
-          type: string
-        reconciliation_issue_id:
-          description: Unique identifier of the associated reconciliation issue
-          format: uuid
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
           readOnly: true
-          type: string
-        request_context:
-          description: Additional context provided by the distributor when requesting an outcome
-          example: Our records reflect that they should be enrolled at the carrier, can you update?
-          readOnly: true
-          type: string
-        resolution_type:
-          description: The technique used to resolve the reconciliation issue
-          example: member_request
-          readOnly: true
-          type: string
-        result:
-          description: Result of the discrepancy resolution
-          type: object
-        version:
-          description: Current version of the record
-          format: uuid
-          type: string
+          type: integer
       required:
-      - created
-      - distributor_action
-      - id
-      - modified
-      - reconciliation_issue_id
-      - request_context
-      - resolution_type
-      - version
+      - offset
+      - page_num
+      - page_size
       type: object
-      x-field_order:
-      - id
-      - version
-      - reconciliation_issue_id
-      - automated_change_id
-      - automated_change_type
-      - resolution_type
-      - outcome
-      - distributor_action
-      - request_context
-      - result
-      - created
-      - modified
     ReconciliationIssueResolutionRequestOutcome:
       properties:
         distributor_action:
@@ -355,56 +412,5 @@ components:
       - outcome
       type: object
       x-field_order: []
-    ReconciliationIssueAckRequest:
-      properties: {}
-      type: object
-      x-field_order: []
-    PaginatedReconciliationIssueResolutionResult:
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of reconciliation issue resolutions
-          items:
-            $ref: '#/components/schemas/ReconciliationIssueResolutionResult'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
-    Meta:
-      properties:
-        offset:
-          description: The offset of the first response record within the matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
-        page_num:
-          description: The page number of the response records within the overall data set (1-based integer)
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        page_size:
-          description: The maximum number of response records on each page of results
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        total_records:
-          description: The total number of records in the entire matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
-      required:
-      - offset
-      - page_num
-      - page_size
-      type: object
+x-readme:
+  explorer-enabled: false

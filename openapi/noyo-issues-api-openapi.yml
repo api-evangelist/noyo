@@ -1,9 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: APIs to manage and consume information about Carriers
-  title: Noyo Carrier Carrier Mapped Field Issues API
+  description: Policy management APIs for health and ancillary insurance
+  title: Noyo Fulfillment Issues API
   version: 1.0.0
-servers: []
+servers:
+- description: Noyo Fulfillment API - Live
+  url: https://fulfillment.noyo.com
+- description: Noyo Fulfillment API - Sandbox
+  url: https://fulfillment-sandbox.noyo.com
 tags:
 - name: Issues
 paths:
@@ -572,6 +576,159 @@ paths:
       - Issues
 components:
   schemas:
+    PublicIssueResult:
+      properties:
+        category:
+          description: The category of error for this issue
+          enum:
+          - missing_coverage
+          - duplicate_coverage
+          - missing_employee
+          - missing_dependent
+          - duplicate_member
+          - overage_dependent
+          - invalid_coverage
+          - invalid_volume
+          - invalid_ssn
+          - invalid_address
+          - invalid_demographic_info
+          - invalid_carrier_config
+          - cobra_status_conflict
+          - coverage_date_conflict
+          - enrollment_conflict
+          - event_conflict
+          - eoi_pending
+          - retro_change
+          - future_change
+          - missing_event
+          - missing_ssn
+          type:
+          - string
+          - 'null'
+        created:
+          description: The date the record was created
+          type: integer
+        dismissed:
+          description: Whether this issue has been dismissed
+          readOnly: true
+          type: boolean
+        employee_id:
+          description: The unique identifier of the employee associated with this issue
+          format: uuid
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        group_id:
+          description: The unique identifier of the group associated with this issue
+          format: uuid
+          type:
+          - string
+          - 'null'
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        issue_key:
+          description: A unique key identifying this issue, generated from partner and issue details
+          readOnly: true
+          type: string
+        last_seen:
+          description: The timestamp when this issue was last observed
+          readOnly: true
+          type: integer
+        member_id:
+          description: The unique identifier of the member associated with this issue
+          format: uuid
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        member_type:
+          description: The type of member (employee or dependent)
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        modified:
+          description: The date the record was last updated
+          type: integer
+        partner_id:
+          description: The unique identifier of the partner (carrier, broker, etc.) associated with this issue
+          format: uuid
+          type:
+          - string
+          - 'null'
+        resolved_at:
+          description: The timestamp when this issue was resolved
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        status:
+          description: The current status of the issue (open, pending_resolution, or resolved)
+          enum:
+          - open
+          - pending_resolution
+          - resolved
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - created
+      - id
+      - modified
+      - status
+      - version
+      type: object
+      x-field_order: []
+    IssueDataResolution:
+      properties:
+        action:
+          allOf:
+          - $ref: '#/components/schemas/Action'
+          description: Action taken to resolve this issue
+        pending_time:
+          description: Timestamp when issue was first moved to pending_resolution status
+          format: date-time
+          type:
+          - string
+          - 'null'
+      type: object
+    Action:
+      properties:
+        completed_at:
+          description: Timestamp when the action was completed
+          format: date-time
+          type: string
+        completed_by:
+          description: The identifier of the user who completed the action
+          type: string
+        explanation:
+          description: The explanation text for the action (duplicating the guidance text)
+          enum:
+          - updated_carrier
+          - updated_noyo
+          - updated_platform
+          type: string
+      required:
+      - completed_at
+      - completed_by
+      - explanation
+      type: object
+    ResolutionGuidanceContextContainer:
+      properties:
+        context:
+          description: Non-empty list of guidance context entries
+          items:
+            $ref: '#/components/schemas/ResolutionGuidanceContextEntry'
+          minItems: 1
+          type: array
+      required:
+      - context
+      type: object
     IssueUIResult:
       properties:
         category:
@@ -598,8 +755,9 @@ components:
           - future_change
           - missing_event
           - missing_ssn
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         created:
           description: The date the record was created
           type: integer
@@ -614,14 +772,16 @@ components:
         employee_id:
           description: The unique identifier of the employee associated with this issue
           format: uuid
-          nullable: true
           readOnly: true
-          type: string
+          type:
+          - string
+          - 'null'
         group_id:
           description: The unique identifier of the group associated with this issue
           format: uuid
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         id:
           description: Unique identifier of the record in Noyo
           format: uuid
@@ -636,8 +796,9 @@ components:
         issue_person_id:
           description: The unique identifier of the issue person (demographics) associated with this issue
           format: uuid
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         last_seen:
           description: The timestamp when this issue was last observed
           readOnly: true
@@ -645,14 +806,16 @@ components:
         member_id:
           description: The unique identifier of the member associated with this issue
           format: uuid
-          nullable: true
           readOnly: true
-          type: string
+          type:
+          - string
+          - 'null'
         member_type:
           description: The type of member (employee or dependent)
-          nullable: true
           readOnly: true
-          type: string
+          type:
+          - string
+          - 'null'
         modified:
           description: The date the record was last updated
           type: integer
@@ -663,30 +826,35 @@ components:
         partner_id:
           description: The unique identifier of the partner (carrier, broker, etc.) associated with this issue
           format: uuid
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         partner_type:
           description: The type of partner (carrier, broker, organization, etc.)
           enum:
           - carrier
           - broker
           - organization
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         resolution_guidance:
           description: Noyo-authored guidance for resolving this issue, visible to external users
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         resolution_method:
           description: The method used to resolve this issue
-          nullable: true
           readOnly: true
-          type: string
+          type:
+          - string
+          - 'null'
         resolved_at:
           description: The timestamp when this issue was resolved
-          nullable: true
           readOnly: true
-          type: integer
+          type:
+          - integer
+          - 'null'
         source:
           description: The source system or process that created this issue
           enum:
@@ -745,8 +913,9 @@ components:
           - future_change
           - missing_event
           - missing_ssn
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         data:
           allOf:
           - $ref: '#/components/schemas/IssueData'
@@ -758,8 +927,9 @@ components:
         group_id:
           description: The unique identifier of the group associated with this issue
           format: uuid
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         is_external:
           description: Whether the issue is visible to external users
           type: boolean
@@ -768,8 +938,9 @@ components:
         issue_person_id:
           description: The unique identifier of the issue person (demographics) associated with this issue
           format: uuid
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         organization_id:
           description: The unique identifier of the organization associated with this issue
           format: uuid
@@ -792,23 +963,27 @@ components:
         partner_id:
           description: The unique identifier of the partner (carrier, broker, etc.) associated with this issue
           format: uuid
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         partner_type:
           description: The type of partner (carrier, broker, organization, etc.)
           enum:
           - carrier
           - broker
           - organization
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         raw_issue_data:
-          nullable: true
-          type: object
+          type:
+          - object
+          - 'null'
         resolution_guidance:
           description: Noyo-authored guidance for resolving this issue, visible to external users
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         source:
           description: The source system or process that created this issue
           enum:
@@ -826,6 +1001,33 @@ components:
       - source
       type: object
       x-field_order: []
+    ResolutionGuidanceContextEntry:
+      properties:
+        id:
+          description: Stable id for this context entry
+          format: uuid
+          type: string
+        references:
+          minLength: 1
+          type: object
+        type:
+          description: Originating record class for this guidance (member_snapshot today)
+          enum:
+          - member_snapshot
+          type: string
+      required:
+      - id
+      - references
+      - type
+      type: object
+    IssueDataNotes:
+      properties:
+        customer:
+          description: Customer-visible notes about the issue
+          type:
+          - string
+          - 'null'
+      type: object
     IssueUIEditRequest:
       properties:
         category:
@@ -851,44 +1053,53 @@ components:
           - future_change
           - missing_event
           - missing_ssn
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         data:
           $ref: '#/components/schemas/IssueData'
         dismissed:
           type: boolean
         employee_id:
           format: uuid
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         group_id:
           format: uuid
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         internal_notes:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         is_external:
-          nullable: true
-          type: boolean
+          type:
+          - boolean
+          - 'null'
         issue_person_id:
           format: uuid
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         last_seen:
           format: date-time
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         member_id:
           format: uuid
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         member_type:
           enum:
           - employee
           - dependent
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         originating_record_ids:
           items:
             format: uuid
@@ -902,25 +1113,31 @@ components:
           - manual_entry
           - member_snapshot
           - api_request
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         partner_document_source_id:
           format: uuid
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         raw_issue_data:
-          nullable: true
-          type: object
+          type:
+          - object
+          - 'null'
         resolution_guidance:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         resolution_method:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         resolution_partner_document_id:
           format: uuid
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         status:
           enum:
           - open
@@ -929,156 +1146,6 @@ components:
           type: string
       type: object
       x-field_order: []
-    IssueDataResolution:
-      properties:
-        action:
-          allOf:
-          - $ref: '#/components/schemas/Action'
-          description: Action taken to resolve this issue
-        pending_time:
-          description: Timestamp when issue was first moved to pending_resolution status
-          format: date-time
-          nullable: true
-          type: string
-      type: object
-    PublicIssueResult:
-      properties:
-        category:
-          description: The category of error for this issue
-          enum:
-          - missing_coverage
-          - duplicate_coverage
-          - missing_employee
-          - missing_dependent
-          - duplicate_member
-          - overage_dependent
-          - invalid_coverage
-          - invalid_volume
-          - invalid_ssn
-          - invalid_address
-          - invalid_demographic_info
-          - invalid_carrier_config
-          - cobra_status_conflict
-          - coverage_date_conflict
-          - enrollment_conflict
-          - event_conflict
-          - eoi_pending
-          - retro_change
-          - future_change
-          - missing_event
-          - missing_ssn
-          nullable: true
-          type: string
-        created:
-          description: The date the record was created
-          type: integer
-        dismissed:
-          description: Whether this issue has been dismissed
-          readOnly: true
-          type: boolean
-        employee_id:
-          description: The unique identifier of the employee associated with this issue
-          format: uuid
-          nullable: true
-          readOnly: true
-          type: string
-        group_id:
-          description: The unique identifier of the group associated with this issue
-          format: uuid
-          nullable: true
-          type: string
-        id:
-          description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        issue_key:
-          description: A unique key identifying this issue, generated from partner and issue details
-          readOnly: true
-          type: string
-        last_seen:
-          description: The timestamp when this issue was last observed
-          readOnly: true
-          type: integer
-        member_id:
-          description: The unique identifier of the member associated with this issue
-          format: uuid
-          nullable: true
-          readOnly: true
-          type: string
-        member_type:
-          description: The type of member (employee or dependent)
-          nullable: true
-          readOnly: true
-          type: string
-        modified:
-          description: The date the record was last updated
-          type: integer
-        partner_id:
-          description: The unique identifier of the partner (carrier, broker, etc.) associated with this issue
-          format: uuid
-          nullable: true
-          type: string
-        resolved_at:
-          description: The timestamp when this issue was resolved
-          nullable: true
-          readOnly: true
-          type: integer
-        status:
-          description: The current status of the issue (open, pending_resolution, or resolved)
-          enum:
-          - open
-          - pending_resolution
-          - resolved
-          type: string
-        version:
-          description: Current version of the record
-          format: uuid
-          type: string
-      required:
-      - created
-      - id
-      - modified
-      - status
-      - version
-      type: object
-      x-field_order: []
-    IssueDataNotes:
-      properties:
-        customer:
-          description: Customer-visible notes about the issue
-          nullable: true
-          type: string
-      type: object
-    ResolutionGuidanceContextContainer:
-      properties:
-        context:
-          description: Non-empty list of guidance context entries
-          items:
-            $ref: '#/components/schemas/ResolutionGuidanceContextEntry'
-          minItems: 1
-          type: array
-      required:
-      - context
-      type: object
-    ResolutionGuidanceContextEntry:
-      properties:
-        id:
-          description: Stable id for this context entry
-          format: uuid
-          type: string
-        references:
-          minLength: 1
-          type: object
-        type:
-          description: Originating record class for this guidance (member_snapshot today)
-          enum:
-          - member_snapshot
-          type: string
-      required:
-      - id
-      - references
-      - type
-      type: object
     Meta:
       properties:
         offset:
@@ -1109,27 +1176,6 @@ components:
       - offset
       - page_num
       - page_size
-      type: object
-    Action:
-      properties:
-        completed_at:
-          description: Timestamp when the action was completed
-          format: date-time
-          type: string
-        completed_by:
-          description: The identifier of the user who completed the action
-          type: string
-        explanation:
-          description: The explanation text for the action (duplicating the guidance text)
-          enum:
-          - updated_carrier
-          - updated_noyo
-          - updated_platform
-          type: string
-      required:
-      - completed_at
-      - completed_by
-      - explanation
       type: object
     PaginatedIssueUIResult:
       properties:
@@ -1165,8 +1211,9 @@ components:
           type: array
         error_key:
           description: The error key that identifies the specific error type for this issue
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         notes:
           allOf:
           - $ref: '#/components/schemas/IssueDataNotes'
@@ -1174,8 +1221,9 @@ components:
         plan_id_for_key:
           description: When set, the Noyo plan UUID that was included in the deterministic issue_key (same semantics as IssueCandidate.plan_id_for_key)
           format: uuid
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         plan_ids:
           description: Noyo plan UUIDs tied to this issue
           items:
@@ -1190,11 +1238,11 @@ components:
           allOf:
           - $ref: '#/components/schemas/ResolutionGuidanceContextContainer'
           description: Structured pointers for UI field highlighting
-          nullable: true
         summary:
           description: AI-generated summary of the issue
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       type: object
     PaginatedPublicIssueResult:
       properties:
@@ -1214,3 +1262,5 @@ components:
       x-field_order:
       - meta
       - response
+x-readme:
+  explorer-enabled: false

@@ -1,9 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: APIs to manage and consume information about Carriers
-  title: Noyo Carrier Carrier Mapped Field Eligibility Rules API
+  description: Policy management APIs for health and ancillary insurance
+  title: Noyo Fulfillment Eligibility Rules API
   version: 1.0.0
-servers: []
+servers:
+- description: Noyo Fulfillment API - Live
+  url: https://fulfillment.noyo.com
+- description: Noyo Fulfillment API - Sandbox
+  url: https://fulfillment-sandbox.noyo.com
 tags:
 - name: Eligibility Rules
 paths:
@@ -35,6 +39,21 @@ paths:
       - Eligibility Rules
 components:
   schemas:
+    EligibilityRuleConfiguration:
+      properties:
+        data_exchange_configuration_name:
+          description: Data exchange configuration name
+          type: string
+        rules:
+          description: List of eligibility rule descriptions
+          items:
+            $ref: '#/components/schemas/EligibilityRuleDescription'
+          type: array
+      required:
+      - data_exchange_configuration_name
+      - rules
+      type: object
+      x-field_order: []
     PaginatedEligibilityRulesResult:
       properties:
         meta:
@@ -53,19 +72,13 @@ components:
       x-field_order:
       - meta
       - response
-    EligibilityRuleConfiguration:
+    EligibilityRuleDescription:
       properties:
-        data_exchange_configuration_name:
-          description: Data exchange configuration name
+        description:
+          description: Eligibility rule description
           type: string
-        rules:
-          description: List of eligibility rule descriptions
-          items:
-            $ref: '#/components/schemas/EligibilityRuleDescription'
-          type: array
       required:
-      - data_exchange_configuration_name
-      - rules
+      - description
       type: object
       x-field_order: []
     Meta:
@@ -99,12 +112,5 @@ components:
       - page_num
       - page_size
       type: object
-    EligibilityRuleDescription:
-      properties:
-        description:
-          description: Eligibility rule description
-          type: string
-      required:
-      - description
-      type: object
-      x-field_order: []
+x-readme:
+  explorer-enabled: false

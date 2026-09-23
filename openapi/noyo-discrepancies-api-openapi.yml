@@ -1,9 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: APIs to manage and consume information about Carriers
-  title: Noyo Carrier Carrier Mapped Field Discrepancies API
+  description: Policy management APIs for health and ancillary insurance
+  title: Noyo Fulfillment Discrepancies API
   version: 1.0.0
-servers: []
+servers:
+- description: Noyo Fulfillment API - Live
+  url: https://fulfillment.noyo.com
+- description: Noyo Fulfillment API - Sandbox
+  url: https://fulfillment-sandbox.noyo.com
 tags:
 - name: Discrepancies
 paths:
@@ -753,117 +757,24 @@ components:
       - resolution_type
       - distributor_action
       - request_context
-    DiscrepancyResolutionResult:
+    PaginatedDiscrepancyResolutionResult:
       properties:
-        automated_change_id:
-          description: Unique identifier of the associated automated change model
-          format: uuid
-          readOnly: true
-          type: string
-        automated_change_type:
-          description: The type or model of the associated automated change, 'MemberRequest' or 'MemberSnapshot'
-          enum:
-          - member_request
-          - member_snapshot
-          - no_change
-          readOnly: true
-          type: string
-        created:
-          description: The date the record was created
-          type: integer
-        discrepancy_id:
-          description: Unique identifier of the associated discrepancy
-          format: uuid
-          readOnly: true
-          type: string
-        distributor_action:
-          description: The distributor action taken to sync up with Noyo's system, as a result of this change
-          example: already_updated
-          readOnly: true
-          type: string
-        id:
-          description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        modified:
-          description: The date the record was last updated
-          type: integer
-        outcome:
-          description: The outcome of the resolution, in order words, what change took place
-          example: carrier_change
-          readOnly: true
-          type: string
-        request_context:
-          description: Additional context provided by the distributor when requesting an outcome
-          example: Our records reflect that they should be enrolled at the carrier, can you update?
-          readOnly: true
-          type: string
-        resolution_type:
-          description: The technique used to resolve the discrepancy
-          example: member_request
-          readOnly: true
-          type: string
-        result:
-          description: Result of the discrepancy resolution
-          type: object
-        version:
-          description: Current version of the record
-          format: uuid
-          type: string
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of discrepancy resolutions
+          items:
+            $ref: '#/components/schemas/DiscrepancyResolutionResult'
+          type: array
       required:
-      - created
-      - discrepancy_id
-      - distributor_action
-      - id
-      - modified
-      - request_context
-      - resolution_type
-      - version
+      - meta
+      - response
       type: object
       x-field_order:
-      - id
-      - version
-      - discrepancy_id
-      - automated_change_id
-      - automated_change_type
-      - resolution_type
-      - outcome
-      - distributor_action
-      - request_context
-      - result
-      - created
-      - modified
-    Meta:
-      properties:
-        offset:
-          description: The offset of the first response record within the matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
-        page_num:
-          description: The page number of the response records within the overall data set (1-based integer)
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        page_size:
-          description: The maximum number of response records on each page of results
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        total_records:
-          description: The total number of records in the entire matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
-      required:
-      - offset
-      - page_num
-      - page_size
-      type: object
+      - meta
+      - response
     DiscrepancyPublicResult:
       properties:
         body:
@@ -947,6 +858,126 @@ components:
       - body
       - created
       - modified
+    PaginatedDiscrepancyPublicResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of discrepancy results
+          items:
+            $ref: '#/components/schemas/DiscrepancyPublicResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    DiscrepancyAckRequest:
+      properties: {}
+      type: object
+      x-field_order: []
+    DiscrepancyResolutionResult:
+      properties:
+        automated_change_id:
+          description: Unique identifier of the associated automated change model
+          format: uuid
+          readOnly: true
+          type: string
+        automated_change_type:
+          description: The type or model of the associated automated change, 'MemberRequest' or 'MemberSnapshot'
+          enum:
+          - member_request
+          - member_snapshot
+          - no_change
+          readOnly: true
+          type: string
+        created:
+          description: The date the record was created
+          type: integer
+        discrepancy_id:
+          description: Unique identifier of the associated discrepancy
+          format: uuid
+          readOnly: true
+          type: string
+        distributor_action:
+          description: The distributor action taken to sync up with Noyo's system, as a result of this change
+          example: already_updated
+          readOnly: true
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        outcome:
+          description: The outcome of the resolution, in order words, what change took place
+          example: carrier_change
+          readOnly: true
+          type: string
+        request_context:
+          description: Additional context provided by the distributor when requesting an outcome
+          example: Our records reflect that they should be enrolled at the carrier, can you update?
+          readOnly: true
+          type: string
+        resolution_type:
+          description: The technique used to resolve the discrepancy
+          example: member_request
+          readOnly: true
+          type: string
+        result:
+          description: Result of the discrepancy resolution
+          type: object
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - created
+      - discrepancy_id
+      - distributor_action
+      - id
+      - modified
+      - request_context
+      - resolution_type
+      - version
+      type: object
+      x-field_order:
+      - id
+      - version
+      - discrepancy_id
+      - automated_change_id
+      - automated_change_type
+      - resolution_type
+      - outcome
+      - distributor_action
+      - request_context
+      - result
+      - created
+      - modified
+    PaginatedDiscrepancyNoteResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of discrepancy notes
+          items:
+            $ref: '#/components/schemas/DiscrepancyNoteResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
     DiscrepancyNoteResult:
       properties:
         author_type:
@@ -994,61 +1025,36 @@ components:
       - content
       - created
       - modified
-    PaginatedDiscrepancyResolutionResult:
+    Meta:
       properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of discrepancy resolutions
-          items:
-            $ref: '#/components/schemas/DiscrepancyResolutionResult'
-          type: array
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
       required:
-      - meta
-      - response
+      - offset
+      - page_num
+      - page_size
       type: object
-      x-field_order:
-      - meta
-      - response
-    DiscrepancyAckRequest:
-      properties: {}
-      type: object
-      x-field_order: []
-    PaginatedDiscrepancyPublicResult:
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of discrepancy results
-          items:
-            $ref: '#/components/schemas/DiscrepancyPublicResult'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
-    PaginatedDiscrepancyNoteResult:
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of discrepancy notes
-          items:
-            $ref: '#/components/schemas/DiscrepancyNoteResult'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
+x-readme:
+  explorer-enabled: false

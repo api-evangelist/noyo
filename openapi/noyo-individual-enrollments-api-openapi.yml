@@ -1,9 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: APIs to manage and consume information about Carriers
-  title: Noyo Carrier Carrier Mapped Field Individual Enrollments API
+  description: Policy management APIs for health and ancillary insurance
+  title: Noyo Fulfillment Individual Enrollments API
   version: 1.0.0
-servers: []
+servers:
+- description: Noyo Fulfillment API - Live
+  url: https://fulfillment.noyo.com
+- description: Noyo Fulfillment API - Sandbox
+  url: https://fulfillment-sandbox.noyo.com
 tags:
 - name: Individual Enrollments
 paths:
@@ -336,6 +340,46 @@ paths:
       - Individual Enrollments
 components:
   schemas:
+    PaginatedIndividualEnrollmentResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of individual enrollment results
+          items:
+            $ref: '#/components/schemas/PublicIndividualEnrollmentResultWithConfig'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    PCPDetails:
+      properties:
+        providers:
+          description: List of primary care providers
+          items:
+            $ref: '#/components/schemas/PrimaryCareProvider'
+          type: array
+      required:
+      - providers
+      type: object
+    IndividualEnrollmentCOBRAEnrollment:
+      properties:
+        cobra_enrolled:
+          description: True if member is enrolled in COBRA coverage
+          type: boolean
+        cobra_type:
+          description: Type of COBRA enrollment for the member
+          enum:
+          - federal
+          - state
+          type: string
+      type: object
     PrimaryCareProvider:
       properties:
         entity_identifier_code:
@@ -382,16 +426,6 @@ components:
       required:
       - identification_code
       - identification_code_type
-      type: object
-    PCPDetails:
-      properties:
-        providers:
-          description: List of primary care providers
-          items:
-            $ref: '#/components/schemas/PrimaryCareProvider'
-          type: array
-      required:
-      - providers
       type: object
     PublicIndividualEnrollmentResultWithConfig:
       properties:
@@ -557,24 +591,6 @@ components:
       - page_num
       - page_size
       type: object
-    PaginatedIndividualEnrollmentResult:
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of individual enrollment results
-          items:
-            $ref: '#/components/schemas/PublicIndividualEnrollmentResultWithConfig'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
     COBRADetails:
       properties:
         eligibility_end_date:
@@ -606,15 +622,5 @@ components:
       required:
       - eligibility_start_date
       type: object
-    IndividualEnrollmentCOBRAEnrollment:
-      properties:
-        cobra_enrolled:
-          description: True if member is enrolled in COBRA coverage
-          type: boolean
-        cobra_type:
-          description: Type of COBRA enrollment for the member
-          enum:
-          - federal
-          - state
-          type: string
-      type: object
+x-readme:
+  explorer-enabled: false

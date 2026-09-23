@@ -1,9 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: APIs to manage and consume information about Carriers
-  title: Noyo Carrier Carrier Mapped Field Export API
+  description: Policy management APIs for health and ancillary insurance
+  title: Noyo Fulfillment Export API
   version: 1.0.0
-servers: []
+servers:
+- description: Noyo Fulfillment API - Live
+  url: https://fulfillment.noyo.com
+- description: Noyo Fulfillment API - Sandbox
+  url: https://fulfillment-sandbox.noyo.com
 tags:
 - name: Export
 paths:
@@ -101,22 +105,6 @@ paths:
       - Export
 components:
   schemas:
-    ExportRequest:
-      properties:
-        export_ids:
-          description: List of uuids when exported selected items
-          items:
-            description: UUID of model exporting
-            format: uuid
-            type: string
-          type: array
-        export_type:
-          description: Type of export to be created
-          type: string
-      required:
-      - export_type
-      type: object
-      x-field_order: []
     ExportResult:
       properties:
         completed:
@@ -156,3 +144,21 @@ components:
       - version
       type: object
       x-field_order: []
+    ExportRequest:
+      properties:
+        export_ids:
+          description: List of uuids when exported selected items
+          items:
+            description: UUID of model exporting
+            format: uuid
+            type: string
+          type: array
+        export_type:
+          description: Type of export to be created
+          type: string
+      required:
+      - export_type
+      type: object
+      x-field_order: []
+x-readme:
+  explorer-enabled: false

@@ -1,9 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: APIs to manage and consume information about Carriers
-  title: Noyo Carrier Carrier Mapped Field Cases API
+  description: Policy management APIs for health and ancillary insurance
+  title: Noyo Fulfillment Cases API
   version: 1.0.0
-servers: []
+servers:
+- description: Noyo Fulfillment API - Live
+  url: https://fulfillment.noyo.com
+- description: Noyo Fulfillment API - Sandbox
+  url: https://fulfillment-sandbox.noyo.com
 tags:
 - name: Cases
 paths:
@@ -63,12 +67,14 @@ components:
         resolved:
           description: A datetime of when the case was resolved
           format: date-time
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         title:
           description: Public facing message of the case
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         version:
           description: Current version of the record
           format: uuid
@@ -91,3 +97,5 @@ components:
       - resolved
       - action_owner
       - automated
+x-readme:
+  explorer-enabled: false

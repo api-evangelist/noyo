@@ -1,9 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: APIs to manage and consume information about Carriers
-  title: Noyo Carrier Carrier Mapped Field Platform Account Structure API
+  description: Policy management APIs for health and ancillary insurance
+  title: Noyo Fulfillment Platform Account Structure API
   version: 1.0.0
-servers: []
+servers:
+- description: Noyo Fulfillment API - Live
+  url: https://fulfillment.noyo.com
+- description: Noyo Fulfillment API - Sandbox
+  url: https://fulfillment-sandbox.noyo.com
 tags:
 - name: Platform Account Structure
 paths:
@@ -58,7 +62,6 @@ paths:
       tags:
       - Platform Account Structure
     post:
-      description: Create a new Platform Account Structure
       operationId: createNewPlatformAccountStructure
       parameters:
       - description: Unique identifier of the associated group in the Noyo system
@@ -311,6 +314,34 @@ components:
       - account_structure
       - start_date
       - end_date
+    PlatformAccountStructureAccountStructureField:
+      properties:
+        existing_value_set:
+          description: All distinct values that are represented in the group for this field
+          items:
+            type: string
+          type: array
+        field_name:
+          description: The name of the field
+          type: string
+        field_type:
+          description: The data type of this field
+          enum:
+          - string
+          - integer
+          - decimal
+          - date
+          - boolean
+          type: string
+      required:
+      - existing_value_set
+      - field_name
+      - field_type
+      type: object
+      x-field_order:
+      - field_name
+      - field_type
+      - existing_value_set
     PlatformAccountStructureResult:
       properties:
         account_structure:
@@ -352,29 +383,16 @@ components:
       - modified
       - group_id
       - account_structure
-    PlatformAccountStructureAccountStructureField:
+    PlatformAccountStructureAccountStructure:
       properties:
-        existing_value_set:
-          description: All distinct values that are represented in the group for this field
+        account_structure_fields:
           items:
-            type: string
+            $ref: '#/components/schemas/PlatformAccountStructureAccountStructureField'
           type: array
-        field_name:
-          description: The name of the field
-          type: string
-        field_type:
-          description: The data type of this field
-          enum:
-          - string
-          - integer
-          - decimal
-          - date
-          - boolean
-          type: string
-      required:
-      - existing_value_set
-      - field_name
-      - field_type
+        plans:
+          allOf:
+          - $ref: '#/components/schemas/PlatformAccountStructureAccountStructurePlan'
+          description: Plans available for plan mapping
       type: object
       x-field_order:
       - field_name
@@ -468,18 +486,5 @@ components:
       - group_hospital_indemnity_plans
       - group_pharmacy_plans
       - group_wellness_plans
-    PlatformAccountStructureAccountStructure:
-      properties:
-        account_structure_fields:
-          items:
-            $ref: '#/components/schemas/PlatformAccountStructureAccountStructureField'
-          type: array
-        plans:
-          allOf:
-          - $ref: '#/components/schemas/PlatformAccountStructureAccountStructurePlan'
-          description: Plans available for plan mapping
-      type: object
-      x-field_order:
-      - field_name
-      - field_type
-      - existing_value_set
+x-readme:
+  explorer-enabled: false

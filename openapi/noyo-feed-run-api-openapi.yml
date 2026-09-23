@@ -1,9 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: APIs to manage and consume information about Carriers
-  title: Noyo Carrier Carrier Mapped Field Feed Run API
+  description: Policy management APIs for health and ancillary insurance
+  title: Noyo Fulfillment Feed Run API
   version: 1.0.0
-servers: []
+servers:
+- description: Noyo Fulfillment API - Live
+  url: https://fulfillment.noyo.com
+- description: Noyo Fulfillment API - Sandbox
+  url: https://fulfillment-sandbox.noyo.com
 tags:
 - name: Feed Run
 paths:
@@ -137,7 +141,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PublicFeedRunResult'
           description: Successful Response - Returns a single feed run
-      summary: 'Get a feed run '
+      summary: Get a feed run
       tags:
       - Feed Run
 components:
@@ -166,22 +170,67 @@ components:
       - primaries
       - terminations
       type: object
-    Details1:
+    Transmission:
       properties:
-        file:
-          $ref: '#/components/schemas/File1'
-        transmission:
-          $ref: '#/components/schemas/Transmission'
+        id:
+          format: uuid
+          type: string
+        sent_timestamp:
+          type: integer
+      required:
+      - sent_timestamp
       type: object
-    File1:
+    PublicFeedRunResult:
       properties:
-        audit:
-          $ref: '#/components/schemas/Audit2'
-        name:
+        carrier_id:
+          format: uuid
+          type: string
+        completed:
+          type:
+          - integer
+          - 'null'
+        created:
+          description: The date the record was created
+          type: integer
+        details:
+          $ref: '#/components/schemas/Details1'
+        feed_id:
+          format: uuid
+          type: string
+        group_ids:
+          items:
+            format: uuid
+            type: string
+          type:
+          - array
+          - 'null'
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        initiated:
+          type: integer
+        modified:
+          description: The date the record was last updated
+          type: integer
+        status:
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
           type: string
       required:
-      - name
+      - carrier_id
+      - created
+      - details
+      - feed_id
+      - id
+      - initiated
+      - modified
+      - status
+      - version
       type: object
+      x-field_order: []
     Meta:
       properties:
         offset:
@@ -229,67 +278,26 @@ components:
       x-field_order:
       - meta
       - response
-    Transmission:
+    File1:
       properties:
-        id:
-          format: uuid
-          type: string
-        sent_timestamp:
-          type: integer
-      required:
-      - sent_timestamp
-      type: object
-    PublicFeedRunResult:
-      properties:
-        carrier_id:
-          format: uuid
-          type: string
-        completed:
-          nullable: true
-          type: integer
-        created:
-          description: The date the record was created
-          type: integer
-        details:
-          $ref: '#/components/schemas/Details1'
-        feed_id:
-          format: uuid
-          type: string
-        group_ids:
-          items:
-            format: uuid
-            type: string
-          nullable: true
-          type: array
-        id:
-          description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        initiated:
-          type: integer
-        modified:
-          description: The date the record was last updated
-          type: integer
-        status:
-          type: string
-        version:
-          description: Current version of the record
-          format: uuid
+        audit:
+          $ref: '#/components/schemas/Audit2'
+        name:
           type: string
       required:
-      - carrier_id
-      - created
-      - details
-      - feed_id
-      - id
-      - initiated
-      - modified
-      - status
-      - version
+      - name
       type: object
-      x-field_order: []
+    Details1:
+      properties:
+        file:
+          $ref: '#/components/schemas/File1'
+        transmission:
+          $ref: '#/components/schemas/Transmission'
+      type: object
     Audit2:
       properties:
         count:
           $ref: '#/components/schemas/Count'
       type: object
+x-readme:
+  explorer-enabled: false

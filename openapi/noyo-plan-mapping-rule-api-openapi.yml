@@ -1,9 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: APIs to manage and consume information about Carriers
-  title: Noyo Carrier Carrier Mapped Field Plan Mapping Rule API
+  description: Policy management APIs for health and ancillary insurance
+  title: Noyo Fulfillment Plan Mapping Rule API
   version: 1.0.0
-servers: []
+servers:
+- description: Noyo Fulfillment API - Live
+  url: https://fulfillment.noyo.com
+- description: Noyo Fulfillment API - Sandbox
+  url: https://fulfillment-sandbox.noyo.com
 tags:
 - name: Plan Mapping Rule
 paths:
@@ -63,7 +67,6 @@ paths:
       tags:
       - Plan Mapping Rule
     post:
-      description: Create a new Plan Mapping Rule
       operationId: createNewPlanMappingRule
       parameters:
       - description: The unique identifier of the group mapping you would like to create plan mapping rule for
@@ -225,16 +228,6 @@ paths:
       - Plan Mapping Rule
 components:
   schemas:
-    PlanMappingRuleCreateRequest:
-      properties:
-        details:
-          allOf:
-          - $ref: '#/components/schemas/PlanMappingRuleDetails'
-          description: Details of the plan mapping rule
-      required:
-      - details
-      type: object
-      x-field_order: []
     PlanMappingRuleDetails:
       properties:
         group_accident_plans:
@@ -379,7 +372,7 @@ components:
       - group_health_fund_plans
       - group_pharmacy_plans
       - group_wellness_plans
-    PlanMappingRuleEditRequest:
+    PlanMappingRuleCreateRequest:
       properties:
         details:
           allOf:
@@ -389,55 +382,6 @@ components:
       - details
       type: object
       x-field_order: []
-    Meta:
-      properties:
-        offset:
-          description: The offset of the first response record within the matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
-        page_num:
-          description: The page number of the response records within the overall data set (1-based integer)
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        page_size:
-          description: The maximum number of response records on each page of results
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        total_records:
-          description: The total number of records in the entire matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
-      required:
-      - offset
-      - page_num
-      - page_size
-      type: object
-    PaginatedPlanMappingRuleResult:
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of plan mapping rules
-          items:
-            $ref: '#/components/schemas/PlanMappingRuleResult'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
     PlanMappingRuleResult:
       properties:
         created:
@@ -479,3 +423,64 @@ components:
       - modified
       - group_mapping_id
       - details
+    PlanMappingRuleEditRequest:
+      properties:
+        details:
+          allOf:
+          - $ref: '#/components/schemas/PlanMappingRuleDetails'
+          description: Details of the plan mapping rule
+      required:
+      - details
+      type: object
+      x-field_order: []
+    PaginatedPlanMappingRuleResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of plan mapping rules
+          items:
+            $ref: '#/components/schemas/PlanMappingRuleResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+x-readme:
+  explorer-enabled: false

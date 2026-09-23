@@ -1,9 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: APIs to manage and consume information about Carriers
-  title: Noyo Carrier Carrier Mapped Field Group Configuration API
+  description: Policy management APIs for health and ancillary insurance
+  title: Noyo Fulfillment Group Configuration API
   version: 1.0.0
-servers: []
+servers:
+- description: Noyo Fulfillment API - Live
+  url: https://fulfillment.noyo.com
+- description: Noyo Fulfillment API - Sandbox
+  url: https://fulfillment-sandbox.noyo.com
 tags:
 - name: Group Configuration
 paths:
@@ -526,9 +530,7 @@ paths:
       description: 'Returns a list of all groups in the current user organization.
 
 
-        If you would like to search the groups list, you can use the company query param. It allows searches based on the group''s name or dba_name values.
-
-        '
+        If you would like to search the groups list, you can use the company query param. It allows searches based on the group''s name or dba_name values.'
       operationId: getGroupList
       parameters:
       - description: The max size of each page of results
@@ -1700,100 +1702,76 @@ paths:
       - Group Configuration
 components:
   schemas:
-    CreatePersonRequest:
+    PersonAmericanIndian:
       properties:
-        contact:
-          allOf:
-          - $ref: '#/components/schemas/PersonContact'
-          description: Contact information for the person
-        date_of_birth:
-          description: ISO-8601 date string for the date of birth of the person
-          example: '1977-06-03'
-          format: date
-          type: string
-        details:
-          allOf:
-          - $ref: '#/components/schemas/PersonDetails'
-          description: Additional personal details of the person
-        first_name:
-          description: First name of the person
-          example: Catherine
-          type: string
-        home_address:
-          allOf:
-          - $ref: '#/components/schemas/Address'
-          description: Home address of the person
-        last_name:
-          description: Last name of the person
-          example: Briggs
-          type: string
-        maiden_name:
-          description: Maiden name of the person (deprecated)
-          type: string
-        mailing_address:
-          allOf:
-          - $ref: '#/components/schemas/Address'
-          description: Mailing address of the person, if different from home address
-        marital_status:
-          description: Marital status of the person
+        state:
+          description: Primary state of the federally-recognized American Indian or Alaska Native tribe, if applicable
           enum:
-          - single
-          - married
-          - domestic-partner
-          - divorced
-          - widowed
-          - legally-separated
-          example: married
+          - AL
+          - AK
+          - AZ
+          - AR
+          - CA
+          - CO
+          - CT
+          - DE
+          - DC
+          - FL
+          - GA
+          - HI
+          - ID
+          - IL
+          - IN
+          - IA
+          - KS
+          - KY
+          - LA
+          - ME
+          - MD
+          - MA
+          - MI
+          - MN
+          - MS
+          - MO
+          - MT
+          - NE
+          - NV
+          - NH
+          - NJ
+          - NM
+          - NY
+          - NC
+          - ND
+          - OH
+          - OK
+          - OR
+          - PA
+          - RI
+          - SC
+          - SD
+          - TN
+          - TX
+          - UT
+          - VT
+          - VA
+          - WA
+          - WV
+          - WI
+          - WY
+          - AS
+          - GU
+          - MH
+          - FM
+          - MP
+          - PW
+          - PR
+          - VI
+          - UM
           type: string
-        middle_name:
-          description: Middle name of the person
-          example: S
+        tribe:
+          description: Name of the federally-recognized American Indian or Alaska Native tribe, if applicable
+          example: Ojibwe
           type: string
-        sex:
-          description: Sex of the person
-          enum:
-          - F
-          - M
-          - U
-          - X
-          example: F
-          type: string
-        ssn:
-          description: Social Security Number of the person
-          example: '123456789'
-          nullable: true
-          pattern: ^(?!000)[0-9]{3}(?!00)[0-9]{2}(?!0000)[0-9]{4}$
-          type: string
-        suffix:
-          description: Suffix of the person
-          type: string
-      required:
-      - date_of_birth
-      - first_name
-      - home_address
-      - last_name
-      - sex
-      type: object
-      x-field_order:
-      - first_name
-      - middle_name
-      - last_name
-      - suffix
-      - home_address
-      - mailing_address
-      - date_of_birth
-      - ssn
-      - sex
-      - marital_status
-      - maiden_name
-      - contact
-      - details
-    EnrollmentsFromCarrier:
-      properties:
-        enabled:
-          default: false
-          description: Flag indicating if receiving data from the carrier is enabled
-          type: boolean
       type: object
     IndividualEnrollmentResult:
       properties:
@@ -1922,6 +1900,1135 @@ components:
       - modified
       - cobra_details
       - pcp_details
+    PersonWithoutSSN:
+      properties:
+        contact:
+          allOf:
+          - $ref: '#/components/schemas/PersonContact'
+          description: Contact information for the person
+        date_of_birth:
+          description: ISO-8601 date string for the date of birth of the person
+          example: '1977-06-03'
+          format: date
+          type: string
+        details:
+          allOf:
+          - $ref: '#/components/schemas/PersonDetails'
+          description: Additional personal details of the person
+        first_name:
+          description: First name of the person
+          example: Catherine
+          type: string
+        home_address:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: Home address of the person
+        last_name:
+          description: Last name of the person
+          example: Briggs
+          type: string
+        maiden_name:
+          description: Maiden name of the person (deprecated)
+          type: string
+        mailing_address:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: Mailing address of the person, if different from home address
+        marital_status:
+          description: Marital status of the person
+          enum:
+          - single
+          - married
+          - domestic-partner
+          - divorced
+          - widowed
+          - legally-separated
+          example: married
+          type: string
+        middle_name:
+          description: Middle name of the person
+          example: S
+          type: string
+        sex:
+          description: Sex of the person
+          enum:
+          - F
+          - M
+          - U
+          - X
+          example: F
+          type: string
+        suffix:
+          description: Suffix of the person
+          type: string
+      required:
+      - date_of_birth
+      - first_name
+      - home_address
+      - last_name
+      - sex
+      type: object
+    Employment:
+      properties:
+        employment_dates:
+          allOf:
+          - $ref: '#/components/schemas/EmploymentDates'
+          description: Employee employment dates
+        employment_status:
+          description: Employee employment status
+          enum:
+          - full-time
+          - part-time
+          - contract
+          - disabled
+          - terminated
+          - retired
+          type: string
+        hours_worked:
+          description: An integer of hours worked per week by the employee
+          example: 40
+          format: int32
+          type: integer
+        occupation:
+          description: Employee occupation or job title
+          example: Engineer
+          type: string
+        salary:
+          allOf:
+          - $ref: '#/components/schemas/Salary'
+          description: Employee salary information
+      required:
+      - employment_dates
+      - employment_status
+      - hours_worked
+      type: object
+      x-field_order:
+      - employment_status
+      - occupation
+      - hours_worked
+      - salary
+      - employment_dates
+    EnrollmentsFromCarrier:
+      properties:
+        enabled:
+          default: false
+          description: Flag indicating if receiving data from the carrier is enabled
+          type: boolean
+      type: object
+    PaginatedEmployeeResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of employee results
+          items:
+            $ref: '#/components/schemas/EmployeeResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    PaginatedContactResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of contact results
+          items:
+            $ref: '#/components/schemas/ContactResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    PublicGroupCarrierConfigurationEditRequest:
+      properties:
+        connection_configuration:
+          $ref: '#/components/schemas/PublicGroupCarrierConnectionConfigurationEdit'
+      type: object
+      x-field_order: []
+    PaginatedGroupResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of group results
+          items:
+            $ref: '#/components/schemas/GroupResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    PublicGroupCarrierConnectionConfigurationEdit:
+      properties:
+        connection_tier:
+          description: Connection tier for the group
+          enum:
+          - premier
+          - standard
+          - advanced
+          - not_connected
+          type:
+          - string
+          - 'null'
+        data_exchange:
+          allOf:
+          - $ref: '#/components/schemas/DataExchange'
+          description: Data exchange configuration
+      type: object
+    ContactCreateRequest:
+      properties:
+        carrier_id:
+          description: Unique identifier of a Carrier in Noyo's system when contact type contains carrier
+          format: uuid
+          type: string
+        email:
+          description: Work email address of the group contact
+          example: catherine.briggs@example.com
+          type: string
+        first_name:
+          description: First name of the group contact
+          example: Catherine
+          type: string
+        last_name:
+          description: Last name of the group contact
+          example: Briggs
+          type: string
+        phone_number:
+          description: Work phone number of the group contact in E.164 format
+          example: '+15555551212'
+          type: string
+        primary_contact:
+          description: True if contact is the primary contact for the group
+          type: boolean
+        title:
+          description: Job title of the group contact
+          example: Engineer
+          type: string
+        types:
+          description: List of contact types for the group contact
+          items:
+            enum:
+            - company
+            - billing
+            - executive
+            - online
+            - carrier
+            type: string
+          minItems: 1
+          type: array
+      required:
+      - email
+      - first_name
+      - last_name
+      - types
+      type: object
+      x-field_order: []
+    ContactResult:
+      properties:
+        carrier_id:
+          description: Unique identifier of a Carrier in Noyo's system
+          format: uuid
+          readOnly: true
+          type: string
+        created:
+          description: The date the record was originated
+          readOnly: true
+          type: integer
+        email:
+          description: Work email address of the group contact
+          example: catherine.briggs@example.com
+          readOnly: true
+          type: string
+        first_name:
+          description: First name of the group contact
+          example: Catherine
+          readOnly: true
+          type: string
+        group_id:
+          description: Unique identifier of the group in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        id:
+          description: Unique identifier of the group contact in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        last_name:
+          description: Last name of the group contact
+          example: Briggs
+          readOnly: true
+          type: string
+        modified:
+          description: The date the record was last updated
+          readOnly: true
+          type: integer
+        phone_number:
+          description: Work phone number of the group contact in E.164 format
+          example: '+15555551212'
+          readOnly: true
+          type: string
+        primary_contact:
+          description: True if contact is the primary contact for the group
+          readOnly: true
+          type: boolean
+        title:
+          description: Job title of the group contact
+          example: Engineer
+          readOnly: true
+          type: string
+        types:
+          description: List of contact types for the group contact
+          items:
+            enum:
+            - company
+            - billing
+            - executive
+            - online
+            - carrier
+            type: string
+          minItems: 1
+          type: array
+        version:
+          description: Version of the group contact record
+          format: uuid
+          readOnly: true
+          type: string
+      required:
+      - created
+      - group_id
+      - id
+      - modified
+      - types
+      - version
+      type: object
+      x-field_order:
+      - id
+      - version
+      - created
+      - modified
+      - group_id
+      - first_name
+      - last_name
+      - title
+      - email
+      - phone_number
+      - types
+      - primary_contact
+      - carrier_id
+    PersonTobacco:
+      properties:
+        duration:
+          description: Duration of tobacco use
+          example: 5 years
+          type: string
+        frequency:
+          description: Frequency of tobacco use
+          example: Daily
+          type: string
+        types:
+          description: List of types of tobacco use
+          example: cigarettes
+          items:
+            enum:
+            - pipe
+            - cigarettes
+            - chewing-tobacco
+            type: string
+          minItems: 1
+          type: array
+        user:
+          description: True if the person uses tobacco of any kind
+          example: true
+          type: boolean
+      type: object
+      x-field_order:
+      - user
+      - types
+      - duration
+      - frequency
+    PCPDetails:
+      properties:
+        providers:
+          description: List of primary care providers
+          items:
+            $ref: '#/components/schemas/PrimaryCareProvider'
+          type: array
+      required:
+      - providers
+      type: object
+    PaginatedUIEmployeeResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of employee results
+          items:
+            $ref: '#/components/schemas/UIEmployeeParentResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    Enrollments:
+      properties:
+        from_carrier:
+          allOf:
+          - $ref: '#/components/schemas/EnrollmentsFromCarrier'
+          description: Configuration for receiving data from the carrier
+        to_carrier:
+          allOf:
+          - $ref: '#/components/schemas/EnrollmentsToCarrier'
+          description: Configuration for sending data to the carrier
+      type: object
+    EmploymentDates:
+      properties:
+        full_time_start:
+          description: ISO-8601 date string for start date as a full time employee with the group (if applicable)
+          example: '2017-01-17'
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
+          type: string
+        hire_date:
+          description: ISO-8601 date string for the hire date of the employee
+          example: '2017-01-17'
+          format: date
+          type: string
+        rehire:
+          description: ISO-8601 date string for the rehire date of the employee (if applicable)
+          example: '2018-02-01'
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
+          type: string
+        retirement:
+          description: ISO-8601 date string for the retirement date of the employee (if applicable)
+          example: '2019-01-01'
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
+          type: string
+        terminated:
+          description: ISO-8601 date string for the termination date of the employee (if applicable)
+          example: '2018-01-01'
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
+          type: string
+      required:
+      - hire_date
+      type: object
+      x-field_order: []
+    GroupCreateRequest:
+      properties:
+        dba_name:
+          description: DBA name for the company, if applicable
+          example: Floors R Us
+          type: string
+        federal_ein:
+          description: Federal Employer Identification Number for the company
+          example: '112222222'
+          type: string
+        name:
+          description: Name of the group
+          example: ACME Flooring
+          type: string
+        organization_id:
+          description: Unique identifier of the platform or broker organization in Noyo
+          format: uuid
+          type: string
+        sic_code:
+          description: SIC Code of the group
+          example: '5713'
+          type: string
+      required:
+      - name
+      type: object
+      x-field_order: []
+    Salary:
+      properties:
+        amount:
+          description: Amount of salary earned by the employee in US dollars and cents, as a decimal value
+          example: 52000
+          minimum: 0
+          type: number
+        type:
+          description: Type of salary earned by the employee
+          enum:
+          - hourly
+          - salary
+          example: salary
+          type: string
+        unit:
+          description: Unit of salary earned by the employee
+          enum:
+          - annual
+          - month
+          - semi-monthly
+          - week
+          - hour
+          example: annual
+          type: string
+      type: object
+      x-field_order:
+      - amount
+      - unit
+      - type
+    PublicGroupCarrierConfigurationResult:
+      properties:
+        carrier_group_id:
+          description: Unique identifier for the group in the carrier system
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        carrier_id:
+          description: Unique identifier of the carrier in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        configuration:
+          description: Carrier configuration details for the group
+          readOnly: true
+          type: object
+        connection_configuration:
+          allOf:
+          - $ref: '#/components/schemas/PublicGroupCarrierConnectionConfigurationResult'
+          readOnly: true
+        group_id:
+          description: Unique identifier of the group in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        id:
+          description: Unique identifier of the group carrier configuration in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        version:
+          description: Version of the group carrier configuration record
+          format: uuid
+          readOnly: true
+          type: string
+      required:
+      - carrier_id
+      - configuration
+      - group_id
+      - id
+      - version
+      type: object
+      x-field_order:
+      - id
+      - version
+      - group_id
+      - carrier_id
+      - carrier_group_id
+      - configuration
+      - connection_configuration
+    GroupStructure:
+      properties:
+        default_method:
+          default: null
+          description: Default method for receiving group structure
+          enum:
+          - api
+          - account_structure_file
+          type:
+          - string
+          - 'null'
+        enabled:
+          default: false
+          description: Flag indicating if receiving group structure is enabled
+          type: boolean
+      type: object
+      x-field_order: []
+    DependentResultWithoutSSN:
+      properties:
+        created:
+          description: The date the record was originated
+          readOnly: true
+          type: integer
+        custom_individual_id:
+          description: The custom identifier for this dependent in your system
+          readOnly: true
+          type: string
+        employee_id:
+          description: Unique identifier of the employee in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        id:
+          description: Unique identifier of the dependent in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        modified:
+          description: The date the record was last updated
+          readOnly: true
+          type: integer
+        person:
+          allOf:
+          - $ref: '#/components/schemas/PersonWithoutSSN'
+          description: Personal information for the dependent
+        relationship:
+          description: Relationship of the dependent to the employee
+          enum:
+          - spouse
+          - child
+          - domestic-partner
+          - grandchild
+          - civil-union
+          - step-child
+          - foster-child
+          - adopted-child
+          - legal-guardianship
+          - ex-spouse
+          - other
+          type: string
+        version:
+          description: Version of the dependent record
+          format: uuid
+          readOnly: true
+          type: string
+      required:
+      - created
+      - employee_id
+      - id
+      - modified
+      - person
+      - relationship
+      - version
+      type: object
+    CreatePersonRequest:
+      properties:
+        contact:
+          allOf:
+          - $ref: '#/components/schemas/PersonContact'
+          description: Contact information for the person
+        date_of_birth:
+          description: ISO-8601 date string for the date of birth of the person
+          example: '1977-06-03'
+          format: date
+          type: string
+        details:
+          allOf:
+          - $ref: '#/components/schemas/PersonDetails'
+          description: Additional personal details of the person
+        first_name:
+          description: First name of the person
+          example: Catherine
+          type: string
+        home_address:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: Home address of the person
+        last_name:
+          description: Last name of the person
+          example: Briggs
+          type: string
+        maiden_name:
+          description: Maiden name of the person (deprecated)
+          type: string
+        mailing_address:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: Mailing address of the person, if different from home address
+        marital_status:
+          description: Marital status of the person
+          enum:
+          - single
+          - married
+          - domestic-partner
+          - divorced
+          - widowed
+          - legally-separated
+          example: married
+          type: string
+        middle_name:
+          description: Middle name of the person
+          example: S
+          type: string
+        sex:
+          description: Sex of the person
+          enum:
+          - F
+          - M
+          - U
+          - X
+          example: F
+          type: string
+        ssn:
+          description: Social Security Number of the person
+          example: '123456789'
+          pattern: ^(?!000)[0-9]{3}(?!00)[0-9]{2}(?!0000)[0-9]{4}$
+          type:
+          - string
+          - 'null'
+        suffix:
+          description: Suffix of the person
+          type: string
+      required:
+      - date_of_birth
+      - first_name
+      - home_address
+      - last_name
+      - sex
+      type: object
+      x-field_order:
+      - first_name
+      - middle_name
+      - last_name
+      - suffix
+      - home_address
+      - mailing_address
+      - date_of_birth
+      - ssn
+      - sex
+      - marital_status
+      - maiden_name
+      - contact
+      - details
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+    COBRADetails:
+      properties:
+        eligibility_end_date:
+          description: The date which represents when the individual is no longer eligible for COBRA
+          format: date
+          type: string
+        eligibility_start_date:
+          description: The date which represents when the individual is first eligible for COBRA
+          format: date
+          type: string
+        qualifying_event_date:
+          description: The date of the event which qualified the individual for COBRA
+          format: date
+          type: string
+        qualifying_event_reason:
+          description: The reason of the event which qualified the individual for COBRA
+          enum:
+          - termination_of_employment
+          - reduction_of_work_hours
+          - medicare
+          - death
+          - divorce
+          - separation
+          - ineligible_child
+          - bankruptcy_of_retirees_former_employer
+          - layoff
+          - leave_of_absence
+          type: string
+      required:
+      - eligibility_start_date
+      type: object
+    EmployeeResult:
+      properties:
+        classifications:
+          description: Fields that classify employees for group structure mapping
+          readOnly: true
+          type: object
+        created:
+          description: The date the record was originated
+          readOnly: true
+          type: integer
+        custom_individual_id:
+          description: The custom identifier for this employee in your system
+          readOnly: true
+          type: string
+        employment:
+          allOf:
+          - $ref: '#/components/schemas/EmploymentResult'
+          description: Employment information for the employee
+        group_id:
+          description: Unique identifier of the group in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        id:
+          description: Unique identifier of the employee in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        location_id:
+          description: Unique identifier of the employee group location in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          readOnly: true
+          type: integer
+        person:
+          allOf:
+          - $ref: '#/components/schemas/Person'
+          description: Personal information for the employee
+        version:
+          description: Version of the employee record
+          format: uuid
+          readOnly: true
+          type: string
+      required:
+      - created
+      - employment
+      - group_id
+      - id
+      - modified
+      - person
+      - version
+      type: object
+      x-field_order:
+      - id
+      - custom_individual_id
+      - version
+      - created
+      - modified
+      - group_id
+      - location_id
+      - person
+      - employment
+      - classifications
+    EmploymentResult:
+      properties:
+        employment_dates:
+          allOf:
+          - $ref: '#/components/schemas/EmploymentDatesResult'
+          description: Employee employment dates
+        employment_status:
+          description: Employee employment status
+          enum:
+          - full-time
+          - part-time
+          - contract
+          - disabled
+          - terminated
+          - retired
+          type: string
+        hours_worked:
+          description: An integer of hours worked per week by the employee
+          example: 40
+          format: int32
+          type: integer
+        occupation:
+          description: Employee occupation or job title
+          example: Engineer
+          type: string
+        salary:
+          allOf:
+          - $ref: '#/components/schemas/Salary'
+          description: Employee salary information
+      required:
+      - employment_dates
+      - employment_status
+      - hours_worked
+      type: object
+      x-field_order:
+      - employment_status
+      - occupation
+      - hours_worked
+      - salary
+      - employment_dates
+    EnrollmentErrors:
+      properties:
+        default_method:
+          default: null
+          description: Default method for receiving enrollment errors from the carrier
+          enum:
+          - snapshot_errors
+          - error_report
+          type:
+          - string
+          - 'null'
+        enabled:
+          default: false
+          description: Flag indicating if enrollment errors are enabled
+          type: boolean
+      type: object
+    PersonDetails:
+      properties:
+        american_indian:
+          allOf:
+          - $ref: '#/components/schemas/PersonAmericanIndian'
+          description: American Indian status details (if applicable)
+        disability:
+          allOf:
+          - $ref: '#/components/schemas/PersonDisability'
+          description: Disability details (if applicable)
+        is_military:
+          description: True if the person is in the military
+          type: boolean
+        is_student:
+          description: True if the person is a student
+          type: boolean
+        tobacco:
+          allOf:
+          - $ref: '#/components/schemas/PersonTobacco'
+          description: Tobacco usage details (if applicable)
+      type: object
+      x-field_order:
+      - tobacco
+      - disability
+      - american_indian
+      - is_student
+      - is_military
+    Person:
+      properties:
+        contact:
+          allOf:
+          - $ref: '#/components/schemas/PersonContact'
+          description: Contact information for the person
+        date_of_birth:
+          description: ISO-8601 date string for the date of birth of the person
+          example: '1977-06-03'
+          format: date
+          type: string
+        details:
+          allOf:
+          - $ref: '#/components/schemas/PersonDetails'
+          description: Additional personal details of the person
+        first_name:
+          description: First name of the person
+          example: Catherine
+          type: string
+        home_address:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: Home address of the person
+        last_name:
+          description: Last name of the person
+          example: Briggs
+          type: string
+        maiden_name:
+          description: Maiden name of the person (deprecated)
+          type: string
+        mailing_address:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: Mailing address of the person, if different from home address
+        marital_status:
+          description: Marital status of the person
+          enum:
+          - single
+          - married
+          - domestic-partner
+          - divorced
+          - widowed
+          - legally-separated
+          example: married
+          type: string
+        middle_name:
+          description: Middle name of the person
+          example: S
+          type: string
+        sex:
+          description: Sex of the person
+          enum:
+          - F
+          - M
+          - U
+          - X
+          example: F
+          type: string
+        ssn:
+          description: Social Security Number of the person
+          example: '123456789'
+          pattern: ^(?!000)[0-9]{3}(?!00)[0-9]{2}(?!0000)[0-9]{4}$
+          type:
+          - string
+          - 'null'
+        suffix:
+          description: Suffix of the person
+          type: string
+      required:
+      - date_of_birth
+      - first_name
+      - home_address
+      - last_name
+      - sex
+      type: object
+      x-field_order:
+      - first_name
+      - middle_name
+      - last_name
+      - suffix
+      - home_address
+      - mailing_address
+      - date_of_birth
+      - ssn
+      - sex
+      - marital_status
+      - maiden_name
+      - contact
+      - details
+    ContactEditRequest:
+      properties:
+        carrier_id:
+          description: Unique identifier of a Carrier in Noyo's system
+          format: uuid
+          type: string
+        email:
+          description: Work email address of the group contact
+          example: catherine.briggs@example.com
+          type: string
+        first_name:
+          description: First name of the group contact
+          example: Catherine
+          type: string
+        last_name:
+          description: Last name of the group contact
+          example: Briggs
+          type: string
+        phone_number:
+          description: Work phone number of the group contact in E.164 format
+          example: '+15555551212'
+          type: string
+        primary_contact:
+          description: True if contact is the primary contact for the group
+          type: boolean
+        title:
+          description: Job title of the group contact
+          example: Engineer
+          type: string
+        types:
+          description: List of contact types for the group contact
+          items:
+            enum:
+            - company
+            - billing
+            - executive
+            - online
+            - carrier
+            type: string
+          minItems: 1
+          type: array
+      type: object
+      x-field_order: []
+    PublicGroupCarrierConnectionConfigurationResult:
+      properties:
+        connection_tier:
+          description: Connection tier for the group
+          enum:
+          - premier
+          - advanced
+          - standard
+          - not_connected
+          type:
+          - string
+          - 'null'
+        data_exchange:
+          allOf:
+          - $ref: '#/components/schemas/DataExchange'
+          description: Data exchange configuration
+      type: object
+    GroupEditRequest:
+      properties:
+        dba_name:
+          description: DBA name for the company, if applicable
+          example: Floors R Us
+          type: string
+        federal_ein:
+          description: Federal Employer Identification Number for the company
+          example: '112222222'
+          type: string
+        name:
+          description: Name of the group
+          example: ACME Flooring
+          type: string
+        sic_code:
+          description: SIC Code of the group
+          example: '5713'
+          type: string
+      type: object
+      x-field_order: []
+    PrimaryCareProvider:
+      properties:
+        entity_identifier_code:
+          description: Code of the entity identifier
+          enum:
+          - pcp
+          - dental_pcp
+          - obgyn
+          type: string
+        entity_type:
+          description: Type of entity
+          enum:
+          - person
+          - non_person_entity
+          type: string
+        first_name:
+          description: First name of the primary care provider
+          type: string
+        identification_code:
+          description: Code of the identification
+          type: string
+        identification_code_type:
+          description: Type of the identification code
+          enum:
+          - service_provider_number
+          - national_provider_identifier
+          type: string
+        last_name:
+          description: Last name of the primary care provider
+          type: string
+        middle_name:
+          description: Middle name of the primary care provider
+          type: string
+        organization_name:
+          description: Organization name of the primary care provider.
+          type: string
+        patient_relationship_code:
+          description: Code which represents the relationship of the patient to the primary care provider
+          enum:
+          - established
+          - not_established
+          - unknown
+          type: string
+      required:
+      - identification_code
+      - identification_code_type
+      type: object
     Address:
       properties:
         city:
@@ -2023,385 +3130,20 @@ components:
       - state
       - zip_code
       - county
-    Meta:
+    DataExchange:
       properties:
-        offset:
-          description: The offset of the first response record within the matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
-        page_num:
-          description: The page number of the response records within the overall data set (1-based integer)
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        page_size:
-          description: The maximum number of response records on each page of results
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        total_records:
-          description: The total number of records in the entire matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
-      required:
-      - offset
-      - page_num
-      - page_size
-      type: object
-    PaginatedContactResult:
-      properties:
-        meta:
+        enrollment_errors:
           allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of contact results
-          items:
-            $ref: '#/components/schemas/ContactResult'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
-    PublicGroupCarrierConnectionConfigurationResult:
-      properties:
-        connection_tier:
-          description: Connection tier for the group
-          enum:
-          - premier
-          - advanced
-          - standard
-          - not_connected
-          nullable: true
-          type: string
-        data_exchange:
+          - $ref: '#/components/schemas/EnrollmentErrors'
+          description: Data exchange configuration for enrollment errors
+        enrollments:
           allOf:
-          - $ref: '#/components/schemas/DataExchange'
-          description: Data exchange configuration
-          nullable: true
-      type: object
-    COBRADetails:
-      properties:
-        eligibility_end_date:
-          description: The date which represents when the individual is no longer eligible for COBRA
-          format: date
-          type: string
-        eligibility_start_date:
-          description: The date which represents when the individual is first eligible for COBRA
-          format: date
-          type: string
-        qualifying_event_date:
-          description: The date of the event which qualified the individual for COBRA
-          format: date
-          type: string
-        qualifying_event_reason:
-          description: The reason of the event which qualified the individual for COBRA
-          enum:
-          - termination_of_employment
-          - reduction_of_work_hours
-          - medicare
-          - death
-          - divorce
-          - separation
-          - ineligible_child
-          - bankruptcy_of_retirees_former_employer
-          - layoff
-          - leave_of_absence
-          type: string
-      required:
-      - eligibility_start_date
-      type: object
-    PaginatedLocationResult:
-      properties:
-        meta:
+          - $ref: '#/components/schemas/Enrollments'
+          description: Data exchange configuration for enrollments
+        group_structure:
           allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of location results
-          items:
-            $ref: '#/components/schemas/LocationResult'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
-    PublicGroupCarrierConfigurationResult:
-      properties:
-        carrier_group_id:
-          description: Unique identifier for the group in the carrier system
-          nullable: true
-          readOnly: true
-          type: string
-        carrier_id:
-          description: Unique identifier of the carrier in Noyo
-          format: uuid
-          readOnly: true
-          type: string
-        configuration:
-          description: Carrier configuration details for the group
-          readOnly: true
-          type: object
-        connection_configuration:
-          allOf:
-          - $ref: '#/components/schemas/PublicGroupCarrierConnectionConfigurationResult'
-          nullable: true
-          readOnly: true
-        group_id:
-          description: Unique identifier of the group in Noyo
-          format: uuid
-          readOnly: true
-          type: string
-        id:
-          description: Unique identifier of the group carrier configuration in Noyo
-          format: uuid
-          readOnly: true
-          type: string
-        version:
-          description: Version of the group carrier configuration record
-          format: uuid
-          readOnly: true
-          type: string
-      required:
-      - carrier_id
-      - configuration
-      - group_id
-      - id
-      - version
-      type: object
-      x-field_order:
-      - id
-      - version
-      - group_id
-      - carrier_id
-      - carrier_group_id
-      - configuration
-      - connection_configuration
-    DependentCreateRequest:
-      properties:
-        person:
-          allOf:
-          - $ref: '#/components/schemas/CreatePersonRequest'
-          description: Personal information for the dependent
-        relationship:
-          description: Relationship of the dependent to the employee
-          enum:
-          - spouse
-          - child
-          - domestic-partner
-          - grandchild
-          - civil-union
-          - step-child
-          - foster-child
-          - adopted-child
-          - legal-guardianship
-          - ex-spouse
-          - other
-          type: string
-      required:
-      - person
-      - relationship
-      type: object
-      x-field_order:
-      - relationship
-      - person
-    UIEmployeeParentResult:
-      properties:
-        dependents:
-          items:
-            allOf:
-            - $ref: '#/components/schemas/DependentResultWithoutSSN'
-            description: List of all dependents associated with the employee
-          type: array
-        employee:
-          allOf:
-          - $ref: '#/components/schemas/EmployeeResultWithoutSSN'
-          description: Core employee details for this employee
-        group:
-          allOf:
-          - $ref: '#/components/schemas/GroupResult'
-          description: Group the employee is in
-        individual_enrollments:
-          items:
-            allOf:
-            - $ref: '#/components/schemas/IndividualEnrollmentResult'
-            description: List of individual enrollments for the employee and their dependents
-          type: array
-      required:
-      - employee
-      - group
-      type: object
-      x-field_order:
-      - employee
-      - dependents
-      - individual_enrollments
-      - group
-    PublicGroupCarrierConnectionConfigurationEdit:
-      properties:
-        connection_tier:
-          description: Connection tier for the group
-          enum:
-          - premier
-          - standard
-          - advanced
-          - not_connected
-          nullable: true
-          type: string
-        data_exchange:
-          allOf:
-          - $ref: '#/components/schemas/DataExchange'
-          description: Data exchange configuration
-          nullable: true
-      type: object
-    Enrollments:
-      properties:
-        from_carrier:
-          allOf:
-          - $ref: '#/components/schemas/EnrollmentsFromCarrier'
-          description: Configuration for receiving data from the carrier
-        to_carrier:
-          allOf:
-          - $ref: '#/components/schemas/EnrollmentsToCarrier'
-          description: Configuration for sending data to the carrier
-      type: object
-    GroupStructure:
-      properties:
-        default_method:
-          default: null
-          description: Default method for receiving group structure
-          enum:
-          - api
-          - account_structure_file
-          nullable: true
-          type: string
-        enabled:
-          default: false
-          description: Flag indicating if receiving group structure is enabled
-          type: boolean
-      type: object
-      x-field_order: []
-    EmploymentResult:
-      properties:
-        employment_dates:
-          allOf:
-          - $ref: '#/components/schemas/EmploymentDatesResult'
-          description: Employee employment dates
-        employment_status:
-          description: Employee employment status
-          enum:
-          - full-time
-          - part-time
-          - contract
-          - disabled
-          - terminated
-          - retired
-          type: string
-        hours_worked:
-          description: An integer of hours worked per week by the employee
-          example: 40
-          format: int32
-          type: integer
-        occupation:
-          description: Employee occupation or job title
-          example: Engineer
-          type: string
-        salary:
-          allOf:
-          - $ref: '#/components/schemas/Salary'
-          description: Employee salary information
-      required:
-      - employment_dates
-      - employment_status
-      - hours_worked
-      type: object
-      x-field_order:
-      - employment_status
-      - occupation
-      - hours_worked
-      - salary
-      - employment_dates
-    PersonAmericanIndian:
-      properties:
-        state:
-          description: Primary state of the federally-recognized American Indian or Alaska Native tribe, if applicable
-          enum:
-          - AL
-          - AK
-          - AZ
-          - AR
-          - CA
-          - CO
-          - CT
-          - DE
-          - DC
-          - FL
-          - GA
-          - HI
-          - ID
-          - IL
-          - IN
-          - IA
-          - KS
-          - KY
-          - LA
-          - ME
-          - MD
-          - MA
-          - MI
-          - MN
-          - MS
-          - MO
-          - MT
-          - NE
-          - NV
-          - NH
-          - NJ
-          - NM
-          - NY
-          - NC
-          - ND
-          - OH
-          - OK
-          - OR
-          - PA
-          - RI
-          - SC
-          - SD
-          - TN
-          - TX
-          - UT
-          - VT
-          - VA
-          - WA
-          - WV
-          - WI
-          - WY
-          - AS
-          - GU
-          - MH
-          - FM
-          - MP
-          - PW
-          - PR
-          - VI
-          - UM
-          type: string
-        tribe:
-          description: Name of the federally-recognized American Indian or Alaska Native tribe, if applicable
-          example: Ojibwe
-          type: string
+          - $ref: '#/components/schemas/GroupStructure'
+          description: Data exchange configuration for group structure
       type: object
     EmployeeCreateRequest:
       properties:
@@ -2434,22 +3176,35 @@ components:
       - location_id
       - person
       - employment
-    PersonDisability:
+    EmploymentDatesResult:
       properties:
-        communication:
-          description: True if the disability impacts the ability to communicate or read
-          type: boolean
-        disabled:
-          description: True if the member has a disability
-          type: boolean
-        reason:
-          description: Description of the disability
+        full_time_start:
+          description: ISO-8601 date string for start date as a full time employee with the group (if applicable)
+          example: '2017-01-17'
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
+          type: string
+        hire_date:
+          description: ISO-8601 date string for the hire date of the employee
+          example: '2017-01-17'
+          format: date
+          type: string
+        rehire:
+          description: ISO-8601 date string for the rehire date of the employee (if applicable)
+          example: '2018-02-01'
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
+          type: string
+        retirement:
+          description: ISO-8601 date string for the retirement date of the employee (if applicable)
+          example: '2019-01-01'
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
+          type: string
+        terminated:
+          description: ISO-8601 date string for the termination date of the employee (if applicable)
+          example: '2018-01-01'
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
           type: string
       type: object
-      x-field_order:
-      - disabled
-      - reason
-      - communication
+      x-field_order: []
     DependentResult:
       properties:
         created:
@@ -2516,106 +3271,16 @@ components:
       - employee_id
       - relationship
       - person
-    PersonWithoutSSN:
-      properties:
-        contact:
-          allOf:
-          - $ref: '#/components/schemas/PersonContact'
-          description: Contact information for the person
-        date_of_birth:
-          description: ISO-8601 date string for the date of birth of the person
-          example: '1977-06-03'
-          format: date
-          type: string
-        details:
-          allOf:
-          - $ref: '#/components/schemas/PersonDetails'
-          description: Additional personal details of the person
-        first_name:
-          description: First name of the person
-          example: Catherine
-          type: string
-        home_address:
-          allOf:
-          - $ref: '#/components/schemas/Address'
-          description: Home address of the person
-          nullable: true
-        last_name:
-          description: Last name of the person
-          example: Briggs
-          type: string
-        maiden_name:
-          description: Maiden name of the person (deprecated)
-          type: string
-        mailing_address:
-          allOf:
-          - $ref: '#/components/schemas/Address'
-          description: Mailing address of the person, if different from home address
-          nullable: true
-        marital_status:
-          description: Marital status of the person
-          enum:
-          - single
-          - married
-          - domestic-partner
-          - divorced
-          - widowed
-          - legally-separated
-          example: married
-          type: string
-        middle_name:
-          description: Middle name of the person
-          example: S
-          type: string
-        sex:
-          description: Sex of the person
-          enum:
-          - F
-          - M
-          - U
-          - X
-          example: F
-          type: string
-        suffix:
-          description: Suffix of the person
-          type: string
-      required:
-      - date_of_birth
-      - first_name
-      - home_address
-      - last_name
-      - sex
-      type: object
-    GroupEditRequest:
-      properties:
-        dba_name:
-          description: DBA name for the company, if applicable
-          example: Floors R Us
-          type: string
-        federal_ein:
-          description: Federal Employer Identification Number for the company
-          example: '112222222'
-          type: string
-        name:
-          description: Name of the group
-          example: ACME Flooring
-          type: string
-        sic_code:
-          description: SIC Code of the group
-          example: '5713'
-          type: string
-      type: object
-      x-field_order: []
-    PaginatedEmployeeResult:
+    PaginatedLocationResult:
       properties:
         meta:
           allOf:
           - $ref: '#/components/schemas/Meta'
           description: Metadata associated with the response data
         response:
-          description: List of employee results
+          description: List of location results
           items:
-            $ref: '#/components/schemas/EmployeeResult'
+            $ref: '#/components/schemas/LocationResult'
           type: array
       required:
       - meta
@@ -2624,102 +3289,6 @@ components:
       x-field_order:
       - meta
       - response
-    GroupResult:
-      properties:
-        created:
-          description: The date the record was created
-          type: integer
-        dba_name:
-          description: DBA name for the company, if applicable
-          example: Floors R Us
-          type: string
-        federal_ein:
-          description: Federal Employer Identification Number for the company
-          example: '112222222'
-          type: string
-        id:
-          description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        modified:
-          description: The date the record was last updated
-          type: integer
-        name:
-          description: Name of the group
-          example: ACME Flooring
-          type: string
-        organization_id:
-          description: Unique identifier of the platform or broker organization in Noyo
-          format: uuid
-          type: string
-        sic_code:
-          description: SIC Code of the group
-          example: '5713'
-          type: string
-        version:
-          description: Current version of the record
-          format: uuid
-          type: string
-      required:
-      - created
-      - id
-      - modified
-      - name
-      - version
-      type: object
-      x-field_order:
-      - id
-      - version
-      - created
-      - modified
-      - organization_id
-      - name
-      - sic_code
-      - dba_name
-      - federal_ein
-    ContactEditRequest:
-      properties:
-        carrier_id:
-          description: Unique identifier of a Carrier in Noyo's system
-          format: uuid
-          type: string
-        email:
-          description: Work email address of the group contact
-          example: catherine.briggs@example.com
-          type: string
-        first_name:
-          description: First name of the group contact
-          example: Catherine
-          type: string
-        last_name:
-          description: Last name of the group contact
-          example: Briggs
-          type: string
-        phone_number:
-          description: Work phone number of the group contact in E.164 format
-          example: '+15555551212'
-          type: string
-        primary_contact:
-          description: True if contact is the primary contact for the group
-          type: boolean
-        title:
-          description: Job title of the group contact
-          example: Engineer
-          type: string
-        types:
-          description: List of contact types for the group contact
-          items:
-            enum:
-            - company
-            - billing
-            - executive
-            - online
-            - carrier
-            type: string
-          minItems: 1
-          type: array
-      type: object
-      x-field_order: []
     PersonContact:
       properties:
         email_address:
@@ -2769,158 +3338,6 @@ components:
       - preferred_method
       - preferred_language
       - speaks_english
-    PersonDetails:
-      properties:
-        american_indian:
-          allOf:
-          - $ref: '#/components/schemas/PersonAmericanIndian'
-          description: American Indian status details (if applicable)
-        disability:
-          allOf:
-          - $ref: '#/components/schemas/PersonDisability'
-          description: Disability details (if applicable)
-        is_military:
-          description: True if the person is in the military
-          type: boolean
-        is_student:
-          description: True if the person is a student
-          type: boolean
-        tobacco:
-          allOf:
-          - $ref: '#/components/schemas/PersonTobacco'
-          description: Tobacco usage details (if applicable)
-      type: object
-      x-field_order:
-      - tobacco
-      - disability
-      - american_indian
-      - is_student
-      - is_military
-    Salary:
-      properties:
-        amount:
-          description: Amount of salary earned by the employee in US dollars and cents, as a decimal value
-          example: 52000
-          minimum: 0
-          type: number
-        type:
-          description: Type of salary earned by the employee
-          enum:
-          - hourly
-          - salary
-          example: salary
-          type: string
-        unit:
-          description: Unit of salary earned by the employee
-          enum:
-          - annual
-          - month
-          - semi-monthly
-          - week
-          - hour
-          example: annual
-          type: string
-      type: object
-      x-field_order:
-      - amount
-      - unit
-      - type
-    PublicGroupCarrierConfigurationEditRequest:
-      properties:
-        connection_configuration:
-          $ref: '#/components/schemas/PublicGroupCarrierConnectionConfigurationEdit'
-      type: object
-      x-field_order: []
-    Person:
-      properties:
-        contact:
-          allOf:
-          - $ref: '#/components/schemas/PersonContact'
-          description: Contact information for the person
-        date_of_birth:
-          description: ISO-8601 date string for the date of birth of the person
-          example: '1977-06-03'
-          format: date
-          type: string
-        details:
-          allOf:
-          - $ref: '#/components/schemas/PersonDetails'
-          description: Additional personal details of the person
-        first_name:
-          description: First name of the person
-          example: Catherine
-          type: string
-        home_address:
-          allOf:
-          - $ref: '#/components/schemas/Address'
-          description: Home address of the person
-          nullable: true
-        last_name:
-          description: Last name of the person
-          example: Briggs
-          type: string
-        maiden_name:
-          description: Maiden name of the person (deprecated)
-          type: string
-        mailing_address:
-          allOf:
-          - $ref: '#/components/schemas/Address'
-          description: Mailing address of the person, if different from home address
-          nullable: true
-        marital_status:
-          description: Marital status of the person
-          enum:
-          - single
-          - married
-          - domestic-partner
-          - divorced
-          - widowed
-          - legally-separated
-          example: married
-          type: string
-        middle_name:
-          description: Middle name of the person
-          example: S
-          type: string
-        sex:
-          description: Sex of the person
-          enum:
-          - F
-          - M
-          - U
-          - X
-          example: F
-          type: string
-        ssn:
-          description: Social Security Number of the person
-          example: '123456789'
-          nullable: true
-          pattern: ^(?!000)[0-9]{3}(?!00)[0-9]{2}(?!0000)[0-9]{4}$
-          type: string
-        suffix:
-          description: Suffix of the person
-          type: string
-      required:
-      - date_of_birth
-      - first_name
-      - home_address
-      - last_name
-      - sex
-      type: object
-      x-field_order:
-      - first_name
-      - middle_name
-      - last_name
-      - suffix
-      - home_address
-      - mailing_address
-      - date_of_birth
-      - ssn
-      - sex
-      - marital_status
-      - maiden_name
-      - contact
-      - details
     EnrollmentsToCarrier:
       properties:
         default_method:
@@ -2931,247 +3348,32 @@ components:
           - feeds
           - manual_noyo
           - manual_partner
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         enabled:
           default: false
           description: Flag indicating if sending to the carrier is enabled
           type: boolean
       type: object
-    ContactResult:
+    PaginatedDependentResult:
       properties:
-        carrier_id:
-          description: Unique identifier of a Carrier in Noyo's system
-          format: uuid
-          readOnly: true
-          type: string
-        created:
-          description: The date the record was originated
-          readOnly: true
-          type: integer
-        email:
-          description: Work email address of the group contact
-          example: catherine.briggs@example.com
-          readOnly: true
-          type: string
-        first_name:
-          description: First name of the group contact
-          example: Catherine
-          readOnly: true
-          type: string
-        group_id:
-          description: Unique identifier of the group in Noyo
-          format: uuid
-          readOnly: true
-          type: string
-        id:
-          description: Unique identifier of the group contact in Noyo
-          format: uuid
-          readOnly: true
-          type: string
-        last_name:
-          description: Last name of the group contact
-          example: Briggs
-          readOnly: true
-          type: string
-        modified:
-          description: The date the record was last updated
-          readOnly: true
-          type: integer
-        phone_number:
-          description: Work phone number of the group contact in E.164 format
-          example: '+15555551212'
-          readOnly: true
-          type: string
-        primary_contact:
-          description: True if contact is the primary contact for the group
-          readOnly: true
-          type: boolean
-        title:
-          description: Job title of the group contact
-          example: Engineer
-          readOnly: true
-          type: string
-        types:
-          description: List of contact types for the group contact
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of dependent results
           items:
-            enum:
-            - company
-            - billing
-            - executive
-            - online
-            - carrier
-            type: string
-          minItems: 1
+            $ref: '#/components/schemas/DependentResult'
           type: array
-        version:
-          description: Version of the group contact record
-          format: uuid
-          readOnly: true
-          type: string
       required:
-      - created
-      - group_id
-      - id
-      - modified
-      - types
-      - version
+      - meta
+      - response
       type: object
       x-field_order:
-      - id
-      - version
-      - created
-      - modified
-      - group_id
-      - first_name
-      - last_name
-      - title
-      - email
-      - phone_number
-      - types
-      - primary_contact
-      - carrier_id
-    Employment:
-      properties:
-        employment_dates:
-          allOf:
-          - $ref: '#/components/schemas/EmploymentDates'
-          description: Employee employment dates
-        employment_status:
-          description: Employee employment status
-          enum:
-          - full-time
-          - part-time
-          - contract
-          - disabled
-          - terminated
-          - retired
-          type: string
-        hours_worked:
-          description: An integer of hours worked per week by the employee
-          example: 40
-          format: int32
-          type: integer
-        occupation:
-          description: Employee occupation or job title
-          example: Engineer
-          type: string
-        salary:
-          allOf:
-          - $ref: '#/components/schemas/Salary'
-          description: Employee salary information
-      required:
-      - employment_dates
-      - employment_status
-      - hours_worked
-      type: object
-      x-field_order:
-      - employment_status
-      - occupation
-      - hours_worked
-      - salary
-      - employment_dates
-    GroupCreateRequest:
-      properties:
-        dba_name:
-          description: DBA name for the company, if applicable
-          example: Floors R Us
-          type: string
-        federal_ein:
-          description: Federal Employer Identification Number for the company
-          example: '112222222'
-          type: string
-        name:
-          description: Name of the group
-          example: ACME Flooring
-          type: string
-        organization_id:
-          description: Unique identifier of the platform or broker organization in Noyo
-          format: uuid
-          type: string
-        sic_code:
-          description: SIC Code of the group
-          example: '5713'
-          type: string
-      required:
-      - name
-      type: object
-      x-field_order: []
-    EmploymentDates:
-      properties:
-        full_time_start:
-          description: ISO-8601 date string for start date as a full time employee with the group (if applicable)
-          example: '2017-01-17'
-          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
-          type: string
-        hire_date:
-          description: ISO-8601 date string for the hire date of the employee
-          example: '2017-01-17'
-          format: date
-          type: string
-        rehire:
-          description: ISO-8601 date string for the rehire date of the employee (if applicable)
-          example: '2018-02-01'
-          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
-          type: string
-        retirement:
-          description: ISO-8601 date string for the retirement date of the employee (if applicable)
-          example: '2019-01-01'
-          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
-          type: string
-        terminated:
-          description: ISO-8601 date string for the termination date of the employee (if applicable)
-          example: '2018-01-01'
-          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
-          type: string
-      required:
-      - hire_date
-      type: object
-      x-field_order: []
-    EmploymentDatesResult:
-      properties:
-        full_time_start:
-          description: ISO-8601 date string for start date as a full time employee with the group (if applicable)
-          example: '2017-01-17'
-          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
-          type: string
-        hire_date:
-          description: ISO-8601 date string for the hire date of the employee
-          example: '2017-01-17'
-          format: date
-          type: string
-        rehire:
-          description: ISO-8601 date string for the rehire date of the employee (if applicable)
-          example: '2018-02-01'
-          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
-          type: string
-        retirement:
-          description: ISO-8601 date string for the retirement date of the employee (if applicable)
-          example: '2019-01-01'
-          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
-          type: string
-        terminated:
-          description: ISO-8601 date string for the termination date of the employee (if applicable)
-          example: '2018-01-01'
-          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
-          type: string
-      type: object
-      x-field_order: []
-    EnrollmentErrors:
-      properties:
-        default_method:
-          default: null
-          description: Default method for receiving enrollment errors from the carrier
-          enum:
-          - snapshot_errors
-          - error_report
-          nullable: true
-          type: string
-        enabled:
-          default: false
-          description: Flag indicating if enrollment errors are enabled
-          type: boolean
-      type: object
+      - meta
+      - response
     LocationResult:
       properties:
         address:
@@ -3218,345 +3420,6 @@ components:
       - group_id
       - display_name
       - address
-    PersonTobacco:
-      properties:
-        duration:
-          description: Duration of tobacco use
-          example: 5 years
-          type: string
-        frequency:
-          description: Frequency of tobacco use
-          example: Daily
-          type: string
-        types:
-          description: List of types of tobacco use
-          example: cigarettes
-          items:
-            enum:
-            - pipe
-            - cigarettes
-            - chewing-tobacco
-            type: string
-          minItems: 1
-          type: array
-        user:
-          description: True if the person uses tobacco of any kind
-          example: true
-          type: boolean
-      type: object
-      x-field_order:
-      - user
-      - types
-      - duration
-      - frequency
-    PaginatedDependentResult:
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of dependent results
-          items:
-            $ref: '#/components/schemas/DependentResult'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
-    ContactCreateRequest:
-      properties:
-        carrier_id:
-          description: Unique identifier of a Carrier in Noyo's system when contact type contains carrier
-          format: uuid
-          type: string
-        email:
-          description: Work email address of the group contact
-          example: catherine.briggs@example.com
-          type: string
-        first_name:
-          description: First name of the group contact
-          example: Catherine
-          type: string
-        last_name:
-          description: Last name of the group contact
-          example: Briggs
-          type: string
-        phone_number:
-          description: Work phone number of the group contact in E.164 format
-          example: '+15555551212'
-          type: string
-        primary_contact:
-          description: True if contact is the primary contact for the group
-          type: boolean
-        title:
-          description: Job title of the group contact
-          example: Engineer
-          type: string
-        types:
-          description: List of contact types for the group contact
-          items:
-            enum:
-            - company
-            - billing
-            - executive
-            - online
-            - carrier
-            type: string
-          minItems: 1
-          type: array
-      required:
-      - email
-      - first_name
-      - last_name
-      - types
-      type: object
-      x-field_order: []
-    DependentResultWithoutSSN:
-      properties:
-        created:
-          description: The date the record was originated
-          readOnly: true
-          type: integer
-        custom_individual_id:
-          description: The custom identifier for this dependent in your system
-          readOnly: true
-          type: string
-        employee_id:
-          description: Unique identifier of the employee in Noyo
-          format: uuid
-          readOnly: true
-          type: string
-        id:
-          description: Unique identifier of the dependent in Noyo
-          format: uuid
-          readOnly: true
-          type: string
-        modified:
-          description: The date the record was last updated
-          readOnly: true
-          type: integer
-        person:
-          allOf:
-          - $ref: '#/components/schemas/PersonWithoutSSN'
-          description: Personal information for the dependent
-        relationship:
-          description: Relationship of the dependent to the employee
-          enum:
-          - spouse
-          - child
-          - domestic-partner
-          - grandchild
-          - civil-union
-          - step-child
-          - foster-child
-          - adopted-child
-          - legal-guardianship
-          - ex-spouse
-          - other
-          type: string
-        version:
-          description: Version of the dependent record
-          format: uuid
-          readOnly: true
-          type: string
-      required:
-      - created
-      - employee_id
-      - id
-      - modified
-      - person
-      - relationship
-      - version
-      type: object
-    EmployeeResult:
-      properties:
-        classifications:
-          description: Fields that classify employees for group structure mapping
-          readOnly: true
-          type: object
-        created:
-          description: The date the record was originated
-          readOnly: true
-          type: integer
-        custom_individual_id:
-          description: The custom identifier for this employee in your system
-          readOnly: true
-          type: string
-        employment:
-          allOf:
-          - $ref: '#/components/schemas/EmploymentResult'
-          description: Employment information for the employee
-        group_id:
-          description: Unique identifier of the group in Noyo
-          format: uuid
-          readOnly: true
-          type: string
-        id:
-          description: Unique identifier of the employee in Noyo
-          format: uuid
-          readOnly: true
-          type: string
-        location_id:
-          description: Unique identifier of the employee group location in Noyo
-          format: uuid
-          type: string
-        modified:
-          description: The date the record was last updated
-          readOnly: true
-          type: integer
-        person:
-          allOf:
-          - $ref: '#/components/schemas/Person'
-          description: Personal information for the employee
-        version:
-          description: Version of the employee record
-          format: uuid
-          readOnly: true
-          type: string
-      required:
-      - created
-      - employment
-      - group_id
-      - id
-      - modified
-      - person
-      - version
-      type: object
-      x-field_order:
-      - id
-      - custom_individual_id
-      - version
-      - created
-      - modified
-      - group_id
-      - location_id
-      - person
-      - employment
-      - classifications
-    DataExchange:
-      properties:
-        enrollment_errors:
-          allOf:
-          - $ref: '#/components/schemas/EnrollmentErrors'
-          description: Data exchange configuration for enrollment errors
-        enrollments:
-          allOf:
-          - $ref: '#/components/schemas/Enrollments'
-          description: Data exchange configuration for enrollments
-        group_structure:
-          allOf:
-          - $ref: '#/components/schemas/GroupStructure'
-          description: Data exchange configuration for group structure
-      type: object
-    PrimaryCareProvider:
-      properties:
-        entity_identifier_code:
-          description: Code of the entity identifier
-          enum:
-          - pcp
-          - dental_pcp
-          - obgyn
-          type: string
-        entity_type:
-          description: Type of entity
-          enum:
-          - person
-          - non_person_entity
-          type: string
-        first_name:
-          description: First name of the primary care provider
-          type: string
-        identification_code:
-          description: Code of the identification
-          type: string
-        identification_code_type:
-          description: Type of the identification code
-          enum:
-          - service_provider_number
-          - national_provider_identifier
-          type: string
-        last_name:
-          description: Last name of the primary care provider
-          type: string
-        middle_name:
-          description: Middle name of the primary care provider
-          type: string
-        organization_name:
-          description: Organization name of the primary care provider.
-          type: string
-        patient_relationship_code:
-          description: Code which represents the relationship of the patient to the primary care provider
-          enum:
-          - established
-          - not_established
-          - unknown
-          type: string
-      required:
-      - identification_code
-      - identification_code_type
-      type: object
-    PCPDetails:
-      properties:
-        providers:
-          description: List of primary care providers
-          items:
-            $ref: '#/components/schemas/PrimaryCareProvider'
-          type: array
-      required:
-      - providers
-      type: object
-    PaginatedUIEmployeeResult:
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of employee results
-          items:
-            $ref: '#/components/schemas/UIEmployeeParentResult'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
-    PaginatedGroupResult:
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of group results
-          items:
-            $ref: '#/components/schemas/GroupResult'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
-    IndividualEnrollmentCOBRAEnrollment:
-      properties:
-        cobra_enrolled:
-          description: True if member is enrolled in COBRA coverage
-          type: boolean
-        cobra_type:
-          description: Type of COBRA enrollment for the member
-          enum:
-          - federal
-          - state
-          type: string
-      type: object
     EmployeeResultWithoutSSN:
       properties:
         classifications:
@@ -3611,3 +3474,145 @@ components:
       - person
       - version
       type: object
+    PersonDisability:
+      properties:
+        communication:
+          description: True if the disability impacts the ability to communicate or read
+          type: boolean
+        disabled:
+          description: True if the member has a disability
+          type: boolean
+        reason:
+          description: Description of the disability
+          type: string
+      type: object
+      x-field_order:
+      - disabled
+      - reason
+      - communication
+    IndividualEnrollmentCOBRAEnrollment:
+      properties:
+        cobra_enrolled:
+          description: True if member is enrolled in COBRA coverage
+          type: boolean
+        cobra_type:
+          description: Type of COBRA enrollment for the member
+          enum:
+          - federal
+          - state
+          type: string
+      type: object
+    DependentCreateRequest:
+      properties:
+        person:
+          allOf:
+          - $ref: '#/components/schemas/CreatePersonRequest'
+          description: Personal information for the dependent
+        relationship:
+          description: Relationship of the dependent to the employee
+          enum:
+          - spouse
+          - child
+          - domestic-partner
+          - grandchild
+          - civil-union
+          - step-child
+          - foster-child
+          - adopted-child
+          - legal-guardianship
+          - ex-spouse
+          - other
+          type: string
+      required:
+      - person
+      - relationship
+      type: object
+      x-field_order:
+      - relationship
+      - person
+    UIEmployeeParentResult:
+      properties:
+        dependents:
+          items:
+            allOf:
+            - $ref: '#/components/schemas/DependentResultWithoutSSN'
+            description: List of all dependents associated with the employee
+          type: array
+        employee:
+          allOf:
+          - $ref: '#/components/schemas/EmployeeResultWithoutSSN'
+          description: Core employee details for this employee
+        group:
+          allOf:
+          - $ref: '#/components/schemas/GroupResult'
+          description: Group the employee is in
+        individual_enrollments:
+          items:
+            allOf:
+            - $ref: '#/components/schemas/IndividualEnrollmentResult'
+            description: List of individual enrollments for the employee and their dependents
+          type: array
+      required:
+      - employee
+      - group
+      type: object
+      x-field_order:
+      - employee
+      - dependents
+      - individual_enrollments
+      - group
+    GroupResult:
+      properties:
+        created:
+          description: The date the record was created
+          type: integer
+        dba_name:
+          description: DBA name for the company, if applicable
+          example: Floors R Us
+          type: string
+        federal_ein:
+          description: Federal Employer Identification Number for the company
+          example: '112222222'
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        name:
+          description: Name of the group
+          example: ACME Flooring
+          type: string
+        organization_id:
+          description: Unique identifier of the platform or broker organization in Noyo
+          format: uuid
+          type: string
+        sic_code:
+          description: SIC Code of the group
+          example: '5713'
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - created
+      - id
+      - modified
+      - name
+      - version
+      type: object
+      x-field_order:
+      - id
+      - version
+      - created
+      - modified
+      - organization_id
+      - name
+      - sic_code
+      - dba_name
+      - federal_ein
+x-readme:
+  explorer-enabled: false

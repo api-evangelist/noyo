@@ -1,9 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: APIs to manage and consume information about Carriers
-  title: Noyo Carrier Carrier Mapped Field Member Premiums API
+  description: Policy management APIs for health and ancillary insurance
+  title: Noyo Fulfillment Member Premiums API
   version: 1.0.0
-servers: []
+servers:
+- description: Noyo Fulfillment API - Live
+  url: https://fulfillment.noyo.com
+- description: Noyo Fulfillment API - Sandbox
+  url: https://fulfillment-sandbox.noyo.com
 tags:
 - name: Member Premiums
 paths:
@@ -120,6 +124,71 @@ components:
       x-field_order:
       - meta
       - response
+    MemberPremiumPeriod:
+      properties:
+        amount:
+          description: Length of premium period
+          format: int32
+          minimum: 1
+          type: integer
+        unit:
+          description: Unit frequency of premium period
+          enum:
+          - annual
+          - month
+          - semi-monthly
+          - week
+          - day
+          type: string
+      required:
+      - amount
+      - unit
+      type: object
+    MemberPremiumBilledMember:
+      properties:
+        line_of_coverage:
+          description: Line of coverage for the billed group plan
+          enum:
+          - medical
+          - dental
+          - vision
+          - life
+          - add
+          - std
+          - ltd
+          - accident
+          - critical_illness
+          - cancer
+          - health_fund
+          - hospital_indemnity
+          - pharmacy
+          - wellness
+          type: string
+        member_id:
+          description: Unique ID of the billed member in Noyo
+          format: uuid
+          type: string
+        member_type:
+          description: Type of member for the billed premium
+          enum:
+          - dependent
+          - employee
+          type: string
+        plan_id:
+          description: Unique identifier of the billed group plan in Noyo
+          format: uuid
+          type: string
+      required:
+      - line_of_coverage
+      - member_id
+      - member_type
+      - plan_id
+      type: object
+      x-field_order:
+      - member_id
+      - member_type
+      - line_of_coverage
+      - plan_id
     MemberPremiumResult:
       properties:
         amount:
@@ -193,51 +262,6 @@ components:
       - billed_members
       - created
       - modified
-    MemberPremiumBilledMember:
-      properties:
-        line_of_coverage:
-          description: Line of coverage for the billed group plan
-          enum:
-          - medical
-          - dental
-          - vision
-          - life
-          - add
-          - std
-          - ltd
-          - accident
-          - critical_illness
-          - cancer
-          - health_fund
-          - hospital_indemnity
-          - pharmacy
-          - wellness
-          type: string
-        member_id:
-          description: Unique ID of the billed member in Noyo
-          format: uuid
-          type: string
-        member_type:
-          description: Type of member for the billed premium
-          enum:
-          - dependent
-          - employee
-          type: string
-        plan_id:
-          description: Unique identifier of the billed group plan in Noyo
-          format: uuid
-          type: string
-      required:
-      - line_of_coverage
-      - member_id
-      - member_type
-      - plan_id
-      type: object
-      x-field_order:
-      - member_id
-      - member_type
-      - line_of_coverage
-      - plan_id
     Meta:
       properties:
         offset:
@@ -269,23 +293,5 @@ components:
       - page_num
       - page_size
       type: object
-    MemberPremiumPeriod:
-      properties:
-        amount:
-          description: Length of premium period
-          format: int32
-          minimum: 1
-          type: integer
-        unit:
-          description: Unit frequency of premium period
-          enum:
-          - annual
-          - month
-          - semi-monthly
-          - week
-          - day
-          type: string
-      required:
-      - amount
-      - unit
-      type: object
+x-readme:
+  explorer-enabled: false
