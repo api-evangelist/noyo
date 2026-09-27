@@ -340,92 +340,67 @@ paths:
       - Individual Enrollments
 components:
   schemas:
-    PaginatedIndividualEnrollmentResult:
+    Meta:
       properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of individual enrollment results
-          items:
-            $ref: '#/components/schemas/PublicIndividualEnrollmentResultWithConfig'
-          type: array
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
       required:
-      - meta
-      - response
+      - offset
+      - page_num
+      - page_size
       type: object
-      x-field_order:
-      - meta
-      - response
-    PCPDetails:
+    COBRADetails:
       properties:
-        providers:
-          description: List of primary care providers
-          items:
-            $ref: '#/components/schemas/PrimaryCareProvider'
-          type: array
-      required:
-      - providers
-      type: object
-    IndividualEnrollmentCOBRAEnrollment:
-      properties:
-        cobra_enrolled:
-          description: True if member is enrolled in COBRA coverage
-          type: boolean
-        cobra_type:
-          description: Type of COBRA enrollment for the member
+        eligibility_end_date:
+          description: The date which represents when the individual is no longer eligible for COBRA
+          format: date
+          type: string
+        eligibility_start_date:
+          description: The date which represents when the individual is first eligible for COBRA
+          format: date
+          type: string
+        qualifying_event_date:
+          description: The date of the event which qualified the individual for COBRA
+          format: date
+          type: string
+        qualifying_event_reason:
+          description: The reason of the event which qualified the individual for COBRA
           enum:
-          - federal
-          - state
-          type: string
-      type: object
-    PrimaryCareProvider:
-      properties:
-        entity_identifier_code:
-          description: Code of the entity identifier
-          enum:
-          - pcp
-          - dental_pcp
-          - obgyn
-          type: string
-        entity_type:
-          description: Type of entity
-          enum:
-          - person
-          - non_person_entity
-          type: string
-        first_name:
-          description: First name of the primary care provider
-          type: string
-        identification_code:
-          description: Code of the identification
-          type: string
-        identification_code_type:
-          description: Type of the identification code
-          enum:
-          - service_provider_number
-          - national_provider_identifier
-          type: string
-        last_name:
-          description: Last name of the primary care provider
-          type: string
-        middle_name:
-          description: Middle name of the primary care provider
-          type: string
-        organization_name:
-          description: Organization name of the primary care provider.
-          type: string
-        patient_relationship_code:
-          description: Code which represents the relationship of the patient to the primary care provider
-          enum:
-          - established
-          - not_established
-          - unknown
+          - termination_of_employment
+          - reduction_of_work_hours
+          - medicare
+          - death
+          - divorce
+          - separation
+          - ineligible_child
+          - bankruptcy_of_retirees_former_employer
+          - layoff
+          - leave_of_absence
           type: string
       required:
-      - identification_code
-      - identification_code_type
+      - eligibility_start_date
       type: object
     PublicIndividualEnrollmentResultWithConfig:
       properties:
@@ -560,67 +535,92 @@ components:
       - modified
       - cobra_details
       - pcp_details
-    Meta:
+    IndividualEnrollmentCOBRAEnrollment:
       properties:
-        offset:
-          description: The offset of the first response record within the matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
-        page_num:
-          description: The page number of the response records within the overall data set (1-based integer)
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        page_size:
-          description: The maximum number of response records on each page of results
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        total_records:
-          description: The total number of records in the entire matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
-      required:
-      - offset
-      - page_num
-      - page_size
-      type: object
-    COBRADetails:
-      properties:
-        eligibility_end_date:
-          description: The date which represents when the individual is no longer eligible for COBRA
-          format: date
-          type: string
-        eligibility_start_date:
-          description: The date which represents when the individual is first eligible for COBRA
-          format: date
-          type: string
-        qualifying_event_date:
-          description: The date of the event which qualified the individual for COBRA
-          format: date
-          type: string
-        qualifying_event_reason:
-          description: The reason of the event which qualified the individual for COBRA
+        cobra_enrolled:
+          description: True if member is enrolled in COBRA coverage
+          type: boolean
+        cobra_type:
+          description: Type of COBRA enrollment for the member
           enum:
-          - termination_of_employment
-          - reduction_of_work_hours
-          - medicare
-          - death
-          - divorce
-          - separation
-          - ineligible_child
-          - bankruptcy_of_retirees_former_employer
-          - layoff
-          - leave_of_absence
+          - federal
+          - state
+          type: string
+      type: object
+    PrimaryCareProvider:
+      properties:
+        entity_identifier_code:
+          description: Code of the entity identifier
+          enum:
+          - pcp
+          - dental_pcp
+          - obgyn
+          type: string
+        entity_type:
+          description: Type of entity
+          enum:
+          - person
+          - non_person_entity
+          type: string
+        first_name:
+          description: First name of the primary care provider
+          type: string
+        identification_code:
+          description: Code of the identification
+          type: string
+        identification_code_type:
+          description: Type of the identification code
+          enum:
+          - service_provider_number
+          - national_provider_identifier
+          type: string
+        last_name:
+          description: Last name of the primary care provider
+          type: string
+        middle_name:
+          description: Middle name of the primary care provider
+          type: string
+        organization_name:
+          description: Organization name of the primary care provider.
+          type: string
+        patient_relationship_code:
+          description: Code which represents the relationship of the patient to the primary care provider
+          enum:
+          - established
+          - not_established
+          - unknown
           type: string
       required:
-      - eligibility_start_date
+      - identification_code
+      - identification_code_type
+      type: object
+    PaginatedIndividualEnrollmentResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of individual enrollment results
+          items:
+            $ref: '#/components/schemas/PublicIndividualEnrollmentResultWithConfig'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    PCPDetails:
+      properties:
+        providers:
+          description: List of primary care providers
+          items:
+            $ref: '#/components/schemas/PrimaryCareProvider'
+          type: array
+      required:
+      - providers
       type: object
 x-readme:
   explorer-enabled: false

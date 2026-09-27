@@ -66,29 +66,6 @@ paths:
       - Volley Definitions
 components:
   schemas:
-    VolleyDefinitionResult:
-      properties:
-        steps:
-          description: Steps in the volley definition
-          items:
-            $ref: '#/components/schemas/VolleyStepDefinition'
-          type: array
-        transitions:
-          description: Transitions in the volley definition
-          items:
-            $ref: '#/components/schemas/VolleyTransitionRule'
-          type: array
-        version:
-          type: string
-        volley_type:
-          type: string
-      required:
-      - steps
-      - transitions
-      - version
-      - volley_type
-      type: object
-      x-field_order: []
     VolleyTransitionRule:
       properties:
         allowed_attachment_types:
@@ -133,6 +110,29 @@ components:
       - actor_type
       - step_key
       - step_type
+      type: object
+      x-field_order: []
+    VolleyDefinitionResult:
+      properties:
+        steps:
+          description: Steps in the volley definition
+          items:
+            $ref: '#/components/schemas/VolleyStepDefinition'
+          type: array
+        transitions:
+          description: Transitions in the volley definition
+          items:
+            $ref: '#/components/schemas/VolleyTransitionRule'
+          type: array
+        version:
+          type: string
+        volley_type:
+          type: string
+      required:
+      - steps
+      - transitions
+      - version
+      - volley_type
       type: object
       x-field_order: []
 x-readme:

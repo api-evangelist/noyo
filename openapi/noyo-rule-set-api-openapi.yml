@@ -301,80 +301,37 @@ paths:
       - Rule Set
 components:
   schemas:
-    RuleSetUpdateRequest:
+    Meta:
       properties:
-        entry_point:
-          enum:
-          - member_snapshot
-          type:
-          - string
-          - 'null'
-        group_id:
-          format: uuid
-          type:
-          - string
-          - 'null'
-        name:
-          type: string
-        rules:
-          type: object
-      type: object
-      x-field_order: []
-    RuleSetCreateRequest:
-      properties:
-        entry_point:
-          enum:
-          - member_snapshot
-          type: string
-        group_id:
-          format: uuid
-          type:
-          - string
-          - 'null'
-        name:
-          type: string
-        rule_set_metadata:
-          $ref: '#/components/schemas/RuleSetMetadata'
-        rules:
-          type: object
-        status:
-          default: active
-          enum:
-          - active
-          - draft
-          - archived
-          type: string
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
       required:
-      - entry_point
-      - name
-      - rules
+      - offset
+      - page_num
+      - page_size
       type: object
-      x-field_order: []
-    RuleSetMetadata:
-      properties:
-        sandwich_position:
-          type: string
-      required:
-      - sandwich_position
-      type: object
-    PaginatedRuleSetTracesResult:
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of Rule set traces
-          items:
-            $ref: '#/components/schemas/RuleSetTraceResult'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
     RuleSetResult:
       properties:
         created:
@@ -423,24 +380,55 @@ components:
       - version
       type: object
       x-field_order: []
-    PaginatedRuleSetResult:
+    RuleSetCreateRequest:
       properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of Rule set results
-          items:
-            $ref: '#/components/schemas/RuleSetResult'
-          type: array
+        entry_point:
+          enum:
+          - member_snapshot
+          type: string
+        group_id:
+          format: uuid
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+        rule_set_metadata:
+          $ref: '#/components/schemas/RuleSetMetadata'
+        rules:
+          type: object
+        status:
+          default: active
+          enum:
+          - active
+          - draft
+          - archived
+          type: string
       required:
-      - meta
-      - response
+      - entry_point
+      - name
+      - rules
       type: object
-      x-field_order:
-      - meta
-      - response
+      x-field_order: []
+    RuleSetUpdateRequest:
+      properties:
+        entry_point:
+          enum:
+          - member_snapshot
+          type:
+          - string
+          - 'null'
+        group_id:
+          format: uuid
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+        rules:
+          type: object
+      type: object
+      x-field_order: []
     RuleSetTraceResult:
       properties:
         created:
@@ -488,36 +476,48 @@ components:
       - version
       type: object
       x-field_order: []
-    Meta:
+    RuleSetMetadata:
       properties:
-        offset:
-          description: The offset of the first response record within the matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
-        page_num:
-          description: The page number of the response records within the overall data set (1-based integer)
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        page_size:
-          description: The maximum number of response records on each page of results
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        total_records:
-          description: The total number of records in the entire matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
+        sandwich_position:
+          type: string
       required:
-      - offset
-      - page_num
-      - page_size
+      - sandwich_position
       type: object
+    PaginatedRuleSetResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of Rule set results
+          items:
+            $ref: '#/components/schemas/RuleSetResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    PaginatedRuleSetTracesResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of Rule set traces
+          items:
+            $ref: '#/components/schemas/RuleSetTraceResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
 x-readme:
   explorer-enabled: false

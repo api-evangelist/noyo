@@ -54,24 +54,6 @@ components:
       - rules
       type: object
       x-field_order: []
-    PaginatedEligibilityRulesResult:
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of eligibility rule configurations
-          items:
-            $ref: '#/components/schemas/EligibilityRuleConfiguration'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
     EligibilityRuleDescription:
       properties:
         description:
@@ -112,5 +94,23 @@ components:
       - page_num
       - page_size
       type: object
+    PaginatedEligibilityRulesResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of eligibility rule configurations
+          items:
+            $ref: '#/components/schemas/EligibilityRuleConfiguration'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
 x-readme:
   explorer-enabled: false

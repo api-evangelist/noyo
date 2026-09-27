@@ -150,13 +150,6 @@ paths:
       - Volley Setting
 components:
   schemas:
-    VolleySettingUpdateRequest:
-      properties:
-        configuration:
-          allOf:
-          - $ref: '#/components/schemas/VolleySettingConfiguration'
-      type: object
-      x-field_order: []
     VolleySettingConfiguration:
       properties:
         configuration_settings:
@@ -166,69 +159,6 @@ components:
       required:
       - configuration_settings
       - volley_type
-      type: object
-    PaginatedVolleySettingResult:
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of Volley Setting results
-          items:
-            $ref: '#/components/schemas/VolleySettingResult'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
-    VolleySettingResult:
-      properties:
-        configuration:
-          allOf:
-          - $ref: '#/components/schemas/VolleySettingConfiguration'
-        created:
-          description: The date the record was created
-          type: integer
-        id:
-          description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        modified:
-          description: The date the record was last updated
-          type: integer
-        organization_id:
-          format: uuid
-          type: string
-        version:
-          description: Current version of the record
-          format: uuid
-          type: string
-        volley_type:
-          enum:
-          - new_connection_mapping
-          type: string
-      required:
-      - created
-      - id
-      - modified
-      - organization_id
-      - version
-      - volley_type
-      type: object
-      x-field_order: []
-    VolleySettingConfigurationSettings:
-      properties:
-        platform_email_addresses:
-          items:
-            format: email
-            type: string
-          type: array
-      required:
-      - platform_email_addresses
       type: object
     Meta:
       properties:
@@ -261,6 +191,16 @@ components:
       - page_num
       - page_size
       type: object
+    VolleySettingConfigurationSettings:
+      properties:
+        platform_email_addresses:
+          items:
+            format: email
+            type: string
+          type: array
+      required:
+      - platform_email_addresses
+      type: object
     VolleySettingCreateRequest:
       properties:
         configuration:
@@ -271,6 +211,66 @@ components:
           - new_connection_mapping
           type: string
       required:
+      - volley_type
+      type: object
+      x-field_order: []
+    PaginatedVolleySettingResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of Volley Setting results
+          items:
+            $ref: '#/components/schemas/VolleySettingResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    VolleySettingUpdateRequest:
+      properties:
+        configuration:
+          allOf:
+          - $ref: '#/components/schemas/VolleySettingConfiguration'
+      type: object
+      x-field_order: []
+    VolleySettingResult:
+      properties:
+        configuration:
+          allOf:
+          - $ref: '#/components/schemas/VolleySettingConfiguration'
+        created:
+          description: The date the record was created
+          type: integer
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        organization_id:
+          format: uuid
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+        volley_type:
+          enum:
+          - new_connection_mapping
+          type: string
+      required:
+      - created
+      - id
+      - modified
+      - organization_id
+      - version
       - volley_type
       type: object
       x-field_order: []

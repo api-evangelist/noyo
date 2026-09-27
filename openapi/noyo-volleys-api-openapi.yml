@@ -248,103 +248,6 @@ paths:
       - Volleys
 components:
   schemas:
-    PublicVolleyAvailableTransitionsResult:
-      properties:
-        response:
-          description: List of available transitions
-          items:
-            $ref: '#/components/schemas/AvailableTransition'
-          type: array
-      required:
-      - response
-      type: object
-      x-field_order: []
-    VolleyAttachmentRequest:
-      properties:
-        attachment_type:
-          description: Type of the attachment (note, document)
-          type: string
-        content:
-          description: Text content for the attachment
-          type:
-          - string
-          - 'null'
-        file_key:
-          description: Cloud storage key for document attachments
-          type:
-          - string
-          - 'null'
-        file_name:
-          description: Original file name for document attachments
-          type:
-          - string
-          - 'null'
-      required:
-      - attachment_type
-      type: object
-      x-field_order: []
-    PublicVolleyResult:
-      properties:
-        carrier_id:
-          description: Carrier ID
-          format: uuid
-          type: string
-        closed_at:
-          description: Timestamp when volley was closed
-          format: date-time
-          type:
-          - string
-          - 'null'
-        created:
-          description: The date the record was created
-          type: integer
-        definition_version:
-          description: Version of the volley definition
-          type: string
-        group_id:
-          description: Group ID
-          format: uuid
-          type: string
-        group_setup_request_id:
-          description: Group setup request ID
-          format: uuid
-          type:
-          - string
-          - 'null'
-        id:
-          description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        modified:
-          description: The date the record was last updated
-          type: integer
-        organization_id:
-          description: Organization ID
-          format: uuid
-          type: string
-        status:
-          description: Current status of the volley
-          type: string
-        version:
-          description: Current version of the record
-          format: uuid
-          type: string
-        volley_type:
-          description: Type of the volley
-          type: string
-      required:
-      - carrier_id
-      - created
-      - definition_version
-      - group_id
-      - id
-      - modified
-      - organization_id
-      - status
-      - version
-      - volley_type
-      type: object
-      x-field_order: []
     StepTransitionData:
       properties:
         from_step_key:
@@ -412,38 +315,61 @@ components:
       - volley_id
       type: object
       x-field_order: []
-    VolleyPaginatedResult:
+    VolleyAttachmentRequest:
       properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of volleys
-          items:
-            $ref: '#/components/schemas/PublicVolleyResult'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
-    VolleyTransitionRequest:
-      properties:
-        attachments:
-          description: Attachments for the transition
-          items:
-            $ref: '#/components/schemas/VolleyAttachmentRequest'
-          type: array
-        transition_key:
-          description: Key of the transition to execute
+        attachment_type:
+          description: Type of the attachment (note, document)
           type: string
+        content:
+          description: Text content for the attachment
+          type:
+          - string
+          - 'null'
+        file_key:
+          description: Cloud storage key for document attachments
+          type:
+          - string
+          - 'null'
+        file_name:
+          description: Original file name for document attachments
+          type:
+          - string
+          - 'null'
       required:
-      - transition_key
+      - attachment_type
       type: object
       x-field_order: []
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
     AvailableTransition:
       properties:
         allowed_attachment_types:
@@ -537,36 +463,110 @@ components:
       - version
       type: object
       x-field_order: []
-    Meta:
+    PublicVolleyAvailableTransitionsResult:
       properties:
-        offset:
-          description: The offset of the first response record within the matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
-        page_num:
-          description: The page number of the response records within the overall data set (1-based integer)
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        page_size:
-          description: The maximum number of response records on each page of results
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        total_records:
-          description: The total number of records in the entire matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
+        response:
+          description: List of available transitions
+          items:
+            $ref: '#/components/schemas/AvailableTransition'
+          type: array
       required:
-      - offset
-      - page_num
-      - page_size
+      - response
       type: object
+      x-field_order: []
+    VolleyPaginatedResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of volleys
+          items:
+            $ref: '#/components/schemas/PublicVolleyResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    VolleyTransitionRequest:
+      properties:
+        attachments:
+          description: Attachments for the transition
+          items:
+            $ref: '#/components/schemas/VolleyAttachmentRequest'
+          type: array
+        transition_key:
+          description: Key of the transition to execute
+          type: string
+      required:
+      - transition_key
+      type: object
+      x-field_order: []
+    PublicVolleyResult:
+      properties:
+        carrier_id:
+          description: Carrier ID
+          format: uuid
+          type: string
+        closed_at:
+          description: Timestamp when volley was closed
+          format: date-time
+          type:
+          - string
+          - 'null'
+        created:
+          description: The date the record was created
+          type: integer
+        definition_version:
+          description: Version of the volley definition
+          type: string
+        group_id:
+          description: Group ID
+          format: uuid
+          type: string
+        group_setup_request_id:
+          description: Group setup request ID
+          format: uuid
+          type:
+          - string
+          - 'null'
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        organization_id:
+          description: Organization ID
+          format: uuid
+          type: string
+        status:
+          description: Current status of the volley
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+        volley_type:
+          description: Type of the volley
+          type: string
+      required:
+      - carrier_id
+      - created
+      - definition_version
+      - group_id
+      - id
+      - modified
+      - organization_id
+      - status
+      - version
+      - volley_type
+      type: object
+      x-field_order: []
 x-readme:
   explorer-enabled: false

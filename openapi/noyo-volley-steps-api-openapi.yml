@@ -100,24 +100,6 @@ paths:
       - Volley Steps
 components:
   schemas:
-    VolleyStepPaginatedResult:
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of volley steps
-          items:
-            $ref: '#/components/schemas/VolleyStepResult'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
     VolleyStepResult:
       properties:
         actor_type:
@@ -215,5 +197,23 @@ components:
       - page_num
       - page_size
       type: object
+    VolleyStepPaginatedResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of volley steps
+          items:
+            $ref: '#/components/schemas/VolleyStepResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
 x-readme:
   explorer-enabled: false

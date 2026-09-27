@@ -114,25 +114,6 @@ components:
       - carrier_id
       - line_of_coverage
       type: object
-    PlatformStructureTemporalPlan:
-      properties:
-        configuration:
-          type:
-          - string
-          - 'null'
-        end_date:
-          description: Temporal end date of the record
-          example: '2020-01-01'
-          format: date
-          type:
-          - string
-          - 'null'
-        start_date:
-          description: Temporal start date of the record
-          example: '2019-01-01'
-          format: date
-          type: string
-      type: object
     PlatformStructure:
       properties:
         plans:
@@ -177,5 +158,24 @@ components:
       - version
       type: object
       x-field_order: []
+    PlatformStructureTemporalPlan:
+      properties:
+        configuration:
+          type:
+          - string
+          - 'null'
+        end_date:
+          description: Temporal end date of the record
+          example: '2020-01-01'
+          format: date
+          type:
+          - string
+          - 'null'
+        start_date:
+          description: Temporal start date of the record
+          example: '2019-01-01'
+          format: date
+          type: string
+      type: object
 x-readme:
   explorer-enabled: false

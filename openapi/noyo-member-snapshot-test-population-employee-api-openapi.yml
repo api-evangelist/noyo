@@ -164,24 +164,15 @@ components:
       - version
       type: object
       x-field_order: []
-    PaginatedMemberSnapshotTestPopulationEmployeeResult:
+    MemberSnapshotTestPopulationEmployeeCreateRequest:
       properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of member snapshot test population employee results
-          items:
-            $ref: '#/components/schemas/MemberSnapshotTestPopulationEmployeeResult'
-          type: array
+        employee_id:
+          format: uuid
+          type: string
       required:
-      - meta
-      - response
+      - employee_id
       type: object
-      x-field_order:
-      - meta
-      - response
+      x-field_order: []
     Meta:
       properties:
         offset:
@@ -213,14 +204,23 @@ components:
       - page_num
       - page_size
       type: object
-    MemberSnapshotTestPopulationEmployeeCreateRequest:
+    PaginatedMemberSnapshotTestPopulationEmployeeResult:
       properties:
-        employee_id:
-          format: uuid
-          type: string
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of member snapshot test population employee results
+          items:
+            $ref: '#/components/schemas/MemberSnapshotTestPopulationEmployeeResult'
+          type: array
       required:
-      - employee_id
+      - meta
+      - response
       type: object
-      x-field_order: []
+      x-field_order:
+      - meta
+      - response
 x-readme:
   explorer-enabled: false

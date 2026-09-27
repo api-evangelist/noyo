@@ -407,132 +407,37 @@ components:
       - dependent_child_termination_rule
       - dependent_child_type
       type: object
-    PaginatedGroupEnrollmentResult:
+    Meta:
       properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of group enrollment results
-          items:
-            $ref: '#/components/schemas/GroupEnrollmentPublicResult'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
-    GroupEnrollmentPublicResult:
-      properties:
-        carrier_id:
-          description: Unique identifier of the associated carrier in the Noyo system
-          format: uuid
-          type: string
-        created:
-          description: The date the record was created
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
           type: integer
-        effective_end_date:
-          description: ISO-8601 date string for the effective end date of the record
-          example: '2018-12-31'
-          format: date
-          type:
-          - string
-          - 'null'
-        effective_start_date:
-          description: ISO-8601 date string for the effective start date of the record
-          example: '2018-01-01'
-          format: date
-          type:
-          - string
-          - 'null'
-        group_id:
-          description: Unique identifier of the associated group in the Noyo system
-          format: uuid
-          type: string
-        id:
-          description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        line_of_coverage:
-          description: Line of coverage for the group enrollment
-          enum:
-          - medical
-          - dental
-          - vision
-          - life
-          - add
-          - std
-          - ltd
-          - accident
-          - critical_illness
-          - cancer
-          - health_fund
-          - hospital_indemnity
-          - pharmacy
-          - wellness
-          type: string
-        modified:
-          description: The date the record was last updated
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
           type: integer
-        open_enrollment_end_date:
-          description: ISO-8601 date string for the open enrollment end date of the group enrollment
-          example: '2018-11-30'
-          format: date
-          type:
-          - string
-          - 'null'
-        open_enrollment_renewal_date:
-          description: ISO-8601 date string for the open enrollment renewal start date of the group enrollment
-          example: '2018-12-01'
-          format: date
-          type:
-          - string
-          - 'null'
-        open_enrollment_start_date:
-          description: ISO-8601 date string for the open enrollment start date of the group enrollment
-          example: '2018-11-01'
-          format: date
-          type:
-          - string
-          - 'null'
-        status:
-          description: Status of the group enrollment
-          enum:
-          - pending
-          - active
-          - completed
-          type: string
-        version:
-          description: Current version of the record
-          format: uuid
-          type: string
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
       required:
-      - carrier_id
-      - created
-      - group_id
-      - id
-      - line_of_coverage
-      - modified
-      - status
-      - version
+      - offset
+      - page_num
+      - page_size
       type: object
-      x-field_order:
-      - id
-      - version
-      - group_id
-      - carrier_id
-      - line_of_coverage
-      - status
-      - open_enrollment_start_date
-      - open_enrollment_end_date
-      - open_enrollment_renewal_date
-      - effective_start_date
-      - effective_end_date
-      - created
-      - modified
     GroupDentalPlanPublicResult:
       properties:
         benefits:
@@ -691,19 +596,6 @@ components:
       - benefits
       - created
       - modified
-    GroupPlanCOBRARules:
-      properties:
-        eligible:
-          description: True if group plan is eligible for COBRA enrollments
-          type: boolean
-      type: object
-    GroupDentalPlanBenefitsSnapshot:
-      properties:
-        contributory_type:
-          description: Contribution type for the group AD&D plan
-          example: Contributory
-          type: string
-      type: object
     PaginatedGroupPlanResult:
       properties:
         meta:
@@ -724,36 +616,18 @@ components:
       x-field_order:
       - meta
       - response
-    Meta:
+    GroupDentalPlanBenefitsSnapshot:
       properties:
-        offset:
-          description: The offset of the first response record within the matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
-        page_num:
-          description: The page number of the response records within the overall data set (1-based integer)
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        page_size:
-          description: The maximum number of response records on each page of results
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        total_records:
-          description: The total number of records in the entire matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
-      required:
-      - offset
-      - page_num
-      - page_size
+        contributory_type:
+          description: Contribution type for the group AD&D plan
+          example: Contributory
+          type: string
+      type: object
+    GroupPlanCOBRARules:
+      properties:
+        eligible:
+          description: True if group plan is eligible for COBRA enrollments
+          type: boolean
       type: object
     SingleGroupPlanResult:
       properties:
@@ -765,5 +639,131 @@ components:
       - plan
       type: object
       x-field_order: []
+    GroupEnrollmentPublicResult:
+      properties:
+        carrier_id:
+          description: Unique identifier of the associated carrier in the Noyo system
+          format: uuid
+          type: string
+        created:
+          description: The date the record was created
+          type: integer
+        effective_end_date:
+          description: ISO-8601 date string for the effective end date of the record
+          example: '2018-12-31'
+          format: date
+          type:
+          - string
+          - 'null'
+        effective_start_date:
+          description: ISO-8601 date string for the effective start date of the record
+          example: '2018-01-01'
+          format: date
+          type:
+          - string
+          - 'null'
+        group_id:
+          description: Unique identifier of the associated group in the Noyo system
+          format: uuid
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        line_of_coverage:
+          description: Line of coverage for the group enrollment
+          enum:
+          - medical
+          - dental
+          - vision
+          - life
+          - add
+          - std
+          - ltd
+          - accident
+          - critical_illness
+          - cancer
+          - health_fund
+          - hospital_indemnity
+          - pharmacy
+          - wellness
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        open_enrollment_end_date:
+          description: ISO-8601 date string for the open enrollment end date of the group enrollment
+          example: '2018-11-30'
+          format: date
+          type:
+          - string
+          - 'null'
+        open_enrollment_renewal_date:
+          description: ISO-8601 date string for the open enrollment renewal start date of the group enrollment
+          example: '2018-12-01'
+          format: date
+          type:
+          - string
+          - 'null'
+        open_enrollment_start_date:
+          description: ISO-8601 date string for the open enrollment start date of the group enrollment
+          example: '2018-11-01'
+          format: date
+          type:
+          - string
+          - 'null'
+        status:
+          description: Status of the group enrollment
+          enum:
+          - pending
+          - active
+          - completed
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - carrier_id
+      - created
+      - group_id
+      - id
+      - line_of_coverage
+      - modified
+      - status
+      - version
+      type: object
+      x-field_order:
+      - id
+      - version
+      - group_id
+      - carrier_id
+      - line_of_coverage
+      - status
+      - open_enrollment_start_date
+      - open_enrollment_end_date
+      - open_enrollment_renewal_date
+      - effective_start_date
+      - effective_end_date
+      - created
+      - modified
+    PaginatedGroupEnrollmentResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of group enrollment results
+          items:
+            $ref: '#/components/schemas/GroupEnrollmentPublicResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
 x-readme:
   explorer-enabled: false

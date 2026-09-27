@@ -81,117 +81,71 @@ paths:
       - Employee
 components:
   schemas:
-    PersonAmericanIndian:
+    EmployeeResult:
       properties:
-        state:
-          description: Primary state of the federally-recognized American Indian or Alaska Native tribe, if applicable
-          enum:
-          - AL
-          - AK
-          - AZ
-          - AR
-          - CA
-          - CO
-          - CT
-          - DE
-          - DC
-          - FL
-          - GA
-          - HI
-          - ID
-          - IL
-          - IN
-          - IA
-          - KS
-          - KY
-          - LA
-          - ME
-          - MD
-          - MA
-          - MI
-          - MN
-          - MS
-          - MO
-          - MT
-          - NE
-          - NV
-          - NH
-          - NJ
-          - NM
-          - NY
-          - NC
-          - ND
-          - OH
-          - OK
-          - OR
-          - PA
-          - RI
-          - SC
-          - SD
-          - TN
-          - TX
-          - UT
-          - VT
-          - VA
-          - WA
-          - WV
-          - WI
-          - WY
-          - AS
-          - GU
-          - MH
-          - FM
-          - MP
-          - PW
-          - PR
-          - VI
-          - UM
-          type: string
-        tribe:
-          description: Name of the federally-recognized American Indian or Alaska Native tribe, if applicable
-          example: Ojibwe
-          type: string
-      type: object
-    EmploymentResult:
-      properties:
-        employment_dates:
-          allOf:
-          - $ref: '#/components/schemas/EmploymentDatesResult'
-          description: Employee employment dates
-        employment_status:
-          description: Employee employment status
-          enum:
-          - full-time
-          - part-time
-          - contract
-          - disabled
-          - terminated
-          - retired
-          type: string
-        hours_worked:
-          description: An integer of hours worked per week by the employee
-          example: 40
-          format: int32
+        classifications:
+          description: Fields that classify employees for group structure mapping
+          readOnly: true
+          type: object
+        created:
+          description: The date the record was originated
+          readOnly: true
           type: integer
-        occupation:
-          description: Employee occupation or job title
-          example: Engineer
+        custom_individual_id:
+          description: The custom identifier for this employee in your system
+          readOnly: true
           type: string
-        salary:
+        employment:
           allOf:
-          - $ref: '#/components/schemas/Salary'
-          description: Employee salary information
+          - $ref: '#/components/schemas/EmploymentResult'
+          description: Employment information for the employee
+        group_id:
+          description: Unique identifier of the group in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        id:
+          description: Unique identifier of the employee in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        location_id:
+          description: Unique identifier of the employee group location in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          readOnly: true
+          type: integer
+        person:
+          allOf:
+          - $ref: '#/components/schemas/Person'
+          description: Personal information for the employee
+        version:
+          description: Version of the employee record
+          format: uuid
+          readOnly: true
+          type: string
       required:
-      - employment_dates
-      - employment_status
-      - hours_worked
+      - created
+      - employment
+      - group_id
+      - id
+      - modified
+      - person
+      - version
       type: object
       x-field_order:
-      - employment_status
-      - occupation
-      - hours_worked
-      - salary
-      - employment_dates
+      - id
+      - custom_individual_id
+      - version
+      - created
+      - modified
+      - group_id
+      - location_id
+      - person
+      - employment
+      - classifications
     PersonTobacco:
       properties:
         duration:
@@ -223,167 +177,6 @@ components:
       - types
       - duration
       - frequency
-    PersonDetails:
-      properties:
-        american_indian:
-          allOf:
-          - $ref: '#/components/schemas/PersonAmericanIndian'
-          description: American Indian status details (if applicable)
-        disability:
-          allOf:
-          - $ref: '#/components/schemas/PersonDisability'
-          description: Disability details (if applicable)
-        is_military:
-          description: True if the person is in the military
-          type: boolean
-        is_student:
-          description: True if the person is a student
-          type: boolean
-        tobacco:
-          allOf:
-          - $ref: '#/components/schemas/PersonTobacco'
-          description: Tobacco usage details (if applicable)
-      type: object
-      x-field_order:
-      - tobacco
-      - disability
-      - american_indian
-      - is_student
-      - is_military
-    PersonDisability:
-      properties:
-        communication:
-          description: True if the disability impacts the ability to communicate or read
-          type: boolean
-        disabled:
-          description: True if the member has a disability
-          type: boolean
-        reason:
-          description: Description of the disability
-          type: string
-      type: object
-      x-field_order:
-      - disabled
-      - reason
-      - communication
-    Person:
-      properties:
-        contact:
-          allOf:
-          - $ref: '#/components/schemas/PersonContact'
-          description: Contact information for the person
-        date_of_birth:
-          description: ISO-8601 date string for the date of birth of the person
-          example: '1977-06-03'
-          format: date
-          type: string
-        details:
-          allOf:
-          - $ref: '#/components/schemas/PersonDetails'
-          description: Additional personal details of the person
-        first_name:
-          description: First name of the person
-          example: Catherine
-          type: string
-        home_address:
-          allOf:
-          - $ref: '#/components/schemas/Address'
-          description: Home address of the person
-        last_name:
-          description: Last name of the person
-          example: Briggs
-          type: string
-        maiden_name:
-          description: Maiden name of the person (deprecated)
-          type: string
-        mailing_address:
-          allOf:
-          - $ref: '#/components/schemas/Address'
-          description: Mailing address of the person, if different from home address
-        marital_status:
-          description: Marital status of the person
-          enum:
-          - single
-          - married
-          - domestic-partner
-          - divorced
-          - widowed
-          - legally-separated
-          example: married
-          type: string
-        middle_name:
-          description: Middle name of the person
-          example: S
-          type: string
-        sex:
-          description: Sex of the person
-          enum:
-          - F
-          - M
-          - U
-          - X
-          example: F
-          type: string
-        ssn:
-          description: Social Security Number of the person
-          example: '123456789'
-          pattern: ^(?!000)[0-9]{3}(?!00)[0-9]{2}(?!0000)[0-9]{4}$
-          type:
-          - string
-          - 'null'
-        suffix:
-          description: Suffix of the person
-          type: string
-      required:
-      - date_of_birth
-      - first_name
-      - home_address
-      - last_name
-      - sex
-      type: object
-      x-field_order:
-      - first_name
-      - middle_name
-      - last_name
-      - suffix
-      - home_address
-      - mailing_address
-      - date_of_birth
-      - ssn
-      - sex
-      - marital_status
-      - maiden_name
-      - contact
-      - details
-    Salary:
-      properties:
-        amount:
-          description: Amount of salary earned by the employee in US dollars and cents, as a decimal value
-          example: 52000
-          minimum: 0
-          type: number
-        type:
-          description: Type of salary earned by the employee
-          enum:
-          - hourly
-          - salary
-          example: salary
-          type: string
-        unit:
-          description: Unit of salary earned by the employee
-          enum:
-          - annual
-          - month
-          - semi-monthly
-          - week
-          - hour
-          example: annual
-          type: string
-      type: object
-      x-field_order:
-      - amount
-      - unit
-      - type
     Address:
       properties:
         city:
@@ -485,6 +278,91 @@ components:
       - state
       - zip_code
       - county
+    EmploymentResult:
+      properties:
+        employment_dates:
+          allOf:
+          - $ref: '#/components/schemas/EmploymentDatesResult'
+          description: Employee employment dates
+        employment_status:
+          description: Employee employment status
+          enum:
+          - full-time
+          - part-time
+          - contract
+          - disabled
+          - terminated
+          - retired
+          type: string
+        hours_worked:
+          description: An integer of hours worked per week by the employee
+          example: 40
+          format: int32
+          type: integer
+        occupation:
+          description: Employee occupation or job title
+          example: Engineer
+          type: string
+        salary:
+          allOf:
+          - $ref: '#/components/schemas/Salary'
+          description: Employee salary information
+      required:
+      - employment_dates
+      - employment_status
+      - hours_worked
+      type: object
+      x-field_order:
+      - employment_status
+      - occupation
+      - hours_worked
+      - salary
+      - employment_dates
+    PersonDisability:
+      properties:
+        communication:
+          description: True if the disability impacts the ability to communicate or read
+          type: boolean
+        disabled:
+          description: True if the member has a disability
+          type: boolean
+        reason:
+          description: Description of the disability
+          type: string
+      type: object
+      x-field_order:
+      - disabled
+      - reason
+      - communication
+    Salary:
+      properties:
+        amount:
+          description: Amount of salary earned by the employee in US dollars and cents, as a decimal value
+          example: 52000
+          minimum: 0
+          type: number
+        type:
+          description: Type of salary earned by the employee
+          enum:
+          - hourly
+          - salary
+          example: salary
+          type: string
+        unit:
+          description: Unit of salary earned by the employee
+          enum:
+          - annual
+          - month
+          - semi-monthly
+          - week
+          - hour
+          example: annual
+          type: string
+      type: object
+      x-field_order:
+      - amount
+      - unit
+      - type
     EmploymentDatesResult:
       properties:
         full_time_start:
@@ -514,6 +392,166 @@ components:
           type: string
       type: object
       x-field_order: []
+    PersonAmericanIndian:
+      properties:
+        state:
+          description: Primary state of the federally-recognized American Indian or Alaska Native tribe, if applicable
+          enum:
+          - AL
+          - AK
+          - AZ
+          - AR
+          - CA
+          - CO
+          - CT
+          - DE
+          - DC
+          - FL
+          - GA
+          - HI
+          - ID
+          - IL
+          - IN
+          - IA
+          - KS
+          - KY
+          - LA
+          - ME
+          - MD
+          - MA
+          - MI
+          - MN
+          - MS
+          - MO
+          - MT
+          - NE
+          - NV
+          - NH
+          - NJ
+          - NM
+          - NY
+          - NC
+          - ND
+          - OH
+          - OK
+          - OR
+          - PA
+          - RI
+          - SC
+          - SD
+          - TN
+          - TX
+          - UT
+          - VT
+          - VA
+          - WA
+          - WV
+          - WI
+          - WY
+          - AS
+          - GU
+          - MH
+          - FM
+          - MP
+          - PW
+          - PR
+          - VI
+          - UM
+          type: string
+        tribe:
+          description: Name of the federally-recognized American Indian or Alaska Native tribe, if applicable
+          example: Ojibwe
+          type: string
+      type: object
+    Person:
+      properties:
+        contact:
+          allOf:
+          - $ref: '#/components/schemas/PersonContact'
+          description: Contact information for the person
+        date_of_birth:
+          description: ISO-8601 date string for the date of birth of the person
+          example: '1977-06-03'
+          format: date
+          type: string
+        details:
+          allOf:
+          - $ref: '#/components/schemas/PersonDetails'
+          description: Additional personal details of the person
+        first_name:
+          description: First name of the person
+          example: Catherine
+          type: string
+        home_address:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: Home address of the person
+        last_name:
+          description: Last name of the person
+          example: Briggs
+          type: string
+        maiden_name:
+          description: Maiden name of the person (deprecated)
+          type: string
+        mailing_address:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: Mailing address of the person, if different from home address
+        marital_status:
+          description: Marital status of the person
+          enum:
+          - single
+          - married
+          - domestic-partner
+          - divorced
+          - widowed
+          - legally-separated
+          example: married
+          type: string
+        middle_name:
+          description: Middle name of the person
+          example: S
+          type: string
+        sex:
+          description: Sex of the person
+          enum:
+          - F
+          - M
+          - U
+          - X
+          example: F
+          type: string
+        ssn:
+          description: Social Security Number of the person
+          example: '123456789'
+          pattern: ^(?!000)[0-9]{3}(?!00)[0-9]{2}(?!0000)[0-9]{4}$
+          type:
+          - string
+          - 'null'
+        suffix:
+          description: Suffix of the person
+          type: string
+      required:
+      - date_of_birth
+      - first_name
+      - home_address
+      - last_name
+      - sex
+      type: object
+      x-field_order:
+      - first_name
+      - middle_name
+      - last_name
+      - suffix
+      - home_address
+      - mailing_address
+      - date_of_birth
+      - ssn
+      - sex
+      - marital_status
+      - maiden_name
+      - contact
+      - details
     PersonContact:
       properties:
         email_address:
@@ -563,70 +601,32 @@ components:
       - preferred_method
       - preferred_language
       - speaks_english
-    EmployeeResult:
+    PersonDetails:
       properties:
-        classifications:
-          description: Fields that classify employees for group structure mapping
-          readOnly: true
-          type: object
-        created:
-          description: The date the record was originated
-          readOnly: true
-          type: integer
-        custom_individual_id:
-          description: The custom identifier for this employee in your system
-          readOnly: true
-          type: string
-        employment:
+        american_indian:
           allOf:
-          - $ref: '#/components/schemas/EmploymentResult'
-          description: Employment information for the employee
-        group_id:
-          description: Unique identifier of the group in Noyo
-          format: uuid
-          readOnly: true
-          type: string
-        id:
-          description: Unique identifier of the employee in Noyo
-          format: uuid
-          readOnly: true
-          type: string
-        location_id:
-          description: Unique identifier of the employee group location in Noyo
-          format: uuid
-          type: string
-        modified:
-          description: The date the record was last updated
-          readOnly: true
-          type: integer
-        person:
+          - $ref: '#/components/schemas/PersonAmericanIndian'
+          description: American Indian status details (if applicable)
+        disability:
           allOf:
-          - $ref: '#/components/schemas/Person'
-          description: Personal information for the employee
-        version:
-          description: Version of the employee record
-          format: uuid
-          readOnly: true
-          type: string
-      required:
-      - created
-      - employment
-      - group_id
-      - id
-      - modified
-      - person
-      - version
+          - $ref: '#/components/schemas/PersonDisability'
+          description: Disability details (if applicable)
+        is_military:
+          description: True if the person is in the military
+          type: boolean
+        is_student:
+          description: True if the person is a student
+          type: boolean
+        tobacco:
+          allOf:
+          - $ref: '#/components/schemas/PersonTobacco'
+          description: Tobacco usage details (if applicable)
       type: object
       x-field_order:
-      - id
-      - custom_individual_id
-      - version
-      - created
-      - modified
-      - group_id
-      - location_id
-      - person
-      - employment
-      - classifications
+      - tobacco
+      - disability
+      - american_indian
+      - is_student
+      - is_military
 x-readme:
   explorer-enabled: false

@@ -83,18 +83,6 @@ paths:
       - Label
 components:
   schemas:
-    BulkLabelTransactionsRequest:
-      properties:
-        member_transactions:
-          items:
-            description: Member Transactions UUID's to apply label
-            format: uuid
-            type: string
-          type: array
-      required:
-      - member_transactions
-      type: object
-      x-field_order: []
     LabelPublicResult:
       properties:
         created:
@@ -140,6 +128,18 @@ components:
       required:
       - failed_updates
       - successful_updates
+      type: object
+      x-field_order: []
+    BulkLabelTransactionsRequest:
+      properties:
+        member_transactions:
+          items:
+            description: Member Transactions UUID's to apply label
+            format: uuid
+            type: string
+          type: array
+      required:
+      - member_transactions
       type: object
       x-field_order: []
 x-readme:

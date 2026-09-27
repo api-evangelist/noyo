@@ -249,6 +249,21 @@ components:
       - transmissionGUID
       - transmissionStatusCode
       type: object
+    Audit3:
+      properties:
+        auditID:
+          description: Unique audit identifier
+          type: string
+        auditRecord:
+          description: Contains information about the number of records processed
+          items:
+            $ref: '#/components/schemas/AuditRecord'
+          minItems: 1
+          type: array
+      required:
+      - auditID
+      - auditRecord
+      type: object
     Remark:
       properties:
         entityCode:
@@ -302,21 +317,6 @@ components:
       - transmissionResponse
       type: object
       x-field_order: []
-    Audit3:
-      properties:
-        auditID:
-          description: Unique audit identifier
-          type: string
-        auditRecord:
-          description: Contains information about the number of records processed
-          items:
-            $ref: '#/components/schemas/AuditRecord'
-          minItems: 1
-          type: array
-      required:
-      - auditID
-      - auditRecord
-      type: object
     TransactionDetail:
       properties:
         referenceElement:

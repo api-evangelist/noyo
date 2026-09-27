@@ -110,6 +110,55 @@ paths:
       - Partner Document Sources
 components:
   schemas:
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+    PaginatedPartnerDocumentSourcePublicResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of partner document source results
+          items:
+            $ref: '#/components/schemas/PartnerDocumentSourcePublicResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
     PartnerDocumentSourcePublicResult:
       properties:
         created:
@@ -192,54 +241,5 @@ components:
       - source_config
       - feed_ids
       - group_ids
-    Meta:
-      properties:
-        offset:
-          description: The offset of the first response record within the matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
-        page_num:
-          description: The page number of the response records within the overall data set (1-based integer)
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        page_size:
-          description: The maximum number of response records on each page of results
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        total_records:
-          description: The total number of records in the entire matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
-      required:
-      - offset
-      - page_num
-      - page_size
-      type: object
-    PaginatedPartnerDocumentSourcePublicResult:
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of partner document source results
-          items:
-            $ref: '#/components/schemas/PartnerDocumentSourcePublicResult'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
 x-readme:
   explorer-enabled: false

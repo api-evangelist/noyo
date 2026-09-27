@@ -146,40 +146,6 @@ paths:
       - Feed Run
 components:
   schemas:
-    Count:
-      properties:
-        dependents:
-          format: int32
-          type: integer
-        enrollments:
-          format: int32
-          type: integer
-        members:
-          format: int32
-          type: integer
-        primaries:
-          format: int32
-          type: integer
-        terminations:
-          format: int32
-          type: integer
-      required:
-      - dependents
-      - enrollments
-      - members
-      - primaries
-      - terminations
-      type: object
-    Transmission:
-      properties:
-        id:
-          format: uuid
-          type: string
-        sent_timestamp:
-          type: integer
-      required:
-      - sent_timestamp
-      type: object
     PublicFeedRunResult:
       properties:
         carrier_id:
@@ -231,6 +197,31 @@ components:
       - version
       type: object
       x-field_order: []
+    PublicPaginatedFeedRunListResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          items:
+            $ref: '#/components/schemas/PublicFeedRunResult'
+          type: array
+      required:
+      - meta
+      type: object
+      x-field_order:
+      - meta
+      - response
+    File1:
+      properties:
+        audit:
+          $ref: '#/components/schemas/Audit2'
+        name:
+          type: string
+      required:
+      - name
+      type: object
     Meta:
       properties:
         offset:
@@ -262,31 +253,6 @@ components:
       - page_num
       - page_size
       type: object
-    PublicPaginatedFeedRunListResult:
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          items:
-            $ref: '#/components/schemas/PublicFeedRunResult'
-          type: array
-      required:
-      - meta
-      type: object
-      x-field_order:
-      - meta
-      - response
-    File1:
-      properties:
-        audit:
-          $ref: '#/components/schemas/Audit2'
-        name:
-          type: string
-      required:
-      - name
-      type: object
     Details1:
       properties:
         file:
@@ -294,10 +260,44 @@ components:
         transmission:
           $ref: '#/components/schemas/Transmission'
       type: object
+    Count:
+      properties:
+        dependents:
+          format: int32
+          type: integer
+        enrollments:
+          format: int32
+          type: integer
+        members:
+          format: int32
+          type: integer
+        primaries:
+          format: int32
+          type: integer
+        terminations:
+          format: int32
+          type: integer
+      required:
+      - dependents
+      - enrollments
+      - members
+      - primaries
+      - terminations
+      type: object
     Audit2:
       properties:
         count:
           $ref: '#/components/schemas/Count'
+      type: object
+    Transmission:
+      properties:
+        id:
+          format: uuid
+          type: string
+        sent_timestamp:
+          type: integer
+      required:
+      - sent_timestamp
       type: object
 x-readme:
   explorer-enabled: false

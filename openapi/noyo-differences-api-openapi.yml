@@ -1254,10 +1254,135 @@ paths:
       - Differences
 components:
   schemas:
-    BatchAssigneeUpdateRequest:
-      properties: {}
+    BatchDifferenceUpdateResponse:
+      properties:
+        ids:
+          items:
+            description: UUIDs that were updated (does not include those who had no change)
+            format: uuid
+            type: string
+          type: array
+      type: object
+      x-field_order: []
+    BasicSingleDifferenceResult:
+      properties:
+        carrier_id:
+          description: Unique identifier of the carrier in Noyo
+          format: uuid
+          type: string
+        created:
+          description: The date the record was created
+          type: integer
+        difference_classification:
+          description: 'Describes the way in which the carrier and platform values differ. One of: missing_from_carrier, field_mismatch, missing_from_platform'
+          type: string
+        difference_type:
+          description: Describes the specific type of data the difference is for
+          type: string
+        discrepancy_time:
+          description: If the difference has become a discrepancy, the time at which that happened
+          type: integer
+        employee_id:
+          description: Unique identifier of the employee whose family is associated with this difference
+          format: uuid
+          type: string
+        group_id:
+          description: Unique identifier of the group in Noyo
+          format: uuid
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        impact_score:
+          description: A numerical score describing the impact of the difference
+          format: int32
+          type: integer
+        impact_type:
+          description: Describes the type of impact this difference has
+          type:
+          - string
+          - 'null'
+        is_dismissed:
+          description: Has this difference been dismissed by the user?
+          type: boolean
+        is_suppressed:
+          description: Has this difference been suppressed by noyo?
+          type: boolean
+        modified:
+          description: The date the record was last updated
+          type: integer
+        object_id:
+          description: Unique identifier associated with the object
+          format: uuid
+          type: string
+        object_type:
+          description: 'Type of the object. One of: dependent, employee, individual_enrollment'
+          type: string
+        replaced_by:
+          description: Unique identifier of the replacing difference
+          format: uuid
+          type:
+          - string
+          - 'null'
+        resolved:
+          description: The date the difference was resolved
+          type:
+          - integer
+          - 'null'
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
       required:
+      - carrier_id
+      - created
+      - difference_classification
+      - difference_type
+      - employee_id
+      - group_id
+      - id
+      - impact_score
+      - is_dismissed
+      - is_suppressed
+      - modified
+      - object_id
+      - object_type
+      - organization_id
+      - version
+      type: object
+      x-field_order:
+      - id
+      - version
+      - created
+      - modified
+      - organization_id
+      - group_id
+      - carrier_id
+      - employee_id
+      - object_type
+      - object_id
+      - impact_type
+      - impact_score
+      - difference_classification
+      - difference_type
+      - resolved
+      - replaced_by
+      - is_dismissed
+      - is_suppressed
+      - discrepancy_time
+      - impact_score_calculation_method
+      - impact_score_calculated
       - assignee_id
+    BatchDismissalUpdateRequest:
+      properties:
+        ids:
+          items:
+            description: UUID request with of status to update
+            format: uuid
+            type: string
+          minItems: 1
+          type: array
       type: object
       x-field_order: []
     PublicSingleDifferenceResult:
@@ -1453,122 +1578,20 @@ components:
       - impact_score_calculation_method
       - impact_score_calculated
       - assignee_id
-    UpdateDifferenceAssigneeRequest:
+    BatchAssigneeUpdateRequest:
       properties: {}
       required:
       - assignee_id
       type: object
       x-field_order: []
-    BasicSingleDifferenceResult:
+    DifferenceCountsResult:
       properties:
-        carrier_id:
-          description: Unique identifier of the carrier in Noyo
-          format: uuid
-          type: string
-        created:
-          description: The date the record was created
-          type: integer
-        difference_classification:
-          description: 'Describes the way in which the carrier and platform values differ. One of: missing_from_carrier, field_mismatch, missing_from_platform'
-          type: string
-        difference_type:
-          description: Describes the specific type of data the difference is for
-          type: string
-        discrepancy_time:
-          description: If the difference has become a discrepancy, the time at which that happened
-          type: integer
-        employee_id:
-          description: Unique identifier of the employee whose family is associated with this difference
-          format: uuid
-          type: string
-        group_id:
-          description: Unique identifier of the group in Noyo
-          format: uuid
-          type: string
-        id:
-          description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        impact_score:
-          description: A numerical score describing the impact of the difference
-          format: int32
-          type: integer
-        impact_type:
-          description: Describes the type of impact this difference has
-          type:
-          - string
-          - 'null'
-        is_dismissed:
-          description: Has this difference been dismissed by the user?
-          type: boolean
-        is_suppressed:
-          description: Has this difference been suppressed by noyo?
-          type: boolean
-        modified:
-          description: The date the record was last updated
-          type: integer
-        object_id:
-          description: Unique identifier associated with the object
-          format: uuid
-          type: string
-        object_type:
-          description: 'Type of the object. One of: dependent, employee, individual_enrollment'
-          type: string
-        replaced_by:
-          description: Unique identifier of the replacing difference
-          format: uuid
-          type:
-          - string
-          - 'null'
-        resolved:
-          description: The date the difference was resolved
-          type:
-          - integer
-          - 'null'
-        version:
-          description: Current version of the record
-          format: uuid
-          type: string
-      required:
-      - carrier_id
-      - created
-      - difference_classification
-      - difference_type
-      - employee_id
-      - group_id
-      - id
-      - impact_score
-      - is_dismissed
-      - is_suppressed
-      - modified
-      - object_id
-      - object_type
-      - organization_id
-      - version
+        response:
+          items:
+            type: object
+          type: array
       type: object
-      x-field_order:
-      - id
-      - version
-      - created
-      - modified
-      - organization_id
-      - group_id
-      - carrier_id
-      - employee_id
-      - object_type
-      - object_id
-      - impact_type
-      - impact_score
-      - difference_classification
-      - difference_type
-      - resolved
-      - replaced_by
-      - is_dismissed
-      - is_suppressed
-      - discrepancy_time
-      - impact_score_calculation_method
-      - impact_score_calculated
-      - assignee_id
+      x-field_order: []
     PaginatedTransactionsDifferencesResult:
       properties:
         meta:
@@ -1617,33 +1640,10 @@ components:
       x-field_order:
       - meta
       - response
-    DifferenceCountsResult:
-      properties:
-        response:
-          items:
-            type: object
-          type: array
-      type: object
-      x-field_order: []
-    BatchDismissalUpdateRequest:
-      properties:
-        ids:
-          items:
-            description: UUID request with of status to update
-            format: uuid
-            type: string
-          minItems: 1
-          type: array
-      type: object
-      x-field_order: []
-    BatchDifferenceUpdateResponse:
-      properties:
-        ids:
-          items:
-            description: UUIDs that were updated (does not include those who had no change)
-            format: uuid
-            type: string
-          type: array
+    UpdateDifferenceAssigneeRequest:
+      properties: {}
+      required:
+      - assignee_id
       type: object
       x-field_order: []
     PaginatedDifferencesResult:

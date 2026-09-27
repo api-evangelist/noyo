@@ -39,50 +39,24 @@ paths:
       - Plan Rates
 components:
   schemas:
-    TemporalPlanRateResult:
+    PaginatedPlanRateByPlanResult:
       properties:
-        end_date:
-          format: date
-          type:
-          - string
-          - 'null'
-        id:
-          format: uuid
-          type: string
-        plan_rate_id:
-          format: uuid
-          type: string
-        rate_structure:
-          $ref: '#/components/schemas/RateStructure'
-        start_date:
-          format: date
-          type: string
-      required:
-      - id
-      - plan_rate_id
-      - rate_structure
-      - start_date
-      type: object
-    PlanRateByPlanResult:
-      properties:
-        plan_id:
-          description: Unique identifier of the plan
-          format: uuid
-          type: string
-        plan_rate_id:
-          description: Unique identifier of the plan rate
-          format: uuid
-          type: string
-        temporal_rates:
-          description: List of temporal rates for this plan
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of plan rate results
           items:
-            $ref: '#/components/schemas/TemporalPlanRateResult'
+            $ref: '#/components/schemas/PlanRateByPlanResult'
           type: array
       required:
-      - plan_id
-      - plan_rate_id
-      - temporal_rates
+      - meta
+      - response
       type: object
+      x-field_order:
+      - meta
+      - response
     Meta:
       properties:
         offset:
@@ -114,24 +88,30 @@ components:
       - page_num
       - page_size
       type: object
-    PaginatedPlanRateByPlanResult:
+    TemporalPlanRateResult:
       properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of plan rate results
-          items:
-            $ref: '#/components/schemas/PlanRateByPlanResult'
-          type: array
+        end_date:
+          format: date
+          type:
+          - string
+          - 'null'
+        id:
+          format: uuid
+          type: string
+        plan_rate_id:
+          format: uuid
+          type: string
+        rate_structure:
+          $ref: '#/components/schemas/RateStructure'
+        start_date:
+          format: date
+          type: string
       required:
-      - meta
-      - response
+      - id
+      - plan_rate_id
+      - rate_structure
+      - start_date
       type: object
-      x-field_order:
-      - meta
-      - response
     RateStructure:
       properties:
         calculation_type:
@@ -147,6 +127,26 @@ components:
       required:
       - calculation_type
       - options
+      type: object
+    PlanRateByPlanResult:
+      properties:
+        plan_id:
+          description: Unique identifier of the plan
+          format: uuid
+          type: string
+        plan_rate_id:
+          description: Unique identifier of the plan rate
+          format: uuid
+          type: string
+        temporal_rates:
+          description: List of temporal rates for this plan
+          items:
+            $ref: '#/components/schemas/TemporalPlanRateResult'
+          type: array
+      required:
+      - plan_id
+      - plan_rate_id
+      - temporal_rates
       type: object
 x-readme:
   explorer-enabled: false

@@ -100,32 +100,25 @@ paths:
       - Ui Group Connections
 components:
   schemas:
-    GroupSetupRequestPublicGroupDataResult:
+    GroupConnectionRequestEditUI:
       properties:
-        broker_federal_ein:
-          description: Broker federal EIN, used in Principal groups
-          readOnly: true
+        sent_carrier_auth_comms:
+          description: Timestamp of carrier authorization request email
+          format: date-time
+          type:
+          - string
+          - 'null'
+        setup_data:
+          description: Information of the group connection setup
+          type: object
+        setup_result:
+          description: More information about the result of the group connection
+          type: object
+        status:
+          description: Status of the group connection
           type: string
-        broker_tin:
-          description: Broker TIN, used in Anthem groups
-          readOnly: true
-          type: string
-        carrier_group_id:
-          description: Unique identifier for the group in the carrier system
-          readOnly: true
-          type: string
-        employer_email_address:
-          description: Email address of the group's employer
-          readOnly: true
-          type: string
-        group_name:
-          description: Name for the group in the Noyo system
-          readOnly: true
-          type: string
-      required:
-      - carrier_group_id
-      - group_name
       type: object
+      x-field_order: []
     GroupSetupRequestUIResult:
       properties:
         carrier_id:
@@ -213,24 +206,31 @@ components:
       - group_data
       - setup_result
       - setup_data
-    GroupConnectionRequestEditUI:
+    GroupSetupRequestPublicGroupDataResult:
       properties:
-        sent_carrier_auth_comms:
-          description: Timestamp of carrier authorization request email
-          format: date-time
-          type:
-          - string
-          - 'null'
-        setup_data:
-          description: Information of the group connection setup
-          type: object
-        setup_result:
-          description: More information about the result of the group connection
-          type: object
-        status:
-          description: Status of the group connection
+        broker_federal_ein:
+          description: Broker federal EIN, used in Principal groups
+          readOnly: true
           type: string
+        broker_tin:
+          description: Broker TIN, used in Anthem groups
+          readOnly: true
+          type: string
+        carrier_group_id:
+          description: Unique identifier for the group in the carrier system
+          readOnly: true
+          type: string
+        employer_email_address:
+          description: Email address of the group's employer
+          readOnly: true
+          type: string
+        group_name:
+          description: Name for the group in the Noyo system
+          readOnly: true
+          type: string
+      required:
+      - carrier_group_id
+      - group_name
       type: object
-      x-field_order: []
 x-readme:
   explorer-enabled: false

@@ -96,24 +96,19 @@ paths:
       - Member Snapshot Test Population
 components:
   schemas:
-    PaginatedMemberSnapshotTestPopulationResult:
+    MemberSnapshotTestPopulationCreateRequest:
       properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of Member Snapshot Test Population results
-          items:
-            $ref: '#/components/schemas/MemberSnapshotTestPopulationResult'
-          type: array
+        carrier_id:
+          format: uuid
+          type: string
+        group_id:
+          format: uuid
+          type: string
       required:
-      - meta
-      - response
+      - carrier_id
+      - group_id
       type: object
-      x-field_order:
-      - meta
-      - response
+      x-field_order: []
     MemberSnapshotTestPopulationResult:
       properties:
         carrier_id:
@@ -174,18 +169,23 @@ components:
       - page_num
       - page_size
       type: object
-    MemberSnapshotTestPopulationCreateRequest:
+    PaginatedMemberSnapshotTestPopulationResult:
       properties:
-        carrier_id:
-          format: uuid
-          type: string
-        group_id:
-          format: uuid
-          type: string
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of Member Snapshot Test Population results
+          items:
+            $ref: '#/components/schemas/MemberSnapshotTestPopulationResult'
+          type: array
       required:
-      - carrier_id
-      - group_id
+      - meta
+      - response
       type: object
-      x-field_order: []
+      x-field_order:
+      - meta
+      - response
 x-readme:
   explorer-enabled: false
