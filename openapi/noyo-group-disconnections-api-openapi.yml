@@ -582,6 +582,45 @@ paths:
       - Group Disconnections
 components:
   schemas:
+    GroupDisconnectionRequestPublicConfirmRequest:
+      properties:
+        effective_end_date:
+          description: The date at which the disconnection will take effect - required if not already set
+          format: date
+          type: string
+      type: object
+      x-field_order: []
+    UIGroupDisconnectionRequestNestedReason:
+      properties:
+        context_from_carrier:
+          description: Context provided by the carrier
+          readOnly: true
+          type: string
+        context_from_platform:
+          description: Context given by a platform when rejecting a disconnection
+          readOnly: true
+          type: string
+        created_by:
+          description: Which team created the reason
+          readOnly: true
+          type: string
+        other_reason:
+          description: Other reason for the request
+          readOnly: true
+          type: string
+        reason:
+          description: Why the action was taken
+          readOnly: true
+          type: string
+      required:
+      - created_by
+      type: object
+      x-field_order:
+      - created_by
+      - reason
+      - other_reason
+      - context_from_carrier
+      - context_from_platform
     GroupDisconnectionRequestPublicCreateRequest:
       properties:
         carrier_id:
@@ -619,24 +658,106 @@ components:
       - carrier_id
       - group_id
       - effective_end_date
-    UIPaginatedGroupDisconnectionRequestResult:
+    UIGroupDisconnectionRequestResult:
       properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of group disconnection request results
-          items:
-            $ref: '#/components/schemas/UIGroupDisconnectionRequestResult'
-          type: array
+        carrier_id:
+          description: Unique identifier for the carrier to be disconnected from
+          format: uuid
+          readOnly: true
+          type: string
+        completed:
+          description: Timestamp at which the disconnection was completed
+          readOnly: true
+          type: integer
+        created:
+          description: The date the record was created
+          type: integer
+        created_reason:
+          $ref: '#/components/schemas/UIGroupDisconnectionRequestNestedReason'
+        decided:
+          description: Timestamp at which the platform recorded a decision on the disconnection
+          readOnly: true
+          type: integer
+        effective_end_date:
+          description: The date at which the disconnection will take effect
+          format: date
+          readOnly: true
+          type: string
+        group_id:
+          description: Unique identifier for the group to be disconnected. May be missing if group has already been disconnected.
+          format: uuid
+          readOnly: true
+          type: string
+        group_name:
+          description: Name of the group to be disconnected from
+          readOnly: true
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        organization_id:
+          description: Unique identifier for organization associated with the request
+          format: uuid
+          readOnly: true
+          type: string
+        rejected_reason:
+          $ref: '#/components/schemas/UIGroupDisconnectionRequestNestedReason'
+        source_date:
+          description: The date associated with the source of the disconnection
+          format: date
+          readOnly: true
+          type: string
+        source_id:
+          description: If applicable, the ID associated with the source of the disconnection request
+          format: uuid
+          readOnly: true
+          type: string
+        source_type:
+          description: The source of the disconnection request
+          readOnly: true
+          type: string
+        status:
+          description: The status of the disconnection request
+          readOnly: true
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
       required:
-      - meta
-      - response
+      - carrier_id
+      - created
+      - group_name
+      - id
+      - modified
+      - organization_id
+      - source_id
+      - source_type
+      - status
+      - version
       type: object
       x-field_order:
-      - meta
-      - response
+      - id
+      - version
+      - created
+      - modified
+      - organization_id
+      - carrier_id
+      - group_id
+      - group_name
+      - source_id
+      - source_type
+      - source_date
+      - status
+      - effective_end_date
+      - completed
+      - decided
+      - created_reason
+      - rejected_reason
     Meta:
       properties:
         offset:
@@ -668,14 +789,42 @@ components:
       - page_num
       - page_size
       type: object
-    GroupDisconnectionRequestPublicConfirmRequest:
+    PaginatedGroupDisconnectionRequestResult:
       properties:
-        effective_end_date:
-          description: The date at which the disconnection will take effect - required if not already set
-          format: date
-          type: string
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of group disconnection request results
+          items:
+            $ref: '#/components/schemas/GroupDisconnectionRequestResult'
+          type: array
+      required:
+      - meta
+      - response
       type: object
-      x-field_order: []
+      x-field_order:
+      - meta
+      - response
+    UIPaginatedGroupDisconnectionRequestResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of group disconnection request results
+          items:
+            $ref: '#/components/schemas/UIGroupDisconnectionRequestResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
     GroupDisconnectionRequestResult:
       properties:
         carrier_id:
@@ -797,154 +946,5 @@ components:
       - status
       type: object
       x-field_order: []
-    UIGroupDisconnectionRequestResult:
-      properties:
-        carrier_id:
-          description: Unique identifier for the carrier to be disconnected from
-          format: uuid
-          readOnly: true
-          type: string
-        completed:
-          description: Timestamp at which the disconnection was completed
-          readOnly: true
-          type: integer
-        created:
-          description: The date the record was created
-          type: integer
-        created_reason:
-          $ref: '#/components/schemas/UIGroupDisconnectionRequestNestedReason'
-        decided:
-          description: Timestamp at which the platform recorded a decision on the disconnection
-          readOnly: true
-          type: integer
-        effective_end_date:
-          description: The date at which the disconnection will take effect
-          format: date
-          readOnly: true
-          type: string
-        group_id:
-          description: Unique identifier for the group to be disconnected. May be missing if group has already been disconnected.
-          format: uuid
-          readOnly: true
-          type: string
-        group_name:
-          description: Name of the group to be disconnected from
-          readOnly: true
-          type: string
-        id:
-          description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        modified:
-          description: The date the record was last updated
-          type: integer
-        organization_id:
-          description: Unique identifier for organization associated with the request
-          format: uuid
-          readOnly: true
-          type: string
-        rejected_reason:
-          $ref: '#/components/schemas/UIGroupDisconnectionRequestNestedReason'
-        source_date:
-          description: The date associated with the source of the disconnection
-          format: date
-          readOnly: true
-          type: string
-        source_id:
-          description: If applicable, the ID associated with the source of the disconnection request
-          format: uuid
-          readOnly: true
-          type: string
-        source_type:
-          description: The source of the disconnection request
-          readOnly: true
-          type: string
-        status:
-          description: The status of the disconnection request
-          readOnly: true
-          type: string
-        version:
-          description: Current version of the record
-          format: uuid
-          type: string
-      required:
-      - carrier_id
-      - created
-      - group_name
-      - id
-      - modified
-      - organization_id
-      - source_id
-      - source_type
-      - status
-      - version
-      type: object
-      x-field_order:
-      - id
-      - version
-      - created
-      - modified
-      - organization_id
-      - carrier_id
-      - group_id
-      - group_name
-      - source_id
-      - source_type
-      - source_date
-      - status
-      - effective_end_date
-      - completed
-      - decided
-      - created_reason
-      - rejected_reason
-    PaginatedGroupDisconnectionRequestResult:
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of group disconnection request results
-          items:
-            $ref: '#/components/schemas/GroupDisconnectionRequestResult'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
-    UIGroupDisconnectionRequestNestedReason:
-      properties:
-        context_from_carrier:
-          description: Context provided by the carrier
-          readOnly: true
-          type: string
-        context_from_platform:
-          description: Context given by a platform when rejecting a disconnection
-          readOnly: true
-          type: string
-        created_by:
-          description: Which team created the reason
-          readOnly: true
-          type: string
-        other_reason:
-          description: Other reason for the request
-          readOnly: true
-          type: string
-        reason:
-          description: Why the action was taken
-          readOnly: true
-          type: string
-      required:
-      - created_by
-      type: object
-      x-field_order:
-      - created_by
-      - reason
-      - other_reason
-      - context_from_carrier
-      - context_from_platform
 x-readme:
   explorer-enabled: false

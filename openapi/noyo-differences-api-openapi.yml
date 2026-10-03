@@ -1254,13 +1254,20 @@ paths:
       - Differences
 components:
   schemas:
-    BatchDifferenceUpdateResponse:
+    UpdateDifferenceAssigneeRequest:
+      properties: {}
+      required:
+      - assignee_id
+      type: object
+      x-field_order: []
+    BatchDismissalUpdateRequest:
       properties:
         ids:
           items:
-            description: UUIDs that were updated (does not include those who had no change)
+            description: UUID request with of status to update
             format: uuid
             type: string
+          minItems: 1
           type: array
       type: object
       x-field_order: []
@@ -1374,17 +1381,6 @@ components:
       - impact_score_calculation_method
       - impact_score_calculated
       - assignee_id
-    BatchDismissalUpdateRequest:
-      properties:
-        ids:
-          items:
-            description: UUID request with of status to update
-            format: uuid
-            type: string
-          minItems: 1
-          type: array
-      type: object
-      x-field_order: []
     PublicSingleDifferenceResult:
       properties:
         carrier_id:
@@ -1578,74 +1574,6 @@ components:
       - impact_score_calculation_method
       - impact_score_calculated
       - assignee_id
-    BatchAssigneeUpdateRequest:
-      properties: {}
-      required:
-      - assignee_id
-      type: object
-      x-field_order: []
-    DifferenceCountsResult:
-      properties:
-        response:
-          items:
-            type: object
-          type: array
-      type: object
-      x-field_order: []
-    PaginatedTransactionsDifferencesResult:
-      properties:
-        meta:
-          description: Metadata associated with the response data
-          properties:
-            offset:
-              description: The offset of the first response record within the matching data set
-              format: int32
-              minimum: 0
-              readOnly: true
-              type: integer
-            page_num:
-              description: The page number of the response records within the overall data set (1-based integer)
-              format: int32
-              minimum: 1
-              readOnly: true
-              type: integer
-            page_size:
-              description: The maximum number of response records on each page of results
-              format: int32
-              minimum: 1
-              readOnly: true
-              type: integer
-            total_records:
-              description: The total number of records in the entire matching data set
-              format: int32
-              minimum: 0
-              readOnly: true
-              type: integer
-          required:
-          - offset
-          - page_num
-          - page_size
-          type: object
-        response:
-          description: List of Member transactions that created differences
-          items:
-            description: member Transaction UUID
-            format: uuid
-            type: string
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
-    UpdateDifferenceAssigneeRequest:
-      properties: {}
-      required:
-      - assignee_id
-      type: object
-      x-field_order: []
     PaginatedDifferencesResult:
       properties:
         meta:
@@ -1791,6 +1719,78 @@ components:
             - organization_id
             - version
             type: object
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    BatchAssigneeUpdateRequest:
+      properties: {}
+      required:
+      - assignee_id
+      type: object
+      x-field_order: []
+    BatchDifferenceUpdateResponse:
+      properties:
+        ids:
+          items:
+            description: UUIDs that were updated (does not include those who had no change)
+            format: uuid
+            type: string
+          type: array
+      type: object
+      x-field_order: []
+    DifferenceCountsResult:
+      properties:
+        response:
+          items:
+            type: object
+          type: array
+      type: object
+      x-field_order: []
+    PaginatedTransactionsDifferencesResult:
+      properties:
+        meta:
+          description: Metadata associated with the response data
+          properties:
+            offset:
+              description: The offset of the first response record within the matching data set
+              format: int32
+              minimum: 0
+              readOnly: true
+              type: integer
+            page_num:
+              description: The page number of the response records within the overall data set (1-based integer)
+              format: int32
+              minimum: 1
+              readOnly: true
+              type: integer
+            page_size:
+              description: The maximum number of response records on each page of results
+              format: int32
+              minimum: 1
+              readOnly: true
+              type: integer
+            total_records:
+              description: The total number of records in the entire matching data set
+              format: int32
+              minimum: 0
+              readOnly: true
+              type: integer
+          required:
+          - offset
+          - page_num
+          - page_size
+          type: object
+        response:
+          description: List of Member transactions that created differences
+          items:
+            description: member Transaction UUID
+            format: uuid
+            type: string
           type: array
       required:
       - meta

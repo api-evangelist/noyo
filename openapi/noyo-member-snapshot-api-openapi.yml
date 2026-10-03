@@ -1604,135 +1604,7 @@ paths:
       - Member Snapshot
 components:
   schemas:
-    InboundMemberSnapshotEmployee:
-      properties:
-        classifications:
-          description: Fields that classify employees for group structure mapping
-          type: object
-        custom_individual_id:
-          description: Custom ID of the Employee from platform system. Required if member is new
-          minLength: 1
-          type: string
-        employment:
-          allOf:
-          - $ref: '#/components/schemas/InboundMemberSnapshotEmployment'
-          description: Employment information for the employee
-        event_id:
-          description: The unique ID of an event from the snapshot events list
-          example: '1'
-          minLength: 1
-          type: string
-        group_individual_id:
-          description: Group-level ID of the employee
-          minLength: 1
-          type: string
-        id:
-          description: Unique ID of the Employee in Noyo's system. Leave blank if member is new
-          format: uuid
-          type: string
-        person:
-          allOf:
-          - $ref: '#/components/schemas/InboundMemberSnapshotPerson'
-          description: Personal information for the employee
-      required:
-      - employment
-      - person
-      type: object
-      x-field_order: []
-    InboundMemberSnapshotPersonTobacco:
-      properties:
-        duration:
-          description: Duration of tobacco use
-          example: 5 years
-          type: string
-        frequency:
-          description: Frequency of tobacco use
-          example: Daily
-          type: string
-        types:
-          description: List of types of tobacco use
-          example: cigarettes
-          items:
-            enum:
-            - pipe
-            - cigarettes
-            - chewing-tobacco
-            type: string
-          minItems: 1
-          type: array
-        user:
-          description: True if the person uses tobacco of any kind
-          example: true
-          type: boolean
-      type: object
-      x-field_order: []
-    RuleSetOverrides:
-      properties:
-        noyo_post:
-          description: Noyo post rule set ID to override selection for
-          format: uuid
-          type: string
-        noyo_pre:
-          description: Noyo pre rule set ID to use instead of the default
-          format: uuid
-          type: string
-        platform_post:
-          description: Platform post rule set ID to override selection for
-          format: uuid
-          type: string
-        platform_pre:
-          description: Platform pre rule set ID to override selection for
-          format: uuid
-          type: string
-        primary:
-          description: Primary rule set ID to override selection for
-          format: uuid
-          type: string
-      type: object
-    InboundMemberSnapshotDependent:
-      properties:
-        custom_individual_id:
-          description: Custom ID of the Dependent from platform system. Required if member is new
-          minLength: 1
-          type: string
-        event_id:
-          description: The unique ID of an event from the snapshot events list
-          example: '1'
-          minLength: 1
-          type: string
-        group_individual_id:
-          description: Group-level ID of the dependent
-          minLength: 1
-          type: string
-        id:
-          description: Unique ID of the Dependent in Noyo's system. Leave blank if member is new
-          format: uuid
-          type: string
-        person:
-          allOf:
-          - $ref: '#/components/schemas/InboundMemberSnapshotPerson'
-          description: Personal information for the dependent
-        relationship:
-          description: Relationship of the dependent to the employee
-          enum:
-          - spouse
-          - child
-          - domestic-partner
-          - grandchild
-          - civil-union
-          - step-child
-          - foster-child
-          - adopted-child
-          - legal-guardianship
-          - ex-spouse
-          - other
-          type: string
-      required:
-      - person
-      - relationship
-      type: object
-      x-field_order: []
-    PaginatedUIMemberSnapshotPublicResult:
+    OutboundPaginatedMemberSnapshot:
       properties:
         meta:
           allOf:
@@ -1741,7 +1613,7 @@ components:
         response:
           description: List of member snapshot results
           items:
-            $ref: '#/components/schemas/UIMemberSnapshotPublicParentResult'
+            $ref: '#/components/schemas/OutboundSimplifiedMemberSnapshot'
           type: array
       required:
       - meta
@@ -1750,52 +1622,166 @@ components:
       x-field_order:
       - meta
       - response
-    InboundMemberSnapshotPrimaryCareProvider:
+    MemberSnapshotDB:
       properties:
-        entity_identifier_code:
-          description: Code of the entity identifier
+        coverages:
+          description: List of coverage and enrollment decisions for each member
+          items:
+            $ref: '#/components/schemas/InboundMemberSnapshotCoverage'
+          type: array
+        dependents:
+          description: List of demographic information for each dependent
+          items:
+            $ref: '#/components/schemas/InboundMemberSnapshotDependent'
+          type: array
+        employee:
+          allOf:
+          - $ref: '#/components/schemas/InboundMemberSnapshotEmployee'
+          description: Demographic information for the employee
+        enable_member_auto_link:
+          default: false
+          description: Boolean flag for autolinking workflow
+          type: boolean
+        events:
+          description: List of events associated with member and coverage updates
+          items:
+            $ref: '#/components/schemas/InboundMemberSnapshotEvent'
+          type: array
+        omitted_coverage_handling:
+          allOf:
+          - $ref: '#/components/schemas/InboundMemberSnapshotOmittedCoverage'
+          description: Configuration for handling omitted coverages
+        snapshot_mode:
+          description: Mode describing how the contents of the snapshot will be processed
           enum:
-          - pcp
-          - dental_pcp
-          - obgyn
-          type: string
-        entity_type:
-          description: Type of entity
-          enum:
-          - person
-          - non_person_entity
-          type: string
-        first_name:
-          description: First name of the primary care provider
-          type: string
-        identification_code:
-          description: Code of the identification
-          type: string
-        identification_code_type:
-          description: Type of the identification code
-          enum:
-          - service_provider_number
-          - national_provider_identifier
-          type: string
-        last_name:
-          description: Last name of the primary care provider
-          type: string
-        middle_name:
-          description: Middle name of the primary care provider
-          type: string
-        organization_name:
-          description: Organization name of the primary care provider.
-          type: string
-        patient_relationship_code:
-          description: Code which represents the relationship of the patient to the primary care provider
-          enum:
-          - established
-          - not_established
-          - unknown
+          - current_open
+          example: current_open
           type: string
       required:
-      - identification_code
-      - identification_code_type
+      - employee
+      - snapshot_mode
+      type: object
+    PlatformChange:
+      properties:
+        id:
+          description: Unique identifier of the platform change record
+          format: uuid
+          type: string
+        status:
+          description: The status of the platform change
+          type: string
+        type:
+          description: The type of the platform change record
+          enum:
+          - member_request
+          - member_snapshot
+          type: string
+      required:
+      - id
+      - status
+      - type
+      type: object
+    InboundMemberSnapshotEmploymentDates:
+      properties:
+        full_time_start:
+          description: ISO-8601 date string for start date as a full time employee with the group (if applicable)
+          example: '2017-01-17'
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
+          type: string
+        hire_date:
+          description: ISO-8601 date string for the hire date of the employee
+          example: '2017-01-17'
+          format: date
+          type: string
+        rehire:
+          description: ISO-8601 date string for the rehire date of the employee (if applicable)
+          example: '2018-02-01'
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
+          type: string
+        retirement:
+          description: ISO-8601 date string for the retirement date of the employee (if applicable)
+          example: '2019-01-01'
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
+          type: string
+        terminated:
+          description: ISO-8601 date string for the termination date of the employee (if applicable)
+          example: '2018-01-01'
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
+          type: string
+      required:
+      - hire_date
+      type: object
+      x-field_order: []
+    InboundMemberSnapshotPersonAmericanIndian:
+      properties:
+        state:
+          description: Primary state of the federally-recognized American Indian or Alaska Native tribe, if applicable
+          enum:
+          - AL
+          - AK
+          - AZ
+          - AR
+          - CA
+          - CO
+          - CT
+          - DE
+          - DC
+          - FL
+          - GA
+          - HI
+          - ID
+          - IL
+          - IN
+          - IA
+          - KS
+          - KY
+          - LA
+          - ME
+          - MD
+          - MA
+          - MI
+          - MN
+          - MS
+          - MO
+          - MT
+          - NE
+          - NV
+          - NH
+          - NJ
+          - NM
+          - NY
+          - NC
+          - ND
+          - OH
+          - OK
+          - OR
+          - PA
+          - RI
+          - SC
+          - SD
+          - TN
+          - TX
+          - UT
+          - VT
+          - VA
+          - WA
+          - WV
+          - WI
+          - WY
+          - AS
+          - GU
+          - MH
+          - FM
+          - MP
+          - PW
+          - PR
+          - VI
+          - UM
+          type: string
+        tribe:
+          description: Name of the federally-recognized American Indian or Alaska Native tribe, if applicable
+          example: Ojibwe
+          type: string
       type: object
       x-field_order: []
     InboundMemberSnapshot:
@@ -1836,15 +1822,6 @@ components:
       required:
       - employee
       - snapshot_mode
-      type: object
-      x-field_order: []
-    InboundMemberSnapshotOmittedCoverageCustom:
-      properties:
-        effective_end_date:
-          description: A custom effective end date that will be used for the termination of the omitted coverage(s).
-          example: '2024-03-15'
-          format: date
-          type: string
       type: object
       x-field_order: []
     InboundMemberSnapshotPerson:
@@ -1924,6 +1901,233 @@ components:
       - sex
       type: object
       x-field_order: []
+    UIEmployeeResult:
+      properties:
+        employment:
+          allOf:
+          - $ref: '#/components/schemas/Employment'
+          description: Employment information for the employee
+        id:
+          description: Unique identifier of the employee in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        person:
+          allOf:
+          - $ref: '#/components/schemas/UIPersonResult'
+          description: Personal information for the employee
+      required:
+      - employment
+      - id
+      - person
+      type: object
+    OutboundSimplifiedMemberSnapshot:
+      properties:
+        created:
+          description: The date the record was created
+          type: integer
+        employee_id:
+          description: Unique identifier of the employee in Noyo
+          format: uuid
+          type: string
+        fulfillment_summary:
+          description: List of member snapshot fulfillment statuses per carrier
+          items:
+            $ref: '#/components/schemas/CarrierFulfillmentStatus'
+          type: array
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        status:
+          description: Status of the member snapshot
+          enum:
+          - processing
+          - completed
+          - replaced
+          - canceled
+          - submitted
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - created
+      - employee_id
+      - id
+      - modified
+      - status
+      - version
+      type: object
+      x-field_order:
+      - id
+      - version
+      - created
+      - modified
+      - employee_id
+      - status
+      - fulfillment_summary
+    InboundMemberSnapshotEmployee:
+      properties:
+        classifications:
+          description: Fields that classify employees for group structure mapping
+          type: object
+        custom_individual_id:
+          description: Custom ID of the Employee from platform system. Required if member is new
+          minLength: 1
+          type: string
+        employment:
+          allOf:
+          - $ref: '#/components/schemas/InboundMemberSnapshotEmployment'
+          description: Employment information for the employee
+        event_id:
+          description: The unique ID of an event from the snapshot events list
+          example: '1'
+          minLength: 1
+          type: string
+        group_individual_id:
+          description: Group-level ID of the employee
+          minLength: 1
+          type: string
+        id:
+          description: Unique ID of the Employee in Noyo's system. Leave blank if member is new
+          format: uuid
+          type: string
+        person:
+          allOf:
+          - $ref: '#/components/schemas/InboundMemberSnapshotPerson'
+          description: Personal information for the employee
+      required:
+      - employment
+      - person
+      type: object
+      x-field_order: []
+    InboundTestMemberSnapshot:
+      properties:
+        carrier_overrides:
+          description: List of carrier overrides to control connection status for testing
+          items:
+            $ref: '#/components/schemas/CarrierOverride'
+          type: array
+        member_snapshot:
+          allOf:
+          - $ref: '#/components/schemas/InboundMemberSnapshot'
+          description: The member snapshot data to process
+        rule_set_overrides:
+          allOf:
+          - $ref: '#/components/schemas/RuleSetOverrides'
+          description: Run test overriding rule sets by ID
+      required:
+      - member_snapshot
+      type: object
+      x-field_order: []
+    GroupResult:
+      properties:
+        created:
+          description: The date the record was created
+          type: integer
+        dba_name:
+          description: DBA name for the company, if applicable
+          example: Floors R Us
+          type: string
+        federal_ein:
+          description: Federal Employer Identification Number for the company
+          example: '112222222'
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        name:
+          description: Name of the group
+          example: ACME Flooring
+          type: string
+        organization_id:
+          description: Unique identifier of the platform or broker organization in Noyo
+          format: uuid
+          type: string
+        sic_code:
+          description: SIC Code of the group
+          example: '5713'
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - created
+      - id
+      - modified
+      - name
+      - version
+      type: object
+      x-field_order:
+      - id
+      - version
+      - created
+      - modified
+      - organization_id
+      - name
+      - sic_code
+      - dba_name
+      - federal_ein
+    InboundMemberSnapshotPersonTobacco:
+      properties:
+        duration:
+          description: Duration of tobacco use
+          example: 5 years
+          type: string
+        frequency:
+          description: Frequency of tobacco use
+          example: Daily
+          type: string
+        types:
+          description: List of types of tobacco use
+          example: cigarettes
+          items:
+            enum:
+            - pipe
+            - cigarettes
+            - chewing-tobacco
+            type: string
+          minItems: 1
+          type: array
+        user:
+          description: True if the person uses tobacco of any kind
+          example: true
+          type: boolean
+      type: object
+      x-field_order: []
+    RuleSetOverrides:
+      properties:
+        noyo_post:
+          description: Noyo post rule set ID to override selection for
+          format: uuid
+          type: string
+        noyo_pre:
+          description: Noyo pre rule set ID to use instead of the default
+          format: uuid
+          type: string
+        platform_post:
+          description: Platform post rule set ID to override selection for
+          format: uuid
+          type: string
+        platform_pre:
+          description: Platform pre rule set ID to override selection for
+          format: uuid
+          type: string
+        primary:
+          description: Primary rule set ID to override selection for
+          format: uuid
+          type: string
+      type: object
     Salary:
       properties:
         amount:
@@ -1953,91 +2157,70 @@ components:
       - amount
       - unit
       - type
-    InboundMemberSnapshotCOBRADetails:
+    InboundMemberSnapshotOmittedCoverage:
       properties:
-        cobra_enrolled:
-          description: Boolean representing whether or not a member is enrolled in COBRA
-          type: boolean
-        eligibility_end_date:
-          description: The date which represents when the individual is no longer eligible for COBRA
-          format: date
-          type: string
-        eligibility_start_date:
-          description: The date which represents when the individual is first eligible for COBRA
-          format: date
-          type: string
-        qualifying_event_date:
-          description: The date of the event which qualified the individual for COBRA
-          format: date
-          type: string
-        qualifying_event_reason:
-          description: The reason of the event which qualified the individual for COBRA
+        custom:
+          allOf:
+          - $ref: '#/components/schemas/InboundMemberSnapshotOmittedCoverageCustom'
+          description: List of Individual Enrollment actions
+        policy:
+          default: reject
+          description: How Noyo will process the member snapshot's omitted coverage(s).
           enum:
-          - termination_of_employment
-          - reduction_of_work_hours
-          - medicare
-          - death
-          - divorce
-          - separation
-          - ineligible_child
-          - bankruptcy_of_retirees_former_employer
-          - layoff
-          - leave_of_absence
+          - continue
+          - reject
+          - terminate
+          example: terminate
           type: string
-      required:
-      - cobra_enrolled
-      - eligibility_end_date
-      - eligibility_start_date
+        termination_rule:
+          description: The rule that Noyo should use to determine the explicit date of termination for the omitted coverage(s).
+          enum:
+          - custom
+          - end_of_current_month
+          - end_of_prior_month
+          example: end_of_current_month
+          type: string
       type: object
       x-field_order: []
-    Meta:
+    InboundMemberSnapshotPersonDisability:
       properties:
-        offset:
-          description: The offset of the first response record within the matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
-        page_num:
-          description: The page number of the response records within the overall data set (1-based integer)
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        page_size:
-          description: The maximum number of response records on each page of results
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        total_records:
-          description: The total number of records in the entire matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
-      required:
-      - offset
-      - page_num
-      - page_size
+        communication:
+          description: True if the disability impacts the ability to communicate or read
+          type: boolean
+        disabled:
+          description: True if the member has a disability
+          type: boolean
+        reason:
+          description: Description of the disability
+          type: string
       type: object
-    InboundTestMemberSnapshot:
+      x-field_order: []
+    CarrierFulfillmentStatus:
       properties:
-        carrier_overrides:
-          description: List of carrier overrides to control connection status for testing
+        carrier_id:
+          description: Unique identifier of the Carrier in Noyo
+          format: uuid
+          type: string
+        errors:
+          description: Errors generated while processing the member snapshot at the carrier
           items:
-            $ref: '#/components/schemas/CarrierOverride'
+            type: string
           type: array
-        member_snapshot:
-          allOf:
-          - $ref: '#/components/schemas/InboundMemberSnapshot'
-          description: The member snapshot data to process
-        rule_set_overrides:
-          allOf:
-          - $ref: '#/components/schemas/RuleSetOverrides'
-          description: Run test overriding rule sets by ID
+        status:
+          description: Status of the member snapshot fulfillment at carrier
+          enum:
+          - invalid
+          - no_changes
+          - processing
+          - replaced
+          - scheduled
+          - sent
+          - valid
+          - not_connected
+          type: string
       required:
-      - member_snapshot
+      - carrier_id
+      - status
       type: object
       x-field_order: []
     InboundMemberSnapshotAddress:
@@ -2135,30 +2318,12 @@ components:
       - zip_code
       type: object
       x-field_order: []
-    UIPersonResult:
+    LatestPlatformChange:
       properties:
-        first_name:
-          description: First name of the person
-          example: Catherine
-          type: string
-        id:
-          description: Unique identifier of the person in Noyo
-          format: uuid
-          readOnly: true
-          type: string
-        last_name:
-          description: Last name of the person
-          example: Briggs
-          type: string
-        middle_name:
-          description: Middle name of the person
-          example: S
-          type: string
-      required:
-      - id
-      type: object
-    PlatformChange:
-      properties:
+        error:
+          allOf:
+          - $ref: '#/components/schemas/LatestChangeError'
+          description: The error message explaining any issues from the platform change
         id:
           description: Unique identifier of the platform change record
           format: uuid
@@ -2177,6 +2342,68 @@ components:
       - status
       - type
       type: object
+    InboundMemberSnapshotOmittedCoverageCustom:
+      properties:
+        effective_end_date:
+          description: A custom effective end date that will be used for the termination of the omitted coverage(s).
+          example: '2024-03-15'
+          format: date
+          type: string
+      type: object
+      x-field_order: []
+    InboundMemberSnapshotSalary:
+      properties:
+        amount:
+          description: Amount of salary earned by the employee in US dollars and cents, as a decimal value
+          example: 52000
+          minimum: 0
+          type: number
+        effective_date:
+          description: The ISO-8601 date-string the current employee salary is effective
+          example: '2022-02-01'
+          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
+          type: string
+        type:
+          description: Type of salary earned by the employee
+          enum:
+          - hourly
+          - salary
+          example: salary
+          type: string
+        unit:
+          description: Unit of salary earned by the employee
+          enum:
+          - annual
+          - month
+          - semi-monthly
+          - week
+          - hour
+          example: annual
+          type: string
+      type: object
+      x-field_order: []
+    InboundMemberSnapshotPersonDetails:
+      properties:
+        american_indian:
+          allOf:
+          - $ref: '#/components/schemas/InboundMemberSnapshotPersonAmericanIndian'
+          description: American Indian status details (if applicable)
+        disability:
+          allOf:
+          - $ref: '#/components/schemas/InboundMemberSnapshotPersonDisability'
+          description: Disability details (if applicable)
+        is_military:
+          description: True if the person is in the military
+          type: boolean
+        is_student:
+          description: True if the person is a student
+          type: boolean
+        tobacco:
+          allOf:
+          - $ref: '#/components/schemas/InboundMemberSnapshotPersonTobacco'
+          description: Tobacco usage details (if applicable)
+      type: object
+      x-field_order: []
     InboundMemberSnapshotEmployment:
       properties:
         employment_dates:
@@ -2212,570 +2439,46 @@ components:
       - hours_worked
       type: object
       x-field_order: []
-    CarrierOverride:
+    Employment:
       properties:
-        carrier_id:
-          description: Carrier ID to override connection status for
-          example: 123e4567-e89b-12d3-a456-426614174000
-          format: uuid
-          type: string
-        connected:
-          description: Whether the carrier should be treated as connected for testing
-          example: true
-          type: boolean
-      required:
-      - carrier_id
-      type: object
-    EmployeeCarrierStatus:
-      properties:
-        carrier_id:
-          description: Unique identifier of the carrier in Noyo
-          format: uuid
-          type: string
-        latest_platform_change:
+        employment_dates:
           allOf:
-          - $ref: '#/components/schemas/LatestPlatformChange'
-          description: Details on the latest change sent to Noyo to be applied at the carrier
-        pending_changes:
-          description: A list of any open changes being processed with the carrier
-          items:
-            $ref: '#/components/schemas/PlatformChange'
-          type: array
-        status:
-          description: The member status related to the latest requested platform changes
+          - $ref: '#/components/schemas/EmploymentDates'
+          description: Employee employment dates
+        employment_status:
+          description: Employee employment status
           enum:
-          - pending_changes
-          - stable
-          - unable_to_fulfill
+          - full-time
+          - part-time
+          - contract
+          - disabled
+          - terminated
+          - retired
           type: string
-      required:
-      - pending_changes
-      - status
-      type: object
-    OutboundSimplifiedMemberSnapshot:
-      properties:
-        created:
-          description: The date the record was created
+        hours_worked:
+          description: An integer of hours worked per week by the employee
+          example: 40
+          format: int32
           type: integer
-        employee_id:
-          description: Unique identifier of the employee in Noyo
-          format: uuid
+        occupation:
+          description: Employee occupation or job title
+          example: Engineer
           type: string
-        fulfillment_summary:
-          description: List of member snapshot fulfillment statuses per carrier
-          items:
-            $ref: '#/components/schemas/CarrierFulfillmentStatus'
-          type: array
-        id:
-          description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        modified:
-          description: The date the record was last updated
-          type: integer
-        status:
-          description: Status of the member snapshot
-          enum:
-          - processing
-          - completed
-          - replaced
-          - canceled
-          - submitted
-          type: string
-        version:
-          description: Current version of the record
-          format: uuid
-          type: string
+        salary:
+          allOf:
+          - $ref: '#/components/schemas/Salary'
+          description: Employee salary information
       required:
-      - created
-      - employee_id
-      - id
-      - modified
-      - status
-      - version
+      - employment_dates
+      - employment_status
+      - hours_worked
       type: object
       x-field_order:
-      - id
-      - version
-      - created
-      - modified
-      - employee_id
-      - status
-      - fulfillment_summary
-    CarrierFulfillmentStatus:
-      properties:
-        carrier_id:
-          description: Unique identifier of the Carrier in Noyo
-          format: uuid
-          type: string
-        errors:
-          description: Errors generated while processing the member snapshot at the carrier
-          items:
-            type: string
-          type: array
-        status:
-          description: Status of the member snapshot fulfillment at carrier
-          enum:
-          - invalid
-          - no_changes
-          - processing
-          - replaced
-          - scheduled
-          - sent
-          - valid
-          - not_connected
-          type: string
-      required:
-      - carrier_id
-      - status
-      type: object
-      x-field_order: []
-    InboundMemberSnapshotPersonDetails:
-      properties:
-        american_indian:
-          allOf:
-          - $ref: '#/components/schemas/InboundMemberSnapshotPersonAmericanIndian'
-          description: American Indian status details (if applicable)
-        disability:
-          allOf:
-          - $ref: '#/components/schemas/InboundMemberSnapshotPersonDisability'
-          description: Disability details (if applicable)
-        is_military:
-          description: True if the person is in the military
-          type: boolean
-        is_student:
-          description: True if the person is a student
-          type: boolean
-        tobacco:
-          allOf:
-          - $ref: '#/components/schemas/InboundMemberSnapshotPersonTobacco'
-          description: Tobacco usage details (if applicable)
-      type: object
-      x-field_order: []
-    EmployeeStatusResult:
-      properties:
-        carrier_statuses:
-          description: List of employee statuses with any relevant carriers
-          items:
-            $ref: '#/components/schemas/EmployeeCarrierStatus'
-          type: array
-      required:
-      - carrier_statuses
-      type: object
-      x-field_order: []
-    OutboundMemberSnapshotCreatedMember:
-      properties:
-        custom_individual_id:
-          description: Custom ID of the Member from the platform's system.
-          type: string
-        id:
-          description: Unique ID of the Member in Noyo's system.
-          format: uuid
-          type: string
-        type:
-          description: Type of the Member. Either 'employee' or 'dependent.
-          type: string
-      required:
-      - id
-      - type
-      type: object
-      x-field_order: []
-    GroupResult:
-      properties:
-        created:
-          description: The date the record was created
-          type: integer
-        dba_name:
-          description: DBA name for the company, if applicable
-          example: Floors R Us
-          type: string
-        federal_ein:
-          description: Federal Employer Identification Number for the company
-          example: '112222222'
-          type: string
-        id:
-          description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        modified:
-          description: The date the record was last updated
-          type: integer
-        name:
-          description: Name of the group
-          example: ACME Flooring
-          type: string
-        organization_id:
-          description: Unique identifier of the platform or broker organization in Noyo
-          format: uuid
-          type: string
-        sic_code:
-          description: SIC Code of the group
-          example: '5713'
-          type: string
-        version:
-          description: Current version of the record
-          format: uuid
-          type: string
-      required:
-      - created
-      - id
-      - modified
-      - name
-      - version
-      type: object
-      x-field_order:
-      - id
-      - version
-      - created
-      - modified
-      - organization_id
-      - name
-      - sic_code
-      - dba_name
-      - federal_ein
-    InboundMemberSnapshotSalary:
-      properties:
-        amount:
-          description: Amount of salary earned by the employee in US dollars and cents, as a decimal value
-          example: 52000
-          minimum: 0
-          type: number
-        effective_date:
-          description: The ISO-8601 date-string the current employee salary is effective
-          example: '2022-02-01'
-          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
-          type: string
-        type:
-          description: Type of salary earned by the employee
-          enum:
-          - hourly
-          - salary
-          example: salary
-          type: string
-        unit:
-          description: Unit of salary earned by the employee
-          enum:
-          - annual
-          - month
-          - semi-monthly
-          - week
-          - hour
-          example: annual
-          type: string
-      type: object
-      x-field_order: []
-    LatestPlatformChange:
-      properties:
-        error:
-          allOf:
-          - $ref: '#/components/schemas/LatestChangeError'
-          description: The error message explaining any issues from the platform change
-        id:
-          description: Unique identifier of the platform change record
-          format: uuid
-          type: string
-        status:
-          description: The status of the platform change
-          type: string
-        type:
-          description: The type of the platform change record
-          enum:
-          - member_request
-          - member_snapshot
-          type: string
-      required:
-      - id
-      - status
-      - type
-      type: object
-    LatestChangeError:
-      properties:
-        message:
-          description: The error message for the latest change
-          type: string
-      required:
-      - message
-      type: object
-    UIMemberSnapshotPublicParentResult:
-      properties:
-        created:
-          description: The date the record was created
-          type: integer
-        employee:
-          allOf:
-          - $ref: '#/components/schemas/UIEmployeeResult'
-          description: Employee details associated with the member snapshot
-        group:
-          allOf:
-          - $ref: '#/components/schemas/GroupResult'
-          description: Group details associated with the member snapshot
-        id:
-          description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        member_snapshot:
-          allOf:
-          - $ref: '#/components/schemas/OutboundSimplifiedMemberSnapshot'
-          description: Member snapshot details
-        modified:
-          description: The date the record was last updated
-          type: integer
-        version:
-          description: Current version of the record
-          format: uuid
-          type: string
-      required:
-      - created
-      - employee
-      - group
-      - id
-      - member_snapshot
-      - modified
-      - version
-      type: object
-    OutboundPaginatedMemberSnapshot:
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of member snapshot results
-          items:
-            $ref: '#/components/schemas/OutboundSimplifiedMemberSnapshot'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
-    InboundMemberSnapshotOmittedCoverage:
-      properties:
-        custom:
-          allOf:
-          - $ref: '#/components/schemas/InboundMemberSnapshotOmittedCoverageCustom'
-          description: List of Individual Enrollment actions
-        policy:
-          default: reject
-          description: How Noyo will process the member snapshot's omitted coverage(s).
-          enum:
-          - continue
-          - reject
-          - terminate
-          example: terminate
-          type: string
-        termination_rule:
-          description: The rule that Noyo should use to determine the explicit date of termination for the omitted coverage(s).
-          enum:
-          - custom
-          - end_of_current_month
-          - end_of_prior_month
-          example: end_of_current_month
-          type: string
-      type: object
-      x-field_order: []
-    InboundMemberSnapshotEvent:
-      properties:
-        date:
-          description: The date the event occurred
-          format: date
-          type: string
-        id:
-          description: Unique ID for the event, used internally in this payload
-          minLength: 1
-          type: string
-        reason:
-          description: The cause or real world scenario described in the event
-          enum:
-          - adoption
-          - benefit_class_change
-          - change_to_part_time
-          - change_to_full_time
-          - cobra_enrollment
-          - cobra_termination
-          - cobra_update_other
-          - court_order
-          - death
-          - demographic_change
-          - dependent_open_enrollment
-          - disability_status_change
-          - divorce
-          - eligibility_change
-          - foster_care
-          - immigration_status_change
-          - leave_status_change
-          - legal_guardian
-          - lost_coverage
-          - marriage
-          - medicare
-          - moved
-          - newborn
-          - new_hire
-          - offline_change
-          - open_enrollment
-          - rate_changed
-          - rehire
-          - reinstatement
-          - retirement
-          - termination
-          type: string
-        type:
-          description: The type or category of member change made due to this event
-          enum:
-          - coverage
-          - demographic
-          type: string
-      required:
-      - date
-      - id
-      - reason
-      - type
-      type: object
-      x-field_order: []
-    InboundMemberSnapshotPersonContact:
-      properties:
-        email_address:
-          description: Email address of the person
-          example: catherine.briggs@example.com
-          format: email
-          type:
-          - string
-          - 'null'
-        email_address_type:
-          description: Type of email address
-          enum:
-          - home
-          - work
-          example: home
-          type: string
-        home_phone:
-          description: Home phone number in E.164 format
-          example: '+15555551212'
-          type: string
-        preferred_language:
-          description: Preferred written or spoken language of the person
-          example: English
-          type: string
-        preferred_method:
-          description: Preferred method of contact for the person
-          enum:
-          - mail
-          - email
-          - home-phone
-          - work-phone
-          - other
-          example: email
-          type: string
-        speaks_english:
-          description: True if the person can speak or communicate in English
-          example: true
-          type: boolean
-        work_phone:
-          description: Work phone number in E.164 format
-          example: '+15555551212'
-          type: string
-      type: object
-      x-field_order: []
-    EmploymentDates:
-      properties:
-        full_time_start:
-          description: ISO-8601 date string for start date as a full time employee with the group (if applicable)
-          example: '2017-01-17'
-          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
-          type: string
-        hire_date:
-          description: ISO-8601 date string for the hire date of the employee
-          example: '2017-01-17'
-          format: date
-          type: string
-        rehire:
-          description: ISO-8601 date string for the rehire date of the employee (if applicable)
-          example: '2018-02-01'
-          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
-          type: string
-        retirement:
-          description: ISO-8601 date string for the retirement date of the employee (if applicable)
-          example: '2019-01-01'
-          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
-          type: string
-        terminated:
-          description: ISO-8601 date string for the termination date of the employee (if applicable)
-          example: '2018-01-01'
-          pattern: ^([0-9]{4})(-)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$
-          type: string
-      required:
-      - hire_date
-      type: object
-      x-field_order: []
-    OutboundMemberSnapshot:
-      properties:
-        created:
-          description: The date the record was created
-          type: integer
-        created_members:
-          description: List of created members
-          items:
-            $ref: '#/components/schemas/OutboundMemberSnapshotCreatedMember'
-          type: array
-        employee_id:
-          description: Unique ID of the employee in Noyo
-          format: uuid
-          type: string
-        fulfillment_summary:
-          description: List of member snapshot fulfillment statuses per carrier
-          items:
-            $ref: '#/components/schemas/CarrierFulfillmentStatus'
-          type: array
-        id:
-          description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        inbound_snapshot:
-          description: Exact member snapshot as received by Noyo and prior to any processing (e.g. adding omitted coverages, applying rulesets, etc.)
-          type: string
-        member_snapshot:
-          allOf:
-          - $ref: '#/components/schemas/MemberSnapshotDB'
-          description: Member snapshot post Noyo processing (e.g. adding omitted coverages, applying rulesets, etc.)
-        modified:
-          description: The date the record was last updated
-          type: integer
-        replaced_by:
-          description: UUID of the member snapshot that replaced the returned snapshot
-          format: uuid
-          type: string
-        status:
-          description: Status of the member snapshot
-          enum:
-          - processing
-          - completed
-          - replaced
-          - canceled
-          - submitted
-          type: string
-        version:
-          description: Current version of the record
-          format: uuid
-          type: string
-        warnings:
-          description: Warnings generated during processing of the member snapshot
-          items:
-            type: string
-          type: array
-      required:
-      - created
-      - created_members
-      - employee_id
-      - id
-      - member_snapshot
-      - modified
-      - status
-      - version
-      - warnings
-      type: object
-      x-field_order: []
+      - employment_status
+      - occupation
+      - hours_worked
+      - salary
+      - employment_dates
     InboundMemberSnapshotCoverage:
       properties:
         carrier_config:
@@ -2891,219 +2594,257 @@ components:
       - individual_type
       type: object
       x-field_order: []
-    UIEmployeeResult:
+    Meta:
       properties:
-        employment:
-          allOf:
-          - $ref: '#/components/schemas/Employment'
-          description: Employment information for the employee
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+    InboundMemberSnapshotEvent:
+      properties:
+        date:
+          description: The date the event occurred
+          format: date
+          type: string
         id:
-          description: Unique identifier of the employee in Noyo
+          description: Unique ID for the event, used internally in this payload
+          minLength: 1
+          type: string
+        reason:
+          description: The cause or real world scenario described in the event
+          enum:
+          - adoption
+          - benefit_class_change
+          - change_to_part_time
+          - change_to_full_time
+          - cobra_enrollment
+          - cobra_termination
+          - cobra_update_other
+          - court_order
+          - death
+          - demographic_change
+          - dependent_open_enrollment
+          - disability_status_change
+          - divorce
+          - eligibility_change
+          - foster_care
+          - immigration_status_change
+          - leave_status_change
+          - legal_guardian
+          - lost_coverage
+          - marriage
+          - medicare
+          - moved
+          - newborn
+          - new_hire
+          - offline_change
+          - open_enrollment
+          - rate_changed
+          - rehire
+          - reinstatement
+          - retirement
+          - termination
+          type: string
+        type:
+          description: The type or category of member change made due to this event
+          enum:
+          - coverage
+          - demographic
+          type: string
+      required:
+      - date
+      - id
+      - reason
+      - type
+      type: object
+      x-field_order: []
+    InboundMemberSnapshotCOBRADetails:
+      properties:
+        cobra_enrolled:
+          description: Boolean representing whether or not a member is enrolled in COBRA
+          type: boolean
+        eligibility_end_date:
+          description: The date which represents when the individual is no longer eligible for COBRA
+          format: date
+          type: string
+        eligibility_start_date:
+          description: The date which represents when the individual is first eligible for COBRA
+          format: date
+          type: string
+        qualifying_event_date:
+          description: The date of the event which qualified the individual for COBRA
+          format: date
+          type: string
+        qualifying_event_reason:
+          description: The reason of the event which qualified the individual for COBRA
+          enum:
+          - termination_of_employment
+          - reduction_of_work_hours
+          - medicare
+          - death
+          - divorce
+          - separation
+          - ineligible_child
+          - bankruptcy_of_retirees_former_employer
+          - layoff
+          - leave_of_absence
+          type: string
+      required:
+      - cobra_enrolled
+      - eligibility_end_date
+      - eligibility_start_date
+      type: object
+      x-field_order: []
+    OutboundMemberSnapshotCreatedMember:
+      properties:
+        custom_individual_id:
+          description: Custom ID of the Member from the platform's system.
+          type: string
+        id:
+          description: Unique ID of the Member in Noyo's system.
+          format: uuid
+          type: string
+        type:
+          description: Type of the Member. Either 'employee' or 'dependent.
+          type: string
+      required:
+      - id
+      - type
+      type: object
+      x-field_order: []
+    EmployeeStatusResult:
+      properties:
+        carrier_statuses:
+          description: List of employee statuses with any relevant carriers
+          items:
+            $ref: '#/components/schemas/EmployeeCarrierStatus'
+          type: array
+      required:
+      - carrier_statuses
+      type: object
+      x-field_order: []
+    EmployeeCarrierStatus:
+      properties:
+        carrier_id:
+          description: Unique identifier of the carrier in Noyo
+          format: uuid
+          type: string
+        latest_platform_change:
+          allOf:
+          - $ref: '#/components/schemas/LatestPlatformChange'
+          description: Details on the latest change sent to Noyo to be applied at the carrier
+        pending_changes:
+          description: A list of any open changes being processed with the carrier
+          items:
+            $ref: '#/components/schemas/PlatformChange'
+          type: array
+        status:
+          description: The member status related to the latest requested platform changes
+          enum:
+          - pending_changes
+          - stable
+          - unable_to_fulfill
+          type: string
+      required:
+      - pending_changes
+      - status
+      type: object
+    UIPersonResult:
+      properties:
+        first_name:
+          description: First name of the person
+          example: Catherine
+          type: string
+        id:
+          description: Unique identifier of the person in Noyo
           format: uuid
           readOnly: true
           type: string
-        person:
-          allOf:
-          - $ref: '#/components/schemas/UIPersonResult'
-          description: Personal information for the employee
+        last_name:
+          description: Last name of the person
+          example: Briggs
+          type: string
+        middle_name:
+          description: Middle name of the person
+          example: S
+          type: string
       required:
-      - employment
       - id
-      - person
       type: object
-    InboundMemberSnapshotPCPDetails:
+    InboundMemberSnapshotPrimaryCareProvider:
       properties:
-        providers:
-          description: List of primary care providers
-          items:
-            $ref: '#/components/schemas/InboundMemberSnapshotPrimaryCareProvider'
-          type: array
-      required:
-      - providers
-      type: object
-      x-field_order: []
-    MemberSnapshotDB:
-      properties:
-        coverages:
-          description: List of coverage and enrollment decisions for each member
-          items:
-            $ref: '#/components/schemas/InboundMemberSnapshotCoverage'
-          type: array
-        dependents:
-          description: List of demographic information for each dependent
-          items:
-            $ref: '#/components/schemas/InboundMemberSnapshotDependent'
-          type: array
-        employee:
-          allOf:
-          - $ref: '#/components/schemas/InboundMemberSnapshotEmployee'
-          description: Demographic information for the employee
-        enable_member_auto_link:
-          default: false
-          description: Boolean flag for autolinking workflow
-          type: boolean
-        events:
-          description: List of events associated with member and coverage updates
-          items:
-            $ref: '#/components/schemas/InboundMemberSnapshotEvent'
-          type: array
-        omitted_coverage_handling:
-          allOf:
-          - $ref: '#/components/schemas/InboundMemberSnapshotOmittedCoverage'
-          description: Configuration for handling omitted coverages
-        snapshot_mode:
-          description: Mode describing how the contents of the snapshot will be processed
+        entity_identifier_code:
+          description: Code of the entity identifier
           enum:
-          - current_open
-          example: current_open
+          - pcp
+          - dental_pcp
+          - obgyn
           type: string
-      required:
-      - employee
-      - snapshot_mode
-      type: object
-    OutboundTestMemberSnapshot:
-      properties:
-        member_snapshot:
-          allOf:
-          - $ref: '#/components/schemas/OutboundMemberSnapshot'
-          description: The member snapshot that would have been created
-        trace_ids:
-          description: List of trace IDs for tracking the test request
-          items:
-            format: uuid
-            type: string
-          type: array
-      required:
-      - member_snapshot
-      - trace_ids
-      type: object
-      x-field_order: []
-    InboundMemberSnapshotPersonDisability:
-      properties:
-        communication:
-          description: True if the disability impacts the ability to communicate or read
-          type: boolean
-        disabled:
-          description: True if the member has a disability
-          type: boolean
-        reason:
-          description: Description of the disability
-          type: string
-      type: object
-      x-field_order: []
-    Employment:
-      properties:
-        employment_dates:
-          allOf:
-          - $ref: '#/components/schemas/EmploymentDates'
-          description: Employee employment dates
-        employment_status:
-          description: Employee employment status
+        entity_type:
+          description: Type of entity
           enum:
-          - full-time
-          - part-time
-          - contract
-          - disabled
-          - terminated
-          - retired
+          - person
+          - non_person_entity
           type: string
-        hours_worked:
-          description: An integer of hours worked per week by the employee
-          example: 40
-          format: int32
-          type: integer
-        occupation:
-          description: Employee occupation or job title
-          example: Engineer
+        first_name:
+          description: First name of the primary care provider
           type: string
-        salary:
-          allOf:
-          - $ref: '#/components/schemas/Salary'
-          description: Employee salary information
-      required:
-      - employment_dates
-      - employment_status
-      - hours_worked
-      type: object
-      x-field_order:
-      - employment_status
-      - occupation
-      - hours_worked
-      - salary
-      - employment_dates
-    InboundMemberSnapshotPersonAmericanIndian:
-      properties:
-        state:
-          description: Primary state of the federally-recognized American Indian or Alaska Native tribe, if applicable
+        identification_code:
+          description: Code of the identification
+          type: string
+        identification_code_type:
+          description: Type of the identification code
           enum:
-          - AL
-          - AK
-          - AZ
-          - AR
-          - CA
-          - CO
-          - CT
-          - DE
-          - DC
-          - FL
-          - GA
-          - HI
-          - ID
-          - IL
-          - IN
-          - IA
-          - KS
-          - KY
-          - LA
-          - ME
-          - MD
-          - MA
-          - MI
-          - MN
-          - MS
-          - MO
-          - MT
-          - NE
-          - NV
-          - NH
-          - NJ
-          - NM
-          - NY
-          - NC
-          - ND
-          - OH
-          - OK
-          - OR
-          - PA
-          - RI
-          - SC
-          - SD
-          - TN
-          - TX
-          - UT
-          - VT
-          - VA
-          - WA
-          - WV
-          - WI
-          - WY
-          - AS
-          - GU
-          - MH
-          - FM
-          - MP
-          - PW
-          - PR
-          - VI
-          - UM
+          - service_provider_number
+          - national_provider_identifier
           type: string
-        tribe:
-          description: Name of the federally-recognized American Indian or Alaska Native tribe, if applicable
-          example: Ojibwe
+        last_name:
+          description: Last name of the primary care provider
           type: string
+        middle_name:
+          description: Middle name of the primary care provider
+          type: string
+        organization_name:
+          description: Organization name of the primary care provider.
+          type: string
+        patient_relationship_code:
+          description: Code which represents the relationship of the patient to the primary care provider
+          enum:
+          - established
+          - not_established
+          - unknown
+          type: string
+      required:
+      - identification_code
+      - identification_code_type
       type: object
       x-field_order: []
-    InboundMemberSnapshotEmploymentDates:
+    EmploymentDates:
       properties:
         full_time_start:
           description: ISO-8601 date string for start date as a full time employee with the group (if applicable)
@@ -3134,5 +2875,264 @@ components:
       - hire_date
       type: object
       x-field_order: []
+    OutboundTestMemberSnapshot:
+      properties:
+        member_snapshot:
+          allOf:
+          - $ref: '#/components/schemas/OutboundMemberSnapshot'
+          description: The member snapshot that would have been created
+        trace_ids:
+          description: List of trace IDs for tracking the test request
+          items:
+            format: uuid
+            type: string
+          type: array
+      required:
+      - member_snapshot
+      - trace_ids
+      type: object
+      x-field_order: []
+    InboundMemberSnapshotPCPDetails:
+      properties:
+        providers:
+          description: List of primary care providers
+          items:
+            $ref: '#/components/schemas/InboundMemberSnapshotPrimaryCareProvider'
+          type: array
+      required:
+      - providers
+      type: object
+      x-field_order: []
+    CarrierOverride:
+      properties:
+        carrier_id:
+          description: Carrier ID to override connection status for
+          example: 123e4567-e89b-12d3-a456-426614174000
+          format: uuid
+          type: string
+        connected:
+          description: Whether the carrier should be treated as connected for testing
+          example: true
+          type: boolean
+      required:
+      - carrier_id
+      type: object
+    PaginatedUIMemberSnapshotPublicResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of member snapshot results
+          items:
+            $ref: '#/components/schemas/UIMemberSnapshotPublicParentResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    LatestChangeError:
+      properties:
+        message:
+          description: The error message for the latest change
+          type: string
+      required:
+      - message
+      type: object
+    InboundMemberSnapshotDependent:
+      properties:
+        custom_individual_id:
+          description: Custom ID of the Dependent from platform system. Required if member is new
+          minLength: 1
+          type: string
+        event_id:
+          description: The unique ID of an event from the snapshot events list
+          example: '1'
+          minLength: 1
+          type: string
+        group_individual_id:
+          description: Group-level ID of the dependent
+          minLength: 1
+          type: string
+        id:
+          description: Unique ID of the Dependent in Noyo's system. Leave blank if member is new
+          format: uuid
+          type: string
+        person:
+          allOf:
+          - $ref: '#/components/schemas/InboundMemberSnapshotPerson'
+          description: Personal information for the dependent
+        relationship:
+          description: Relationship of the dependent to the employee
+          enum:
+          - spouse
+          - child
+          - domestic-partner
+          - grandchild
+          - civil-union
+          - step-child
+          - foster-child
+          - adopted-child
+          - legal-guardianship
+          - ex-spouse
+          - other
+          type: string
+      required:
+      - person
+      - relationship
+      type: object
+      x-field_order: []
+    OutboundMemberSnapshot:
+      properties:
+        created:
+          description: The date the record was created
+          type: integer
+        created_members:
+          description: List of created members
+          items:
+            $ref: '#/components/schemas/OutboundMemberSnapshotCreatedMember'
+          type: array
+        employee_id:
+          description: Unique ID of the employee in Noyo
+          format: uuid
+          type: string
+        fulfillment_summary:
+          description: List of member snapshot fulfillment statuses per carrier
+          items:
+            $ref: '#/components/schemas/CarrierFulfillmentStatus'
+          type: array
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        inbound_snapshot:
+          description: Exact member snapshot as received by Noyo and prior to any processing (e.g. adding omitted coverages, applying rulesets, etc.)
+          type: string
+        member_snapshot:
+          allOf:
+          - $ref: '#/components/schemas/MemberSnapshotDB'
+          description: Member snapshot post Noyo processing (e.g. adding omitted coverages, applying rulesets, etc.)
+        modified:
+          description: The date the record was last updated
+          type: integer
+        replaced_by:
+          description: UUID of the member snapshot that replaced the returned snapshot
+          format: uuid
+          type: string
+        status:
+          description: Status of the member snapshot
+          enum:
+          - processing
+          - completed
+          - replaced
+          - canceled
+          - submitted
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+        warnings:
+          description: Warnings generated during processing of the member snapshot
+          items:
+            type: string
+          type: array
+      required:
+      - created
+      - created_members
+      - employee_id
+      - id
+      - member_snapshot
+      - modified
+      - status
+      - version
+      - warnings
+      type: object
+      x-field_order: []
+    InboundMemberSnapshotPersonContact:
+      properties:
+        email_address:
+          description: Email address of the person
+          example: catherine.briggs@example.com
+          format: email
+          type:
+          - string
+          - 'null'
+        email_address_type:
+          description: Type of email address
+          enum:
+          - home
+          - work
+          example: home
+          type: string
+        home_phone:
+          description: Home phone number in E.164 format
+          example: '+15555551212'
+          type: string
+        preferred_language:
+          description: Preferred written or spoken language of the person
+          example: English
+          type: string
+        preferred_method:
+          description: Preferred method of contact for the person
+          enum:
+          - mail
+          - email
+          - home-phone
+          - work-phone
+          - other
+          example: email
+          type: string
+        speaks_english:
+          description: True if the person can speak or communicate in English
+          example: true
+          type: boolean
+        work_phone:
+          description: Work phone number in E.164 format
+          example: '+15555551212'
+          type: string
+      type: object
+      x-field_order: []
+    UIMemberSnapshotPublicParentResult:
+      properties:
+        created:
+          description: The date the record was created
+          type: integer
+        employee:
+          allOf:
+          - $ref: '#/components/schemas/UIEmployeeResult'
+          description: Employee details associated with the member snapshot
+        group:
+          allOf:
+          - $ref: '#/components/schemas/GroupResult'
+          description: Group details associated with the member snapshot
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        member_snapshot:
+          allOf:
+          - $ref: '#/components/schemas/OutboundSimplifiedMemberSnapshot'
+          description: Member snapshot details
+        modified:
+          description: The date the record was last updated
+          type: integer
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - created
+      - employee
+      - group
+      - id
+      - member_snapshot
+      - modified
+      - version
+      type: object
 x-readme:
   explorer-enabled: false

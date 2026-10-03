@@ -39,24 +39,22 @@ paths:
       - Plan Rates
 components:
   schemas:
-    PaginatedPlanRateByPlanResult:
+    RateStructure:
       properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of plan rate results
+        calculation_type:
+          enum:
+          - member_based
+          - member_based_volume
+          - family_unit_based
+          type: string
+        options:
           items:
-            $ref: '#/components/schemas/PlanRateByPlanResult'
+            type: string
           type: array
       required:
-      - meta
-      - response
+      - calculation_type
+      - options
       type: object
-      x-field_order:
-      - meta
-      - response
     Meta:
       properties:
         offset:
@@ -112,22 +110,6 @@ components:
       - rate_structure
       - start_date
       type: object
-    RateStructure:
-      properties:
-        calculation_type:
-          enum:
-          - member_based
-          - member_based_volume
-          - family_unit_based
-          type: string
-        options:
-          items:
-            type: string
-          type: array
-      required:
-      - calculation_type
-      - options
-      type: object
     PlanRateByPlanResult:
       properties:
         plan_id:
@@ -148,5 +130,23 @@ components:
       - plan_rate_id
       - temporal_rates
       type: object
+    PaginatedPlanRateByPlanResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of plan rate results
+          items:
+            $ref: '#/components/schemas/PlanRateByPlanResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
 x-readme:
   explorer-enabled: false

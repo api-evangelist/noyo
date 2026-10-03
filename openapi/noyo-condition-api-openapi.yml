@@ -171,6 +171,51 @@ paths:
       - Condition
 components:
   schemas:
+    ConditionCreateRequest:
+      properties:
+        details:
+          allOf:
+          - $ref: '#/components/schemas/ConditionDetails'
+          description: Details of the condition
+        rule_id:
+          description: Unique identifier of the rule we are creating a condition for
+          format: uuid
+          type: string
+      required:
+      - details
+      - rule_id
+      type: object
+      x-field_order:
+      - rule_id
+      - details
+    PaginatedConditionResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of conditions
+          items:
+            $ref: '#/components/schemas/ConditionResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    ConditionEditRequest:
+      properties:
+        details:
+          allOf:
+          - $ref: '#/components/schemas/ConditionDetails'
+          description: Details of the condition
+      required:
+      - details
+      type: object
+      x-field_order: []
     Meta:
       properties:
         offset:
@@ -202,24 +247,34 @@ components:
       - page_num
       - page_size
       type: object
-    PaginatedConditionResult:
+    ConditionDetails:
       properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of conditions
-          items:
-            $ref: '#/components/schemas/ConditionResult'
-          type: array
-      required:
-      - meta
-      - response
+        left_operand:
+          description: Field name that is being evaluated
+          type: string
+        operator:
+          description: Operation we are evaluating between the left and right operands
+          enum:
+          - is
+          - is_not
+          - is_one_of
+          - is_at_least_one_of
+          - is_not_one_of
+          - greater_than
+          - less_than
+          - begins_with
+          - ends_with
+          - between
+          - contains
+          type:
+          - string
+          - 'null'
+        right_operand:
+          description: The resulting value of the conditional
+          type:
+          - string
+          - 'null'
       type: object
-      x-field_order:
-      - meta
-      - response
     ConditionResult:
       properties:
         created:
@@ -261,60 +316,5 @@ components:
       - modified
       - rule_id
       - details
-    ConditionDetails:
-      properties:
-        left_operand:
-          description: Field name that is being evaluated
-          type: string
-        operator:
-          description: Operation we are evaluating between the left and right operands
-          enum:
-          - is
-          - is_not
-          - is_one_of
-          - is_at_least_one_of
-          - is_not_one_of
-          - greater_than
-          - less_than
-          - begins_with
-          - ends_with
-          - between
-          - contains
-          type:
-          - string
-          - 'null'
-        right_operand:
-          description: The resulting value of the conditional
-          type:
-          - string
-          - 'null'
-      type: object
-    ConditionCreateRequest:
-      properties:
-        details:
-          allOf:
-          - $ref: '#/components/schemas/ConditionDetails'
-          description: Details of the condition
-        rule_id:
-          description: Unique identifier of the rule we are creating a condition for
-          format: uuid
-          type: string
-      required:
-      - details
-      - rule_id
-      type: object
-      x-field_order:
-      - rule_id
-      - details
-    ConditionEditRequest:
-      properties:
-        details:
-          allOf:
-          - $ref: '#/components/schemas/ConditionDetails'
-          description: Details of the condition
-      required:
-      - details
-      type: object
-      x-field_order: []
 x-readme:
   explorer-enabled: false

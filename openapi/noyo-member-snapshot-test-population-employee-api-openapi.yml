@@ -133,37 +133,6 @@ paths:
       - Member Snapshot Test Population Employee
 components:
   schemas:
-    MemberSnapshotTestPopulationEmployeeResult:
-      properties:
-        created:
-          description: The date the record was created
-          type: integer
-        employee_id:
-          format: uuid
-          type: string
-        id:
-          description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        member_snapshot_test_population_id:
-          format: uuid
-          type: string
-        modified:
-          description: The date the record was last updated
-          type: integer
-        version:
-          description: Current version of the record
-          format: uuid
-          type: string
-      required:
-      - created
-      - employee_id
-      - id
-      - member_snapshot_test_population_id
-      - modified
-      - version
-      type: object
-      x-field_order: []
     MemberSnapshotTestPopulationEmployeeCreateRequest:
       properties:
         employee_id:
@@ -204,6 +173,37 @@ components:
       - page_num
       - page_size
       type: object
+    MemberSnapshotTestPopulationEmployeeResult:
+      properties:
+        created:
+          description: The date the record was created
+          type: integer
+        employee_id:
+          format: uuid
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        member_snapshot_test_population_id:
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - created
+      - employee_id
+      - id
+      - member_snapshot_test_population_id
+      - modified
+      - version
+      type: object
+      x-field_order: []
     PaginatedMemberSnapshotTestPopulationEmployeeResult:
       properties:
         meta:

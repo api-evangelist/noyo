@@ -216,6 +216,20 @@ paths:
       - Group Coverage Export
 components:
   schemas:
+    GroupCoverageExportCreateRequest:
+      properties:
+        as_of:
+          description: ISO-8601 Date to query group coverage data
+          format: date
+          type: string
+        carrier_ids:
+          description: List of carrier IDs to only include in requested group coverage export
+          items:
+            format: uuid
+            type: string
+          type: array
+      type: object
+      x-field_order: []
     GroupCoverageExportResult:
       properties:
         as_of:
@@ -309,6 +323,24 @@ components:
       - status
       - file_format
       - percentage_complete
+    PaginatedGroupCoverageExportResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of group coverage exports
+          items:
+            $ref: '#/components/schemas/GroupCoverageExportResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
     Meta:
       properties:
         offset:
@@ -340,37 +372,5 @@ components:
       - page_num
       - page_size
       type: object
-    PaginatedGroupCoverageExportResult:
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of group coverage exports
-          items:
-            $ref: '#/components/schemas/GroupCoverageExportResult'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
-    GroupCoverageExportCreateRequest:
-      properties:
-        as_of:
-          description: ISO-8601 Date to query group coverage data
-          format: date
-          type: string
-        carrier_ids:
-          description: List of carrier IDs to only include in requested group coverage export
-          items:
-            format: uuid
-            type: string
-          type: array
-      type: object
-      x-field_order: []
 x-readme:
   explorer-enabled: false

@@ -156,6 +156,74 @@ paths:
       - Carriers
 components:
   schemas:
+    OrganizationCarrierResult:
+      properties:
+        carrier_id:
+          description: Carrier ID associated with the organization
+          format: uuid
+          readOnly: true
+          type: string
+        created:
+          description: The date the record was created
+          type: integer
+          x-format: timestamp
+        estimated_volume:
+          description: Estimated number of enrollments with this carrier
+          format: int32
+          type: integer
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+          x-format: timestamp
+        organization_id:
+          description: Unique identifier of the platform organization in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        status:
+          description: Status of the organization carrier connection
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - carrier_id
+      - created
+      - id
+      - modified
+      - organization_id
+      - status
+      - version
+      type: object
+      x-field_order:
+      - id
+      - version
+      - created
+      - modified
+      - carrier_id
+      - organization_id
+      - status
+      - estimated_volume
+    CreateOrganizationCarrierPublicRequest:
+      properties:
+        carrier_id:
+          description: Carrier ID associated with the organization
+          format: uuid
+          type: string
+        estimated_volume:
+          default: 0
+          description: estimated number of enrollments with this carrier
+          format: int32
+          type: integer
+      required:
+      - carrier_id
+      type: object
+      x-field_order: []
     CarrierResult:
       properties:
         display_name:
@@ -264,73 +332,5 @@ components:
       - lines_of_coverage
       - state
       - version
-      type: object
-      x-field_order: []
-    OrganizationCarrierResult:
-      properties:
-        carrier_id:
-          description: Carrier ID associated with the organization
-          format: uuid
-          readOnly: true
-          type: string
-        created:
-          description: The date the record was created
-          type: integer
-          x-format: timestamp
-        estimated_volume:
-          description: Estimated number of enrollments with this carrier
-          format: int32
-          type: integer
-        id:
-          description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        modified:
-          description: The date the record was last updated
-          type: integer
-          x-format: timestamp
-        organization_id:
-          description: Unique identifier of the platform organization in Noyo
-          format: uuid
-          readOnly: true
-          type: string
-        status:
-          description: Status of the organization carrier connection
-          type: string
-        version:
-          description: Current version of the record
-          format: uuid
-          type: string
-      required:
-      - carrier_id
-      - created
-      - id
-      - modified
-      - organization_id
-      - status
-      - version
-      type: object
-      x-field_order:
-      - id
-      - version
-      - created
-      - modified
-      - carrier_id
-      - organization_id
-      - status
-      - estimated_volume
-    CreateOrganizationCarrierPublicRequest:
-      properties:
-        carrier_id:
-          description: Carrier ID associated with the organization
-          format: uuid
-          type: string
-        estimated_volume:
-          default: 0
-          description: estimated number of enrollments with this carrier
-          format: int32
-          type: integer
-      required:
-      - carrier_id
       type: object
       x-field_order: []

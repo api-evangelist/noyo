@@ -39,21 +39,24 @@ paths:
       - Eligibility Rules
 components:
   schemas:
-    EligibilityRuleConfiguration:
+    PaginatedEligibilityRulesResult:
       properties:
-        data_exchange_configuration_name:
-          description: Data exchange configuration name
-          type: string
-        rules:
-          description: List of eligibility rule descriptions
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of eligibility rule configurations
           items:
-            $ref: '#/components/schemas/EligibilityRuleDescription'
+            $ref: '#/components/schemas/EligibilityRuleConfiguration'
           type: array
       required:
-      - data_exchange_configuration_name
-      - rules
+      - meta
+      - response
       type: object
-      x-field_order: []
+      x-field_order:
+      - meta
+      - response
     EligibilityRuleDescription:
       properties:
         description:
@@ -94,23 +97,20 @@ components:
       - page_num
       - page_size
       type: object
-    PaginatedEligibilityRulesResult:
+    EligibilityRuleConfiguration:
       properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of eligibility rule configurations
+        data_exchange_configuration_name:
+          description: Data exchange configuration name
+          type: string
+        rules:
+          description: List of eligibility rule descriptions
           items:
-            $ref: '#/components/schemas/EligibilityRuleConfiguration'
+            $ref: '#/components/schemas/EligibilityRuleDescription'
           type: array
       required:
-      - meta
-      - response
+      - data_exchange_configuration_name
+      - rules
       type: object
-      x-field_order:
-      - meta
-      - response
+      x-field_order: []
 x-readme:
   explorer-enabled: false

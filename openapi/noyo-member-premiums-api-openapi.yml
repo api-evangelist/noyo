@@ -151,6 +151,44 @@ components:
       - member_type
       - line_of_coverage
       - plan_id
+    PaginatedMemberPremiumResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of member premiums
+          items:
+            $ref: '#/components/schemas/MemberPremiumResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    MemberPremiumPeriod:
+      properties:
+        amount:
+          description: Length of premium period
+          format: int32
+          minimum: 1
+          type: integer
+        unit:
+          description: Unit frequency of premium period
+          enum:
+          - annual
+          - month
+          - semi-monthly
+          - week
+          - day
+          type: string
+      required:
+      - amount
+      - unit
+      type: object
     Meta:
       properties:
         offset:
@@ -255,43 +293,5 @@ components:
       - billed_members
       - created
       - modified
-    PaginatedMemberPremiumResult:
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of member premiums
-          items:
-            $ref: '#/components/schemas/MemberPremiumResult'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
-    MemberPremiumPeriod:
-      properties:
-        amount:
-          description: Length of premium period
-          format: int32
-          minimum: 1
-          type: integer
-        unit:
-          description: Unit frequency of premium period
-          enum:
-          - annual
-          - month
-          - semi-monthly
-          - week
-          - day
-          type: string
-      required:
-      - amount
-      - unit
-      type: object
 x-readme:
   explorer-enabled: false

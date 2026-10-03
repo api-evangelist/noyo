@@ -61,40 +61,14 @@ paths:
       - Group Collection
 components:
   schemas:
-    GroupCollectionResult:
+    GroupCollectionMemberResult:
       properties:
-        created:
-          description: The date the record was created
-          type: integer
-        group_collection_members:
-          description: List of Group Collection results
-          items:
-            $ref: '#/components/schemas/GroupCollectionMemberResult'
-          type: array
-        id:
-          description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        modified:
-          description: The date the record was last updated
-          type: integer
-        summary:
-          type: string
-        title:
-          type: string
-        version:
-          description: Current version of the record
+        group_id:
           format: uuid
           type: string
       required:
-      - created
-      - group_collection_members
-      - id
-      - modified
-      - title
-      - version
+      - group_id
       type: object
-      x-field_order: []
     PaginatedGroupCollectionResult:
       properties:
         meta:
@@ -144,13 +118,39 @@ components:
       - page_num
       - page_size
       type: object
-    GroupCollectionMemberResult:
+    GroupCollectionResult:
       properties:
-        group_id:
+        created:
+          description: The date the record was created
+          type: integer
+        group_collection_members:
+          description: List of Group Collection results
+          items:
+            $ref: '#/components/schemas/GroupCollectionMemberResult'
+          type: array
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        summary:
+          type: string
+        title:
+          type: string
+        version:
+          description: Current version of the record
           format: uuid
           type: string
       required:
-      - group_id
+      - created
+      - group_collection_members
+      - id
+      - modified
+      - title
+      - version
       type: object
+      x-field_order: []
 x-readme:
   explorer-enabled: false

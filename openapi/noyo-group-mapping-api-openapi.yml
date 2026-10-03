@@ -263,61 +263,6 @@ paths:
       - Group Mapping
 components:
   schemas:
-    GroupMappingEditRequest:
-      properties:
-        effective_end_date:
-          description: ISO-8601 date string for the effective end date of the record
-          example: '2018-12-31'
-          format: date
-          type:
-          - string
-          - 'null'
-        effective_start_date:
-          description: ISO-8601 date string for the effective start date of the record
-          example: '2018-01-01'
-          format: date
-          type:
-          - string
-          - 'null'
-        status:
-          description: Status of the group mapping
-          enum:
-          - in_progress
-          - ready
-          example: in_progress
-          type: string
-      type: object
-      x-field_order:
-      - status
-      - effective_start_date
-      - effective_end_date
-    GroupMappingCreateRequest:
-      properties:
-        carrier_id:
-          description: Unique identifier of the carrier in Noyo
-          format: uuid
-          type: string
-        effective_end_date:
-          description: ISO-8601 date string for the effective end date of the record
-          example: '2018-12-31'
-          format: date
-          type:
-          - string
-          - 'null'
-        effective_start_date:
-          description: ISO-8601 date string for the effective start date of the record
-          example: '2018-01-01'
-          format: date
-          type:
-          - string
-          - 'null'
-      required:
-      - carrier_id
-      type: object
-      x-field_order:
-      - carrier_id
-      - effective_start_date
-      - effective_end_date
     GroupMappingResult:
       properties:
         carrier_id:
@@ -381,69 +326,6 @@ components:
       - status
       - effective_start_date
       - effective_end_date
-    Meta:
-      properties:
-        offset:
-          description: The offset of the first response record within the matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
-        page_num:
-          description: The page number of the response records within the overall data set (1-based integer)
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        page_size:
-          description: The maximum number of response records on each page of results
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        total_records:
-          description: The total number of records in the entire matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
-      required:
-      - offset
-      - page_num
-      - page_size
-      type: object
-    UIGroupMappingRulesConditionsResult:
-      properties:
-        conditions:
-          items:
-            allOf:
-            - $ref: '#/components/schemas/ConditionResult'
-            description: List of all conditions for the group mapping
-          type: array
-        rule:
-          $ref: '#/components/schemas/RuleResult'
-      required:
-      - conditions
-      - rule
-      type: object
-    PaginatedUIGroupMappingRulesResult:
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of rules and conditions for a group mapping
-          items:
-            $ref: '#/components/schemas/UIGroupMappingRulesConditionsResult'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
     RuleResult:
       properties:
         active:
@@ -542,6 +424,20 @@ components:
       - resulting_field_name
       - resulting_field_value
       - rank
+    UIGroupMappingRulesConditionsResult:
+      properties:
+        conditions:
+          items:
+            allOf:
+            - $ref: '#/components/schemas/ConditionResult'
+            description: List of all conditions for the group mapping
+          type: array
+        rule:
+          $ref: '#/components/schemas/RuleResult'
+      required:
+      - conditions
+      - rule
+      type: object
     PaginatedGroupMappingResult:
       properties:
         meta:
@@ -552,6 +448,138 @@ components:
           description: List of group mappings
           items:
             $ref: '#/components/schemas/GroupMappingResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+    GroupMappingEditRequest:
+      properties:
+        effective_end_date:
+          description: ISO-8601 date string for the effective end date of the record
+          example: '2018-12-31'
+          format: date
+          type:
+          - string
+          - 'null'
+        effective_start_date:
+          description: ISO-8601 date string for the effective start date of the record
+          example: '2018-01-01'
+          format: date
+          type:
+          - string
+          - 'null'
+        status:
+          description: Status of the group mapping
+          enum:
+          - in_progress
+          - ready
+          example: in_progress
+          type: string
+      type: object
+      x-field_order:
+      - status
+      - effective_start_date
+      - effective_end_date
+    GroupMappingCreateRequest:
+      properties:
+        carrier_id:
+          description: Unique identifier of the carrier in Noyo
+          format: uuid
+          type: string
+        effective_end_date:
+          description: ISO-8601 date string for the effective end date of the record
+          example: '2018-12-31'
+          format: date
+          type:
+          - string
+          - 'null'
+        effective_start_date:
+          description: ISO-8601 date string for the effective start date of the record
+          example: '2018-01-01'
+          format: date
+          type:
+          - string
+          - 'null'
+      required:
+      - carrier_id
+      type: object
+      x-field_order:
+      - carrier_id
+      - effective_start_date
+      - effective_end_date
+    ConditionDetails:
+      properties:
+        left_operand:
+          description: Field name that is being evaluated
+          type: string
+        operator:
+          description: Operation we are evaluating between the left and right operands
+          enum:
+          - is
+          - is_not
+          - is_one_of
+          - is_at_least_one_of
+          - is_not_one_of
+          - greater_than
+          - less_than
+          - begins_with
+          - ends_with
+          - between
+          - contains
+          type:
+          - string
+          - 'null'
+        right_operand:
+          description: The resulting value of the conditional
+          type:
+          - string
+          - 'null'
+      type: object
+    PaginatedUIGroupMappingRulesResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of rules and conditions for a group mapping
+          items:
+            $ref: '#/components/schemas/UIGroupMappingRulesConditionsResult'
           type: array
       required:
       - meta
@@ -601,33 +629,5 @@ components:
       - modified
       - rule_id
       - details
-    ConditionDetails:
-      properties:
-        left_operand:
-          description: Field name that is being evaluated
-          type: string
-        operator:
-          description: Operation we are evaluating between the left and right operands
-          enum:
-          - is
-          - is_not
-          - is_one_of
-          - is_at_least_one_of
-          - is_not_one_of
-          - greater_than
-          - less_than
-          - begins_with
-          - ends_with
-          - between
-          - contains
-          type:
-          - string
-          - 'null'
-        right_operand:
-          description: The resulting value of the conditional
-          type:
-          - string
-          - 'null'
-      type: object
 x-readme:
   explorer-enabled: false

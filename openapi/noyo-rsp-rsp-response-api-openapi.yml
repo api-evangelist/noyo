@@ -196,6 +196,35 @@ paths:
       - RSP (RSP Response)
 components:
   schemas:
+    TransactionDetail:
+      properties:
+        referenceElement:
+          description: Reference element type (e.g., BenefitPlanID)
+          enum:
+          - BenefitClassID
+          - BenefitPlanID
+          - BillGroupID
+          - ClaimGroupID
+          - CoverageID
+          - EmployeePartyID
+          - EmployerPartyID
+          - GroupConfigurationID
+          - GroupProfileID
+          - OfferID
+          type: string
+        referenceElementID:
+          description: Unique identifier for the reference element
+          type: string
+        transactionRemark:
+          description: Remarks for this transaction
+          items:
+            $ref: '#/components/schemas/Remark'
+          minItems: 0
+          type: array
+      required:
+      - referenceElement
+      - referenceElementID
+      type: object
     AuditRecord:
       properties:
         recordFieldName:
@@ -209,6 +238,16 @@ components:
       - recordFieldName
       - recordQuantity
       type: object
+    CreateRspRequest:
+      properties:
+        transmissionResponse:
+          allOf:
+          - $ref: '#/components/schemas/TransmissionResponse'
+          description: Complete transmission response with results and audit
+      required:
+      - transmissionResponse
+      type: object
+      x-field_order: []
     TransmissionResponse:
       properties:
         audit:
@@ -248,21 +287,6 @@ components:
       - sourceTransmissionGUID
       - transmissionGUID
       - transmissionStatusCode
-      type: object
-    Audit3:
-      properties:
-        auditID:
-          description: Unique audit identifier
-          type: string
-        auditRecord:
-          description: Contains information about the number of records processed
-          items:
-            $ref: '#/components/schemas/AuditRecord'
-          minItems: 1
-          type: array
-      required:
-      - auditID
-      - auditRecord
       type: object
     Remark:
       properties:
@@ -307,44 +331,20 @@ components:
       - fieldName
       - remarkStatusCode
       type: object
-    CreateRspRequest:
+    Audit3:
       properties:
-        transmissionResponse:
-          allOf:
-          - $ref: '#/components/schemas/TransmissionResponse'
-          description: Complete transmission response with results and audit
-      required:
-      - transmissionResponse
-      type: object
-      x-field_order: []
-    TransactionDetail:
-      properties:
-        referenceElement:
-          description: Reference element type (e.g., BenefitPlanID)
-          enum:
-          - BenefitClassID
-          - BenefitPlanID
-          - BillGroupID
-          - ClaimGroupID
-          - CoverageID
-          - EmployeePartyID
-          - EmployerPartyID
-          - GroupConfigurationID
-          - GroupProfileID
-          - OfferID
+        auditID:
+          description: Unique audit identifier
           type: string
-        referenceElementID:
-          description: Unique identifier for the reference element
-          type: string
-        transactionRemark:
-          description: Remarks for this transaction
+        auditRecord:
+          description: Contains information about the number of records processed
           items:
-            $ref: '#/components/schemas/Remark'
-          minItems: 0
+            $ref: '#/components/schemas/AuditRecord'
+          minItems: 1
           type: array
       required:
-      - referenceElement
-      - referenceElementID
+      - auditID
+      - auditRecord
       type: object
 x-readme:
   explorer-enabled: false

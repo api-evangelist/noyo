@@ -109,35 +109,6 @@ components:
       - group_id
       type: object
       x-field_order: []
-    MemberSnapshotTestPopulationResult:
-      properties:
-        carrier_id:
-          format: uuid
-          type: string
-        created:
-          description: The date the record was created
-          type: integer
-        group_id:
-          format: uuid
-          type: string
-        id:
-          description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        modified:
-          description: The date the record was last updated
-          type: integer
-        version:
-          description: Current version of the record
-          format: uuid
-          type: string
-      required:
-      - created
-      - id
-      - modified
-      - version
-      type: object
-      x-field_order: []
     Meta:
       properties:
         offset:
@@ -169,6 +140,35 @@ components:
       - page_num
       - page_size
       type: object
+    MemberSnapshotTestPopulationResult:
+      properties:
+        carrier_id:
+          format: uuid
+          type: string
+        created:
+          description: The date the record was created
+          type: integer
+        group_id:
+          format: uuid
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - created
+      - id
+      - modified
+      - version
+      type: object
+      x-field_order: []
     PaginatedMemberSnapshotTestPopulationResult:
       properties:
         meta:

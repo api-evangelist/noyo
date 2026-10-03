@@ -101,29 +101,6 @@ paths:
       - Status Detail
 components:
   schemas:
-    StatusDetailResult:
-      properties:
-        event_created:
-          description: Timestamp indicating when the status detail was created
-          example: '1673452723'
-          type: integer
-        status_detail:
-          description: Type of Status detail
-          enum:
-          - noyo_accepted
-          - carrier_accepted
-          - carrier_processing
-          - carrier_completed
-          - noyo_verified
-          example: carrier_accepted
-          type: string
-      required:
-      - event_created
-      - status_detail
-      type: object
-      x-field_order:
-      - status_detail
-      - event_created
     Meta:
       properties:
         offset:
@@ -173,5 +150,28 @@ components:
       x-field_order:
       - meta
       - response
+    StatusDetailResult:
+      properties:
+        event_created:
+          description: Timestamp indicating when the status detail was created
+          example: '1673452723'
+          type: integer
+        status_detail:
+          description: Type of Status detail
+          enum:
+          - noyo_accepted
+          - carrier_accepted
+          - carrier_processing
+          - carrier_completed
+          - noyo_verified
+          example: carrier_accepted
+          type: string
+      required:
+      - event_created
+      - status_detail
+      type: object
+      x-field_order:
+      - status_detail
+      - event_created
 x-readme:
   explorer-enabled: false

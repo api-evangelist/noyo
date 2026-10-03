@@ -382,62 +382,6 @@ paths:
       - Group Plans & Enrollment
 components:
   schemas:
-    GroupPlanDependentChildAgeLimit:
-      properties:
-        dependent_child_age_limit:
-          description: Age limit where dependent child is no longer eligible for plan
-          format: int32
-          minimum: 0
-          type: integer
-        dependent_child_termination_rule:
-          description: Termination rule describing when coverage ends for dependent child
-          enum:
-          - date_of_birth
-          - end_of_month_after_birthday
-          - end_of_year_after_birthday
-          type: string
-        dependent_child_type:
-          description: Dependent type to decide whether age limit rule should be applied
-          enum:
-          - dependent_child
-          - student
-          type: string
-      required:
-      - dependent_child_age_limit
-      - dependent_child_termination_rule
-      - dependent_child_type
-      type: object
-    Meta:
-      properties:
-        offset:
-          description: The offset of the first response record within the matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
-        page_num:
-          description: The page number of the response records within the overall data set (1-based integer)
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        page_size:
-          description: The maximum number of response records on each page of results
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        total_records:
-          description: The total number of records in the entire matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
-      required:
-      - offset
-      - page_num
-      - page_size
-      type: object
     GroupDentalPlanPublicResult:
       properties:
         benefits:
@@ -596,6 +540,48 @@ components:
       - benefits
       - created
       - modified
+    GroupPlanDependentChildAgeLimit:
+      properties:
+        dependent_child_age_limit:
+          description: Age limit where dependent child is no longer eligible for plan
+          format: int32
+          minimum: 0
+          type: integer
+        dependent_child_termination_rule:
+          description: Termination rule describing when coverage ends for dependent child
+          enum:
+          - date_of_birth
+          - end_of_month_after_birthday
+          - end_of_year_after_birthday
+          type: string
+        dependent_child_type:
+          description: Dependent type to decide whether age limit rule should be applied
+          enum:
+          - dependent_child
+          - student
+          type: string
+      required:
+      - dependent_child_age_limit
+      - dependent_child_termination_rule
+      - dependent_child_type
+      type: object
+    SingleGroupPlanResult:
+      properties:
+        plan:
+          description: Group plan associated to a line of coverage
+          readOnly: true
+          type: object
+      required:
+      - plan
+      type: object
+      x-field_order: []
+    GroupDentalPlanBenefitsSnapshot:
+      properties:
+        contributory_type:
+          description: Contribution type for the group AD&D plan
+          example: Contributory
+          type: string
+      type: object
     PaginatedGroupPlanResult:
       properties:
         meta:
@@ -616,29 +602,24 @@ components:
       x-field_order:
       - meta
       - response
-    GroupDentalPlanBenefitsSnapshot:
+    PaginatedGroupEnrollmentResult:
       properties:
-        contributory_type:
-          description: Contribution type for the group AD&D plan
-          example: Contributory
-          type: string
-      type: object
-    GroupPlanCOBRARules:
-      properties:
-        eligible:
-          description: True if group plan is eligible for COBRA enrollments
-          type: boolean
-      type: object
-    SingleGroupPlanResult:
-      properties:
-        plan:
-          description: Group plan associated to a line of coverage
-          readOnly: true
-          type: object
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of group enrollment results
+          items:
+            $ref: '#/components/schemas/GroupEnrollmentPublicResult'
+          type: array
       required:
-      - plan
+      - meta
+      - response
       type: object
-      x-field_order: []
+      x-field_order:
+      - meta
+      - response
     GroupEnrollmentPublicResult:
       properties:
         carrier_id:
@@ -747,23 +728,42 @@ components:
       - effective_end_date
       - created
       - modified
-    PaginatedGroupEnrollmentResult:
+    Meta:
       properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of group enrollment results
-          items:
-            $ref: '#/components/schemas/GroupEnrollmentPublicResult'
-          type: array
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
       required:
-      - meta
-      - response
+      - offset
+      - page_num
+      - page_size
       type: object
-      x-field_order:
-      - meta
-      - response
+    GroupPlanCOBRARules:
+      properties:
+        eligible:
+          description: True if group plan is eligible for COBRA enrollments
+          type: boolean
+      type: object
 x-readme:
   explorer-enabled: false

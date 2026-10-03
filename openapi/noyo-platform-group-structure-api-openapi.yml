@@ -51,69 +51,6 @@ paths:
       - Platform Group Structure
 components:
   schemas:
-    UIGroupPlatformGroupStructureResult:
-      properties:
-        created:
-          description: The date the record was created
-          type: integer
-        group_id:
-          description: Unique identifier of the group
-          format: uuid
-          type: string
-        id:
-          description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        modified:
-          description: The date the record was last updated
-          type: integer
-        organization_id:
-          description: Unique identifier of the organization
-          format: uuid
-          type: string
-        structure:
-          $ref: '#/components/schemas/PlatformStructure'
-        version:
-          description: Current version of the record
-          format: uuid
-          type: string
-      required:
-      - created
-      - group_id
-      - id
-      - modified
-      - organization_id
-      - version
-      type: object
-      x-field_order: []
-    PlatformStructurePlan:
-      properties:
-        carrier_id:
-          format: uuid
-          type: string
-        custom_plan_id:
-          type:
-          - string
-          - 'null'
-        id:
-          format: uuid
-          type:
-          - string
-          - 'null'
-        line_of_coverage:
-          type: string
-        name:
-          type:
-          - string
-          - 'null'
-        temporals:
-          items:
-            $ref: '#/components/schemas/PlatformStructureTemporalPlan'
-          type: array
-      required:
-      - carrier_id
-      - line_of_coverage
-      type: object
     PlatformStructure:
       properties:
         plans:
@@ -123,7 +60,7 @@ components:
           - array
           - 'null'
       type: object
-    PlatformGroupStructureUpdateRequestUI:
+    UIGroupPlatformGroupStructureResult:
       properties:
         created:
           description: The date the record was created
@@ -177,5 +114,68 @@ components:
           format: date
           type: string
       type: object
+    PlatformStructurePlan:
+      properties:
+        carrier_id:
+          format: uuid
+          type: string
+        custom_plan_id:
+          type:
+          - string
+          - 'null'
+        id:
+          format: uuid
+          type:
+          - string
+          - 'null'
+        line_of_coverage:
+          type: string
+        name:
+          type:
+          - string
+          - 'null'
+        temporals:
+          items:
+            $ref: '#/components/schemas/PlatformStructureTemporalPlan'
+          type: array
+      required:
+      - carrier_id
+      - line_of_coverage
+      type: object
+    PlatformGroupStructureUpdateRequestUI:
+      properties:
+        created:
+          description: The date the record was created
+          type: integer
+        group_id:
+          description: Unique identifier of the group
+          format: uuid
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        organization_id:
+          description: Unique identifier of the organization
+          format: uuid
+          type: string
+        structure:
+          $ref: '#/components/schemas/PlatformStructure'
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - created
+      - group_id
+      - id
+      - modified
+      - organization_id
+      - version
+      type: object
+      x-field_order: []
 x-readme:
   explorer-enabled: false

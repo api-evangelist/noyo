@@ -248,264 +248,6 @@ paths:
       - Volleys
 components:
   schemas:
-    StepTransitionData:
-      properties:
-        from_step_key:
-          type:
-          - string
-          - 'null'
-        from_transition_keys:
-          items:
-            type: string
-          type: array
-        to_step_keys:
-          items:
-            type: string
-          type: array
-        triggered_by_actor_type:
-          type: string
-      required:
-      - triggered_by_actor_type
-      type: object
-    VolleyStepTransitionResult:
-      properties:
-        attachments:
-          description: Attachments for this transition
-          items:
-            $ref: '#/components/schemas/VolleyAttachmentResult'
-          type: array
-        created:
-          description: The date the record was created
-          type: integer
-        id:
-          description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        modified:
-          description: The date the record was last updated
-          type: integer
-        to_transition_id:
-          description: Linked transition ID
-          format: uuid
-          type:
-          - string
-          - 'null'
-        transition_data:
-          allOf:
-          - $ref: '#/components/schemas/StepTransitionData'
-          description: Transition data
-        transition_key:
-          description: Transition key
-          type: string
-        version:
-          description: Current version of the record
-          format: uuid
-          type: string
-        volley_id:
-          description: Volley ID
-          format: uuid
-          type: string
-      required:
-      - created
-      - id
-      - modified
-      - transition_data
-      - transition_key
-      - version
-      - volley_id
-      type: object
-      x-field_order: []
-    VolleyAttachmentRequest:
-      properties:
-        attachment_type:
-          description: Type of the attachment (note, document)
-          type: string
-        content:
-          description: Text content for the attachment
-          type:
-          - string
-          - 'null'
-        file_key:
-          description: Cloud storage key for document attachments
-          type:
-          - string
-          - 'null'
-        file_name:
-          description: Original file name for document attachments
-          type:
-          - string
-          - 'null'
-      required:
-      - attachment_type
-      type: object
-      x-field_order: []
-    Meta:
-      properties:
-        offset:
-          description: The offset of the first response record within the matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
-        page_num:
-          description: The page number of the response records within the overall data set (1-based integer)
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        page_size:
-          description: The maximum number of response records on each page of results
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        total_records:
-          description: The total number of records in the entire matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
-      required:
-      - offset
-      - page_num
-      - page_size
-      type: object
-    AvailableTransition:
-      properties:
-        allowed_attachment_types:
-          items:
-            type: string
-          type:
-          - array
-          - 'null'
-        from_step_actor_type:
-          description: Type of the owner of the step the transition is from
-          type: string
-        from_step_id:
-          description: ID of the step the transition is from
-          format: uuid
-          type: string
-        from_step_key:
-          description: Key of the step the transition is from
-          type:
-          - string
-          - 'null'
-        requires_attachment:
-          description: Whether the transition requires an attachment
-          type: boolean
-        transition_key:
-          description: Key of the transition
-          type: string
-      required:
-      - from_step_actor_type
-      - from_step_id
-      - requires_attachment
-      - transition_key
-      type: object
-      x-field_order: []
-    VolleyStepTransitionPaginatedResult:
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of transitions
-          items:
-            $ref: '#/components/schemas/VolleyStepTransitionResult'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
-    VolleyAttachmentResult:
-      properties:
-        attachment_type:
-          description: Type of the attachment
-          type: string
-        content:
-          description: Text content of the attachment
-          type:
-          - string
-          - 'null'
-        created:
-          description: The date the record was created
-          type: integer
-        file_key:
-          description: Cloud storage key
-          type:
-          - string
-          - 'null'
-        file_name:
-          description: Original file name
-          type:
-          - string
-          - 'null'
-        id:
-          description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        modified:
-          description: The date the record was last updated
-          type: integer
-        version:
-          description: Current version of the record
-          format: uuid
-          type: string
-      required:
-      - attachment_type
-      - created
-      - id
-      - modified
-      - version
-      type: object
-      x-field_order: []
-    PublicVolleyAvailableTransitionsResult:
-      properties:
-        response:
-          description: List of available transitions
-          items:
-            $ref: '#/components/schemas/AvailableTransition'
-          type: array
-      required:
-      - response
-      type: object
-      x-field_order: []
-    VolleyPaginatedResult:
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of volleys
-          items:
-            $ref: '#/components/schemas/PublicVolleyResult'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
-    VolleyTransitionRequest:
-      properties:
-        attachments:
-          description: Attachments for the transition
-          items:
-            $ref: '#/components/schemas/VolleyAttachmentRequest'
-          type: array
-        transition_key:
-          description: Key of the transition to execute
-          type: string
-      required:
-      - transition_key
-      type: object
-      x-field_order: []
     PublicVolleyResult:
       properties:
         carrier_id:
@@ -568,5 +310,263 @@ components:
       - volley_type
       type: object
       x-field_order: []
+    VolleyPaginatedResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of volleys
+          items:
+            $ref: '#/components/schemas/PublicVolleyResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    VolleyTransitionRequest:
+      properties:
+        attachments:
+          description: Attachments for the transition
+          items:
+            $ref: '#/components/schemas/VolleyAttachmentRequest'
+          type: array
+        transition_key:
+          description: Key of the transition to execute
+          type: string
+      required:
+      - transition_key
+      type: object
+      x-field_order: []
+    AvailableTransition:
+      properties:
+        allowed_attachment_types:
+          items:
+            type: string
+          type:
+          - array
+          - 'null'
+        from_step_actor_type:
+          description: Type of the owner of the step the transition is from
+          type: string
+        from_step_id:
+          description: ID of the step the transition is from
+          format: uuid
+          type: string
+        from_step_key:
+          description: Key of the step the transition is from
+          type:
+          - string
+          - 'null'
+        requires_attachment:
+          description: Whether the transition requires an attachment
+          type: boolean
+        transition_key:
+          description: Key of the transition
+          type: string
+      required:
+      - from_step_actor_type
+      - from_step_id
+      - requires_attachment
+      - transition_key
+      type: object
+      x-field_order: []
+    VolleyStepTransitionResult:
+      properties:
+        attachments:
+          description: Attachments for this transition
+          items:
+            $ref: '#/components/schemas/VolleyAttachmentResult'
+          type: array
+        created:
+          description: The date the record was created
+          type: integer
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        to_transition_id:
+          description: Linked transition ID
+          format: uuid
+          type:
+          - string
+          - 'null'
+        transition_data:
+          allOf:
+          - $ref: '#/components/schemas/StepTransitionData'
+          description: Transition data
+        transition_key:
+          description: Transition key
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+        volley_id:
+          description: Volley ID
+          format: uuid
+          type: string
+      required:
+      - created
+      - id
+      - modified
+      - transition_data
+      - transition_key
+      - version
+      - volley_id
+      type: object
+      x-field_order: []
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+    VolleyAttachmentResult:
+      properties:
+        attachment_type:
+          description: Type of the attachment
+          type: string
+        content:
+          description: Text content of the attachment
+          type:
+          - string
+          - 'null'
+        created:
+          description: The date the record was created
+          type: integer
+        file_key:
+          description: Cloud storage key
+          type:
+          - string
+          - 'null'
+        file_name:
+          description: Original file name
+          type:
+          - string
+          - 'null'
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - attachment_type
+      - created
+      - id
+      - modified
+      - version
+      type: object
+      x-field_order: []
+    PublicVolleyAvailableTransitionsResult:
+      properties:
+        response:
+          description: List of available transitions
+          items:
+            $ref: '#/components/schemas/AvailableTransition'
+          type: array
+      required:
+      - response
+      type: object
+      x-field_order: []
+    VolleyAttachmentRequest:
+      properties:
+        attachment_type:
+          description: Type of the attachment (note, document)
+          type: string
+        content:
+          description: Text content for the attachment
+          type:
+          - string
+          - 'null'
+        file_key:
+          description: Cloud storage key for document attachments
+          type:
+          - string
+          - 'null'
+        file_name:
+          description: Original file name for document attachments
+          type:
+          - string
+          - 'null'
+      required:
+      - attachment_type
+      type: object
+      x-field_order: []
+    StepTransitionData:
+      properties:
+        from_step_key:
+          type:
+          - string
+          - 'null'
+        from_transition_keys:
+          items:
+            type: string
+          type: array
+        to_step_keys:
+          items:
+            type: string
+          type: array
+        triggered_by_actor_type:
+          type: string
+      required:
+      - triggered_by_actor_type
+      type: object
+    VolleyStepTransitionPaginatedResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of transitions
+          items:
+            $ref: '#/components/schemas/VolleyStepTransitionResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
 x-readme:
   explorer-enabled: false

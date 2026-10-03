@@ -100,25 +100,6 @@ paths:
       - Ui Group Connections
 components:
   schemas:
-    GroupConnectionRequestEditUI:
-      properties:
-        sent_carrier_auth_comms:
-          description: Timestamp of carrier authorization request email
-          format: date-time
-          type:
-          - string
-          - 'null'
-        setup_data:
-          description: Information of the group connection setup
-          type: object
-        setup_result:
-          description: More information about the result of the group connection
-          type: object
-        status:
-          description: Status of the group connection
-          type: string
-      type: object
-      x-field_order: []
     GroupSetupRequestUIResult:
       properties:
         carrier_id:
@@ -206,6 +187,25 @@ components:
       - group_data
       - setup_result
       - setup_data
+    GroupConnectionRequestEditUI:
+      properties:
+        sent_carrier_auth_comms:
+          description: Timestamp of carrier authorization request email
+          format: date-time
+          type:
+          - string
+          - 'null'
+        setup_data:
+          description: Information of the group connection setup
+          type: object
+        setup_result:
+          description: More information about the result of the group connection
+          type: object
+        status:
+          description: Status of the group connection
+          type: string
+      type: object
+      x-field_order: []
     GroupSetupRequestPublicGroupDataResult:
       properties:
         broker_federal_ein:

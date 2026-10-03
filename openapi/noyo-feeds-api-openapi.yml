@@ -213,41 +213,18 @@ paths:
       - Feeds
 components:
   schemas:
-    Meta:
+    UIFeedsLastTransmissionResult:
       properties:
-        offset:
-          description: The offset of the first response record within the matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
-        page_num:
-          description: The page number of the response records within the overall data set (1-based integer)
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        page_size:
-          description: The maximum number of response records on each page of results
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        total_records:
-          description: The total number of records in the entire matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
+        id:
+          description: ID of transmission
+          format: uuid
+          type: string
+        sent_timestamp:
+          description: DateTime the transmission was sent to the carrier
           type: integer
       required:
-      - offset
-      - page_num
-      - page_size
-      type: object
-    PublicFeedConfiguration:
-      properties:
-        cadence:
-          $ref: '#/components/schemas/Cadence'
+      - id
+      - sent_timestamp
       type: object
     PaginatedPublicFeedResult:
       properties:
@@ -267,56 +244,6 @@ components:
       x-field_order:
       - meta
       - response
-    Cadence:
-      properties:
-        end_date:
-          format: date
-          type: string
-        next_transmission:
-          format: date-time
-          type:
-          - string
-          - 'null'
-        paused:
-          type: boolean
-        rrule:
-          type: string
-        start_date:
-          format: date
-          type: string
-        time_of_day:
-          pattern: ^([01]?[0-9]|2[0-3]):[0-5][0-9]$
-          type: string
-        zone_info:
-          enum:
-          - Etc/UTC
-          - US/Eastern
-          - US/Central
-          - US/Mountain
-          - US/Pacific
-          type: string
-      required:
-      - end_date
-      - next_transmission
-      - paused
-      - rrule
-      - start_date
-      - time_of_day
-      - zone_info
-      type: object
-    UIFeedsLastTransmissionResult:
-      properties:
-        id:
-          description: ID of transmission
-          format: uuid
-          type: string
-        sent_timestamp:
-          description: DateTime the transmission was sent to the carrier
-          type: integer
-      required:
-      - id
-      - sent_timestamp
-      type: object
     PublicFeedResult:
       properties:
         carrier_id:
@@ -381,5 +308,78 @@ components:
       - version
       type: object
       x-field_order: []
+    Cadence:
+      properties:
+        end_date:
+          format: date
+          type: string
+        next_transmission:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        paused:
+          type: boolean
+        rrule:
+          type: string
+        start_date:
+          format: date
+          type: string
+        time_of_day:
+          pattern: ^([01]?[0-9]|2[0-3]):[0-5][0-9]$
+          type: string
+        zone_info:
+          enum:
+          - Etc/UTC
+          - US/Eastern
+          - US/Central
+          - US/Mountain
+          - US/Pacific
+          type: string
+      required:
+      - end_date
+      - next_transmission
+      - paused
+      - rrule
+      - start_date
+      - time_of_day
+      - zone_info
+      type: object
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+    PublicFeedConfiguration:
+      properties:
+        cadence:
+          $ref: '#/components/schemas/Cadence'
+      type: object
 x-readme:
   explorer-enabled: false

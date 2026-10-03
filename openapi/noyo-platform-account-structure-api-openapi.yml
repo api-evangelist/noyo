@@ -262,6 +262,142 @@ paths:
       - Platform Account Structure
 components:
   schemas:
+    PlatformAccountStructureResult:
+      properties:
+        account_structure:
+          allOf:
+          - $ref: '#/components/schemas/PlatformAccountStructureAccountStructure'
+          description: Group-specific platform account structure
+          readOnly: true
+        created:
+          description: The date the record was created
+          type: integer
+        group_id:
+          description: Unique identifier of the group in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - account_structure
+      - created
+      - group_id
+      - id
+      - modified
+      - version
+      type: object
+      x-field_order:
+      - id
+      - version
+      - created
+      - modified
+      - group_id
+      - account_structure
+    PlatformAccountStructureCreateRequest:
+      properties:
+        account_structure:
+          allOf:
+          - $ref: '#/components/schemas/PlatformAccountStructureAccountStructure'
+          description: Group-specific platform account structure
+        end_date:
+          description: Effective end date of the record
+          example: '2020-01-01'
+          format: date
+          type: string
+        start_date:
+          description: Effective start date of the record, defaults to today
+          example: '2019-01-01'
+          format: date
+          type: string
+      required:
+      - account_structure
+      type: object
+      x-field_order:
+      - account_structure
+      - start_date
+      - end_date
+    PlatformAccountStructureEditRequest:
+      properties:
+        account_structure:
+          allOf:
+          - $ref: '#/components/schemas/PlatformAccountStructureAccountStructure'
+          description: Group-specific platform account structure
+        effective_date:
+          description: Effective date for target record to update, defaults to today
+          example: '2019-04-04'
+          format: date
+          type: string
+        end_date:
+          description: Effective end date of the record
+          example: '2020-01-01'
+          format: date
+          type: string
+        start_date:
+          description: Effective start date of the record, defaults to today
+          example: '2019-01-01'
+          format: date
+          type: string
+      required:
+      - account_structure
+      type: object
+      x-field_order:
+      - account_structure
+      - effective_date
+      - start_date
+      - end_date
+    PlatformAccountStructureAccountStructure:
+      properties:
+        account_structure_fields:
+          items:
+            $ref: '#/components/schemas/PlatformAccountStructureAccountStructureField'
+          type: array
+        plans:
+          allOf:
+          - $ref: '#/components/schemas/PlatformAccountStructureAccountStructurePlan'
+          description: Plans available for plan mapping
+      type: object
+      x-field_order:
+      - field_name
+      - field_type
+      - existing_value_set
+    PlatformAccountStructureAccountStructureField:
+      properties:
+        existing_value_set:
+          description: All distinct values that are represented in the group for this field
+          items:
+            type: string
+          type: array
+        field_name:
+          description: The name of the field
+          type: string
+        field_type:
+          description: The data type of this field
+          enum:
+          - string
+          - integer
+          - decimal
+          - date
+          - boolean
+          type: string
+      required:
+      - existing_value_set
+      - field_name
+      - field_type
+      type: object
+      x-field_order:
+      - field_name
+      - field_type
+      - existing_value_set
     PlatformAccountStructureAccountStructurePlan:
       properties:
         group_accident_plans:
@@ -350,141 +486,5 @@ components:
       - group_hospital_indemnity_plans
       - group_pharmacy_plans
       - group_wellness_plans
-    PlatformAccountStructureAccountStructureField:
-      properties:
-        existing_value_set:
-          description: All distinct values that are represented in the group for this field
-          items:
-            type: string
-          type: array
-        field_name:
-          description: The name of the field
-          type: string
-        field_type:
-          description: The data type of this field
-          enum:
-          - string
-          - integer
-          - decimal
-          - date
-          - boolean
-          type: string
-      required:
-      - existing_value_set
-      - field_name
-      - field_type
-      type: object
-      x-field_order:
-      - field_name
-      - field_type
-      - existing_value_set
-    PlatformAccountStructureCreateRequest:
-      properties:
-        account_structure:
-          allOf:
-          - $ref: '#/components/schemas/PlatformAccountStructureAccountStructure'
-          description: Group-specific platform account structure
-        end_date:
-          description: Effective end date of the record
-          example: '2020-01-01'
-          format: date
-          type: string
-        start_date:
-          description: Effective start date of the record, defaults to today
-          example: '2019-01-01'
-          format: date
-          type: string
-      required:
-      - account_structure
-      type: object
-      x-field_order:
-      - account_structure
-      - start_date
-      - end_date
-    PlatformAccountStructureAccountStructure:
-      properties:
-        account_structure_fields:
-          items:
-            $ref: '#/components/schemas/PlatformAccountStructureAccountStructureField'
-          type: array
-        plans:
-          allOf:
-          - $ref: '#/components/schemas/PlatformAccountStructureAccountStructurePlan'
-          description: Plans available for plan mapping
-      type: object
-      x-field_order:
-      - field_name
-      - field_type
-      - existing_value_set
-    PlatformAccountStructureResult:
-      properties:
-        account_structure:
-          allOf:
-          - $ref: '#/components/schemas/PlatformAccountStructureAccountStructure'
-          description: Group-specific platform account structure
-          readOnly: true
-        created:
-          description: The date the record was created
-          type: integer
-        group_id:
-          description: Unique identifier of the group in Noyo
-          format: uuid
-          readOnly: true
-          type: string
-        id:
-          description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        modified:
-          description: The date the record was last updated
-          type: integer
-        version:
-          description: Current version of the record
-          format: uuid
-          type: string
-      required:
-      - account_structure
-      - created
-      - group_id
-      - id
-      - modified
-      - version
-      type: object
-      x-field_order:
-      - id
-      - version
-      - created
-      - modified
-      - group_id
-      - account_structure
-    PlatformAccountStructureEditRequest:
-      properties:
-        account_structure:
-          allOf:
-          - $ref: '#/components/schemas/PlatformAccountStructureAccountStructure'
-          description: Group-specific platform account structure
-        effective_date:
-          description: Effective date for target record to update, defaults to today
-          example: '2019-04-04'
-          format: date
-          type: string
-        end_date:
-          description: Effective end date of the record
-          example: '2020-01-01'
-          format: date
-          type: string
-        start_date:
-          description: Effective start date of the record, defaults to today
-          example: '2019-01-01'
-          format: date
-          type: string
-      required:
-      - account_structure
-      type: object
-      x-field_order:
-      - account_structure
-      - effective_date
-      - start_date
-      - end_date
 x-readme:
   explorer-enabled: false

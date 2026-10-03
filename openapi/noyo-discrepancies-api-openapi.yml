@@ -718,142 +718,6 @@ paths:
       - Discrepancies
 components:
   schemas:
-    PaginatedDiscrepancyNoteResult:
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of discrepancy notes
-          items:
-            $ref: '#/components/schemas/DiscrepancyNoteResult'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
-    DiscrepancyAckRequest:
-      properties: {}
-      type: object
-      x-field_order: []
-    Meta:
-      properties:
-        offset:
-          description: The offset of the first response record within the matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
-        page_num:
-          description: The page number of the response records within the overall data set (1-based integer)
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        page_size:
-          description: The maximum number of response records on each page of results
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        total_records:
-          description: The total number of records in the entire matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
-      required:
-      - offset
-      - page_num
-      - page_size
-      type: object
-    DiscrepancyPublicResult:
-      properties:
-        body:
-          description: Details of what values are in contention with each other
-          readOnly: true
-          type: object
-        carrier_id:
-          description: Unique identifier of the associated carrier in Noyo
-          format: uuid
-          readOnly: true
-          type: string
-        context:
-          description: Context for the processing of the discrepancy
-          readOnly: true
-          type: string
-        created:
-          description: The date the record was created
-          type: integer
-        discrepancy_type:
-          description: Categorization of the discrepancy
-          readOnly: true
-          type: string
-        group_id:
-          description: Unique identifier of the group in Noyo
-          format: uuid
-          readOnly: true
-          type: string
-        id:
-          description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        modified:
-          description: The date the record was last updated
-          type: integer
-        status:
-          description: Status of the discrepancy
-          enum:
-          - needs_review
-          - processing
-          - resolved
-          - dismissed
-          - failed
-          readOnly: true
-          type: string
-        subject_id:
-          description: Unique identifier of the model that is the subject of the discrepancy
-          format: uuid
-          readOnly: true
-          type: string
-        subject_type:
-          description: The type of the model that is the subject of the discrepancy
-          readOnly: true
-          type: string
-        version:
-          description: Current version of the record
-          format: uuid
-          type: string
-      required:
-      - body
-      - carrier_id
-      - created
-      - discrepancy_type
-      - group_id
-      - id
-      - modified
-      - status
-      - subject_id
-      - subject_type
-      - version
-      type: object
-      x-field_order:
-      - id
-      - version
-      - group_id
-      - carrier_id
-      - status
-      - discrepancy_type
-      - subject_id
-      - subject_type
-      - context
-      - body
-      - created
-      - modified
     DiscrepancyResolutionResult:
       properties:
         automated_change_id:
@@ -934,6 +798,42 @@ components:
       - result
       - created
       - modified
+    PaginatedDiscrepancyResolutionResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of discrepancy resolutions
+          items:
+            $ref: '#/components/schemas/DiscrepancyResolutionResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    PaginatedDiscrepancyNoteResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of discrepancy notes
+          items:
+            $ref: '#/components/schemas/DiscrepancyNoteResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
     DiscrepancyResolutionRequestOutcome:
       properties:
         distributor_action:
@@ -1020,6 +920,41 @@ components:
       - content
       - created
       - modified
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
+    DiscrepancyAckRequest:
+      properties: {}
+      type: object
+      x-field_order: []
     PaginatedDiscrepancyPublicResult:
       properties:
         meta:
@@ -1038,23 +973,88 @@ components:
       x-field_order:
       - meta
       - response
-    PaginatedDiscrepancyResolutionResult:
+    DiscrepancyPublicResult:
       properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of discrepancy resolutions
-          items:
-            $ref: '#/components/schemas/DiscrepancyResolutionResult'
-          type: array
+        body:
+          description: Details of what values are in contention with each other
+          readOnly: true
+          type: object
+        carrier_id:
+          description: Unique identifier of the associated carrier in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        context:
+          description: Context for the processing of the discrepancy
+          readOnly: true
+          type: string
+        created:
+          description: The date the record was created
+          type: integer
+        discrepancy_type:
+          description: Categorization of the discrepancy
+          readOnly: true
+          type: string
+        group_id:
+          description: Unique identifier of the group in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        status:
+          description: Status of the discrepancy
+          enum:
+          - needs_review
+          - processing
+          - resolved
+          - dismissed
+          - failed
+          readOnly: true
+          type: string
+        subject_id:
+          description: Unique identifier of the model that is the subject of the discrepancy
+          format: uuid
+          readOnly: true
+          type: string
+        subject_type:
+          description: The type of the model that is the subject of the discrepancy
+          readOnly: true
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
       required:
-      - meta
-      - response
+      - body
+      - carrier_id
+      - created
+      - discrepancy_type
+      - group_id
+      - id
+      - modified
+      - status
+      - subject_id
+      - subject_type
+      - version
       type: object
       x-field_order:
-      - meta
-      - response
+      - id
+      - version
+      - group_id
+      - carrier_id
+      - status
+      - discrepancy_type
+      - subject_id
+      - subject_type
+      - context
+      - body
+      - created
+      - modified
 x-readme:
   explorer-enabled: false

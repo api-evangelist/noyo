@@ -110,6 +110,24 @@ paths:
       - Partner Document Sources
 components:
   schemas:
+    PaginatedPartnerDocumentSourcePublicResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of partner document source results
+          items:
+            $ref: '#/components/schemas/PartnerDocumentSourcePublicResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
     Meta:
       properties:
         offset:
@@ -141,24 +159,6 @@ components:
       - page_num
       - page_size
       type: object
-    PaginatedPartnerDocumentSourcePublicResult:
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of partner document source results
-          items:
-            $ref: '#/components/schemas/PartnerDocumentSourcePublicResult'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
     PartnerDocumentSourcePublicResult:
       properties:
         created:
