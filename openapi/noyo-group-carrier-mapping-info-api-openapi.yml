@@ -77,6 +77,27 @@ components:
       x-field_order:
       - meta
       - response
+    UICarrierMappingInfoResult:
+      properties:
+        carrier_id:
+          description: Associated Carrier ID
+          format: uuid
+          type: string
+        config_completed:
+          description: Determines whether the associated group carrier configuration is complete
+          type: boolean
+        group_mapping_id:
+          description: Associated Group Mapping ID
+          format: uuid
+          type: string
+        simple_account_structure:
+          description: Based on whether we have carrier mapped fields or not
+          type: boolean
+      required:
+      - carrier_id
+      - config_completed
+      - simple_account_structure
+      type: object
     Meta:
       properties:
         offset:
@@ -107,27 +128,6 @@ components:
       - offset
       - page_num
       - page_size
-      type: object
-    UICarrierMappingInfoResult:
-      properties:
-        carrier_id:
-          description: Associated Carrier ID
-          format: uuid
-          type: string
-        config_completed:
-          description: Determines whether the associated group carrier configuration is complete
-          type: boolean
-        group_mapping_id:
-          description: Associated Group Mapping ID
-          format: uuid
-          type: string
-        simple_account_structure:
-          description: Based on whether we have carrier mapped fields or not
-          type: boolean
-      required:
-      - carrier_id
-      - config_completed
-      - simple_account_structure
       type: object
 x-readme:
   explorer-enabled: false

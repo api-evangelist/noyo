@@ -39,31 +39,19 @@ paths:
       - Eligibility Rules
 components:
   schemas:
-    PaginatedEligibilityRulesResult:
+    EligibilityRuleConfiguration:
       properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of eligibility rule configurations
+        data_exchange_configuration_name:
+          description: Data exchange configuration name
+          type: string
+        rules:
+          description: List of eligibility rule descriptions
           items:
-            $ref: '#/components/schemas/EligibilityRuleConfiguration'
+            $ref: '#/components/schemas/EligibilityRuleDescription'
           type: array
       required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
-    EligibilityRuleDescription:
-      properties:
-        description:
-          description: Eligibility rule description
-          type: string
-      required:
-      - description
+      - data_exchange_configuration_name
+      - rules
       type: object
       x-field_order: []
     Meta:
@@ -97,20 +85,32 @@ components:
       - page_num
       - page_size
       type: object
-    EligibilityRuleConfiguration:
+    EligibilityRuleDescription:
       properties:
-        data_exchange_configuration_name:
-          description: Data exchange configuration name
+        description:
+          description: Eligibility rule description
           type: string
-        rules:
-          description: List of eligibility rule descriptions
-          items:
-            $ref: '#/components/schemas/EligibilityRuleDescription'
-          type: array
       required:
-      - data_exchange_configuration_name
-      - rules
+      - description
       type: object
       x-field_order: []
+    PaginatedEligibilityRulesResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of eligibility rule configurations
+          items:
+            $ref: '#/components/schemas/EligibilityRuleConfiguration'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
 x-readme:
   explorer-enabled: false

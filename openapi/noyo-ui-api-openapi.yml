@@ -82,6 +82,22 @@ paths:
       - UI
 components:
   schemas:
+    UIGetMemberTransactionResult:
+      properties:
+        member_snapshot_id:
+          description: Associated member snapshot id
+          format: uuid
+          type: string
+        member_transaction:
+          allOf:
+          - $ref: '#/components/schemas/MemberTransactionResult'
+          description: Member transaction details
+      required:
+      - member_transaction
+      type: object
+      x-field_order:
+      - member_transaction
+      - member_snapshot_id
     StatusDetailResult:
       properties:
         event_created:
@@ -105,22 +121,6 @@ components:
       x-field_order:
       - status_detail
       - event_created
-    UIGetMemberTransactionResult:
-      properties:
-        member_snapshot_id:
-          description: Associated member snapshot id
-          format: uuid
-          type: string
-        member_transaction:
-          allOf:
-          - $ref: '#/components/schemas/MemberTransactionResult'
-          description: Member transaction details
-      required:
-      - member_transaction
-      type: object
-      x-field_order:
-      - member_transaction
-      - member_snapshot_id
     MemberTransactionResult:
       properties:
         body:

@@ -209,21 +209,6 @@ components:
       - organization_id
       - status
       - estimated_volume
-    CreateOrganizationCarrierPublicRequest:
-      properties:
-        carrier_id:
-          description: Carrier ID associated with the organization
-          format: uuid
-          type: string
-        estimated_volume:
-          default: 0
-          description: estimated number of enrollments with this carrier
-          format: int32
-          type: integer
-      required:
-      - carrier_id
-      type: object
-      x-field_order: []
     CarrierResult:
       properties:
         display_name:
@@ -332,5 +317,20 @@ components:
       - lines_of_coverage
       - state
       - version
+      type: object
+      x-field_order: []
+    CreateOrganizationCarrierPublicRequest:
+      properties:
+        carrier_id:
+          description: Carrier ID associated with the organization
+          format: uuid
+          type: string
+        estimated_volume:
+          default: 0
+          description: estimated number of enrollments with this carrier
+          format: int32
+          type: integer
+      required:
+      - carrier_id
       type: object
       x-field_order: []

@@ -382,6 +382,175 @@ paths:
       - Group Plans & Enrollment
 components:
   schemas:
+    SingleGroupPlanResult:
+      properties:
+        plan:
+          description: Group plan associated to a line of coverage
+          readOnly: true
+          type: object
+      required:
+      - plan
+      type: object
+      x-field_order: []
+    GroupPlanDependentChildAgeLimit:
+      properties:
+        dependent_child_age_limit:
+          description: Age limit where dependent child is no longer eligible for plan
+          format: int32
+          minimum: 0
+          type: integer
+        dependent_child_termination_rule:
+          description: Termination rule describing when coverage ends for dependent child
+          enum:
+          - date_of_birth
+          - end_of_month_after_birthday
+          - end_of_year_after_birthday
+          type: string
+        dependent_child_type:
+          description: Dependent type to decide whether age limit rule should be applied
+          enum:
+          - dependent_child
+          - student
+          type: string
+      required:
+      - dependent_child_age_limit
+      - dependent_child_termination_rule
+      - dependent_child_type
+      type: object
+    GroupEnrollmentPublicResult:
+      properties:
+        carrier_id:
+          description: Unique identifier of the associated carrier in the Noyo system
+          format: uuid
+          type: string
+        created:
+          description: The date the record was created
+          type: integer
+        effective_end_date:
+          description: ISO-8601 date string for the effective end date of the record
+          example: '2018-12-31'
+          format: date
+          type:
+          - string
+          - 'null'
+        effective_start_date:
+          description: ISO-8601 date string for the effective start date of the record
+          example: '2018-01-01'
+          format: date
+          type:
+          - string
+          - 'null'
+        group_id:
+          description: Unique identifier of the associated group in the Noyo system
+          format: uuid
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        line_of_coverage:
+          description: Line of coverage for the group enrollment
+          enum:
+          - medical
+          - dental
+          - vision
+          - life
+          - add
+          - std
+          - ltd
+          - accident
+          - critical_illness
+          - cancer
+          - health_fund
+          - hospital_indemnity
+          - pharmacy
+          - wellness
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        open_enrollment_end_date:
+          description: ISO-8601 date string for the open enrollment end date of the group enrollment
+          example: '2018-11-30'
+          format: date
+          type:
+          - string
+          - 'null'
+        open_enrollment_renewal_date:
+          description: ISO-8601 date string for the open enrollment renewal start date of the group enrollment
+          example: '2018-12-01'
+          format: date
+          type:
+          - string
+          - 'null'
+        open_enrollment_start_date:
+          description: ISO-8601 date string for the open enrollment start date of the group enrollment
+          example: '2018-11-01'
+          format: date
+          type:
+          - string
+          - 'null'
+        status:
+          description: Status of the group enrollment
+          enum:
+          - pending
+          - active
+          - completed
+          type: string
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - carrier_id
+      - created
+      - group_id
+      - id
+      - line_of_coverage
+      - modified
+      - status
+      - version
+      type: object
+      x-field_order:
+      - id
+      - version
+      - group_id
+      - carrier_id
+      - line_of_coverage
+      - status
+      - open_enrollment_start_date
+      - open_enrollment_end_date
+      - open_enrollment_renewal_date
+      - effective_start_date
+      - effective_end_date
+      - created
+      - modified
+    PaginatedGroupPlanResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of group plan results
+          items:
+            description: Group plan associated with the group
+            readOnly: true
+            type: object
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    GroupPlanCOBRARules:
+      properties:
+        eligible:
+          description: True if group plan is eligible for COBRA enrollments
+          type: boolean
+      type: object
     GroupDentalPlanPublicResult:
       properties:
         benefits:
@@ -540,68 +709,6 @@ components:
       - benefits
       - created
       - modified
-    GroupPlanDependentChildAgeLimit:
-      properties:
-        dependent_child_age_limit:
-          description: Age limit where dependent child is no longer eligible for plan
-          format: int32
-          minimum: 0
-          type: integer
-        dependent_child_termination_rule:
-          description: Termination rule describing when coverage ends for dependent child
-          enum:
-          - date_of_birth
-          - end_of_month_after_birthday
-          - end_of_year_after_birthday
-          type: string
-        dependent_child_type:
-          description: Dependent type to decide whether age limit rule should be applied
-          enum:
-          - dependent_child
-          - student
-          type: string
-      required:
-      - dependent_child_age_limit
-      - dependent_child_termination_rule
-      - dependent_child_type
-      type: object
-    SingleGroupPlanResult:
-      properties:
-        plan:
-          description: Group plan associated to a line of coverage
-          readOnly: true
-          type: object
-      required:
-      - plan
-      type: object
-      x-field_order: []
-    GroupDentalPlanBenefitsSnapshot:
-      properties:
-        contributory_type:
-          description: Contribution type for the group AD&D plan
-          example: Contributory
-          type: string
-      type: object
-    PaginatedGroupPlanResult:
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of group plan results
-          items:
-            description: Group plan associated with the group
-            readOnly: true
-            type: object
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
     PaginatedGroupEnrollmentResult:
       properties:
         meta:
@@ -620,114 +727,6 @@ components:
       x-field_order:
       - meta
       - response
-    GroupEnrollmentPublicResult:
-      properties:
-        carrier_id:
-          description: Unique identifier of the associated carrier in the Noyo system
-          format: uuid
-          type: string
-        created:
-          description: The date the record was created
-          type: integer
-        effective_end_date:
-          description: ISO-8601 date string for the effective end date of the record
-          example: '2018-12-31'
-          format: date
-          type:
-          - string
-          - 'null'
-        effective_start_date:
-          description: ISO-8601 date string for the effective start date of the record
-          example: '2018-01-01'
-          format: date
-          type:
-          - string
-          - 'null'
-        group_id:
-          description: Unique identifier of the associated group in the Noyo system
-          format: uuid
-          type: string
-        id:
-          description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        line_of_coverage:
-          description: Line of coverage for the group enrollment
-          enum:
-          - medical
-          - dental
-          - vision
-          - life
-          - add
-          - std
-          - ltd
-          - accident
-          - critical_illness
-          - cancer
-          - health_fund
-          - hospital_indemnity
-          - pharmacy
-          - wellness
-          type: string
-        modified:
-          description: The date the record was last updated
-          type: integer
-        open_enrollment_end_date:
-          description: ISO-8601 date string for the open enrollment end date of the group enrollment
-          example: '2018-11-30'
-          format: date
-          type:
-          - string
-          - 'null'
-        open_enrollment_renewal_date:
-          description: ISO-8601 date string for the open enrollment renewal start date of the group enrollment
-          example: '2018-12-01'
-          format: date
-          type:
-          - string
-          - 'null'
-        open_enrollment_start_date:
-          description: ISO-8601 date string for the open enrollment start date of the group enrollment
-          example: '2018-11-01'
-          format: date
-          type:
-          - string
-          - 'null'
-        status:
-          description: Status of the group enrollment
-          enum:
-          - pending
-          - active
-          - completed
-          type: string
-        version:
-          description: Current version of the record
-          format: uuid
-          type: string
-      required:
-      - carrier_id
-      - created
-      - group_id
-      - id
-      - line_of_coverage
-      - modified
-      - status
-      - version
-      type: object
-      x-field_order:
-      - id
-      - version
-      - group_id
-      - carrier_id
-      - line_of_coverage
-      - status
-      - open_enrollment_start_date
-      - open_enrollment_end_date
-      - open_enrollment_renewal_date
-      - effective_start_date
-      - effective_end_date
-      - created
-      - modified
     Meta:
       properties:
         offset:
@@ -759,11 +758,12 @@ components:
       - page_num
       - page_size
       type: object
-    GroupPlanCOBRARules:
+    GroupDentalPlanBenefitsSnapshot:
       properties:
-        eligible:
-          description: True if group plan is eligible for COBRA enrollments
-          type: boolean
+        contributory_type:
+          description: Contribution type for the group AD&D plan
+          example: Contributory
+          type: string
       type: object
 x-readme:
   explorer-enabled: false

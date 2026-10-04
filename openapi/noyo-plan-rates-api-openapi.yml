@@ -55,6 +55,24 @@ components:
       - calculation_type
       - options
       type: object
+    PaginatedPlanRateByPlanResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of plan rate results
+          items:
+            $ref: '#/components/schemas/PlanRateByPlanResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
     Meta:
       properties:
         offset:
@@ -86,6 +104,26 @@ components:
       - page_num
       - page_size
       type: object
+    PlanRateByPlanResult:
+      properties:
+        plan_id:
+          description: Unique identifier of the plan
+          format: uuid
+          type: string
+        plan_rate_id:
+          description: Unique identifier of the plan rate
+          format: uuid
+          type: string
+        temporal_rates:
+          description: List of temporal rates for this plan
+          items:
+            $ref: '#/components/schemas/TemporalPlanRateResult'
+          type: array
+      required:
+      - plan_id
+      - plan_rate_id
+      - temporal_rates
+      type: object
     TemporalPlanRateResult:
       properties:
         end_date:
@@ -110,43 +148,5 @@ components:
       - rate_structure
       - start_date
       type: object
-    PlanRateByPlanResult:
-      properties:
-        plan_id:
-          description: Unique identifier of the plan
-          format: uuid
-          type: string
-        plan_rate_id:
-          description: Unique identifier of the plan rate
-          format: uuid
-          type: string
-        temporal_rates:
-          description: List of temporal rates for this plan
-          items:
-            $ref: '#/components/schemas/TemporalPlanRateResult'
-          type: array
-      required:
-      - plan_id
-      - plan_rate_id
-      - temporal_rates
-      type: object
-    PaginatedPlanRateByPlanResult:
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of plan rate results
-          items:
-            $ref: '#/components/schemas/PlanRateByPlanResult'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
 x-readme:
   explorer-enabled: false

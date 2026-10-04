@@ -1254,12 +1254,78 @@ paths:
       - Differences
 components:
   schemas:
-    UpdateDifferenceAssigneeRequest:
+    BatchDifferenceUpdateResponse:
+      properties:
+        ids:
+          items:
+            description: UUIDs that were updated (does not include those who had no change)
+            format: uuid
+            type: string
+          type: array
+      type: object
+      x-field_order: []
+    BatchAssigneeUpdateRequest:
       properties: {}
       required:
       - assignee_id
       type: object
       x-field_order: []
+    DifferenceCountsResult:
+      properties:
+        response:
+          items:
+            type: object
+          type: array
+      type: object
+      x-field_order: []
+    PaginatedTransactionsDifferencesResult:
+      properties:
+        meta:
+          description: Metadata associated with the response data
+          properties:
+            offset:
+              description: The offset of the first response record within the matching data set
+              format: int32
+              minimum: 0
+              readOnly: true
+              type: integer
+            page_num:
+              description: The page number of the response records within the overall data set (1-based integer)
+              format: int32
+              minimum: 1
+              readOnly: true
+              type: integer
+            page_size:
+              description: The maximum number of response records on each page of results
+              format: int32
+              minimum: 1
+              readOnly: true
+              type: integer
+            total_records:
+              description: The total number of records in the entire matching data set
+              format: int32
+              minimum: 0
+              readOnly: true
+              type: integer
+          required:
+          - offset
+          - page_num
+          - page_size
+          type: object
+        response:
+          description: List of Member transactions that created differences
+          items:
+            description: member Transaction UUID
+            format: uuid
+            type: string
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
     BatchDismissalUpdateRequest:
       properties:
         ids:
@@ -1381,6 +1447,165 @@ components:
       - impact_score_calculation_method
       - impact_score_calculated
       - assignee_id
+    PaginatedDifferencesResult:
+      properties:
+        meta:
+          description: Metadata associated with the response data
+          properties:
+            offset:
+              description: The offset of the first response record within the matching data set
+              format: int32
+              minimum: 0
+              readOnly: true
+              type: integer
+            page_num:
+              description: The page number of the response records within the overall data set (1-based integer)
+              format: int32
+              minimum: 1
+              readOnly: true
+              type: integer
+            page_size:
+              description: The maximum number of response records on each page of results
+              format: int32
+              minimum: 1
+              readOnly: true
+              type: integer
+            total_records:
+              description: The total number of records in the entire matching data set
+              format: int32
+              minimum: 0
+              readOnly: true
+              type: integer
+          required:
+          - offset
+          - page_num
+          - page_size
+          type: object
+        response:
+          description: List of difference results
+          items:
+            properties:
+              carrier_id:
+                description: Unique identifier of the carrier in Noyo
+                format: uuid
+                type: string
+              created:
+                description: The date the record was created
+                type: integer
+              difference_classification:
+                description: 'Describes the way in which the carrier and platform values differ. One of: missing_from_carrier, field_mismatch, missing_from_platform'
+                type: string
+              difference_type:
+                description: Describes the specific type of data the difference is for
+                type: string
+              discrepancy_time:
+                description: If the difference has become a discrepancy, the time at which that happened
+                type: integer
+              employee_id:
+                description: Unique identifier of the employee whose family is associated with this difference
+                format: uuid
+                type: string
+              fields:
+                description: The difference fields that are different between the platform and carrier
+                items:
+                  properties:
+                    carrier_value:
+                      description: The value the carrier has for the key
+                      type:
+                      - string
+                      - 'null'
+                    key:
+                      description: Describes the field where the platform and carrier values are different
+                      type: string
+                    platform_value:
+                      description: The value the platform has for key
+                      type:
+                      - string
+                      - 'null'
+                  required:
+                  - key
+                  type: object
+                type: array
+              group_id:
+                description: Unique identifier of the group in Noyo
+                format: uuid
+                type: string
+              id:
+                description: Unique identifier of the record in Noyo
+                format: uuid
+                type: string
+              impact_score:
+                description: A numerical score describing the impact of the difference
+                format: int32
+                type: integer
+              impact_type:
+                description: Describes the type of impact this difference has
+                type:
+                - string
+                - 'null'
+              is_dismissed:
+                description: Has this difference been dismissed by the user?
+                type: boolean
+              is_suppressed:
+                description: Has this difference been suppressed by noyo?
+                type: boolean
+              modified:
+                description: The date the record was last updated
+                type: integer
+              object_id:
+                description: Unique identifier associated with the object
+                format: uuid
+                type: string
+              object_type:
+                description: 'Type of the object. One of: dependent, employee, individual_enrollment'
+                type: string
+              replaced_by:
+                description: Unique identifier of the replacing difference
+                format: uuid
+                type:
+                - string
+                - 'null'
+              resolved:
+                description: The date the difference was resolved
+                type:
+                - integer
+                - 'null'
+              version:
+                description: Current version of the record
+                format: uuid
+                type: string
+            required:
+            - carrier_id
+            - created
+            - difference_classification
+            - difference_type
+            - employee_id
+            - fields
+            - group_id
+            - id
+            - impact_score
+            - is_dismissed
+            - is_suppressed
+            - modified
+            - object_id
+            - object_type
+            - organization_id
+            - version
+            type: object
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    UpdateDifferenceAssigneeRequest:
+      properties: {}
+      required:
+      - assignee_id
+      type: object
+      x-field_order: []
     PublicSingleDifferenceResult:
       properties:
         carrier_id:
@@ -1574,230 +1799,5 @@ components:
       - impact_score_calculation_method
       - impact_score_calculated
       - assignee_id
-    PaginatedDifferencesResult:
-      properties:
-        meta:
-          description: Metadata associated with the response data
-          properties:
-            offset:
-              description: The offset of the first response record within the matching data set
-              format: int32
-              minimum: 0
-              readOnly: true
-              type: integer
-            page_num:
-              description: The page number of the response records within the overall data set (1-based integer)
-              format: int32
-              minimum: 1
-              readOnly: true
-              type: integer
-            page_size:
-              description: The maximum number of response records on each page of results
-              format: int32
-              minimum: 1
-              readOnly: true
-              type: integer
-            total_records:
-              description: The total number of records in the entire matching data set
-              format: int32
-              minimum: 0
-              readOnly: true
-              type: integer
-          required:
-          - offset
-          - page_num
-          - page_size
-          type: object
-        response:
-          description: List of difference results
-          items:
-            properties:
-              carrier_id:
-                description: Unique identifier of the carrier in Noyo
-                format: uuid
-                type: string
-              created:
-                description: The date the record was created
-                type: integer
-              difference_classification:
-                description: 'Describes the way in which the carrier and platform values differ. One of: missing_from_carrier, field_mismatch, missing_from_platform'
-                type: string
-              difference_type:
-                description: Describes the specific type of data the difference is for
-                type: string
-              discrepancy_time:
-                description: If the difference has become a discrepancy, the time at which that happened
-                type: integer
-              employee_id:
-                description: Unique identifier of the employee whose family is associated with this difference
-                format: uuid
-                type: string
-              fields:
-                description: The difference fields that are different between the platform and carrier
-                items:
-                  properties:
-                    carrier_value:
-                      description: The value the carrier has for the key
-                      type:
-                      - string
-                      - 'null'
-                    key:
-                      description: Describes the field where the platform and carrier values are different
-                      type: string
-                    platform_value:
-                      description: The value the platform has for key
-                      type:
-                      - string
-                      - 'null'
-                  required:
-                  - key
-                  type: object
-                type: array
-              group_id:
-                description: Unique identifier of the group in Noyo
-                format: uuid
-                type: string
-              id:
-                description: Unique identifier of the record in Noyo
-                format: uuid
-                type: string
-              impact_score:
-                description: A numerical score describing the impact of the difference
-                format: int32
-                type: integer
-              impact_type:
-                description: Describes the type of impact this difference has
-                type:
-                - string
-                - 'null'
-              is_dismissed:
-                description: Has this difference been dismissed by the user?
-                type: boolean
-              is_suppressed:
-                description: Has this difference been suppressed by noyo?
-                type: boolean
-              modified:
-                description: The date the record was last updated
-                type: integer
-              object_id:
-                description: Unique identifier associated with the object
-                format: uuid
-                type: string
-              object_type:
-                description: 'Type of the object. One of: dependent, employee, individual_enrollment'
-                type: string
-              replaced_by:
-                description: Unique identifier of the replacing difference
-                format: uuid
-                type:
-                - string
-                - 'null'
-              resolved:
-                description: The date the difference was resolved
-                type:
-                - integer
-                - 'null'
-              version:
-                description: Current version of the record
-                format: uuid
-                type: string
-            required:
-            - carrier_id
-            - created
-            - difference_classification
-            - difference_type
-            - employee_id
-            - fields
-            - group_id
-            - id
-            - impact_score
-            - is_dismissed
-            - is_suppressed
-            - modified
-            - object_id
-            - object_type
-            - organization_id
-            - version
-            type: object
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
-    BatchAssigneeUpdateRequest:
-      properties: {}
-      required:
-      - assignee_id
-      type: object
-      x-field_order: []
-    BatchDifferenceUpdateResponse:
-      properties:
-        ids:
-          items:
-            description: UUIDs that were updated (does not include those who had no change)
-            format: uuid
-            type: string
-          type: array
-      type: object
-      x-field_order: []
-    DifferenceCountsResult:
-      properties:
-        response:
-          items:
-            type: object
-          type: array
-      type: object
-      x-field_order: []
-    PaginatedTransactionsDifferencesResult:
-      properties:
-        meta:
-          description: Metadata associated with the response data
-          properties:
-            offset:
-              description: The offset of the first response record within the matching data set
-              format: int32
-              minimum: 0
-              readOnly: true
-              type: integer
-            page_num:
-              description: The page number of the response records within the overall data set (1-based integer)
-              format: int32
-              minimum: 1
-              readOnly: true
-              type: integer
-            page_size:
-              description: The maximum number of response records on each page of results
-              format: int32
-              minimum: 1
-              readOnly: true
-              type: integer
-            total_records:
-              description: The total number of records in the entire matching data set
-              format: int32
-              minimum: 0
-              readOnly: true
-              type: integer
-          required:
-          - offset
-          - page_num
-          - page_size
-          type: object
-        response:
-          description: List of Member transactions that created differences
-          items:
-            description: member Transaction UUID
-            format: uuid
-            type: string
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
 x-readme:
   explorer-enabled: false

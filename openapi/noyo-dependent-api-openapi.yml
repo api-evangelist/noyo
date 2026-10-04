@@ -131,72 +131,22 @@ paths:
       - Dependent
 components:
   schemas:
-    DependentResult:
+    PersonDisability:
       properties:
-        created:
-          description: The date the record was originated
-          readOnly: true
-          type: integer
-        custom_individual_id:
-          description: The custom identifier for this dependent in your system
-          readOnly: true
+        communication:
+          description: True if the disability impacts the ability to communicate or read
+          type: boolean
+        disabled:
+          description: True if the member has a disability
+          type: boolean
+        reason:
+          description: Description of the disability
           type: string
-        employee_id:
-          description: Unique identifier of the employee in Noyo
-          format: uuid
-          readOnly: true
-          type: string
-        id:
-          description: Unique identifier of the dependent in Noyo
-          format: uuid
-          readOnly: true
-          type: string
-        modified:
-          description: The date the record was last updated
-          readOnly: true
-          type: integer
-        person:
-          allOf:
-          - $ref: '#/components/schemas/Person'
-          description: Personal information for the dependent
-        relationship:
-          description: Relationship of the dependent to the employee
-          enum:
-          - spouse
-          - child
-          - domestic-partner
-          - grandchild
-          - civil-union
-          - step-child
-          - foster-child
-          - adopted-child
-          - legal-guardianship
-          - ex-spouse
-          - other
-          type: string
-        version:
-          description: Version of the dependent record
-          format: uuid
-          readOnly: true
-          type: string
-      required:
-      - created
-      - employee_id
-      - id
-      - modified
-      - person
-      - relationship
-      - version
       type: object
       x-field_order:
-      - id
-      - custom_individual_id
-      - version
-      - created
-      - modified
-      - employee_id
-      - relationship
-      - person
+      - disabled
+      - reason
+      - communication
     PersonDetails:
       properties:
         american_indian:
@@ -313,77 +263,37 @@ components:
       - maiden_name
       - contact
       - details
-    PersonAmericanIndian:
+    PersonTobacco:
       properties:
-        state:
-          description: Primary state of the federally-recognized American Indian or Alaska Native tribe, if applicable
-          enum:
-          - AL
-          - AK
-          - AZ
-          - AR
-          - CA
-          - CO
-          - CT
-          - DE
-          - DC
-          - FL
-          - GA
-          - HI
-          - ID
-          - IL
-          - IN
-          - IA
-          - KS
-          - KY
-          - LA
-          - ME
-          - MD
-          - MA
-          - MI
-          - MN
-          - MS
-          - MO
-          - MT
-          - NE
-          - NV
-          - NH
-          - NJ
-          - NM
-          - NY
-          - NC
-          - ND
-          - OH
-          - OK
-          - OR
-          - PA
-          - RI
-          - SC
-          - SD
-          - TN
-          - TX
-          - UT
-          - VT
-          - VA
-          - WA
-          - WV
-          - WI
-          - WY
-          - AS
-          - GU
-          - MH
-          - FM
-          - MP
-          - PW
-          - PR
-          - VI
-          - UM
+        duration:
+          description: Duration of tobacco use
+          example: 5 years
           type: string
-        tribe:
-          description: Name of the federally-recognized American Indian or Alaska Native tribe, if applicable
-          example: Ojibwe
+        frequency:
+          description: Frequency of tobacco use
+          example: Daily
           type: string
+        types:
+          description: List of types of tobacco use
+          example: cigarettes
+          items:
+            enum:
+            - pipe
+            - cigarettes
+            - chewing-tobacco
+            type: string
+          minItems: 1
+          type: array
+        user:
+          description: True if the person uses tobacco of any kind
+          example: true
+          type: boolean
       type: object
+      x-field_order:
+      - user
+      - types
+      - duration
+      - frequency
     Address:
       properties:
         city:
@@ -485,37 +395,6 @@ components:
       - state
       - zip_code
       - county
-    PersonTobacco:
-      properties:
-        duration:
-          description: Duration of tobacco use
-          example: 5 years
-          type: string
-        frequency:
-          description: Frequency of tobacco use
-          example: Daily
-          type: string
-        types:
-          description: List of types of tobacco use
-          example: cigarettes
-          items:
-            enum:
-            - pipe
-            - cigarettes
-            - chewing-tobacco
-            type: string
-          minItems: 1
-          type: array
-        user:
-          description: True if the person uses tobacco of any kind
-          example: true
-          type: boolean
-      type: object
-      x-field_order:
-      - user
-      - types
-      - duration
-      - frequency
     PersonContact:
       properties:
         email_address:
@@ -565,21 +444,142 @@ components:
       - preferred_method
       - preferred_language
       - speaks_english
-    PersonDisability:
+    DependentResult:
       properties:
-        communication:
-          description: True if the disability impacts the ability to communicate or read
-          type: boolean
-        disabled:
-          description: True if the member has a disability
-          type: boolean
-        reason:
-          description: Description of the disability
+        created:
+          description: The date the record was originated
+          readOnly: true
+          type: integer
+        custom_individual_id:
+          description: The custom identifier for this dependent in your system
+          readOnly: true
           type: string
+        employee_id:
+          description: Unique identifier of the employee in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        id:
+          description: Unique identifier of the dependent in Noyo
+          format: uuid
+          readOnly: true
+          type: string
+        modified:
+          description: The date the record was last updated
+          readOnly: true
+          type: integer
+        person:
+          allOf:
+          - $ref: '#/components/schemas/Person'
+          description: Personal information for the dependent
+        relationship:
+          description: Relationship of the dependent to the employee
+          enum:
+          - spouse
+          - child
+          - domestic-partner
+          - grandchild
+          - civil-union
+          - step-child
+          - foster-child
+          - adopted-child
+          - legal-guardianship
+          - ex-spouse
+          - other
+          type: string
+        version:
+          description: Version of the dependent record
+          format: uuid
+          readOnly: true
+          type: string
+      required:
+      - created
+      - employee_id
+      - id
+      - modified
+      - person
+      - relationship
+      - version
       type: object
       x-field_order:
-      - disabled
-      - reason
-      - communication
+      - id
+      - custom_individual_id
+      - version
+      - created
+      - modified
+      - employee_id
+      - relationship
+      - person
+    PersonAmericanIndian:
+      properties:
+        state:
+          description: Primary state of the federally-recognized American Indian or Alaska Native tribe, if applicable
+          enum:
+          - AL
+          - AK
+          - AZ
+          - AR
+          - CA
+          - CO
+          - CT
+          - DE
+          - DC
+          - FL
+          - GA
+          - HI
+          - ID
+          - IL
+          - IN
+          - IA
+          - KS
+          - KY
+          - LA
+          - ME
+          - MD
+          - MA
+          - MI
+          - MN
+          - MS
+          - MO
+          - MT
+          - NE
+          - NV
+          - NH
+          - NJ
+          - NM
+          - NY
+          - NC
+          - ND
+          - OH
+          - OK
+          - OR
+          - PA
+          - RI
+          - SC
+          - SD
+          - TN
+          - TX
+          - UT
+          - VT
+          - VA
+          - WA
+          - WV
+          - WI
+          - WY
+          - AS
+          - GU
+          - MH
+          - FM
+          - MP
+          - PW
+          - PR
+          - VI
+          - UM
+          type: string
+        tribe:
+          description: Name of the federally-recognized American Indian or Alaska Native tribe, if applicable
+          example: Ojibwe
+          type: string
+      type: object
 x-readme:
   explorer-enabled: false

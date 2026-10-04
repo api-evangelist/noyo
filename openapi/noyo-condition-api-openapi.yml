@@ -171,23 +171,6 @@ paths:
       - Condition
 components:
   schemas:
-    ConditionCreateRequest:
-      properties:
-        details:
-          allOf:
-          - $ref: '#/components/schemas/ConditionDetails'
-          description: Details of the condition
-        rule_id:
-          description: Unique identifier of the rule we are creating a condition for
-          format: uuid
-          type: string
-      required:
-      - details
-      - rule_id
-      type: object
-      x-field_order:
-      - rule_id
-      - details
     PaginatedConditionResult:
       properties:
         meta:
@@ -216,6 +199,51 @@ components:
       - details
       type: object
       x-field_order: []
+    ConditionCreateRequest:
+      properties:
+        details:
+          allOf:
+          - $ref: '#/components/schemas/ConditionDetails'
+          description: Details of the condition
+        rule_id:
+          description: Unique identifier of the rule we are creating a condition for
+          format: uuid
+          type: string
+      required:
+      - details
+      - rule_id
+      type: object
+      x-field_order:
+      - rule_id
+      - details
+    ConditionDetails:
+      properties:
+        left_operand:
+          description: Field name that is being evaluated
+          type: string
+        operator:
+          description: Operation we are evaluating between the left and right operands
+          enum:
+          - is
+          - is_not
+          - is_one_of
+          - is_at_least_one_of
+          - is_not_one_of
+          - greater_than
+          - less_than
+          - begins_with
+          - ends_with
+          - between
+          - contains
+          type:
+          - string
+          - 'null'
+        right_operand:
+          description: The resulting value of the conditional
+          type:
+          - string
+          - 'null'
+      type: object
     Meta:
       properties:
         offset:
@@ -246,34 +274,6 @@ components:
       - offset
       - page_num
       - page_size
-      type: object
-    ConditionDetails:
-      properties:
-        left_operand:
-          description: Field name that is being evaluated
-          type: string
-        operator:
-          description: Operation we are evaluating between the left and right operands
-          enum:
-          - is
-          - is_not
-          - is_one_of
-          - is_at_least_one_of
-          - is_not_one_of
-          - greater_than
-          - less_than
-          - begins_with
-          - ends_with
-          - between
-          - contains
-          type:
-          - string
-          - 'null'
-        right_operand:
-          description: The resulting value of the conditional
-          type:
-          - string
-          - 'null'
       type: object
     ConditionResult:
       properties:

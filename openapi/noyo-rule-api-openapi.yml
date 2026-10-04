@@ -235,52 +235,6 @@ paths:
       - Rule
 components:
   schemas:
-    RuleEditRequest:
-      properties:
-        active:
-          description: Boolean that dictates if the rule is active or not
-          type: boolean
-        joining_operator:
-          description: Operator that will join the rule's conditions
-          enum:
-          - AND
-          - OR
-          type:
-          - string
-          - 'null'
-        name:
-          description: descriptive name of the rule
-          type: string
-        rank:
-          description: Rank of the rule versus other rules
-          type:
-          - number
-          - 'null'
-        resulting_field_name:
-          description: Name of the field this rule will result in
-          type:
-          - string
-          - 'null'
-        resulting_field_value:
-          description: Value of the resulting_field_name this rule will result in
-          type:
-          - string
-          - 'null'
-        rule_type:
-          description: Type of rule
-          enum:
-          - normal
-          - default
-          type: string
-      type: object
-      x-field_order:
-      - active
-      - name
-      - rule_type
-      - joining_operator
-      - resulting_field_name
-      - resulting_field_value
-      - rank
     RuleResult:
       properties:
         active:
@@ -379,6 +333,70 @@ components:
       - resulting_field_name
       - resulting_field_value
       - rank
+    RuleEditRequest:
+      properties:
+        active:
+          description: Boolean that dictates if the rule is active or not
+          type: boolean
+        joining_operator:
+          description: Operator that will join the rule's conditions
+          enum:
+          - AND
+          - OR
+          type:
+          - string
+          - 'null'
+        name:
+          description: descriptive name of the rule
+          type: string
+        rank:
+          description: Rank of the rule versus other rules
+          type:
+          - number
+          - 'null'
+        resulting_field_name:
+          description: Name of the field this rule will result in
+          type:
+          - string
+          - 'null'
+        resulting_field_value:
+          description: Value of the resulting_field_name this rule will result in
+          type:
+          - string
+          - 'null'
+        rule_type:
+          description: Type of rule
+          enum:
+          - normal
+          - default
+          type: string
+      type: object
+      x-field_order:
+      - active
+      - name
+      - rule_type
+      - joining_operator
+      - resulting_field_name
+      - resulting_field_value
+      - rank
+    PaginatedRulesResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of rules
+          items:
+            $ref: '#/components/schemas/RuleResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
     Meta:
       properties:
         offset:
@@ -410,24 +428,6 @@ components:
       - page_num
       - page_size
       type: object
-    PaginatedRulesResult:
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of rules
-          items:
-            $ref: '#/components/schemas/RuleResult'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
     RuleCreateRequest:
       properties:
         active:

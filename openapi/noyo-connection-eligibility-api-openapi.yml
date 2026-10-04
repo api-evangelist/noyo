@@ -50,21 +50,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    DataExchange:
-      properties:
-        enrollment_errors:
-          allOf:
-          - $ref: '#/components/schemas/EnrollmentErrors'
-          description: Data exchange configuration for enrollment errors
-        enrollments:
-          allOf:
-          - $ref: '#/components/schemas/Enrollments'
-          description: Data exchange configuration for enrollments
-        group_structure:
-          allOf:
-          - $ref: '#/components/schemas/GroupStructure'
-          description: Data exchange configuration for group structure
-      type: object
     DataExchangeConfiguration:
       properties:
         data_exchange:
@@ -73,70 +58,6 @@ components:
           default: Not Connected
           type: string
       type: object
-    Enrollments:
-      properties:
-        from_carrier:
-          allOf:
-          - $ref: '#/components/schemas/EnrollmentsFromCarrier'
-          description: Configuration for receiving data from the carrier
-        to_carrier:
-          allOf:
-          - $ref: '#/components/schemas/EnrollmentsToCarrier'
-          description: Configuration for sending data to the carrier
-      type: object
-    EligibilityRuleEvaluation:
-      properties:
-        description:
-          type: string
-        result:
-          type: string
-        rule:
-          type: string
-      required:
-      - description
-      - result
-      - rule
-      type: object
-    EnrollmentErrors:
-      properties:
-        default_method:
-          default: null
-          description: Default method for receiving enrollment errors from the carrier
-          enum:
-          - snapshot_errors
-          - error_report
-          type:
-          - string
-          - 'null'
-        enabled:
-          default: false
-          description: Flag indicating if enrollment errors are enabled
-          type: boolean
-      type: object
-    EnrollmentsFromCarrier:
-      properties:
-        enabled:
-          default: false
-          description: Flag indicating if receiving data from the carrier is enabled
-          type: boolean
-      type: object
-    GroupStructure:
-      properties:
-        default_method:
-          default: null
-          description: Default method for receiving group structure
-          enum:
-          - api
-          - account_structure_file
-          type:
-          - string
-          - 'null'
-        enabled:
-          default: false
-          description: Flag indicating if receiving group structure is enabled
-          type: boolean
-      type: object
-      x-field_order: []
     ConnectionEligibilityResult:
       properties:
         carrier_id:
@@ -176,6 +97,85 @@ components:
           default: false
           description: Flag indicating if sending to the carrier is enabled
           type: boolean
+      type: object
+    Enrollments:
+      properties:
+        from_carrier:
+          allOf:
+          - $ref: '#/components/schemas/EnrollmentsFromCarrier'
+          description: Configuration for receiving data from the carrier
+        to_carrier:
+          allOf:
+          - $ref: '#/components/schemas/EnrollmentsToCarrier'
+          description: Configuration for sending data to the carrier
+      type: object
+    GroupStructure:
+      properties:
+        default_method:
+          default: null
+          description: Default method for receiving group structure
+          enum:
+          - api
+          - account_structure_file
+          type:
+          - string
+          - 'null'
+        enabled:
+          default: false
+          description: Flag indicating if receiving group structure is enabled
+          type: boolean
+      type: object
+      x-field_order: []
+    DataExchange:
+      properties:
+        enrollment_errors:
+          allOf:
+          - $ref: '#/components/schemas/EnrollmentErrors'
+          description: Data exchange configuration for enrollment errors
+        enrollments:
+          allOf:
+          - $ref: '#/components/schemas/Enrollments'
+          description: Data exchange configuration for enrollments
+        group_structure:
+          allOf:
+          - $ref: '#/components/schemas/GroupStructure'
+          description: Data exchange configuration for group structure
+      type: object
+    EnrollmentErrors:
+      properties:
+        default_method:
+          default: null
+          description: Default method for receiving enrollment errors from the carrier
+          enum:
+          - snapshot_errors
+          - error_report
+          type:
+          - string
+          - 'null'
+        enabled:
+          default: false
+          description: Flag indicating if enrollment errors are enabled
+          type: boolean
+      type: object
+    EnrollmentsFromCarrier:
+      properties:
+        enabled:
+          default: false
+          description: Flag indicating if receiving data from the carrier is enabled
+          type: boolean
+      type: object
+    EligibilityRuleEvaluation:
+      properties:
+        description:
+          type: string
+        result:
+          type: string
+        rule:
+          type: string
+      required:
+      - description
+      - result
+      - rule
       type: object
 x-readme:
   explorer-enabled: false

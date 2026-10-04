@@ -149,24 +149,23 @@ paths:
       - Mapping Operand
 components:
   schemas:
-    PaginatedMappingOperandResult:
+    UIMappingOperandResult:
       properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of mapping operands
+        carrier_mapped_field_ids:
+          description: Associated carrier mapped fields
           items:
-            $ref: '#/components/schemas/MappingOperandResult'
+            format: uuid
+            type: string
           type: array
+        operand:
+          allOf:
+          - $ref: '#/components/schemas/MappingOperandResult'
+          description: Mapping Operand
       required:
-      - meta
-      - response
+      - carrier_mapped_field_ids
+      - operand
       type: object
-      x-field_order:
-      - meta
-      - response
+      x-field_order: []
     UIPaginatedMappingOperandResult:
       properties:
         meta:
@@ -185,6 +184,37 @@ components:
       x-field_order:
       - meta
       - response
+    Meta:
+      properties:
+        offset:
+          description: The offset of the first response record within the matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        page_num:
+          description: The page number of the response records within the overall data set (1-based integer)
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        page_size:
+          description: The maximum number of response records on each page of results
+          format: int32
+          minimum: 1
+          readOnly: true
+          type: integer
+        total_records:
+          description: The total number of records in the entire matching data set
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+      required:
+      - offset
+      - page_num
+      - page_size
+      type: object
     MappingOperandResult:
       properties:
         created:
@@ -245,53 +275,23 @@ components:
       - field_type
       - mapping_type
       - existing_value_set
-    Meta:
+    PaginatedMappingOperandResult:
       properties:
-        offset:
-          description: The offset of the first response record within the matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
-        page_num:
-          description: The page number of the response records within the overall data set (1-based integer)
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        page_size:
-          description: The maximum number of response records on each page of results
-          format: int32
-          minimum: 1
-          readOnly: true
-          type: integer
-        total_records:
-          description: The total number of records in the entire matching data set
-          format: int32
-          minimum: 0
-          readOnly: true
-          type: integer
-      required:
-      - offset
-      - page_num
-      - page_size
-      type: object
-    UIMappingOperandResult:
-      properties:
-        carrier_mapped_field_ids:
-          description: Associated carrier mapped fields
-          items:
-            format: uuid
-            type: string
-          type: array
-        operand:
+        meta:
           allOf:
-          - $ref: '#/components/schemas/MappingOperandResult'
-          description: Mapping Operand
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of mapping operands
+          items:
+            $ref: '#/components/schemas/MappingOperandResult'
+          type: array
       required:
-      - carrier_mapped_field_ids
-      - operand
+      - meta
+      - response
       type: object
-      x-field_order: []
+      x-field_order:
+      - meta
+      - response
 x-readme:
   explorer-enabled: false

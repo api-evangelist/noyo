@@ -173,6 +173,24 @@ components:
       - page_num
       - page_size
       type: object
+    PaginatedMemberSnapshotTestPopulationEmployeeResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of member snapshot test population employee results
+          items:
+            $ref: '#/components/schemas/MemberSnapshotTestPopulationEmployeeResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
     MemberSnapshotTestPopulationEmployeeResult:
       properties:
         created:
@@ -204,23 +222,5 @@ components:
       - version
       type: object
       x-field_order: []
-    PaginatedMemberSnapshotTestPopulationEmployeeResult:
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of member snapshot test population employee results
-          items:
-            $ref: '#/components/schemas/MemberSnapshotTestPopulationEmployeeResult'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
 x-readme:
   explorer-enabled: false

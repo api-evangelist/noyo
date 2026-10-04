@@ -151,24 +151,6 @@ components:
       - member_type
       - line_of_coverage
       - plan_id
-    PaginatedMemberPremiumResult:
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of member premiums
-          items:
-            $ref: '#/components/schemas/MemberPremiumResult'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
     MemberPremiumPeriod:
       properties:
         amount:
@@ -189,6 +171,24 @@ components:
       - amount
       - unit
       type: object
+    PaginatedMemberPremiumResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of member premiums
+          items:
+            $ref: '#/components/schemas/MemberPremiumResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
     Meta:
       properties:
         offset:

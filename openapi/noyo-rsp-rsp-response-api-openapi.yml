@@ -196,6 +196,21 @@ paths:
       - RSP (RSP Response)
 components:
   schemas:
+    Audit3:
+      properties:
+        auditID:
+          description: Unique audit identifier
+          type: string
+        auditRecord:
+          description: Contains information about the number of records processed
+          items:
+            $ref: '#/components/schemas/AuditRecord'
+          minItems: 1
+          type: array
+      required:
+      - auditID
+      - auditRecord
+      type: object
     TransactionDetail:
       properties:
         referenceElement:
@@ -225,19 +240,6 @@ components:
       - referenceElement
       - referenceElementID
       type: object
-    AuditRecord:
-      properties:
-        recordFieldName:
-          description: Record type name (e.g., employeeRecordQuantity)
-          type: string
-        recordQuantity:
-          description: Count of records processed
-          format: int32
-          type: integer
-      required:
-      - recordFieldName
-      - recordQuantity
-      type: object
     CreateRspRequest:
       properties:
         transmissionResponse:
@@ -248,46 +250,6 @@ components:
       - transmissionResponse
       type: object
       x-field_order: []
-    TransmissionResponse:
-      properties:
-        audit:
-          allOf:
-          - $ref: '#/components/schemas/Audit3'
-          description: Record count summary
-        creationDateTime:
-          description: ISO 8601 creation timestamp
-          type: string
-        sourceTransmissionGUID:
-          description: Original transmission request identifier
-          type: string
-        transactionDetail:
-          description: Transaction processing details
-          items:
-            $ref: '#/components/schemas/TransactionDetail'
-          minItems: 0
-          type: array
-        transmissionGUID:
-          description: Unique transmission identifier
-          type: string
-        transmissionRemark:
-          description: Overall transmission remarks
-          items:
-            $ref: '#/components/schemas/Remark'
-          minItems: 0
-          type: array
-        transmissionStatusCode:
-          description: Processing status (Success, Partial, Failure)
-          enum:
-          - Failure
-          - Partial
-          - Success
-          type: string
-      required:
-      - creationDateTime
-      - sourceTransmissionGUID
-      - transmissionGUID
-      - transmissionStatusCode
-      type: object
     Remark:
       properties:
         entityCode:
@@ -331,20 +293,58 @@ components:
       - fieldName
       - remarkStatusCode
       type: object
-    Audit3:
+    AuditRecord:
       properties:
-        auditID:
-          description: Unique audit identifier
+        recordFieldName:
+          description: Record type name (e.g., employeeRecordQuantity)
           type: string
-        auditRecord:
-          description: Contains information about the number of records processed
-          items:
-            $ref: '#/components/schemas/AuditRecord'
-          minItems: 1
-          type: array
+        recordQuantity:
+          description: Count of records processed
+          format: int32
+          type: integer
       required:
-      - auditID
-      - auditRecord
+      - recordFieldName
+      - recordQuantity
+      type: object
+    TransmissionResponse:
+      properties:
+        audit:
+          allOf:
+          - $ref: '#/components/schemas/Audit3'
+          description: Record count summary
+        creationDateTime:
+          description: ISO 8601 creation timestamp
+          type: string
+        sourceTransmissionGUID:
+          description: Original transmission request identifier
+          type: string
+        transactionDetail:
+          description: Transaction processing details
+          items:
+            $ref: '#/components/schemas/TransactionDetail'
+          minItems: 0
+          type: array
+        transmissionGUID:
+          description: Unique transmission identifier
+          type: string
+        transmissionRemark:
+          description: Overall transmission remarks
+          items:
+            $ref: '#/components/schemas/Remark'
+          minItems: 0
+          type: array
+        transmissionStatusCode:
+          description: Processing status (Success, Partial, Failure)
+          enum:
+          - Failure
+          - Partial
+          - Success
+          type: string
+      required:
+      - creationDateTime
+      - sourceTransmissionGUID
+      - transmissionGUID
+      - transmissionStatusCode
       type: object
 x-readme:
   explorer-enabled: false

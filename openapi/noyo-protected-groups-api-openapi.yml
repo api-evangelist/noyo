@@ -113,6 +113,24 @@ components:
       - name
       - version
       type: object
+    PaginatedUIProtectedGroupResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of protected group results
+          items:
+            $ref: '#/components/schemas/UIProtectedGroupResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
     Meta:
       properties:
         offset:
@@ -181,23 +199,5 @@ components:
       - version
       type: object
       x-field_order: []
-    PaginatedUIProtectedGroupResult:
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of protected group results
-          items:
-            $ref: '#/components/schemas/UIProtectedGroupResult'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
 x-readme:
   explorer-enabled: false

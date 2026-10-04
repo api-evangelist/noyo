@@ -62,6 +62,37 @@ paths:
       - GroupDisconnectionBulkRequest
 components:
   schemas:
+    UIGroupDisconnectionRequestNestedReason:
+      properties:
+        context_from_carrier:
+          description: Context provided by the carrier
+          readOnly: true
+          type: string
+        context_from_platform:
+          description: Context given by a platform when rejecting a disconnection
+          readOnly: true
+          type: string
+        created_by:
+          description: Which team created the reason
+          readOnly: true
+          type: string
+        other_reason:
+          description: Other reason for the request
+          readOnly: true
+          type: string
+        reason:
+          description: Why the action was taken
+          readOnly: true
+          type: string
+      required:
+      - created_by
+      type: object
+      x-field_order:
+      - created_by
+      - reason
+      - other_reason
+      - context_from_carrier
+      - context_from_platform
     GroupDisconnectionBulkRequestPublicCreateRequest:
       properties:
         carrier_ids:
@@ -135,37 +166,6 @@ components:
       - context
       - context_from_carrier
       - protected_group_override
-    UIGroupDisconnectionRequestNestedReason:
-      properties:
-        context_from_carrier:
-          description: Context provided by the carrier
-          readOnly: true
-          type: string
-        context_from_platform:
-          description: Context given by a platform when rejecting a disconnection
-          readOnly: true
-          type: string
-        created_by:
-          description: Which team created the reason
-          readOnly: true
-          type: string
-        other_reason:
-          description: Other reason for the request
-          readOnly: true
-          type: string
-        reason:
-          description: Why the action was taken
-          readOnly: true
-          type: string
-      required:
-      - created_by
-      type: object
-      x-field_order:
-      - created_by
-      - reason
-      - other_reason
-      - context_from_carrier
-      - context_from_platform
     UIGroupDisconnectionRequestResult:
       properties:
         carrier_id:

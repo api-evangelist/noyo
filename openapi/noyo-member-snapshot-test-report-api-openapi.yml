@@ -77,23 +77,23 @@ paths:
       - Member Snapshot Test Report
 components:
   schemas:
-    MemberSnapshotTestReportPaginatedResult:
+    PublicMemberSnapshotReportData:
       properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          items:
-            $ref: '#/components/schemas/MemberSnapshotTestReportResult'
-          type: array
-      required:
-      - meta
-      - response
+        completed_at:
+          default: null
+          description: Time the report was completed
+          type:
+          - integer
+          - 'null'
+        rule_set_overrides:
+          $ref: '#/components/schemas/RuleSetOverrides'
+        started_at:
+          default: null
+          description: Time the report started being actually filled out
+          type:
+          - integer
+          - 'null'
       type: object
-      x-field_order:
-      - meta
-      - response
     MemberSnapshotTestReportResult:
       properties:
         carrier_id:
@@ -128,6 +128,29 @@ components:
       - version
       type: object
       x-field_order: []
+    RuleSetOverrides:
+      properties:
+        noyo_post:
+          description: Noyo post rule set ID to override selection for
+          format: uuid
+          type: string
+        noyo_pre:
+          description: Noyo pre rule set ID to use instead of the default
+          format: uuid
+          type: string
+        platform_post:
+          description: Platform post rule set ID to override selection for
+          format: uuid
+          type: string
+        platform_pre:
+          description: Platform pre rule set ID to override selection for
+          format: uuid
+          type: string
+        primary:
+          description: Primary rule set ID to override selection for
+          format: uuid
+          type: string
+      type: object
     Meta:
       properties:
         offset:
@@ -159,45 +182,22 @@ components:
       - page_num
       - page_size
       type: object
-    RuleSetOverrides:
+    MemberSnapshotTestReportPaginatedResult:
       properties:
-        noyo_post:
-          description: Noyo post rule set ID to override selection for
-          format: uuid
-          type: string
-        noyo_pre:
-          description: Noyo pre rule set ID to use instead of the default
-          format: uuid
-          type: string
-        platform_post:
-          description: Platform post rule set ID to override selection for
-          format: uuid
-          type: string
-        platform_pre:
-          description: Platform pre rule set ID to override selection for
-          format: uuid
-          type: string
-        primary:
-          description: Primary rule set ID to override selection for
-          format: uuid
-          type: string
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          items:
+            $ref: '#/components/schemas/MemberSnapshotTestReportResult'
+          type: array
+      required:
+      - meta
+      - response
       type: object
-    PublicMemberSnapshotReportData:
-      properties:
-        completed_at:
-          default: null
-          description: Time the report was completed
-          type:
-          - integer
-          - 'null'
-        rule_set_overrides:
-          $ref: '#/components/schemas/RuleSetOverrides'
-        started_at:
-          default: null
-          description: Time the report started being actually filled out
-          type:
-          - integer
-          - 'null'
-      type: object
+      x-field_order:
+      - meta
+      - response
 x-readme:
   explorer-enabled: false

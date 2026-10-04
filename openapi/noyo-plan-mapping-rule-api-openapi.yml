@@ -228,6 +228,67 @@ paths:
       - Plan Mapping Rule
 components:
   schemas:
+    PlanMappingRuleCreateRequest:
+      properties:
+        details:
+          allOf:
+          - $ref: '#/components/schemas/PlanMappingRuleDetails'
+          description: Details of the plan mapping rule
+      required:
+      - details
+      type: object
+      x-field_order: []
+    PlanMappingRuleEditRequest:
+      properties:
+        details:
+          allOf:
+          - $ref: '#/components/schemas/PlanMappingRuleDetails'
+          description: Details of the plan mapping rule
+      required:
+      - details
+      type: object
+      x-field_order: []
+    PlanMappingRuleResult:
+      properties:
+        created:
+          description: The date the record was created
+          type: integer
+        details:
+          allOf:
+          - $ref: '#/components/schemas/PlanMappingRuleDetails'
+          description: Details of the plan mapping rule
+          readOnly: true
+        group_mapping_id:
+          description: Unique identifier of the group mapping we are creating plan mapping rule for
+          format: uuid
+          readOnly: true
+          type: string
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - created
+      - details
+      - group_mapping_id
+      - id
+      - modified
+      - version
+      type: object
+      x-field_order:
+      - id
+      - version
+      - created
+      - modified
+      - group_mapping_id
+      - details
     PlanMappingRuleDetails:
       properties:
         group_accident_plans:
@@ -372,24 +433,6 @@ components:
       - group_health_fund_plans
       - group_pharmacy_plans
       - group_wellness_plans
-    PaginatedPlanMappingRuleResult:
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of plan mapping rules
-          items:
-            $ref: '#/components/schemas/PlanMappingRuleResult'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
     Meta:
       properties:
         offset:
@@ -421,66 +464,23 @@ components:
       - page_num
       - page_size
       type: object
-    PlanMappingRuleEditRequest:
+    PaginatedPlanMappingRuleResult:
       properties:
-        details:
+        meta:
           allOf:
-          - $ref: '#/components/schemas/PlanMappingRuleDetails'
-          description: Details of the plan mapping rule
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of plan mapping rules
+          items:
+            $ref: '#/components/schemas/PlanMappingRuleResult'
+          type: array
       required:
-      - details
-      type: object
-      x-field_order: []
-    PlanMappingRuleCreateRequest:
-      properties:
-        details:
-          allOf:
-          - $ref: '#/components/schemas/PlanMappingRuleDetails'
-          description: Details of the plan mapping rule
-      required:
-      - details
-      type: object
-      x-field_order: []
-    PlanMappingRuleResult:
-      properties:
-        created:
-          description: The date the record was created
-          type: integer
-        details:
-          allOf:
-          - $ref: '#/components/schemas/PlanMappingRuleDetails'
-          description: Details of the plan mapping rule
-          readOnly: true
-        group_mapping_id:
-          description: Unique identifier of the group mapping we are creating plan mapping rule for
-          format: uuid
-          readOnly: true
-          type: string
-        id:
-          description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        modified:
-          description: The date the record was last updated
-          type: integer
-        version:
-          description: Current version of the record
-          format: uuid
-          type: string
-      required:
-      - created
-      - details
-      - group_mapping_id
-      - id
-      - modified
-      - version
+      - meta
+      - response
       type: object
       x-field_order:
-      - id
-      - version
-      - created
-      - modified
-      - group_mapping_id
-      - details
+      - meta
+      - response
 x-readme:
   explorer-enabled: false

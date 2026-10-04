@@ -68,6 +68,37 @@ paths:
       - Feed
 components:
   schemas:
+    UIFeedRunCarrierTransmission:
+      properties:
+        id:
+          description: ID of the transmission
+          format: uuid
+          type: string
+        sent_timestamp:
+          description: DateTime the transmission was sent to the carrier
+          type: integer
+      required:
+      - id
+      - sent_timestamp
+      type: object
+    PaginatedUIFeedRunsResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of feed run results
+          items:
+            $ref: '#/components/schemas/UIFeedRun'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
     UIFeedRunFile:
       properties:
         gcs_path:
@@ -94,24 +125,23 @@ components:
       - is_test
       - name
       type: object
-    PaginatedUIFeedRunsResult:
+    UIFeedRunWorkflow:
       properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of feed run results
-          items:
-            $ref: '#/components/schemas/UIFeedRun'
-          type: array
+        created:
+          description: DateTime when the workflow was created
+          type: integer
+        id:
+          description: ID of workflow
+          format: uuid
+          type: string
+        status:
+          description: Status of workflow
+          type: string
       required:
-      - meta
-      - response
+      - created
+      - id
+      - status
       type: object
-      x-field_order:
-      - meta
-      - response
     UIFeedRun:
       properties:
         carrier_transmission:
@@ -126,19 +156,6 @@ components:
           allOf:
           - $ref: '#/components/schemas/UIFeedRunWorkflow'
           description: Workflow for the run
-      type: object
-    UIFeedRunCarrierTransmission:
-      properties:
-        id:
-          description: ID of the transmission
-          format: uuid
-          type: string
-        sent_timestamp:
-          description: DateTime the transmission was sent to the carrier
-          type: integer
-      required:
-      - id
-      - sent_timestamp
       type: object
     Meta:
       properties:
@@ -170,23 +187,6 @@ components:
       - offset
       - page_num
       - page_size
-      type: object
-    UIFeedRunWorkflow:
-      properties:
-        created:
-          description: DateTime when the workflow was created
-          type: integer
-        id:
-          description: ID of workflow
-          format: uuid
-          type: string
-        status:
-          description: Status of workflow
-          type: string
-      required:
-      - created
-      - id
-      - status
       type: object
 x-readme:
   explorer-enabled: false

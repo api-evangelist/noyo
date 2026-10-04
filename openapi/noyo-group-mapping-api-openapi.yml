@@ -424,20 +424,6 @@ components:
       - resulting_field_name
       - resulting_field_value
       - rank
-    UIGroupMappingRulesConditionsResult:
-      properties:
-        conditions:
-          items:
-            allOf:
-            - $ref: '#/components/schemas/ConditionResult'
-            description: List of all conditions for the group mapping
-          type: array
-        rule:
-          $ref: '#/components/schemas/RuleResult'
-      required:
-      - conditions
-      - rule
-      type: object
     PaginatedGroupMappingResult:
       properties:
         meta:
@@ -456,6 +442,80 @@ components:
       x-field_order:
       - meta
       - response
+    GroupMappingEditRequest:
+      properties:
+        effective_end_date:
+          description: ISO-8601 date string for the effective end date of the record
+          example: '2018-12-31'
+          format: date
+          type:
+          - string
+          - 'null'
+        effective_start_date:
+          description: ISO-8601 date string for the effective start date of the record
+          example: '2018-01-01'
+          format: date
+          type:
+          - string
+          - 'null'
+        status:
+          description: Status of the group mapping
+          enum:
+          - in_progress
+          - ready
+          example: in_progress
+          type: string
+      type: object
+      x-field_order:
+      - status
+      - effective_start_date
+      - effective_end_date
+    PaginatedUIGroupMappingRulesResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of rules and conditions for a group mapping
+          items:
+            $ref: '#/components/schemas/UIGroupMappingRulesConditionsResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    ConditionDetails:
+      properties:
+        left_operand:
+          description: Field name that is being evaluated
+          type: string
+        operator:
+          description: Operation we are evaluating between the left and right operands
+          enum:
+          - is
+          - is_not
+          - is_one_of
+          - is_at_least_one_of
+          - is_not_one_of
+          - greater_than
+          - less_than
+          - begins_with
+          - ends_with
+          - between
+          - contains
+          type:
+          - string
+          - 'null'
+        right_operand:
+          description: The resulting value of the conditional
+          type:
+          - string
+          - 'null'
+      type: object
     Meta:
       properties:
         offset:
@@ -487,107 +547,6 @@ components:
       - page_num
       - page_size
       type: object
-    GroupMappingEditRequest:
-      properties:
-        effective_end_date:
-          description: ISO-8601 date string for the effective end date of the record
-          example: '2018-12-31'
-          format: date
-          type:
-          - string
-          - 'null'
-        effective_start_date:
-          description: ISO-8601 date string for the effective start date of the record
-          example: '2018-01-01'
-          format: date
-          type:
-          - string
-          - 'null'
-        status:
-          description: Status of the group mapping
-          enum:
-          - in_progress
-          - ready
-          example: in_progress
-          type: string
-      type: object
-      x-field_order:
-      - status
-      - effective_start_date
-      - effective_end_date
-    GroupMappingCreateRequest:
-      properties:
-        carrier_id:
-          description: Unique identifier of the carrier in Noyo
-          format: uuid
-          type: string
-        effective_end_date:
-          description: ISO-8601 date string for the effective end date of the record
-          example: '2018-12-31'
-          format: date
-          type:
-          - string
-          - 'null'
-        effective_start_date:
-          description: ISO-8601 date string for the effective start date of the record
-          example: '2018-01-01'
-          format: date
-          type:
-          - string
-          - 'null'
-      required:
-      - carrier_id
-      type: object
-      x-field_order:
-      - carrier_id
-      - effective_start_date
-      - effective_end_date
-    ConditionDetails:
-      properties:
-        left_operand:
-          description: Field name that is being evaluated
-          type: string
-        operator:
-          description: Operation we are evaluating between the left and right operands
-          enum:
-          - is
-          - is_not
-          - is_one_of
-          - is_at_least_one_of
-          - is_not_one_of
-          - greater_than
-          - less_than
-          - begins_with
-          - ends_with
-          - between
-          - contains
-          type:
-          - string
-          - 'null'
-        right_operand:
-          description: The resulting value of the conditional
-          type:
-          - string
-          - 'null'
-      type: object
-    PaginatedUIGroupMappingRulesResult:
-      properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of rules and conditions for a group mapping
-          items:
-            $ref: '#/components/schemas/UIGroupMappingRulesConditionsResult'
-          type: array
-      required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
     ConditionResult:
       properties:
         created:
@@ -629,5 +588,46 @@ components:
       - modified
       - rule_id
       - details
+    GroupMappingCreateRequest:
+      properties:
+        carrier_id:
+          description: Unique identifier of the carrier in Noyo
+          format: uuid
+          type: string
+        effective_end_date:
+          description: ISO-8601 date string for the effective end date of the record
+          example: '2018-12-31'
+          format: date
+          type:
+          - string
+          - 'null'
+        effective_start_date:
+          description: ISO-8601 date string for the effective start date of the record
+          example: '2018-01-01'
+          format: date
+          type:
+          - string
+          - 'null'
+      required:
+      - carrier_id
+      type: object
+      x-field_order:
+      - carrier_id
+      - effective_start_date
+      - effective_end_date
+    UIGroupMappingRulesConditionsResult:
+      properties:
+        conditions:
+          items:
+            allOf:
+            - $ref: '#/components/schemas/ConditionResult'
+            description: List of all conditions for the group mapping
+          type: array
+        rule:
+          $ref: '#/components/schemas/RuleResult'
+      required:
+      - conditions
+      - rule
+      type: object
 x-readme:
   explorer-enabled: false

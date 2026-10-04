@@ -82,48 +82,32 @@ paths:
       - Member Transaction Labels
 components:
   schemas:
-    MemberTransactionLabelUIResult:
+    LabelUIResult:
       properties:
-        context:
-          description: Describing why/when a label was applied
-          example: transaction_complete
-          type: string
         created:
           description: The date the record was created
           type: integer
+        display_name:
+          type: string
         id:
           description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        internal_note:
-          description: Free text note
-          type: string
-        label:
-          allOf:
-          - $ref: '#/components/schemas/LabelUIResult'
-          description: Label associated to the member transaction
-        member_transaction_id:
-          description: Unique identifier of the associated member transaction
           format: uuid
           type: string
         modified:
           description: The date the record was last updated
           type: integer
-        name:
-          description: String describing the contents of the label
-          example: suspected_eoi
+        summary:
           type: string
         version:
           description: Current version of the record
           format: uuid
           type: string
       required:
-      - context
       - created
+      - display_name
       - id
-      - member_transaction_id
       - modified
-      - name
+      - summary
       - version
       type: object
     Meta:
@@ -175,32 +159,48 @@ components:
       x-field_order:
       - meta
       - response
-    LabelUIResult:
+    MemberTransactionLabelUIResult:
       properties:
+        context:
+          description: Describing why/when a label was applied
+          example: transaction_complete
+          type: string
         created:
           description: The date the record was created
           type: integer
-        display_name:
-          type: string
         id:
           description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        internal_note:
+          description: Free text note
+          type: string
+        label:
+          allOf:
+          - $ref: '#/components/schemas/LabelUIResult'
+          description: Label associated to the member transaction
+        member_transaction_id:
+          description: Unique identifier of the associated member transaction
           format: uuid
           type: string
         modified:
           description: The date the record was last updated
           type: integer
-        summary:
+        name:
+          description: String describing the contents of the label
+          example: suspected_eoi
           type: string
         version:
           description: Current version of the record
           format: uuid
           type: string
       required:
+      - context
       - created
-      - display_name
       - id
+      - member_transaction_id
       - modified
-      - summary
+      - name
       - version
       type: object
 x-readme:

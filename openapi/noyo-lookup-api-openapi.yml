@@ -325,46 +325,6 @@ paths:
       - Lookup
 components:
   schemas:
-    LookupData:
-      properties:
-        columns:
-          items:
-            $ref: '#/components/schemas/LookupColumn'
-          type: array
-        lookup_type:
-          enum:
-          - match
-          - range
-          type: string
-        supports_plan_year:
-          type: boolean
-        use_first_available_instance:
-          type: boolean
-      required:
-      - columns
-      - lookup_type
-      - supports_plan_year
-      type: object
-    LookupInstanceUpdateRequest:
-      properties:
-        data:
-          items:
-            items:
-              type: string
-            minItems: 2
-            type: array
-          type: array
-        default_value:
-          type:
-          - string
-          - 'null'
-        plan_year_start:
-          items:
-            format: date
-            type: string
-          type: array
-      type: object
-      x-field_order: []
     LookupInstanceCreateRequest:
       properties:
         carrier_id:
@@ -395,20 +355,6 @@ components:
       - lookup_id
       type: object
       x-field_order: []
-    LookupColumn:
-      properties:
-        name:
-          type: string
-        type:
-          enum:
-          - boolean
-          - number
-          - string
-          type: string
-      required:
-      - name
-      - type
-      type: object
     PaginatedLookupInstanceResult:
       properties:
         meta:
@@ -427,6 +373,68 @@ components:
       x-field_order:
       - meta
       - response
+    LookupCreateRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/LookupData'
+        name:
+          type: string
+        organization_id:
+          format: uuid
+          type: string
+      required:
+      - data
+      - name
+      type: object
+      x-field_order: []
+    LookupInstanceUpdateRequest:
+      properties:
+        data:
+          items:
+            items:
+              type: string
+            minItems: 2
+            type: array
+          type: array
+        default_value:
+          type:
+          - string
+          - 'null'
+        plan_year_start:
+          items:
+            format: date
+            type: string
+          type: array
+      type: object
+      x-field_order: []
+    LookupUpdateRequest:
+      properties:
+        columns:
+          items:
+            description: Name of all columns
+            type: string
+          minItems: 2
+          type: array
+        name:
+          type: string
+        use_first_available_instance:
+          type: boolean
+      type: object
+      x-field_order: []
+    LookupColumn:
+      properties:
+        name:
+          type: string
+        type:
+          enum:
+          - boolean
+          - number
+          - string
+          type: string
+      required:
+      - name
+      - type
+      type: object
     LookupInstanceResult:
       properties:
         carrier_id:
@@ -478,36 +486,6 @@ components:
       - version
       type: object
       x-field_order: []
-    LookupResult:
-      properties:
-        created:
-          description: The date the record was created
-          type: integer
-        data:
-          $ref: '#/components/schemas/LookupData'
-        id:
-          description: Unique identifier of the record in Noyo
-          format: uuid
-          type: string
-        modified:
-          description: The date the record was last updated
-          type: integer
-        name:
-          type: string
-        version:
-          description: Current version of the record
-          format: uuid
-          type: string
-      required:
-      - created
-      - data
-      - id
-      - modified
-      - name
-      - organization_id
-      - version
-      type: object
-      x-field_order: []
     Meta:
       properties:
         offset:
@@ -539,18 +517,34 @@ components:
       - page_num
       - page_size
       type: object
-    LookupUpdateRequest:
+    LookupResult:
       properties:
-        columns:
-          items:
-            description: Name of all columns
-            type: string
-          minItems: 2
-          type: array
+        created:
+          description: The date the record was created
+          type: integer
+        data:
+          $ref: '#/components/schemas/LookupData'
+        id:
+          description: Unique identifier of the record in Noyo
+          format: uuid
+          type: string
+        modified:
+          description: The date the record was last updated
+          type: integer
         name:
           type: string
-        use_first_available_instance:
-          type: boolean
+        version:
+          description: Current version of the record
+          format: uuid
+          type: string
+      required:
+      - created
+      - data
+      - id
+      - modified
+      - name
+      - organization_id
+      - version
       type: object
       x-field_order: []
     PaginatedLookupResult:
@@ -571,19 +565,25 @@ components:
       x-field_order:
       - meta
       - response
-    LookupCreateRequest:
+    LookupData:
       properties:
-        data:
-          $ref: '#/components/schemas/LookupData'
-        name:
+        columns:
+          items:
+            $ref: '#/components/schemas/LookupColumn'
+          type: array
+        lookup_type:
+          enum:
+          - match
+          - range
           type: string
-        organization_id:
-          format: uuid
-          type: string
+        supports_plan_year:
+          type: boolean
+        use_first_available_instance:
+          type: boolean
       required:
-      - data
-      - name
+      - columns
+      - lookup_type
+      - supports_plan_year
       type: object
-      x-field_order: []
 x-readme:
   explorer-enabled: false

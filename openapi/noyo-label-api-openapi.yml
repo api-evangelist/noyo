@@ -83,6 +83,37 @@ paths:
       - Label
 components:
   schemas:
+    BulkLabelTransactionsRequest:
+      properties:
+        member_transactions:
+          items:
+            description: Member Transactions UUID's to apply label
+            format: uuid
+            type: string
+          type: array
+      required:
+      - member_transactions
+      type: object
+      x-field_order: []
+    BulkLabelResult:
+      properties:
+        failed_updates:
+          items:
+            description: UUID of member transaction with failed update
+            format: uuid
+            type: string
+          type: array
+        successful_updates:
+          items:
+            description: UUID of member transaction with successful update
+            format: uuid
+            type: string
+          type: array
+      required:
+      - failed_updates
+      - successful_updates
+      type: object
+      x-field_order: []
     LabelPublicResult:
       properties:
         created:
@@ -109,37 +140,6 @@ components:
       - id
       - modified
       - version
-      type: object
-      x-field_order: []
-    BulkLabelResult:
-      properties:
-        failed_updates:
-          items:
-            description: UUID of member transaction with failed update
-            format: uuid
-            type: string
-          type: array
-        successful_updates:
-          items:
-            description: UUID of member transaction with successful update
-            format: uuid
-            type: string
-          type: array
-      required:
-      - failed_updates
-      - successful_updates
-      type: object
-      x-field_order: []
-    BulkLabelTransactionsRequest:
-      properties:
-        member_transactions:
-          items:
-            description: Member Transactions UUID's to apply label
-            format: uuid
-            type: string
-          type: array
-      required:
-      - member_transactions
       type: object
       x-field_order: []
 x-readme:

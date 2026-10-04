@@ -150,33 +150,15 @@ paths:
       - Volley Setting
 components:
   schemas:
-    PaginatedVolleySettingResult:
+    VolleySettingConfiguration:
       properties:
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          description: Metadata associated with the response data
-        response:
-          description: List of Volley Setting results
-          items:
-            $ref: '#/components/schemas/VolleySettingResult'
-          type: array
+        configuration_settings:
+          $ref: '#/components/schemas/VolleySettingConfigurationSettings'
+        volley_type:
+          type: string
       required:
-      - meta
-      - response
-      type: object
-      x-field_order:
-      - meta
-      - response
-    VolleySettingConfigurationSettings:
-      properties:
-        platform_email_addresses:
-          items:
-            format: email
-            type: string
-          type: array
-      required:
-      - platform_email_addresses
+      - configuration_settings
+      - volley_type
       type: object
     VolleySettingResult:
       properties:
@@ -213,29 +195,6 @@ components:
       - volley_type
       type: object
       x-field_order: []
-    VolleySettingCreateRequest:
-      properties:
-        configuration:
-          allOf:
-          - $ref: '#/components/schemas/VolleySettingConfiguration'
-        volley_type:
-          enum:
-          - new_connection_mapping
-          type: string
-      required:
-      - volley_type
-      type: object
-      x-field_order: []
-    VolleySettingConfiguration:
-      properties:
-        configuration_settings:
-          $ref: '#/components/schemas/VolleySettingConfigurationSettings'
-        volley_type:
-          type: string
-      required:
-      - configuration_settings
-      - volley_type
-      type: object
     Meta:
       properties:
         offset:
@@ -267,11 +226,52 @@ components:
       - page_num
       - page_size
       type: object
+    VolleySettingConfigurationSettings:
+      properties:
+        platform_email_addresses:
+          items:
+            format: email
+            type: string
+          type: array
+      required:
+      - platform_email_addresses
+      type: object
     VolleySettingUpdateRequest:
       properties:
         configuration:
           allOf:
           - $ref: '#/components/schemas/VolleySettingConfiguration'
+      type: object
+      x-field_order: []
+    PaginatedVolleySettingResult:
+      properties:
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          description: Metadata associated with the response data
+        response:
+          description: List of Volley Setting results
+          items:
+            $ref: '#/components/schemas/VolleySettingResult'
+          type: array
+      required:
+      - meta
+      - response
+      type: object
+      x-field_order:
+      - meta
+      - response
+    VolleySettingCreateRequest:
+      properties:
+        configuration:
+          allOf:
+          - $ref: '#/components/schemas/VolleySettingConfiguration'
+        volley_type:
+          enum:
+          - new_connection_mapping
+          type: string
+      required:
+      - volley_type
       type: object
       x-field_order: []
 x-readme:
